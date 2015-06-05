@@ -14,6 +14,7 @@
 		2B31C3E01B11C3FD004C865A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B31C3DF1B11C3FD004C865A /* Images.xcassets */; };
 		2B31C3E31B11C3FD004C865A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B31C3E11B11C3FD004C865A /* LaunchScreen.xib */; };
 		2B31C3EF1B11C3FD004C865A /* MyRillTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B31C3EE1B11C3FD004C865A /* MyRillTests.m */; };
+		F29F86101B21D4B90058FC9F /* Utilities in Resources */ = {isa = PBXBuildFile; fileRef = F29F860F1B21D4B90058FC9F /* Utilities */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		2B31C3E81B11C3FD004C865A /* MyRillTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyRillTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B31C3ED1B11C3FD004C865A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2B31C3EE1B11C3FD004C865A /* MyRillTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyRillTests.m; sourceTree = "<group>"; };
+		F29F860F1B21D4B90058FC9F /* Utilities */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Utilities; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 		2B31C3D11B11C3FD004C865A /* MyRill */ = {
 			isa = PBXGroup;
 			children = (
+				F29F860F1B21D4B90058FC9F /* Utilities */,
 				2B31C3D61B11C3FD004C865A /* AppDelegate.h */,
 				2B31C3D71B11C3FD004C865A /* AppDelegate.m */,
 				2B31C3D91B11C3FD004C865A /* ViewController.h */,
@@ -199,6 +202,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B31C3DE1B11C3FD004C865A /* Main.storyboard in Resources */,
+				F29F86101B21D4B90058FC9F /* Utilities in Resources */,
 				2B31C3E31B11C3FD004C865A /* LaunchScreen.xib in Resources */,
 				2B31C3E01B11C3FD004C865A /* Images.xcassets in Resources */,
 			);
