@@ -23,6 +23,8 @@
 		2B39C93E1B241212007BAC7A /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9321B241212007BAC7A /* NSLayoutConstraint+MASDebugAdditions.m */; };
 		2B39C93F1B241212007BAC7A /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9341B241212007BAC7A /* View+MASAdditions.m */; };
 		2B39C9441B24128F007BAC7A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9431B24128F007BAC7A /* LoginViewController.m */; };
+		2B39C9481B241972007BAC7A /* LoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9471B241972007BAC7A /* LoginService.m */; };
+		2B39C94C1B24501B007BAC7A /* ColorHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C94B1B24501B007BAC7A /* ColorHandler.m */; };
 		F29F86281B2410070058FC9F /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F29F86161B2410070058FC9F /* AFHTTPRequestOperation.m */; };
 		F29F86291B2410070058FC9F /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F29F86181B2410070058FC9F /* AFHTTPRequestOperationManager.m */; };
 		F29F862A1B2410070058FC9F /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F29F861A1B2410070058FC9F /* AFHTTPSessionManager.m */; };
@@ -89,6 +91,10 @@
 		2B39C9351B241212007BAC7A /* View+MASShorthandAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "View+MASShorthandAdditions.h"; sourceTree = "<group>"; };
 		2B39C9421B24128F007BAC7A /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		2B39C9431B24128F007BAC7A /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		2B39C9461B241972007BAC7A /* LoginService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginService.h; sourceTree = "<group>"; };
+		2B39C9471B241972007BAC7A /* LoginService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginService.m; sourceTree = "<group>"; };
+		2B39C94A1B24501B007BAC7A /* ColorHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorHandler.h; sourceTree = "<group>"; };
+		2B39C94B1B24501B007BAC7A /* ColorHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorHandler.m; sourceTree = "<group>"; };
 		F29F86151B2410070058FC9F /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPRequestOperation.h; path = Utilities/AFNetworking/AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		F29F86161B2410070058FC9F /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFHTTPRequestOperation.m; path = Utilities/AFNetworking/AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		F29F86171B2410070058FC9F /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPRequestOperationManager.h; path = Utilities/AFNetworking/AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -168,7 +174,9 @@
 			children = (
 				2B31C3D61B11C3FD004C865A /* AppDelegate.h */,
 				2B31C3D71B11C3FD004C865A /* AppDelegate.m */,
+				2B39C9491B244FFF007BAC7A /* Common */,
 				F29F86131B240FC30058FC9F /* Utilities */,
+				2B39C9451B241938007BAC7A /* Service */,
 				2B39C9401B241243007BAC7A /* Controllers */,
 				2B39C9411B24126F007BAC7A /* Views */,
 				2B31C3DF1B11C3FD004C865A /* Images.xcassets */,
@@ -249,6 +257,24 @@
 			children = (
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		2B39C9451B241938007BAC7A /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				2B39C9461B241972007BAC7A /* LoginService.h */,
+				2B39C9471B241972007BAC7A /* LoginService.m */,
+			);
+			name = Service;
+			sourceTree = "<group>";
+		};
+		2B39C9491B244FFF007BAC7A /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				2B39C94A1B24501B007BAC7A /* ColorHandler.h */,
+				2B39C94B1B24501B007BAC7A /* ColorHandler.m */,
+			);
+			name = Common;
 			sourceTree = "<group>";
 		};
 		F29F86131B240FC30058FC9F /* Utilities */ = {
@@ -417,10 +443,12 @@
 				2B39C93A1B241212007BAC7A /* MASLayoutConstraint.m in Sources */,
 				F29F86481B2410320058FC9F /* UIProgressView+AFNetworking.m in Sources */,
 				F29F862B1B2410070058FC9F /* AFNetworkReachabilityManager.m in Sources */,
+				2B39C9481B241972007BAC7A /* LoginService.m in Sources */,
 				F29F862F1B2410070058FC9F /* AFURLResponseSerialization.m in Sources */,
 				F29F862D1B2410070058FC9F /* AFURLConnectionOperation.m in Sources */,
 				F29F86461B2410320058FC9F /* UIButton+AFNetworking.m in Sources */,
 				2B39C93B1B241212007BAC7A /* MASViewAttribute.m in Sources */,
+				2B39C94C1B24501B007BAC7A /* ColorHandler.m in Sources */,
 				F29F86441B2410320058FC9F /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				2B39C9391B241212007BAC7A /* MASConstraintMaker.m in Sources */,
 				2B39C93F1B241212007BAC7A /* View+MASAdditions.m in Sources */,
