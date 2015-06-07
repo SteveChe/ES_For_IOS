@@ -9,6 +9,7 @@
 #import "LoginViewController.h"
 #import "Masonry.h"
 #import "ColorHandler.h"
+#import "AFHttpTool.h"
 
 @interface LoginViewController ()
 
@@ -84,6 +85,14 @@
 #pragma mark - response events
 - (void)onLoginBtnClicked:(UIButton *)sender {
     
+    {
+        [AFHttpTool loginWithUserName:_userNameTxtField.text password:_passwordTxtField.text success:^(id response) {
+            
+        }
+                              failure:^(NSError* err) {
+                               
+                              }];
+    }
 }
 
 - (void)onSignUpBtnClicked:(UIButton *)sender {
