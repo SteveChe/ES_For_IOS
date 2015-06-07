@@ -25,6 +25,7 @@
 		2B39C9441B24128F007BAC7A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9431B24128F007BAC7A /* LoginViewController.m */; };
 		2B39C9481B241972007BAC7A /* LoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9471B241972007BAC7A /* LoginService.m */; };
 		2B39C94C1B24501B007BAC7A /* ColorHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C94B1B24501B007BAC7A /* ColorHandler.m */; };
+		2B39C9501B248063007BAC7A /* LoginDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C94F1B248063007BAC7A /* LoginDataParse.m */; };
 		F250F2EA1B2471CD000AD021 /* AFHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = F250F2E91B2471CD000AD021 /* AFHttpTool.m */; };
 		F29F86281B2410070058FC9F /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F29F86161B2410070058FC9F /* AFHTTPRequestOperation.m */; };
 		F29F86291B2410070058FC9F /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F29F86181B2410070058FC9F /* AFHTTPRequestOperationManager.m */; };
@@ -96,6 +97,8 @@
 		2B39C9471B241972007BAC7A /* LoginService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginService.m; sourceTree = "<group>"; };
 		2B39C94A1B24501B007BAC7A /* ColorHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorHandler.h; sourceTree = "<group>"; };
 		2B39C94B1B24501B007BAC7A /* ColorHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorHandler.m; sourceTree = "<group>"; };
+		2B39C94E1B248063007BAC7A /* LoginDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginDataParse.h; sourceTree = "<group>"; };
+		2B39C94F1B248063007BAC7A /* LoginDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginDataParse.m; sourceTree = "<group>"; };
 		F250F2E81B2471CD000AD021 /* AFHttpTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHttpTool.h; path = Network/AFHttpTool.h; sourceTree = "<group>"; };
 		F250F2E91B2471CD000AD021 /* AFHttpTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFHttpTool.m; path = Network/AFHttpTool.m; sourceTree = "<group>"; };
 		F29F86151B2410070058FC9F /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPRequestOperation.h; path = Utilities/AFNetworking/AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -175,7 +178,8 @@
 		2B31C3D11B11C3FD004C865A /* MyRill */ = {
 			isa = PBXGroup;
 			children = (
-				F250F2E71B247156000AD021 /* Network */,
+				2B39C94D1B247A4E007BAC7A /* DataDrive */,
+				F250F2E71B247156000AD021 /* AFNetWorkInterface */,
 				2B31C3D61B11C3FD004C865A /* AppDelegate.h */,
 				2B31C3D71B11C3FD004C865A /* AppDelegate.m */,
 				2B39C9491B244FFF007BAC7A /* Common */,
@@ -281,13 +285,22 @@
 			name = Common;
 			sourceTree = "<group>";
 		};
-		F250F2E71B247156000AD021 /* Network */ = {
+		2B39C94D1B247A4E007BAC7A /* DataDrive */ = {
+			isa = PBXGroup;
+			children = (
+				2B39C94E1B248063007BAC7A /* LoginDataParse.h */,
+				2B39C94F1B248063007BAC7A /* LoginDataParse.m */,
+			);
+			name = DataDrive;
+			sourceTree = "<group>";
+		};
+		F250F2E71B247156000AD021 /* AFNetWorkInterface */ = {
 			isa = PBXGroup;
 			children = (
 				F250F2E81B2471CD000AD021 /* AFHttpTool.h */,
 				F250F2E91B2471CD000AD021 /* AFHttpTool.m */,
 			);
-			name = Network;
+			name = AFNetWorkInterface;
 			sourceTree = "<group>";
 		};
 		F29F86131B240FC30058FC9F /* Utilities */ = {
@@ -451,6 +464,7 @@
 			files = (
 				2B39C9441B24128F007BAC7A /* LoginViewController.m in Sources */,
 				F29F86281B2410070058FC9F /* AFHTTPRequestOperation.m in Sources */,
+				2B39C9501B248063007BAC7A /* LoginDataParse.m in Sources */,
 				F29F86471B2410320058FC9F /* UIImageView+AFNetworking.m in Sources */,
 				F29F86291B2410070058FC9F /* AFHTTPRequestOperationManager.m in Sources */,
 				2B39C93A1B241212007BAC7A /* MASLayoutConstraint.m in Sources */,
