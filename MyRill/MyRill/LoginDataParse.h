@@ -18,6 +18,6 @@
 @interface LoginDataParse : NSObject
 
 //login
--(void) loginWithUserName:(NSString *) userName  password:(NSString *) password;
+-(void) loginWithUserName:(NSString *)userName  password:(NSString *)password;
 
 @end

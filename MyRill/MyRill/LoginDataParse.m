@@ -13,10 +13,11 @@
 
 -(void) loginWithUserName:(NSString *) userName  password:(NSString *) password
 {
-    [AFHttpTool loginWithUserName:userName password:password success:^(id response) {
-        
-        
-    }
+    [AFHttpTool loginWithUserName:userName
+                         password:password
+                          success:^(id response) {
+                              
+                          }
                           failure:^(NSError* err) {
                               
                           }];

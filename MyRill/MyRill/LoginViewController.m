@@ -7,6 +7,7 @@
 //
 
 #import "LoginViewController.h"
+#import "SignUpViewController.h"
 #import "Masonry.h"
 #import "ColorHandler.h"
 
@@ -91,7 +92,11 @@
 }
 
 - (void)onSignUpBtnClicked:(UIButton *)sender {
-    
+    SignUpViewController *signUpViewController = [[SignUpViewController alloc] init];
+    self.definesPresentationContext = YES;
+    signUpViewController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    signUpViewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
+    [self presentViewController:signUpViewController animated:YES completion:nil];
 }
 
 #pragma mark - setters&getters
@@ -135,7 +140,7 @@
         _loginBtn.layer.cornerRadius = 3.0;
         _loginBtn.backgroundColor = [UIColor blueColor];
         [_loginBtn addTarget:self action:@selector(onLoginBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-        [_loginBtn setTitle:@"登陆" forState:UIControlStateNormal];
+        [_loginBtn setTitle:@"登录" forState:UIControlStateNormal];
     }
     
     return _loginBtn;
