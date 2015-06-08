@@ -12,7 +12,7 @@
 
 #define DEV_SERVER_ADDRESS @"http://120.25.249.144/"
 
-#define ContentType @"text/html"
+#define ContentType @"text/json"
 
 @implementation AFHttpTool
 
@@ -27,7 +27,7 @@
     AFHTTPRequestOperationManager* mgr = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:baseURL];
     
 #ifdef ContentType
-    mgr.responseSerializer.acceptableContentTypes = [NSSet setWithObject:ContentType];
+//    mgr.responseSerializer.acceptableContentTypes = [NSSet setWithObject:ContentType];
 #endif
     mgr.requestSerializer.HTTPShouldHandleCookies = YES;
     
@@ -55,6 +55,7 @@
               success:^(AFHTTPRequestOperation* operation, NSDictionary* responseObj) {
                   if (success) {
                       success(responseObj);
+                      NSLog(@"%@",responseObj);
                   }
               } failure:^(AFHTTPRequestOperation* operation, NSError* error) {
                   if (failure) {
