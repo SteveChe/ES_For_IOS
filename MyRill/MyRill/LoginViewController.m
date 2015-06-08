@@ -9,7 +9,6 @@
 #import "LoginViewController.h"
 #import "Masonry.h"
 #import "ColorHandler.h"
-#import "AFHttpTool.h"
 
 @interface LoginViewController ()
 
@@ -17,6 +16,7 @@
 @property (nonatomic, strong) UITextField *passwordTxtField;
 @property (nonatomic, strong) UIButton *loginBtn;
 @property (nonatomic, strong) UIButton *signUpBtn;
+@property (nonatomic, strong) LoginDataParse* loginDataParse;
 
 @end
 
@@ -36,6 +36,8 @@
     [self.view addSubview:self.signUpBtn];
     
     [self layoutPageSubviews];
+    
+    _loginDataParse = [[LoginDataParse alloc] init];
 }
 
 - (void)layoutPageSubviews {
@@ -84,15 +86,8 @@
 
 #pragma mark - response events
 - (void)onLoginBtnClicked:(UIButton *)sender {
+    [_loginDataParse loginWithUserName:_userNameTxtField.text password:_passwordTxtField.text];
     
-    {
-        [AFHttpTool loginWithUserName:_userNameTxtField.text password:_passwordTxtField.text success:^(id response) {
-            
-        }
-                              failure:^(NSError* err) {
-                               
-                              }];
-    }
 }
 
 - (void)onSignUpBtnClicked:(UIButton *)sender {
