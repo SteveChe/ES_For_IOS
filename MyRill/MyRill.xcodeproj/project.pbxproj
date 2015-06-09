@@ -29,6 +29,7 @@
 		2B39C9551B25CA86007BAC7A /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9541B25CA86007BAC7A /* SignUpViewController.m */; };
 		2B39C9581B271F53007BAC7A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B39C9571B271F53007BAC7A /* AVFoundation.framework */; };
 		2B39C95A1B271F5C007BAC7A /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B39C9591B271F5C007BAC7A /* CoreData.framework */; };
+		2B39C95F1B272221007BAC7A /* QRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C95E1B272221007BAC7A /* QRCodeViewController.m */; };
 		F250F2EA1B2471CD000AD021 /* AFHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = F250F2E91B2471CD000AD021 /* AFHttpTool.m */; };
 		F29F86281B2410070058FC9F /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F29F86161B2410070058FC9F /* AFHTTPRequestOperation.m */; };
 		F29F86291B2410070058FC9F /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F29F86181B2410070058FC9F /* AFHTTPRequestOperationManager.m */; };
@@ -107,6 +108,8 @@
 		2B39C9571B271F53007BAC7A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		2B39C9591B271F5C007BAC7A /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		2B39C95B1B271F7A007BAC7A /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		2B39C95D1B272221007BAC7A /* QRCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeViewController.h; sourceTree = "<group>"; };
+		2B39C95E1B272221007BAC7A /* QRCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeViewController.m; sourceTree = "<group>"; };
 		F250F2E81B2471CD000AD021 /* AFHttpTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHttpTool.h; path = Network/AFHttpTool.h; sourceTree = "<group>"; };
 		F250F2E91B2471CD000AD021 /* AFHttpTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFHttpTool.m; path = Network/AFHttpTool.m; sourceTree = "<group>"; };
 		F29F86151B2410070058FC9F /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPRequestOperation.h; path = Utilities/AFNetworking/AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -266,6 +269,11 @@
 			isa = PBXGroup;
 			children = (
 				2B39C9511B25CA45007BAC7A /* Login */,
+				2B39C9641B272969007BAC7A /* Conversation */,
+				2B39C9601B2728C5007BAC7A /* Business */,
+				2B39C9611B2728F9007BAC7A /* Contacts */,
+				2B39C9621B272915007BAC7A /* Task */,
+				2B39C9631B27293C007BAC7A /* User */,
 				2B39C9521B25CA55007BAC7A /* Others */,
 			);
 			name = Controllers;
@@ -312,6 +320,8 @@
 				2B39C9431B24128F007BAC7A /* LoginViewController.m */,
 				2B39C9531B25CA86007BAC7A /* SignUpViewController.h */,
 				2B39C9541B25CA86007BAC7A /* SignUpViewController.m */,
+				2B39C95D1B272221007BAC7A /* QRCodeViewController.h */,
+				2B39C95E1B272221007BAC7A /* QRCodeViewController.m */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -331,6 +341,41 @@
 				2B39C9571B271F53007BAC7A /* AVFoundation.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2B39C9601B2728C5007BAC7A /* Business */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Business;
+			sourceTree = "<group>";
+		};
+		2B39C9611B2728F9007BAC7A /* Contacts */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Contacts;
+			sourceTree = "<group>";
+		};
+		2B39C9621B272915007BAC7A /* Task */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Task;
+			sourceTree = "<group>";
+		};
+		2B39C9631B27293C007BAC7A /* User */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = User;
+			sourceTree = "<group>";
+		};
+		2B39C9641B272969007BAC7A /* Conversation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Conversation;
 			sourceTree = "<group>";
 		};
 		F250F2E71B247156000AD021 /* AFNetWorkInterface */ = {
@@ -521,6 +566,7 @@
 				2B39C9391B241212007BAC7A /* MASConstraintMaker.m in Sources */,
 				2B39C93F1B241212007BAC7A /* View+MASAdditions.m in Sources */,
 				2B39C93C1B241212007BAC7A /* MASViewConstraint.m in Sources */,
+				2B39C95F1B272221007BAC7A /* QRCodeViewController.m in Sources */,
 				2B39C9371B241212007BAC7A /* MASCompositeConstraint.m in Sources */,
 				F29F862C1B2410070058FC9F /* AFSecurityPolicy.m in Sources */,
 				F29F86491B2410320058FC9F /* UIRefreshControl+AFNetworking.m in Sources */,

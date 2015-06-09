@@ -9,6 +9,7 @@
 #import "SignUpViewController.h"
 #import "ColorHandler.h"
 #import "Masonry.h"
+#import "QRCodeViewController.h"
 
 @interface SignUpViewController () <UITextFieldDelegate>
 
@@ -31,6 +32,7 @@
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor whiteColor];
+    self.title = @"注册";
     [self.view endEditing:YES];
     
     [self.view addSubview:self.phoneNumTxtField];
@@ -106,6 +108,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - response events
+- (void)compBtnOnClicked:(UIButton *)sender {
+    QRCodeViewController *qrcodeVC = [[QRCodeViewController alloc] init];
+    [self.navigationController pushViewController:qrcodeVC animated:YES];
+    
+}
+
 #pragma mark - private methods
 - (void)textFieldConfig:(UITextField *)textField {
     textField.layer.borderColor = [ColorHandler colorFromHexRGB:@"EDEDED"].CGColor;
@@ -123,6 +132,13 @@
         _phoneNumTxtField = [UITextField new];
         _phoneNumTxtField.placeholder = @"输入手机号";
         _phoneNumTxtField.textAlignment = NSTextAlignmentLeft;
+        UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        rightBtn.bounds = CGRectMake(0, 0, 80, 30);
+        rightBtn.backgroundColor = [UIColor blueColor];
+        [rightBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
+        rightBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+        _phoneNumTxtField.rightView = rightBtn;
+        _phoneNumTxtField.rightViewMode = UITextFieldViewModeAlways;
         [self textFieldConfig:_phoneNumTxtField];
     }
     
@@ -179,6 +195,7 @@
         [_joinBtn setTitle:@"加入企业" forState:UIControlStateNormal];
         _joinBtn.backgroundColor = [UIColor blueColor];
         _joinBtn.layer.cornerRadius = 3.0;
+        [_joinBtn addTarget:self action:@selector(compBtnOnClicked:) forControlEvents:UIControlEventTouchUpInside];
     }
     
     return _joinBtn;

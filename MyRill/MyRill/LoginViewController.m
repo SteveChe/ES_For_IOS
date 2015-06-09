@@ -29,6 +29,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.title = @"My Rill";
     self.view.backgroundColor = [UIColor whiteColor];
     
     [self.view addSubview:self.userNameTxtField];
@@ -93,10 +94,11 @@
 
 - (void)onSignUpBtnClicked:(UIButton *)sender {
     SignUpViewController *signUpViewController = [[SignUpViewController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:signUpViewController];
     self.definesPresentationContext = YES;
-    signUpViewController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    signUpViewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
-    [self presentViewController:signUpViewController animated:YES completion:nil];
+    nav.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    nav.modalPresentationStyle = UIModalPresentationOverFullScreen;
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 #pragma mark - setters&getters
