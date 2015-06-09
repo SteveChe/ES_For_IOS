@@ -27,6 +27,8 @@
 		2B39C94C1B24501B007BAC7A /* ColorHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C94B1B24501B007BAC7A /* ColorHandler.m */; };
 		2B39C9501B248063007BAC7A /* LoginDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C94F1B248063007BAC7A /* LoginDataParse.m */; };
 		2B39C9551B25CA86007BAC7A /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9541B25CA86007BAC7A /* SignUpViewController.m */; };
+		2B39C9581B271F53007BAC7A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B39C9571B271F53007BAC7A /* AVFoundation.framework */; };
+		2B39C95A1B271F5C007BAC7A /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B39C9591B271F5C007BAC7A /* CoreData.framework */; };
 		F250F2EA1B2471CD000AD021 /* AFHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = F250F2E91B2471CD000AD021 /* AFHttpTool.m */; };
 		F29F86281B2410070058FC9F /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F29F86161B2410070058FC9F /* AFHTTPRequestOperation.m */; };
 		F29F86291B2410070058FC9F /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F29F86181B2410070058FC9F /* AFHTTPRequestOperationManager.m */; };
@@ -102,6 +104,9 @@
 		2B39C94F1B248063007BAC7A /* LoginDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginDataParse.m; sourceTree = "<group>"; };
 		2B39C9531B25CA86007BAC7A /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
 		2B39C9541B25CA86007BAC7A /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
+		2B39C9571B271F53007BAC7A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		2B39C9591B271F5C007BAC7A /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		2B39C95B1B271F7A007BAC7A /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		F250F2E81B2471CD000AD021 /* AFHttpTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHttpTool.h; path = Network/AFHttpTool.h; sourceTree = "<group>"; };
 		F250F2E91B2471CD000AD021 /* AFHttpTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFHttpTool.m; path = Network/AFHttpTool.m; sourceTree = "<group>"; };
 		F29F86151B2410070058FC9F /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPRequestOperation.h; path = Utilities/AFNetworking/AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -147,6 +152,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B39C95A1B271F5C007BAC7A /* CoreData.framework in Frameworks */,
+				2B39C9581B271F53007BAC7A /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				2B31C3D11B11C3FD004C865A /* MyRill */,
+				2B39C9561B271C95007BAC7A /* Frameworks */,
 				2B31C3EB1B11C3FD004C865A /* MyRillTests */,
 				2B31C3D01B11C3FD004C865A /* Products */,
 			);
@@ -313,6 +321,16 @@
 			children = (
 			);
 			name = Others;
+			sourceTree = "<group>";
+		};
+		2B39C9561B271C95007BAC7A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2B39C95B1B271F7A007BAC7A /* CoreFoundation.framework */,
+				2B39C9591B271F5C007BAC7A /* CoreData.framework */,
+				2B39C9571B271F53007BAC7A /* AVFoundation.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		F250F2E71B247156000AD021 /* AFNetWorkInterface */ = {
