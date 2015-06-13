@@ -23,7 +23,7 @@ typedef NS_ENUM(NSInteger, RequestMethodType){
  *  @param success      请求成功后的回调（请将请求成功后想做的事情写到这个block中）
  *  @param failure      请求失败后的回调（请将请求失败后想做的事情写到这个block中）
  */
-+(void) requestWihtMethod:(RequestMethodType)
++(void) requestWithMethod:(RequestMethodType)
 methodType url : (NSString *)url
                    params:(NSDictionary *)params
                   success:(void (^)(id response))success

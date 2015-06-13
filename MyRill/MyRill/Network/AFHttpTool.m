@@ -16,7 +16,7 @@
 
 @implementation AFHttpTool
 
-+ (void)requestWihtMethod:(RequestMethodType)methodType
++ (void)requestWithMethod:(RequestMethodType)methodType
                       url:(NSString*)url
                    params:(NSDictionary*)params
                   success:(void (^)(id response))success
@@ -38,7 +38,7 @@
             [mgr GET:url parameters:params
              success:^(AFHTTPRequestOperation* operation, NSDictionary* responseObj) {
                  if (success) {
-                     success(responseObj);
+                     success(responseObj);                     
                  }
              } failure:^(AFHTTPRequestOperation* operation, NSError* error) {
                  if (failure) {
@@ -55,7 +55,13 @@
               success:^(AFHTTPRequestOperation* operation, NSDictionary* responseObj) {
                   if (success) {
                       success(responseObj);
-                      NSLog(@"%@",responseObj);
+//                      NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
+                      NSString* strCookieUrl = [NSString stringWithFormat:@"%@%@",DEV_SERVER_ADDRESS,url];
+                      NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL: [NSURL URLWithString:strCookieUrl]];
+                      NSData *data = [NSKeyedArchiver archivedDataWithRootObject:cookies];
+                      NSString *aString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+
+                      NSLog(@"%@",[operation.response allHeaderFields]  );
                   }
               } failure:^(AFHTTPRequestOperation* operation, NSError* error) {
                   if (failure) {
@@ -77,8 +83,8 @@
                    failure:(void (^)(NSError* err))failure
 {
     NSDictionary *params = @{@"Phone number":phoneNum,@"Password":password,@"Verification code":verificationCode};
-    [AFHttpTool requestWihtMethod:RequestMethodTypePost
-                              url:@"api/accounts/sign-up/"
+    [AFHttpTool requestWithMethod:RequestMethodTypePost
+                              url:@"api/accounts/sign-up/.json"
                            params:params
                           success:success
                           failure:failure];
@@ -91,14 +97,12 @@
                   success:(void (^)(id response))success
                   failure:(void (^)(NSError* err))failure
 {
-    NSDictionary *params = @{@"Username":userName,@"Password":password};
-    [AFHttpTool requestWihtMethod:RequestMethodTypePost
-                              url:@"api/accounts/sign-in/"
+    NSDictionary *params = @{@"username":userName,@"password":password};
+    [AFHttpTool requestWithMethod:RequestMethodTypePost
+                              url:@"api/accounts/sign-in/.json"
                            params:params
                           success:success
                           failure:failure];
 }
-
-
 
 @end
