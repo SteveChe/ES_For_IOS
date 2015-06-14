@@ -31,6 +31,15 @@
 #endif
     mgr.requestSerializer.HTTPShouldHandleCookies = YES;
     
+    NSData *cookiesdata = [[NSUserDefaults standardUserDefaults] objectForKey:@"sessionCookies"];
+    if([cookiesdata length]) {
+        NSArray *cookies = [NSKeyedUnarchiver unarchiveObjectWithData:cookiesdata];
+        NSHTTPCookie *cookie;
+        for (cookie in cookies) {
+            [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
+        }
+    }
+    
     switch (methodType) {
         case RequestMethodTypeGet:
         {
@@ -55,13 +64,17 @@
               success:^(AFHTTPRequestOperation* operation, NSDictionary* responseObj) {
                   if (success) {
                       success(responseObj);
+                      
 //                      NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
-                      NSString* strCookieUrl = [NSString stringWithFormat:@"%@%@",DEV_SERVER_ADDRESS,url];
-                      NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL: [NSURL URLWithString:strCookieUrl]];
-                      NSData *data = [NSKeyedArchiver archivedDataWithRootObject:cookies];
-                      NSString *aString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-
-                      NSLog(@"%@",[operation.response allHeaderFields]  );
+//                      for (NSHTTPCookie *cookie in cookies) {
+//                          // Here I see the correct rails session cookie
+//                          NSLog(@"cookie: %@", cookie);
+//                      }
+                      NSData *cookiesData = [NSKeyedArchiver archivedDataWithRootObject: [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]];
+                      NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                      [defaults setObject: cookiesData forKey: @"sessionCookies"];
+                      [defaults synchronize];
+                      
                   }
               } failure:^(AFHTTPRequestOperation* operation, NSError* error) {
                   if (failure) {

@@ -45,7 +45,10 @@
                                       break;
                               }
                               NSString* errorMessage = [reponseDic valueForKey:NETWORK_ERROR_MESSAGE];
-                              
+                              if(errorMessage==nil)
+                                  return;
+                                  
+                              errorMessage= [errorMessage stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
                               NSLog(@"%@",errorMessage);
                               
                           }

@@ -41,5 +41,12 @@ methodType url : (NSString *)url
                   password:(NSString *) password
                    success:(void (^)(id response))success
                    failure:(void (^)(NSError* err))failure;
+//change password
++(void) loginWithUserName:(NSString *) userName
+                 password:(NSString *) password
+                  success:(void (^)(id response))success
+                  failure:(void (^)(NSError* err))failure;
+
+
 
 @end
