@@ -21,7 +21,7 @@
      {
          NSDictionary* reponseDic = (NSDictionary*)response;
          NSNumber* errorCodeNum = [reponseDic valueForKey:NETWORK_ERROR_CODE];
-         if (errorCodeNum == nil)
+         if (errorCodeNum == nil || [errorCodeNum isEqual:[NSNull null]] )
          {
              return ;
          }
