@@ -9,7 +9,7 @@
 #import "SignUpViewController.h"
 #import "ColorHandler.h"
 #import "Masonry.h"
-#import "QRCodeViewController.h"
+#import "QRCodeContainerViewController.h"
 
 @interface SignUpViewController () <UITextFieldDelegate>
 
@@ -110,7 +110,7 @@
 
 #pragma mark - response events
 - (void)compBtnOnClicked:(UIButton *)sender {
-    QRCodeViewController *qrcodeVC = [[QRCodeViewController alloc] init];
+    QRCodeContainerViewController *qrcodeVC = [[QRCodeContainerViewController alloc] init];
     [self.navigationController pushViewController:qrcodeVC animated:YES];
     
 }

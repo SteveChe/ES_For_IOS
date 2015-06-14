@@ -8,13 +8,13 @@
 
 #import "AppDelegate.h"
 #import "LoginViewController.h"
+#import "ESMenuViewController.h"
 
 @interface AppDelegate ()
 
 @end
 
 @implementation AppDelegate
-
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
@@ -25,6 +25,12 @@
     [self.window makeKeyAndVisible];
     
     return YES;
+}
+
+- (void)changeWindow:(UIViewController *)sender {
+    ESMenuViewController *esVC = [[ESMenuViewController alloc] init];
+    self.window.rootViewController = esVC;
+    [self.window makeKeyAndVisible];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

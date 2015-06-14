@@ -10,6 +10,7 @@
 #import "SignUpViewController.h"
 #import "Masonry.h"
 #import "ColorHandler.h"
+#import "AppDelegate.h"
 
 @interface LoginViewController ()
 
@@ -87,8 +88,10 @@
 
 #pragma mark - response events
 - (void)onLoginBtnClicked:(UIButton *)sender {
-    [_loginDataParse loginWithUserName:_userNameTxtField.text password:_passwordTxtField.text];
+    //[_loginDataParse loginWithUserName:_userNameTxtField.text password:_passwordTxtField.text];
     
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    [appDelegate changeWindow:nil];
 }
 
 - (void)onSignUpBtnClicked:(UIButton *)sender {

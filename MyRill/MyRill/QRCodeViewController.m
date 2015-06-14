@@ -26,7 +26,10 @@
     // Do any additional setup after loading the view.
     
     self.title = @"企业二维码扫描";
-
+    
+    CGRect bounds = [[UIScreen mainScreen] bounds];
+//    CGFloat screenHigh = bounds.size.height;
+//    CGFloat screenWidth = bounds.size.width;
     
     _device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     // Input
@@ -34,6 +37,13 @@
     // Output
     _output = [[AVCaptureMetadataOutput alloc] init];
     [_output setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
+//    [_output setRectOfInterest:CGRectMake (( 124 )/ screenHigh ,(( screenWidth - 220 )/ 2 )/ screenWidth, 220 / screenHigh , 220 / screenWidth)];
+    CGSize size = self.view.bounds.size;
+    CGRect cropRect = CGRectMake(40, 100, 240, 240);
+    _output.rectOfInterest = CGRectMake(cropRect.origin.y/size.height,
+                                              cropRect.origin.x/size.width,
+                                              cropRect.size.height/size.height,
+                                              cropRect.size.width/size.width);
     
     // Session
     
@@ -82,6 +92,8 @@
         AVMetadataMachineReadableCodeObject *metadataObject = [metadataObjects objectAtIndex:0];
         stringValue = metadataObject.stringValue;
         NSLog(@"%@",stringValue);
+        
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 

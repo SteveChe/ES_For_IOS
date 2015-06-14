@@ -30,6 +30,13 @@
 		2B39C9581B271F53007BAC7A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B39C9571B271F53007BAC7A /* AVFoundation.framework */; };
 		2B39C95A1B271F5C007BAC7A /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B39C9591B271F5C007BAC7A /* CoreData.framework */; };
 		2B39C95F1B272221007BAC7A /* QRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C95E1B272221007BAC7A /* QRCodeViewController.m */; };
+		2B39C9671B2D734A007BAC7A /* QRCodeContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9661B2D734A007BAC7A /* QRCodeContainerViewController.m */; };
+		2B39C96D1B2D79DB007BAC7A /* BusinessContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C96C1B2D79DB007BAC7A /* BusinessContainerViewController.m */; };
+		2B39C9701B2D7AD2007BAC7A /* ChatContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C96F1B2D7AD2007BAC7A /* ChatContainerViewController.m */; };
+		2B39C9731B2D7AF0007BAC7A /* ContactsContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9721B2D7AF0007BAC7A /* ContactsContainerViewController.m */; };
+		2B39C9761B2D7B05007BAC7A /* TaskContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9751B2D7B05007BAC7A /* TaskContainerViewController.m */; };
+		2B39C9791B2D7B14007BAC7A /* UserContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9781B2D7B14007BAC7A /* UserContainerViewController.m */; };
+		2B39C97C1B2D8003007BAC7A /* ESMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C97B1B2D8003007BAC7A /* ESMenuViewController.m */; };
 		F250F2EA1B2471CD000AD021 /* AFHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = F250F2E91B2471CD000AD021 /* AFHttpTool.m */; };
 		F29F86281B2410070058FC9F /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F29F86161B2410070058FC9F /* AFHTTPRequestOperation.m */; };
 		F29F86291B2410070058FC9F /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F29F86181B2410070058FC9F /* AFHTTPRequestOperationManager.m */; };
@@ -110,6 +117,20 @@
 		2B39C95B1B271F7A007BAC7A /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		2B39C95D1B272221007BAC7A /* QRCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeViewController.h; sourceTree = "<group>"; };
 		2B39C95E1B272221007BAC7A /* QRCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeViewController.m; sourceTree = "<group>"; };
+		2B39C9651B2D734A007BAC7A /* QRCodeContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeContainerViewController.h; sourceTree = "<group>"; };
+		2B39C9661B2D734A007BAC7A /* QRCodeContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeContainerViewController.m; sourceTree = "<group>"; };
+		2B39C96B1B2D79DB007BAC7A /* BusinessContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessContainerViewController.h; sourceTree = "<group>"; };
+		2B39C96C1B2D79DB007BAC7A /* BusinessContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessContainerViewController.m; sourceTree = "<group>"; };
+		2B39C96E1B2D7AD2007BAC7A /* ChatContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatContainerViewController.h; sourceTree = "<group>"; };
+		2B39C96F1B2D7AD2007BAC7A /* ChatContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatContainerViewController.m; sourceTree = "<group>"; };
+		2B39C9711B2D7AF0007BAC7A /* ContactsContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsContainerViewController.h; sourceTree = "<group>"; };
+		2B39C9721B2D7AF0007BAC7A /* ContactsContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsContainerViewController.m; sourceTree = "<group>"; };
+		2B39C9741B2D7B05007BAC7A /* TaskContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskContainerViewController.h; sourceTree = "<group>"; };
+		2B39C9751B2D7B05007BAC7A /* TaskContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskContainerViewController.m; sourceTree = "<group>"; };
+		2B39C9771B2D7B14007BAC7A /* UserContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserContainerViewController.h; sourceTree = "<group>"; };
+		2B39C9781B2D7B14007BAC7A /* UserContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserContainerViewController.m; sourceTree = "<group>"; };
+		2B39C97A1B2D8003007BAC7A /* ESMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESMenuViewController.h; sourceTree = "<group>"; };
+		2B39C97B1B2D8003007BAC7A /* ESMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESMenuViewController.m; sourceTree = "<group>"; };
 		F247876C1B2BC3CE00EC266B /* DataParseDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataParseDefine.h; sourceTree = "<group>"; };
 		F250F2E81B2471CD000AD021 /* AFHttpTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHttpTool.h; path = Network/AFHttpTool.h; sourceTree = "<group>"; };
 		F250F2E91B2471CD000AD021 /* AFHttpTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFHttpTool.m; path = Network/AFHttpTool.m; sourceTree = "<group>"; };
@@ -269,9 +290,11 @@
 		2B39C9401B241243007BAC7A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				2B39C97A1B2D8003007BAC7A /* ESMenuViewController.h */,
+				2B39C97B1B2D8003007BAC7A /* ESMenuViewController.m */,
 				2B39C9511B25CA45007BAC7A /* Login */,
-				2B39C9641B272969007BAC7A /* Conversation */,
 				2B39C9601B2728C5007BAC7A /* Business */,
+				2B39C9641B272969007BAC7A /* Conversation */,
 				2B39C9611B2728F9007BAC7A /* Contacts */,
 				2B39C9621B272915007BAC7A /* Task */,
 				2B39C9631B27293C007BAC7A /* User */,
@@ -322,6 +345,8 @@
 				2B39C9431B24128F007BAC7A /* LoginViewController.m */,
 				2B39C9531B25CA86007BAC7A /* SignUpViewController.h */,
 				2B39C9541B25CA86007BAC7A /* SignUpViewController.m */,
+				2B39C9651B2D734A007BAC7A /* QRCodeContainerViewController.h */,
+				2B39C9661B2D734A007BAC7A /* QRCodeContainerViewController.m */,
 				2B39C95D1B272221007BAC7A /* QRCodeViewController.h */,
 				2B39C95E1B272221007BAC7A /* QRCodeViewController.m */,
 			);
@@ -348,6 +373,8 @@
 		2B39C9601B2728C5007BAC7A /* Business */ = {
 			isa = PBXGroup;
 			children = (
+				2B39C96B1B2D79DB007BAC7A /* BusinessContainerViewController.h */,
+				2B39C96C1B2D79DB007BAC7A /* BusinessContainerViewController.m */,
 			);
 			name = Business;
 			sourceTree = "<group>";
@@ -355,6 +382,8 @@
 		2B39C9611B2728F9007BAC7A /* Contacts */ = {
 			isa = PBXGroup;
 			children = (
+				2B39C9711B2D7AF0007BAC7A /* ContactsContainerViewController.h */,
+				2B39C9721B2D7AF0007BAC7A /* ContactsContainerViewController.m */,
 			);
 			name = Contacts;
 			sourceTree = "<group>";
@@ -362,6 +391,8 @@
 		2B39C9621B272915007BAC7A /* Task */ = {
 			isa = PBXGroup;
 			children = (
+				2B39C9741B2D7B05007BAC7A /* TaskContainerViewController.h */,
+				2B39C9751B2D7B05007BAC7A /* TaskContainerViewController.m */,
 			);
 			name = Task;
 			sourceTree = "<group>";
@@ -369,6 +400,8 @@
 		2B39C9631B27293C007BAC7A /* User */ = {
 			isa = PBXGroup;
 			children = (
+				2B39C9771B2D7B14007BAC7A /* UserContainerViewController.h */,
+				2B39C9781B2D7B14007BAC7A /* UserContainerViewController.m */,
 			);
 			name = User;
 			sourceTree = "<group>";
@@ -376,6 +409,8 @@
 		2B39C9641B272969007BAC7A /* Conversation */ = {
 			isa = PBXGroup;
 			children = (
+				2B39C96E1B2D7AD2007BAC7A /* ChatContainerViewController.h */,
+				2B39C96F1B2D7AD2007BAC7A /* ChatContainerViewController.m */,
 			);
 			name = Conversation;
 			sourceTree = "<group>";
@@ -548,21 +583,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B39C96D1B2D79DB007BAC7A /* BusinessContainerViewController.m in Sources */,
 				2B39C9441B24128F007BAC7A /* LoginViewController.m in Sources */,
 				F29F86281B2410070058FC9F /* AFHTTPRequestOperation.m in Sources */,
 				2B39C9501B248063007BAC7A /* LoginDataParse.m in Sources */,
 				F29F86471B2410320058FC9F /* UIImageView+AFNetworking.m in Sources */,
+				2B39C97C1B2D8003007BAC7A /* ESMenuViewController.m in Sources */,
 				2B39C9551B25CA86007BAC7A /* SignUpViewController.m in Sources */,
 				F29F86291B2410070058FC9F /* AFHTTPRequestOperationManager.m in Sources */,
 				2B39C93A1B241212007BAC7A /* MASLayoutConstraint.m in Sources */,
 				F29F86481B2410320058FC9F /* UIProgressView+AFNetworking.m in Sources */,
 				F29F862B1B2410070058FC9F /* AFNetworkReachabilityManager.m in Sources */,
+				2B39C9761B2D7B05007BAC7A /* TaskContainerViewController.m in Sources */,
 				2B39C9481B241972007BAC7A /* LoginService.m in Sources */,
 				F29F862F1B2410070058FC9F /* AFURLResponseSerialization.m in Sources */,
 				F29F862D1B2410070058FC9F /* AFURLConnectionOperation.m in Sources */,
 				F29F86461B2410320058FC9F /* UIButton+AFNetworking.m in Sources */,
 				2B39C93B1B241212007BAC7A /* MASViewAttribute.m in Sources */,
 				F250F2EA1B2471CD000AD021 /* AFHttpTool.m in Sources */,
+				2B39C9791B2D7B14007BAC7A /* UserContainerViewController.m in Sources */,
 				2B39C94C1B24501B007BAC7A /* ColorHandler.m in Sources */,
 				F29F86441B2410320058FC9F /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				2B39C9391B241212007BAC7A /* MASConstraintMaker.m in Sources */,
@@ -573,9 +612,12 @@
 				F29F862C1B2410070058FC9F /* AFSecurityPolicy.m in Sources */,
 				F29F86491B2410320058FC9F /* UIRefreshControl+AFNetworking.m in Sources */,
 				F29F864A1B2410320058FC9F /* UIWebView+AFNetworking.m in Sources */,
+				2B39C9701B2D7AD2007BAC7A /* ChatContainerViewController.m in Sources */,
 				F29F862A1B2410070058FC9F /* AFHTTPSessionManager.m in Sources */,
+				2B39C9671B2D734A007BAC7A /* QRCodeContainerViewController.m in Sources */,
 				F29F86451B2410320058FC9F /* UIAlertView+AFNetworking.m in Sources */,
 				2B39C9381B241212007BAC7A /* MASConstraint.m in Sources */,
+				2B39C9731B2D7AF0007BAC7A /* ContactsContainerViewController.m in Sources */,
 				F29F862E1B2410070058FC9F /* AFURLRequestSerialization.m in Sources */,
 				F29F86431B2410320058FC9F /* AFNetworkActivityIndicatorManager.m in Sources */,
 				2B39C93E1B241212007BAC7A /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,

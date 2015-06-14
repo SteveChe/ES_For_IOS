@@ -12,6 +12,7 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
+- (void)changeWindow:(UIViewController *)sender;
 
 @end
 
