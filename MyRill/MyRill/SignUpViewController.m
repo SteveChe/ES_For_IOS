@@ -10,6 +10,8 @@
 #import "ColorHandler.h"
 #import "Masonry.h"
 #import "QRCodeContainerViewController.h"
+#import "QRCodeViewController.h"
+#import "SignUpDataParse.h"
 
 @interface SignUpViewController () <UITextFieldDelegate>
 

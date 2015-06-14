@@ -22,7 +22,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    BusinessContainerViewController *businessVC = [[BusinessContainerViewController alloc] init];
+    UICollectionViewFlowLayout *flowLayout=[[UICollectionViewFlowLayout alloc] init];
+    flowLayout.itemSize=CGSizeMake(100,100);
+    [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
+    BusinessContainerViewController *businessVC = [[BusinessContainerViewController alloc] initWithCollectionViewLayout:flowLayout];
     businessVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"业务"
                                                           image:nil
                                                   selectedImage:nil];

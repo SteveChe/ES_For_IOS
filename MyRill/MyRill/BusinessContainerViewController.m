@@ -8,7 +8,7 @@
 
 #import "BusinessContainerViewController.h"
 
-@interface BusinessContainerViewController ()
+@interface BusinessContainerViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
 @end
 
@@ -18,6 +18,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"业务";
+    
 }
 
 - (void)didReceiveMemoryWarning {

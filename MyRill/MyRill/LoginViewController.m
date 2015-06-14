@@ -89,6 +89,8 @@
 
 #pragma mark - response events
 - (void)onLoginBtnClicked:(UIButton *)sender {
+    [_loginDataParse loginWithUserName:_userNameTxtField.text password:_passwordTxtField.text];
+
     //[_loginDataParse loginWithUserName:_userNameTxtField.text password:_passwordTxtField.text];
     
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
