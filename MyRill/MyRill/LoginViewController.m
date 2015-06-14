@@ -39,6 +39,7 @@
     [self layoutPageSubviews];
     
     _loginDataParse = [[LoginDataParse alloc] init];
+    _loginDataParse.delegate = self;
 }
 
 - (void)layoutPageSubviews {
@@ -158,5 +159,16 @@
     
     return _signUpBtn;
 }
+
+#pragma mark - LoginDataDelegate
+-(void)loginSucceed
+{
+    
+}
+-(void)loginFailed
+{
+    
+}
+
 
 @end

@@ -47,6 +47,8 @@ methodType url : (NSString *)url
                   success:(void (^)(id response))success
                   failure:(void (^)(NSError* err))failure;
 
+//get verification code
++(void) getVerificationCode:(NSString *)phoneNum;
 
 
 @end

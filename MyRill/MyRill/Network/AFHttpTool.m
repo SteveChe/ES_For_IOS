@@ -141,5 +141,11 @@
                           failure:failure];
 }
 
+//get verification code
++(void) getVerificationCode:(NSString *)phoneNum
+{
+    NSDictionary *params = @{@"phone_number":phoneNum};
+    [AFHttpTool requestWithMethod:RequestMethodTypePost url:@"/api/accounts/send-verification-code/.json" params:params success:nil failure:nil];
+}
 
 @end

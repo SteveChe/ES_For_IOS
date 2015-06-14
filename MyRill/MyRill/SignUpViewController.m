@@ -10,6 +10,7 @@
 #import "ColorHandler.h"
 #import "Masonry.h"
 #import "QRCodeViewController.h"
+#import "SignUpDataParse.h"
 
 @interface SignUpViewController () <UITextFieldDelegate>
 
@@ -21,6 +22,7 @@
 
 @property (strong, nonatomic) UIButton *joinBtn;
 @property (strong, nonatomic) UIButton *signUpBtn;
+@property (strong, nonatomic) SignUpDataParse * signUpDataParse;
 
 @end
 
@@ -44,6 +46,9 @@
     [self.view addSubview:self.signUpBtn];
     
     [self layoutPageSubviews];
+    
+    _signUpDataParse = [[SignUpDataParse alloc] init];
+    
 }
 
 - (void)layoutPageSubviews {
@@ -115,6 +120,14 @@
     
 }
 
+- (void)signUpBtnOnClicked:(UIButton *)sender {
+    [_signUpDataParse signUpWithPhoneNum:_phoneNumTxtField.text password:_pwdTxtField.text verificationCode:_captchasTxtField.text];
+}
+
+- (void)verificationBtnOnClicked:(UIButton *)sender {
+    [_signUpDataParse getVerificationCode:_phoneNumTxtField.text];
+}
+
 #pragma mark - private methods
 - (void)textFieldConfig:(UITextField *)textField {
     textField.layer.borderColor = [ColorHandler colorFromHexRGB:@"EDEDED"].CGColor;
@@ -137,6 +150,8 @@
         rightBtn.backgroundColor = [UIColor blueColor];
         [rightBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
         rightBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+        [rightBtn addTarget:self action:@selector(verificationBtnOnClicked:) forControlEvents:UIControlEventTouchUpInside];
+
         _phoneNumTxtField.rightView = rightBtn;
         _phoneNumTxtField.rightViewMode = UITextFieldViewModeAlways;
         [self textFieldConfig:_phoneNumTxtField];
@@ -207,6 +222,7 @@
         [_signUpBtn setTitle:@"注册" forState:UIControlStateNormal];
         _signUpBtn.backgroundColor = [UIColor blueColor];
         _signUpBtn.layer.cornerRadius = 3.0;
+        [_signUpBtn addTarget:self action:@selector(signUpBtnOnClicked:) forControlEvents:UIControlEventTouchUpInside];
     }
     
     return _signUpBtn;

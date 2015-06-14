@@ -10,7 +10,6 @@
 #import "AFHttpTool.h"
 #import "DataParseDefine.h"
 @interface LoginDataParse()
-@property (nonatomic,assign)id<LoginDataDelegate>delegate;
 
 @end
 
