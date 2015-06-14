@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BusinessContainerViewController : UICollectionViewController
+@interface BusinessContainerViewController : UIViewController
 
 @end
