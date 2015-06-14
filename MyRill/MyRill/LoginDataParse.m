@@ -53,9 +53,9 @@
                               
                           }
                           failure:^(NSError* err) {
-                              if ([self.delegate respondsToSelector:@selector(loninFailed)])
+                              if ([self.delegate respondsToSelector:@selector(loginFailed)])
                               {
-                                  [self.delegate loninFailed];
+                                  [self.delegate loginFailed];
                               }
 
                           }];

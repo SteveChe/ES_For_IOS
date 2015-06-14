@@ -88,7 +88,7 @@
 #pragma mark - response events
 - (void)onLoginBtnClicked:(UIButton *)sender {
     [_loginDataParse loginWithUserName:_userNameTxtField.text password:_passwordTxtField.text];
-    
+
 }
 
 - (void)onSignUpBtnClicked:(UIButton *)sender {
