@@ -18,7 +18,6 @@
 @property (nonatomic, strong) UIButton *loginBtn;
 @property (nonatomic, strong) UIButton *signUpBtn;
 @property (nonatomic, strong) LoginDataParse* loginDataParse;
-
 @end
 
 @implementation LoginViewController

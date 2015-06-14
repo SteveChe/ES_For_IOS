@@ -10,6 +10,6 @@
 #import "LoginDataParse.h"
 
 
-@interface LoginViewController : UIViewController<LoginDataDelegate>
+@interface LoginViewController : UIViewController
 
 @end
