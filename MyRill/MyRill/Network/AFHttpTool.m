@@ -30,7 +30,21 @@
 //    mgr.responseSerializer.acceptableContentTypes = [NSSet setWithObject:ContentType];
 #endif
     mgr.requestSerializer.HTTPShouldHandleCookies = YES;
-    
+//    [mgr se]
+
+    NSData *cookiesdata = [[NSUserDefaults standardUserDefaults] objectForKey:@"sessionCookies"];
+    if([cookiesdata length]) {
+        NSArray *cookies = [NSKeyedUnarchiver unarchiveObjectWithData:cookiesdata];
+        NSHTTPCookie *cookie;
+        for (cookie in cookies) {
+            if ([cookie.name  isEqual: @"csrftoken"] )
+            {
+                [mgr.requestSerializer setValue:cookie.value forHTTPHeaderField:@"X-Csrftoken"];
+//                NSLog(@"csrftoken = %@",cookie.value);
+            }
+            [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
+        }
+    }
     switch (methodType) {
         case RequestMethodTypeGet:
         {
@@ -38,7 +52,11 @@
             [mgr GET:url parameters:params
              success:^(AFHTTPRequestOperation* operation, NSDictionary* responseObj) {
                  if (success) {
-                     success(responseObj);                     
+                     success(responseObj);
+                     NSData *cookiesData = [NSKeyedArchiver archivedDataWithRootObject: [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]];
+                     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                     [defaults setObject: cookiesData forKey: @"sessionCookies"];
+                     [defaults synchronize];
                  }
              } failure:^(AFHTTPRequestOperation* operation, NSError* error) {
                  if (failure) {
@@ -55,13 +73,17 @@
               success:^(AFHTTPRequestOperation* operation, NSDictionary* responseObj) {
                   if (success) {
                       success(responseObj);
+                      
 //                      NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
-                      NSString* strCookieUrl = [NSString stringWithFormat:@"%@%@",DEV_SERVER_ADDRESS,url];
-                      NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL: [NSURL URLWithString:strCookieUrl]];
-                      NSData *data = [NSKeyedArchiver archivedDataWithRootObject:cookies];
-                      NSString *aString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-
-                      NSLog(@"%@",[operation.response allHeaderFields]  );
+//                      for (NSHTTPCookie *cookie in cookies) {
+//                          // Here I see the correct rails session cookie
+//                          NSLog(@"cookie: %@", cookie);
+//                      }
+                      NSData *cookiesData = [NSKeyedArchiver archivedDataWithRootObject: [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]];
+                      NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                      [defaults setObject: cookiesData forKey: @"sessionCookies"];
+                      [defaults synchronize];
+                      
                   }
               } failure:^(AFHTTPRequestOperation* operation, NSError* error) {
                   if (failure) {
@@ -82,7 +104,7 @@
                    success:(void (^)(id response))success
                    failure:(void (^)(NSError* err))failure
 {
-    NSDictionary *params = @{@"Phone number":phoneNum,@"Password":password,@"Verification code":verificationCode};
+    NSDictionary *params = @{@"phone_number":phoneNum,@"password":password,@"verification_code":verificationCode};
     [AFHttpTool requestWithMethod:RequestMethodTypePost
                               url:@"api/accounts/sign-up/.json"
                            params:params
@@ -103,6 +125,27 @@
                            params:params
                           success:success
                           failure:failure];
+}
+
+//change password
++(void) changePassword:(NSString *) oldPassword
+           newPassword:(NSString *) newPassword
+               success:(void (^)(id response))success
+               failure:(void (^)(NSError* err))failure
+{
+    NSDictionary *params = @{@"old_password":oldPassword,@"new_password":newPassword};
+    [AFHttpTool requestWithMethod:RequestMethodTypePost
+                              url:@"api/accounts/change-password/.json"
+                           params:params
+                          success:success
+                          failure:failure];
+}
+
+//get verification code
++(void) getVerificationCode:(NSString *)phoneNum
+{
+    NSDictionary *params = @{@"phone_number":phoneNum};
+    [AFHttpTool requestWithMethod:RequestMethodTypePost url:@"/api/accounts/send-verification-code/.json" params:params success:nil failure:nil];
 }
 
 @end

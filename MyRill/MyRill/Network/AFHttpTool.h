@@ -41,5 +41,14 @@ methodType url : (NSString *)url
                   password:(NSString *) password
                    success:(void (^)(id response))success
                    failure:(void (^)(NSError* err))failure;
+//change password
++(void) changePassword:(NSString *) oldPassword
+                 newPassword:(NSString *) newPassword
+                  success:(void (^)(id response))success
+                  failure:(void (^)(NSError* err))failure;
+
+//get verification code
++(void) getVerificationCode:(NSString *)phoneNum;
+
 
 @end

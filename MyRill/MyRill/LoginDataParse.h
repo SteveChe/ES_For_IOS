@@ -11,11 +11,12 @@
 @protocol LoginDataDelegate <NSObject>
 
 -(void)loginSucceed;
--(void)loninFailed;
+-(void)loginFailed;
 
 @end
 
 @interface LoginDataParse : NSObject
+@property (nonatomic,assign)id<LoginDataDelegate>delegate;
 
 //login
 -(void) loginWithUserName:(NSString *)userName  password:(NSString *)password;

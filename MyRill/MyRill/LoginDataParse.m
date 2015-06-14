@@ -10,7 +10,6 @@
 #import "AFHttpTool.h"
 #import "DataParseDefine.h"
 @interface LoginDataParse()
-@property (nonatomic,assign)id<LoginDataDelegate>delegate;
 
 @end
 
@@ -45,14 +44,17 @@
                                       break;
                               }
                               NSString* errorMessage = [reponseDic valueForKey:NETWORK_ERROR_MESSAGE];
-                              
+                              if(errorMessage==nil)
+                                  return;
+                                  
+                              errorMessage= [errorMessage stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
                               NSLog(@"%@",errorMessage);
                               
                           }
                           failure:^(NSError* err) {
-                              if ([self.delegate respondsToSelector:@selector(loninFailed)])
+                              if ([self.delegate respondsToSelector:@selector(loginFailed)])
                               {
-                                  [self.delegate loninFailed];
+                                  [self.delegate loginFailed];
                               }
 
                           }];

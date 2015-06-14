@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SignUpDataParse.h"
 
 @interface SignUpViewController : UIViewController
 
