@@ -7,6 +7,7 @@
 //
 
 #import "BusinessContainerViewController.h"
+#import "ColorHandler.h"
 
 @interface BusinessContainerViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
@@ -20,7 +21,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"业务";
+    UIBarButtonItem *sortBtnItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
+                                                                               target:self
+                                                                               action:@selector(onSortBtnItemClicked:)];
+    self.navigationItem.rightBarButtonItem = sortBtnItem;
     
+    self.view.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.collectionView];
 }
 
@@ -35,7 +41,40 @@
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 3;
+    return 4;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
+    if (!cell) {
+        cell = [[UICollectionViewCell alloc] init];
+    }
+    
+    cell.contentView.backgroundColor = [UIColor whiteColor];
+//    cell.layer.borderColor = [UIColor grayColor].CGColor;
+//    cell.layer.borderWidth = 1.0;
+    
+    return cell;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return CGSizeMake(([[UIScreen mainScreen] bounds].size.width - 2)/3,([[UIScreen mainScreen] bounds].size.height - 64 - 44)/3);
+}
+
+-(CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 1;
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section;
+{
+    return UIEdgeInsetsMake(0,0,0,0);
+}
+
+#pragma mark - response events
+- (void)onSortBtnItemClicked:(UIBarButtonItem *)sender {
+    
 }
 
 #pragma mark - setters&getters
@@ -44,6 +83,7 @@
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         _collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
         [_collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
+        _collectionView.backgroundColor = [UIColor clearColor];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
     }

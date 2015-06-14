@@ -12,6 +12,7 @@
 #import "ContactsContainerViewController.h"
 #import "TaskContainerViewController.h"
 #import "UserContainerViewController.h"
+#import "ColorHandler.h"
 
 @interface ESMenuViewController () <UITabBarControllerDelegate>
 
@@ -22,30 +23,33 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.view.backgroundColor = [ColorHandler colorFromHexRGB:@"E9EEF2"];
 
     BusinessContainerViewController *businessVC = [[BusinessContainerViewController alloc] init];
-    businessVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"业务"
-                                                          image:nil
-                                                  selectedImage:nil];
+    UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:@"业务"
+                                                             image:[UIImage imageNamed:@"icon"]
+                                                     selectedImage:nil];
+    businessVC.tabBarItem = tabBarItem;
     
     ChatContainerViewController *chatVC = [[ChatContainerViewController alloc] init];
     chatVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"对话"
-                                                      image:nil
+                                                      image:[UIImage imageNamed:@"icon"]
                                               selectedImage:nil];
-    
+
     ContactsContainerViewController *contactsVC = [[ContactsContainerViewController alloc] init];
     contactsVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"联系人"
-                                                          image:nil
+                                                          image:[UIImage imageNamed:@"icon"]
                                                   selectedImage:nil];
     
     TaskContainerViewController *taskVC = [[TaskContainerViewController alloc] init];
     taskVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"任务"
-                                                      image:nil
+                                                      image:[UIImage imageNamed:@"icon"]
                                               selectedImage:nil];
     
     UserContainerViewController *userVC = [[UserContainerViewController alloc] init];
     userVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"我"
-                                                      image:nil
+                                                      image:[UIImage imageNamed:@"icon"]
                                               selectedImage:nil];
     
     self.viewControllers = [NSArray arrayWithObjects:
