@@ -50,5 +50,7 @@ methodType url : (NSString *)url
 //get verification code
 +(void) getVerificationCode:(NSString *)phoneNum;
 
+//
+
 
 @end

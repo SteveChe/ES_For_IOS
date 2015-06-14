@@ -11,6 +11,7 @@
 #import "Masonry.h"
 #import "ColorHandler.h"
 #import "AppDelegate.h"
+#import "CustomShowMessage.h"
 
 @interface LoginViewController ()
 
@@ -98,6 +99,9 @@
 }
 
 - (void)onSignUpBtnClicked:(UIButton *)sender {
+    [[CustomShowMessage getInstance] showNotificationMessage:@"点击注册按钮"];
+    return;
+    
     SignUpViewController *signUpViewController = [[SignUpViewController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:signUpViewController];
     self.definesPresentationContext = YES;

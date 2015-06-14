@@ -40,6 +40,13 @@
 		F24787721B2D5CE700EC266B /* ChangePasswordDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F24787711B2D5CE700EC266B /* ChangePasswordDataParse.m */; };
 		F24787751B2D775E00EC266B /* SignUpDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F24787741B2D775E00EC266B /* SignUpDataParse.m */; };
 		F250F2EA1B2471CD000AD021 /* AFHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = F250F2E91B2471CD000AD021 /* AFHttpTool.m */; };
+		F277ADFB1B2DBE97006E42CB /* CustomShowMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = F277ADFA1B2DBE97006E42CB /* CustomShowMessage.m */; };
+		F277ADFE1B2DC046006E42CB /* CustomMessageBox.m in Sources */ = {isa = PBXBuildFile; fileRef = F277ADFD1B2DC046006E42CB /* CustomMessageBox.m */; };
+		F277AE011B2DC146006E42CB /* DeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F277AE001B2DC146006E42CB /* DeviceInfo.m */; };
+		F277AE041B2DC34E006E42CB /* UIDevice+screenType.m in Sources */ = {isa = PBXBuildFile; fileRef = F277AE031B2DC34E006E42CB /* UIDevice+screenType.m */; };
+		F277AE071B2DC72A006E42CB /* BMBase.m in Sources */ = {isa = PBXBuildFile; fileRef = F277AE061B2DC72A006E42CB /* BMBase.m */; };
+		F277AE0A1B2DCF39006E42CB /* StretchImageUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = F277AE091B2DCF39006E42CB /* StretchImageUtil.m */; };
+		F277AE0D1B2DD066006E42CB /* UIPageNavigator.m in Sources */ = {isa = PBXBuildFile; fileRef = F277AE0C1B2DD066006E42CB /* UIPageNavigator.m */; };
 		F29F86281B2410070058FC9F /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F29F86161B2410070058FC9F /* AFHTTPRequestOperation.m */; };
 		F29F86291B2410070058FC9F /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F29F86181B2410070058FC9F /* AFHTTPRequestOperationManager.m */; };
 		F29F862A1B2410070058FC9F /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F29F861A1B2410070058FC9F /* AFHTTPSessionManager.m */; };
@@ -140,6 +147,20 @@
 		F24787741B2D775E00EC266B /* SignUpDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpDataParse.m; sourceTree = "<group>"; };
 		F250F2E81B2471CD000AD021 /* AFHttpTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHttpTool.h; path = Network/AFHttpTool.h; sourceTree = "<group>"; };
 		F250F2E91B2471CD000AD021 /* AFHttpTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFHttpTool.m; path = Network/AFHttpTool.m; sourceTree = "<group>"; };
+		F277ADF91B2DBE97006E42CB /* CustomShowMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomShowMessage.h; path = Utilities/common/CustomShowMessage.h; sourceTree = "<group>"; };
+		F277ADFA1B2DBE97006E42CB /* CustomShowMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomShowMessage.m; path = Utilities/common/CustomShowMessage.m; sourceTree = "<group>"; };
+		F277ADFC1B2DC046006E42CB /* CustomMessageBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomMessageBox.h; path = Utilities/common/CustomMessageBox.h; sourceTree = "<group>"; };
+		F277ADFD1B2DC046006E42CB /* CustomMessageBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomMessageBox.m; path = Utilities/common/CustomMessageBox.m; sourceTree = "<group>"; };
+		F277ADFF1B2DC146006E42CB /* DeviceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeviceInfo.h; path = Utilities/common/DeviceInfo.h; sourceTree = "<group>"; };
+		F277AE001B2DC146006E42CB /* DeviceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeviceInfo.m; path = Utilities/common/DeviceInfo.m; sourceTree = "<group>"; };
+		F277AE021B2DC34E006E42CB /* UIDevice+screenType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIDevice+screenType.h"; path = "Utilities/common/UIDevice+screenType.h"; sourceTree = "<group>"; };
+		F277AE031B2DC34E006E42CB /* UIDevice+screenType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIDevice+screenType.m"; path = "Utilities/common/UIDevice+screenType.m"; sourceTree = "<group>"; };
+		F277AE051B2DC72A006E42CB /* BMBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BMBase.h; path = Utilities/common/BMBase.h; sourceTree = "<group>"; };
+		F277AE061B2DC72A006E42CB /* BMBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BMBase.m; path = Utilities/common/BMBase.m; sourceTree = "<group>"; };
+		F277AE081B2DCF39006E42CB /* StretchImageUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StretchImageUtil.h; path = Utilities/common/StretchImageUtil.h; sourceTree = "<group>"; };
+		F277AE091B2DCF39006E42CB /* StretchImageUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StretchImageUtil.m; path = Utilities/common/StretchImageUtil.m; sourceTree = "<group>"; };
+		F277AE0B1B2DD066006E42CB /* UIPageNavigator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIPageNavigator.h; path = Utilities/common/UIPageNavigator.h; sourceTree = "<group>"; };
+		F277AE0C1B2DD066006E42CB /* UIPageNavigator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIPageNavigator.m; path = Utilities/common/UIPageNavigator.m; sourceTree = "<group>"; };
 		F29F86151B2410070058FC9F /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPRequestOperation.h; path = Utilities/AFNetworking/AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		F29F86161B2410070058FC9F /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFHTTPRequestOperation.m; path = Utilities/AFNetworking/AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		F29F86171B2410070058FC9F /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPRequestOperationManager.h; path = Utilities/AFNetworking/AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -434,9 +455,31 @@
 			name = AFNetWorkInterface;
 			sourceTree = "<group>";
 		};
+		F277ADF81B2DBE52006E42CB /* common */ = {
+			isa = PBXGroup;
+			children = (
+				F277ADF91B2DBE97006E42CB /* CustomShowMessage.h */,
+				F277ADFA1B2DBE97006E42CB /* CustomShowMessage.m */,
+				F277ADFC1B2DC046006E42CB /* CustomMessageBox.h */,
+				F277ADFD1B2DC046006E42CB /* CustomMessageBox.m */,
+				F277ADFF1B2DC146006E42CB /* DeviceInfo.h */,
+				F277AE001B2DC146006E42CB /* DeviceInfo.m */,
+				F277AE021B2DC34E006E42CB /* UIDevice+screenType.h */,
+				F277AE031B2DC34E006E42CB /* UIDevice+screenType.m */,
+				F277AE051B2DC72A006E42CB /* BMBase.h */,
+				F277AE061B2DC72A006E42CB /* BMBase.m */,
+				F277AE081B2DCF39006E42CB /* StretchImageUtil.h */,
+				F277AE091B2DCF39006E42CB /* StretchImageUtil.m */,
+				F277AE0B1B2DD066006E42CB /* UIPageNavigator.h */,
+				F277AE0C1B2DD066006E42CB /* UIPageNavigator.m */,
+			);
+			name = common;
+			sourceTree = "<group>";
+		};
 		F29F86131B240FC30058FC9F /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				F277ADF81B2DBE52006E42CB /* common */,
 				2B39C91D1B241212007BAC7A /* Masonry */,
 				F29F86141B240FE00058FC9F /* AFNetworking */,
 			);
@@ -596,6 +639,7 @@
 				2B39C96D1B2D79DB007BAC7A /* BusinessContainerViewController.m in Sources */,
 				2B39C9441B24128F007BAC7A /* LoginViewController.m in Sources */,
 				F29F86281B2410070058FC9F /* AFHTTPRequestOperation.m in Sources */,
+				F277AE071B2DC72A006E42CB /* BMBase.m in Sources */,
 				2B39C9501B248063007BAC7A /* LoginDataParse.m in Sources */,
 				F29F86471B2410320058FC9F /* UIImageView+AFNetworking.m in Sources */,
 				2B39C97C1B2D8003007BAC7A /* ESMenuViewController.m in Sources */,
@@ -604,6 +648,8 @@
 				2B39C93A1B241212007BAC7A /* MASLayoutConstraint.m in Sources */,
 				F29F86481B2410320058FC9F /* UIProgressView+AFNetworking.m in Sources */,
 				F29F862B1B2410070058FC9F /* AFNetworkReachabilityManager.m in Sources */,
+				F277AE041B2DC34E006E42CB /* UIDevice+screenType.m in Sources */,
+				F277AE0A1B2DCF39006E42CB /* StretchImageUtil.m in Sources */,
 				2B39C9761B2D7B05007BAC7A /* TaskContainerViewController.m in Sources */,
 				2B39C9481B241972007BAC7A /* LoginService.m in Sources */,
 				F29F862F1B2410070058FC9F /* AFURLResponseSerialization.m in Sources */,
@@ -611,17 +657,20 @@
 				F29F86461B2410320058FC9F /* UIButton+AFNetworking.m in Sources */,
 				2B39C93B1B241212007BAC7A /* MASViewAttribute.m in Sources */,
 				F24787721B2D5CE700EC266B /* ChangePasswordDataParse.m in Sources */,
+				F277ADFB1B2DBE97006E42CB /* CustomShowMessage.m in Sources */,
 				F250F2EA1B2471CD000AD021 /* AFHttpTool.m in Sources */,
 				2B39C9791B2D7B14007BAC7A /* UserContainerViewController.m in Sources */,
 				2B39C94C1B24501B007BAC7A /* ColorHandler.m in Sources */,
 				F29F86441B2410320058FC9F /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				2B39C9391B241212007BAC7A /* MASConstraintMaker.m in Sources */,
 				2B39C93F1B241212007BAC7A /* View+MASAdditions.m in Sources */,
+				F277AE011B2DC146006E42CB /* DeviceInfo.m in Sources */,
 				2B39C93C1B241212007BAC7A /* MASViewConstraint.m in Sources */,
 				2B39C95F1B272221007BAC7A /* QRCodeViewController.m in Sources */,
 				2B39C9371B241212007BAC7A /* MASCompositeConstraint.m in Sources */,
 				F29F862C1B2410070058FC9F /* AFSecurityPolicy.m in Sources */,
 				F29F86491B2410320058FC9F /* UIRefreshControl+AFNetworking.m in Sources */,
+				F277ADFE1B2DC046006E42CB /* CustomMessageBox.m in Sources */,
 				F29F864A1B2410320058FC9F /* UIWebView+AFNetworking.m in Sources */,
 				2B39C9701B2D7AD2007BAC7A /* ChatContainerViewController.m in Sources */,
 				F29F862A1B2410070058FC9F /* AFHTTPSessionManager.m in Sources */,
@@ -636,6 +685,7 @@
 				F29F86301B2410070058FC9F /* AFURLSessionManager.m in Sources */,
 				2B31C3D81B11C3FD004C865A /* AppDelegate.m in Sources */,
 				F24787751B2D775E00EC266B /* SignUpDataParse.m in Sources */,
+				F277AE0D1B2DD066006E42CB /* UIPageNavigator.m in Sources */,
 				2B31C3D51B11C3FD004C865A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
