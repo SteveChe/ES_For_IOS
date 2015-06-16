@@ -40,13 +40,16 @@ static UIPageNavigator *_navInstance = nil;
     }
     else
     {
-        NSString *path = [[NSBundle mainBundle] pathForResource:imageName ofType:@"png"];
+//        NSString *path = [[NSBundle mainBundle] pathForResource:imageName ofType:@"png"];
+        NSString *path = [NSString stringWithFormat:@"%@.png",imageName];
+        
         if (path == nil) {
             return [UIImage imageNamed:imageName];
         }
         else
         {
-            image = [UIImage imageWithContentsOfFile:path];
+//            image = [UIImage imageWithContentsOfFile:path];
+            image = [UIImage imageNamed:imageName];
             [navigation.imageCache setObject:image forKey:imageName];
             return image;
         }

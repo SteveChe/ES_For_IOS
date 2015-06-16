@@ -37,7 +37,7 @@
         
         self.backgroundColor = [UIColor clearColor];
         
-//        [self addSubview:m_bgImage];
+        [self addSubview:m_bgImage];
         [self addSubview:m_messageTitle];
     }
     return self;
