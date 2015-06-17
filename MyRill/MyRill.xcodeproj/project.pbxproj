@@ -64,6 +64,10 @@
 		F29F86481B2410320058FC9F /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = F29F863E1B2410320058FC9F /* UIProgressView+AFNetworking.m */; };
 		F29F86491B2410320058FC9F /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = F29F86401B2410320058FC9F /* UIRefreshControl+AFNetworking.m */; };
 		F29F864A1B2410320058FC9F /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = F29F86421B2410320058FC9F /* UIWebView+AFNetworking.m */; };
+		F2D233561B31AA1200F8C65D /* libPushSDK-1.8.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2D233551B31AA1200F8C65D /* libPushSDK-1.8.3.a */; };
+		F2D2335A1B31AE2800F8C65D /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F2D233591B31AE2800F8C65D /* libz.dylib */; };
+		F2D2335C1B31AE4D00F8C65D /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2D2335B1B31AE4D00F8C65D /* CoreTelephony.framework */; };
+		F2D2335E1B31B1F400F8C65D /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = F2D2335D1B31B1F400F8C65D /* PushConfig.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -197,6 +201,11 @@
 		F29F86401B2410320058FC9F /* UIRefreshControl+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIRefreshControl+AFNetworking.m"; path = "Utilities/AFNetworking/UIKit+AFNetworking/UIRefreshControl+AFNetworking.m"; sourceTree = "<group>"; };
 		F29F86411B2410320058FC9F /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIWebView+AFNetworking.h"; path = "Utilities/AFNetworking/UIKit+AFNetworking/UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
 		F29F86421B2410320058FC9F /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIWebView+AFNetworking.m"; path = "Utilities/AFNetworking/UIKit+AFNetworking/UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
+		F2D233551B31AA1200F8C65D /* libPushSDK-1.8.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPushSDK-1.8.3.a"; path = "MyRill/JPush/libPushSDK-1.8.3.a"; sourceTree = "<group>"; };
+		F2D233581B31AA3A00F8C65D /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APService.h; path = JPush/APService.h; sourceTree = "<group>"; };
+		F2D233591B31AE2800F8C65D /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		F2D2335B1B31AE4D00F8C65D /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		F2D2335D1B31B1F400F8C65D /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PushConfig.plist; path = Resource/Property/PushConfig.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,6 +213,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2D2335C1B31AE4D00F8C65D /* CoreTelephony.framework in Frameworks */,
+				F2D2335A1B31AE2800F8C65D /* libz.dylib in Frameworks */,
+				F2D233561B31AA1200F8C65D /* libPushSDK-1.8.3.a in Frameworks */,
 				2B39C95A1B271F5C007BAC7A /* CoreData.framework in Frameworks */,
 				2B39C9581B271F53007BAC7A /* AVFoundation.framework in Frameworks */,
 			);
@@ -241,6 +253,7 @@
 		2B31C3D11B11C3FD004C865A /* MyRill */ = {
 			isa = PBXGroup;
 			children = (
+				F2D233571B31AA2600F8C65D /* JPush */,
 				2B39C94D1B247A4E007BAC7A /* DataDrive */,
 				F250F2E71B247156000AD021 /* AFNetWorkInterface */,
 				2B31C3D61B11C3FD004C865A /* AppDelegate.h */,
@@ -262,6 +275,7 @@
 			children = (
 				2B31C3D31B11C3FD004C865A /* Info.plist */,
 				2B31C3D41B11C3FD004C865A /* main.m */,
+				F2D2335D1B31B1F400F8C65D /* PushConfig.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -394,6 +408,9 @@
 		2B39C9561B271C95007BAC7A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F2D2335B1B31AE4D00F8C65D /* CoreTelephony.framework */,
+				F2D233591B31AE2800F8C65D /* libz.dylib */,
+				F2D233551B31AA1200F8C65D /* libPushSDK-1.8.3.a */,
 				2B39C95B1B271F7A007BAC7A /* CoreFoundation.framework */,
 				2B39C9591B271F5C007BAC7A /* CoreData.framework */,
 				2B39C9571B271F53007BAC7A /* AVFoundation.framework */,
@@ -537,6 +554,14 @@
 			name = "UIKit+AFNetworking";
 			sourceTree = "<group>";
 		};
+		F2D233571B31AA2600F8C65D /* JPush */ = {
+			isa = PBXGroup;
+			children = (
+				F2D233581B31AA3A00F8C65D /* APService.h */,
+			);
+			name = JPush;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -594,6 +619,7 @@
 					};
 					2B31C3E71B11C3FD004C865A = {
 						CreatedOnToolsVersion = 6.3.2;
+						DevelopmentTeam = 6XH6L3AH29;
 						TestTargetID = 2B31C3CE1B11C3FD004C865A;
 					};
 				};
@@ -622,6 +648,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2D2335E1B31B1F400F8C65D /* PushConfig.plist in Resources */,
 				2B39C9361B241212007BAC7A /* Info.plist in Resources */,
 				2B31C3E31B11C3FD004C865A /* LaunchScreen.xib in Resources */,
 				2B31C3E01B11C3FD004C865A /* Images.xcassets in Resources */,
@@ -816,9 +843,14 @@
 				INFOPLIST_FILE = MyRill/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MyRill/lib",
+					"$(PROJECT_DIR)/MyRill/JPush",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Debug;
 		};
@@ -830,9 +862,14 @@
 				INFOPLIST_FILE = MyRill/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MyRill/lib",
+					"$(PROJECT_DIR)/MyRill/JPush",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Release;
 		};
@@ -840,6 +877,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -851,6 +890,7 @@
 				INFOPLIST_FILE = MyRillTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MyRill.app/MyRill";
 			};
 			name = Debug;
@@ -859,6 +899,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -866,6 +908,7 @@
 				INFOPLIST_FILE = MyRillTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MyRill.app/MyRill";
 			};
 			name = Release;
