@@ -44,14 +44,42 @@
 #endif
     // Required
     [APService setupWithOption:launchOptions];
-
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    LoginViewController *loginViewController = [[LoginViewController alloc] init];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginViewController];
-    self.window.rootViewController = nav;
-    [self.window makeKeyAndVisible];
+    [self initRootWindow];
     
     return YES;
+}
+
+- (void)initRootWindow
+{
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    UIViewController* rootViewCtrl = nil;
+    NSData *cookiesdata = [[NSUserDefaults standardUserDefaults] objectForKey:@"sessionCookies"];
+    if([cookiesdata length]) {
+        NSArray *cookies = [NSKeyedUnarchiver unarchiveObjectWithData:cookiesdata];
+        NSHTTPCookie *cookie;
+        BOOL bLogined = FALSE;
+        for (cookie in cookies) {
+            if ([cookie.name  isEqual: @"sessionid"] )
+            {
+                if([cookie.value length])
+                    bLogined = TRUE;
+            }
+        }
+        if (bLogined){
+            rootViewCtrl = [[ESMenuViewController alloc] init];
+        }
+        else{
+            rootViewCtrl = [[LoginViewController alloc] init];
+        }
+    }
+    else{
+        rootViewCtrl = [[LoginViewController alloc] init];
+    }
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:rootViewCtrl];
+
+    self.window.rootViewController = nav;
+    [self.window makeKeyAndVisible];
+
 }
 
 - (void)changeWindow:(UIViewController *)sender {
@@ -76,6 +104,8 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    application.applicationIconBadgeNumber = 0;
+
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -95,7 +125,6 @@
     
     NSLog(@"%@", [NSString stringWithFormat:@"Device Token: %@", deviceToken]);
     [APService registerDeviceToken:deviceToken];
-    
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
@@ -109,7 +138,6 @@
     NSLog(@"userInfo= %@",userInfo);
     [APService handleRemoteNotification:userInfo];
     completionHandler(UIBackgroundFetchResultNewData);
-
 }
 
 

@@ -93,9 +93,6 @@
     [_loginDataParse loginWithUserName:_userNameTxtField.text password:_passwordTxtField.text];
 
     //[_loginDataParse loginWithUserName:_userNameTxtField.text password:_passwordTxtField.text];
-    
-    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-    [appDelegate changeWindow:nil];
 }
 
 - (void)onSignUpBtnClicked:(UIButton *)sender {
@@ -170,12 +167,14 @@
 -(void)loginSucceed
 {
     [[CustomShowMessage getInstance] showNotificationMessage:@"登录成功"];
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    [appDelegate changeWindow:nil];
     return;
-
 }
--(void)loginFailed
+-(void)loginFailed:(NSString*)errorMessage
 {
     
+    [[CustomShowMessage getInstance] showNotificationMessage:errorMessage];
 }
 
 

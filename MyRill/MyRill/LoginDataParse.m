@@ -40,10 +40,8 @@
                                       {
                                           [self.delegate loginSucceed];
                                       }
-
                                   }
                                       break;
-                                  
                                   default:
                                       break;
                               }
@@ -56,9 +54,9 @@
                               
                           }
                           failure:^(NSError* err) {
-                              if (self.delegate!= nil &&[self.delegate respondsToSelector:@selector(loginFailed)])
+                              if (self.delegate!= nil &&[self.delegate respondsToSelector:@selector(loginFailed:)])
                               {
-                                  [self.delegate loginFailed];
+                                  [self.delegate loginFailed:@"网络连接失败"];
                               }
                           }];
 

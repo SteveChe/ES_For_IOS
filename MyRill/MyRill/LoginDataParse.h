@@ -11,7 +11,7 @@
 @protocol LoginDataDelegate <NSObject>
 
 -(void)loginSucceed;
--(void)loginFailed;
+-(void)loginFailed:(NSString*)errorMessage;
 
 @end
 
