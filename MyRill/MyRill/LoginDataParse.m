@@ -9,6 +9,9 @@
 #import "LoginDataParse.h"
 #import "AFHttpTool.h"
 #import "DataParseDefine.h"
+#import "APService.h"
+#import "NSString+MD5Addition.h"
+
 @interface LoginDataParse()
 
 @end
@@ -32,6 +35,7 @@
                               {
                                   case 0:
                                   {
+                                      [self setJpushAlias];
                                       if (self.delegate!= nil && [self.delegate respondsToSelector:@selector(loginSucceed)])
                                       {
                                           [self.delegate loginSucceed];
@@ -59,6 +63,24 @@
                           }];
 
 }
+
+-(void) setJpushAlias
+{
+    NSData *cookiesdata = [[NSUserDefaults standardUserDefaults] objectForKey:@"sessionCookies"];
+    if([cookiesdata length]) {
+        NSArray *cookies = [NSKeyedUnarchiver unarchiveObjectWithData:cookiesdata];
+        NSHTTPCookie *cookie;
+        for (cookie in cookies) {
+            if ([cookie.name  isEqual: @"sessionid"] )
+            {
+                NSLog(@"jpush alias = %@",cookie.value);
+
+                [APService setAlias:[cookie.value stringFromMD5] callbackSelector:nil object:nil];
+            }
+        }
+    }
+}
+
 
 
 @end

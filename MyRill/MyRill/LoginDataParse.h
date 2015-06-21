@@ -21,4 +21,6 @@
 //login
 -(void) loginWithUserName:(NSString *)userName  password:(NSString *)password;
 
+-(void) setJpushAlias;
+
 @end
