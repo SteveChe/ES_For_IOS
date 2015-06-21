@@ -37,6 +37,7 @@
 		2B39C9761B2D7B05007BAC7A /* TaskContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9751B2D7B05007BAC7A /* TaskContainerViewController.m */; };
 		2B39C9791B2D7B14007BAC7A /* UserContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9781B2D7B14007BAC7A /* UserContainerViewController.m */; };
 		2B39C97C1B2D8003007BAC7A /* ESMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C97B1B2D8003007BAC7A /* ESMenuViewController.m */; };
+		2B39C9841B30561F007BAC7A /* BusinessCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9831B30561F007BAC7A /* BusinessCollectionViewCell.m */; };
 		F24787721B2D5CE700EC266B /* ChangePasswordDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F24787711B2D5CE700EC266B /* ChangePasswordDataParse.m */; };
 		F24787751B2D775E00EC266B /* SignUpDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F24787741B2D775E00EC266B /* SignUpDataParse.m */; };
 		F250F2EA1B2471CD000AD021 /* AFHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = F250F2E91B2471CD000AD021 /* AFHttpTool.m */; };
@@ -145,6 +146,8 @@
 		2B39C9781B2D7B14007BAC7A /* UserContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserContainerViewController.m; sourceTree = "<group>"; };
 		2B39C97A1B2D8003007BAC7A /* ESMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESMenuViewController.h; sourceTree = "<group>"; };
 		2B39C97B1B2D8003007BAC7A /* ESMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESMenuViewController.m; sourceTree = "<group>"; };
+		2B39C9821B30561F007BAC7A /* BusinessCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessCollectionViewCell.h; sourceTree = "<group>"; };
+		2B39C9831B30561F007BAC7A /* BusinessCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessCollectionViewCell.m; sourceTree = "<group>"; };
 		F247876C1B2BC3CE00EC266B /* DataParseDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataParseDefine.h; sourceTree = "<group>"; };
 		F24787701B2D5CE700EC266B /* ChangePasswordDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordDataParse.h; sourceTree = "<group>"; };
 		F24787711B2D5CE700EC266B /* ChangePasswordDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordDataParse.m; sourceTree = "<group>"; };
@@ -350,6 +353,8 @@
 		2B39C9411B24126F007BAC7A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2B39C9821B30561F007BAC7A /* BusinessCollectionViewCell.h */,
+				2B39C9831B30561F007BAC7A /* BusinessCollectionViewCell.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -701,6 +706,7 @@
 				2B39C94C1B24501B007BAC7A /* ColorHandler.m in Sources */,
 				F29F86441B2410320058FC9F /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				2B39C9391B241212007BAC7A /* MASConstraintMaker.m in Sources */,
+				2B39C9841B30561F007BAC7A /* BusinessCollectionViewCell.m in Sources */,
 				2B39C93F1B241212007BAC7A /* View+MASAdditions.m in Sources */,
 				F277AE011B2DC146006E42CB /* DeviceInfo.m in Sources */,
 				2B39C93C1B241212007BAC7A /* MASViewConstraint.m in Sources */,

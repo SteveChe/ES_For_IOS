@@ -31,26 +31,26 @@ methodType url : (NSString *)url
 
 //sign-up
 +(void) signUpWithPhoneNum:(NSString *) phoneNum
-              password:(NSString *) password
-                verificationCode:(NSString*) verificationCode
+                  password:(NSString *) password
+          verificationCode:(NSString*) verificationCode
                    success:(void (^)(id response))success
                    failure:(void (^)(NSError* err))failure;
 
 //login
 +(void) loginWithUserName:(NSString *) userName
-                  password:(NSString *) password
-                   success:(void (^)(id response))success
-                   failure:(void (^)(NSError* err))failure;
-//change password
-+(void) changePassword:(NSString *) oldPassword
-                 newPassword:(NSString *) newPassword
+                 password:(NSString *) password
                   success:(void (^)(id response))success
                   failure:(void (^)(NSError* err))failure;
+//change password
++(void) changePassword:(NSString *) oldPassword
+           newPassword:(NSString *) newPassword
+               success:(void (^)(id response))success
+               failure:(void (^)(NSError* err))failure;
 
 //get verification code
 +(void) getVerificationCode:(NSString *)phoneNum;
 
-//
-
++ (void)getProfessionSuccess:(void (^)(id response))success
+                     failure:(void (^)(NSError *error))failre;
 
 @end

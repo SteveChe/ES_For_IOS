@@ -7,8 +7,11 @@
 //
 
 #import "ContactsContainerViewController.h"
+#import "Masonry.h"
 
-@interface ContactsContainerViewController ()
+@interface ContactsContainerViewController () <UITableViewDataSource, UITableViewDelegate>
+
+@property (nonatomic, strong) UITableView *tableView;
 
 @end
 
@@ -18,6 +21,18 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"联系人";
+    
+    [self.view addSubview:self.tableView];
+    
+    
+}
+
+- (void)layoutPageSubviews {
+    __weak UIView *ws = self.view;
+    
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(ws).insets(UIEdgeInsetsMake(0, 0, 0, 0));
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -25,14 +40,39 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - UITableViewDataSource&UITableViewDelegate
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 10;
 }
-*/
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 2;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 30;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"" forIndexPath:indexPath];
+    
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@""];
+    }
+    
+    return cell;
+}
+
+#pragma mark - setters&getters
+- (UITableView *)tableView {
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.backgroundColor = [UIColor clearColor];
+    }
+    
+    return _tableView;
+}
 
 @end
