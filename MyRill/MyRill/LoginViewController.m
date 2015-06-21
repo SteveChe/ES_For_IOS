@@ -11,6 +11,7 @@
 #import "Masonry.h"
 #import "ColorHandler.h"
 #import "AppDelegate.h"
+#import "CustomShowMessage.h"
 
 @interface LoginViewController ()
 
@@ -168,7 +169,9 @@
 #pragma mark - LoginDataDelegate
 -(void)loginSucceed
 {
-    
+    [[CustomShowMessage getInstance] showNotificationMessage:@"登录成功"];
+    return;
+
 }
 -(void)loginFailed
 {

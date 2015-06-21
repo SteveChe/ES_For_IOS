@@ -32,7 +32,7 @@
                               {
                                   case 0:
                                   {
-                                      if ([self.delegate respondsToSelector:@selector(loginSucceed)])
+                                      if (self.delegate!= nil && [self.delegate respondsToSelector:@selector(loginSucceed)])
                                       {
                                           [self.delegate loginSucceed];
                                       }
@@ -52,7 +52,7 @@
                               
                           }
                           failure:^(NSError* err) {
-                              if ([self.delegate respondsToSelector:@selector(loginFailed)])
+                              if (self.delegate!= nil &&[self.delegate respondsToSelector:@selector(loginFailed)])
                               {
                                   [self.delegate loginFailed];
                               }
