@@ -99,9 +99,6 @@
 }
 
 - (void)onSignUpBtnClicked:(UIButton *)sender {
-    [[CustomShowMessage getInstance] showNotificationMessage:@"点击注册按钮"];
-    return;
-    
     SignUpViewController *signUpViewController = [[SignUpViewController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:signUpViewController];
     self.definesPresentationContext = YES;
@@ -172,7 +169,9 @@
 #pragma mark - LoginDataDelegate
 -(void)loginSucceed
 {
-    
+    [[CustomShowMessage getInstance] showNotificationMessage:@"登录成功"];
+    return;
+
 }
 -(void)loginFailed
 {
