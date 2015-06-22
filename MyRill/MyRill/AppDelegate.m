@@ -5,11 +5,16 @@
 //  Created by Siyuan Wang on 15/5/24.
 //
 //
-
+#import <RongIMKit/RongIMKit.h>
+#import <RongIMLib/RongIMLib.h>
 #import "AppDelegate.h"
 #import "LoginViewController.h"
 #import "ESMenuViewController.h"
 #import "APService.h"
+
+#define RONGCLOUD_IM_APPKEY @"pvxdm17jx871r" //online key
+
+#define kDeviceToken @"RongCloud_SDK_DeviceToken"
 
 @interface AppDelegate ()
 
@@ -19,6 +24,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    NSString *_deviceTokenCache = [[NSUserDefaults standardUserDefaults]objectForKey:kDeviceToken];
+    
+    //初始化融云SDK，
+    [[RCIM sharedRCIM] initWithAppKey:RONGCLOUD_IM_APPKEY deviceToken:_deviceTokenCache];
     
     // Required
 #if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_7_1
@@ -131,9 +141,17 @@
 //                                stringByReplacingOccurrencesOfString: @" " withString: @""];
     
 //    [[BMPushModel getInstance] registPushWithToken:deviceTokenStr];
-    
-    NSLog(@"%@", [NSString stringWithFormat:@"Device Token: %@", deviceToken]);
+    NSString *token = [[[[deviceToken description]
+                         stringByReplacingOccurrencesOfString:@"<" withString:@""]
+                        stringByReplacingOccurrencesOfString:@">" withString:@""]
+                       stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSLog(@"%@", [NSString stringWithFormat:@"Device Token: %@", token]);
     [APService registerDeviceToken:deviceToken];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:token forKey:kDeviceToken];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [[RCIMClient sharedRCIMClient] setDeviceToken:token];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
