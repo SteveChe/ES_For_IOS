@@ -43,14 +43,22 @@
                                   }
                                       break;
                                   default:
+                                  {
+                                      NSString* errorMessage = [reponseDic valueForKey:NETWORK_ERROR_MESSAGE];
+                                      if(errorMessage==nil)
+                                          return;
+                                      
+                                      errorMessage= [errorMessage stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+                                      NSLog(@"%@",errorMessage);
+                                      if (self.delegate!= nil &&[self.delegate respondsToSelector:@selector(loginFailed:)])
+                                      {
+                                          [self.delegate loginFailed:errorMessage];
+                                      }
+
+
+                                  }
                                       break;
                               }
-                              NSString* errorMessage = [reponseDic valueForKey:NETWORK_ERROR_MESSAGE];
-                              if(errorMessage==nil)
-                                  return;
-                                  
-                              errorMessage= [errorMessage stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-                              NSLog(@"%@",errorMessage);
                               
                           }
                           failure:^(NSError* err) {

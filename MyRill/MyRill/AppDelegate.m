@@ -83,8 +83,8 @@
 }
 
 - (void)changeWindow:(UIViewController *)sender {
-    ESMenuViewController *esVC = [[ESMenuViewController alloc] init];
-    self.window.rootViewController = esVC;
+//    ESMenuViewController *esVC = [[ESMenuViewController alloc] init];
+    self.window.rootViewController = sender;
     [self.window makeKeyAndVisible];
 }
 

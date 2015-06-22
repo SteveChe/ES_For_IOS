@@ -12,6 +12,9 @@
 #import "QRCodeContainerViewController.h"
 #import "QRCodeViewController.h"
 #import "SignUpDataParse.h"
+#import "CustomShowMessage.h"
+#import "AppDelegate.h"
+#import "LoginViewController.h"
 
 @interface SignUpViewController () <UITextFieldDelegate>
 
@@ -49,6 +52,7 @@
     [self layoutPageSubviews];
     
     _signUpDataParse = [[SignUpDataParse alloc] init];
+    _signUpDataParse.delegate = self;
     
 }
 
@@ -199,6 +203,7 @@
         _validatePwdTxtField = [UITextField new];
         _validatePwdTxtField.placeholder = @"确认密码";
         _validatePwdTxtField.textAlignment = NSTextAlignmentCenter;
+        _validatePwdTxtField.delegate = self;
         [self textFieldConfig:_validatePwdTxtField];
     }
     
@@ -228,5 +233,28 @@
     
     return _signUpBtn;
 }
+
+-(BOOL) textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+
+#pragma mark SignUpDataDelegate - method
+-(void)signUpSucceed
+{
+    [[CustomShowMessage getInstance] showNotificationMessage:@"登录成功"];
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    LoginViewController *loginVC = [[LoginViewController alloc] init];
+    
+    [appDelegate changeWindow:loginVC];
+
+}
+-(void)signUpFailed:(NSString*)errorMessage
+{
+    [[CustomShowMessage getInstance] showNotificationMessage:errorMessage];
+}
+
 
 @end

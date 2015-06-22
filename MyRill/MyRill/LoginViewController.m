@@ -12,6 +12,7 @@
 #import "ColorHandler.h"
 #import "AppDelegate.h"
 #import "CustomShowMessage.h"
+#import "ESMenuViewController.h"
 
 @interface LoginViewController ()
 
@@ -168,7 +169,9 @@
 {
     [[CustomShowMessage getInstance] showNotificationMessage:@"登录成功"];
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-    [appDelegate changeWindow:nil];
+    ESMenuViewController *esVC = [[ESMenuViewController alloc] init];
+
+    [appDelegate changeWindow:esVC];
     return;
 }
 -(void)loginFailed:(NSString*)errorMessage

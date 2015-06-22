@@ -10,12 +10,14 @@
 @protocol SignUpDataDelegate <NSObject>
 
 -(void)signUpSucceed;
--(void)signUpFailed;
+-(void)signUpFailed:(NSString*)errorMessage;
 
 @end
 
 
 @interface SignUpDataParse : NSObject
+@property (nonatomic,weak)id<SignUpDataDelegate>delegate;
+
 //sign up
 -(void) signUpWithPhoneNum:(NSString *)phoneNum  password:(NSString *)password verificationCode:(NSString*) verificationCode;
 
