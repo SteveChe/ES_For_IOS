@@ -72,6 +72,12 @@
             [mgr POST:url parameters:params
               success:^(AFHTTPRequestOperation* operation, NSDictionary* responseObj) {
                   if (success) {
+                      
+                      NSData *cookiesData = [NSKeyedArchiver archivedDataWithRootObject: [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]];
+                      NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                      [defaults setObject: cookiesData forKey: @"sessionCookies"];
+                      [defaults synchronize];
+
                       success(responseObj);
                       
 //                      NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
@@ -79,10 +85,6 @@
 //                          // Here I see the correct rails session cookie
 //                          NSLog(@"cookie: %@", cookie);
 //                      }
-                      NSData *cookiesData = [NSKeyedArchiver archivedDataWithRootObject: [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]];
-                      NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-                      [defaults setObject: cookiesData forKey: @"sessionCookies"];
-                      [defaults synchronize];
                       
                   }
               } failure:^(AFHTTPRequestOperation* operation, NSError* error) {

@@ -45,19 +45,33 @@
 #endif
     // Required
     [APService setupWithOption:launchOptions];
+    [self initRootWindow];
+    
+    return YES;
+}
 
+- (void)initRootWindow
+{
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     LoginViewController *loginViewController = [[LoginViewController alloc] init];
     ESNavigationController *nav = [[ESNavigationController alloc] initWithRootViewController:loginViewController];
     self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];
-    
-    return YES;
+
 }
 
 - (void)changeWindow:(UIViewController *)sender {
-    ESMenuViewController *esVC = [[ESMenuViewController alloc] init];
-    self.window.rootViewController = esVC;
+//    ESMenuViewController *esVC = [[ESMenuViewController alloc] init];
+    [UIView transitionFromView:self.window.rootViewController.view
+                        toView:sender.view
+                      duration:1
+                       options:UIViewAnimationOptionTransitionCurlUp
+                    completion:^(BOOL finished)
+     {
+         self.window.rootViewController = sender;
+     }];
+
+//    self.window.rootViewController = sender;
     [self.window makeKeyAndVisible];
 }
 
@@ -77,6 +91,8 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    application.applicationIconBadgeNumber = 0;
+
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -96,7 +112,6 @@
     
     NSLog(@"%@", [NSString stringWithFormat:@"Device Token: %@", deviceToken]);
     [APService registerDeviceToken:deviceToken];
-    
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
@@ -110,7 +125,6 @@
     NSLog(@"userInfo= %@",userInfo);
     [APService handleRemoteNotification:userInfo];
     completionHandler(UIBackgroundFetchResultNewData);
-
 }
 
 

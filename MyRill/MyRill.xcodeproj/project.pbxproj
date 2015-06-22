@@ -71,6 +71,7 @@
 		F2D2335A1B31AE2800F8C65D /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F2D233591B31AE2800F8C65D /* libz.dylib */; };
 		F2D2335C1B31AE4D00F8C65D /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2D2335B1B31AE4D00F8C65D /* CoreTelephony.framework */; };
 		F2D2335E1B31B1F400F8C65D /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = F2D2335D1B31B1F400F8C65D /* PushConfig.plist */; };
+		F2D2338B1B36B0DD00F8C65D /* NSString+MD5Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D2338A1B36B0DD00F8C65D /* NSString+MD5Addition.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -214,6 +215,8 @@
 		F2D233591B31AE2800F8C65D /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		F2D2335B1B31AE4D00F8C65D /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		F2D2335D1B31B1F400F8C65D /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PushConfig.plist; path = Resource/Property/PushConfig.plist; sourceTree = "<group>"; };
+		F2D233891B36B0DD00F8C65D /* NSString+MD5Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+MD5Addition.h"; path = "Utilities/common/NSString+MD5Addition.h"; sourceTree = "<group>"; };
+		F2D2338A1B36B0DD00F8C65D /* NSString+MD5Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+MD5Addition.m"; path = "Utilities/common/NSString+MD5Addition.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -490,6 +493,8 @@
 			children = (
 				F277ADF91B2DBE97006E42CB /* CustomShowMessage.h */,
 				F277ADFA1B2DBE97006E42CB /* CustomShowMessage.m */,
+				F2D233891B36B0DD00F8C65D /* NSString+MD5Addition.h */,
+				F2D2338A1B36B0DD00F8C65D /* NSString+MD5Addition.m */,
 				F277ADFC1B2DC046006E42CB /* CustomMessageBox.h */,
 				F277ADFD1B2DC046006E42CB /* CustomMessageBox.m */,
 				F277ADFF1B2DC146006E42CB /* DeviceInfo.h */,
@@ -731,6 +736,7 @@
 				F29F86431B2410320058FC9F /* AFNetworkActivityIndicatorManager.m in Sources */,
 				2B39C93E1B241212007BAC7A /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				2B39C93D1B241212007BAC7A /* NSArray+MASAdditions.m in Sources */,
+				F2D2338B1B36B0DD00F8C65D /* NSString+MD5Addition.m in Sources */,
 				F29F86301B2410070058FC9F /* AFURLSessionManager.m in Sources */,
 				2B31C3D81B11C3FD004C865A /* AppDelegate.m in Sources */,
 				F24787751B2D775E00EC266B /* SignUpDataParse.m in Sources */,

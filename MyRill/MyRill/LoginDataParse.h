@@ -11,7 +11,7 @@
 @protocol LoginDataDelegate <NSObject>
 
 -(void)loginSucceed;
--(void)loginFailed;
+-(void)loginFailed:(NSString*)errorMessage;
 
 @end
 
@@ -20,5 +20,7 @@
 
 //login
 -(void) loginWithUserName:(NSString *)userName  password:(NSString *)password;
+
+-(void) setJpushAlias;
 
 @end

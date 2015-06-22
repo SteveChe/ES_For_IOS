@@ -138,7 +138,6 @@ static CustomShowMessage *_sharedInstance = nil;
     
     [self showNotificationMessage:messageTitle WithBgImg:nil AndFrame:_frame withAnimation:YES];
     
-    
 }
 
 

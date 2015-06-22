@@ -9,6 +9,9 @@
 #import "LoginDataParse.h"
 #import "AFHttpTool.h"
 #import "DataParseDefine.h"
+#import "APService.h"
+#import "NSString+MD5Addition.h"
+
 @interface LoginDataParse()
 
 @end
@@ -32,33 +35,58 @@
                               {
                                   case 0:
                                   {
+                                      [self setJpushAlias];
                                       if (self.delegate!= nil && [self.delegate respondsToSelector:@selector(loginSucceed)])
                                       {
                                           [self.delegate loginSucceed];
                                       }
+                                  }
+                                      break;
+                                  default:
+                                  {
+                                      NSString* errorMessage = [reponseDic valueForKey:NETWORK_ERROR_MESSAGE];
+                                      if(errorMessage==nil)
+                                          return;
+                                      
+                                      errorMessage= [errorMessage stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+                                      NSLog(@"%@",errorMessage);
+                                      if (self.delegate!= nil &&[self.delegate respondsToSelector:@selector(loginFailed:)])
+                                      {
+                                          [self.delegate loginFailed:errorMessage];
+                                      }
+
 
                                   }
                                       break;
-                                  
-                                  default:
-                                      break;
                               }
-                              NSString* errorMessage = [reponseDic valueForKey:NETWORK_ERROR_MESSAGE];
-                              if(errorMessage==nil)
-                                  return;
-                                  
-                              errorMessage= [errorMessage stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-                              NSLog(@"%@",errorMessage);
                               
                           }
                           failure:^(NSError* err) {
-                              if (self.delegate!= nil &&[self.delegate respondsToSelector:@selector(loginFailed)])
+                              if (self.delegate!= nil &&[self.delegate respondsToSelector:@selector(loginFailed:)])
                               {
-                                  [self.delegate loginFailed];
+                                  [self.delegate loginFailed:@"网络连接失败"];
                               }
                           }];
 
 }
+
+-(void) setJpushAlias
+{
+    NSData *cookiesdata = [[NSUserDefaults standardUserDefaults] objectForKey:@"sessionCookies"];
+    if([cookiesdata length]) {
+        NSArray *cookies = [NSKeyedUnarchiver unarchiveObjectWithData:cookiesdata];
+        NSHTTPCookie *cookie;
+        for (cookie in cookies) {
+            if ([cookie.name  isEqual: @"sessionid"] )
+            {
+                NSLog(@"jpush alias = %@",cookie.value);
+
+                [APService setAlias:[cookie.value stringFromMD5] callbackSelector:nil object:nil];
+            }
+        }
+    }
+}
+
 
 
 @end

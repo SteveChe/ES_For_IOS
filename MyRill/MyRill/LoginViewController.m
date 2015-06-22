@@ -12,6 +12,7 @@
 #import "ColorHandler.h"
 #import "AppDelegate.h"
 #import "CustomShowMessage.h"
+#import "ESMenuViewController.h"
 
 @interface LoginViewController ()
 
@@ -95,9 +96,6 @@
     [_loginDataParse loginWithUserName:_userNameTxtField.text password:_passwordTxtField.text];
 
     //[_loginDataParse loginWithUserName:_userNameTxtField.text password:_passwordTxtField.text];
-    
-    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-    [appDelegate changeWindow:nil];
 }
 
 - (IBAction)onSignUpBtnClicked:(UIButton *)sender {
