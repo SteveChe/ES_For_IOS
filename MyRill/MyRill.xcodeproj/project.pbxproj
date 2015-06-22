@@ -75,6 +75,28 @@
 		F2D2335C1B31AE4D00F8C65D /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2D2335B1B31AE4D00F8C65D /* CoreTelephony.framework */; };
 		F2D2335E1B31B1F400F8C65D /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = F2D2335D1B31B1F400F8C65D /* PushConfig.plist */; };
 		F2D2338B1B36B0DD00F8C65D /* NSString+MD5Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D2338A1B36B0DD00F8C65D /* NSString+MD5Addition.m */; };
+		F2D2338F1B37DE6400F8C65D /* RongCloud.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F2D2338C1B37DE6400F8C65D /* RongCloud.bundle */; };
+		F2D233901B37DE6400F8C65D /* RongIMKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2D2338D1B37DE6400F8C65D /* RongIMKit.framework */; };
+		F2D233911B37DE6400F8C65D /* RongIMLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2D2338E1B37DE6400F8C65D /* RongIMLib.framework */; };
+		F2D233931B37E22500F8C65D /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2D233921B37E22500F8C65D /* AssetsLibrary.framework */; };
+		F2D233951B37E23100F8C65D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2D233941B37E23100F8C65D /* AudioToolbox.framework */; };
+		F2D233971B37E24100F8C65D /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2D233961B37E24000F8C65D /* CFNetwork.framework */; };
+		F2D233991B37E24C00F8C65D /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2D233981B37E24C00F8C65D /* CoreAudio.framework */; };
+		F2D2339B1B37E25A00F8C65D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2D2339A1B37E25A00F8C65D /* CoreLocation.framework */; };
+		F2D2339D1B37E2A500F8C65D /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2D2339C1B37E2A500F8C65D /* CoreMedia.framework */; };
+		F2D2339F1B37E2C900F8C65D /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2D2339E1B37E2C900F8C65D /* CoreVideo.framework */; };
+		F2D233A11B37E2D200F8C65D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2D233A01B37E2D200F8C65D /* CoreGraphics.framework */; };
+		F2D233A31B37E2DE00F8C65D /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2D233A21B37E2DE00F8C65D /* ImageIO.framework */; };
+		F2D233A51B37E2EC00F8C65D /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F2D233A41B37E2EC00F8C65D /* libc++.dylib */; };
+		F2D233A71B37E2F600F8C65D /* libc++abi.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F2D233A61B37E2F600F8C65D /* libc++abi.dylib */; };
+		F2D233A91B37E30400F8C65D /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F2D233A81B37E30400F8C65D /* libsqlite3.dylib */; };
+		F2D233AB1B37E31400F8C65D /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F2D233AA1B37E31400F8C65D /* libstdc++.dylib */; };
+		F2D233AD1B37E31E00F8C65D /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F2D233AC1B37E31E00F8C65D /* libxml2.dylib */; };
+		F2D233AF1B37E33200F8C65D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2D233AE1B37E33200F8C65D /* MapKit.framework */; };
+		F2D233B11B37E33900F8C65D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2D233B01B37E33900F8C65D /* OpenGLES.framework */; };
+		F2D233B31B37E34000F8C65D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2D233B21B37E34000F8C65D /* QuartzCore.framework */; };
+		F2D233B51B37E35300F8C65D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2D233B41B37E35300F8C65D /* SystemConfiguration.framework */; };
+		F2D233B71B37E37100F8C65D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2D233B61B37E37100F8C65D /* UIKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -224,6 +246,28 @@
 		F2D2335D1B31B1F400F8C65D /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PushConfig.plist; path = Resource/Property/PushConfig.plist; sourceTree = "<group>"; };
 		F2D233891B36B0DD00F8C65D /* NSString+MD5Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+MD5Addition.h"; path = "Utilities/common/NSString+MD5Addition.h"; sourceTree = "<group>"; };
 		F2D2338A1B36B0DD00F8C65D /* NSString+MD5Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+MD5Addition.m"; path = "Utilities/common/NSString+MD5Addition.m"; sourceTree = "<group>"; };
+		F2D2338C1B37DE6400F8C65D /* RongCloud.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = RongCloud.bundle; path = MyRill/RCloud/RongCloud.bundle; sourceTree = "<group>"; };
+		F2D2338D1B37DE6400F8C65D /* RongIMKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RongIMKit.framework; path = MyRill/RCloud/RongIMKit.framework; sourceTree = "<group>"; };
+		F2D2338E1B37DE6400F8C65D /* RongIMLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RongIMLib.framework; path = MyRill/RCloud/RongIMLib.framework; sourceTree = "<group>"; };
+		F2D233921B37E22500F8C65D /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		F2D233941B37E23100F8C65D /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		F2D233961B37E24000F8C65D /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		F2D233981B37E24C00F8C65D /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		F2D2339A1B37E25A00F8C65D /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		F2D2339C1B37E2A500F8C65D /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		F2D2339E1B37E2C900F8C65D /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		F2D233A01B37E2D200F8C65D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		F2D233A21B37E2DE00F8C65D /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		F2D233A41B37E2EC00F8C65D /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		F2D233A61B37E2F600F8C65D /* libc++abi.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++abi.dylib"; path = "usr/lib/libc++abi.dylib"; sourceTree = SDKROOT; };
+		F2D233A81B37E30400F8C65D /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		F2D233AA1B37E31400F8C65D /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
+		F2D233AC1B37E31E00F8C65D /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		F2D233AE1B37E33200F8C65D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		F2D233B01B37E33900F8C65D /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		F2D233B21B37E34000F8C65D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		F2D233B41B37E35300F8C65D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		F2D233B61B37E37100F8C65D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -231,11 +275,32 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F2D2335C1B31AE4D00F8C65D /* CoreTelephony.framework in Frameworks */,
+				F2D233B71B37E37100F8C65D /* UIKit.framework in Frameworks */,
+				F2D233B51B37E35300F8C65D /* SystemConfiguration.framework in Frameworks */,
+				F2D233B31B37E34000F8C65D /* QuartzCore.framework in Frameworks */,
+				F2D233B11B37E33900F8C65D /* OpenGLES.framework in Frameworks */,
+				F2D233AF1B37E33200F8C65D /* MapKit.framework in Frameworks */,
 				F2D2335A1B31AE2800F8C65D /* libz.dylib in Frameworks */,
-				F2D233561B31AA1200F8C65D /* libPushSDK-1.8.3.a in Frameworks */,
-				2B39C95A1B271F5C007BAC7A /* CoreData.framework in Frameworks */,
+				F2D233AD1B37E31E00F8C65D /* libxml2.dylib in Frameworks */,
+				F2D233AB1B37E31400F8C65D /* libstdc++.dylib in Frameworks */,
+				F2D233A91B37E30400F8C65D /* libsqlite3.dylib in Frameworks */,
+				F2D233A71B37E2F600F8C65D /* libc++abi.dylib in Frameworks */,
+				F2D233A51B37E2EC00F8C65D /* libc++.dylib in Frameworks */,
+				F2D233A31B37E2DE00F8C65D /* ImageIO.framework in Frameworks */,
+				F2D233A11B37E2D200F8C65D /* CoreGraphics.framework in Frameworks */,
+				F2D2339F1B37E2C900F8C65D /* CoreVideo.framework in Frameworks */,
+				F2D2339D1B37E2A500F8C65D /* CoreMedia.framework in Frameworks */,
+				F2D2339B1B37E25A00F8C65D /* CoreLocation.framework in Frameworks */,
+				F2D233991B37E24C00F8C65D /* CoreAudio.framework in Frameworks */,
+				F2D233971B37E24100F8C65D /* CFNetwork.framework in Frameworks */,
 				2B39C9581B271F53007BAC7A /* AVFoundation.framework in Frameworks */,
+				F2D233951B37E23100F8C65D /* AudioToolbox.framework in Frameworks */,
+				F2D233931B37E22500F8C65D /* AssetsLibrary.framework in Frameworks */,
+				F2D2335C1B31AE4D00F8C65D /* CoreTelephony.framework in Frameworks */,
+				F2D233561B31AA1200F8C65D /* libPushSDK-1.8.3.a in Frameworks */,
+				F2D233911B37DE6400F8C65D /* RongIMLib.framework in Frameworks */,
+				2B39C95A1B271F5C007BAC7A /* CoreData.framework in Frameworks */,
+				F2D233901B37DE6400F8C65D /* RongIMKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -435,6 +500,28 @@
 		2B39C9561B271C95007BAC7A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F2D233B61B37E37100F8C65D /* UIKit.framework */,
+				F2D233B41B37E35300F8C65D /* SystemConfiguration.framework */,
+				F2D233B21B37E34000F8C65D /* QuartzCore.framework */,
+				F2D233B01B37E33900F8C65D /* OpenGLES.framework */,
+				F2D233AE1B37E33200F8C65D /* MapKit.framework */,
+				F2D233AC1B37E31E00F8C65D /* libxml2.dylib */,
+				F2D233AA1B37E31400F8C65D /* libstdc++.dylib */,
+				F2D233A81B37E30400F8C65D /* libsqlite3.dylib */,
+				F2D233A61B37E2F600F8C65D /* libc++abi.dylib */,
+				F2D233A41B37E2EC00F8C65D /* libc++.dylib */,
+				F2D233A21B37E2DE00F8C65D /* ImageIO.framework */,
+				F2D233A01B37E2D200F8C65D /* CoreGraphics.framework */,
+				F2D2339E1B37E2C900F8C65D /* CoreVideo.framework */,
+				F2D2339C1B37E2A500F8C65D /* CoreMedia.framework */,
+				F2D2339A1B37E25A00F8C65D /* CoreLocation.framework */,
+				F2D233981B37E24C00F8C65D /* CoreAudio.framework */,
+				F2D233961B37E24000F8C65D /* CFNetwork.framework */,
+				F2D233941B37E23100F8C65D /* AudioToolbox.framework */,
+				F2D233921B37E22500F8C65D /* AssetsLibrary.framework */,
+				F2D2338C1B37DE6400F8C65D /* RongCloud.bundle */,
+				F2D2338D1B37DE6400F8C65D /* RongIMKit.framework */,
+				F2D2338E1B37DE6400F8C65D /* RongIMLib.framework */,
 				F2D2335B1B31AE4D00F8C65D /* CoreTelephony.framework */,
 				F2D233591B31AE2800F8C65D /* libz.dylib */,
 				F2D233551B31AA1200F8C65D /* libPushSDK-1.8.3.a */,
@@ -876,6 +963,10 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer: Xinshuai Che (5242EFF4R7)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xinshuai Che (5242EFF4R7)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MyRill/RCloud",
+				);
 				INFOPLIST_FILE = MyRill/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -895,6 +986,10 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer: Xinshuai Che (5242EFF4R7)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xinshuai Che (5242EFF4R7)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MyRill/RCloud",
+				);
 				INFOPLIST_FILE = MyRill/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
