@@ -130,7 +130,7 @@
 }
 
 //change password
-+(void) changePassword:(NSString *) oldPassword
++ (void)changePassword:(NSString *) oldPassword
            newPassword:(NSString *) newPassword
                success:(void (^)(id response))success
                failure:(void (^)(NSError* err))failure
@@ -153,32 +153,14 @@
 + (void)getProfessionSuccess:(void (^)(id))success
                      failure:(void (^)(NSError *))failre {
 
-    NSURL *url = [NSURL URLWithString:DEV_SERVER_ADDRESS];
-    AFHTTPRequestOperationManager *afManager = [[AFHTTPRequestOperationManager alloc] init];
-    
-    NSData *cookiesdata = [[NSUserDefaults standardUserDefaults] objectForKey:@"sessionCookies"];
-    if([cookiesdata length]) {
-        NSArray *cookies = [NSKeyedUnarchiver unarchiveObjectWithData:cookiesdata];
-        NSHTTPCookie *cookie;
-        for (cookie in cookies) {
-            if ([cookie.name  isEqual: @"csrftoken"] )
-            {
-                [afManager.requestSerializer setValue:cookie.value forHTTPHeaderField:@"X-Csrftoken"];
-                //                NSLog(@"csrftoken = %@",cookie.value);
-            }
-            [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
-        }
-    }
-    
-    [afManager GET:@"http://120.25.249.144/api/professions/.json"
-        parameters:@{@"format":@"api"}
-           success:^(AFHTTPRequestOperation *operation, id responseObject) {
-               NSLog(@"`````%@",responseObject);
-           } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-               NSLog(@"`````%@",error);
-           }];
-    afManager.requestSerializer.HTTPShouldHandleCookies = YES;
-    //    [mgr se]
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet
+                              url:@"api/professions/.json"
+                           params:nil
+                          success:^(id response) {
+                              NSLog(@"%@",response);
+                          } failure:^(NSError *err) {
+                              NSLog(@"%@",err);
+                          }];
 }
 
 @end

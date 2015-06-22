@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "LoginViewController.h"
 #import "ESMenuViewController.h"
+#import "ESNavigationController.h"
 #import "APService.h"
 
 #define RONGCLOUD_IM_APPKEY @"pvxdm17jx871r" //online key
@@ -62,31 +63,8 @@
 - (void)initRootWindow
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    UIViewController* rootViewCtrl = nil;
-    NSData *cookiesdata = [[NSUserDefaults standardUserDefaults] objectForKey:@"sessionCookies"];
-    if([cookiesdata length]) {
-        NSArray *cookies = [NSKeyedUnarchiver unarchiveObjectWithData:cookiesdata];
-        NSHTTPCookie *cookie;
-        BOOL bLogined = FALSE;
-        for (cookie in cookies) {
-            if ([cookie.name  isEqual: @"sessionid"] )
-            {
-                if([cookie.value length])
-                    bLogined = TRUE;
-            }
-        }
-        if (bLogined){
-            rootViewCtrl = [[ESMenuViewController alloc] init];
-        }
-        else{
-            rootViewCtrl = [[LoginViewController alloc] init];
-        }
-    }
-    else{
-        rootViewCtrl = [[LoginViewController alloc] init];
-    }
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:rootViewCtrl];
-
+    LoginViewController *loginViewController = [[LoginViewController alloc] init];
+    ESNavigationController *nav = [[ESNavigationController alloc] initWithRootViewController:loginViewController];
     self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];
 

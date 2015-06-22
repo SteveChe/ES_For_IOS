@@ -16,15 +16,15 @@
 
 @interface LoginViewController ()
 
+@property (weak, nonatomic) IBOutlet UIView *textFieldHoldView;
 @property (nonatomic, strong) UITextField *userNameTxtField;
 @property (nonatomic, strong) UITextField *passwordTxtField;
-@property (nonatomic, strong) UIButton *loginBtn;
-@property (nonatomic, strong) UIButton *signUpBtn;
+@property (weak, nonatomic) IBOutlet UIButton *loginBtn;
+@property (nonatomic, strong) IBOutlet UIButton *signUpBtn;
 @property (nonatomic, strong) LoginDataParse* loginDataParse;
 @end
 
 @implementation LoginViewController
-
 
 #pragma mark - life cycle
 - (void)viewDidLoad {
@@ -37,7 +37,6 @@
     [self.view addSubview:self.userNameTxtField];
     [self.view addSubview:self.passwordTxtField];
     [self.view addSubview:self.loginBtn];
-    [self.view addSubview:self.signUpBtn];
     
     [self layoutPageSubviews];
     
@@ -73,15 +72,6 @@
         make.trailing.equalTo(weakSelf.mas_trailing).with.offset(-20);
         make.height.equalTo(@40);
     }];
-    
-    __weak UIButton *weakLogin = self.loginBtn;
-    [self.signUpBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(weakSelf.mas_centerX);
-        make.top.equalTo(weakLogin.mas_bottom).with.offset(8);
-        make.leading.equalTo(weakSelf.mas_leading).with.offset(20);
-        make.trailing.equalTo(weakSelf.mas_trailing).with.offset(-20);
-        make.height.equalTo(@40);
-    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -89,14 +79,26 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - LoginDataDelegate
+-(void)loginSucceed
+{
+    [[CustomShowMessage getInstance] showNotificationMessage:@"登录成功"];
+    return;
+    
+}
+-(void)loginFailed
+{
+    
+}
+
 #pragma mark - response events
-- (void)onLoginBtnClicked:(UIButton *)sender {
+- (IBAction)onLoginBtnClicked:(UIButton *)sender {
     [_loginDataParse loginWithUserName:_userNameTxtField.text password:_passwordTxtField.text];
 
     //[_loginDataParse loginWithUserName:_userNameTxtField.text password:_passwordTxtField.text];
 }
 
-- (void)onSignUpBtnClicked:(UIButton *)sender {
+- (IBAction)onSignUpBtnClicked:(UIButton *)sender {
     SignUpViewController *signUpViewController = [[SignUpViewController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:signUpViewController];
     self.definesPresentationContext = YES;
@@ -140,45 +142,17 @@
     return _passwordTxtField;
 }
 
-- (UIButton *)loginBtn {
-    if (!_loginBtn) {
-        _loginBtn = [UIButton new];
-        _loginBtn.layer.cornerRadius = 3.0;
-        _loginBtn.backgroundColor = [UIColor blueColor];
-        [_loginBtn addTarget:self action:@selector(onLoginBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-        [_loginBtn setTitle:@"登录" forState:UIControlStateNormal];
-    }
+-(void)setTextFieldHoldView:(UIView *)textFieldHoldView {
+    _textFieldHoldView = textFieldHoldView;
     
-    return _loginBtn;
+    _textFieldHoldView.layer.borderWidth = 1.0;
+    _textFieldHoldView.layer.borderColor = [ColorHandler colorFromHexRGB:@"DDDDDD"].CGColor;
 }
 
-- (UIButton *)signUpBtn {
-    if (!_signUpBtn) {
-        _signUpBtn = [UIButton new];
-        _signUpBtn.layer.cornerRadius = 3.0;
-        _signUpBtn.backgroundColor = [UIColor blueColor];
-        [_signUpBtn addTarget:self action:@selector(onSignUpBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-        [_signUpBtn setTitle:@"注册" forState:UIControlStateNormal];
-    }
+- (void)setLoginBtn:(UIButton *)loginBtn {
+    _loginBtn = loginBtn;
     
-    return _signUpBtn;
+    _loginBtn.layer.cornerRadius = 19.0;
 }
-
-#pragma mark - LoginDataDelegate
--(void)loginSucceed
-{
-    [[CustomShowMessage getInstance] showNotificationMessage:@"登录成功"];
-    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-    ESMenuViewController *esVC = [[ESMenuViewController alloc] init];
-
-    [appDelegate changeWindow:esVC];
-    return;
-}
--(void)loginFailed:(NSString*)errorMessage
-{
-    
-    [[CustomShowMessage getInstance] showNotificationMessage:errorMessage];
-}
-
 
 @end
