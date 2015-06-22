@@ -84,7 +84,16 @@
 
 - (void)changeWindow:(UIViewController *)sender {
 //    ESMenuViewController *esVC = [[ESMenuViewController alloc] init];
-    self.window.rootViewController = sender;
+    [UIView transitionFromView:self.window.rootViewController.view
+                        toView:sender.view
+                      duration:1
+                       options:UIViewAnimationOptionTransitionCurlUp
+                    completion:^(BOOL finished)
+     {
+         self.window.rootViewController = sender;
+     }];
+
+//    self.window.rootViewController = sender;
     [self.window makeKeyAndVisible];
 }
 

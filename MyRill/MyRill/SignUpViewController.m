@@ -245,15 +245,23 @@
 -(void)signUpSucceed
 {
     [[CustomShowMessage getInstance] showNotificationMessage:@"登录成功"];
-    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-    LoginViewController *loginVC = [[LoginViewController alloc] init];
     
-    [appDelegate changeWindow:loginVC];
+    [self performSelector:@selector( changeToLoginView)
+               withObject:nil
+               afterDelay:2];
 
 }
+
 -(void)signUpFailed:(NSString*)errorMessage
 {
     [[CustomShowMessage getInstance] showNotificationMessage:errorMessage];
+}
+
+-(void)changeToLoginView
+{
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    LoginViewController *loginVC = [[LoginViewController alloc] init];
+    [appDelegate changeWindow:loginVC];
 }
 
 
