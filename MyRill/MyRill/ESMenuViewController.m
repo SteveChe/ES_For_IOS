@@ -7,6 +7,7 @@
 //
 
 #import "ESMenuViewController.h"
+#import "ESNavigationController.h"
 #import "BusinessContainerViewController.h"
 #import "ChatContainerViewController.h"
 #import "ContactsContainerViewController.h"
@@ -53,11 +54,11 @@
                                               selectedImage:nil];
     
     self.viewControllers = [NSArray arrayWithObjects:
-                                [[UINavigationController alloc] initWithRootViewController:businessVC],
-                                [[UINavigationController alloc] initWithRootViewController:chatVC],
-                                [[UINavigationController alloc] initWithRootViewController:contactsVC],
-                                [[UINavigationController alloc] initWithRootViewController:taskVC],
-                                [[UINavigationController alloc] initWithRootViewController:userVC],nil];
+                                [[ESNavigationController alloc] initWithRootViewController:businessVC],
+                                [[ESNavigationController alloc] initWithRootViewController:chatVC],
+                                [[ESNavigationController alloc] initWithRootViewController:contactsVC],
+                                [[ESNavigationController alloc] initWithRootViewController:taskVC],
+                                [[ESNavigationController alloc] initWithRootViewController:userVC],nil];
     [self setSelectedIndex:0];
     self.delegate = self;
 }

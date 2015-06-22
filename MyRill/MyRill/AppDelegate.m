@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "LoginViewController.h"
 #import "ESMenuViewController.h"
+#import "ESNavigationController.h"
 #import "APService.h"
 
 @interface AppDelegate ()
@@ -47,7 +48,7 @@
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     LoginViewController *loginViewController = [[LoginViewController alloc] init];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginViewController];
+    ESNavigationController *nav = [[ESNavigationController alloc] initWithRootViewController:loginViewController];
     self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];
     

@@ -9,10 +9,12 @@
 #import "BusinessContainerViewController.h"
 #import "ColorHandler.h"
 #import "AFHttpTool.h"
+#import "AFNetworking.h"
 
 @interface BusinessContainerViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate>
 
 @property (nonatomic, strong) UICollectionView *collectionView;
+@property (nonatomic, strong) NSMutableArray *dataSource;
 
 @end
 
@@ -29,6 +31,8 @@
     
     self.view.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.collectionView];
+    
+    [AFHttpTool getProfessionSuccess:nil failure:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -39,7 +43,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [AFHttpTool getProfessionSuccess:nil failure:nil];
+    
 }
 
 #pragma mark - UICollectionViewDataSource&UICollectionViewDelegateFlowLayout
@@ -117,6 +121,13 @@
     }
     
     return _collectionView;
+}
+
+- (NSMutableArray *)dataSource {
+    if (!_dataSource) {
+        _dataSource = [[NSMutableArray alloc] init];
+    }
+    return _dataSource;
 }
 
 @end
