@@ -13,7 +13,7 @@
 #import "ESNavigationController.h"
 #import "APService.h"
 
-#define RONGCLOUD_IM_APPKEY @"pvxdm17jx871r" //online key
+#define RONGCLOUD_IM_APPKEY @"x18ywvqf8hzqc" //online key
 
 #define kDeviceToken @"RongCloud_SDK_DeviceToken"
 
