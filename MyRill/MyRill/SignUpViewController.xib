@@ -7,7 +7,16 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SignUpViewController">
             <connections>
+                <outlet property="captchasTxtField" destination="ydR-CX-6x2" id="mH8-dU-IIh"/>
+                <outlet property="confirmPwdTxtField" destination="XcE-wy-HGr" id="xuA-2r-QeM"/>
+                <outlet property="phoneNumTxtField" destination="pm8-Vs-BJr" id="7bL-Ij-p37"/>
+                <outlet property="pwdTxtField" destination="8Bc-A3-UjS" id="FCS-4i-AqT"/>
+                <outlet property="signUpBtn" destination="El0-hz-pkE" id="uOb-hB-QSG"/>
+                <outlet property="usernameTxtField" destination="eVC-gu-UO4" id="zSN-pL-Unf"/>
+                <outlet property="verificationBtn" destination="aNS-ld-DBj" id="Ebi-cR-1Y2"/>
                 <outlet property="view" destination="oFz-lT-fHa" id="nOV-Kn-moj"/>
+                <outletCollection property="holdViews" destination="AAc-Lc-Zkr" id="itn-fv-RnD"/>
+                <outletCollection property="holdViews" destination="34c-Wr-dVN" id="NPA-ne-8gJ"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -15,36 +24,41 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AAc-Lc-Zkr">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AAc-Lc-Zkr" userLabel="TextFieldHoldView">
                     <rect key="frame" x="-1" y="20" width="602" height="229"/>
                     <subviews>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pm8-Vs-BJr">
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入手机号" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="pm8-Vs-BJr">
                             <rect key="frame" x="20" y="0.0" width="562" height="45"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="45" id="rQt-yZ-mwz"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="next"/>
                         </textField>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ydR-CX-6x2">
-                            <rect key="frame" x="20" y="46" width="562" height="45"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入验证码" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ydR-CX-6x2">
+                            <rect key="frame" x="20" y="46" width="393" height="45"/>
+                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="next"/>
                         </textField>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eVC-gu-UO4">
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="用户名" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="eVC-gu-UO4">
                             <rect key="frame" x="20" y="92" width="562" height="45"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="next"/>
                         </textField>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8Bc-A3-UjS">
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入新密码" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="8Bc-A3-UjS">
                             <rect key="frame" x="20" y="138" width="562" height="45"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="next" secureTextEntry="YES"/>
                         </textField>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XcE-wy-HGr">
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="确认密码" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="XcE-wy-HGr">
                             <rect key="frame" x="20" y="184" width="562" height="45"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="done" secureTextEntry="YES"/>
                         </textField>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eqa-Uc-if9" userLabel="SplitLine1">
                             <rect key="frame" x="20" y="45" width="562" height="1"/>
@@ -65,6 +79,18 @@
                             <rect key="frame" x="20" y="183" width="562" height="1"/>
                             <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </view>
+                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aNS-ld-DBj">
+                            <rect key="frame" x="492" y="50" width="90" height="35"/>
+                            <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="90" id="NlY-bQ-yyT"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                            <state key="normal" title="获取验证码">
+                                <color key="titleColor" red="0.023529411760000001" green="0.65490196079999996" blue="0.88235294119999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -76,18 +102,19 @@
                         <constraint firstItem="8Bc-A3-UjS" firstAttribute="height" secondItem="pm8-Vs-BJr" secondAttribute="height" id="CH0-6E-Ldg"/>
                         <constraint firstItem="XcE-wy-HGr" firstAttribute="leading" secondItem="AAc-Lc-Zkr" secondAttribute="leading" constant="20" symbolic="YES" id="G6r-Wq-ESJ"/>
                         <constraint firstAttribute="trailing" secondItem="5X2-OX-Xt0" secondAttribute="trailing" constant="20" symbolic="YES" id="G8R-Dc-jgp"/>
+                        <constraint firstItem="ydR-CX-6x2" firstAttribute="height" secondItem="aNS-ld-DBj" secondAttribute="height" constant="10" id="JUh-xf-jtH"/>
                         <constraint firstItem="5X2-OX-Xt0" firstAttribute="leading" secondItem="AAc-Lc-Zkr" secondAttribute="leading" constant="20" symbolic="YES" id="KPU-UJ-vFM"/>
                         <constraint firstAttribute="bottom" secondItem="XcE-wy-HGr" secondAttribute="bottom" id="Pck-J0-fbO"/>
                         <constraint firstAttribute="trailing" secondItem="8Bc-A3-UjS" secondAttribute="trailing" constant="20" symbolic="YES" id="QAq-Qj-AZ1"/>
                         <constraint firstItem="ydR-CX-6x2" firstAttribute="leading" secondItem="AAc-Lc-Zkr" secondAttribute="leading" constant="20" symbolic="YES" id="RV0-NG-Cza"/>
                         <constraint firstItem="7nq-44-gkU" firstAttribute="height" secondItem="eqa-Uc-if9" secondAttribute="height" id="Trm-uM-CPn"/>
                         <constraint firstItem="8Bc-A3-UjS" firstAttribute="top" secondItem="5X2-OX-Xt0" secondAttribute="bottom" id="W5Q-AN-srx"/>
-                        <constraint firstAttribute="trailing" secondItem="ydR-CX-6x2" secondAttribute="trailing" constant="20" symbolic="YES" id="Wf9-1d-kgG"/>
                         <constraint firstAttribute="trailing" secondItem="eVC-gu-UO4" secondAttribute="trailing" constant="20" symbolic="YES" id="YyP-ID-qIK"/>
                         <constraint firstAttribute="trailing" secondItem="dYy-QL-ovT" secondAttribute="trailing" constant="20" symbolic="YES" id="ZQh-37-ddm"/>
                         <constraint firstItem="dYy-QL-ovT" firstAttribute="top" secondItem="ydR-CX-6x2" secondAttribute="bottom" id="a8n-96-UkC"/>
                         <constraint firstItem="eVC-gu-UO4" firstAttribute="leading" secondItem="AAc-Lc-Zkr" secondAttribute="leading" constant="20" symbolic="YES" id="drQ-Ga-kmk"/>
                         <constraint firstItem="pm8-Vs-BJr" firstAttribute="height" secondItem="ydR-CX-6x2" secondAttribute="height" id="eLI-0A-2z5"/>
+                        <constraint firstAttribute="trailing" secondItem="aNS-ld-DBj" secondAttribute="trailing" constant="20" symbolic="YES" id="gqY-Jz-rBi"/>
                         <constraint firstAttribute="trailing" secondItem="XcE-wy-HGr" secondAttribute="trailing" constant="20" symbolic="YES" id="gso-85-4HX"/>
                         <constraint firstItem="7nq-44-gkU" firstAttribute="top" secondItem="8Bc-A3-UjS" secondAttribute="bottom" id="hty-Yr-7Y3"/>
                         <constraint firstItem="ydR-CX-6x2" firstAttribute="top" secondItem="eqa-Uc-if9" secondAttribute="bottom" id="i8M-aH-wbF"/>
@@ -95,24 +122,74 @@
                         <constraint firstItem="eqa-Uc-if9" firstAttribute="top" secondItem="pm8-Vs-BJr" secondAttribute="bottom" id="lVG-dv-i5A"/>
                         <constraint firstItem="eVC-gu-UO4" firstAttribute="top" secondItem="dYy-QL-ovT" secondAttribute="bottom" id="ll5-nD-qLf"/>
                         <constraint firstItem="eVC-gu-UO4" firstAttribute="height" secondItem="pm8-Vs-BJr" secondAttribute="height" id="qOW-Ak-R6r"/>
+                        <constraint firstItem="aNS-ld-DBj" firstAttribute="leading" secondItem="ydR-CX-6x2" secondAttribute="trailing" constant="79" id="qlJ-H0-wgk"/>
                         <constraint firstAttribute="trailing" secondItem="pm8-Vs-BJr" secondAttribute="trailing" constant="20" id="rYF-3R-Zac"/>
                         <constraint firstItem="XcE-wy-HGr" firstAttribute="top" secondItem="7nq-44-gkU" secondAttribute="bottom" id="sMj-rX-b1d"/>
                         <constraint firstAttribute="trailing" secondItem="7nq-44-gkU" secondAttribute="trailing" constant="20" symbolic="YES" id="sc9-yk-AGr"/>
                         <constraint firstItem="eqa-Uc-if9" firstAttribute="leading" secondItem="AAc-Lc-Zkr" secondAttribute="leading" constant="20" symbolic="YES" id="tCH-FK-rdw"/>
                         <constraint firstItem="eqa-Uc-if9" firstAttribute="height" secondItem="dYy-QL-ovT" secondAttribute="height" id="vJ4-s2-Yih"/>
                         <constraint firstItem="dYy-QL-ovT" firstAttribute="leading" secondItem="AAc-Lc-Zkr" secondAttribute="leading" constant="20" symbolic="YES" id="x8w-Sl-PZH"/>
+                        <constraint firstItem="ydR-CX-6x2" firstAttribute="centerY" secondItem="aNS-ld-DBj" secondAttribute="centerY" id="ywV-5N-XGf"/>
                         <constraint firstItem="pm8-Vs-BJr" firstAttribute="top" secondItem="AAc-Lc-Zkr" secondAttribute="top" id="zDD-Cg-99e"/>
                         <constraint firstItem="XcE-wy-HGr" firstAttribute="height" secondItem="pm8-Vs-BJr" secondAttribute="height" id="zXp-tc-eWF"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="El0-hz-pkE">
+                    <rect key="frame" x="20" y="369" width="560" height="44"/>
+                    <color key="backgroundColor" red="0.023529411760000001" green="0.65490196079999996" blue="0.88235294119999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="4xj-jU-eAZ"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                    <state key="normal" title="注册">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="34c-Wr-dVN" userLabel="JoinHoldView">
+                    <rect key="frame" x="-1" y="269" width="602" height="45"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="加入企业(可选)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rCM-oq-XsZ">
+                            <rect key="frame" x="20" y="12" width="111" height="20.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ijy-kc-HV5">
+                            <rect key="frame" x="0.0" y="0.0" width="602" height="45"/>
+                            <state key="normal">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="compBtnOnClicked:" destination="-1" eventType="touchUpInside" id="YoJ-fN-6hy"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="Ijy-kc-HV5" firstAttribute="top" secondItem="34c-Wr-dVN" secondAttribute="top" id="6fy-3f-kj8"/>
+                        <constraint firstItem="rCM-oq-XsZ" firstAttribute="leading" secondItem="34c-Wr-dVN" secondAttribute="leading" constant="20" symbolic="YES" id="JtK-Bo-doO"/>
+                        <constraint firstAttribute="bottom" secondItem="Ijy-kc-HV5" secondAttribute="bottom" id="UIb-U1-L4v"/>
+                        <constraint firstItem="Ijy-kc-HV5" firstAttribute="leading" secondItem="34c-Wr-dVN" secondAttribute="leading" id="fxs-j8-8k1"/>
+                        <constraint firstAttribute="trailing" secondItem="Ijy-kc-HV5" secondAttribute="trailing" id="kzm-vq-iti"/>
+                        <constraint firstAttribute="centerY" secondItem="rCM-oq-XsZ" secondAttribute="centerY" id="n9t-Ym-tui"/>
+                        <constraint firstAttribute="height" constant="45" id="xqQ-Nr-xFt"/>
                     </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="AAc-Lc-Zkr" firstAttribute="leading" secondItem="oFz-lT-fHa" secondAttribute="leading" constant="-1" id="48j-65-aBr"/>
+                <constraint firstItem="34c-Wr-dVN" firstAttribute="top" secondItem="AAc-Lc-Zkr" secondAttribute="bottom" constant="20" id="5On-mk-C9E"/>
+                <constraint firstItem="El0-hz-pkE" firstAttribute="leading" secondItem="oFz-lT-fHa" secondAttribute="leading" constant="20" symbolic="YES" id="CEV-w9-Scw"/>
+                <constraint firstItem="34c-Wr-dVN" firstAttribute="leading" secondItem="oFz-lT-fHa" secondAttribute="leading" constant="-1" id="ElC-Jq-LEF"/>
                 <constraint firstItem="AAc-Lc-Zkr" firstAttribute="top" secondItem="oFz-lT-fHa" secondAttribute="top" constant="20" symbolic="YES" id="ID0-QQ-edq"/>
                 <constraint firstAttribute="trailing" secondItem="AAc-Lc-Zkr" secondAttribute="trailing" constant="-1" id="Iiu-nz-Wag"/>
+                <constraint firstAttribute="trailing" secondItem="34c-Wr-dVN" secondAttribute="trailing" constant="-1" id="S1l-P3-BLI"/>
+                <constraint firstItem="El0-hz-pkE" firstAttribute="top" secondItem="34c-Wr-dVN" secondAttribute="bottom" constant="55" id="aqj-3A-pcX"/>
+                <constraint firstAttribute="trailing" secondItem="El0-hz-pkE" secondAttribute="trailing" constant="20" symbolic="YES" id="jA1-Vl-uL1"/>
             </constraints>
-            <point key="canvasLocation" x="613" y="366"/>
+            <point key="canvasLocation" x="662" y="349"/>
         </view>
     </objects>
 </document>
