@@ -86,9 +86,13 @@
     else{
         rootViewCtrl = [[LoginViewController alloc] init];
     }
-    ESNavigationController *nav = [[ESNavigationController alloc] initWithRootViewController:rootViewCtrl];
-
-    self.window.rootViewController = nav;
+    if ([rootViewCtrl isKindOfClass:[LoginViewController class]]) {
+        ESNavigationController *nav = [[ESNavigationController alloc] initWithRootViewController:rootViewCtrl];
+        self.window.rootViewController = nav;
+    } else {
+        self.window.rootViewController = rootViewCtrl;
+    }
+    
     [self.window makeKeyAndVisible];
 
 }

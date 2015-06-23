@@ -30,7 +30,6 @@
 		2B39C9581B271F53007BAC7A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B39C9571B271F53007BAC7A /* AVFoundation.framework */; };
 		2B39C95A1B271F5C007BAC7A /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B39C9591B271F5C007BAC7A /* CoreData.framework */; };
 		2B39C95F1B272221007BAC7A /* QRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C95E1B272221007BAC7A /* QRCodeViewController.m */; };
-		2B39C9671B2D734A007BAC7A /* QRCodeContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9661B2D734A007BAC7A /* QRCodeContainerViewController.m */; };
 		2B39C96D1B2D79DB007BAC7A /* BusinessContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C96C1B2D79DB007BAC7A /* BusinessContainerViewController.m */; };
 		2B39C9701B2D7AD2007BAC7A /* ChatContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C96F1B2D7AD2007BAC7A /* ChatContainerViewController.m */; };
 		2B39C9731B2D7AF0007BAC7A /* ContactsContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9721B2D7AF0007BAC7A /* ContactsContainerViewController.m */; };
@@ -159,8 +158,6 @@
 		2B39C95B1B271F7A007BAC7A /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		2B39C95D1B272221007BAC7A /* QRCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeViewController.h; sourceTree = "<group>"; };
 		2B39C95E1B272221007BAC7A /* QRCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeViewController.m; sourceTree = "<group>"; };
-		2B39C9651B2D734A007BAC7A /* QRCodeContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeContainerViewController.h; sourceTree = "<group>"; };
-		2B39C9661B2D734A007BAC7A /* QRCodeContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeContainerViewController.m; sourceTree = "<group>"; };
 		2B39C96B1B2D79DB007BAC7A /* BusinessContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessContainerViewController.h; sourceTree = "<group>"; };
 		2B39C96C1B2D79DB007BAC7A /* BusinessContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessContainerViewController.m; sourceTree = "<group>"; };
 		2B39C96E1B2D7AD2007BAC7A /* ChatContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatContainerViewController.h; sourceTree = "<group>"; };
@@ -482,8 +479,6 @@
 				2B39C9531B25CA86007BAC7A /* SignUpViewController.h */,
 				2B39C9541B25CA86007BAC7A /* SignUpViewController.m */,
 				2B39C9961B37E634007BAC7A /* SignUpViewController.xib */,
-				2B39C9651B2D734A007BAC7A /* QRCodeContainerViewController.h */,
-				2B39C9661B2D734A007BAC7A /* QRCodeContainerViewController.m */,
 				2B39C95D1B272221007BAC7A /* QRCodeViewController.h */,
 				2B39C95E1B272221007BAC7A /* QRCodeViewController.m */,
 			);
@@ -770,6 +765,7 @@
 				2B39C9361B241212007BAC7A /* Info.plist in Resources */,
 				2B31C3E31B11C3FD004C865A /* LaunchScreen.xib in Resources */,
 				2B39C9951B37E5F2007BAC7A /* ResetPwdViewController.xib in Resources */,
+				F2D2338F1B37DE6400F8C65D /* RongCloud.bundle in Resources */,
 				2B31C3E01B11C3FD004C865A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -828,7 +824,6 @@
 				F29F864A1B2410320058FC9F /* UIWebView+AFNetworking.m in Sources */,
 				2B39C9701B2D7AD2007BAC7A /* ChatContainerViewController.m in Sources */,
 				F29F862A1B2410070058FC9F /* AFHTTPSessionManager.m in Sources */,
-				2B39C9671B2D734A007BAC7A /* QRCodeContainerViewController.m in Sources */,
 				F29F86451B2410320058FC9F /* UIAlertView+AFNetworking.m in Sources */,
 				2B39C9941B37E5F2007BAC7A /* ResetPwdViewController.m in Sources */,
 				2B39C9381B241212007BAC7A /* MASConstraint.m in Sources */,
