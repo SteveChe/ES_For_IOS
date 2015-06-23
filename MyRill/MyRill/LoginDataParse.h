@@ -12,7 +12,7 @@
 
 -(void)loginSucceed;
 -(void)loginFailed:(NSString*)errorMessage;
-
+-(void)rongCloudToken:(NSString*)rongCloudToken ;
 @end
 
 @interface LoginDataParse : NSObject
@@ -22,5 +22,7 @@
 -(void) loginWithUserName:(NSString *)userName  password:(NSString *)password;
 
 -(void) setJpushAlias;
+
+-(void) getRongCloudToken;
 
 @end
