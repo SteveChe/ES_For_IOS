@@ -63,8 +63,31 @@
 - (void)initRootWindow
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    LoginViewController *loginViewController = [[LoginViewController alloc] init];
-    ESNavigationController *nav = [[ESNavigationController alloc] initWithRootViewController:loginViewController];
+    UIViewController* rootViewCtrl = nil;
+    NSData *cookiesdata = [[NSUserDefaults standardUserDefaults] objectForKey:@"sessionCookies"];
+    if([cookiesdata length]) {
+        NSArray *cookies = [NSKeyedUnarchiver unarchiveObjectWithData:cookiesdata];
+        NSHTTPCookie *cookie;
+        BOOL bLogined = FALSE;
+        for (cookie in cookies) {
+            if ([cookie.name  isEqual: @"sessionid"] )
+            {
+                if([cookie.value length])
+                    bLogined = TRUE;
+            }
+        }
+        if (bLogined){
+            rootViewCtrl = [[ESMenuViewController alloc] init];
+        }
+        else{
+            rootViewCtrl = [[LoginViewController alloc] init];
+        }
+    }
+    else{
+        rootViewCtrl = [[LoginViewController alloc] init];
+    }
+    ESNavigationController *nav = [[ESNavigationController alloc] initWithRootViewController:rootViewCtrl];
+
     self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];
 

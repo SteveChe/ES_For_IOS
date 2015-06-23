@@ -40,6 +40,9 @@
 		2B39C9841B30561F007BAC7A /* BusinessCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9831B30561F007BAC7A /* BusinessCollectionViewCell.m */; };
 		2B39C98D1B37B2A4007BAC7A /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B39C98C1B37B2A4007BAC7A /* LoginViewController.xib */; };
 		2B39C9901B37B691007BAC7A /* ESNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C98F1B37B691007BAC7A /* ESNavigationController.m */; };
+		2B39C9941B37E5F2007BAC7A /* ResetPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9921B37E5F2007BAC7A /* ResetPwdViewController.m */; };
+		2B39C9951B37E5F2007BAC7A /* ResetPwdViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B39C9931B37E5F2007BAC7A /* ResetPwdViewController.xib */; };
+		2B39C9971B37E634007BAC7A /* SignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B39C9961B37E634007BAC7A /* SignUpViewController.xib */; };
 		F24787721B2D5CE700EC266B /* ChangePasswordDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F24787711B2D5CE700EC266B /* ChangePasswordDataParse.m */; };
 		F24787751B2D775E00EC266B /* SignUpDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F24787741B2D775E00EC266B /* SignUpDataParse.m */; };
 		F250F2EA1B2471CD000AD021 /* AFHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = F250F2E91B2471CD000AD021 /* AFHttpTool.m */; };
@@ -175,6 +178,10 @@
 		2B39C98C1B37B2A4007BAC7A /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		2B39C98E1B37B691007BAC7A /* ESNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESNavigationController.h; sourceTree = "<group>"; };
 		2B39C98F1B37B691007BAC7A /* ESNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESNavigationController.m; sourceTree = "<group>"; };
+		2B39C9911B37E5F2007BAC7A /* ResetPwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResetPwdViewController.h; sourceTree = "<group>"; };
+		2B39C9921B37E5F2007BAC7A /* ResetPwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResetPwdViewController.m; sourceTree = "<group>"; };
+		2B39C9931B37E5F2007BAC7A /* ResetPwdViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResetPwdViewController.xib; sourceTree = "<group>"; };
+		2B39C9961B37E634007BAC7A /* SignUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignUpViewController.xib; sourceTree = "<group>"; };
 		F247876C1B2BC3CE00EC266B /* DataParseDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataParseDefine.h; sourceTree = "<group>"; };
 		F24787701B2D5CE700EC266B /* ChangePasswordDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordDataParse.h; sourceTree = "<group>"; };
 		F24787711B2D5CE700EC266B /* ChangePasswordDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordDataParse.m; sourceTree = "<group>"; };
@@ -469,8 +476,12 @@
 				2B39C9421B24128F007BAC7A /* LoginViewController.h */,
 				2B39C9431B24128F007BAC7A /* LoginViewController.m */,
 				2B39C98C1B37B2A4007BAC7A /* LoginViewController.xib */,
+				2B39C9911B37E5F2007BAC7A /* ResetPwdViewController.h */,
+				2B39C9921B37E5F2007BAC7A /* ResetPwdViewController.m */,
+				2B39C9931B37E5F2007BAC7A /* ResetPwdViewController.xib */,
 				2B39C9531B25CA86007BAC7A /* SignUpViewController.h */,
 				2B39C9541B25CA86007BAC7A /* SignUpViewController.m */,
+				2B39C9961B37E634007BAC7A /* SignUpViewController.xib */,
 				2B39C9651B2D734A007BAC7A /* QRCodeContainerViewController.h */,
 				2B39C9661B2D734A007BAC7A /* QRCodeContainerViewController.m */,
 				2B39C95D1B272221007BAC7A /* QRCodeViewController.h */,
@@ -755,9 +766,10 @@
 			files = (
 				F2D2335E1B31B1F400F8C65D /* PushConfig.plist in Resources */,
 				2B39C98D1B37B2A4007BAC7A /* LoginViewController.xib in Resources */,
+				2B39C9971B37E634007BAC7A /* SignUpViewController.xib in Resources */,
 				2B39C9361B241212007BAC7A /* Info.plist in Resources */,
 				2B31C3E31B11C3FD004C865A /* LaunchScreen.xib in Resources */,
-				F2D2338F1B37DE6400F8C65D /* RongCloud.bundle in Resources */,
+				2B39C9951B37E5F2007BAC7A /* ResetPwdViewController.xib in Resources */,
 				2B31C3E01B11C3FD004C865A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -818,6 +830,7 @@
 				F29F862A1B2410070058FC9F /* AFHTTPSessionManager.m in Sources */,
 				2B39C9671B2D734A007BAC7A /* QRCodeContainerViewController.m in Sources */,
 				F29F86451B2410320058FC9F /* UIAlertView+AFNetworking.m in Sources */,
+				2B39C9941B37E5F2007BAC7A /* ResetPwdViewController.m in Sources */,
 				2B39C9381B241212007BAC7A /* MASConstraint.m in Sources */,
 				2B39C9731B2D7AF0007BAC7A /* ContactsContainerViewController.m in Sources */,
 				F29F862E1B2410070058FC9F /* AFURLRequestSerialization.m in Sources */,
