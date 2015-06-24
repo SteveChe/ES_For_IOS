@@ -34,7 +34,7 @@
 		2B39C9701B2D7AD2007BAC7A /* ChatContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C96F1B2D7AD2007BAC7A /* ChatContainerViewController.m */; };
 		2B39C9731B2D7AF0007BAC7A /* ContactsContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9721B2D7AF0007BAC7A /* ContactsContainerViewController.m */; };
 		2B39C9761B2D7B05007BAC7A /* TaskContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9751B2D7B05007BAC7A /* TaskContainerViewController.m */; };
-		2B39C9791B2D7B14007BAC7A /* UserContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9781B2D7B14007BAC7A /* UserContainerViewController.m */; };
+		2B39C9791B2D7B14007BAC7A /* UserMsgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9781B2D7B14007BAC7A /* UserMsgViewController.m */; };
 		2B39C97C1B2D8003007BAC7A /* ESMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C97B1B2D8003007BAC7A /* ESMenuViewController.m */; };
 		2B39C9841B30561F007BAC7A /* BusinessCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9831B30561F007BAC7A /* BusinessCollectionViewCell.m */; };
 		2B39C98D1B37B2A4007BAC7A /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B39C98C1B37B2A4007BAC7A /* LoginViewController.xib */; };
@@ -42,6 +42,9 @@
 		2B39C9941B37E5F2007BAC7A /* ResetPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9921B37E5F2007BAC7A /* ResetPwdViewController.m */; };
 		2B39C9951B37E5F2007BAC7A /* ResetPwdViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B39C9931B37E5F2007BAC7A /* ResetPwdViewController.xib */; };
 		2B39C9971B37E634007BAC7A /* SignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B39C9961B37E634007BAC7A /* SignUpViewController.xib */; };
+		2B9CBB5B1B39AA43007D7A45 /* UserMsgTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B9CBB5A1B39AA43007D7A45 /* UserMsgTableViewCell.m */; };
+		2B9CBB611B3ADEC4007D7A45 /* UserSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B9CBB5F1B3ADEC4007D7A45 /* UserSettingViewController.m */; };
+		2B9CBB621B3ADEC4007D7A45 /* UserSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B9CBB601B3ADEC4007D7A45 /* UserSettingViewController.xib */; };
 		F24787721B2D5CE700EC266B /* ChangePasswordDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F24787711B2D5CE700EC266B /* ChangePasswordDataParse.m */; };
 		F24787751B2D775E00EC266B /* SignUpDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F24787741B2D775E00EC266B /* SignUpDataParse.m */; };
 		F250F2EA1B2471CD000AD021 /* AFHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = F250F2E91B2471CD000AD021 /* AFHttpTool.m */; };
@@ -166,8 +169,8 @@
 		2B39C9721B2D7AF0007BAC7A /* ContactsContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsContainerViewController.m; sourceTree = "<group>"; };
 		2B39C9741B2D7B05007BAC7A /* TaskContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskContainerViewController.h; sourceTree = "<group>"; };
 		2B39C9751B2D7B05007BAC7A /* TaskContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskContainerViewController.m; sourceTree = "<group>"; };
-		2B39C9771B2D7B14007BAC7A /* UserContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserContainerViewController.h; sourceTree = "<group>"; };
-		2B39C9781B2D7B14007BAC7A /* UserContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserContainerViewController.m; sourceTree = "<group>"; };
+		2B39C9771B2D7B14007BAC7A /* UserMsgViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserMsgViewController.h; sourceTree = "<group>"; };
+		2B39C9781B2D7B14007BAC7A /* UserMsgViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserMsgViewController.m; sourceTree = "<group>"; };
 		2B39C97A1B2D8003007BAC7A /* ESMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESMenuViewController.h; sourceTree = "<group>"; };
 		2B39C97B1B2D8003007BAC7A /* ESMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESMenuViewController.m; sourceTree = "<group>"; };
 		2B39C9821B30561F007BAC7A /* BusinessCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessCollectionViewCell.h; sourceTree = "<group>"; };
@@ -179,6 +182,11 @@
 		2B39C9921B37E5F2007BAC7A /* ResetPwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResetPwdViewController.m; sourceTree = "<group>"; };
 		2B39C9931B37E5F2007BAC7A /* ResetPwdViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResetPwdViewController.xib; sourceTree = "<group>"; };
 		2B39C9961B37E634007BAC7A /* SignUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignUpViewController.xib; sourceTree = "<group>"; };
+		2B9CBB591B39AA43007D7A45 /* UserMsgTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserMsgTableViewCell.h; sourceTree = "<group>"; };
+		2B9CBB5A1B39AA43007D7A45 /* UserMsgTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserMsgTableViewCell.m; sourceTree = "<group>"; };
+		2B9CBB5E1B3ADEC4007D7A45 /* UserSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSettingViewController.h; sourceTree = "<group>"; };
+		2B9CBB5F1B3ADEC4007D7A45 /* UserSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSettingViewController.m; sourceTree = "<group>"; };
+		2B9CBB601B3ADEC4007D7A45 /* UserSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserSettingViewController.xib; sourceTree = "<group>"; };
 		F247876C1B2BC3CE00EC266B /* DataParseDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataParseDefine.h; sourceTree = "<group>"; };
 		F24787701B2D5CE700EC266B /* ChangePasswordDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordDataParse.h; sourceTree = "<group>"; };
 		F24787711B2D5CE700EC266B /* ChangePasswordDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordDataParse.m; sourceTree = "<group>"; };
@@ -431,6 +439,8 @@
 			children = (
 				2B39C9821B30561F007BAC7A /* BusinessCollectionViewCell.h */,
 				2B39C9831B30561F007BAC7A /* BusinessCollectionViewCell.m */,
+				2B9CBB591B39AA43007D7A45 /* UserMsgTableViewCell.h */,
+				2B9CBB5A1B39AA43007D7A45 /* UserMsgTableViewCell.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -557,8 +567,11 @@
 		2B39C9631B27293C007BAC7A /* User */ = {
 			isa = PBXGroup;
 			children = (
-				2B39C9771B2D7B14007BAC7A /* UserContainerViewController.h */,
-				2B39C9781B2D7B14007BAC7A /* UserContainerViewController.m */,
+				2B39C9771B2D7B14007BAC7A /* UserMsgViewController.h */,
+				2B39C9781B2D7B14007BAC7A /* UserMsgViewController.m */,
+				2B9CBB5E1B3ADEC4007D7A45 /* UserSettingViewController.h */,
+				2B9CBB5F1B3ADEC4007D7A45 /* UserSettingViewController.m */,
+				2B9CBB601B3ADEC4007D7A45 /* UserSettingViewController.xib */,
 			);
 			name = User;
 			sourceTree = "<group>";
@@ -767,6 +780,7 @@
 				2B39C9951B37E5F2007BAC7A /* ResetPwdViewController.xib in Resources */,
 				F2D2338F1B37DE6400F8C65D /* RongCloud.bundle in Resources */,
 				2B31C3E01B11C3FD004C865A /* Images.xcassets in Resources */,
+				2B9CBB621B3ADEC4007D7A45 /* UserSettingViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -794,6 +808,7 @@
 				2B39C9551B25CA86007BAC7A /* SignUpViewController.m in Sources */,
 				F29F86291B2410070058FC9F /* AFHTTPRequestOperationManager.m in Sources */,
 				2B39C93A1B241212007BAC7A /* MASLayoutConstraint.m in Sources */,
+				2B9CBB5B1B39AA43007D7A45 /* UserMsgTableViewCell.m in Sources */,
 				F29F86481B2410320058FC9F /* UIProgressView+AFNetworking.m in Sources */,
 				2B39C9901B37B691007BAC7A /* ESNavigationController.m in Sources */,
 				F29F862B1B2410070058FC9F /* AFNetworkReachabilityManager.m in Sources */,
@@ -808,7 +823,8 @@
 				F24787721B2D5CE700EC266B /* ChangePasswordDataParse.m in Sources */,
 				F277ADFB1B2DBE97006E42CB /* CustomShowMessage.m in Sources */,
 				F250F2EA1B2471CD000AD021 /* AFHttpTool.m in Sources */,
-				2B39C9791B2D7B14007BAC7A /* UserContainerViewController.m in Sources */,
+				2B39C9791B2D7B14007BAC7A /* UserMsgViewController.m in Sources */,
+				2B9CBB611B3ADEC4007D7A45 /* UserSettingViewController.m in Sources */,
 				2B39C94C1B24501B007BAC7A /* ColorHandler.m in Sources */,
 				F29F86441B2410320058FC9F /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				2B39C9391B241212007BAC7A /* MASConstraintMaker.m in Sources */,

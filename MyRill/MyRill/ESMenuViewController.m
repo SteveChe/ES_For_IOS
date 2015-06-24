@@ -12,7 +12,7 @@
 #import "ChatContainerViewController.h"
 #import "ContactsContainerViewController.h"
 #import "TaskContainerViewController.h"
-#import "UserContainerViewController.h"
+#import "UserMsgViewController.h"
 #import "ColorHandler.h"
 
 @interface ESMenuViewController () <UITabBarControllerDelegate>
@@ -48,7 +48,7 @@
                                                       image:[UIImage imageNamed:@"icon"]
                                               selectedImage:nil];
     
-    UserContainerViewController *userVC = [[UserContainerViewController alloc] init];
+    UserMsgViewController *userVC = [[UserMsgViewController alloc] init];
     userVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"我"
                                                       image:[UIImage imageNamed:@"icon"]
                                               selectedImage:nil];
