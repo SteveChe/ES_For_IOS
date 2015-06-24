@@ -9,7 +9,8 @@
 #import "ESMenuViewController.h"
 #import "ESNavigationController.h"
 #import "BusinessContainerViewController.h"
-#import "ChatContainerViewController.h"
+//#import "ChatContainerViewController.h"
+#import "ChatListViewController.h"
 #import "ContactsContainerViewController.h"
 #import "TaskContainerViewController.h"
 #import "UserContainerViewController.h"
@@ -33,7 +34,7 @@
                                                      selectedImage:nil];
     businessVC.tabBarItem = tabBarItem;
     
-    ChatContainerViewController *chatVC = [[ChatContainerViewController alloc] init];
+    ChatListViewController *chatVC = [[ChatListViewController alloc] init];
     chatVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"对话"
                                                       image:[UIImage imageNamed:@"icon"]
                                               selectedImage:nil];
@@ -71,5 +72,54 @@
 -(void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
     
 }
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self loginRongCloud];
+}
+-(void)loginRongCloud
+{
+    //登录融云服务器,开始阶段可以先从融云API调试网站获取，之后token需要通过服务器到融云服务器取。
+    NSString *token =[[NSUserDefaults standardUserDefaults] objectForKey:@"RONG_CLOUD_KEY"];
+    if (token == nil || [token isEqual:[NSNull null]] ||
+        [token length]<=0 )
+    {
+        return;
+    }
+    
+    [[RCIM sharedRCIM] connectWithToken:token success:^(NSString *userId)
+     {
+         //设置用户信息提供者,页面展现的用户头像及昵称都会从此代理取
+         [[RCIM sharedRCIM] setUserInfoDataSource:self];
+         NSLog(@"Login successfully with userId: %@.", userId);
+         //         dispatch_async(dispatch_get_main_queue(), ^{
+         //             RCConversationListViewController *chatListViewController = [[RCConversationListViewController alloc]init];
+         //             [self.navigationController pushViewController:chatListViewController animated:YES];
+         //         });
+         
+     }error:^(RCConnectErrorCode status)
+     {
+         NSLog(@"登录失败%d",(int)status);
+     }
+                         tokenIncorrect:^(id response)
+     {
+         
+     }
+     ];
+    
+}
 
+
+#pragma mark RCIMUserInfoDataSource
+/**
+ *  获取用户信息。
+ *
+ *  @param userId     用户 Id。
+ *  @param completion 用户信息
+ */
+- (void)getUserInfoWithUserId:(NSString *)userId
+                   completion:(void (^)(RCUserInfo *userInfo))completion
+{
+    
+}
 @end

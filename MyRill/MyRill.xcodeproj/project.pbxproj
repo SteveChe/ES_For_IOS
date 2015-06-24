@@ -42,6 +42,13 @@
 		2B39C9941B37E5F2007BAC7A /* ResetPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9921B37E5F2007BAC7A /* ResetPwdViewController.m */; };
 		2B39C9951B37E5F2007BAC7A /* ResetPwdViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B39C9931B37E5F2007BAC7A /* ResetPwdViewController.xib */; };
 		2B39C9971B37E634007BAC7A /* SignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B39C9961B37E634007BAC7A /* SignUpViewController.xib */; };
+		F22FE2731B3AD7BE00A1A997 /* ChatListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE2721B3AD7BE00A1A997 /* ChatListViewController.m */; };
+		F22FE2781B3AD87800A1A997 /* KxMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE2771B3AD87800A1A997 /* KxMenu.m */; };
+		F22FE27B1B3AD94200A1A997 /* UIColor+RCColor.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE27A1B3AD94200A1A997 /* UIColor+RCColor.m */; };
+		F22FE27F1B3ADAB000A1A997 /* ESUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE27E1B3ADAB000A1A997 /* ESUserInfo.m */; };
+		F22FE2821B3ADB6000A1A997 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE2811B3ADB6000A1A997 /* ChatViewController.m */; };
+		F22FE2851B3ADC5700A1A997 /* UIImage+RCImage.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE2841B3ADC5700A1A997 /* UIImage+RCImage.m */; };
+		F22FE2881B3AF0CB00A1A997 /* RongCloudKit.strings in Resources */ = {isa = PBXBuildFile; fileRef = F22FE2861B3AF0CB00A1A997 /* RongCloudKit.strings */; };
 		F24787721B2D5CE700EC266B /* ChangePasswordDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F24787711B2D5CE700EC266B /* ChangePasswordDataParse.m */; };
 		F24787751B2D775E00EC266B /* SignUpDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F24787741B2D775E00EC266B /* SignUpDataParse.m */; };
 		F250F2EA1B2471CD000AD021 /* AFHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = F250F2E91B2471CD000AD021 /* AFHttpTool.m */; };
@@ -179,6 +186,19 @@
 		2B39C9921B37E5F2007BAC7A /* ResetPwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResetPwdViewController.m; sourceTree = "<group>"; };
 		2B39C9931B37E5F2007BAC7A /* ResetPwdViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResetPwdViewController.xib; sourceTree = "<group>"; };
 		2B39C9961B37E634007BAC7A /* SignUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignUpViewController.xib; sourceTree = "<group>"; };
+		F22FE2711B3AD7BE00A1A997 /* ChatListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatListViewController.h; sourceTree = "<group>"; };
+		F22FE2721B3AD7BE00A1A997 /* ChatListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatListViewController.m; sourceTree = "<group>"; };
+		F22FE2761B3AD87800A1A997 /* KxMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KxMenu.h; path = Utilities/KxMenu/KxMenu.h; sourceTree = "<group>"; };
+		F22FE2771B3AD87800A1A997 /* KxMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KxMenu.m; path = Utilities/KxMenu/KxMenu.m; sourceTree = "<group>"; };
+		F22FE2791B3AD94200A1A997 /* UIColor+RCColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+RCColor.h"; path = "Utilities/common/UIColor+RCColor.h"; sourceTree = "<group>"; };
+		F22FE27A1B3AD94200A1A997 /* UIColor+RCColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+RCColor.m"; path = "Utilities/common/UIColor+RCColor.m"; sourceTree = "<group>"; };
+		F22FE27D1B3ADAB000A1A997 /* ESUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ESUserInfo.h; path = Model/ESUserInfo.h; sourceTree = "<group>"; };
+		F22FE27E1B3ADAB000A1A997 /* ESUserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ESUserInfo.m; path = Model/ESUserInfo.m; sourceTree = "<group>"; };
+		F22FE2801B3ADB6000A1A997 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
+		F22FE2811B3ADB6000A1A997 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
+		F22FE2831B3ADC5700A1A997 /* UIImage+RCImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+RCImage.h"; path = "Utilities/common/UIImage+RCImage.h"; sourceTree = "<group>"; };
+		F22FE2841B3ADC5700A1A997 /* UIImage+RCImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+RCImage.m"; path = "Utilities/common/UIImage+RCImage.m"; sourceTree = "<group>"; };
+		F22FE2871B3AF0CB00A1A997 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/RongCloudKit.strings; sourceTree = "<group>"; };
 		F247876C1B2BC3CE00EC266B /* DataParseDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataParseDefine.h; sourceTree = "<group>"; };
 		F24787701B2D5CE700EC266B /* ChangePasswordDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordDataParse.h; sourceTree = "<group>"; };
 		F24787711B2D5CE700EC266B /* ChangePasswordDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordDataParse.m; sourceTree = "<group>"; };
@@ -333,6 +353,7 @@
 		2B31C3D11B11C3FD004C865A /* MyRill */ = {
 			isa = PBXGroup;
 			children = (
+				F22FE27C1B3ADA8200A1A997 /* Model */,
 				F2D233571B31AA2600F8C65D /* JPush */,
 				2B39C94D1B247A4E007BAC7A /* DataDrive */,
 				F250F2E71B247156000AD021 /* AFNetWorkInterface */,
@@ -353,6 +374,7 @@
 		2B31C3D21B11C3FD004C865A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F22FE2861B3AF0CB00A1A997 /* RongCloudKit.strings */,
 				2B31C3D31B11C3FD004C865A /* Info.plist */,
 				2B31C3D41B11C3FD004C865A /* main.m */,
 				F2D2335D1B31B1F400F8C65D /* PushConfig.plist */,
@@ -568,8 +590,30 @@
 			children = (
 				2B39C96E1B2D7AD2007BAC7A /* ChatContainerViewController.h */,
 				2B39C96F1B2D7AD2007BAC7A /* ChatContainerViewController.m */,
+				F22FE2711B3AD7BE00A1A997 /* ChatListViewController.h */,
+				F22FE2721B3AD7BE00A1A997 /* ChatListViewController.m */,
+				F22FE2801B3ADB6000A1A997 /* ChatViewController.h */,
+				F22FE2811B3ADB6000A1A997 /* ChatViewController.m */,
 			);
 			name = Conversation;
+			sourceTree = "<group>";
+		};
+		F22FE2751B3AD86C00A1A997 /* KxMenu */ = {
+			isa = PBXGroup;
+			children = (
+				F22FE2761B3AD87800A1A997 /* KxMenu.h */,
+				F22FE2771B3AD87800A1A997 /* KxMenu.m */,
+			);
+			name = KxMenu;
+			sourceTree = "<group>";
+		};
+		F22FE27C1B3ADA8200A1A997 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F22FE27D1B3ADAB000A1A997 /* ESUserInfo.h */,
+				F22FE27E1B3ADAB000A1A997 /* ESUserInfo.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		F250F2E71B247156000AD021 /* AFNetWorkInterface */ = {
@@ -584,6 +628,10 @@
 		F277ADF81B2DBE52006E42CB /* common */ = {
 			isa = PBXGroup;
 			children = (
+				F22FE2791B3AD94200A1A997 /* UIColor+RCColor.h */,
+				F22FE27A1B3AD94200A1A997 /* UIColor+RCColor.m */,
+				F22FE2831B3ADC5700A1A997 /* UIImage+RCImage.h */,
+				F22FE2841B3ADC5700A1A997 /* UIImage+RCImage.m */,
 				F277ADF91B2DBE97006E42CB /* CustomShowMessage.h */,
 				F277ADFA1B2DBE97006E42CB /* CustomShowMessage.m */,
 				F2D233891B36B0DD00F8C65D /* NSString+MD5Addition.h */,
@@ -607,6 +655,7 @@
 		F29F86131B240FC30058FC9F /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				F22FE2751B3AD86C00A1A997 /* KxMenu */,
 				F277ADF81B2DBE52006E42CB /* common */,
 				2B39C91D1B241212007BAC7A /* Masonry */,
 				F29F86141B240FE00058FC9F /* AFNetworking */,
@@ -759,6 +808,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F22FE2881B3AF0CB00A1A997 /* RongCloudKit.strings in Resources */,
 				F2D2335E1B31B1F400F8C65D /* PushConfig.plist in Resources */,
 				2B39C98D1B37B2A4007BAC7A /* LoginViewController.xib in Resources */,
 				2B39C9971B37E634007BAC7A /* SignUpViewController.xib in Resources */,
@@ -788,6 +838,7 @@
 				2B39C9441B24128F007BAC7A /* LoginViewController.m in Sources */,
 				F29F86281B2410070058FC9F /* AFHTTPRequestOperation.m in Sources */,
 				F277AE071B2DC72A006E42CB /* BMBase.m in Sources */,
+				F22FE2851B3ADC5700A1A997 /* UIImage+RCImage.m in Sources */,
 				2B39C9501B248063007BAC7A /* LoginDataParse.m in Sources */,
 				F29F86471B2410320058FC9F /* UIImageView+AFNetworking.m in Sources */,
 				2B39C97C1B2D8003007BAC7A /* ESMenuViewController.m in Sources */,
@@ -795,6 +846,7 @@
 				F29F86291B2410070058FC9F /* AFHTTPRequestOperationManager.m in Sources */,
 				2B39C93A1B241212007BAC7A /* MASLayoutConstraint.m in Sources */,
 				F29F86481B2410320058FC9F /* UIProgressView+AFNetworking.m in Sources */,
+				F22FE2781B3AD87800A1A997 /* KxMenu.m in Sources */,
 				2B39C9901B37B691007BAC7A /* ESNavigationController.m in Sources */,
 				F29F862B1B2410070058FC9F /* AFNetworkReachabilityManager.m in Sources */,
 				F277AE041B2DC34E006E42CB /* UIDevice+screenType.m in Sources */,
@@ -803,10 +855,12 @@
 				2B39C9481B241972007BAC7A /* LoginService.m in Sources */,
 				F29F862F1B2410070058FC9F /* AFURLResponseSerialization.m in Sources */,
 				F29F862D1B2410070058FC9F /* AFURLConnectionOperation.m in Sources */,
+				F22FE2731B3AD7BE00A1A997 /* ChatListViewController.m in Sources */,
 				F29F86461B2410320058FC9F /* UIButton+AFNetworking.m in Sources */,
 				2B39C93B1B241212007BAC7A /* MASViewAttribute.m in Sources */,
 				F24787721B2D5CE700EC266B /* ChangePasswordDataParse.m in Sources */,
 				F277ADFB1B2DBE97006E42CB /* CustomShowMessage.m in Sources */,
+				F22FE2821B3ADB6000A1A997 /* ChatViewController.m in Sources */,
 				F250F2EA1B2471CD000AD021 /* AFHttpTool.m in Sources */,
 				2B39C9791B2D7B14007BAC7A /* UserContainerViewController.m in Sources */,
 				2B39C94C1B24501B007BAC7A /* ColorHandler.m in Sources */,
@@ -818,6 +872,7 @@
 				2B39C93C1B241212007BAC7A /* MASViewConstraint.m in Sources */,
 				2B39C95F1B272221007BAC7A /* QRCodeViewController.m in Sources */,
 				2B39C9371B241212007BAC7A /* MASCompositeConstraint.m in Sources */,
+				F22FE27B1B3AD94200A1A997 /* UIColor+RCColor.m in Sources */,
 				F29F862C1B2410070058FC9F /* AFSecurityPolicy.m in Sources */,
 				F29F86491B2410320058FC9F /* UIRefreshControl+AFNetworking.m in Sources */,
 				F277ADFE1B2DC046006E42CB /* CustomMessageBox.m in Sources */,
@@ -827,6 +882,7 @@
 				F29F86451B2410320058FC9F /* UIAlertView+AFNetworking.m in Sources */,
 				2B39C9941B37E5F2007BAC7A /* ResetPwdViewController.m in Sources */,
 				2B39C9381B241212007BAC7A /* MASConstraint.m in Sources */,
+				F22FE27F1B3ADAB000A1A997 /* ESUserInfo.m in Sources */,
 				2B39C9731B2D7AF0007BAC7A /* ContactsContainerViewController.m in Sources */,
 				F29F862E1B2410070058FC9F /* AFURLRequestSerialization.m in Sources */,
 				F29F86431B2410320058FC9F /* AFNetworkActivityIndicatorManager.m in Sources */,
@@ -866,6 +922,14 @@
 				2B31C3E21B11C3FD004C865A /* Base */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		F22FE2861B3AF0CB00A1A997 /* RongCloudKit.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F22FE2871B3AF0CB00A1A997 /* Base */,
+			);
+			name = RongCloudKit.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

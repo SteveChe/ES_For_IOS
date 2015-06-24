@@ -20,7 +20,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"对话";
-//    [self loginRongCloud];
+    [self loginRongCloud];
     [self setDisplayConversationTypes:@[@(ConversationType_PRIVATE),@(ConversationType_DISCUSSION)]];
     //自定义导航左右按钮
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc]initWithTitle:@"单聊" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonItemPressed:)];
@@ -60,10 +60,10 @@
          //设置用户信息提供者,页面展现的用户头像及昵称都会从此代理取
          [[RCIM sharedRCIM] setUserInfoDataSource:self];
          NSLog(@"Login successfully with userId: %@.", userId);
-         dispatch_async(dispatch_get_main_queue(), ^{
-             RCConversationListViewController *chatListViewController = [[RCConversationListViewController alloc]init];
-             [self.navigationController pushViewController:chatListViewController animated:YES];
-         });
+//         dispatch_async(dispatch_get_main_queue(), ^{
+//             RCConversationListViewController *chatListViewController = [[RCConversationListViewController alloc]init];
+//             [self.navigationController pushViewController:chatListViewController animated:YES];
+//         });
 
      }error:^(RCConnectErrorCode status)
          {
@@ -115,9 +115,9 @@
 {
     RCConversationViewController *conversationVC = [[RCConversationViewController alloc]init];
     conversationVC.conversationType =ConversationType_PRIVATE;
-    conversationVC.targetId = @"2440";
-    conversationVC.userName = @"my";
-    conversationVC.title = @"2440";
+    conversationVC.targetId = @"13";
+    conversationVC.userName = @"myself";
+    conversationVC.title = @"13";
 //    [self.navigationController pushViewController:conversationVC animated:YES];
     
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;

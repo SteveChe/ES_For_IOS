@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <RongIMKit/RongIMKit.h>
 
-@interface ESMenuViewController : UITabBarController
+@interface ESMenuViewController : UITabBarController<RCIMUserInfoDataSource>
 
 @end
