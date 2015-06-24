@@ -52,6 +52,8 @@ methodType url : (NSString *)url
 
 + (void)getProfessionSuccess:(void (^)(id response))success
                      failure:(void (^)(NSError *error))failre;
-
+//get RongCloud Token
++(void)getRongTokenSuccess:(void (^)(id response))success
+                   failure:(void (^)(NSError* err))failure;
 
 @end

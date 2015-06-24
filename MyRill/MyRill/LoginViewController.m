@@ -46,12 +46,27 @@
 -(void)loginSucceed
 {
     [[CustomShowMessage getInstance] showNotificationMessage:@"登录成功"];
+    [_loginDataParse getRongCloudToken];
+    [self performSelector:@selector( changeToESMenuView)
+               withObject:nil
+               afterDelay:1];
     return;
     
 }
--(void)loginFailed
+-(void)changeToESMenuView
 {
-    
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    ESMenuViewController *esVC = [[ESMenuViewController alloc] init];
+    [appDelegate changeWindow:esVC];
+}
+-(void)loginFailed:(NSString*)errorMessage
+{
+    [[CustomShowMessage getInstance] showNotificationMessage:errorMessage];
+}
+
+-(void)rongCloudToken:(NSString*)rongCloudToken
+{
+    [[NSUserDefaults standardUserDefaults] setObject:rongCloudToken forKey:@"RONG_CLOUD_KEY"];
 }
 
 #pragma mark - response events
@@ -61,6 +76,7 @@
 }
 
 - (IBAction)onLoginBtnClicked:(UIButton *)sender {
+    [self hideKeyboard];
     [_loginDataParse loginWithUserName:_userNameTxtField.text password:_passwordTxtField.text];
 
     //[_loginDataParse loginWithUserName:_userNameTxtField.text password:_passwordTxtField.text];

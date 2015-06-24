@@ -163,4 +163,14 @@
                           }];
 }
 
+//get RongCloud Token
++(void)getRongTokenSuccess:(void (^)(id response))success
+                   failure:(void (^)(NSError* err))failure
+{
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet
+                              url:@"/api/accounts/get-rong-token/.json"
+                           params:nil
+                          success:success failure:failure];
+}
+
 @end

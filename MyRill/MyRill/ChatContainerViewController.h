@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <RongIMKit/RongIMKit.h>
 
-@interface ChatContainerViewController : UIViewController
+@interface ChatContainerViewController : RCConversationListViewController<RCIMUserInfoDataSource>
 
 @end

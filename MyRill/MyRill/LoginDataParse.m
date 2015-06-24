@@ -54,12 +54,9 @@
                                       {
                                           [self.delegate loginFailed:errorMessage];
                                       }
-
-
                                   }
                                       break;
                               }
-                              
                           }
                           failure:^(NSError* err) {
                               if (self.delegate!= nil &&[self.delegate respondsToSelector:@selector(loginFailed:)])
@@ -85,6 +82,45 @@
             }
         }
     }
+}
+
+-(void) getRongCloudToken
+{
+    [AFHttpTool getRongTokenSuccess:^(id response)
+     {
+         NSDictionary* reponseDic = (NSDictionary*)response;
+         NSNumber* errorCodeNum = [reponseDic valueForKey:NETWORK_ERROR_CODE];
+         if (errorCodeNum == nil || [errorCodeNum isEqual:[NSNull null]] )
+         {
+             return ;
+         }
+         if ([errorCodeNum integerValue] != 0)
+         {
+             return;
+         }
+         NSDictionary* dataDic = [reponseDic valueForKey:NETWORK_OK_DATA];
+         if (dataDic == nil || [dataDic isEqual:[NSNull null]])
+         {
+             return;
+         }
+         
+         NSString* rongCloudToken = [dataDic valueForKey:RONG_CLOUD_TOKEN];
+         if (rongCloudToken == nil || [rongCloudToken isEqual:[NSNull null]]
+             || [rongCloudToken length] <= 0)
+         {
+             return;
+         }
+         
+         if (self.delegate!= nil && [self.delegate respondsToSelector:@selector(rongCloudToken:)])
+         {
+             [self.delegate rongCloudToken:rongCloudToken];
+         }
+         
+     }
+      failure:^(NSError* err)
+     {
+         
+     }];
 }
 
 
