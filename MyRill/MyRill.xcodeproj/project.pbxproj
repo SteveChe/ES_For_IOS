@@ -45,6 +45,8 @@
 		2B9CBB5B1B39AA43007D7A45 /* UserMsgTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B9CBB5A1B39AA43007D7A45 /* UserMsgTableViewCell.m */; };
 		2B9CBB611B3ADEC4007D7A45 /* UserSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B9CBB5F1B3ADEC4007D7A45 /* UserSettingViewController.m */; };
 		2B9CBB621B3ADEC4007D7A45 /* UserSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B9CBB601B3ADEC4007D7A45 /* UserSettingViewController.xib */; };
+		2B9CBB661B3AEC74007D7A45 /* ChangePwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B9CBB641B3AEC74007D7A45 /* ChangePwdViewController.m */; };
+		2B9CBB671B3AEC74007D7A45 /* ChangePwdViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B9CBB651B3AEC74007D7A45 /* ChangePwdViewController.xib */; };
 		F24787721B2D5CE700EC266B /* ChangePasswordDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F24787711B2D5CE700EC266B /* ChangePasswordDataParse.m */; };
 		F24787751B2D775E00EC266B /* SignUpDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F24787741B2D775E00EC266B /* SignUpDataParse.m */; };
 		F250F2EA1B2471CD000AD021 /* AFHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = F250F2E91B2471CD000AD021 /* AFHttpTool.m */; };
@@ -187,6 +189,9 @@
 		2B9CBB5E1B3ADEC4007D7A45 /* UserSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSettingViewController.h; sourceTree = "<group>"; };
 		2B9CBB5F1B3ADEC4007D7A45 /* UserSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSettingViewController.m; sourceTree = "<group>"; };
 		2B9CBB601B3ADEC4007D7A45 /* UserSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserSettingViewController.xib; sourceTree = "<group>"; };
+		2B9CBB631B3AEC74007D7A45 /* ChangePwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePwdViewController.h; sourceTree = "<group>"; };
+		2B9CBB641B3AEC74007D7A45 /* ChangePwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePwdViewController.m; sourceTree = "<group>"; };
+		2B9CBB651B3AEC74007D7A45 /* ChangePwdViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChangePwdViewController.xib; sourceTree = "<group>"; };
 		F247876C1B2BC3CE00EC266B /* DataParseDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataParseDefine.h; sourceTree = "<group>"; };
 		F24787701B2D5CE700EC266B /* ChangePasswordDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordDataParse.h; sourceTree = "<group>"; };
 		F24787711B2D5CE700EC266B /* ChangePasswordDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordDataParse.m; sourceTree = "<group>"; };
@@ -572,6 +577,9 @@
 				2B9CBB5E1B3ADEC4007D7A45 /* UserSettingViewController.h */,
 				2B9CBB5F1B3ADEC4007D7A45 /* UserSettingViewController.m */,
 				2B9CBB601B3ADEC4007D7A45 /* UserSettingViewController.xib */,
+				2B9CBB631B3AEC74007D7A45 /* ChangePwdViewController.h */,
+				2B9CBB641B3AEC74007D7A45 /* ChangePwdViewController.m */,
+				2B9CBB651B3AEC74007D7A45 /* ChangePwdViewController.xib */,
 			);
 			name = User;
 			sourceTree = "<group>";
@@ -774,6 +782,7 @@
 			files = (
 				F2D2335E1B31B1F400F8C65D /* PushConfig.plist in Resources */,
 				2B39C98D1B37B2A4007BAC7A /* LoginViewController.xib in Resources */,
+				2B9CBB671B3AEC74007D7A45 /* ChangePwdViewController.xib in Resources */,
 				2B39C9971B37E634007BAC7A /* SignUpViewController.xib in Resources */,
 				2B39C9361B241212007BAC7A /* Info.plist in Resources */,
 				2B31C3E31B11C3FD004C865A /* LaunchScreen.xib in Resources */,
@@ -827,6 +836,7 @@
 				2B9CBB611B3ADEC4007D7A45 /* UserSettingViewController.m in Sources */,
 				2B39C94C1B24501B007BAC7A /* ColorHandler.m in Sources */,
 				F29F86441B2410320058FC9F /* UIActivityIndicatorView+AFNetworking.m in Sources */,
+				2B9CBB661B3AEC74007D7A45 /* ChangePwdViewController.m in Sources */,
 				2B39C9391B241212007BAC7A /* MASConstraintMaker.m in Sources */,
 				2B39C9841B30561F007BAC7A /* BusinessCollectionViewCell.m in Sources */,
 				2B39C93F1B241212007BAC7A /* View+MASAdditions.m in Sources */,

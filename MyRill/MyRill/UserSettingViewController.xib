@@ -40,9 +40,9 @@
                                 <constraint firstAttribute="height" constant="1" id="1lv-Et-ujL"/>
                             </constraints>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OIA-re-xKI">
-                            <rect key="frame" x="122" y="51" width="46" height="30"/>
-                            <state key="normal" title="Button">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OIA-re-xKI">
+                            <rect key="frame" x="0.0" y="45" width="602" height="44"/>
+                            <state key="normal">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                         </button>
@@ -51,6 +51,9 @@
                             <state key="normal">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="changePwdBtnOnClicked:" destination="-1" eventType="touchUpInside" id="qzW-N8-ufl"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -59,15 +62,19 @@
                         <constraint firstAttribute="trailing" secondItem="pal-cj-rUa" secondAttribute="trailing" id="OaY-1J-fCw"/>
                         <constraint firstAttribute="bottom" secondItem="jAF-vR-EaS" secondAttribute="bottom" id="QmY-pA-7U6"/>
                         <constraint firstItem="FX4-Kc-Kyi" firstAttribute="top" secondItem="KWp-Gq-UZN" secondAttribute="top" id="R63-jd-EKE"/>
+                        <constraint firstItem="OIA-re-xKI" firstAttribute="leading" secondItem="KWp-Gq-UZN" secondAttribute="leading" id="UjU-96-WiH"/>
                         <constraint firstItem="FX4-Kc-Kyi" firstAttribute="leading" secondItem="3mh-y9-DzC" secondAttribute="trailing" id="W7g-pM-QPF"/>
                         <constraint firstItem="FX4-Kc-Kyi" firstAttribute="leading" secondItem="KWp-Gq-UZN" secondAttribute="leading" id="Zc6-Po-TZt"/>
                         <constraint firstAttribute="trailing" secondItem="FX4-Kc-Kyi" secondAttribute="trailing" id="aOD-a1-q2d"/>
+                        <constraint firstAttribute="trailing" secondItem="OIA-re-xKI" secondAttribute="trailing" id="b4X-9t-mSW"/>
                         <constraint firstItem="3mh-y9-DzC" firstAttribute="top" secondItem="KWp-Gq-UZN" secondAttribute="top" id="buo-Lh-o26"/>
                         <constraint firstItem="jAF-vR-EaS" firstAttribute="leading" secondItem="KWp-Gq-UZN" secondAttribute="leading" constant="20" symbolic="YES" id="hXE-SC-fZd"/>
                         <constraint firstItem="jAF-vR-EaS" firstAttribute="top" secondItem="pal-cj-rUa" secondAttribute="bottom" id="ich-3D-4pQ"/>
                         <constraint firstItem="pal-cj-rUa" firstAttribute="top" secondItem="FX4-Kc-Kyi" secondAttribute="bottom" id="j3k-il-SHF"/>
                         <constraint firstItem="pal-cj-rUa" firstAttribute="leading" secondItem="KWp-Gq-UZN" secondAttribute="leading" id="kqU-9O-pLa"/>
+                        <constraint firstItem="OIA-re-xKI" firstAttribute="top" secondItem="pal-cj-rUa" secondAttribute="bottom" id="oVm-Br-bTL"/>
                         <constraint firstItem="pal-cj-rUa" firstAttribute="top" secondItem="3mh-y9-DzC" secondAttribute="bottom" id="wnV-md-Rlt"/>
+                        <constraint firstAttribute="bottom" secondItem="OIA-re-xKI" secondAttribute="bottom" id="yMh-DM-Pba"/>
                         <constraint firstItem="jAF-vR-EaS" firstAttribute="height" secondItem="3mh-y9-DzC" secondAttribute="height" id="zUG-6c-Cq4"/>
                     </constraints>
                     <variation key="default">

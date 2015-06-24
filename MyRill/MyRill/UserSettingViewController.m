@@ -7,6 +7,7 @@
 //
 
 #import "UserSettingViewController.h"
+#import "ChangePwdViewController.h"
 
 @interface UserSettingViewController ()
 
@@ -17,11 +18,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.title = @"信息修改";
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)changePwdBtnOnClicked:(UIButton *)sender {
+    ChangePwdViewController *changePwdVC = [[ChangePwdViewController alloc] init];
+    [self.navigationController pushViewController:changePwdVC animated:YES];
 }
 
 /*
