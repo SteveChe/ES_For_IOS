@@ -42,6 +42,11 @@
 		2B39C9941B37E5F2007BAC7A /* ResetPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9921B37E5F2007BAC7A /* ResetPwdViewController.m */; };
 		2B39C9951B37E5F2007BAC7A /* ResetPwdViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B39C9931B37E5F2007BAC7A /* ResetPwdViewController.xib */; };
 		2B39C9971B37E634007BAC7A /* SignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B39C9961B37E634007BAC7A /* SignUpViewController.xib */; };
+		2B9CBB5B1B39AA43007D7A45 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		2B9CBB611B3ADEC4007D7A45 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		2B9CBB621B3ADEC4007D7A45 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		2B9CBB661B3AEC74007D7A45 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		2B9CBB671B3AEC74007D7A45 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		F22FE2731B3AD7BE00A1A997 /* ChatListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE2721B3AD7BE00A1A997 /* ChatListViewController.m */; };
 		F22FE2781B3AD87800A1A997 /* KxMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE2771B3AD87800A1A997 /* KxMenu.m */; };
 		F22FE27B1B3AD94200A1A997 /* UIColor+RCColor.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE27A1B3AD94200A1A997 /* UIColor+RCColor.m */; };
@@ -49,6 +54,11 @@
 		F22FE2821B3ADB6000A1A997 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE2811B3ADB6000A1A997 /* ChatViewController.m */; };
 		F22FE2851B3ADC5700A1A997 /* UIImage+RCImage.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE2841B3ADC5700A1A997 /* UIImage+RCImage.m */; };
 		F22FE2881B3AF0CB00A1A997 /* RongCloudKit.strings in Resources */ = {isa = PBXBuildFile; fileRef = F22FE2861B3AF0CB00A1A997 /* RongCloudKit.strings */; };
+		F22FE2911B3B000400A1A997 /* ChangePwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE28A1B3B000400A1A997 /* ChangePwdViewController.m */; };
+		F22FE2921B3B000400A1A997 /* ChangePwdViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F22FE28B1B3B000400A1A997 /* ChangePwdViewController.xib */; };
+		F22FE2931B3B000400A1A997 /* UserMsgTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE28D1B3B000400A1A997 /* UserMsgTableViewCell.m */; };
+		F22FE2941B3B000400A1A997 /* UserSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE28F1B3B000400A1A997 /* UserSettingViewController.m */; };
+		F22FE2951B3B000400A1A997 /* UserSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F22FE2901B3B000400A1A997 /* UserSettingViewController.xib */; };
 		F24787721B2D5CE700EC266B /* ChangePasswordDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F24787711B2D5CE700EC266B /* ChangePasswordDataParse.m */; };
 		F24787751B2D775E00EC266B /* SignUpDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F24787741B2D775E00EC266B /* SignUpDataParse.m */; };
 		F250F2EA1B2471CD000AD021 /* AFHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = F250F2E91B2471CD000AD021 /* AFHttpTool.m */; };
@@ -199,6 +209,14 @@
 		F22FE2831B3ADC5700A1A997 /* UIImage+RCImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+RCImage.h"; path = "Utilities/common/UIImage+RCImage.h"; sourceTree = "<group>"; };
 		F22FE2841B3ADC5700A1A997 /* UIImage+RCImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+RCImage.m"; path = "Utilities/common/UIImage+RCImage.m"; sourceTree = "<group>"; };
 		F22FE2871B3AF0CB00A1A997 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/RongCloudKit.strings; sourceTree = "<group>"; };
+		F22FE2891B3B000400A1A997 /* ChangePwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePwdViewController.h; sourceTree = "<group>"; };
+		F22FE28A1B3B000400A1A997 /* ChangePwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePwdViewController.m; sourceTree = "<group>"; };
+		F22FE28B1B3B000400A1A997 /* ChangePwdViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChangePwdViewController.xib; sourceTree = "<group>"; };
+		F22FE28C1B3B000400A1A997 /* UserMsgTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserMsgTableViewCell.h; sourceTree = "<group>"; };
+		F22FE28D1B3B000400A1A997 /* UserMsgTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserMsgTableViewCell.m; sourceTree = "<group>"; };
+		F22FE28E1B3B000400A1A997 /* UserSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSettingViewController.h; sourceTree = "<group>"; };
+		F22FE28F1B3B000400A1A997 /* UserSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSettingViewController.m; sourceTree = "<group>"; };
+		F22FE2901B3B000400A1A997 /* UserSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserSettingViewController.xib; sourceTree = "<group>"; };
 		F247876C1B2BC3CE00EC266B /* DataParseDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataParseDefine.h; sourceTree = "<group>"; };
 		F24787701B2D5CE700EC266B /* ChangePasswordDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordDataParse.h; sourceTree = "<group>"; };
 		F24787711B2D5CE700EC266B /* ChangePasswordDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordDataParse.m; sourceTree = "<group>"; };
@@ -453,8 +471,6 @@
 			children = (
 				2B39C9821B30561F007BAC7A /* BusinessCollectionViewCell.h */,
 				2B39C9831B30561F007BAC7A /* BusinessCollectionViewCell.m */,
-				2B9CBB591B39AA43007D7A45 /* UserMsgTableViewCell.h */,
-				2B9CBB5A1B39AA43007D7A45 /* UserMsgTableViewCell.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -581,14 +597,16 @@
 		2B39C9631B27293C007BAC7A /* User */ = {
 			isa = PBXGroup;
 			children = (
+				F22FE2891B3B000400A1A997 /* ChangePwdViewController.h */,
+				F22FE28A1B3B000400A1A997 /* ChangePwdViewController.m */,
+				F22FE28B1B3B000400A1A997 /* ChangePwdViewController.xib */,
+				F22FE28C1B3B000400A1A997 /* UserMsgTableViewCell.h */,
+				F22FE28D1B3B000400A1A997 /* UserMsgTableViewCell.m */,
+				F22FE28E1B3B000400A1A997 /* UserSettingViewController.h */,
+				F22FE28F1B3B000400A1A997 /* UserSettingViewController.m */,
+				F22FE2901B3B000400A1A997 /* UserSettingViewController.xib */,
 				2B39C9771B2D7B14007BAC7A /* UserMsgViewController.h */,
 				2B39C9781B2D7B14007BAC7A /* UserMsgViewController.m */,
-				2B9CBB5E1B3ADEC4007D7A45 /* UserSettingViewController.h */,
-				2B9CBB5F1B3ADEC4007D7A45 /* UserSettingViewController.m */,
-				2B9CBB601B3ADEC4007D7A45 /* UserSettingViewController.xib */,
-				2B9CBB631B3AEC74007D7A45 /* ChangePwdViewController.h */,
-				2B9CBB641B3AEC74007D7A45 /* ChangePwdViewController.m */,
-				2B9CBB651B3AEC74007D7A45 /* ChangePwdViewController.xib */,
 			);
 			name = User;
 			sourceTree = "<group>";
@@ -819,14 +837,16 @@
 				F22FE2881B3AF0CB00A1A997 /* RongCloudKit.strings in Resources */,
 				F2D2335E1B31B1F400F8C65D /* PushConfig.plist in Resources */,
 				2B39C98D1B37B2A4007BAC7A /* LoginViewController.xib in Resources */,
-				2B9CBB671B3AEC74007D7A45 /* ChangePwdViewController.xib in Resources */,
+				F22FE2951B3B000400A1A997 /* UserSettingViewController.xib in Resources */,
+				2B9CBB671B3AEC74007D7A45 /* (null) in Resources */,
 				2B39C9971B37E634007BAC7A /* SignUpViewController.xib in Resources */,
 				2B39C9361B241212007BAC7A /* Info.plist in Resources */,
 				2B31C3E31B11C3FD004C865A /* LaunchScreen.xib in Resources */,
 				2B39C9951B37E5F2007BAC7A /* ResetPwdViewController.xib in Resources */,
+				F22FE2921B3B000400A1A997 /* ChangePwdViewController.xib in Resources */,
 				F2D2338F1B37DE6400F8C65D /* RongCloud.bundle in Resources */,
 				2B31C3E01B11C3FD004C865A /* Images.xcassets in Resources */,
-				2B9CBB621B3ADEC4007D7A45 /* UserSettingViewController.xib in Resources */,
+				2B9CBB621B3ADEC4007D7A45 /* (null) in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -849,13 +869,14 @@
 				F29F86281B2410070058FC9F /* AFHTTPRequestOperation.m in Sources */,
 				F277AE071B2DC72A006E42CB /* BMBase.m in Sources */,
 				F22FE2851B3ADC5700A1A997 /* UIImage+RCImage.m in Sources */,
+				F22FE2931B3B000400A1A997 /* UserMsgTableViewCell.m in Sources */,
 				2B39C9501B248063007BAC7A /* LoginDataParse.m in Sources */,
 				F29F86471B2410320058FC9F /* UIImageView+AFNetworking.m in Sources */,
 				2B39C97C1B2D8003007BAC7A /* ESMenuViewController.m in Sources */,
 				2B39C9551B25CA86007BAC7A /* SignUpViewController.m in Sources */,
 				F29F86291B2410070058FC9F /* AFHTTPRequestOperationManager.m in Sources */,
 				2B39C93A1B241212007BAC7A /* MASLayoutConstraint.m in Sources */,
-				2B9CBB5B1B39AA43007D7A45 /* UserMsgTableViewCell.m in Sources */,
+				2B9CBB5B1B39AA43007D7A45 /* (null) in Sources */,
 				F29F86481B2410320058FC9F /* UIProgressView+AFNetworking.m in Sources */,
 				F22FE2781B3AD87800A1A997 /* KxMenu.m in Sources */,
 				2B39C9901B37B691007BAC7A /* ESNavigationController.m in Sources */,
@@ -867,6 +888,7 @@
 				F29F862F1B2410070058FC9F /* AFURLResponseSerialization.m in Sources */,
 				F29F862D1B2410070058FC9F /* AFURLConnectionOperation.m in Sources */,
 				F22FE2731B3AD7BE00A1A997 /* ChatListViewController.m in Sources */,
+				F22FE2941B3B000400A1A997 /* UserSettingViewController.m in Sources */,
 				F29F86461B2410320058FC9F /* UIButton+AFNetworking.m in Sources */,
 				2B39C93B1B241212007BAC7A /* MASViewAttribute.m in Sources */,
 				F24787721B2D5CE700EC266B /* ChangePasswordDataParse.m in Sources */,
@@ -874,12 +896,13 @@
 				F22FE2821B3ADB6000A1A997 /* ChatViewController.m in Sources */,
 				F250F2EA1B2471CD000AD021 /* AFHttpTool.m in Sources */,
 				2B39C9791B2D7B14007BAC7A /* UserMsgViewController.m in Sources */,
-				2B9CBB611B3ADEC4007D7A45 /* UserSettingViewController.m in Sources */,
+				2B9CBB611B3ADEC4007D7A45 /* (null) in Sources */,
 				2B39C94C1B24501B007BAC7A /* ColorHandler.m in Sources */,
 				F29F86441B2410320058FC9F /* UIActivityIndicatorView+AFNetworking.m in Sources */,
-				2B9CBB661B3AEC74007D7A45 /* ChangePwdViewController.m in Sources */,
+				2B9CBB661B3AEC74007D7A45 /* (null) in Sources */,
 				2B39C9391B241212007BAC7A /* MASConstraintMaker.m in Sources */,
 				2B39C9841B30561F007BAC7A /* BusinessCollectionViewCell.m in Sources */,
+				F22FE2911B3B000400A1A997 /* ChangePwdViewController.m in Sources */,
 				2B39C93F1B241212007BAC7A /* View+MASAdditions.m in Sources */,
 				F277AE011B2DC146006E42CB /* DeviceInfo.m in Sources */,
 				2B39C93C1B241212007BAC7A /* MASViewConstraint.m in Sources */,
