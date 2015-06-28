@@ -11,6 +11,8 @@
 #import "UIColor+RCColor.h"
 #import "ESUserInfo.h"
 #import "ChatViewController.h"
+#import "RCDSelectPersonViewController.h"
+#import "RCDSearchFriendViewController.h"
 @interface ChatListViewController ()
 
 @end
@@ -45,14 +47,15 @@
     self.tabBarController.navigationItem.titleView = titleView;
     
     //自定义rightBarButtonItem
-//    UIButton *rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 17, 17)];
+    UIButton *rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 17, 17)];
 //    [rightBtn setImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
-//    [rightBtn addTarget:self action:@selector(showMenu:) forControlEvents:UIControlEventTouchUpInside];
-//    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
-//    [rightBtn setTintColor:[UIColor whiteColor]];
+    [rightBtn setTitle:@"+" forState:UIControlStateNormal];
+    [rightBtn addTarget:self action:@selector(rightBarButtonItemPressed:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
+    [rightBtn setTintColor:[UIColor whiteColor]];
 //    self.tabBarController.navigationItem.rightBarButtonItem = rightButton;
-    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc]initWithTitle:@"+" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonItemPressed:)];
-    [rightButton setTintColor:[UIColor whiteColor]];
+//    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc]initWithTitle:@"+" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonItemPressed:)];
+//    [rightButton setTintColor:[UIColor whiteColor]];
     self.navigationItem.rightBarButtonItem = rightButton;
 
     [self updateBadgeValueForTabBarItem];
@@ -149,15 +152,117 @@
  */
 -(void)rightBarButtonItemPressed:(id)sender
 {
-    ChatViewController *_conversationVC = [[ChatViewController alloc]init];
-    _conversationVC.conversationType = ConversationType_PRIVATE;
-    _conversationVC.targetId = @"13";
-    _conversationVC.userName = @"cxs";
-    _conversationVC.title = @"聊天";
+    NSArray *menuItems =
+    @[
+      
+      [KxMenuItem menuItem:@"发起对话"
+                     image:[UIImage imageNamed:@"chat_icon"]
+                    target:self
+                    action:@selector(pushChat:)],
+      
+      [KxMenuItem menuItem:@"添加联系人"
+                     image:[UIImage imageNamed:@"addfriend_icon"]
+                    target:self
+                    action:@selector(pushAddFriend:)],
+      
+      ];
+//    CGRect targetFrame = self.tabBarController.navigationItem.rightBarButtonItem.customView.frame;
+    CGRect targetFrame = self.navigationItem.rightBarButtonItem.customView.frame;
+    targetFrame.origin.y = targetFrame.origin.y + 15;
+    [KxMenu showMenuInView:self.navigationController.navigationBar.superview
+                  fromRect:targetFrame
+                 menuItems:menuItems];
+    //    [KxMenu showMenuInView:self.tabBarController.navigationController.navigationBar.superview
+//                  fromRect:targetFrame
+//                 menuItems:menuItems];
+
+//    ChatViewController *_conversationVC = [[ChatViewController alloc]init];
+//    _conversationVC.conversationType = ConversationType_PRIVATE;
+//    _conversationVC.targetId = @"13";
+//    _conversationVC.userName = @"cxs";
+//    _conversationVC.title = @"聊天";
 //    _conversationVC.conversation = model;
     
-    [self.navigationController pushViewController:_conversationVC animated:YES];
+//    [self.navigationController pushViewController:_conversationVC animated:YES];
 }
 
+#pragma mark 导航按钮-方法
+
+/**
+ *  发起对话
+ *
+ *  @param sender sender description
+ */
+- (void) pushChat:(id) sender
+{
+    RCDSelectPersonViewController *selectPersonVC = [[RCDSelectPersonViewController alloc] init];
+    
+    //设置点击确定之后回传被选择联系人操作
+    __weak typeof(&*self)  weakSelf = self;
+    selectPersonVC.clickDoneCompletion = ^(RCDSelectPersonViewController *selectPersonViewController,NSArray *selectedUsers){
+        if(selectedUsers.count == 1)
+        {
+            RCUserInfo *user = selectedUsers[0];
+            ChatViewController *chat =[[ChatViewController alloc]init];
+            chat.targetId                      = user.userId;
+            chat.userName                    = user.name;
+            chat.conversationType              = ConversationType_PRIVATE;
+            chat.title                         = user.name;
+            
+            //跳转到会话页面
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UITabBarController *tabbarVC = weakSelf.navigationController.viewControllers[0];
+                [weakSelf.navigationController popToViewController:tabbarVC animated:YES];
+                [tabbarVC.navigationController  pushViewController:chat animated:YES];
+            });
+            
+        }
+        //选择多人则创建讨论组
+        else if(selectedUsers.count > 1)
+        {
+            
+            NSMutableString *discussionTitle = [NSMutableString string];
+            NSMutableArray *userIdList = [NSMutableArray new];
+            for (RCUserInfo *user in selectedUsers) {
+                [discussionTitle appendString:[NSString stringWithFormat:@"%@%@", user.name,@","]];
+                [userIdList addObject:user.userId];
+            }
+            [discussionTitle deleteCharactersInRange:NSMakeRange(discussionTitle.length - 1, 1)];
+            
+            [[RCIMClient sharedRCIMClient] createDiscussion:discussionTitle userIdList:userIdList success:^(RCDiscussion *discussion) {
+                NSLog(@"create discussion ssucceed!");
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    ChatViewController *chat =[[ChatViewController alloc]init];
+                    chat.targetId                      = discussion.discussionId;
+                    chat.userName                    = discussion.discussionName;
+                    chat.conversationType              = ConversationType_DISCUSSION;
+                    chat.title                         = @"讨论组";
+                    
+                    
+                    UITabBarController *tabbarVC = weakSelf.navigationController.viewControllers[0];
+                    [weakSelf.navigationController popToViewController:tabbarVC animated:YES];
+                    [tabbarVC.navigationController  pushViewController:chat animated:YES];
+                });
+            } error:^(RCErrorCode status) {
+                NSLog(@"create discussion Failed > %ld!", (long)status);
+            }];
+            return;
+        }
+    };
+    
+    [self.navigationController showViewController:selectPersonVC sender:self.navigationController];
+}
+
+/**
+ *  添加联系人
+ *
+ *  @param sender sender description
+ */
+- (void) pushAddFriend:(id) sender
+{
+    RCDSearchFriendViewController *searchFirendVC = [[RCDSearchFriendViewController alloc] init];
+    [self.navigationController pushViewController:searchFirendVC  animated:YES];
+    
+}
 
 @end

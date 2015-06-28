@@ -10,5 +10,5 @@
 #import "SignUpDataParse.h"
 
 @interface SignUpViewController : UIViewController<UITextFieldDelegate,SignUpDataDelegate>
-
+- (IBAction) signUpBtnOnClicked:(UIButton *)sender;
 @end
