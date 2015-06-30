@@ -12,6 +12,7 @@
 #define NETWORK_ERROR_CODE @"errorCode"
 #define NETWORK_ERROR_MESSAGE @"errorMessage"
 #define NETWORK_OK_DATA    @"data"
+#define NETWORK_DATA_LIST  @"list"
 
 #define RONG_CLOUD_TOKEN   @"token"
 

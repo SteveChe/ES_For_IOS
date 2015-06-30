@@ -12,7 +12,6 @@
 		2B31C3E01B11C3FD004C865A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B31C3DF1B11C3FD004C865A /* Images.xcassets */; };
 		2B31C3E31B11C3FD004C865A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B31C3E11B11C3FD004C865A /* LaunchScreen.xib */; };
 		2B31C3EF1B11C3FD004C865A /* MyRillTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B31C3EE1B11C3FD004C865A /* MyRillTests.m */; };
-		2B39C9361B241212007BAC7A /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2B39C91E1B241212007BAC7A /* Info.plist */; };
 		2B39C9371B241212007BAC7A /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9201B241212007BAC7A /* MASCompositeConstraint.m */; };
 		2B39C9381B241212007BAC7A /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9231B241212007BAC7A /* MASConstraint.m */; };
 		2B39C9391B241212007BAC7A /* MASConstraintMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9251B241212007BAC7A /* MASConstraintMaker.m */; };
@@ -87,6 +86,7 @@
 		F22FE2F21B4000ED00A1A997 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE2E11B4000ED00A1A997 /* UIImageView+WebCache.m */; };
 		F22FE2F31B4000ED00A1A997 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE2E31B4000ED00A1A997 /* UIView+WebCacheOperation.m */; };
 		F22FE2F61B40037100A1A997 /* pinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = F22FE2F41B40037100A1A997 /* pinyin.c */; };
+		F22FE2F91B4042B700A1A997 /* SearchContactDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE2F81B4042B700A1A997 /* SearchContactDataParse.m */; };
 		F24787721B2D5CE700EC266B /* ChangePasswordDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F24787711B2D5CE700EC266B /* ChangePasswordDataParse.m */; };
 		F24787751B2D775E00EC266B /* SignUpDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F24787741B2D775E00EC266B /* SignUpDataParse.m */; };
 		F250F2EA1B2471CD000AD021 /* AFHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = F250F2E91B2471CD000AD021 /* AFHttpTool.m */; };
@@ -164,7 +164,6 @@
 		2B31C3E81B11C3FD004C865A /* MyRillTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyRillTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B31C3ED1B11C3FD004C865A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2B31C3EE1B11C3FD004C865A /* MyRillTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyRillTests.m; sourceTree = "<group>"; };
-		2B39C91E1B241212007BAC7A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2B39C91F1B241212007BAC7A /* MASCompositeConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASCompositeConstraint.h; sourceTree = "<group>"; };
 		2B39C9201B241212007BAC7A /* MASCompositeConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASCompositeConstraint.m; sourceTree = "<group>"; };
 		2B39C9211B241212007BAC7A /* MASConstraint+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MASConstraint+Private.h"; sourceTree = "<group>"; };
@@ -302,6 +301,8 @@
 		F22FE2E31B4000ED00A1A997 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+WebCacheOperation.m"; path = "Utilities/SDWebImage/UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
 		F22FE2F41B40037100A1A997 /* pinyin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pinyin.c; path = Utilities/common/pinyin.c; sourceTree = "<group>"; };
 		F22FE2F51B40037100A1A997 /* pinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pinyin.h; path = Utilities/common/pinyin.h; sourceTree = "<group>"; };
+		F22FE2F71B4042B700A1A997 /* SearchContactDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchContactDataParse.h; sourceTree = "<group>"; };
+		F22FE2F81B4042B700A1A997 /* SearchContactDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchContactDataParse.m; sourceTree = "<group>"; };
 		F247876C1B2BC3CE00EC266B /* DataParseDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataParseDefine.h; sourceTree = "<group>"; };
 		F24787701B2D5CE700EC266B /* ChangePasswordDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordDataParse.h; sourceTree = "<group>"; };
 		F24787711B2D5CE700EC266B /* ChangePasswordDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordDataParse.m; sourceTree = "<group>"; };
@@ -505,7 +506,6 @@
 		2B39C91D1B241212007BAC7A /* Masonry */ = {
 			isa = PBXGroup;
 			children = (
-				2B39C91E1B241212007BAC7A /* Info.plist */,
 				2B39C91F1B241212007BAC7A /* MASCompositeConstraint.h */,
 				2B39C9201B241212007BAC7A /* MASCompositeConstraint.m */,
 				2B39C9211B241212007BAC7A /* MASConstraint+Private.h */,
@@ -588,6 +588,8 @@
 				F24787711B2D5CE700EC266B /* ChangePasswordDataParse.m */,
 				F24787731B2D775E00EC266B /* SignUpDataParse.h */,
 				F24787741B2D775E00EC266B /* SignUpDataParse.m */,
+				F22FE2F71B4042B700A1A997 /* SearchContactDataParse.h */,
+				F22FE2F81B4042B700A1A997 /* SearchContactDataParse.m */,
 			);
 			name = DataDrive;
 			sourceTree = "<group>";
@@ -1030,7 +1032,6 @@
 				F22FE2951B3B000400A1A997 /* UserSettingViewController.xib in Resources */,
 				2B9CBB671B3AEC74007D7A45 /* (null) in Resources */,
 				2B39C9971B37E634007BAC7A /* SignUpViewController.xib in Resources */,
-				2B39C9361B241212007BAC7A /* Info.plist in Resources */,
 				2B31C3E31B11C3FD004C865A /* LaunchScreen.xib in Resources */,
 				2B39C9951B37E5F2007BAC7A /* ResetPwdViewController.xib in Resources */,
 				F22FE2921B3B000400A1A997 /* ChangePwdViewController.xib in Resources */,
@@ -1148,6 +1149,7 @@
 				F22FE2ED1B4000ED00A1A997 /* UIButton+WebCache.m in Sources */,
 				F22FE2F21B4000ED00A1A997 /* UIImageView+WebCache.m in Sources */,
 				F22FE2AE1B3FFAE600A1A997 /* RCDSelectPersonViewController.m in Sources */,
+				F22FE2F91B4042B700A1A997 /* SearchContactDataParse.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -60,6 +60,10 @@
 
     [self updateBadgeValueForTabBarItem];
     
+    UIView* headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 80)];
+    headerView.backgroundColor = [UIColor redColor];
+    self.conversationListTableView.tableHeaderView = headerView;
+    
 }
 
 - (void)updateBadgeValueForTabBarItem

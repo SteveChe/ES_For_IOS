@@ -15,10 +15,13 @@
 #import "ESUserInfo.h"
 #import "RCDSearchResultTableViewCell.h"
 #import "RCDAddFriendViewController.h"
+#import "CustomShowMessage.h"
 
-@interface RCDSearchFriendViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,UISearchControllerDelegate>
+@interface RCDSearchFriendViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,UISearchControllerDelegate,UISearchDisplayDelegate>
 
 @property (strong, nonatomic) NSMutableArray *searchResult;
+@property (strong, nonatomic) SearchContactDataParse * searchContactDataParse;
+@property (strong, nonatomic) UISearchDisplayController* searchDisplayController1;
 
 @end
 
@@ -30,9 +33,14 @@
 
     self.navigationItem.title = @"查找好友";
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.tabBarController.tabBar.hidden = YES;
+
+//   self.searchDisplayController.searchResultsTableView.delegate = self;
     
     //initial data
     _searchResult=[[NSMutableArray alloc] init];
+    _searchContactDataParse = [[SearchContactDataParse alloc] init];
+    _searchContactDataParse.delegate = self;
     
     // Add searchbar
     UISearchBar* searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.bounds.size.width, 40)];
@@ -41,16 +49,27 @@
     self.tableView.tableHeaderView = searchBar;
     searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
     searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    // 用 searchbar 初始化 SearchDisplayController
+    // 并把 searchDisplayController 和当前 controller 关联起来
+    _searchDisplayController1 = [[UISearchDisplayController alloc] initWithSearchBar:searchBar contentsController:self];
+    
+    // searchResultsDataSource 就是 UITableViewDataSource
+    _searchDisplayController1.searchResultsDataSource = self;
+    // searchResultsDelegate 就是 UITableViewDelegate
+    _searchDisplayController1.searchResultsDelegate = self;
+    _searchDisplayController1.delegate = self;
+
+    
+//    self.searchDisplayController.searchBar.placeholder = @"Search";
+//    self.searchDisplayController.searchBar.delegate = self;
+//    self.searchDisplayController.searchBar.frame = CGRectMake(0.0, 0.0, self.view.bounds.size.width, 40);
+//    self.tableView.tableHeaderView = self.searchDisplayController.searchBar;
+//
+//    self.searchDisplayController.searchResultsDataSource = self;
+//    self.searchDisplayController.searchResultsDelegate = self;
+//    self.searchDisplayController.delegate = self ;
 
 }
-
-
-//+(instancetype) searchFriendViewController
-//{
-//    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    RCDSearchFriendViewController *searchController = [mainStoryboard instantiateViewControllerWithIdentifier:@"RCDSearchFriendViewController"];    
-//    return searchController;
-//}
 
 
 - (void)didReceiveMemoryWarning {
@@ -104,8 +123,7 @@
     userInfo.portraitUri = user.portraitUri;
     
     if(user && tableView == self.searchDisplayController.searchResultsTableView){
-        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        RCDAddFriendViewController *addViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"RCDAddFriendViewController"];
+        RCDAddFriendViewController *addViewController = [[RCDAddFriendViewController alloc] init];
         addViewController.targetUserInfo = userInfo;
         [self.navigationController pushViewController:addViewController animated:YES];
     }
@@ -120,44 +138,32 @@
  *  @param searchBar  searchBar description
  *  @param searchText searchText description
  */
-//-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    [_searchResult removeAllObjects];
+    if ([searchText length]) {
+        [_searchContactDataParse searchContacts:searchText];
+    }
+}
+
+#pragma mark SearchContactDelegate
+-(void)searchContactResult:(NSArray*)contactsResult
+{
+    [_searchResult addObjectsFromArray:contactsResult];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.searchDisplayController1.searchResultsTableView reloadData];
+    });
+}
+
+//- (void)setShowsCancelButton:(BOOL)showsCancelButton animated:(BOOL)animated
 //{
-//    [_searchResult removeAllObjects];
-//    if ([searchText length]) {
-//        [RCDHTTPTOOL searchFriendListByEmail:searchText complete:^(NSMutableArray *result) {
-//            if (result) {
-//                [_searchResult addObjectsFromArray:result];
-//                dispatch_async(dispatch_get_main_queue(), ^{
-//                    [self.searchDisplayController.searchResultsTableView reloadData];
-//                });
-//            }
-//        }];
-//        
-//        [RCDHTTPTOOL searchFriendListByName:searchText complete:^(NSMutableArray *result) {
-//            if (result) {
-//                [_searchResult addObjectsFromArray:result];
-//                dispatch_async(dispatch_get_main_queue(), ^{
-//                    [self.searchDisplayController.searchResultsTableView reloadData];
-//
-//                });
-//            }
-//            
-//        }];
-        
-//    }
+//    
 //}
 
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+-(void)searchContactFailed:(NSString*)errorMessage
 {
-    NSLog(@"searchBarSearchButtonClicked");
+    [[CustomShowMessage getInstance] showNotificationMessage:errorMessage];
 }
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
-{
-    NSLog(@"searchBarCancelButtonClicked");
-}
-
-
-
 
 
 

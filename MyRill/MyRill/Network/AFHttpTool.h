@@ -56,4 +56,8 @@ methodType url : (NSString *)url
 +(void)getRongTokenSuccess:(void (^)(id response))success
                    failure:(void (^)(NSError* err))failure;
 
+//search contacts
++(void)searchContacts:(NSString*) keyWord success:(void (^)(id response))success
+              failure:(void (^)(NSError* err))failure;
+
 @end

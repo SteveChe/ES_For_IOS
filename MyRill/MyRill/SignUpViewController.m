@@ -60,7 +60,7 @@
     [self.navigationController pushViewController:qrcodeVC animated:YES];
 }
 
-- (void)signUpBtnOnClicked:(UIButton *)sender {
+- (IBAction)signUpBtnOnClicked:(UIButton *)sender {
     [_signUpDataParse signUpWithPhoneNum:self.phoneNumTxtField.text
                                 password:self.pwdTxtField.text
                         verificationCode:self.captchasTxtField.text];

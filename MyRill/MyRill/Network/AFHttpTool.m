@@ -173,4 +173,15 @@
                           success:success failure:failure];
 }
 
++(void)searchContacts:(NSString*) keyWord success:(void (^)(id response))success
+              failure:(void (^)(NSError* err))failure
+{
+    NSDictionary *params = @{@"q":keyWord};
+
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet
+                              url:@"api/accounts/users/.json"
+                           params:params
+                          success:success failure:failure];
+}
+
 @end

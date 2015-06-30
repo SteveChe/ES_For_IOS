@@ -12,7 +12,5 @@
 @interface RCDAddFriendViewController : UIViewController
 
 @property (nonatomic,strong) RCUserInfo *targetUserInfo;
-@property (weak, nonatomic) IBOutlet UILabel *lblName;
-@property (weak, nonatomic) IBOutlet UIImageView *ivAva;
 
 @end

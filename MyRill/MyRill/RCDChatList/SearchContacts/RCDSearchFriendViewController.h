@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface RCDSearchFriendViewController : UITableViewController
+#import "SearchContactDataParse.h"
+@interface RCDSearchFriendViewController : UITableViewController <SearchContactDelegate>
 
 /**
  *  factory method
