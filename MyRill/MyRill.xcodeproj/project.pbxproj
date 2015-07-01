@@ -46,6 +46,7 @@
 		2B9CBB621B3ADEC4007D7A45 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		2B9CBB661B3AEC74007D7A45 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		2B9CBB671B3AEC74007D7A45 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		2B9CBB691B42D897007D7A45 /* UserMsgViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B9CBB681B42D897007D7A45 /* UserMsgViewController.xib */; };
 		F22FE2731B3AD7BE00A1A997 /* ChatListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE2721B3AD7BE00A1A997 /* ChatListViewController.m */; };
 		F22FE2781B3AD87800A1A997 /* KxMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE2771B3AD87800A1A997 /* KxMenu.m */; };
 		F22FE27B1B3AD94200A1A997 /* UIColor+RCColor.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE27A1B3AD94200A1A997 /* UIColor+RCColor.m */; };
@@ -223,6 +224,7 @@
 		2B39C9921B37E5F2007BAC7A /* ResetPwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResetPwdViewController.m; sourceTree = "<group>"; };
 		2B39C9931B37E5F2007BAC7A /* ResetPwdViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResetPwdViewController.xib; sourceTree = "<group>"; };
 		2B39C9961B37E634007BAC7A /* SignUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignUpViewController.xib; sourceTree = "<group>"; };
+		2B9CBB681B42D897007D7A45 /* UserMsgViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserMsgViewController.xib; sourceTree = "<group>"; };
 		F22FE2711B3AD7BE00A1A997 /* ChatListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatListViewController.h; sourceTree = "<group>"; };
 		F22FE2721B3AD7BE00A1A997 /* ChatListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatListViewController.m; sourceTree = "<group>"; };
 		F22FE2761B3AD87800A1A997 /* KxMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KxMenu.h; path = Utilities/KxMenu/KxMenu.h; sourceTree = "<group>"; };
@@ -684,16 +686,17 @@
 		2B39C9631B27293C007BAC7A /* User */ = {
 			isa = PBXGroup;
 			children = (
+				2B39C9771B2D7B14007BAC7A /* UserMsgViewController.h */,
+				2B39C9781B2D7B14007BAC7A /* UserMsgViewController.m */,
+				2B9CBB681B42D897007D7A45 /* UserMsgViewController.xib */,
+				F22FE28E1B3B000400A1A997 /* UserSettingViewController.h */,
+				F22FE28F1B3B000400A1A997 /* UserSettingViewController.m */,
+				F22FE2901B3B000400A1A997 /* UserSettingViewController.xib */,
 				F22FE2891B3B000400A1A997 /* ChangePwdViewController.h */,
 				F22FE28A1B3B000400A1A997 /* ChangePwdViewController.m */,
 				F22FE28B1B3B000400A1A997 /* ChangePwdViewController.xib */,
 				F22FE28C1B3B000400A1A997 /* UserMsgTableViewCell.h */,
 				F22FE28D1B3B000400A1A997 /* UserMsgTableViewCell.m */,
-				F22FE28E1B3B000400A1A997 /* UserSettingViewController.h */,
-				F22FE28F1B3B000400A1A997 /* UserSettingViewController.m */,
-				F22FE2901B3B000400A1A997 /* UserSettingViewController.xib */,
-				2B39C9771B2D7B14007BAC7A /* UserMsgViewController.h */,
-				2B39C9781B2D7B14007BAC7A /* UserMsgViewController.m */,
 			);
 			name = User;
 			sourceTree = "<group>";
@@ -1029,6 +1032,7 @@
 				F22FE2881B3AF0CB00A1A997 /* RongCloudKit.strings in Resources */,
 				F2D2335E1B31B1F400F8C65D /* PushConfig.plist in Resources */,
 				2B39C98D1B37B2A4007BAC7A /* LoginViewController.xib in Resources */,
+				2B9CBB691B42D897007D7A45 /* UserMsgViewController.xib in Resources */,
 				F22FE2951B3B000400A1A997 /* UserSettingViewController.xib in Resources */,
 				2B9CBB671B3AEC74007D7A45 /* (null) in Resources */,
 				2B39C9971B37E634007BAC7A /* SignUpViewController.xib in Resources */,
