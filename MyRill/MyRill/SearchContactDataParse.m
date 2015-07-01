@@ -44,10 +44,10 @@
                  for (NSDictionary* temDic in listArray)
                  {
                      ESUserInfo* userInfo = [[ESUserInfo alloc] init];
-                     NSString* userId = [temDic valueForKey:@"id"];
+                     NSNumber* userId = [temDic valueForKey:@"id"];
                      if (userId != nil && ![userId isEqual:[NSNull null]])
                      {
-                         userInfo.userId = userId;
+                         userInfo.userId = [NSString stringWithFormat:@"%d",[userId intValue]];
                      }
 
                      NSString* userName = [temDic valueForKey:@"name"];

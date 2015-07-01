@@ -151,7 +151,7 @@
 }
 
 + (void)getProfessionSuccess:(void (^)(id))success
-                     failure:(void (^)(NSError *))failre {
+                     failure:(void (^)(NSError *))failure {
 
     [AFHttpTool requestWithMethod:RequestMethodTypeGet
                               url:@"api/professions/.json"
@@ -173,6 +173,11 @@
                           success:success failure:failure];
 }
 
+/******** 搜索联系人******
+ 参数：?q=keyWord
+ 请求方式：GET
+ 备注：如果keyWord为空，则返回所有联系人
+ **/
 +(void)searchContacts:(NSString*) keyWord success:(void (^)(id response))success
               failure:(void (^)(NSError* err))failure
 {
@@ -183,5 +188,40 @@
                            params:params
                           success:success failure:failure];
 }
+
+//addContacts
++(void) addContacts:(NSString *)userId success:(void (^)(id response))success
+            failure:(void (^)(NSError* err))failure
+{
+    NSString* strURL = [NSString stringWithFormat:@"/api/accounts/users/%@/add/.json",userId];
+
+
+    [AFHttpTool requestWithMethod:RequestMethodTypePost
+                              url:strURL
+                           params:nil
+                          success:success failure:failure];
+}
+//acceptContacts
++(void) acceptContacts:(NSString *)userId success:(void (^)(id response))success
+               failure:(void (^)(NSError* err))failure
+{
+    NSDictionary *params = @{@"approved":[NSNumber numberWithInt:1]};
+    NSString* strURL = [NSString stringWithFormat:@"/api/accounts/users/%@/accept/.json",userId];
+    [AFHttpTool requestWithMethod:RequestMethodTypePost
+                              url:strURL
+                           params:params
+                          success:success failure:failure];
+}
+
+//获取已经请求添加自己的联系人列表
++(void) getContactRequestSuccess:(void (^)(id response))success
+                         failure:(void (^)(NSError *error))failure
+{
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet
+                              url:@"/api/accounts/contact-requests/.json"
+                           params:nil
+                          success:success failure:failure];
+}
+
 
 @end

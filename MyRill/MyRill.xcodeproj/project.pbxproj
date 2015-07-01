@@ -87,6 +87,7 @@
 		F22FE2F31B4000ED00A1A997 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE2E31B4000ED00A1A997 /* UIView+WebCacheOperation.m */; };
 		F22FE2F61B40037100A1A997 /* pinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = F22FE2F41B40037100A1A997 /* pinyin.c */; };
 		F22FE2F91B4042B700A1A997 /* SearchContactDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE2F81B4042B700A1A997 /* SearchContactDataParse.m */; };
+		F22FE2FF1B42DAF600A1A997 /* AddContactDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE2FE1B42DAF600A1A997 /* AddContactDataParse.m */; };
 		F24787721B2D5CE700EC266B /* ChangePasswordDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F24787711B2D5CE700EC266B /* ChangePasswordDataParse.m */; };
 		F24787751B2D775E00EC266B /* SignUpDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F24787741B2D775E00EC266B /* SignUpDataParse.m */; };
 		F250F2EA1B2471CD000AD021 /* AFHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = F250F2E91B2471CD000AD021 /* AFHttpTool.m */; };
@@ -303,6 +304,8 @@
 		F22FE2F51B40037100A1A997 /* pinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pinyin.h; path = Utilities/common/pinyin.h; sourceTree = "<group>"; };
 		F22FE2F71B4042B700A1A997 /* SearchContactDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchContactDataParse.h; sourceTree = "<group>"; };
 		F22FE2F81B4042B700A1A997 /* SearchContactDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchContactDataParse.m; sourceTree = "<group>"; };
+		F22FE2FD1B42DAF600A1A997 /* AddContactDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddContactDataParse.h; sourceTree = "<group>"; };
+		F22FE2FE1B42DAF600A1A997 /* AddContactDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddContactDataParse.m; sourceTree = "<group>"; };
 		F247876C1B2BC3CE00EC266B /* DataParseDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataParseDefine.h; sourceTree = "<group>"; };
 		F24787701B2D5CE700EC266B /* ChangePasswordDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordDataParse.h; sourceTree = "<group>"; };
 		F24787711B2D5CE700EC266B /* ChangePasswordDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordDataParse.m; sourceTree = "<group>"; };
@@ -590,6 +593,8 @@
 				F24787741B2D775E00EC266B /* SignUpDataParse.m */,
 				F22FE2F71B4042B700A1A997 /* SearchContactDataParse.h */,
 				F22FE2F81B4042B700A1A997 /* SearchContactDataParse.m */,
+				F22FE2FD1B42DAF600A1A997 /* AddContactDataParse.h */,
+				F22FE2FE1B42DAF600A1A997 /* AddContactDataParse.m */,
 			);
 			name = DataDrive;
 			sourceTree = "<group>";
@@ -1145,6 +1150,7 @@
 				2B31C3D81B11C3FD004C865A /* AppDelegate.m in Sources */,
 				F24787751B2D775E00EC266B /* SignUpDataParse.m in Sources */,
 				F277AE0D1B2DD066006E42CB /* UIPageNavigator.m in Sources */,
+				F22FE2FF1B42DAF600A1A997 /* AddContactDataParse.m in Sources */,
 				2B31C3D51B11C3FD004C865A /* main.m in Sources */,
 				F22FE2ED1B4000ED00A1A997 /* UIButton+WebCache.m in Sources */,
 				F22FE2F21B4000ED00A1A997 /* UIImageView+WebCache.m in Sources */,
