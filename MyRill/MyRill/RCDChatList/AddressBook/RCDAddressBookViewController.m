@@ -33,7 +33,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    self.navigationItem.title = @"通讯录";
+    self.navigationItem.title = @"联系人";
     
     self.tableView.tableFooterView = [UIView new];
     
