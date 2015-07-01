@@ -20,7 +20,7 @@
     // Do any additional setup after loading the view.
     
     //bar背景颜色
-    self.navigationBar.barTintColor = [ColorHandler colorFromHexRGB:@"06A7E1"];
+    self.navigationBar.barTintColor = [ColorHandler colorFromHexRGB:@"FF5454"];
     //item颜色
     self.navigationBar.tintColor = [UIColor whiteColor];
     //设定title颜色

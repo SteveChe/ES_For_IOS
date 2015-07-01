@@ -28,7 +28,14 @@
 
 - (IBAction)changePwdBtnOnClicked:(UIButton *)sender {
     ChangePwdViewController *changePwdVC = [[ChangePwdViewController alloc] init];
+    changePwdVC.userMsgChangeType = ESPwdChangeMold;
     [self.navigationController pushViewController:changePwdVC animated:YES];
+}
+
+- (IBAction)changePhoneBtnOnClicked:(UIButton *)sender {
+    ChangePwdViewController *changePhoneNumVC = [[ChangePwdViewController alloc] init];
+    changePhoneNumVC.userMsgChangeType = ESPhoneNumChangeMold;
+    [self.navigationController pushViewController:changePhoneNumVC animated:YES];
 }
 
 /*

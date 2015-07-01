@@ -40,11 +40,14 @@
                                 <constraint firstAttribute="height" constant="1" id="1lv-Et-ujL"/>
                             </constraints>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OIA-re-xKI">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OIA-re-xKI" userLabel="更换手机Btn">
                             <rect key="frame" x="0.0" y="45" width="602" height="44"/>
                             <state key="normal">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="changePhoneBtnOnClicked:" destination="-1" eventType="touchUpInside" id="Prp-U2-fvL"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FX4-Kc-Kyi" userLabel="修改密码Btn">
                             <rect key="frame" x="0.0" y="0.0" width="602" height="44"/>

@@ -7,6 +7,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChangePwdViewController">
             <connections>
+                <outlet property="pwdOrCodeLbl" destination="zNp-nm-xYw" id="Ko4-FG-Iic"/>
+                <outlet property="pwdOrphoneNumLbl" destination="2IG-r3-JKq" id="kGM-Jb-0uF"/>
+                <outlet property="titleLabel" destination="ams-xt-1h8" id="M3y-BT-mR7"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
