@@ -51,13 +51,29 @@ methodType url : (NSString *)url
 +(void) getVerificationCode:(NSString *)phoneNum;
 
 + (void)getProfessionSuccess:(void (^)(id response))success
-                     failure:(void (^)(NSError *error))failre;
+                     failure:(void (^)(NSError *error))failure;
 //get RongCloud Token
 +(void)getRongTokenSuccess:(void (^)(id response))success
                    failure:(void (^)(NSError* err))failure;
 
-//search contacts
+/******** 搜索联系人******
+参数：?q=keyWord
+请求方式：GET
+备注：如果keyWord为空，则返回所有联系人
+**/
 +(void)searchContacts:(NSString*) keyWord success:(void (^)(id response))success
               failure:(void (^)(NSError* err))failure;
+
+//addContacts
++(void) addContacts:(NSString *)userId success:(void (^)(id response))success
+            failure:(void (^)(NSError* err))failure;
+
+//acceptContacts
++(void) acceptContacts:(NSString *)userId success:(void (^)(id response))success
+               failure:(void (^)(NSError* err))failure;
+
+//获取已经请求添加自己的联系人列表
++(void) getContactRequestSuccess:(void (^)(id response))success
+                         failure:(void (^)(NSError *error))failure;
 
 @end

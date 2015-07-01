@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <RongIMLib/RCUserInfo.h>
-
-@interface RCDAddFriendViewController : UIViewController
+#import "AddContactDataParse.h"
+@interface RCDAddFriendViewController : UIViewController<AddContactDelegate>
 
 @property (nonatomic,strong) RCUserInfo *targetUserInfo;
 

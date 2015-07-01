@@ -78,8 +78,6 @@
 - (IBAction)onLoginBtnClicked:(UIButton *)sender {
     [self hideKeyboard];
     [_loginDataParse loginWithUserName:_userNameTxtField.text password:_passwordTxtField.text];
-
-    //[_loginDataParse loginWithUserName:_userNameTxtField.text password:_passwordTxtField.text];
 }
 
 - (IBAction)onSignUpBtnClicked:(UIButton *)sender {
