@@ -89,6 +89,9 @@
 		F22FE2F61B40037100A1A997 /* pinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = F22FE2F41B40037100A1A997 /* pinyin.c */; };
 		F22FE2F91B4042B700A1A997 /* SearchContactDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE2F81B4042B700A1A997 /* SearchContactDataParse.m */; };
 		F22FE2FF1B42DAF600A1A997 /* AddContactDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE2FE1B42DAF600A1A997 /* AddContactDataParse.m */; };
+		F22FE3021B4576D100A1A997 /* GetContactListDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE3011B4576D100A1A997 /* GetContactListDataParse.m */; };
+		F22FE3051B458A4100A1A997 /* GetRequestContactListDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE3041B458A4100A1A997 /* GetRequestContactListDataParse.m */; };
+		F22FE3081B45989200A1A997 /* ESContactList.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE3071B45989200A1A997 /* ESContactList.m */; };
 		F24787721B2D5CE700EC266B /* ChangePasswordDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F24787711B2D5CE700EC266B /* ChangePasswordDataParse.m */; };
 		F24787751B2D775E00EC266B /* SignUpDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F24787741B2D775E00EC266B /* SignUpDataParse.m */; };
 		F250F2EA1B2471CD000AD021 /* AFHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = F250F2E91B2471CD000AD021 /* AFHttpTool.m */; };
@@ -308,6 +311,12 @@
 		F22FE2F81B4042B700A1A997 /* SearchContactDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchContactDataParse.m; sourceTree = "<group>"; };
 		F22FE2FD1B42DAF600A1A997 /* AddContactDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddContactDataParse.h; sourceTree = "<group>"; };
 		F22FE2FE1B42DAF600A1A997 /* AddContactDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddContactDataParse.m; sourceTree = "<group>"; };
+		F22FE3001B4576D100A1A997 /* GetContactListDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetContactListDataParse.h; sourceTree = "<group>"; };
+		F22FE3011B4576D100A1A997 /* GetContactListDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetContactListDataParse.m; sourceTree = "<group>"; };
+		F22FE3031B458A4100A1A997 /* GetRequestContactListDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetRequestContactListDataParse.h; sourceTree = "<group>"; };
+		F22FE3041B458A4100A1A997 /* GetRequestContactListDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetRequestContactListDataParse.m; sourceTree = "<group>"; };
+		F22FE3061B45989200A1A997 /* ESContactList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESContactList.h; sourceTree = "<group>"; };
+		F22FE3071B45989200A1A997 /* ESContactList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESContactList.m; sourceTree = "<group>"; };
 		F247876C1B2BC3CE00EC266B /* DataParseDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataParseDefine.h; sourceTree = "<group>"; };
 		F24787701B2D5CE700EC266B /* ChangePasswordDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordDataParse.h; sourceTree = "<group>"; };
 		F24787711B2D5CE700EC266B /* ChangePasswordDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordDataParse.m; sourceTree = "<group>"; };
@@ -597,6 +606,10 @@
 				F22FE2F81B4042B700A1A997 /* SearchContactDataParse.m */,
 				F22FE2FD1B42DAF600A1A997 /* AddContactDataParse.h */,
 				F22FE2FE1B42DAF600A1A997 /* AddContactDataParse.m */,
+				F22FE3001B4576D100A1A997 /* GetContactListDataParse.h */,
+				F22FE3011B4576D100A1A997 /* GetContactListDataParse.m */,
+				F22FE3031B458A4100A1A997 /* GetRequestContactListDataParse.h */,
+				F22FE3041B458A4100A1A997 /* GetRequestContactListDataParse.m */,
 			);
 			name = DataDrive;
 			sourceTree = "<group>";
@@ -734,6 +747,8 @@
 			children = (
 				F22FE27D1B3ADAB000A1A997 /* ESUserInfo.h */,
 				F22FE27E1B3ADAB000A1A997 /* ESUserInfo.m */,
+				F22FE3061B45989200A1A997 /* ESContactList.h */,
+				F22FE3071B45989200A1A997 /* ESContactList.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1087,6 +1102,7 @@
 				2B39C9901B37B691007BAC7A /* ESNavigationController.m in Sources */,
 				F22FE2B61B3FFAF700A1A997 /* RCDSearchFriendViewController.m in Sources */,
 				F29F862B1B2410070058FC9F /* AFNetworkReachabilityManager.m in Sources */,
+				F22FE3021B4576D100A1A997 /* GetContactListDataParse.m in Sources */,
 				F277AE041B2DC34E006E42CB /* UIDevice+screenType.m in Sources */,
 				F277AE0A1B2DCF39006E42CB /* StretchImageUtil.m in Sources */,
 				2B39C9761B2D7B05007BAC7A /* TaskContainerViewController.m in Sources */,
@@ -1095,6 +1111,7 @@
 				F29F862F1B2410070058FC9F /* AFURLResponseSerialization.m in Sources */,
 				F22FE2E41B4000ED00A1A997 /* MKAnnotationView+WebCache.m in Sources */,
 				F29F862D1B2410070058FC9F /* AFURLConnectionOperation.m in Sources */,
+				F22FE3051B458A4100A1A997 /* GetRequestContactListDataParse.m in Sources */,
 				F22FE2731B3AD7BE00A1A997 /* ChatListViewController.m in Sources */,
 				F22FE2B51B3FFAF700A1A997 /* RCDAddFriendViewController.m in Sources */,
 				F22FE2B71B3FFAF700A1A997 /* RCDSearchResultTableViewCell.m in Sources */,
@@ -1127,6 +1144,7 @@
 				F22FE2C11B3FFCAF00A1A997 /* MBProgressHUD.m in Sources */,
 				2B39C93C1B241212007BAC7A /* MASViewConstraint.m in Sources */,
 				2B39C95F1B272221007BAC7A /* QRCodeViewController.m in Sources */,
+				F22FE3081B45989200A1A997 /* ESContactList.m in Sources */,
 				F22FE2A81B3FFAC200A1A997 /* RCDPersonDetailViewController.m in Sources */,
 				2B39C9371B241212007BAC7A /* MASCompositeConstraint.m in Sources */,
 				F22FE27B1B3AD94200A1A997 /* UIColor+RCColor.m in Sources */,

@@ -223,5 +223,19 @@
                           success:success failure:failure];
 }
 
+/******** 联系人列表******
+ 请求方式：GET
+ 参数：无
+ 备注：该接口返回当前用户所有的联系人信息
+ **/
++(void) getContactListSuccess:(void (^)(id response))success
+                      failure:(void (^)(NSError *error))failure
+{
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet
+                              url:@"/api/accounts/contacts/.json"
+                           params:nil
+                          success:success failure:failure];
+}
+
 
 @end

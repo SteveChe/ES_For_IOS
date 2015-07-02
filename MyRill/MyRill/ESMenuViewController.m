@@ -15,6 +15,7 @@
 #import "TaskContainerViewController.h"
 #import "UserMsgViewController.h"
 #import "ColorHandler.h"
+#import "RCDAddressBookViewController.h"
 
 @interface ESMenuViewController () <UITabBarControllerDelegate>
 
@@ -39,7 +40,9 @@
                                                       image:[UIImage imageNamed:@"icon"]
                                               selectedImage:nil];
 
-    ContactsContainerViewController *contactsVC = [[ContactsContainerViewController alloc] init];
+//    ContactsContainerViewController *contactsVC = [[ContactsContainerViewController alloc] init];
+    RCDAddressBookViewController *contactsVC = [[RCDAddressBookViewController alloc] init];
+
     contactsVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"联系人"
                                                           image:[UIImage imageNamed:@"icon"]
                                                   selectedImage:nil];
