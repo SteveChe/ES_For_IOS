@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 //#import "RCSelectPersonViewController.h"
-
-@interface RCDAddressBookViewController : UITableViewController
+#import "GetContactListDataParse.h"
+@interface RCDAddressBookViewController : UITableViewController<GetContactListDelegate>
 
 
 @property (nonatomic, strong) NSArray *keys;

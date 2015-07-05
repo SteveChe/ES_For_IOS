@@ -37,7 +37,7 @@
 
     //自定义rightBarButtonItem
     UIButton *rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 17, 17)];
-    [rightBtn setTitle:@"send" forState:UIControlStateNormal];
+    [rightBtn setTitle:@"发送" forState:UIControlStateNormal];
     [rightBtn addTarget:self action:@selector(rightBarButtonItemPressed:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
     [rightBtn setTintColor:[UIColor whiteColor]];
@@ -53,7 +53,8 @@
 #pragma mark- AddContactDelegate
 -(void)addContactSucceed
 {
-    [[CustomShowMessage getInstance] showNotificationMessage:@""];
+    [[CustomShowMessage getInstance] showNotificationMessage:@"已经发送"];
+//    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)addContactFailed:(NSString*)errorMessage

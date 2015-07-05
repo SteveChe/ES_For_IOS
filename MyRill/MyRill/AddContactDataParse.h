@@ -14,10 +14,6 @@
 
 -(void)acceptContactSucceed;
 -(void)acceptContactFailed:(NSString*)errorMessage;
-
--(void)getRequestedContactList:(NSArray*)contactList;
--(void)getRequestedContactListFailed:(NSString*)errorMessage;
-
 @end
 
 @interface AddContactDataParse : NSObject
@@ -29,8 +25,5 @@
 
 //acceptContacts
 -(void) acceptContact:(NSString *)userId ;
-
-//获取已经请求添加自己的联系人列表
--(void) getRequestedContacts;
 
 @end
