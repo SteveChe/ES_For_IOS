@@ -41,12 +41,31 @@
 		2B39C9941B37E5F2007BAC7A /* ResetPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9921B37E5F2007BAC7A /* ResetPwdViewController.m */; };
 		2B39C9951B37E5F2007BAC7A /* ResetPwdViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B39C9931B37E5F2007BAC7A /* ResetPwdViewController.xib */; };
 		2B39C9971B37E634007BAC7A /* SignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B39C9961B37E634007BAC7A /* SignUpViewController.xib */; };
+		2B5A590C1B48DFBB000382D7 /* MRBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5A58E81B48DFBB000382D7 /* MRBlurView.m */; };
+		2B5A590D1B48DFBB000382D7 /* UIImage+MRImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5A58EA1B48DFBB000382D7 /* UIImage+MRImageEffects.m */; };
+		2B5A590E1B48DFBB000382D7 /* MRActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5A58ED1B48DFBB000382D7 /* MRActivityIndicatorView.m */; };
+		2B5A590F1B48DFBB000382D7 /* MRCircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5A58EF1B48DFBB000382D7 /* MRCircularProgressView.m */; };
+		2B5A59101B48DFBB000382D7 /* MRIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5A58F11B48DFBB000382D7 /* MRIconView.m */; };
+		2B5A59111B48DFBB000382D7 /* MRNavigationBarProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5A58F31B48DFBB000382D7 /* MRNavigationBarProgressView.m */; };
+		2B5A59121B48DFBB000382D7 /* MRProgressOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5A58F51B48DFBB000382D7 /* MRProgressOverlayView.m */; };
+		2B5A59131B48DFBB000382D7 /* MRProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5A58F71B48DFBB000382D7 /* MRProgressView.m */; };
+		2B5A59141B48DFBB000382D7 /* MRStopButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5A58FA1B48DFBB000382D7 /* MRStopButton.m */; };
+		2B5A59151B48DFBB000382D7 /* MRActivityIndicatorView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5A58FF1B48DFBB000382D7 /* MRActivityIndicatorView+AFNetworking.m */; };
+		2B5A59161B48DFBB000382D7 /* MRProgressOverlayView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5A59011B48DFBB000382D7 /* MRProgressOverlayView+AFNetworking.m */; };
+		2B5A59171B48DFBB000382D7 /* MRProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5A59031B48DFBB000382D7 /* MRProgressView+AFNetworking.m */; };
+		2B5A59181B48DFBB000382D7 /* MRMessageInterceptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5A59061B48DFBB000382D7 /* MRMessageInterceptor.m */; };
+		2B5A59191B48DFBB000382D7 /* MRMethodCopier.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5A59081B48DFBB000382D7 /* MRMethodCopier.m */; };
+		2B5A591A1B48DFBB000382D7 /* MRWeakProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5A590B1B48DFBB000382D7 /* MRWeakProxy.m */; };
+		2B5A591E1B48F921000382D7 /* ChangPhoneNumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5A591C1B48F921000382D7 /* ChangPhoneNumViewController.m */; };
+		2B5A591F1B48F921000382D7 /* ChangPhoneNumViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B5A591D1B48F921000382D7 /* ChangPhoneNumViewController.xib */; };
+		2B5A59221B494C2B000382D7 /* ChangePhoneNumDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5A59211B494C2B000382D7 /* ChangePhoneNumDataParse.m */; };
 		2B9CBB5B1B39AA43007D7A45 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		2B9CBB611B3ADEC4007D7A45 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		2B9CBB621B3ADEC4007D7A45 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		2B9CBB661B3AEC74007D7A45 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		2B9CBB671B3AEC74007D7A45 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		2B9CBB691B42D897007D7A45 /* UserMsgViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B9CBB681B42D897007D7A45 /* UserMsgViewController.xib */; };
+		2B9CBB6C1B4571D0007D7A45 /* SignOutDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B9CBB6B1B4571D0007D7A45 /* SignOutDataParse.m */; };
 		F22FE2731B3AD7BE00A1A997 /* ChatListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE2721B3AD7BE00A1A997 /* ChatListViewController.m */; };
 		F22FE2781B3AD87800A1A997 /* KxMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE2771B3AD87800A1A997 /* KxMenu.m */; };
 		F22FE27B1B3AD94200A1A997 /* UIColor+RCColor.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE27A1B3AD94200A1A997 /* UIColor+RCColor.m */; };
@@ -56,7 +75,6 @@
 		F22FE2881B3AF0CB00A1A997 /* RongCloudKit.strings in Resources */ = {isa = PBXBuildFile; fileRef = F22FE2861B3AF0CB00A1A997 /* RongCloudKit.strings */; };
 		F22FE2911B3B000400A1A997 /* ChangePwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE28A1B3B000400A1A997 /* ChangePwdViewController.m */; };
 		F22FE2921B3B000400A1A997 /* ChangePwdViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F22FE28B1B3B000400A1A997 /* ChangePwdViewController.xib */; };
-		F22FE2931B3B000400A1A997 /* UserMsgTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE28D1B3B000400A1A997 /* UserMsgTableViewCell.m */; };
 		F22FE2941B3B000400A1A997 /* UserSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE28F1B3B000400A1A997 /* UserSettingViewController.m */; };
 		F22FE2951B3B000400A1A997 /* UserSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F22FE2901B3B000400A1A997 /* UserSettingViewController.xib */; };
 		F22FE2A61B3FFAC200A1A997 /* RCDAddressBookTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE2A11B3FFAC200A1A997 /* RCDAddressBookTableViewCell.m */; };
@@ -89,7 +107,7 @@
 		F22FE2F61B40037100A1A997 /* pinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = F22FE2F41B40037100A1A997 /* pinyin.c */; };
 		F22FE2F91B4042B700A1A997 /* SearchContactDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE2F81B4042B700A1A997 /* SearchContactDataParse.m */; };
 		F22FE2FF1B42DAF600A1A997 /* AddContactDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE2FE1B42DAF600A1A997 /* AddContactDataParse.m */; };
-		F24787721B2D5CE700EC266B /* ChangePasswordDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F24787711B2D5CE700EC266B /* ChangePasswordDataParse.m */; };
+		F24787721B2D5CE700EC266B /* ChangePwdDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F24787711B2D5CE700EC266B /* ChangePwdDataParse.m */; };
 		F24787751B2D775E00EC266B /* SignUpDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F24787741B2D775E00EC266B /* SignUpDataParse.m */; };
 		F250F2EA1B2471CD000AD021 /* AFHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = F250F2E91B2471CD000AD021 /* AFHttpTool.m */; };
 		F277ADFB1B2DBE97006E42CB /* CustomShowMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = F277ADFA1B2DBE97006E42CB /* CustomShowMessage.m */; };
@@ -225,7 +243,47 @@
 		2B39C9921B37E5F2007BAC7A /* ResetPwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResetPwdViewController.m; sourceTree = "<group>"; };
 		2B39C9931B37E5F2007BAC7A /* ResetPwdViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResetPwdViewController.xib; sourceTree = "<group>"; };
 		2B39C9961B37E634007BAC7A /* SignUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignUpViewController.xib; sourceTree = "<group>"; };
+		2B5A58E71B48DFBB000382D7 /* MRBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRBlurView.h; sourceTree = "<group>"; };
+		2B5A58E81B48DFBB000382D7 /* MRBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRBlurView.m; sourceTree = "<group>"; };
+		2B5A58E91B48DFBB000382D7 /* UIImage+MRImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+MRImageEffects.h"; sourceTree = "<group>"; };
+		2B5A58EA1B48DFBB000382D7 /* UIImage+MRImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MRImageEffects.m"; sourceTree = "<group>"; };
+		2B5A58EC1B48DFBB000382D7 /* MRActivityIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRActivityIndicatorView.h; sourceTree = "<group>"; };
+		2B5A58ED1B48DFBB000382D7 /* MRActivityIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRActivityIndicatorView.m; sourceTree = "<group>"; };
+		2B5A58EE1B48DFBB000382D7 /* MRCircularProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRCircularProgressView.h; sourceTree = "<group>"; };
+		2B5A58EF1B48DFBB000382D7 /* MRCircularProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRCircularProgressView.m; sourceTree = "<group>"; };
+		2B5A58F01B48DFBB000382D7 /* MRIconView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRIconView.h; sourceTree = "<group>"; };
+		2B5A58F11B48DFBB000382D7 /* MRIconView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRIconView.m; sourceTree = "<group>"; };
+		2B5A58F21B48DFBB000382D7 /* MRNavigationBarProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRNavigationBarProgressView.h; sourceTree = "<group>"; };
+		2B5A58F31B48DFBB000382D7 /* MRNavigationBarProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRNavigationBarProgressView.m; sourceTree = "<group>"; };
+		2B5A58F41B48DFBB000382D7 /* MRProgressOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRProgressOverlayView.h; sourceTree = "<group>"; };
+		2B5A58F51B48DFBB000382D7 /* MRProgressOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRProgressOverlayView.m; sourceTree = "<group>"; };
+		2B5A58F61B48DFBB000382D7 /* MRProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRProgressView.h; sourceTree = "<group>"; };
+		2B5A58F71B48DFBB000382D7 /* MRProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRProgressView.m; sourceTree = "<group>"; };
+		2B5A58F81B48DFBB000382D7 /* MRStopableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRStopableView.h; sourceTree = "<group>"; };
+		2B5A58F91B48DFBB000382D7 /* MRStopButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRStopButton.h; sourceTree = "<group>"; };
+		2B5A58FA1B48DFBB000382D7 /* MRStopButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRStopButton.m; sourceTree = "<group>"; };
+		2B5A58FB1B48DFBB000382D7 /* MRProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRProgress.h; sourceTree = "<group>"; };
+		2B5A58FE1B48DFBB000382D7 /* MRActivityIndicatorView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MRActivityIndicatorView+AFNetworking.h"; sourceTree = "<group>"; };
+		2B5A58FF1B48DFBB000382D7 /* MRActivityIndicatorView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MRActivityIndicatorView+AFNetworking.m"; sourceTree = "<group>"; };
+		2B5A59001B48DFBB000382D7 /* MRProgressOverlayView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MRProgressOverlayView+AFNetworking.h"; sourceTree = "<group>"; };
+		2B5A59011B48DFBB000382D7 /* MRProgressOverlayView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MRProgressOverlayView+AFNetworking.m"; sourceTree = "<group>"; };
+		2B5A59021B48DFBB000382D7 /* MRProgressView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MRProgressView+AFNetworking.h"; sourceTree = "<group>"; };
+		2B5A59031B48DFBB000382D7 /* MRProgressView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MRProgressView+AFNetworking.m"; sourceTree = "<group>"; };
+		2B5A59051B48DFBB000382D7 /* MRMessageInterceptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRMessageInterceptor.h; sourceTree = "<group>"; };
+		2B5A59061B48DFBB000382D7 /* MRMessageInterceptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRMessageInterceptor.m; sourceTree = "<group>"; };
+		2B5A59071B48DFBB000382D7 /* MRMethodCopier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRMethodCopier.h; sourceTree = "<group>"; };
+		2B5A59081B48DFBB000382D7 /* MRMethodCopier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRMethodCopier.m; sourceTree = "<group>"; };
+		2B5A59091B48DFBB000382D7 /* MRProgressHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRProgressHelper.h; sourceTree = "<group>"; };
+		2B5A590A1B48DFBB000382D7 /* MRWeakProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRWeakProxy.h; sourceTree = "<group>"; };
+		2B5A590B1B48DFBB000382D7 /* MRWeakProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRWeakProxy.m; sourceTree = "<group>"; };
+		2B5A591B1B48F921000382D7 /* ChangPhoneNumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangPhoneNumViewController.h; sourceTree = "<group>"; };
+		2B5A591C1B48F921000382D7 /* ChangPhoneNumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangPhoneNumViewController.m; sourceTree = "<group>"; };
+		2B5A591D1B48F921000382D7 /* ChangPhoneNumViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChangPhoneNumViewController.xib; sourceTree = "<group>"; };
+		2B5A59201B494C2B000382D7 /* ChangePhoneNumDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePhoneNumDataParse.h; sourceTree = "<group>"; };
+		2B5A59211B494C2B000382D7 /* ChangePhoneNumDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePhoneNumDataParse.m; sourceTree = "<group>"; };
 		2B9CBB681B42D897007D7A45 /* UserMsgViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserMsgViewController.xib; sourceTree = "<group>"; };
+		2B9CBB6A1B4571D0007D7A45 /* SignOutDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignOutDataParse.h; sourceTree = "<group>"; };
+		2B9CBB6B1B4571D0007D7A45 /* SignOutDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignOutDataParse.m; sourceTree = "<group>"; };
 		F22FE2711B3AD7BE00A1A997 /* ChatListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatListViewController.h; sourceTree = "<group>"; };
 		F22FE2721B3AD7BE00A1A997 /* ChatListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatListViewController.m; sourceTree = "<group>"; };
 		F22FE2761B3AD87800A1A997 /* KxMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KxMenu.h; path = Utilities/KxMenu/KxMenu.h; sourceTree = "<group>"; };
@@ -242,8 +300,6 @@
 		F22FE2891B3B000400A1A997 /* ChangePwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePwdViewController.h; sourceTree = "<group>"; };
 		F22FE28A1B3B000400A1A997 /* ChangePwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePwdViewController.m; sourceTree = "<group>"; };
 		F22FE28B1B3B000400A1A997 /* ChangePwdViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChangePwdViewController.xib; sourceTree = "<group>"; };
-		F22FE28C1B3B000400A1A997 /* UserMsgTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserMsgTableViewCell.h; sourceTree = "<group>"; };
-		F22FE28D1B3B000400A1A997 /* UserMsgTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserMsgTableViewCell.m; sourceTree = "<group>"; };
 		F22FE28E1B3B000400A1A997 /* UserSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSettingViewController.h; sourceTree = "<group>"; };
 		F22FE28F1B3B000400A1A997 /* UserSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSettingViewController.m; sourceTree = "<group>"; };
 		F22FE2901B3B000400A1A997 /* UserSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserSettingViewController.xib; sourceTree = "<group>"; };
@@ -309,8 +365,8 @@
 		F22FE2FD1B42DAF600A1A997 /* AddContactDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddContactDataParse.h; sourceTree = "<group>"; };
 		F22FE2FE1B42DAF600A1A997 /* AddContactDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddContactDataParse.m; sourceTree = "<group>"; };
 		F247876C1B2BC3CE00EC266B /* DataParseDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataParseDefine.h; sourceTree = "<group>"; };
-		F24787701B2D5CE700EC266B /* ChangePasswordDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordDataParse.h; sourceTree = "<group>"; };
-		F24787711B2D5CE700EC266B /* ChangePasswordDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordDataParse.m; sourceTree = "<group>"; };
+		F24787701B2D5CE700EC266B /* ChangePwdDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePwdDataParse.h; sourceTree = "<group>"; };
+		F24787711B2D5CE700EC266B /* ChangePwdDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePwdDataParse.m; sourceTree = "<group>"; };
 		F24787731B2D775E00EC266B /* SignUpDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpDataParse.h; sourceTree = "<group>"; };
 		F24787741B2D775E00EC266B /* SignUpDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpDataParse.m; sourceTree = "<group>"; };
 		F250F2E81B2471CD000AD021 /* AFHttpTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHttpTool.h; path = Network/AFHttpTool.h; sourceTree = "<group>"; };
@@ -586,13 +642,17 @@
 		2B39C94D1B247A4E007BAC7A /* DataDrive */ = {
 			isa = PBXGroup;
 			children = (
+				F247876C1B2BC3CE00EC266B /* DataParseDefine.h */,
 				2B39C94E1B248063007BAC7A /* LoginDataParse.h */,
 				2B39C94F1B248063007BAC7A /* LoginDataParse.m */,
-				F247876C1B2BC3CE00EC266B /* DataParseDefine.h */,
-				F24787701B2D5CE700EC266B /* ChangePasswordDataParse.h */,
-				F24787711B2D5CE700EC266B /* ChangePasswordDataParse.m */,
+				F24787701B2D5CE700EC266B /* ChangePwdDataParse.h */,
+				F24787711B2D5CE700EC266B /* ChangePwdDataParse.m */,
+				2B5A59201B494C2B000382D7 /* ChangePhoneNumDataParse.h */,
+				2B5A59211B494C2B000382D7 /* ChangePhoneNumDataParse.m */,
 				F24787731B2D775E00EC266B /* SignUpDataParse.h */,
 				F24787741B2D775E00EC266B /* SignUpDataParse.m */,
+				2B9CBB6A1B4571D0007D7A45 /* SignOutDataParse.h */,
+				2B9CBB6B1B4571D0007D7A45 /* SignOutDataParse.m */,
 				F22FE2F71B4042B700A1A997 /* SearchContactDataParse.h */,
 				F22FE2F81B4042B700A1A997 /* SearchContactDataParse.m */,
 				F22FE2FD1B42DAF600A1A997 /* AddContactDataParse.h */,
@@ -700,8 +760,9 @@
 				F22FE2891B3B000400A1A997 /* ChangePwdViewController.h */,
 				F22FE28A1B3B000400A1A997 /* ChangePwdViewController.m */,
 				F22FE28B1B3B000400A1A997 /* ChangePwdViewController.xib */,
-				F22FE28C1B3B000400A1A997 /* UserMsgTableViewCell.h */,
-				F22FE28D1B3B000400A1A997 /* UserMsgTableViewCell.m */,
+				2B5A591B1B48F921000382D7 /* ChangPhoneNumViewController.h */,
+				2B5A591C1B48F921000382D7 /* ChangPhoneNumViewController.m */,
+				2B5A591D1B48F921000382D7 /* ChangPhoneNumViewController.xib */,
 			);
 			name = User;
 			sourceTree = "<group>";
@@ -718,6 +779,86 @@
 				F22FE29D1B3FF98500A1A997 /* RCDChatList */,
 			);
 			name = Conversation;
+			sourceTree = "<group>";
+		};
+		2B5A58DA1B48DF4B000382D7 /* MRProgress */ = {
+			isa = PBXGroup;
+			children = (
+				2B5A58E61B48DFBB000382D7 /* Blur */,
+				2B5A58EB1B48DFBB000382D7 /* Components */,
+				2B5A58FB1B48DFBB000382D7 /* MRProgress.h */,
+				2B5A58FC1B48DFBB000382D7 /* Support */,
+				2B5A59041B48DFBB000382D7 /* Utils */,
+			);
+			name = MRProgress;
+			sourceTree = "<group>";
+		};
+		2B5A58E61B48DFBB000382D7 /* Blur */ = {
+			isa = PBXGroup;
+			children = (
+				2B5A58E71B48DFBB000382D7 /* MRBlurView.h */,
+				2B5A58E81B48DFBB000382D7 /* MRBlurView.m */,
+				2B5A58E91B48DFBB000382D7 /* UIImage+MRImageEffects.h */,
+				2B5A58EA1B48DFBB000382D7 /* UIImage+MRImageEffects.m */,
+			);
+			path = Blur;
+			sourceTree = "<group>";
+		};
+		2B5A58EB1B48DFBB000382D7 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				2B5A58EC1B48DFBB000382D7 /* MRActivityIndicatorView.h */,
+				2B5A58ED1B48DFBB000382D7 /* MRActivityIndicatorView.m */,
+				2B5A58EE1B48DFBB000382D7 /* MRCircularProgressView.h */,
+				2B5A58EF1B48DFBB000382D7 /* MRCircularProgressView.m */,
+				2B5A58F01B48DFBB000382D7 /* MRIconView.h */,
+				2B5A58F11B48DFBB000382D7 /* MRIconView.m */,
+				2B5A58F21B48DFBB000382D7 /* MRNavigationBarProgressView.h */,
+				2B5A58F31B48DFBB000382D7 /* MRNavigationBarProgressView.m */,
+				2B5A58F41B48DFBB000382D7 /* MRProgressOverlayView.h */,
+				2B5A58F51B48DFBB000382D7 /* MRProgressOverlayView.m */,
+				2B5A58F61B48DFBB000382D7 /* MRProgressView.h */,
+				2B5A58F71B48DFBB000382D7 /* MRProgressView.m */,
+				2B5A58F81B48DFBB000382D7 /* MRStopableView.h */,
+				2B5A58F91B48DFBB000382D7 /* MRStopButton.h */,
+				2B5A58FA1B48DFBB000382D7 /* MRStopButton.m */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		2B5A58FC1B48DFBB000382D7 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				2B5A58FD1B48DFBB000382D7 /* AFNetworking */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		2B5A58FD1B48DFBB000382D7 /* AFNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				2B5A58FE1B48DFBB000382D7 /* MRActivityIndicatorView+AFNetworking.h */,
+				2B5A58FF1B48DFBB000382D7 /* MRActivityIndicatorView+AFNetworking.m */,
+				2B5A59001B48DFBB000382D7 /* MRProgressOverlayView+AFNetworking.h */,
+				2B5A59011B48DFBB000382D7 /* MRProgressOverlayView+AFNetworking.m */,
+				2B5A59021B48DFBB000382D7 /* MRProgressView+AFNetworking.h */,
+				2B5A59031B48DFBB000382D7 /* MRProgressView+AFNetworking.m */,
+			);
+			path = AFNetworking;
+			sourceTree = "<group>";
+		};
+		2B5A59041B48DFBB000382D7 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				2B5A59051B48DFBB000382D7 /* MRMessageInterceptor.h */,
+				2B5A59061B48DFBB000382D7 /* MRMessageInterceptor.m */,
+				2B5A59071B48DFBB000382D7 /* MRMethodCopier.h */,
+				2B5A59081B48DFBB000382D7 /* MRMethodCopier.m */,
+				2B5A59091B48DFBB000382D7 /* MRProgressHelper.h */,
+				2B5A590A1B48DFBB000382D7 /* MRWeakProxy.h */,
+				2B5A590B1B48DFBB000382D7 /* MRWeakProxy.m */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		F22FE2751B3AD86C00A1A997 /* KxMenu */ = {
@@ -879,6 +1020,7 @@
 		F29F86131B240FC30058FC9F /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				2B5A58DA1B48DF4B000382D7 /* MRProgress */,
 				F22FE2C21B4000D400A1A997 /* SDWebImage */,
 				F22FE2BE1B3FFCA200A1A997 /* MBProgressHUD */,
 				F22FE2751B3AD86C00A1A997 /* KxMenu */,
@@ -1040,6 +1182,7 @@
 				2B9CBB691B42D897007D7A45 /* UserMsgViewController.xib in Resources */,
 				F22FE2951B3B000400A1A997 /* UserSettingViewController.xib in Resources */,
 				2B9CBB671B3AEC74007D7A45 /* (null) in Resources */,
+				2B5A591F1B48F921000382D7 /* ChangPhoneNumViewController.xib in Resources */,
 				2B39C9971B37E634007BAC7A /* SignUpViewController.xib in Resources */,
 				2B31C3E31B11C3FD004C865A /* LaunchScreen.xib in Resources */,
 				2B39C9951B37E5F2007BAC7A /* ResetPwdViewController.xib in Resources */,
@@ -1066,26 +1209,32 @@
 			files = (
 				F22FE2E81B4000ED00A1A997 /* SDWebImageDecoder.m in Sources */,
 				2B39C96D1B2D79DB007BAC7A /* BusinessContainerViewController.m in Sources */,
+				2B5A590D1B48DFBB000382D7 /* UIImage+MRImageEffects.m in Sources */,
 				2B39C9441B24128F007BAC7A /* LoginViewController.m in Sources */,
 				F29F86281B2410070058FC9F /* AFHTTPRequestOperation.m in Sources */,
 				F277AE071B2DC72A006E42CB /* BMBase.m in Sources */,
 				F22FE2E71B4000ED00A1A997 /* SDWebImageCompat.m in Sources */,
+				2B9CBB6C1B4571D0007D7A45 /* SignOutDataParse.m in Sources */,
 				F22FE2851B3ADC5700A1A997 /* UIImage+RCImage.m in Sources */,
-				F22FE2931B3B000400A1A997 /* UserMsgTableViewCell.m in Sources */,
+				2B5A59101B48DFBB000382D7 /* MRIconView.m in Sources */,
 				2B39C9501B248063007BAC7A /* LoginDataParse.m in Sources */,
 				F29F86471B2410320058FC9F /* UIImageView+AFNetworking.m in Sources */,
 				2B39C97C1B2D8003007BAC7A /* ESMenuViewController.m in Sources */,
 				2B39C9551B25CA86007BAC7A /* SignUpViewController.m in Sources */,
 				F22FE2F11B4000ED00A1A997 /* UIImageView+HighlightedWebCache.m in Sources */,
 				F29F86291B2410070058FC9F /* AFHTTPRequestOperationManager.m in Sources */,
+				2B5A59131B48DFBB000382D7 /* MRProgressView.m in Sources */,
 				2B39C93A1B241212007BAC7A /* MASLayoutConstraint.m in Sources */,
 				F22FE2E51B4000ED00A1A997 /* NSData+ImageContentType.m in Sources */,
 				2B9CBB5B1B39AA43007D7A45 /* (null) in Sources */,
 				F29F86481B2410320058FC9F /* UIProgressView+AFNetworking.m in Sources */,
+				2B5A59181B48DFBB000382D7 /* MRMessageInterceptor.m in Sources */,
 				F22FE2781B3AD87800A1A997 /* KxMenu.m in Sources */,
 				F22FE2EA1B4000ED00A1A997 /* SDWebImageDownloaderOperation.m in Sources */,
+				2B5A59191B48DFBB000382D7 /* MRMethodCopier.m in Sources */,
 				2B39C9901B37B691007BAC7A /* ESNavigationController.m in Sources */,
 				F22FE2B61B3FFAF700A1A997 /* RCDSearchFriendViewController.m in Sources */,
+				2B5A59141B48DFBB000382D7 /* MRStopButton.m in Sources */,
 				F29F862B1B2410070058FC9F /* AFNetworkReachabilityManager.m in Sources */,
 				F277AE041B2DC34E006E42CB /* UIDevice+screenType.m in Sources */,
 				F277AE0A1B2DCF39006E42CB /* StretchImageUtil.m in Sources */,
@@ -1101,13 +1250,15 @@
 				F22FE2EC1B4000ED00A1A997 /* SDWebImagePrefetcher.m in Sources */,
 				F22FE2AD1B3FFAE600A1A997 /* RCDSelectPersonTableViewCell.m in Sources */,
 				F22FE2941B3B000400A1A997 /* UserSettingViewController.m in Sources */,
+				2B5A59221B494C2B000382D7 /* ChangePhoneNumDataParse.m in Sources */,
 				F22FE2BC1B3FFBB200A1A997 /* RCDAddFriendTableViewController.m in Sources */,
 				F22FE2F01B4000ED00A1A997 /* UIImage+WebP.m in Sources */,
 				F29F86461B2410320058FC9F /* UIButton+AFNetworking.m in Sources */,
 				F22FE2EB1B4000ED00A1A997 /* SDWebImageManager.m in Sources */,
 				2B39C93B1B241212007BAC7A /* MASViewAttribute.m in Sources */,
-				F24787721B2D5CE700EC266B /* ChangePasswordDataParse.m in Sources */,
+				F24787721B2D5CE700EC266B /* ChangePwdDataParse.m in Sources */,
 				F22FE2BD1B3FFBB200A1A997 /* RCDChatListCell.m in Sources */,
+				2B5A591E1B48F921000382D7 /* ChangPhoneNumViewController.m in Sources */,
 				F277ADFB1B2DBE97006E42CB /* CustomShowMessage.m in Sources */,
 				F22FE2821B3ADB6000A1A997 /* ChatViewController.m in Sources */,
 				F22FE2A71B3FFAC200A1A997 /* RCDAddressBookViewController.m in Sources */,
@@ -1125,22 +1276,30 @@
 				2B39C93F1B241212007BAC7A /* View+MASAdditions.m in Sources */,
 				F277AE011B2DC146006E42CB /* DeviceInfo.m in Sources */,
 				F22FE2C11B3FFCAF00A1A997 /* MBProgressHUD.m in Sources */,
+				2B5A59161B48DFBB000382D7 /* MRProgressOverlayView+AFNetworking.m in Sources */,
 				2B39C93C1B241212007BAC7A /* MASViewConstraint.m in Sources */,
+				2B5A590F1B48DFBB000382D7 /* MRCircularProgressView.m in Sources */,
 				2B39C95F1B272221007BAC7A /* QRCodeViewController.m in Sources */,
+				2B5A59111B48DFBB000382D7 /* MRNavigationBarProgressView.m in Sources */,
+				2B5A590C1B48DFBB000382D7 /* MRBlurView.m in Sources */,
 				F22FE2A81B3FFAC200A1A997 /* RCDPersonDetailViewController.m in Sources */,
 				2B39C9371B241212007BAC7A /* MASCompositeConstraint.m in Sources */,
 				F22FE27B1B3AD94200A1A997 /* UIColor+RCColor.m in Sources */,
 				F29F862C1B2410070058FC9F /* AFSecurityPolicy.m in Sources */,
 				F22FE2A61B3FFAC200A1A997 /* RCDAddressBookTableViewCell.m in Sources */,
 				F29F86491B2410320058FC9F /* UIRefreshControl+AFNetworking.m in Sources */,
+				2B5A59121B48DFBB000382D7 /* MRProgressOverlayView.m in Sources */,
+				2B5A591A1B48DFBB000382D7 /* MRWeakProxy.m in Sources */,
 				F22FE2EE1B4000ED00A1A997 /* UIImage+GIF.m in Sources */,
 				F277ADFE1B2DC046006E42CB /* CustomMessageBox.m in Sources */,
 				F29F864A1B2410320058FC9F /* UIWebView+AFNetworking.m in Sources */,
+				2B5A59151B48DFBB000382D7 /* MRActivityIndicatorView+AFNetworking.m in Sources */,
 				2B39C9701B2D7AD2007BAC7A /* ChatContainerViewController.m in Sources */,
 				F22FE2F31B4000ED00A1A997 /* UIView+WebCacheOperation.m in Sources */,
 				F29F862A1B2410070058FC9F /* AFHTTPSessionManager.m in Sources */,
 				F29F86451B2410320058FC9F /* UIAlertView+AFNetworking.m in Sources */,
 				2B39C9941B37E5F2007BAC7A /* ResetPwdViewController.m in Sources */,
+				2B5A590E1B48DFBB000382D7 /* MRActivityIndicatorView.m in Sources */,
 				2B39C9381B241212007BAC7A /* MASConstraint.m in Sources */,
 				F22FE27F1B3ADAB000A1A997 /* ESUserInfo.m in Sources */,
 				2B39C9731B2D7AF0007BAC7A /* ContactsContainerViewController.m in Sources */,
@@ -1158,6 +1317,7 @@
 				2B31C3D51B11C3FD004C865A /* main.m in Sources */,
 				F22FE2ED1B4000ED00A1A997 /* UIButton+WebCache.m in Sources */,
 				F22FE2F21B4000ED00A1A997 /* UIImageView+WebCache.m in Sources */,
+				2B5A59171B48DFBB000382D7 /* MRProgressView+AFNetworking.m in Sources */,
 				F22FE2AE1B3FFAE600A1A997 /* RCDSelectPersonViewController.m in Sources */,
 				F22FE2F91B4042B700A1A997 /* SearchContactDataParse.m in Sources */,
 			);

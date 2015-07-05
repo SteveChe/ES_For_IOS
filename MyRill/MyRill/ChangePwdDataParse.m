@@ -1,19 +1,16 @@
 //
-//  ChangePasswordDataParse.m
+//  ChangePwdDataParse.m
 //  MyRill
 //
 //  Created by Steve on 15/6/14.
 //
 //
 
-#import "ChangePasswordDataParse.h"
+#import "ChangePwdDataParse.h"
 #import "AFHttpTool.h"
 #import "DataParseDefine.h"
-@interface ChangePasswordDataParse()
-@property (nonatomic,assign)id<ChangePasswordDataDelegate>delegate;
 
-@end
-@implementation ChangePasswordDataParse
+@implementation ChangePwdDataParse
 -(void) changePassword:(NSString *)oldPassword  newPassword:(NSString *)newPassword
 {
     [AFHttpTool changePassword:oldPassword newPassword:newPassword
@@ -23,6 +20,10 @@
          NSNumber* errorCodeNum = [reponseDic valueForKey:NETWORK_ERROR_CODE];
          if (errorCodeNum == nil || [errorCodeNum isEqual:[NSNull null]] )
          {
+             NSDictionary *detailDic = (NSDictionary *)detailDic[NETWORK_ERROR_DETAIL];
+             NSString *detailMsg = detailDic[@"new_password"];
+             [self.delegate changePasswordFailed:detailMsg];
+             
              return ;
          }
          
@@ -34,6 +35,15 @@
                  if ([self.delegate respondsToSelector:@selector(changePasswordSucceed)])
                  {
                      [self.delegate changePasswordSucceed];
+                 }
+                 
+             }
+                 break;
+             case 4:
+             {
+                 if ([self.delegate respondsToSelector:@selector(changePasswordFailed:)])
+                 {
+                     [self.delegate changePasswordFailed:@"原密码输入错误!"];
                  }
                  
              }
@@ -53,7 +63,7 @@
                        failure:^(NSError* err) {
                            if ([self.delegate respondsToSelector:@selector(changePasswordFailed)])
                            {
-                               [self.delegate changePasswordFailed];
+                               [self.delegate changePasswordFailed:nil];
                            }
                            
                        }];

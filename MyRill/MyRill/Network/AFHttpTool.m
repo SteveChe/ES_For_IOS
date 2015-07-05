@@ -112,7 +112,16 @@
                            params:params
                           success:success
                           failure:failure];
+}
 
+//sign-out
++ (void)signOutSuccess:(void (^)(id))success
+               failure:(void (^)(NSError *))failure {
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet
+                              url:@"/api/accounts/sign-out/.json"
+                           params:nil
+                          success:success
+                          failure:failure];
 }
 
 //login
@@ -138,6 +147,18 @@
     NSDictionary *params = @{@"old_password":oldPassword,@"new_password":newPassword};
     [AFHttpTool requestWithMethod:RequestMethodTypePost
                               url:@"api/accounts/change-password/.json"
+                           params:params
+                          success:success
+                          failure:failure];
+}
+
++ (void)changePhoneNum:(NSString *)newPhoneNum
+      verificationCode:(NSString *)code
+               success:(void (^)(id))success
+               failure:(void (^)(NSError *))failure {
+    NSDictionary *params = @{@"new_phone_number":newPhoneNum,@"verification_code":code};
+    [AFHttpTool requestWithMethod:RequestMethodTypePost
+                              url:@"/api/accounts/change-phone-number/.json"
                            params:params
                           success:success
                           failure:failure];

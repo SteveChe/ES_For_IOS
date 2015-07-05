@@ -7,11 +7,17 @@
 //
 
 #import "ChangePwdViewController.h"
+#import "ChangePwdDataParse.h"
 
-@interface ChangePwdViewController ()
+@interface ChangePwdViewController () <ChangePwdDataDelegate>
+
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *pwdOrphoneNumLbl;
 @property (weak, nonatomic) IBOutlet UILabel *pwdOrCodeLbl;
+@property (weak, nonatomic) IBOutlet UITextField *oldPwdTxtField;
+@property (weak, nonatomic) IBOutlet UITextField *newpwdTxtField;
+@property (weak, nonatomic) IBOutlet UITextField *newpwdAgainTxtField;
+@property (nonatomic, strong) ChangePwdDataParse *changePwdDP;
 
 @end
 
@@ -29,31 +35,37 @@
     self.navigationItem.rightBarButtonItem = commitBtnItem;
 }
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
+#pragma mark - ChangePwdDataDelegate methods
+- (void)changePasswordSucceed {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - response events
 - (void)commitBtnItemOnClicked:(UIBarButtonItem *)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    
+    if ([self.newpwdTxtField.text isEqualToString:@""] || [self.newpwdAgainTxtField.text isEqualToString:@""]) {
+        return;
+    }
+    
+    if (self.newpwdTxtField.text.length < 6 || self.newpwdAgainTxtField.text.length < 6) {
+        return;
+    }
+    
+    if (![self.newpwdTxtField.text isEqualToString:self.newpwdAgainTxtField.text]) {
+        return;
+    }
+    
+    [self.changePwdDP changePassword:self.oldPwdTxtField.text newPassword:self.newpwdAgainTxtField.text];
 }
 
 #pragma mark - setters&getters
-- (void)setUserMsgChangeType:(ESUserMsgChangeType)userMsgChangeType {
-    _userMsgChangeType = userMsgChangeType;
-    
-    if (_userMsgChangeType == ESPwdChangeMold) {
-        return;
-    } else {
-        self.title = @"更换手机号";
-        self.pwdOrphoneNumLbl.text = @"新手机号";
-        self.pwdOrCodeLbl.text = @"输入验证码";
+- (ChangePwdDataParse *)changePwdDP {
+    if (!_changePwdDP) {
+        _changePwdDP = [[ChangePwdDataParse alloc] init];
+        _changePwdDP.delegate = self;
     }
-}
-
-- (void)setPwdOrphoneNumLbl:(UILabel *)pwdOrphoneNumLbl {
-    _pwdOrphoneNumLbl = pwdOrphoneNumLbl;
     
+    return _changePwdDP;
 }
 
 @end

@@ -36,6 +36,9 @@ methodType url : (NSString *)url
                    success:(void (^)(id response))success
                    failure:(void (^)(NSError* err))failure;
 
++ (void)signOutSuccess:(void (^)(id response))success
+               failure:(void (^)(NSError *err))failure;
+
 //login
 +(void) loginWithUserName:(NSString *) userName
                  password:(NSString *) password
@@ -46,6 +49,11 @@ methodType url : (NSString *)url
            newPassword:(NSString *) newPassword
                success:(void (^)(id response))success
                failure:(void (^)(NSError* err))failure;
+
++ (void)changePhoneNum:(NSString *)newPhoneNum
+      verificationCode:(NSString *)code
+               success:(void (^)(id response))success
+               failure:(void (^)(NSError *err))failure;
 
 //get verification code
 +(void) getVerificationCode:(NSString *)phoneNum;
