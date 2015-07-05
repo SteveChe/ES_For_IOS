@@ -40,25 +40,15 @@
 
 #pragma mark - LogoutDataParse delegate
 - (void)logoutSuccess {
+    [self showTips:@"注销成功!" mode:MRProgressOverlayViewModeCheckmark isDismiss:YES];
+    
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     LoginViewController *loginVC = [[LoginViewController alloc] init];
     [appDelegate changeWindow:loginVC];
-    self.progress.mode = MRProgressOverlayViewModeCheckmark;
-    self.progress.titleLabelText = @"注销成功!";
-    
-    [self performSelector:@selector(dismissProgress) withObject:nil afterDelay:1.5];
 }
 
 - (void)logoutFail {
-    
-}
-
--(void)dismissProgress
-{
-    if (self.progress)
-    {
-        [self.progress dismiss:YES];
-    }
+    [self showTips:@"注销失败!" mode:MRProgressOverlayViewModeCross isDismiss:YES];
 }
 
 #pragma mark - response events
@@ -68,12 +58,28 @@
 }
 
 - (IBAction)logoutBtnOnClicked:(UIButton *)sender {
-    SignOutDataParse *signOutDP = [[SignOutDataParse alloc] init];
-    [signOutDP logout];
-    
+    [self.signOutDP logout];
+}
+
+#pragma mark - private methods
+- (void)showTips:(NSString *)tip mode:(MRProgressOverlayViewMode)mode isDismiss:(BOOL)isDismiss
+{
+    [self.view addSubview:self.progress];
     [self.progress show:YES];
-    self.progress.mode = MRProgressOverlayViewModeDeterminateCircular;
-    self.progress.titleLabelText = @"注销...";
+    self.progress.mode = mode;
+    self.progress.titleLabelText = tip;
+    if (isDismiss)
+    {
+        [self performSelector:@selector(dismissProgress) withObject:nil afterDelay:1.8];
+    }
+}
+
+- (void)dismissProgress
+{
+    if (self.progress)
+    {
+        [self.progress dismiss:YES];
+    }
 }
 
 #pragma mark - setters&getters
@@ -100,10 +106,10 @@
 }
 
 - (MRProgressOverlayView *)progress {
-    if (_progress) {
-        _progress = [[MRProgressOverlayView alloc] initWithFrame:CGRectMake(200, 200, 300, 300)];
-        [self.view addSubview:_progress];
+    if (!_progress) {
+        _progress = [[MRProgressOverlayView alloc] init];
     }
+    
     return _progress;
 }
 

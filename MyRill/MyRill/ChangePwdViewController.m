@@ -8,6 +8,7 @@
 
 #import "ChangePwdViewController.h"
 #import "ChangePwdDataParse.h"
+#import "MRProgress.h"
 
 @interface ChangePwdViewController () <ChangePwdDataDelegate>
 
@@ -17,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *oldPwdTxtField;
 @property (weak, nonatomic) IBOutlet UITextField *newpwdTxtField;
 @property (weak, nonatomic) IBOutlet UITextField *newpwdAgainTxtField;
+@property (nonatomic, strong) MRProgressOverlayView *progress;
 @property (nonatomic, strong) ChangePwdDataParse *changePwdDP;
 
 @end
@@ -41,7 +43,12 @@
 
 #pragma mark - ChangePwdDataDelegate methods
 - (void)changePasswordSucceed {
+    [self showTips:@"修改成功" mode:MRProgressOverlayViewModeCheckmark isDismiss:YES];
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)changePasswordFailed:(NSString *)errorMsg {
+    [self showTips:errorMsg mode:MRProgressOverlayViewModeCross isDismiss:YES];
 }
 
 #pragma mark - response events
@@ -65,7 +72,32 @@
         return;
     }
     
+    //首先回收键盘
+    [self hideKeyboard];
+    [self showTips:@"修改中" mode:MRProgressOverlayViewModeIndeterminate isDismiss:NO];
+    
     [self.changePwdDP changePassword:self.oldPwdTxtField.text newPassword:self.newpwdAgainTxtField.text];
+}
+
+#pragma mark - private methods
+- (void)showTips:(NSString *)tip mode:(MRProgressOverlayViewMode)mode isDismiss:(BOOL)isDismiss
+{
+    [self.view addSubview:self.progress];
+    [self.progress show:YES];
+    self.progress.mode = mode;
+    self.progress.titleLabelText = tip;
+    if (isDismiss)
+    {
+        [self performSelector:@selector(dismissProgress) withObject:nil afterDelay:1.8];
+    }
+}
+
+- (void)dismissProgress
+{
+    if (self.progress)
+    {
+        [self.progress dismiss:YES];
+    }
 }
 
 #pragma mark - setters&getters
@@ -76,6 +108,14 @@
     }
     
     return _changePwdDP;
+}
+
+- (MRProgressOverlayView *)progress {
+    if (!_progress) {
+        _progress = [[MRProgressOverlayView alloc] init];
+    }
+    
+    return _progress;
 }
 
 @end

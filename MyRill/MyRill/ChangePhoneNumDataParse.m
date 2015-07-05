@@ -20,6 +20,7 @@
                            NSNumber *errorCodeNum = responseDic[NETWORK_ERROR_CODE];
                            
                            if (errorCodeNum == nil || [errorCodeNum isEqual:[NSNull null]]) {
+                               [self.delegate changePhoneNUmFail:responseDic[NETWORK_ERROR_MESSAGE]];
                                return;
                            }
                            
@@ -28,7 +29,7 @@
                            if (errorCode == 0) {
                                [self.delegate changePhoneNumSuccess];
                            } else {
-                               [self.delegate changePhoneNUmFail];
+                               [self.delegate changePhoneNUmFail:responseDic[NETWORK_ERROR_MESSAGE]];
                            }
                            
                        } failure:^(NSError *err) {

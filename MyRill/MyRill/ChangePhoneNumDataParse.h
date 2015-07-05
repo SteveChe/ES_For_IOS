@@ -11,7 +11,7 @@
 @protocol ChangePhoneNumDelegate <NSObject>
 
 - (void)changePhoneNumSuccess;
-- (void)changePhoneNUmFail;
+- (void)changePhoneNUmFail:(NSString *)errorMsg;
 
 @end
 

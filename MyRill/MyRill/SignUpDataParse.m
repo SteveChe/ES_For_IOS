@@ -48,11 +48,9 @@
                  {
                      [self.delegate signUpFailed:errorMessage];
                  }
-
              }
                  break;
          }
-         
      }
        failure:^(NSError* err) {
            if (self.delegate!= nil &&[self.delegate respondsToSelector:@selector(signUpFailed:)])
