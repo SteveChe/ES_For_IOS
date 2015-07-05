@@ -9,13 +9,16 @@
 #import "ChangPhoneNumViewController.h"
 #import "ColorHandler.h"
 #import "SignUpDataParse.h"
+#import "ChangePhoneNumDataParse.h"
 
-@interface ChangPhoneNumViewController ()
+@interface ChangPhoneNumViewController () <ChangePhoneNumDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UITextField *newphoneNumTxtField;
+@property (weak, nonatomic) IBOutlet UITextField *verificationTxtField;
 @property (weak, nonatomic) IBOutlet UIButton *verificationBtn;
 @property (nonatomic, strong) SignUpDataParse *signUpDP;
+@property (nonatomic, strong) ChangePhoneNumDataParse *changePhoneNumDP;
 
 @end
 
@@ -33,11 +36,25 @@
                                                                      action:@selector(commitBtnItemOnClicked:)];
     self.navigationItem.rightBarButtonItem = commitBtnItem;
 
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                 action:@selector(hideKeyboard)];
+    [self.view addGestureRecognizer:tapGesture];
+}
+
+#pragma mark - ChangePhoneNumDelegate methods
+- (void)changePhoneNumSuccess {
+    NSLog(@"修改成功");
 }
 
 #pragma mark - response events
+- (void)hideKeyboard {
+    [self.newphoneNumTxtField resignFirstResponder];
+    [self.verificationTxtField resignFirstResponder];
+}
+
 - (void)commitBtnItemOnClicked:(UIBarButtonItem *)sender {
-    
+    [self.changePhoneNumDP changePhoneNumWithNewPhoneNum:self.newphoneNumTxtField.text
+                                       vertificationCode:self.verificationTxtField.text];
 }
 
 - (IBAction)verificationBtnOnClicked:(UIButton *)sender {
@@ -51,6 +68,15 @@
     }
     
     return _signUpDP;
+}
+
+- (ChangePhoneNumDataParse *)changePhoneNumDP {
+    if (!_changePhoneNumDP) {
+        _changePhoneNumDP = [[ChangePhoneNumDataParse alloc] init];
+        _changePhoneNumDP.delegate = self;
+    }
+    
+    return _changePhoneNumDP;
 }
 
 - (void)setContentView:(UIView *)contentView {

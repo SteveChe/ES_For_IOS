@@ -8,6 +8,7 @@
 
 #import "ChangePhoneNumDataParse.h"
 #import "AFHttpTool.h"
+#import "DataParseDefine.h"
 
 @implementation ChangePhoneNumDataParse
 
@@ -15,7 +16,21 @@
     [AFHttpTool changePhoneNum:newphoneNum
               verificationCode:code
                        success:^(id response) {
-                           ;
+                           NSDictionary *responseDic = (NSDictionary *)response;
+                           NSNumber *errorCodeNum = responseDic[NETWORK_ERROR_CODE];
+                           
+                           if (errorCodeNum == nil || [errorCodeNum isEqual:[NSNull null]]) {
+                               return;
+                           }
+                           
+                           NSInteger errorCode = [errorCodeNum integerValue];
+                           
+                           if (errorCode == 0) {
+                               [self.delegate changePhoneNumSuccess];
+                           } else {
+                               [self.delegate changePhoneNUmFail];
+                           }
+                           
                        } failure:^(NSError *err) {
                            ;
                        }];

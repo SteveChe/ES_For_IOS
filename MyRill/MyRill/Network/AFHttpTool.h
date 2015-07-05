@@ -56,7 +56,9 @@ methodType url : (NSString *)url
                failure:(void (^)(NSError *err))failure;
 
 //get verification code
-+(void) getVerificationCode:(NSString *)phoneNum;
++(void) getVerificationCode:(NSString *)phoneNum
+                    success:(void (^)(id response))success
+                    failure:(void (^)(NSError *err))failure;
 
 + (void)getProfessionSuccess:(void (^)(id response))success
                      failure:(void (^)(NSError *error))failure;

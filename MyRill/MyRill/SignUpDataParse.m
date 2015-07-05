@@ -66,6 +66,12 @@
 //get verificiation Code
 -(void) getVerificationCode:(NSString *)phoneNum
 {
-    [AFHttpTool getVerificationCode:phoneNum];
+    [AFHttpTool getVerificationCode:phoneNum
+                            success:^(id response) {
+                                NSDictionary *responseDic = (NSDictionary *)response;
+                            }
+                            failure:^(NSError *err) {
+                                ;
+                            }];
 }
 @end

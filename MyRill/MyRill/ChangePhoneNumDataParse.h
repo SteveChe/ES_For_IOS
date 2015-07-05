@@ -17,6 +17,8 @@
 
 @interface ChangePhoneNumDataParse : NSObject
 
+@property (nonatomic, weak) id<ChangePhoneNumDelegate> delegate;
+
 - (void)changePhoneNumWithNewPhoneNum:(NSString *)newphoneNum vertificationCode:(NSString *)code;
 
 @end

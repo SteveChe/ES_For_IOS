@@ -108,6 +108,10 @@
 		F22FE2F91B4042B700A1A997 /* SearchContactDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE2F81B4042B700A1A997 /* SearchContactDataParse.m */; };
 		F22FE2FF1B42DAF600A1A997 /* AddContactDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE2FE1B42DAF600A1A997 /* AddContactDataParse.m */; };
 		F24787721B2D5CE700EC266B /* ChangePwdDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F24787711B2D5CE700EC266B /* ChangePwdDataParse.m */; };
+		F22FE3021B4576D100A1A997 /* GetContactListDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE3011B4576D100A1A997 /* GetContactListDataParse.m */; };
+		F22FE3051B458A4100A1A997 /* GetRequestContactListDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE3041B458A4100A1A997 /* GetRequestContactListDataParse.m */; };
+		F22FE3081B45989200A1A997 /* ESContactList.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE3071B45989200A1A997 /* ESContactList.m */; };
+		F24787721B2D5CE700EC266B /* ChangePasswordDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F24787711B2D5CE700EC266B /* ChangePasswordDataParse.m */; };
 		F24787751B2D775E00EC266B /* SignUpDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F24787741B2D775E00EC266B /* SignUpDataParse.m */; };
 		F250F2EA1B2471CD000AD021 /* AFHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = F250F2E91B2471CD000AD021 /* AFHttpTool.m */; };
 		F277ADFB1B2DBE97006E42CB /* CustomShowMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = F277ADFA1B2DBE97006E42CB /* CustomShowMessage.m */; };
@@ -1296,6 +1300,7 @@
 				2B39C95F1B272221007BAC7A /* QRCodeViewController.m in Sources */,
 				2B5A59111B48DFBB000382D7 /* MRNavigationBarProgressView.m in Sources */,
 				2B5A590C1B48DFBB000382D7 /* MRBlurView.m in Sources */,
+				F22FE3081B45989200A1A997 /* ESContactList.m in Sources */,
 				F22FE2A81B3FFAC200A1A997 /* RCDPersonDetailViewController.m in Sources */,
 				2B39C9371B241212007BAC7A /* MASCompositeConstraint.m in Sources */,
 				F22FE27B1B3AD94200A1A997 /* UIColor+RCColor.m in Sources */,

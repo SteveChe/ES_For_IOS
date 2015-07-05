@@ -166,9 +166,15 @@
 
 //get verification code
 +(void) getVerificationCode:(NSString *)phoneNum
+                    success:(void (^)(id response))success
+                    failure:(void (^)(NSError *err))failure;
 {
     NSDictionary *params = @{@"phone_number":phoneNum};
-    [AFHttpTool requestWithMethod:RequestMethodTypePost url:@"/api/accounts/send-verification-code/.json" params:params success:nil failure:nil];
+    [AFHttpTool requestWithMethod:RequestMethodTypePost
+                              url:@"/api/accounts/send-verification-code/.json"
+                           params:params
+                          success:success
+                          failure:failure];
 }
 
 + (void)getProfessionSuccess:(void (^)(id))success

@@ -33,6 +33,10 @@
                                                                       target:self
                                                                       action:@selector(commitBtnItemOnClicked:)];
     self.navigationItem.rightBarButtonItem = commitBtnItem;
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                 action:@selector(hideKeyboard)];
+    [self.view addGestureRecognizer:tapGesture];
 }
 
 #pragma mark - ChangePwdDataDelegate methods
@@ -41,6 +45,12 @@
 }
 
 #pragma mark - response events
+- (void)hideKeyboard {
+    [self.oldPwdTxtField resignFirstResponder];
+    [self.newpwdTxtField resignFirstResponder];
+    [self.newpwdAgainTxtField resignFirstResponder];
+}
+
 - (void)commitBtnItemOnClicked:(UIBarButtonItem *)sender {
     
     if ([self.newpwdTxtField.text isEqualToString:@""] || [self.newpwdAgainTxtField.text isEqualToString:@""]) {
