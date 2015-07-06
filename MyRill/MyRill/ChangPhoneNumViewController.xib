@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
@@ -31,20 +31,6 @@
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8dd-9S-wWB">
-                            <rect key="frame" x="482" y="9" width="100" height="36"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="100" id="nTy-bJ-edR"/>
-                                <constraint firstAttribute="height" constant="36" id="p94-4t-BNI"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                            <state key="normal" title="获取验证码">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="verificationBtnOnClicked:" destination="-1" eventType="touchUpInside" id="8pB-jk-cxA"/>
-                            </connections>
-                        </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RkZ-al-CRa" userLabel="SplitLine">
                             <rect key="frame" x="0.0" y="55" width="602" height="1"/>
                             <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -58,38 +44,51 @@
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入验证码" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Dep-e1-5Ve">
-                            <rect key="frame" x="94" y="56" width="488" height="54"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="done"/>
-                        </textField>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入新手机号" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="evU-aF-3aM">
-                            <rect key="frame" x="94" y="0.0" width="378" height="55"/>
+                            <rect key="frame" x="94" y="0.0" width="488" height="55"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="next"/>
                         </textField>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入验证码" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Dep-e1-5Ve">
+                            <rect key="frame" x="94" y="56" width="390" height="54"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="done"/>
+                        </textField>
+                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8dd-9S-wWB">
+                            <rect key="frame" x="481" y="65" width="101" height="36"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="36" id="p94-4t-BNI"/>
+                            </constraints>
+                            <color key="tintColor" red="0.023529411760000001" green="0.65490196079999996" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" title=" 获取验证码 ">
+                                <color key="titleColor" red="0.023529411760000001" green="0.65490196079999996" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="verificationBtnOnClicked:" destination="-1" eventType="touchUpInside" id="8pB-jk-cxA"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="W3Q-R3-M1w" firstAttribute="width" secondItem="6gb-po-EBu" secondAttribute="width" id="39L-k1-coH"/>
-                        <constraint firstAttribute="trailing" secondItem="8dd-9S-wWB" secondAttribute="trailing" constant="20" symbolic="YES" id="3tX-Iu-cVI"/>
-                        <constraint firstItem="8dd-9S-wWB" firstAttribute="leading" secondItem="evU-aF-3aM" secondAttribute="trailing" constant="10" id="4aq-PN-uDf"/>
                         <constraint firstAttribute="trailing" secondItem="RkZ-al-CRa" secondAttribute="trailing" id="5tk-Ub-qS4"/>
+                        <constraint firstItem="8dd-9S-wWB" firstAttribute="centerY" secondItem="Dep-e1-5Ve" secondAttribute="centerY" id="DT6-i1-40K"/>
                         <constraint firstAttribute="bottom" secondItem="W3Q-R3-M1w" secondAttribute="bottom" id="EcW-D6-Zf4"/>
                         <constraint firstItem="Dep-e1-5Ve" firstAttribute="leading" secondItem="W3Q-R3-M1w" secondAttribute="trailing" constant="10" id="Fe7-2d-4If"/>
                         <constraint firstItem="RkZ-al-CRa" firstAttribute="top" secondItem="evU-aF-3aM" secondAttribute="bottom" id="Mba-Ll-RYR"/>
                         <constraint firstItem="RkZ-al-CRa" firstAttribute="top" secondItem="6gb-po-EBu" secondAttribute="bottom" id="Mim-iq-wWa"/>
                         <constraint firstItem="W3Q-R3-M1w" firstAttribute="height" secondItem="6gb-po-EBu" secondAttribute="height" id="TC3-z2-PGR"/>
+                        <constraint firstItem="8dd-9S-wWB" firstAttribute="leading" secondItem="Dep-e1-5Ve" secondAttribute="trailing" constant="8" symbolic="YES" id="UHW-io-ByN"/>
                         <constraint firstItem="Dep-e1-5Ve" firstAttribute="top" secondItem="RkZ-al-CRa" secondAttribute="bottom" id="W1A-fJ-fIN"/>
                         <constraint firstItem="RkZ-al-CRa" firstAttribute="leading" secondItem="KsQ-tY-ksg" secondAttribute="leading" id="Wfk-Ki-RmQ"/>
-                        <constraint firstItem="evU-aF-3aM" firstAttribute="centerY" secondItem="8dd-9S-wWB" secondAttribute="centerY" id="aNk-ld-rXD"/>
                         <constraint firstItem="6gb-po-EBu" firstAttribute="leading" secondItem="KsQ-tY-ksg" secondAttribute="leading" constant="20" symbolic="YES" id="ahR-Ho-W9A"/>
                         <constraint firstItem="evU-aF-3aM" firstAttribute="leading" secondItem="6gb-po-EBu" secondAttribute="trailing" constant="10" id="bSF-zJ-RpB"/>
-                        <constraint firstAttribute="trailing" secondItem="Dep-e1-5Ve" secondAttribute="trailing" constant="20" symbolic="YES" id="csr-tN-RA4"/>
                         <constraint firstItem="W3Q-R3-M1w" firstAttribute="top" secondItem="RkZ-al-CRa" secondAttribute="bottom" id="fao-Hz-9kh"/>
                         <constraint firstAttribute="bottom" secondItem="Dep-e1-5Ve" secondAttribute="bottom" constant="1" id="iVW-Ly-wwp"/>
                         <constraint firstItem="6gb-po-EBu" firstAttribute="top" secondItem="KsQ-tY-ksg" secondAttribute="top" id="k37-gA-svd"/>
+                        <constraint firstAttribute="trailing" secondItem="8dd-9S-wWB" secondAttribute="trailing" constant="20" symbolic="YES" id="lPi-qs-6Au"/>
                         <constraint firstItem="W3Q-R3-M1w" firstAttribute="leading" secondItem="KsQ-tY-ksg" secondAttribute="leading" constant="20" symbolic="YES" id="pjP-R3-tOc"/>
+                        <constraint firstAttribute="trailing" secondItem="evU-aF-3aM" secondAttribute="trailing" constant="20" symbolic="YES" id="uXx-id-ntx"/>
                         <constraint firstItem="evU-aF-3aM" firstAttribute="top" secondItem="KsQ-tY-ksg" secondAttribute="top" id="uwi-75-xqA"/>
                     </constraints>
                 </view>
