@@ -633,7 +633,8 @@ typedef enum {
 
     
 //    UIColor *tintColor = [KxMenu tintColor];
-    UIColor *tintColor = [UIColor colorWithHexString:@"0195FF" alpha:1.0f];
+//    UIColor *tintColor = [UIColor colorWithHexString:@"0195FF" alpha:1.0f];
+    UIColor *tintColor = [UIColor colorWithHexString:@"FFFFFF" alpha:1.0f];
 
     if (tintColor) {
         
