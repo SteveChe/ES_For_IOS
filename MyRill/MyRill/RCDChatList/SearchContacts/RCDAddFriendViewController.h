@@ -13,4 +13,6 @@
 
 @property (nonatomic,strong) RCUserInfo *targetUserInfo;
 
+@property (weak, nonatomic) IBOutlet UITextField *addFriendTextField;
+
 @end

@@ -9,13 +9,14 @@
 #import "RCDSearchFriendViewController.h"
 #import "MBProgressHUD.h"
 #import "AFHttpTool.h"
-#import "RCDAddressBookTableViewCell.h"
 #import "UIImageView+WebCache.h"
 //#import "RCDRCIMDataSource.h"
 #import "ESUserInfo.h"
 #import "RCDSearchResultTableViewCell.h"
 #import "RCDAddFriendViewController.h"
 #import "CustomShowMessage.h"
+#import "RCDPhoneAddressBookViewController.h"
+#import "RCDAddressBookQRCodeViewController.h"
 
 @interface RCDSearchFriendViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,UISearchControllerDelegate,UISearchDisplayDelegate>
 
@@ -44,7 +45,7 @@
     
     // Add searchbar
     UISearchBar* searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.bounds.size.width, 40)];
-    searchBar.placeholder=@"Search";
+    searchBar.placeholder = @"搜索";
     searchBar.delegate = self;
     self.tableView.tableHeaderView = searchBar;
     searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -58,17 +59,6 @@
     // searchResultsDelegate 就是 UITableViewDelegate
     _searchDisplayController1.searchResultsDelegate = self;
     _searchDisplayController1.delegate = self;
-
-    
-//    self.searchDisplayController.searchBar.placeholder = @"Search";
-//    self.searchDisplayController.searchBar.delegate = self;
-//    self.searchDisplayController.searchBar.frame = CGRectMake(0.0, 0.0, self.view.bounds.size.width, 40);
-//    self.tableView.tableHeaderView = self.searchDisplayController.searchBar;
-//
-//    self.searchDisplayController.searchResultsDataSource = self;
-//    self.searchDisplayController.searchResultsDelegate = self;
-//    self.searchDisplayController.delegate = self ;
-
 }
 
 
@@ -83,23 +73,19 @@
 {
     if(tableView == self.searchDisplayController.searchResultsTableView)
         return _searchResult.count;
-    return 0;
+    return 3;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(tableView == self.searchDisplayController.searchResultsTableView)
-        return 80.f;
-    return 0.f;
+    return 66.0f;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
     static NSString *reusableCellWithIdentifier = @"RCDSearchResultTableViewCell";
-    RCDSearchResultTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reusableCellWithIdentifier];
+        RCDSearchResultTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reusableCellWithIdentifier];
     if (tableView == self.searchDisplayController.searchResultsTableView) {
-
         cell = [[RCDSearchResultTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reusableCellWithIdentifier];
         ESUserInfo *user =_searchResult[indexPath.row];
         if(user){
@@ -107,27 +93,79 @@
             [cell.ivAva sd_setImageWithURL:[NSURL URLWithString:user.portraitUri] placeholderImage:[UIImage imageNamed:@"icon_person"]];
         }
     }
-
-
+    else
+    {
+        cell = [[RCDSearchResultTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reusableCellWithIdentifier];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        switch (indexPath.row)
+        {
+            case 0:
+            {
+                cell.textLabel.text = @"手机添加联系人";
+                cell.imageView.image = [UIImage imageNamed:@"icon_address_book"];
+            }
+                break;
+            case 1:
+            {
+                cell.textLabel.text = @"二维码添加";
+                cell.imageView.image = [UIImage imageNamed:@"icon_qr_code"];
+            }
+                break;
+            case 2:
+            {
+                cell.textLabel.text = @"企业号添加";
+                cell.imageView.image = [UIImage imageNamed:@"icon_enterprise"];
+            }
+                break;
+            default:
+                break;
+        }
+    }
+    
     return cell;
+
 }
 
 
 #pragma mark - searchResultDelegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ESUserInfo *user = _searchResult[indexPath.row];
-    RCUserInfo *userInfo = [RCUserInfo new];
-    userInfo.userId = user.userId;
-    userInfo.name = user.userName;
-    userInfo.portraitUri = user.portraitUri;
-    
-    if(user && tableView == self.searchDisplayController.searchResultsTableView){
+    if(tableView == self.searchDisplayController.searchResultsTableView)
+    {
+        ESUserInfo *user = _searchResult[indexPath.row];
+        RCUserInfo *userInfo = [RCUserInfo new];
+        userInfo.userId = user.userId;
+        userInfo.name = user.userName;
+        userInfo.portraitUri = user.portraitUri;
         RCDAddFriendViewController *addViewController = [[RCDAddFriendViewController alloc] init];
         addViewController.targetUserInfo = userInfo;
         [self.navigationController pushViewController:addViewController animated:YES];
     }
-
+    else
+    {
+        switch (indexPath.row)
+        {
+            case 0:
+            {
+                RCDPhoneAddressBookViewController* phoneAddressBookViewController = [[RCDPhoneAddressBookViewController alloc] init];
+                [self.navigationController pushViewController:phoneAddressBookViewController animated:YES];
+            }
+                break;
+            case 1:
+            {
+                RCDAddressBookQRCodeViewController* addressBookQRCodeViewController = [[RCDAddressBookQRCodeViewController alloc] init];
+                [self.navigationController pushViewController:addressBookQRCodeViewController animated:YES];
+            }
+                break;
+            case 2:
+            {
+                
+            }
+                break;
+            default:
+                break;
+        }
+    }
 }
 
 
@@ -155,17 +193,9 @@
     });
 }
 
-//- (void)setShowsCancelButton:(BOOL)showsCancelButton animated:(BOOL)animated
-//{
-//    
-//}
-
 -(void)searchContactFailed:(NSString*)errorMessage
 {
     [[CustomShowMessage getInstance] showNotificationMessage:errorMessage];
 }
-
-
-
 
 @end

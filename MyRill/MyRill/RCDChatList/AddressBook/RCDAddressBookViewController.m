@@ -9,7 +9,6 @@
 #import "RCDAddressBookViewController.h"
 //#import "RCDRCIMDataSource.h"
 #import <RongIMLib/RongIMLib.h>
-#import "RCDAddressBookTableViewCell.h"
 #import "UIImageView+WebCache.h"
 #import "AFHttpTool.h"
 #import "pinyin.h"
@@ -17,7 +16,8 @@
 #import "ESContactList.h"
 #include <ctype.h>
 #import "RCDPersonDetailViewController.h"
-
+#import "RCDAcceptContactViewController.h"
+#import "RCDSearchFriendViewController.h"
 
 @interface RCDAddressBookViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,UISearchControllerDelegate,UISearchDisplayDelegate>
 
@@ -26,6 +26,7 @@
 @property (nonatomic,strong) NSMutableArray *friends;
 @property (nonatomic,strong) GetContactListDataParse* getContactListDataParse;
 @property (strong, nonatomic) UISearchDisplayController* searchDisplayController1;
+-(void) getAllData;
 
 @end
 
@@ -36,9 +37,6 @@
     // Do any additional setup after loading the view.
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationItem.title = @"联系人";
-    
-//    self.tableView.tableFooterView = [UIView new];
-    
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -50,20 +48,20 @@
     
     // Add searchbar
     UISearchBar* searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.bounds.size.width, 40)];
-    searchBar.placeholder=@"搜索";
+    searchBar.placeholder = @"搜索";
     searchBar.delegate = self;
     self.tableView.tableHeaderView = searchBar;
     searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
     searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
     _searchDisplayController1 = [[UISearchDisplayController alloc] initWithSearchBar:searchBar contentsController:self];
     
-    // searchResultsDataSource 就是 UITableViewDataSource
     _searchDisplayController1.searchResultsDataSource = self;
-    // searchResultsDelegate 就是 UITableViewDelegate
     _searchDisplayController1.searchResultsDelegate = self;
     _searchDisplayController1.delegate = self;
-
     
+    UIBarButtonItem *settintBtnItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self                      action:@selector(addButtonOnClicked:)];
+    self.navigationItem.rightBarButtonItem = settintBtnItem;
+
 }
 
 //删除已选中用户
@@ -86,7 +84,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 
 /**
@@ -138,15 +135,17 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    static NSString *reusableCellWithIdentifier = @"RCDAddressBookFirstSectionCell";
+    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:reusableCellWithIdentifier];
+
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reusableCellWithIdentifier];
+    }
     
     if (indexPath.section == 0)
     {
-        static NSString *reusableCellWithIdentifier = @"RCDAddressBookFirstSectionCell";
-        UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:reusableCellWithIdentifier];
-        if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reusableCellWithIdentifier];
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        }
+
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         UIImage* defaultImage = [UIImage imageNamed:@"icon"];
         cell.imageView.image = defaultImage;
 
@@ -169,20 +168,16 @@
     }
     else
     {
-        
-        static NSString *reusableCellWithIdentifier = @"RCDAddressBookCell";
-        RCDAddressBookTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reusableCellWithIdentifier];
-        if (!cell) {
-            cell = [[RCDAddressBookTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reusableCellWithIdentifier];
-        }
-        
+        cell.accessoryType = UITableViewCellAccessoryNone;
+
         ESContactList* contactList = _friends[indexPath.section-1];
         
         ESUserInfo *user = contactList.contactList[indexPath.row];
         if(user){
-            cell.lblName.text = user.userName;
-            [cell.imgvAva sd_setImageWithURL:[NSURL URLWithString:user.portraitUri] placeholderImage:[UIImage imageNamed:@"contact"]];
+            cell.textLabel.text = user.userName;
+            [cell.imageView sd_setImageWithURL:[NSURL URLWithString:user.portraitUri] placeholderImage:[UIImage imageNamed:@"icon"]];
         }
+
         
         return cell;
     }
@@ -226,7 +221,34 @@
 
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0)
+    {
+        if (indexPath.row == 0)
+        {
+            RCDAcceptContactViewController* acceptContactVC = [[RCDAcceptContactViewController alloc] init];
+            [self.navigationController pushViewController:acceptContactVC animated:YES];
+        }
+        
+    }
+    else if (indexPath.section ==1)
+    {
+        
+    }
+    else
+    {
+        
+    }
+}
 
+
+#pragma mark - event repond
+-(void)addButtonOnClicked:(id)sender
+{
+    RCDSearchFriendViewController *  searchFrendVC = [[RCDSearchFriendViewController alloc] init];
+    [self.navigationController pushViewController:searchFrendVC animated:YES];
+}
 
 #pragma mark - 拼音排序
 
@@ -250,6 +272,7 @@
     return pinYinResult;
 
 }
+
 
 
 /**

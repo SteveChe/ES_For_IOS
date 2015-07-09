@@ -29,7 +29,6 @@
     self.conversationListTableView.separatorColor = [UIColor colorWithHexString:@"dfdfdf" alpha:1.0f];
     self.conversationListTableView.tableFooterView = [UIView new];
     
-    
 }
 
 
@@ -53,9 +52,6 @@
     [rightBtn addTarget:self action:@selector(rightBarButtonItemPressed:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
     [rightBtn setTintColor:[UIColor whiteColor]];
-//    self.tabBarController.navigationItem.rightBarButtonItem = rightButton;
-//    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc]initWithTitle:@"+" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonItemPressed:)];
-//    [rightButton setTintColor:[UIColor whiteColor]];
     self.navigationItem.rightBarButtonItem = rightButton;
 
     [self updateBadgeValueForTabBarItem];
@@ -268,5 +264,6 @@
     [self.navigationController pushViewController:searchFirendVC  animated:YES];
     
 }
+
 
 @end
