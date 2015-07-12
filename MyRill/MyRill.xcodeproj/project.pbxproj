@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B26E1011B4A5A46000FE4D3 /* ProfessionDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B26E1001B4A5A46000FE4D3 /* ProfessionDataParse.m */; };
+		2B26E1041B4AA379000FE4D3 /* ESProfession.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B26E1031B4AA379000FE4D3 /* ESProfession.m */; };
 		2B31C3D51B11C3FD004C865A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B31C3D41B11C3FD004C865A /* main.m */; };
 		2B31C3D81B11C3FD004C865A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B31C3D71B11C3FD004C865A /* AppDelegate.m */; };
 		2B31C3E01B11C3FD004C865A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B31C3DF1B11C3FD004C865A /* Images.xcassets */; };
@@ -29,13 +31,12 @@
 		2B39C9581B271F53007BAC7A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B39C9571B271F53007BAC7A /* AVFoundation.framework */; };
 		2B39C95A1B271F5C007BAC7A /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B39C9591B271F5C007BAC7A /* CoreData.framework */; };
 		2B39C95F1B272221007BAC7A /* QRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C95E1B272221007BAC7A /* QRCodeViewController.m */; };
-		2B39C96D1B2D79DB007BAC7A /* BusinessContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C96C1B2D79DB007BAC7A /* BusinessContainerViewController.m */; };
+		2B39C96D1B2D79DB007BAC7A /* ProfessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C96C1B2D79DB007BAC7A /* ProfessionViewController.m */; };
 		2B39C9701B2D7AD2007BAC7A /* ChatContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C96F1B2D7AD2007BAC7A /* ChatContainerViewController.m */; };
 		2B39C9731B2D7AF0007BAC7A /* ContactsContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9721B2D7AF0007BAC7A /* ContactsContainerViewController.m */; };
 		2B39C9761B2D7B05007BAC7A /* TaskContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9751B2D7B05007BAC7A /* TaskContainerViewController.m */; };
 		2B39C9791B2D7B14007BAC7A /* UserMsgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9781B2D7B14007BAC7A /* UserMsgViewController.m */; };
 		2B39C97C1B2D8003007BAC7A /* ESMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C97B1B2D8003007BAC7A /* ESMenuViewController.m */; };
-		2B39C9841B30561F007BAC7A /* BusinessCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9831B30561F007BAC7A /* BusinessCollectionViewCell.m */; };
 		2B39C98D1B37B2A4007BAC7A /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B39C98C1B37B2A4007BAC7A /* LoginViewController.xib */; };
 		2B39C9901B37B691007BAC7A /* ESNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C98F1B37B691007BAC7A /* ESNavigationController.m */; };
 		2B39C9941B37E5F2007BAC7A /* ResetPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9921B37E5F2007BAC7A /* ResetPwdViewController.m */; };
@@ -66,6 +67,13 @@
 		2B9CBB671B3AEC74007D7A45 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		2B9CBB691B42D897007D7A45 /* UserMsgViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B9CBB681B42D897007D7A45 /* UserMsgViewController.xib */; };
 		2B9CBB6C1B4571D0007D7A45 /* SignOutDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B9CBB6B1B4571D0007D7A45 /* SignOutDataParse.m */; };
+		2BE8C21D1B4D60B400858CEE /* ProfessionCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE8C21B1B4D60B400858CEE /* ProfessionCollectionViewCell.m */; };
+		2BE8C21E1B4D60B400858CEE /* ProfessionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE8C21C1B4D60B400858CEE /* ProfessionCollectionViewCell.xib */; };
+		2BE8C22C1B4EB3A200858CEE /* AddProfessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE8C22A1B4EB3A100858CEE /* AddProfessionViewController.m */; };
+		2BE8C22D1B4EB3A200858CEE /* AddProfessionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE8C22B1B4EB3A100858CEE /* AddProfessionViewController.xib */; };
+		2BE8C2301B4EC58500858CEE /* ESViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE8C22F1B4EC58500858CEE /* ESViewController.m */; };
+		2BE8C2331B52506600858CEE /* EditProfessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE8C2321B52506600858CEE /* EditProfessionViewController.m */; };
+		2BE8C2381B52536000858CEE /* ProfessionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE8C2361B52536000858CEE /* ProfessionTableViewCell.m */; };
 		F22FE2731B3AD7BE00A1A997 /* ChatListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE2721B3AD7BE00A1A997 /* ChatListViewController.m */; };
 		F22FE2781B3AD87800A1A997 /* KxMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE2771B3AD87800A1A997 /* KxMenu.m */; };
 		F22FE27B1B3AD94200A1A997 /* UIColor+RCColor.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE27A1B3AD94200A1A997 /* UIColor+RCColor.m */; };
@@ -187,6 +195,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2B26E0FF1B4A5A46000FE4D3 /* ProfessionDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfessionDataParse.h; sourceTree = "<group>"; };
+		2B26E1001B4A5A46000FE4D3 /* ProfessionDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfessionDataParse.m; sourceTree = "<group>"; };
+		2B26E1021B4AA379000FE4D3 /* ESProfession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESProfession.h; sourceTree = "<group>"; };
+		2B26E1031B4AA379000FE4D3 /* ESProfession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESProfession.m; sourceTree = "<group>"; };
 		2B31C3CF1B11C3FD004C865A /* MyRill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyRill.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B31C3D31B11C3FD004C865A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2B31C3D41B11C3FD004C865A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -235,8 +247,8 @@
 		2B39C95B1B271F7A007BAC7A /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		2B39C95D1B272221007BAC7A /* QRCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeViewController.h; sourceTree = "<group>"; };
 		2B39C95E1B272221007BAC7A /* QRCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeViewController.m; sourceTree = "<group>"; };
-		2B39C96B1B2D79DB007BAC7A /* BusinessContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessContainerViewController.h; sourceTree = "<group>"; };
-		2B39C96C1B2D79DB007BAC7A /* BusinessContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessContainerViewController.m; sourceTree = "<group>"; };
+		2B39C96B1B2D79DB007BAC7A /* ProfessionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfessionViewController.h; sourceTree = "<group>"; };
+		2B39C96C1B2D79DB007BAC7A /* ProfessionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfessionViewController.m; sourceTree = "<group>"; };
 		2B39C96E1B2D7AD2007BAC7A /* ChatContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatContainerViewController.h; sourceTree = "<group>"; };
 		2B39C96F1B2D7AD2007BAC7A /* ChatContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatContainerViewController.m; sourceTree = "<group>"; };
 		2B39C9711B2D7AF0007BAC7A /* ContactsContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsContainerViewController.h; sourceTree = "<group>"; };
@@ -247,8 +259,6 @@
 		2B39C9781B2D7B14007BAC7A /* UserMsgViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserMsgViewController.m; sourceTree = "<group>"; };
 		2B39C97A1B2D8003007BAC7A /* ESMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESMenuViewController.h; sourceTree = "<group>"; };
 		2B39C97B1B2D8003007BAC7A /* ESMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESMenuViewController.m; sourceTree = "<group>"; };
-		2B39C9821B30561F007BAC7A /* BusinessCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessCollectionViewCell.h; sourceTree = "<group>"; };
-		2B39C9831B30561F007BAC7A /* BusinessCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessCollectionViewCell.m; sourceTree = "<group>"; };
 		2B39C98C1B37B2A4007BAC7A /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		2B39C98E1B37B691007BAC7A /* ESNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESNavigationController.h; sourceTree = "<group>"; };
 		2B39C98F1B37B691007BAC7A /* ESNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESNavigationController.m; sourceTree = "<group>"; };
@@ -297,6 +307,18 @@
 		2B9CBB681B42D897007D7A45 /* UserMsgViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserMsgViewController.xib; sourceTree = "<group>"; };
 		2B9CBB6A1B4571D0007D7A45 /* SignOutDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignOutDataParse.h; sourceTree = "<group>"; };
 		2B9CBB6B1B4571D0007D7A45 /* SignOutDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignOutDataParse.m; sourceTree = "<group>"; };
+		2BE8C21A1B4D60B400858CEE /* ProfessionCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfessionCollectionViewCell.h; sourceTree = "<group>"; };
+		2BE8C21B1B4D60B400858CEE /* ProfessionCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfessionCollectionViewCell.m; sourceTree = "<group>"; };
+		2BE8C21C1B4D60B400858CEE /* ProfessionCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfessionCollectionViewCell.xib; sourceTree = "<group>"; };
+		2BE8C2291B4EB3A100858CEE /* AddProfessionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddProfessionViewController.h; sourceTree = "<group>"; };
+		2BE8C22A1B4EB3A100858CEE /* AddProfessionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddProfessionViewController.m; sourceTree = "<group>"; };
+		2BE8C22B1B4EB3A100858CEE /* AddProfessionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddProfessionViewController.xib; sourceTree = "<group>"; };
+		2BE8C22E1B4EC58500858CEE /* ESViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESViewController.h; sourceTree = "<group>"; };
+		2BE8C22F1B4EC58500858CEE /* ESViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESViewController.m; sourceTree = "<group>"; };
+		2BE8C2311B52506600858CEE /* EditProfessionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfessionViewController.h; sourceTree = "<group>"; };
+		2BE8C2321B52506600858CEE /* EditProfessionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProfessionViewController.m; sourceTree = "<group>"; };
+		2BE8C2351B52536000858CEE /* ProfessionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfessionTableViewCell.h; sourceTree = "<group>"; };
+		2BE8C2361B52536000858CEE /* ProfessionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfessionTableViewCell.m; sourceTree = "<group>"; };
 		F22FE2711B3AD7BE00A1A997 /* ChatListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatListViewController.h; sourceTree = "<group>"; };
 		F22FE2721B3AD7BE00A1A997 /* ChatListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatListViewController.m; sourceTree = "<group>"; };
 		F22FE2761B3AD87800A1A997 /* KxMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KxMenu.h; path = Utilities/KxMenu/KxMenu.h; sourceTree = "<group>"; };
@@ -635,8 +657,10 @@
 				2B39C97B1B2D8003007BAC7A /* ESMenuViewController.m */,
 				2B39C98E1B37B691007BAC7A /* ESNavigationController.h */,
 				2B39C98F1B37B691007BAC7A /* ESNavigationController.m */,
+				2BE8C22E1B4EC58500858CEE /* ESViewController.h */,
+				2BE8C22F1B4EC58500858CEE /* ESViewController.m */,
 				2B39C9511B25CA45007BAC7A /* Login */,
-				2B39C9601B2728C5007BAC7A /* Business */,
+				2B39C9601B2728C5007BAC7A /* Profession */,
 				2B39C9641B272969007BAC7A /* Conversation */,
 				2B39C9611B2728F9007BAC7A /* Contacts */,
 				2B39C9621B272915007BAC7A /* Task */,
@@ -649,8 +673,7 @@
 		2B39C9411B24126F007BAC7A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				2B39C9821B30561F007BAC7A /* BusinessCollectionViewCell.h */,
-				2B39C9831B30561F007BAC7A /* BusinessCollectionViewCell.m */,
+				2BE8C2341B52533E00858CEE /* Profession */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -761,13 +784,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		2B39C9601B2728C5007BAC7A /* Business */ = {
+		2B39C9601B2728C5007BAC7A /* Profession */ = {
 			isa = PBXGroup;
 			children = (
-				2B39C96B1B2D79DB007BAC7A /* BusinessContainerViewController.h */,
-				2B39C96C1B2D79DB007BAC7A /* BusinessContainerViewController.m */,
+				2B39C96B1B2D79DB007BAC7A /* ProfessionViewController.h */,
+				2B39C96C1B2D79DB007BAC7A /* ProfessionViewController.m */,
+				2BE8C2311B52506600858CEE /* EditProfessionViewController.h */,
+				2BE8C2321B52506600858CEE /* EditProfessionViewController.m */,
+				2BE8C2291B4EB3A100858CEE /* AddProfessionViewController.h */,
+				2BE8C22A1B4EB3A100858CEE /* AddProfessionViewController.m */,
+				2BE8C22B1B4EB3A100858CEE /* AddProfessionViewController.xib */,
 			);
-			name = Business;
+			name = Profession;
 			sourceTree = "<group>";
 		};
 		2B39C9611B2728F9007BAC7A /* Contacts */ = {
@@ -901,6 +929,18 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		2BE8C2341B52533E00858CEE /* Profession */ = {
+			isa = PBXGroup;
+			children = (
+				2BE8C21A1B4D60B400858CEE /* ProfessionCollectionViewCell.h */,
+				2BE8C21B1B4D60B400858CEE /* ProfessionCollectionViewCell.m */,
+				2BE8C21C1B4D60B400858CEE /* ProfessionCollectionViewCell.xib */,
+				2BE8C2351B52536000858CEE /* ProfessionTableViewCell.h */,
+				2BE8C2361B52536000858CEE /* ProfessionTableViewCell.m */,
+			);
+			name = Profession;
+			sourceTree = "<group>";
+		};
 		F22FE2751B3AD86C00A1A997 /* KxMenu */ = {
 			isa = PBXGroup;
 			children = (
@@ -917,6 +957,8 @@
 				F22FE27E1B3ADAB000A1A997 /* ESUserInfo.m */,
 				F22FE3061B45989200A1A997 /* ESContactList.h */,
 				F22FE3071B45989200A1A997 /* ESContactList.m */,
+				2B26E1021B4AA379000FE4D3 /* ESProfession.h */,
+				2B26E1031B4AA379000FE4D3 /* ESProfession.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1231,6 +1273,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BE8C22D1B4EB3A200858CEE /* AddProfessionViewController.xib in Resources */,
 				F22FE2881B3AF0CB00A1A997 /* RongCloudKit.strings in Resources */,
 				F23059BB1B52C141004599FA /* RCDAddressBookViewTableViewCell.xib in Resources */,
 				F2D2335E1B31B1F400F8C65D /* PushConfig.plist in Resources */,
@@ -1246,6 +1289,7 @@
 				F22FE2921B3B000400A1A997 /* ChangePwdViewController.xib in Resources */,
 				F2D2338F1B37DE6400F8C65D /* RongCloud.bundle in Resources */,
 				2B31C3E01B11C3FD004C865A /* Images.xcassets in Resources */,
+				2BE8C21E1B4D60B400858CEE /* ProfessionCollectionViewCell.xib in Resources */,
 				F22FE30A1B4A9F1A00A1A997 /* RCDAddFriendViewController.xib in Resources */,
 				F2F92EFC1B4EC3310047D7BF /* RCDSelectPersonTableViewCell.xib in Resources */,
 				F2F92ECA1B4ABA5F0047D7BF /* RCDAcceptContactTableViewCell.xib in Resources */,
@@ -1268,7 +1312,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F22FE2E81B4000ED00A1A997 /* SDWebImageDecoder.m in Sources */,
-				2B39C96D1B2D79DB007BAC7A /* BusinessContainerViewController.m in Sources */,
+				2B26E1011B4A5A46000FE4D3 /* ProfessionDataParse.m in Sources */,
+				2B39C96D1B2D79DB007BAC7A /* ProfessionViewController.m in Sources */,
 				2B5A590D1B48DFBB000382D7 /* UIImage+MRImageEffects.m in Sources */,
 				2B39C9441B24128F007BAC7A /* LoginViewController.m in Sources */,
 				F29F86281B2410070058FC9F /* AFHTTPRequestOperation.m in Sources */,
@@ -1281,8 +1326,10 @@
 				F29F86471B2410320058FC9F /* UIImageView+AFNetworking.m in Sources */,
 				2B39C97C1B2D8003007BAC7A /* ESMenuViewController.m in Sources */,
 				2B39C9551B25CA86007BAC7A /* SignUpViewController.m in Sources */,
+				2BE8C21D1B4D60B400858CEE /* ProfessionCollectionViewCell.m in Sources */,
 				F22FE2F11B4000ED00A1A997 /* UIImageView+HighlightedWebCache.m in Sources */,
 				F29F86291B2410070058FC9F /* AFHTTPRequestOperationManager.m in Sources */,
+				2B26E1041B4AA379000FE4D3 /* ESProfession.m in Sources */,
 				2B5A59131B48DFBB000382D7 /* MRProgressView.m in Sources */,
 				2B39C93A1B241212007BAC7A /* MASLayoutConstraint.m in Sources */,
 				F22FE2E51B4000ED00A1A997 /* NSData+ImageContentType.m in Sources */,
@@ -1300,6 +1347,8 @@
 				F277AE041B2DC34E006E42CB /* UIDevice+screenType.m in Sources */,
 				F277AE0A1B2DCF39006E42CB /* StretchImageUtil.m in Sources */,
 				2B39C9761B2D7B05007BAC7A /* TaskContainerViewController.m in Sources */,
+				2BE8C2301B4EC58500858CEE /* ESViewController.m in Sources */,
+				2BE8C22C1B4EB3A200858CEE /* AddProfessionViewController.m in Sources */,
 				2B39C9481B241972007BAC7A /* LoginService.m in Sources */,
 				F22FE2E91B4000ED00A1A997 /* SDWebImageDownloader.m in Sources */,
 				F29F862F1B2410070058FC9F /* AFURLResponseSerialization.m in Sources */,
@@ -1334,7 +1383,6 @@
 				F29F86441B2410320058FC9F /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				2B9CBB661B3AEC74007D7A45 /* (null) in Sources */,
 				2B39C9391B241212007BAC7A /* MASConstraintMaker.m in Sources */,
-				2B39C9841B30561F007BAC7A /* BusinessCollectionViewCell.m in Sources */,
 				F22FE2911B3B000400A1A997 /* ChangePwdViewController.m in Sources */,
 				F22FE2EF1B4000ED00A1A997 /* UIImage+MultiFormat.m in Sources */,
 				2B39C93F1B241212007BAC7A /* View+MASAdditions.m in Sources */,
@@ -1367,6 +1415,8 @@
 				2B39C9941B37E5F2007BAC7A /* ResetPwdViewController.m in Sources */,
 				2B5A590E1B48DFBB000382D7 /* MRActivityIndicatorView.m in Sources */,
 				2B39C9381B241212007BAC7A /* MASConstraint.m in Sources */,
+				2BE8C2381B52536000858CEE /* ProfessionTableViewCell.m in Sources */,
+				2BE8C2331B52506600858CEE /* EditProfessionViewController.m in Sources */,
 				F22FE27F1B3ADAB000A1A997 /* ESUserInfo.m in Sources */,
 				F23059B51B529FAE004599FA /* RCDPhoneAddressBookTableViewCell.m in Sources */,
 				2B39C9731B2D7AF0007BAC7A /* ContactsContainerViewController.m in Sources */,

@@ -61,6 +61,17 @@ typedef NS_ENUM(NSInteger, RequestMethodType){
 
 + (void)getProfessionSuccess:(void (^)(id response))success
                      failure:(void (^)(NSError *error))failure;
+
++ (void)addProfessionWithName:(NSString *)name
+                          url:(NSString *)url
+                      success:(void (^)(id response))success
+                      failure:(void (^)(NSError *err))failure;
+
++ (void)deleteProfessionWithName:(NSString *)name
+                             url:(NSString *)url
+                         success:(void (^)(id response))success
+                         failure:(void (^)(NSError *err))failure;
+
 //get RongCloud Token
 +(void)getRongTokenSuccess:(void (^)(id response))success
                    failure:(void (^)(NSError* err))failure;

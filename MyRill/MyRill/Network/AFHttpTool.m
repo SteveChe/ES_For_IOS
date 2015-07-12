@@ -183,11 +183,34 @@
     [AFHttpTool requestWithMethod:RequestMethodTypeGet
                               url:@"api/professions/.json"
                            params:nil
-                          success:^(id response) {
-                              NSLog(@"%@",response);
-                          } failure:^(NSError *err) {
-                              NSLog(@"%@",err);
-                          }];
+                          success:success
+                          failure:failure];
+}
+
++ (void)addProfessionWithName:(NSString *)name
+                          url:(NSString *)url
+                      success:(void (^)(id))success
+                      failure:(void (^)(NSError *))failure {
+    NSDictionary *params = @{@"name":name,@"url":url};
+    
+    [AFHttpTool requestWithMethod:RequestMethodTypePost
+                              url:@"api/professions/.json"
+                           params:params
+                          success:success
+                          failure:failure];
+}
+
++ (void)deleteProfessionWithName:(NSString *)name
+                             url:(NSString *)url
+                         success:(void (^)(id))success
+                         failure:(void (^)(NSError *))failure {
+    NSDictionary *params = @{@"_method":@"DELETE"};
+    
+    [AFHttpTool requestWithMethod:RequestMethodTypePost
+                              url:@"api/professions/25/.json"
+                           params:params
+                          success:success
+                          failure:failure];
 }
 
 //get RongCloud Token
