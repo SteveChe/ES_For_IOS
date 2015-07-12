@@ -11,6 +11,8 @@
 
 @interface ColorHandler : NSObject
 
++ (BOOL)isNullOrNilNumber:(NSNumber *)num;
++ (BOOL)isNullOrEmptyString:(NSString *)str;
 + (UIColor *)colorFromHexRGB:(NSString *)inColorString;
 + (UIColor *)colorFromHexRGB:(NSString *)inColorString Alpha:(float)alpha;
 

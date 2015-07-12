@@ -1,0 +1,68 @@
+//
+//  AddProfessionViewController.m
+//  MyRill
+//
+//  Created by Siyuan Wang on 15/7/9.
+//
+//
+
+#import "AddProfessionViewController.h"
+#import "ColorHandler.h"
+#import "ProfessionDataParse.h"
+
+@interface AddProfessionViewController () <ProfessionDataDelegate>
+
+@property (weak, nonatomic) IBOutlet UIView *contentView;
+@property (strong, nonatomic) IBOutletCollection(UIView) NSArray *holdViews;
+@property (weak, nonatomic) IBOutlet UITextField *nameTxtField;
+@property (weak, nonatomic) IBOutlet UITextField *urlTxtField;
+@property (nonatomic, strong) ProfessionDataParse *professionDP;
+
+@end
+
+@implementation AddProfessionViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view from its nib.
+    self.title = @"添加业务";
+}
+
+#pragma mark - ProfessionDataDelegate methods
+- (void)addProfessionSuccess {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - response events
+- (IBAction)saveBtnOnClicked:(UIButton *)sender {
+    [self.professionDP deleteProfessionWithName:self.nameTxtField.text url:self.urlTxtField.text];
+}
+
+#pragma mark - setters&getters
+- (void)setContentView:(UIView *)contentView {
+    _contentView = contentView;
+    
+    _contentView.layer.borderWidth = 1.f;
+    _contentView.layer.borderColor = [ColorHandler colorFromHexRGB:@"DDDDDD"].CGColor;
+}
+
+- (void)setHoldViews:(NSArray *)holdViews {
+    _holdViews = holdViews;
+    
+    for (UIView *view in _holdViews) {
+        view.layer.borderWidth = 1.f;
+        view.layer.borderColor = [ColorHandler colorFromHexRGB:@"DDDDDD"].CGColor;
+        view.layer.cornerRadius = 3.f;
+    }
+}
+
+- (ProfessionDataParse *)professionDP {
+    if (!_professionDP) {
+        _professionDP = [[ProfessionDataParse alloc] init];
+        _professionDP.delegate = self;
+    }
+    
+    return _professionDP;
+}
+
+@end

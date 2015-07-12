@@ -8,7 +8,7 @@
 
 #import "ESMenuViewController.h"
 #import "ESNavigationController.h"
-#import "BusinessContainerViewController.h"
+#import "ProfessionViewController.h"
 //#import "ChatContainerViewController.h"
 #import "ChatListViewController.h"
 #import "ContactsContainerViewController.h"
@@ -29,7 +29,7 @@
     
     self.view.backgroundColor = [ColorHandler colorFromHexRGB:@"E9EEF2"];
 
-    BusinessContainerViewController *businessVC = [[BusinessContainerViewController alloc] init];
+    ProfessionViewController *businessVC = [[ProfessionViewController alloc] init];
     UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:@"业务"
                                                              image:[UIImage imageNamed:@"icon"]
                                                      selectedImage:nil];
