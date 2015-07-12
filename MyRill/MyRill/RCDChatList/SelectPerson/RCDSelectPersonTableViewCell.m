@@ -8,21 +8,26 @@
 
 #import "RCDSelectPersonTableViewCell.h"
 
+@interface RCDSelectPersonTableViewCell ()
+
+@end
+
 @implementation RCDSelectPersonTableViewCell
 
 -(void)awakeFromNib
 {
     self.ivAva.clipsToBounds = YES;
-    self.ivAva.layer.cornerRadius = 8.f;
+    self.ivAva.layer.cornerRadius = 18.f;
 }
 
 -(void)setSelected:(BOOL)selected
 {
     [super setSelected:selected];
     if (selected) {
-        _ivSelected.image = [UIImage imageNamed:@"select"];
+        
+        _ivSelected.image = [UIImage imageNamed:@"faqiduihua_xuanzhong"];
     }else{
-        _ivSelected.image = [UIImage imageNamed:@"unselect"];
+        _ivSelected.image = [UIImage imageNamed:@"faqiduihua_xuanze"];
     }
 }
 

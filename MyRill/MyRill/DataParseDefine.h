@@ -14,6 +14,8 @@
 #define NETWORK_ERROR_DETAIL @"errorDetail"
 #define NETWORK_OK_DATA    @"data"
 #define NETWORK_DATA_LIST  @"list"
+#define NETWORK_DATA_GROUP_LIST @"groupList"
+#define NETWORK_DATA_GROUP_TITLE @"groupTitle"
 
 #define RONG_CLOUD_TOKEN   @"token"
 

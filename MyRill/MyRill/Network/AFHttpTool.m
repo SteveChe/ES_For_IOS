@@ -264,5 +264,45 @@
                           success:success failure:failure];
 }
 
+/******** 手机联系人列表******
+ 请求方式：POSt
+ 参数：无
+ 备注：该接口返回当前手机联系人信息在ES系统注册的信息
+ **/
++(void) getPhoneContactList:(NSArray *)phoneContacts success:(void (^)(id response))success failure:(void (^)(NSError *error))failure
+{
+//    NSDictionary *params = @{@"_content":phoneContacts,@"_content_type":@"application/json"};
+
+//    NSString* phoneContactArrayStr = @"";
+    
+//    for (int i = 0 ; i<100; i++)
+//    {
+//        NSString* strTemp =  [phoneContacts objectAtIndex:i];
+//
+//        if (i == 0)
+//        {
+//            phoneContactArrayStr = [NSString stringWithFormat:@"[%@",strTemp ];
+//        }
+//        else
+//        {
+//            phoneContactArrayStr = [NSString stringWithFormat:@"%@,%@",phoneContactArrayStr,strTemp ];
+//        }
+//    }
+//    phoneContactArrayStr = [NSString stringWithFormat:@"%@]",phoneContactArrayStr ];
+
+//    NSString* phoneContactArrayStr = @"[18600562102,18612887327]";
+    NSError* error;
+    NSString *cartJSON = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:phoneContacts
+                                                                                        options:NSJSONWritingPrettyPrinted
+                                                                                          error:&error]
+                                               encoding:NSUTF8StringEncoding];
+    
+    NSDictionary *params = @{@"_content":cartJSON,@"_content_type":@"application/json"};
+
+    [AFHttpTool requestWithMethod:RequestMethodTypePost
+                              url:@"/api/accounts/phone-contacts/.json"
+                           params:params
+                          success:success failure:failure];
+}
 
 @end

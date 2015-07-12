@@ -20,6 +20,13 @@
 /** 公司 */
 @property(nonatomic, strong) NSString* enterprise;
 
+/** 公司 职位*/
+@property(nonatomic, strong) NSString* position;
+
+
+/** type */
+@property(nonatomic, strong) NSString* type;
+
 ///** 全拼*/
 //@property(nonatomic, strong) NSString* quanPin;
 ///** email*/

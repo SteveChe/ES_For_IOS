@@ -15,9 +15,11 @@
 @property (nonatomic, strong) NSArray *keys;
 @property (nonatomic, strong) NSMutableDictionary *allFriends;
 @property (nonatomic,strong) NSArray *allKeys;
-
 @property (nonatomic,strong) NSArray *seletedUsers;
-
-
 @property (nonatomic,assign) BOOL hideSectionHeader;
+@property (nonatomic,strong) NSMutableArray *friends;
+
+
+-(void) getAllData;
+
 @end

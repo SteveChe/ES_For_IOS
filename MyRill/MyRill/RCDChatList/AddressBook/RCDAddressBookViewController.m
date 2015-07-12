@@ -18,15 +18,14 @@
 #import "RCDPersonDetailViewController.h"
 #import "RCDAcceptContactViewController.h"
 #import "RCDSearchFriendViewController.h"
+#import "RCDAddressBookViewTableViewCell.h"
 
 @interface RCDAddressBookViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,UISearchControllerDelegate,UISearchDisplayDelegate>
 
 //#字符索引对应的user object
 @property (nonatomic,strong) NSMutableArray *tempOtherArr;
-@property (nonatomic,strong) NSMutableArray *friends;
 @property (nonatomic,strong) GetContactListDataParse* getContactListDataParse;
 @property (strong, nonatomic) UISearchDisplayController* searchDisplayController1;
--(void) getAllData;
 
 @end
 
@@ -37,10 +36,14 @@
     // Do any additional setup after loading the view.
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationItem.title = @"联系人";
+    
+    UINib *rcdCellNib = [UINib nibWithNibName:@"RCDAddressBookViewTableViewCell" bundle:nil];
+    [self.tableView registerNib:rcdCellNib forCellReuseIdentifier:@"RCDAddressBookViewTableViewCell"];
 }
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    self.tabBarController.tabBar.hidden = NO;
     _getContactListDataParse = [[GetContactListDataParse alloc] init];
     _getContactListDataParse.delegate = self;
 
@@ -100,26 +103,9 @@
 {
     _friends = [NSMutableArray arrayWithArray:contactList];
     
-//    if (_friends.count < 20) {
-//        self.hideSectionHeader = YES;
-//    }
-    
-//    _keys = @[@"A",@"B",@"C",@"D",@"E",@"F",@"G",@"H",@"I",@"J",@"K",@"L",@"M",@"N",@"O",@"P",@"Q",@"R",@"S",@"T",@"U",@"V",@"W",@"X",@"Y",@"Z",@"#"];
-//    _allFriends = [NSMutableDictionary new];
-//    _allKeys = [NSMutableArray new];
-    //    [self removeSelectedUsers:_seletedUsers];
-    
-    //    static NSMutableDictionary *staticDic = nil;
-    //    if (staticDic.count) {
-    //        _allFriends = [NSMutableDictionary dictionaryWithDictionary:staticDic];
-    //        return;
-    //    }
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        
-//        _allFriends = [self sortedArrayWithPinYinDic:_friends];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
-            
         });
     });
 }
@@ -135,30 +121,25 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *reusableCellWithIdentifier = @"RCDAddressBookFirstSectionCell";
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:reusableCellWithIdentifier];
-
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reusableCellWithIdentifier];
-    }
+    static NSString *cellReuseIdentifier = @"RCDAddressBookViewTableViewCell";
+    RCDAddressBookViewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellReuseIdentifier forIndexPath:indexPath];
     
     if (indexPath.section == 0)
     {
-
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        UIImage* defaultImage = [UIImage imageNamed:@"icon"];
-        cell.imageView.image = defaultImage;
 
         switch (indexPath.row)
         {
             case 0:
             {
-                cell.textLabel.text = @"新的联系人";
+                cell.addressBookName.text = @"新的联系人";
+                cell.ivAva.image = [UIImage imageNamed:@"lianxiren_xindelianxiren"];
             }
                 break;
             case 1:
             {
-                cell.textLabel.text = @"多人聊天组";
+                cell.addressBookName.text = @"多人聊天组";
+                cell.ivAva.image = [UIImage imageNamed:@"lianxiren_duorenliaotianzu"];
             }
                 
             default:
@@ -174,8 +155,11 @@
         
         ESUserInfo *user = contactList.contactList[indexPath.row];
         if(user){
-            cell.textLabel.text = user.userName;
-            [cell.imageView sd_setImageWithURL:[NSURL URLWithString:user.portraitUri] placeholderImage:[UIImage imageNamed:@"icon"]];
+            cell.addressBookName.text = user.userName;
+            [cell.ivAva sd_setImageWithURL:[NSURL URLWithString:user.portraitUri] placeholderImage:[UIImage imageNamed:@"icon"]];
+            cell.ivAva.clipsToBounds = YES;
+            cell.ivAva.layer.cornerRadius = 18.f;
+
         }
 
         
