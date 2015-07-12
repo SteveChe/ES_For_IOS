@@ -12,6 +12,7 @@
 #import "ESProfession.h"
 #import "ProfessionCollectionViewCell.h"
 #import "AddProfessionViewController.h"
+#import "EditProfessionViewController.h"
 
 @interface ProfessionViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, ProfessionDataDelegate>
 
@@ -43,14 +44,18 @@
 
 #pragma mark - ProfessionDataDelegate methods
 - (void)loadProfessionList:(NSArray *)list {
-    self.dataSource = [NSMutableArray arrayWithArray:list];
+    self.dataSource = nil;
+    [self.dataSource addObjectsFromArray:list];
+    ESProfession *profession = [[ESProfession alloc] init];
+    profession.icon_url = @"add";
+    [self.dataSource addObject:profession];
     
     [self.collectionView reloadData];
 }
 
 #pragma mark - UICollectionViewDataSource&UICollectionViewDelegateFlowLayout
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.dataSource.count + 1;
+    return self.dataSource.count;
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -62,11 +67,11 @@
     
     cell.contentView.backgroundColor = [UIColor whiteColor];
 
-//    if (!cell) {
-//        cell = [UINib nibWithNibName:@"" bundle:nil];
-//    }
-//    ESProfession *profession = (ESProfession *)self.dataSource[indexPath.row];
-    //[cell updateCellData:profession.name];
+    if (self.dataSource.count > 0 && indexPath.row < self.dataSource.count) {
+        ESProfession *profession = (ESProfession *)self.dataSource[indexPath.row];
+        [cell updateCellData:profession];
+
+    }
     
     return cell;
 }
@@ -112,7 +117,7 @@
     NSLog(@"row=======%ld",(long)[indexPath row]);
     NSLog(@"section===%ld",(long)indexPath.section);
     
-    if (indexPath.row == 2) {
+    if (indexPath.row == self.dataSource.count - 1) {
         AddProfessionViewController *addProfessionVC = [[AddProfessionViewController alloc] init];
         [self.navigationController pushViewController:addProfessionVC animated:YES];
     }
@@ -120,7 +125,9 @@
 
 #pragma mark - response events
 - (void)onSortBtnItemClicked:(UIBarButtonItem *)sender {
-    
+    EditProfessionViewController *editProfessionVC = [[EditProfessionViewController alloc] init];
+    [editProfessionVC loadProfessionContent:self.dataSource];
+    [self.navigationController pushViewController:editProfessionVC animated:YES];
 }
 
 #pragma mark - setters&getters

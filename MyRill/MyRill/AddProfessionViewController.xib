@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="contentView" destination="8yo-Cx-SXE" id="KOu-t5-H61"/>
                 <outlet property="nameTxtField" destination="lwn-ai-kQU" id="gcJ-7A-X1E"/>
+                <outlet property="saveBtn" destination="86g-Rg-g18" id="rPa-SP-ldI"/>
                 <outlet property="urlTxtField" destination="bLz-pd-Hpx" id="YrG-WY-IQX"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outletCollection property="holdViews" destination="JhX-fO-koF" id="RTp-SP-hrM"/>
@@ -21,7 +22,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="86g-Rg-g18">
-                    <rect key="frame" x="20" y="184" width="560" height="44"/>
+                    <rect key="frame" x="20" y="174" width="560" height="44"/>
                     <color key="backgroundColor" red="0.023529411764705882" green="0.65490196078431373" blue="0.88235294117647056" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="RDg-U0-g5z"/>
@@ -105,7 +106,7 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="8yo-Cx-SXE" secondAttribute="trailing" constant="-1" id="19h-zq-XmH"/>
-                <constraint firstItem="86g-Rg-g18" firstAttribute="top" secondItem="8yo-Cx-SXE" secondAttribute="bottom" constant="50" id="63r-8f-gBD"/>
+                <constraint firstItem="86g-Rg-g18" firstAttribute="top" secondItem="8yo-Cx-SXE" secondAttribute="bottom" constant="40" id="63r-8f-gBD"/>
                 <constraint firstItem="8yo-Cx-SXE" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="-1" id="9b2-Hu-n11"/>
                 <constraint firstItem="86g-Rg-g18" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" symbolic="YES" id="Y0X-YU-zRH"/>
                 <constraint firstItem="8yo-Cx-SXE" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="-1" id="izr-NC-gDt"/>

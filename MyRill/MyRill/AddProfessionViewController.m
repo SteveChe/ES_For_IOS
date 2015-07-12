@@ -16,6 +16,7 @@
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *holdViews;
 @property (weak, nonatomic) IBOutlet UITextField *nameTxtField;
 @property (weak, nonatomic) IBOutlet UITextField *urlTxtField;
+@property (weak, nonatomic) IBOutlet UIButton *saveBtn;
 @property (nonatomic, strong) ProfessionDataParse *professionDP;
 
 @end
@@ -54,6 +55,12 @@
         view.layer.borderColor = [ColorHandler colorFromHexRGB:@"DDDDDD"].CGColor;
         view.layer.cornerRadius = 3.f;
     }
+}
+
+- (void)setSaveBtn:(UIButton *)saveBtn {
+    _saveBtn = saveBtn;
+    
+    _saveBtn.layer.cornerRadius = 20.f;
 }
 
 - (ProfessionDataParse *)professionDP {

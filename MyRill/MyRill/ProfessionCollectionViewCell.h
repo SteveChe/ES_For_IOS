@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@class ESProfession;
 
 @interface ProfessionCollectionViewCell : UICollectionViewCell
 
-- (void)updateCellData:(NSString *)title;
+- (void)updateCellData:(ESProfession *)profession;
 
 @end

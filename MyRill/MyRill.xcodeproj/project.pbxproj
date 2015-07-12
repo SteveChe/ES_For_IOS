@@ -74,7 +74,6 @@
 		2BE8C2301B4EC58500858CEE /* ESViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE8C22F1B4EC58500858CEE /* ESViewController.m */; };
 		2BE8C2331B52506600858CEE /* EditProfessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE8C2321B52506600858CEE /* EditProfessionViewController.m */; };
 		2BE8C2381B52536000858CEE /* ProfessionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE8C2361B52536000858CEE /* ProfessionTableViewCell.m */; };
-		2BE8C2391B52536000858CEE /* ProfessionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE8C2371B52536000858CEE /* ProfessionTableViewCell.xib */; };
 		F22FE2731B3AD7BE00A1A997 /* ChatListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE2721B3AD7BE00A1A997 /* ChatListViewController.m */; };
 		F22FE2781B3AD87800A1A997 /* KxMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE2771B3AD87800A1A997 /* KxMenu.m */; };
 		F22FE27B1B3AD94200A1A997 /* UIColor+RCColor.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE27A1B3AD94200A1A997 /* UIColor+RCColor.m */; };
@@ -118,6 +117,7 @@
 		F22FE3021B4576D100A1A997 /* GetContactListDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE3011B4576D100A1A997 /* GetContactListDataParse.m */; };
 		F22FE3051B458A4100A1A997 /* GetRequestContactListDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE3041B458A4100A1A997 /* GetRequestContactListDataParse.m */; };
 		F22FE3081B45989200A1A997 /* ESContactList.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE3071B45989200A1A997 /* ESContactList.m */; };
+		F22FE30A1B4A9F1A00A1A997 /* RCDAddFriendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F22FE3091B4A9F1A00A1A997 /* RCDAddFriendViewController.xib */; };
 		F24787721B2D5CE700EC266B /* ChangePwdDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F24787711B2D5CE700EC266B /* ChangePwdDataParse.m */; };
 		F24787751B2D775E00EC266B /* SignUpDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F24787741B2D775E00EC266B /* SignUpDataParse.m */; };
 		F250F2EA1B2471CD000AD021 /* AFHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = F250F2E91B2471CD000AD021 /* AFHttpTool.m */; };
@@ -313,7 +313,6 @@
 		2BE8C2321B52506600858CEE /* EditProfessionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProfessionViewController.m; sourceTree = "<group>"; };
 		2BE8C2351B52536000858CEE /* ProfessionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfessionTableViewCell.h; sourceTree = "<group>"; };
 		2BE8C2361B52536000858CEE /* ProfessionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfessionTableViewCell.m; sourceTree = "<group>"; };
-		2BE8C2371B52536000858CEE /* ProfessionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfessionTableViewCell.xib; sourceTree = "<group>"; };
 		F22FE2711B3AD7BE00A1A997 /* ChatListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatListViewController.h; sourceTree = "<group>"; };
 		F22FE2721B3AD7BE00A1A997 /* ChatListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatListViewController.m; sourceTree = "<group>"; };
 		F22FE2761B3AD87800A1A997 /* KxMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KxMenu.h; path = Utilities/KxMenu/KxMenu.h; sourceTree = "<group>"; };
@@ -923,7 +922,6 @@
 				2BE8C21C1B4D60B400858CEE /* ProfessionCollectionViewCell.xib */,
 				2BE8C2351B52536000858CEE /* ProfessionTableViewCell.h */,
 				2BE8C2361B52536000858CEE /* ProfessionTableViewCell.m */,
-				2BE8C2371B52536000858CEE /* ProfessionTableViewCell.xib */,
 			);
 			name = Profession;
 			sourceTree = "<group>";
@@ -1259,7 +1257,6 @@
 				2B39C98D1B37B2A4007BAC7A /* LoginViewController.xib in Resources */,
 				2B9CBB691B42D897007D7A45 /* UserMsgViewController.xib in Resources */,
 				F22FE2951B3B000400A1A997 /* UserSettingViewController.xib in Resources */,
-				2BE8C2391B52536000858CEE /* ProfessionTableViewCell.xib in Resources */,
 				2B9CBB671B3AEC74007D7A45 /* (null) in Resources */,
 				2B5A591F1B48F921000382D7 /* ChangPhoneNumViewController.xib in Resources */,
 				2B39C9971B37E634007BAC7A /* SignUpViewController.xib in Resources */,
@@ -1269,6 +1266,8 @@
 				F2D2338F1B37DE6400F8C65D /* RongCloud.bundle in Resources */,
 				2B31C3E01B11C3FD004C865A /* Images.xcassets in Resources */,
 				2BE8C21E1B4D60B400858CEE /* ProfessionCollectionViewCell.xib in Resources */,
+				F22FE30A1B4A9F1A00A1A997 /* RCDAddFriendViewController.xib in Resources */,
+				F2F92ECA1B4ABA5F0047D7BF /* RCDAcceptContactTableViewCell.xib in Resources */,
 				2B9CBB621B3ADEC4007D7A45 /* (null) in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,6 +7,7 @@
 //
 
 #import "ProfessionCollectionViewCell.h"
+#import "ESProfession.h"
 
 @interface ProfessionCollectionViewCell ()
 
@@ -21,12 +22,15 @@
     // Initialization code
 }
 
-- (void)updateCellData:(NSString *)title {
-    self.titleLbl.text = title;
-    NSURL *url = [NSURL URLWithString:@"http://g.soz.im/http://sina.com.cn?defaulticon=http://soz.im/favicon.ico"];
-    NSData *data = [NSData dataWithContentsOfURL:url];
-    self.icon.image = [UIImage imageWithData:data];
-    
+- (void)updateCellData:(ESProfession *)profession {
+    self.titleLbl.text = profession.name;
+    if ([profession.icon_url isEqualToString:@"add"]) {
+        self.icon.image = [UIImage imageNamed:@"icon.png"];
+    } else {
+        NSURL *url = [NSURL URLWithString:profession.icon_url];
+        NSData *data = [NSData dataWithContentsOfURL:url];
+        self.icon.image = [UIImage imageWithData:data];
+    }
 }
 
 @end
