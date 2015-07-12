@@ -29,7 +29,6 @@
     self.conversationListTableView.separatorColor = [UIColor colorWithHexString:@"dfdfdf" alpha:1.0f];
     self.conversationListTableView.tableFooterView = [UIView new];
     
-    
 }
 
 
@@ -53,9 +52,6 @@
     [rightBtn addTarget:self action:@selector(rightBarButtonItemPressed:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
     [rightBtn setTintColor:[UIColor whiteColor]];
-//    self.tabBarController.navigationItem.rightBarButtonItem = rightButton;
-//    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc]initWithTitle:@"+" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonItemPressed:)];
-//    [rightButton setTintColor:[UIColor whiteColor]];
     self.navigationItem.rightBarButtonItem = rightButton;
 
     [self updateBadgeValueForTabBarItem];
@@ -63,7 +59,7 @@
     UIView* headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 80)];
     headerView.backgroundColor = [UIColor redColor];
     self.conversationListTableView.tableHeaderView = headerView;
-    
+
 }
 
 - (void)updateBadgeValueForTabBarItem
@@ -156,38 +152,25 @@
  */
 -(void)rightBarButtonItemPressed:(id)sender
 {
+    KxMenuItem* k1 = [KxMenuItem menuItem:@"发起对话"
+                                    image:[UIImage imageNamed:@"duihua_faqiduihua"]
+                                   target:self
+                                   action:@selector(pushChat:)];
+    k1.foreColor = [UIColor colorWithHexString:@"333333" alpha:1.0f];
+    
+    KxMenuItem* k2 = [KxMenuItem menuItem:@"添加联系人"
+                                          image:[UIImage imageNamed:@"duihua_tianjialianxiren"]
+                                         target:self
+                                         action:@selector(pushAddFriend:)];
+    k2.foreColor = [UIColor colorWithHexString:@"333333" alpha:1.0f];
+
     NSArray *menuItems =
-    @[
-      
-      [KxMenuItem menuItem:@"发起对话"
-                     image:[UIImage imageNamed:@"chat_icon"]
-                    target:self
-                    action:@selector(pushChat:)],
-      
-      [KxMenuItem menuItem:@"添加联系人"
-                     image:[UIImage imageNamed:@"addfriend_icon"]
-                    target:self
-                    action:@selector(pushAddFriend:)],
-      
-      ];
-//    CGRect targetFrame = self.tabBarController.navigationItem.rightBarButtonItem.customView.frame;
+    @[ k1, k2,];
     CGRect targetFrame = self.navigationItem.rightBarButtonItem.customView.frame;
     targetFrame.origin.y = targetFrame.origin.y + 15;
     [KxMenu showMenuInView:self.navigationController.navigationBar.superview
                   fromRect:targetFrame
                  menuItems:menuItems];
-    //    [KxMenu showMenuInView:self.tabBarController.navigationController.navigationBar.superview
-//                  fromRect:targetFrame
-//                 menuItems:menuItems];
-
-//    ChatViewController *_conversationVC = [[ChatViewController alloc]init];
-//    _conversationVC.conversationType = ConversationType_PRIVATE;
-//    _conversationVC.targetId = @"13";
-//    _conversationVC.userName = @"cxs";
-//    _conversationVC.title = @"聊天";
-//    _conversationVC.conversation = model;
-    
-//    [self.navigationController pushViewController:_conversationVC animated:YES];
 }
 
 #pragma mark 导航按钮-方法
@@ -268,5 +251,6 @@
     [self.navigationController pushViewController:searchFirendVC  animated:YES];
     
 }
+
 
 @end

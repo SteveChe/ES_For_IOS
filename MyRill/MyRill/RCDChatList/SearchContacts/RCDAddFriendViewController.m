@@ -36,13 +36,13 @@
     [super viewWillAppear:animated];
 
     //自定义rightBarButtonItem
-    UIButton *rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 17, 17)];
-    [rightBtn setTitle:@"发送" forState:UIControlStateNormal];
-    [rightBtn addTarget:self action:@selector(rightBarButtonItemPressed:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
-    [rightBtn setTintColor:[UIColor whiteColor]];
-    self.navigationItem.rightBarButtonItem = rightButton;
-        
+    UIBarButtonItem *settintBtnItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                                    target:self
+                                                                                    action:@selector(rightBarButtonItemPressed:)];
+    self.navigationItem.rightBarButtonItem = settintBtnItem;
+    
+    NSString* addFriendText = [NSString stringWithFormat:@"我是%@",_targetUserInfo.name];
+    _addFriendTextField.text = addFriendText;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -78,7 +78,6 @@
     }
     [_addContactDataParse addContact:_targetUserInfo.userId];
 }
-
 
 -(void)backToLastPage
 {

@@ -13,7 +13,8 @@
 
 @implementation GetRequestContactListDataParse
 //获取已经请求添加自己的联系人列表
--(void) getRequestedContacts
+-(void)getRequestedContactList
+
 {
     [AFHttpTool getContactRequestSuccess:^(id response)
      {
