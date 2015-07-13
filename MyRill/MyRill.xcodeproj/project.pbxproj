@@ -14,6 +14,8 @@
 		2B31C3E01B11C3FD004C865A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B31C3DF1B11C3FD004C865A /* Images.xcassets */; };
 		2B31C3E31B11C3FD004C865A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B31C3E11B11C3FD004C865A /* LaunchScreen.xib */; };
 		2B31C3EF1B11C3FD004C865A /* MyRillTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B31C3EE1B11C3FD004C865A /* MyRillTests.m */; };
+		2B37E44C1B53967D00F671A1 /* ModifyProfessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B37E44A1B53967D00F671A1 /* ModifyProfessionViewController.m */; };
+		2B37E44D1B53967D00F671A1 /* ModifyProfessionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B37E44B1B53967D00F671A1 /* ModifyProfessionViewController.xib */; };
 		2B39C9371B241212007BAC7A /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9201B241212007BAC7A /* MASCompositeConstraint.m */; };
 		2B39C9381B241212007BAC7A /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9231B241212007BAC7A /* MASConstraint.m */; };
 		2B39C9391B241212007BAC7A /* MASConstraintMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9251B241212007BAC7A /* MASConstraintMaker.m */; };
@@ -203,6 +205,9 @@
 		2B31C3E81B11C3FD004C865A /* MyRillTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyRillTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B31C3ED1B11C3FD004C865A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2B31C3EE1B11C3FD004C865A /* MyRillTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyRillTests.m; sourceTree = "<group>"; };
+		2B37E4491B53967D00F671A1 /* ModifyProfessionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModifyProfessionViewController.h; sourceTree = "<group>"; };
+		2B37E44A1B53967D00F671A1 /* ModifyProfessionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModifyProfessionViewController.m; sourceTree = "<group>"; };
+		2B37E44B1B53967D00F671A1 /* ModifyProfessionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ModifyProfessionViewController.xib; sourceTree = "<group>"; };
 		2B39C91F1B241212007BAC7A /* MASCompositeConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASCompositeConstraint.h; sourceTree = "<group>"; };
 		2B39C9201B241212007BAC7A /* MASCompositeConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASCompositeConstraint.m; sourceTree = "<group>"; };
 		2B39C9211B241212007BAC7A /* MASConstraint+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MASConstraint+Private.h"; sourceTree = "<group>"; };
@@ -776,6 +781,9 @@
 				2B39C96C1B2D79DB007BAC7A /* ProfessionViewController.m */,
 				2BE8C2311B52506600858CEE /* EditProfessionViewController.h */,
 				2BE8C2321B52506600858CEE /* EditProfessionViewController.m */,
+				2B37E4491B53967D00F671A1 /* ModifyProfessionViewController.h */,
+				2B37E44A1B53967D00F671A1 /* ModifyProfessionViewController.m */,
+				2B37E44B1B53967D00F671A1 /* ModifyProfessionViewController.xib */,
 				2BE8C2291B4EB3A100858CEE /* AddProfessionViewController.h */,
 				2BE8C22A1B4EB3A100858CEE /* AddProfessionViewController.m */,
 				2BE8C22B1B4EB3A100858CEE /* AddProfessionViewController.xib */,
@@ -1252,6 +1260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2BE8C22D1B4EB3A200858CEE /* AddProfessionViewController.xib in Resources */,
+				2B37E44D1B53967D00F671A1 /* ModifyProfessionViewController.xib in Resources */,
 				F22FE2881B3AF0CB00A1A997 /* RongCloudKit.strings in Resources */,
 				F2D2335E1B31B1F400F8C65D /* PushConfig.plist in Resources */,
 				2B39C98D1B37B2A4007BAC7A /* LoginViewController.xib in Resources */,
@@ -1383,6 +1392,7 @@
 				2B5A59151B48DFBB000382D7 /* MRActivityIndicatorView+AFNetworking.m in Sources */,
 				2B39C9701B2D7AD2007BAC7A /* ChatContainerViewController.m in Sources */,
 				F22FE2F31B4000ED00A1A997 /* UIView+WebCacheOperation.m in Sources */,
+				2B37E44C1B53967D00F671A1 /* ModifyProfessionViewController.m in Sources */,
 				F29F862A1B2410070058FC9F /* AFHTTPSessionManager.m in Sources */,
 				F29F86451B2410320058FC9F /* UIAlertView+AFNetworking.m in Sources */,
 				2B39C9941B37E5F2007BAC7A /* ResetPwdViewController.m in Sources */,

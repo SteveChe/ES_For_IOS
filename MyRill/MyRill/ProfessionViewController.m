@@ -63,7 +63,7 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    ProfessionCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Profession Cell" forIndexPath:indexPath];
+    ProfessionCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Profession CollectionCell" forIndexPath:indexPath];
     
     cell.contentView.backgroundColor = [UIColor whiteColor];
 
@@ -112,10 +112,6 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = (UICollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    cell.backgroundColor = [UIColor redColor];
-    NSLog(@"row=======%ld",(long)[indexPath row]);
-    NSLog(@"section===%ld",(long)indexPath.section);
     
     if (indexPath.row == self.dataSource.count - 1) {
         AddProfessionViewController *addProfessionVC = [[AddProfessionViewController alloc] init];
@@ -138,7 +134,7 @@
         [layout setScrollDirection:UICollectionViewScrollDirectionVertical];
         _collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
         UINib *professionCell = [UINib nibWithNibName:@"ProfessionCollectionViewCell" bundle:nil];
-        [_collectionView registerNib:professionCell forCellWithReuseIdentifier:@"Profession Cell"];
+        [_collectionView registerNib:professionCell forCellWithReuseIdentifier:@"Profession CollectionCell"];
         _collectionView.backgroundColor = [ColorHandler colorFromHexRGB:@"DDDDDD"];
         _collectionView.bounces = NO;
         _collectionView.delegate = self;

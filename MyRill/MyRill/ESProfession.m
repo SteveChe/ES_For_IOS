@@ -35,7 +35,7 @@
         if ([ColorHandler isNullOrEmptyString:dic[@"url"]]) {
             self.url = @"";
         } else {
-            self.url = [NSString stringWithFormat:@"http://g.soz.im/%@n?defaulticon=http://soz.im/favicon.ico",dic[@"url"]];
+            self.url = dic[@"url"];
         }
         
         if ([ColorHandler isNullOrEmptyString:dic[@"icon_url"]]) {

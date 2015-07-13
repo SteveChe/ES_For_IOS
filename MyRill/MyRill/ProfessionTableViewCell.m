@@ -23,7 +23,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     
     if (self) {
-        [self addSubview:self.imgView];
+        //[self addSubview:self.imgView];
         [self addSubview:self.titleLbl];
         
         __weak UIView *ws = self;
@@ -33,13 +33,13 @@
 //            make.centerY.equalTo(ws.mas_centerY);
 //        }];
         
-        [self layoutIfNeeded];
+        //[self layoutIfNeeded];
         
-        __weak UIImageView *wi = self.imgView;
-        [self.titleLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.leading.equalTo(ws.mas_leading).with.offset(70);
-            make.centerY.equalTo(ws.mas_centerY);
-        }];
+        //__weak UIImageView *wi = self.imgView;
+//        [self.titleLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.leading.equalTo(ws.mas_leading).with.offset(70);
+//            make.centerY.equalTo(ws.mas_centerY);
+//        }];
         
     }
     
@@ -68,7 +68,7 @@
 
 - (UILabel *)titleLbl {
     if (!_titleLbl) {
-        _titleLbl = [[UILabel alloc] init];
+        _titleLbl = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, 80, 30)];
         _titleLbl.textColor = [UIColor redColor];
     }
     
