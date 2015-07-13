@@ -23,12 +23,11 @@ typedef NS_ENUM(NSInteger, RequestMethodType){
  *  @param success      请求成功后的回调（请将请求成功后想做的事情写到这个block中）
  *  @param failure      请求失败后的回调（请将请求失败后想做的事情写到这个block中）
  */
-+(void) requestWithMethod:(RequestMethodType)
-methodType url : (NSString *)url
-                   params:(NSDictionary *)params
++ (void)requestWithMethod:(RequestMethodType)methodType
+                      url:(NSString*)url
+                   params:(NSDictionary*)params
                   success:(void (^)(id response))success
-                  failure:(void (^)(NSError *err))failure;
-
+                  failure:(void (^)(NSError* err))failure;
 //sign-up
 +(void) signUpWithPhoneNum:(NSString *) phoneNum
                   password:(NSString *) password
@@ -103,5 +102,13 @@ methodType url : (NSString *)url
  **/
 +(void) getContactListSuccess:(void (^)(id response))success
                       failure:(void (^)(NSError *error))failure;
+
+
+/******** 手机联系人列表******
+ 请求方式：POST
+ 参数：无
+ 备注：该接口返回当前手机联系人信息在ES系统注册的信息
+ **/
++(void) getPhoneContactList:(NSArray *)phoneContacts success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
 
 @end

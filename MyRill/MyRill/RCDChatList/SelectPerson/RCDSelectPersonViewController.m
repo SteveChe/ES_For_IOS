@@ -10,6 +10,7 @@
 #import "RCDSelectPersonTableViewCell.h"
 #import "ESUserInfo.h"
 #import "UIImageView+WebCache.h"
+#import "ESContactList.h"
 //#import "RCDRCIMDataSource.h"
 //#import "ChatViewController.h"
 
@@ -24,14 +25,18 @@
     //控制多选
     self.tableView.allowsMultipleSelection = YES;
     
-    //rightBarButtonItem click event
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStylePlain target:self action:@selector(clickedDone:)];
-
+    
+    UINib *rcdCellNib = [UINib nibWithNibName:@"RCDSelectPersonTableViewCell" bundle:nil];
+    [self.tableView registerNib:rcdCellNib forCellReuseIdentifier:@"RCDSelectPersonTableViewCell"];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    UIBarButtonItem *settintBtnItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self                      action:@selector(clickedDone:)];
+    self.navigationItem.rightBarButtonItem = settintBtnItem;
+
 }
 
 
@@ -51,9 +56,12 @@
     //get seleted users
     NSMutableArray *seletedUsers = [NSMutableArray new];
     for (NSIndexPath *indexPath in indexPaths) {
-        NSString *key = [self.allKeys objectAtIndex:indexPath.section];
-        NSArray *arrayForKey = [self.allFriends objectForKey:key];
-        ESUserInfo *user = arrayForKey[indexPath.row];
+//        NSString *key = [self.allKeys objectAtIndex:indexPath.section];
+//        NSArray *arrayForKey = [self.allFriends objectForKey:key];
+        ESContactList* contactList = self.friends[indexPath.section];
+        
+        ESUserInfo *user = contactList.contactList[indexPath.row];
+
         //转成RCDUserInfo
         ESUserInfo *userInfo = [ESUserInfo new];
         userInfo.userId = user.userId;
@@ -62,40 +70,46 @@
         [seletedUsers addObject:userInfo];
     }
     
-
-    
     //excute the clickDoneCompletion
     if (self.clickDoneCompletion) {
         self.clickDoneCompletion(self,seletedUsers);
     }
-    
 
 }
 
 
+#pragma mark -UITableViewDataSource
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return [self.friends count];
+}
 
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    ESContactList* contactList = [self.friends objectAtIndex:section];
+    return [contactList.contactList count];
+}
 //override delegate
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 72.f;
+    return 65.f;
 }
-
 
 //override datasource
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellReuseIdentifier = @"RCDAddressBookSelectedCell";
-    RCDSelectPersonTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellReuseIdentifier];
-
-    [cell setUserInteractionEnabled:YES];
-    NSString *key = [self.allKeys objectAtIndex:indexPath.section];
-    NSArray *arrayForKey = [self.allFriends objectForKey:key];
+    static NSString *cellReuseIdentifier = @"RCDSelectPersonTableViewCell";
+    RCDSelectPersonTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellReuseIdentifier forIndexPath:indexPath];
     
-    ESUserInfo *user = arrayForKey[indexPath.row];
+    [cell setUserInteractionEnabled:YES];
+
+    ESContactList* contactList = self.friends[indexPath.section];
+    ESUserInfo *user = contactList.contactList[indexPath.row];
+
     if(user){
         cell.lblName.text = user.userName;
-        [cell.ivAva sd_setImageWithURL:[NSURL URLWithString:user.portraitUri] placeholderImage:[UIImage imageNamed:@"icon_person"]];
+        [cell.ivAva sd_setImageWithURL:[NSURL URLWithString:user.portraitUri] placeholderImage:[UIImage imageNamed:@"icon"]];
     }
     
     //设置选中状态
@@ -106,17 +120,13 @@
         }
     }
 
-
     return cell;
 }
 
-
-//override delegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     RCDSelectPersonTableViewCell *cell = (RCDSelectPersonTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
     [cell setSelected:YES];
-    
 }
 
 -(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath

@@ -50,10 +50,10 @@
                  }
                  NSMutableArray* enterpriseList = [NSMutableArray array];
                  
-                 for (NSArray* temArray in dataListArray)
+                 for (NSDictionary* temArrayDic in dataListArray)
                  {
-                     NSString* enterpriseName = [temArray objectAtIndex:0];
-                     NSArray* temContactArray = [temArray objectAtIndex:1];
+                     NSString* enterpriseName = [temArrayDic valueForKey:NETWORK_DATA_GROUP_TITLE];
+                     NSArray* temContactArray = [temArrayDic valueForKey:NETWORK_DATA_GROUP_LIST];
                      if (temContactArray == nil || [temContactArray isEqual:[NSNull null]]
                          || enterpriseName == nil || [enterpriseName isEqual:[NSNull null]])
                      {

@@ -189,12 +189,12 @@
     selectPersonVC.clickDoneCompletion = ^(RCDSelectPersonViewController *selectPersonViewController,NSArray *selectedUsers){
         if(selectedUsers.count == 1)
         {
-            RCUserInfo *user = selectedUsers[0];
+            ESUserInfo *user = selectedUsers[0];
             ChatViewController *chat =[[ChatViewController alloc]init];
             chat.targetId                      = user.userId;
-            chat.userName                    = user.name;
+            chat.userName                    = user.userName;
             chat.conversationType              = ConversationType_PRIVATE;
-            chat.title                         = user.name;
+            chat.title                         = user.userName;
             
             //跳转到会话页面
             dispatch_async(dispatch_get_main_queue(), ^{

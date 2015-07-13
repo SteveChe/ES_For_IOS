@@ -7,10 +7,18 @@
 //
 #import <AddressBook/AddressBook.h>
 #import "RCDPhoneAddressBookViewController.h"
+#import "GetPhoneContactListDataParse.h"
+#import "CustomShowMessage.h"
+#import "ESUserInfo.h"
+#import "UIImageView+WebCache.h"
 
 @interface RCDPhoneAddressBookViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,UISearchControllerDelegate,UISearchDisplayDelegate>
 
-@property (strong, nonatomic) UISearchDisplayController* searchDisplayController1;
+@property (nonatomic,strong) UISearchDisplayController* searchDisplayController1;
+@property (nonatomic,strong) NSMutableArray* phoneNumberList;
+@property (nonatomic,strong) NSMutableDictionary* addBookDic;
+@property (nonatomic,strong) GetPhoneContactListDataParse* getPhoneContactListDataParse;
+@property (nonatomic,strong) NSMutableArray* phoneNumberContacts;
 
 @end
 
@@ -19,7 +27,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    _getPhoneContactListDataParse = [[GetPhoneContactListDataParse alloc] init];
+    _getPhoneContactListDataParse.delegate = self;
+    _phoneNumberList = [[NSMutableArray alloc] init];
+    _phoneNumberContacts = [[NSMutableArray alloc] init];
+    _addBookDic = [NSMutableDictionary dictionary];
     
+    [self initPhoneContactList];
+    
+    UINib *rcdCellNib = [UINib nibWithNibName:@"RCDPhoneAddressBookTableViewCell" bundle:nil];
+    [self.tableView registerNib:rcdCellNib forCellReuseIdentifier:@"RCDPhoneAddressBookTableViewCell"];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -46,11 +64,22 @@
     
 }
 
+//
+-(void)initPhoneContactList
+{
+    [self readAllPeoples];
+    if ([self.phoneNumberList count] > 0)
+    {
+        [_getPhoneContactListDataParse getPhoneContactList:self.phoneNumberList];
+    }
+    
+}
+
 //读取所有联系人
 -(void)readAllPeoples
 
 {
-    
+    [_phoneNumberList removeAllObjects];
     //取得本地通信录名柄
     ABAddressBookRef tmpAddressBook = nil;
     CFErrorRef error = nil;
@@ -104,7 +133,7 @@
             continue;
         }
         
-        NSLog(@"personName = %@",personName);
+//        NSLog(@"personName = %@",personName);
         //读取电话多值
         ABMultiValueRef phone = ABRecordCopyValue(person, kABPersonPhoneProperty);
         NSInteger phoneCount = ABMultiValueGetCount(phone);
@@ -120,6 +149,8 @@
                 if (pureNumbers.length >= 11)
                 {
                     NSString *phoneNumber = [pureNumbers substringFromIndex:pureNumbers.length-11];
+                    [_phoneNumberList addObject:phoneNumber];
+                    [_addBookDic setObject:personName forKey:phoneNumber];
                 }
             }
         
@@ -129,7 +160,83 @@
     CFRelease(peopleMutable);
     CFRelease(results);
     CFRelease(tmpAddressBook);
+    
+}
 
+
+#pragma mark --GetPhoneContactListDelegate
+-(void)getPhoneContactList:(NSArray*)contactList;
+{
+    [_phoneNumberContacts removeAllObjects];
+    [_phoneNumberContacts addObjectsFromArray:contactList];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+            
+        });
+    });
+}
+-(void)getPhoneContactListFailed:(NSString*)errorMessage;
+{
+    [[CustomShowMessage getInstance] showNotificationMessage:errorMessage];
+}
+
+#pragma mark --UITableViewDataSource
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [_phoneNumberContacts count];
+}
+
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return @"手机联系人";
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *cellReuseIdentifier = @"RCDPhoneAddressBookTableViewCell";
+    RCDPhoneAddressBookTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellReuseIdentifier forIndexPath:indexPath];
+    ESUserInfo *user = _phoneNumberContacts[indexPath.row];
+    
+    if(user)
+    {
+        cell.esName.text = user.userName;
+        NSString* phoneName = [_addBookDic valueForKey:user.phoneNumber];
+        if (phoneName != nil && [phoneName length] > 0 )
+        {
+            cell.phoneName.text = phoneName;
+        }
+        [cell.ivAva sd_setImageWithURL:[NSURL URLWithString:user.portraitUri] placeholderImage:[UIImage imageNamed:@"icon"]];
+        cell.delegate = self;
+    }
+
+    
+
+    return cell;
+}
+
+#pragma mark --UITableViewDelegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 65.0f;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+}
+
+#pragma mark --RCDPhoneAddressBookTableViewCellDelegate
+
+-(void)addButtonClick:(id)sender
+{
+    RCDPhoneAddressBookTableViewCell* cell = (RCDPhoneAddressBookTableViewCell*) sender;
+    [cell.addButton setBackgroundImage:[UIImage imageNamed:@"ren_tianjia_chenggong"] forState:UIControlStateNormal];
 }
 
 @end
