@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2B26E1011B4A5A46000FE4D3 /* ProfessionDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B26E1001B4A5A46000FE4D3 /* ProfessionDataParse.m */; };
 		2B26E1041B4AA379000FE4D3 /* ESProfession.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B26E1031B4AA379000FE4D3 /* ESProfession.m */; };
 		2B31C3D51B11C3FD004C865A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B31C3D41B11C3FD004C865A /* main.m */; };
 		2B31C3D81B11C3FD004C865A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B31C3D71B11C3FD004C865A /* AppDelegate.m */; };
@@ -16,6 +15,8 @@
 		2B31C3EF1B11C3FD004C865A /* MyRillTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B31C3EE1B11C3FD004C865A /* MyRillTests.m */; };
 		2B37E44C1B53967D00F671A1 /* ModifyProfessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B37E44A1B53967D00F671A1 /* ModifyProfessionViewController.m */; };
 		2B37E44D1B53967D00F671A1 /* ModifyProfessionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B37E44B1B53967D00F671A1 /* ModifyProfessionViewController.xib */; };
+		2B37E45F1B53E9D800F671A1 /* ProfessionDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B37E45E1B53E9D800F671A1 /* ProfessionDataParse.m */; };
+		2B37E4601B53E9E000F671A1 /* ProfessionDataParse.h in Sources */ = {isa = PBXBuildFile; fileRef = 2B37E45D1B53E9D800F671A1 /* ProfessionDataParse.h */; };
 		2B39C9371B241212007BAC7A /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9201B241212007BAC7A /* MASCompositeConstraint.m */; };
 		2B39C9381B241212007BAC7A /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9231B241212007BAC7A /* MASConstraint.m */; };
 		2B39C9391B241212007BAC7A /* MASConstraintMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9251B241212007BAC7A /* MASConstraintMaker.m */; };
@@ -197,8 +198,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2B26E0FF1B4A5A46000FE4D3 /* ProfessionDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfessionDataParse.h; sourceTree = "<group>"; };
-		2B26E1001B4A5A46000FE4D3 /* ProfessionDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfessionDataParse.m; sourceTree = "<group>"; };
 		2B26E1021B4AA379000FE4D3 /* ESProfession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESProfession.h; sourceTree = "<group>"; };
 		2B26E1031B4AA379000FE4D3 /* ESProfession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESProfession.m; sourceTree = "<group>"; };
 		2B31C3CF1B11C3FD004C865A /* MyRill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyRill.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -214,6 +213,8 @@
 		2B37E4491B53967D00F671A1 /* ModifyProfessionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModifyProfessionViewController.h; sourceTree = "<group>"; };
 		2B37E44A1B53967D00F671A1 /* ModifyProfessionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModifyProfessionViewController.m; sourceTree = "<group>"; };
 		2B37E44B1B53967D00F671A1 /* ModifyProfessionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ModifyProfessionViewController.xib; sourceTree = "<group>"; };
+		2B37E45D1B53E9D800F671A1 /* ProfessionDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfessionDataParse.h; sourceTree = "<group>"; };
+		2B37E45E1B53E9D800F671A1 /* ProfessionDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfessionDataParse.m; sourceTree = "<group>"; };
 		2B39C91F1B241212007BAC7A /* MASCompositeConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASCompositeConstraint.h; sourceTree = "<group>"; };
 		2B39C9201B241212007BAC7A /* MASCompositeConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASCompositeConstraint.m; sourceTree = "<group>"; };
 		2B39C9211B241212007BAC7A /* MASConstraint+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MASConstraint+Private.h"; sourceTree = "<group>"; };
@@ -704,6 +705,8 @@
 		2B39C94D1B247A4E007BAC7A /* DataDrive */ = {
 			isa = PBXGroup;
 			children = (
+				2B37E45D1B53E9D800F671A1 /* ProfessionDataParse.h */,
+				2B37E45E1B53E9D800F671A1 /* ProfessionDataParse.m */,
 				F247876C1B2BC3CE00EC266B /* DataParseDefine.h */,
 				2B39C94E1B248063007BAC7A /* LoginDataParse.h */,
 				2B39C94F1B248063007BAC7A /* LoginDataParse.m */,
@@ -1320,8 +1323,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B37E4601B53E9E000F671A1 /* ProfessionDataParse.h in Sources */,
 				F22FE2E81B4000ED00A1A997 /* SDWebImageDecoder.m in Sources */,
-				2B26E1011B4A5A46000FE4D3 /* ProfessionDataParse.m in Sources */,
 				2B39C96D1B2D79DB007BAC7A /* ProfessionViewController.m in Sources */,
 				2B5A590D1B48DFBB000382D7 /* UIImage+MRImageEffects.m in Sources */,
 				2B39C9441B24128F007BAC7A /* LoginViewController.m in Sources */,
@@ -1398,6 +1401,7 @@
 				F277AE011B2DC146006E42CB /* DeviceInfo.m in Sources */,
 				F22FE2C11B3FFCAF00A1A997 /* MBProgressHUD.m in Sources */,
 				2B5A59161B48DFBB000382D7 /* MRProgressOverlayView+AFNetworking.m in Sources */,
+				2B37E45F1B53E9D800F671A1 /* ProfessionDataParse.m in Sources */,
 				2B39C93C1B241212007BAC7A /* MASViewConstraint.m in Sources */,
 				F2F92EFF1B5020CC0047D7BF /* GetPhoneContactListDataParse.m in Sources */,
 				2B5A590F1B48DFBB000382D7 /* MRCircularProgressView.m in Sources */,

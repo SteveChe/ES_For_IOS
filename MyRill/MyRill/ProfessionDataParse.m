@@ -36,39 +36,13 @@
             
             [self.delegate loadProfessionList:resultList];
         }
-                        } failure:^(NSError *error) {
-                            ;
-                        }];
+    } failure:^(NSError *error) {
+        ;
+    }];
 }
 
 - (void)addProfessionWithName:(NSString *)name url:(NSString *)url {
     [AFHttpTool addProfessionWithName:name
-                                  url:url
-                              success:^(id response) {
-                                  NSDictionary *responseDic = (NSDictionary *)response;
-                                  NSNumber *errorCodeNum = responseDic[NETWORK_ERROR_CODE];
-        
-                                  if (errorCodeNum == nil || [errorCodeNum isEqual:[NSNull null]]) {
-                                      NSLog(@"请求有误！");
-                                      return;
-                                  }
-        
-                                  NSInteger errorCode = [errorCodeNum integerValue];
-                                  if (errorCode == 0) {
-                                      NSDictionary *dataDic = (NSDictionary *)responseDic[NETWORK_OK_DATA];
-            
-                                      [self.delegate addProfessionSuccess];
-                                  }
-                              }
-                              failure:^(NSError *error) {
-                                  NSLog(@"%@",[error debugDescription]);
-                                  ;
-                              }];
-}
-
-- (void)deleteProfessionWithName:(NSString *)name
-                             url:(NSString *)url {
-    [AFHttpTool deleteProfessionWithName:name
                                   url:url
                               success:^(id response) {
                                   NSDictionary *responseDic = (NSDictionary *)response;
@@ -90,6 +64,32 @@
                                   NSLog(@"%@",[error debugDescription]);
                                   ;
                               }];
+}
+
+- (void)deleteProfessionWithName:(NSString *)name
+                             url:(NSString *)url {
+    [AFHttpTool deleteProfessionWithName:name
+                                     url:url
+                                 success:^(id response) {
+                                     NSDictionary *responseDic = (NSDictionary *)response;
+                                     NSNumber *errorCodeNum = responseDic[NETWORK_ERROR_CODE];
+                                     
+                                     if (errorCodeNum == nil || [errorCodeNum isEqual:[NSNull null]]) {
+                                         NSLog(@"请求有误！");
+                                         return;
+                                     }
+                                     
+                                     NSInteger errorCode = [errorCodeNum integerValue];
+                                     if (errorCode == 0) {
+                                         NSDictionary *dataDic = (NSDictionary *)responseDic[NETWORK_OK_DATA];
+                                         
+                                         [self.delegate addProfessionSuccess];
+                                     }
+                                 }
+                                 failure:^(NSError *error) {
+                                     NSLog(@"%@",[error debugDescription]);
+                                     ;
+                                 }];
 }
 
 @end
