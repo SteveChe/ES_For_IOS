@@ -10,7 +10,9 @@
 
 @interface ESProfession : NSObject
 
-@property (nonatomic, assign) NSNumber *order;
+@property (nonatomic, strong) NSNumber *professionId;
+@property (nonatomic, strong) NSNumber *sub_id;
+@property (nonatomic, strong) NSNumber *order;
 @property (nonatomic, assign) BOOL isSystem;
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *url;

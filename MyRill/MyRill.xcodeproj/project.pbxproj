@@ -705,8 +705,6 @@
 		2B39C94D1B247A4E007BAC7A /* DataDrive */ = {
 			isa = PBXGroup;
 			children = (
-				2B37E45D1B53E9D800F671A1 /* ProfessionDataParse.h */,
-				2B37E45E1B53E9D800F671A1 /* ProfessionDataParse.m */,
 				F247876C1B2BC3CE00EC266B /* DataParseDefine.h */,
 				2B39C94E1B248063007BAC7A /* LoginDataParse.h */,
 				2B39C94F1B248063007BAC7A /* LoginDataParse.m */,
@@ -722,6 +720,8 @@
 				F22FE2F81B4042B700A1A997 /* SearchContactDataParse.m */,
 				F22FE2FD1B42DAF600A1A997 /* AddContactDataParse.h */,
 				F22FE2FE1B42DAF600A1A997 /* AddContactDataParse.m */,
+				2B37E45D1B53E9D800F671A1 /* ProfessionDataParse.h */,
+				2B37E45E1B53E9D800F671A1 /* ProfessionDataParse.m */,
 				F22FE3001B4576D100A1A997 /* GetContactListDataParse.h */,
 				F22FE3011B4576D100A1A997 /* GetContactListDataParse.m */,
 				F22FE3031B458A4100A1A997 /* GetRequestContactListDataParse.h */,

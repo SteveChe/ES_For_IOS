@@ -43,14 +43,16 @@
 }
 
 #pragma mark - ProfessionDataDelegate methods
-- (void)loadProfessionList:(NSArray *)list {
-    self.dataSource = nil;
-    [self.dataSource addObjectsFromArray:list];
-    ESProfession *profession = [[ESProfession alloc] init];
-    profession.icon_url = @"add";
-    [self.dataSource addObject:profession];
-    
-    [self.collectionView reloadData];
+- (void)professionOperationSuccess:(NSArray *)list {
+    if ([list isKindOfClass:[NSArray class]]) {
+        self.dataSource = nil;
+        [self.dataSource addObjectsFromArray:list];
+        ESProfession *profession = [[ESProfession alloc] init];
+        profession.icon_url = @"add";
+        [self.dataSource addObject:profession];
+        
+        [self.collectionView reloadData];
+    }
 }
 
 #pragma mark - UICollectionViewDataSource&UICollectionViewDelegateFlowLayout

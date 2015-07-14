@@ -116,6 +116,9 @@
                             <state key="normal" title="取消">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="dismissBtn:" destination="-1" eventType="touchUpInside" id="QYH-bm-F0W"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="54E-Pw-tYA">
                             <rect key="frame" x="280" y="181" width="279.5" height="44"/>
@@ -124,6 +127,9 @@
                             <state key="normal" title="保存">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="saveBtn:" destination="-1" eventType="touchUpInside" id="my4-Fp-xeV"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.8666666666666667" green="0.8666666666666667" blue="0.8666666666666667" alpha="1" colorSpace="calibratedRGB"/>

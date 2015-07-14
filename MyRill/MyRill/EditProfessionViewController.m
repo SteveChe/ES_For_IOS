@@ -10,6 +10,7 @@
 #import "ProfessionDataParse.h"
 #import "ProfessionTableViewCell.h"
 #import "ColorHandler.h"
+#import "ESProfession.h"
 #import "Masonry.h"
 #import "AddProfessionViewController.h"
 #import "ModifyProfessionViewController.h"
@@ -19,7 +20,9 @@
 @property (nonatomic, strong) UIView *footerView;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
+@property (nonatomic, strong) NSMutableArray *cacheDataSource;
 @property (nonatomic, strong) ProfessionDataParse *professionDP;
+@property (nonatomic, strong) NSIndexPath *deleteIndexPath;
 
 @end
 
@@ -42,7 +45,19 @@
 }
 
 #pragma mark - ProfessionDataDelegate methods
+- (void)professionOperationSuccess:(id)context {
+    [self.dataSource removeObjectAtIndex:self.deleteIndexPath.row];
+    [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:self.deleteIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+}
 
+- (void)professionOperationFailure:(NSString *)errorMsg {
+    self.dataSource = nil;
+    self.dataSource = [NSMutableArray arrayWithArray:self.cacheDataSource];
+    
+    [self.tableView reloadData];
+    
+    NSLog(@"删除业务失败,请检查网络");
+}
 
 #pragma mark - UITableViewDataSource&UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -72,12 +87,10 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if(editingStyle == UITableViewCellEditingStyleDelete)
     {
-//        [self.tableView beginUpdates];
-        [self.dataSource removeObjectAtIndex:indexPath.row];
-        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-//        [self.tableView endUpdates];
+        self.deleteIndexPath = [indexPath copy];
+        ESProfession *profession = (ESProfession *)self.dataSource[self.deleteIndexPath.row];
+        [self.professionDP deleteProfessionWithId:[profession.professionId stringValue]];
     }
-    [self.tableView reloadData];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -118,6 +131,8 @@
     } else {
         [self.tableView setEditing:NO animated:YES];
         sender.title = @"编辑";
+        
+        [self.professionDP updateProfessionListOrderWith:self.dataSource];
     }
 }
 
@@ -131,6 +146,8 @@
     self.dataSource = nil;
     self.dataSource = [NSMutableArray arrayWithArray:array];
     [self.dataSource removeLastObject];
+    
+    self.cacheDataSource = [NSMutableArray arrayWithArray:self.dataSource];
     
     [self.tableView reloadData];
 }
@@ -180,12 +197,13 @@
     return _footerView;
 }
 
-- (NSMutableArray *)dataSource {
-    if (!_dataSource) {
-        _dataSource = [[NSMutableArray alloc] init];
+- (ProfessionDataParse *)professionDP {
+    if (!_professionDP) {
+        _professionDP = [[ProfessionDataParse alloc] init];
+        _professionDP.delegate = self;
     }
     
-    return _dataSource;
+    return _professionDP;
 }
 
 @end

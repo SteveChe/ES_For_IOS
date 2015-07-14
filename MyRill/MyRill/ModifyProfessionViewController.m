@@ -9,13 +9,15 @@
 #import "ModifyProfessionViewController.h"
 #import "ColorHandler.h"
 #import "ESProfession.h"
+#import "ProfessionDataParse.h"
 
-@interface ModifyProfessionViewController ()
+@interface ModifyProfessionViewController () <ProfessionDataDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *popOverView;
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *holdViews;
 @property (weak, nonatomic) IBOutlet UITextField *nameTxtField;
 @property (weak, nonatomic) IBOutlet UITextField *urlTxtField;
+@property (nonatomic, strong) ProfessionDataParse *professionDP;
 
 @end
 
@@ -26,9 +28,13 @@
     // Do any additional setup after loading the view from its nib.
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (IBAction)dismissBtn:(UIButton *)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)saveBtn:(UIButton *)sender {
+    [self dismissBtn:nil];
+    [self.professionDP updateProfessionWithId:@"17" name:self.nameTxtField.text url:self.urlTxtField.text];
 }
 
 #pragma mark - private methods
@@ -52,6 +58,14 @@
         view.layer.borderColor = [ColorHandler colorFromHexRGB:@"DDDDDD"].CGColor;
         view.layer.cornerRadius = 3.f;
     }
+}
+
+- (ProfessionDataParse *)professionDP {
+    if (!_professionDP) {
+        _professionDP = [[ProfessionDataParse alloc] init];
+        _professionDP.delegate = self;
+    }
+    return _professionDP;
 }
 
 @end

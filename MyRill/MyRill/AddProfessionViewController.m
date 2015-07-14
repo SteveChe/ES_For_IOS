@@ -9,6 +9,7 @@
 #import "AddProfessionViewController.h"
 #import "ColorHandler.h"
 #import "ProfessionDataParse.h"
+#import "ESProfession.h"
 
 @interface AddProfessionViewController () <ProfessionDataDelegate>
 
@@ -30,13 +31,32 @@
 }
 
 #pragma mark - ProfessionDataDelegate methods
-- (void)addProfessionSuccess {
-    [self.navigationController popViewControllerAnimated:YES];
+- (void)professionOperationSuccess:(id)context {
+    if ([context isKindOfClass:[ESProfession class]]) {
+        ESProfession *profession = (ESProfession *)context;
+        [self.navigationController popViewControllerAnimated:YES];
+    } else if (YES) {
+        
+    } else {
+        
+    }
+}
+
+- (void)professionOperationFailure:(NSString *)errorMsg {
+    NSLog(@"添加业务失败,请检查网络");
 }
 
 #pragma mark - response events
 - (IBAction)saveBtnOnClicked:(UIButton *)sender {
-    [self.professionDP deleteProfessionWithName:self.nameTxtField.text url:self.urlTxtField.text];
+    if (self.nameTxtField.text != nil && self.urlTxtField.text != nil) {
+        [self.professionDP addProfessionWithName:self.nameTxtField.text url:self.urlTxtField.text];
+    } else {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示"
+                                                                                 message:@"名称和URL不能为空!"
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        
+        
+    }
 }
 
 #pragma mark - setters&getters
