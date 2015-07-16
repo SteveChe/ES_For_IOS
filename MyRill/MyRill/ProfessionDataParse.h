@@ -13,6 +13,9 @@
 - (void)professionOperationSuccess:(id)context;
 - (void)professionOperationFailure:(NSString *)errorMsg;
 
+@optional
+- (void)orderProfessionListResult:(id)context;
+
 @end
 
 @interface ProfessionDataParse : NSObject

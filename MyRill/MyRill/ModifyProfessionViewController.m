@@ -18,27 +18,38 @@
 @property (weak, nonatomic) IBOutlet UITextField *nameTxtField;
 @property (weak, nonatomic) IBOutlet UITextField *urlTxtField;
 @property (nonatomic, strong) ProfessionDataParse *professionDP;
+@property (nonatomic, strong) ESProfession *profession;
 
 @end
 
 @implementation ModifyProfessionViewController
 
+#pragma mark - lifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 }
 
+#pragma mark - ProfessionDataDelegate methods
+- (void)professionOperationSuccess:(id)context {
+    [self dismissBtn:nil];
+}
+
+#pragma mark - response events
 - (IBAction)dismissBtn:(UIButton *)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)saveBtn:(UIButton *)sender {
-    [self dismissBtn:nil];
-    [self.professionDP updateProfessionWithId:@"17" name:self.nameTxtField.text url:self.urlTxtField.text];
+    [self.professionDP updateProfessionWithId:[self.profession.professionId stringValue]
+                                         name:self.nameTxtField.text
+                                          url:self.urlTxtField.text];
 }
 
 #pragma mark - private methods
 - (void)loadProfessionData:(ESProfession *)profession {
+    self.profession = nil;
+    self.profession = profession;
     self.nameTxtField.text = profession.name;
     self.urlTxtField.text = profession.url;
 }

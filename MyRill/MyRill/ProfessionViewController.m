@@ -13,6 +13,7 @@
 #import "ProfessionCollectionViewCell.h"
 #import "AddProfessionViewController.h"
 #import "EditProfessionViewController.h"
+#import "ProfessionWebViewController.h"
 
 @interface ProfessionViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, ProfessionDataDelegate>
 
@@ -78,16 +79,6 @@
     return cell;
 }
 
-//- (NSArray*)layoutAttributesForElementsInRect:(CGRect)rect
-//{
-//    NSMutableArray* attributes = [[self.collectionView layoutAttributesForElementsInRect:rect] mutableCopy];
-//    
-//    
-//    for (UICollectionViewLayoutAttributes *attr in attributes) {
-//        NSLog(@"%@", NSStringFromCGRect([attr frame]));
-//    }
-//}
-
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     return CGSizeMake(([[UIScreen mainScreen] bounds].size.width - 3)/3,([[UIScreen mainScreen] bounds].size.height - 64 - 44 - 9)/4);
@@ -118,6 +109,12 @@
     if (indexPath.row == self.dataSource.count - 1) {
         AddProfessionViewController *addProfessionVC = [[AddProfessionViewController alloc] init];
         [self.navigationController pushViewController:addProfessionVC animated:YES];
+    } else {
+        ProfessionWebViewController *webVC = [[ProfessionWebViewController alloc] init];
+        ESProfession *profession = self.dataSource[indexPath.row];
+        webVC.title = profession.name;
+        webVC.urlString = profession.url;
+        [self.navigationController pushViewController:webVC animated:YES];
     }
 }
 

@@ -57,6 +57,30 @@
     [self.navigationController pushViewController:settingVC animated:YES];
 }
 
+- (IBAction)userImg:(UIButton *)sender {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
+                                                                             message:nil
+                                                                      preferredStyle:UIAlertControllerStyleActionSheet];
+    //添加Button
+    [alertController addAction:[UIAlertAction actionWithTitle:@"拍照"
+                                                        style:UIAlertActionStyleDefault
+                                                      handler:^(UIAlertAction *action) {
+                                                          //处理点击拍照
+                                                      }]];
+    [alertController addAction:[UIAlertAction actionWithTitle:@"从相册选取"
+                                                        style:UIAlertActionStyleDefault
+                                                      handler:^(UIAlertAction *action){
+                                                          //处理点击从相册选取
+                                                      }]];
+    [alertController addAction:[UIAlertAction actionWithTitle:@"取消"
+                                                        style:UIAlertActionStyleCancel
+                                                      handler:nil]];
+    
+    [self presentViewController:alertController
+                       animated:YES
+                     completion:nil];
+}
+
 - (IBAction)logoutBtnOnClicked:(UIButton *)sender {
     [self.signOutDP logout];
 }

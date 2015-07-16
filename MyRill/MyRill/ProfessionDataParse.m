@@ -96,19 +96,41 @@
                                     url:url
                                 success:^(id response) {
                                     NSDictionary *responseDic = (NSDictionary *)response;
-                                    NSLog(@"%@",responseDic);
+                                    NSNumber *errorCodeNum = responseDic[NETWORK_ERROR_CODE];
+                                    
+                                    if (errorCodeNum == nil || [errorCodeNum isEqual:[NSNull null]]) {
+                                        NSLog(@"请求有误！");
+                                        return;
+                                    }
+                                    
+                                    NSInteger errorCode = [errorCodeNum integerValue];
+                                    if (errorCode == 0) {
+                                        [self.delegate professionOperationSuccess:nil];
+                                    }
                                 } failure:^(NSError *err) {
-                                    ;
+                                    [self.delegate professionOperationFailure:nil];
+                                    //NSLog(@"%@",[error debugDescription]);
                                 }];
 }
 
 - (void)updateProfessionListOrderWith:(NSArray *)professioinArray {
     [AFHttpTool updateProfessioinListOrderWith:professioinArray
                                        success:^(id response) {
-                                           NSDictionary *dic = (NSDictionary *)response;
-                                           NSLog(@"%@",dic);
+                                           NSDictionary *responseDic = (NSDictionary *)response;
+                                           NSNumber *errorCodeNum = responseDic[NETWORK_ERROR_CODE];
+                                           
+                                           if (errorCodeNum == nil || [errorCodeNum isEqual:[NSNull null]]) {
+                                               NSLog(@"请求有误！");
+                                               return;
+                                           }
+                                           
+                                           NSInteger errorCode = [errorCodeNum integerValue];
+                                           if (errorCode == 0) {
+                                               [self.delegate orderProfessionListResult:@YES];
+                                           }
                                        } failure:^(NSError *err) {
-                                           NSLog(@"%@",[err debugDescription]);
+                                           [self.delegate orderProfessionListResult:nil];
+                                           //NSLog(@"%@",[err debugDescription]);
                                        }];
 }
 

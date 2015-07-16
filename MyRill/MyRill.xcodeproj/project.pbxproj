@@ -63,6 +63,8 @@
 		2B5A591E1B48F921000382D7 /* ChangPhoneNumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5A591C1B48F921000382D7 /* ChangPhoneNumViewController.m */; };
 		2B5A591F1B48F921000382D7 /* ChangPhoneNumViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B5A591D1B48F921000382D7 /* ChangPhoneNumViewController.xib */; };
 		2B5A59221B494C2B000382D7 /* ChangePhoneNumDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5A59211B494C2B000382D7 /* ChangePhoneNumDataParse.m */; };
+		2B7FB8171B56AA5D00DA456E /* ProfessionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B7FB8151B56AA5D00DA456E /* ProfessionTableViewCell.m */; };
+		2B7FB8181B56AA5D00DA456E /* ProfessionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B7FB8161B56AA5D00DA456E /* ProfessionTableViewCell.xib */; };
 		2B9CBB5B1B39AA43007D7A45 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		2B9CBB611B3ADEC4007D7A45 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		2B9CBB621B3ADEC4007D7A45 /* (null) in Resources */ = {isa = PBXBuildFile; };
@@ -70,13 +72,13 @@
 		2B9CBB671B3AEC74007D7A45 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		2B9CBB691B42D897007D7A45 /* UserMsgViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B9CBB681B42D897007D7A45 /* UserMsgViewController.xib */; };
 		2B9CBB6C1B4571D0007D7A45 /* SignOutDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B9CBB6B1B4571D0007D7A45 /* SignOutDataParse.m */; };
+		2BC8212F1B57FFDC0090E2C1 /* ProfessionWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC8212E1B57FFDC0090E2C1 /* ProfessionWebViewController.m */; };
 		2BE8C21D1B4D60B400858CEE /* ProfessionCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE8C21B1B4D60B400858CEE /* ProfessionCollectionViewCell.m */; };
 		2BE8C21E1B4D60B400858CEE /* ProfessionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE8C21C1B4D60B400858CEE /* ProfessionCollectionViewCell.xib */; };
 		2BE8C22C1B4EB3A200858CEE /* AddProfessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE8C22A1B4EB3A100858CEE /* AddProfessionViewController.m */; };
 		2BE8C22D1B4EB3A200858CEE /* AddProfessionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE8C22B1B4EB3A100858CEE /* AddProfessionViewController.xib */; };
 		2BE8C2301B4EC58500858CEE /* ESViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE8C22F1B4EC58500858CEE /* ESViewController.m */; };
 		2BE8C2331B52506600858CEE /* EditProfessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE8C2321B52506600858CEE /* EditProfessionViewController.m */; };
-		2BE8C2381B52536000858CEE /* ProfessionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE8C2361B52536000858CEE /* ProfessionTableViewCell.m */; };
 		F22FE2731B3AD7BE00A1A997 /* ChatListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE2721B3AD7BE00A1A997 /* ChatListViewController.m */; };
 		F22FE2781B3AD87800A1A997 /* KxMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE2771B3AD87800A1A997 /* KxMenu.m */; };
 		F22FE27B1B3AD94200A1A997 /* UIColor+RCColor.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE27A1B3AD94200A1A997 /* UIColor+RCColor.m */; };
@@ -310,9 +312,14 @@
 		2B5A591D1B48F921000382D7 /* ChangPhoneNumViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChangPhoneNumViewController.xib; sourceTree = "<group>"; };
 		2B5A59201B494C2B000382D7 /* ChangePhoneNumDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePhoneNumDataParse.h; sourceTree = "<group>"; };
 		2B5A59211B494C2B000382D7 /* ChangePhoneNumDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePhoneNumDataParse.m; sourceTree = "<group>"; };
+		2B7FB8141B56AA5D00DA456E /* ProfessionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfessionTableViewCell.h; sourceTree = "<group>"; };
+		2B7FB8151B56AA5D00DA456E /* ProfessionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfessionTableViewCell.m; sourceTree = "<group>"; };
+		2B7FB8161B56AA5D00DA456E /* ProfessionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfessionTableViewCell.xib; sourceTree = "<group>"; };
 		2B9CBB681B42D897007D7A45 /* UserMsgViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserMsgViewController.xib; sourceTree = "<group>"; };
 		2B9CBB6A1B4571D0007D7A45 /* SignOutDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignOutDataParse.h; sourceTree = "<group>"; };
 		2B9CBB6B1B4571D0007D7A45 /* SignOutDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignOutDataParse.m; sourceTree = "<group>"; };
+		2BC8212D1B57FFDC0090E2C1 /* ProfessionWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfessionWebViewController.h; sourceTree = "<group>"; };
+		2BC8212E1B57FFDC0090E2C1 /* ProfessionWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfessionWebViewController.m; sourceTree = "<group>"; };
 		2BE8C21A1B4D60B400858CEE /* ProfessionCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfessionCollectionViewCell.h; sourceTree = "<group>"; };
 		2BE8C21B1B4D60B400858CEE /* ProfessionCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfessionCollectionViewCell.m; sourceTree = "<group>"; };
 		2BE8C21C1B4D60B400858CEE /* ProfessionCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfessionCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -323,8 +330,6 @@
 		2BE8C22F1B4EC58500858CEE /* ESViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESViewController.m; sourceTree = "<group>"; };
 		2BE8C2311B52506600858CEE /* EditProfessionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfessionViewController.h; sourceTree = "<group>"; };
 		2BE8C2321B52506600858CEE /* EditProfessionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProfessionViewController.m; sourceTree = "<group>"; };
-		2BE8C2351B52536000858CEE /* ProfessionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfessionTableViewCell.h; sourceTree = "<group>"; };
-		2BE8C2361B52536000858CEE /* ProfessionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfessionTableViewCell.m; sourceTree = "<group>"; };
 		F22FE2711B3AD7BE00A1A997 /* ChatListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatListViewController.h; sourceTree = "<group>"; };
 		F22FE2721B3AD7BE00A1A997 /* ChatListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatListViewController.m; sourceTree = "<group>"; };
 		F22FE2761B3AD87800A1A997 /* KxMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KxMenu.h; path = Utilities/KxMenu/KxMenu.h; sourceTree = "<group>"; };
@@ -797,6 +802,8 @@
 			children = (
 				2B39C96B1B2D79DB007BAC7A /* ProfessionViewController.h */,
 				2B39C96C1B2D79DB007BAC7A /* ProfessionViewController.m */,
+				2BC8212D1B57FFDC0090E2C1 /* ProfessionWebViewController.h */,
+				2BC8212E1B57FFDC0090E2C1 /* ProfessionWebViewController.m */,
 				2BE8C2311B52506600858CEE /* EditProfessionViewController.h */,
 				2BE8C2321B52506600858CEE /* EditProfessionViewController.m */,
 				2B37E4491B53967D00F671A1 /* ModifyProfessionViewController.h */,
@@ -946,8 +953,9 @@
 				2BE8C21A1B4D60B400858CEE /* ProfessionCollectionViewCell.h */,
 				2BE8C21B1B4D60B400858CEE /* ProfessionCollectionViewCell.m */,
 				2BE8C21C1B4D60B400858CEE /* ProfessionCollectionViewCell.xib */,
-				2BE8C2351B52536000858CEE /* ProfessionTableViewCell.h */,
-				2BE8C2361B52536000858CEE /* ProfessionTableViewCell.m */,
+				2B7FB8141B56AA5D00DA456E /* ProfessionTableViewCell.h */,
+				2B7FB8151B56AA5D00DA456E /* ProfessionTableViewCell.m */,
+				2B7FB8161B56AA5D00DA456E /* ProfessionTableViewCell.xib */,
 			);
 			name = Profession;
 			sourceTree = "<group>";
@@ -1306,6 +1314,7 @@
 				F2F92EFC1B4EC3310047D7BF /* RCDSelectPersonTableViewCell.xib in Resources */,
 				F2F92ECA1B4ABA5F0047D7BF /* RCDAcceptContactTableViewCell.xib in Resources */,
 				2B9CBB621B3ADEC4007D7A45 /* (null) in Resources */,
+				2B7FB8181B56AA5D00DA456E /* ProfessionTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1370,6 +1379,7 @@
 				F22FE2731B3AD7BE00A1A997 /* ChatListViewController.m in Sources */,
 				F22FE2B51B3FFAF700A1A997 /* RCDAddFriendViewController.m in Sources */,
 				F22FE2B71B3FFAF700A1A997 /* RCDSearchResultTableViewCell.m in Sources */,
+				2B7FB8171B56AA5D00DA456E /* ProfessionTableViewCell.m in Sources */,
 				F22FE2EC1B4000ED00A1A997 /* SDWebImagePrefetcher.m in Sources */,
 				F2F92ECD1B4D60910047D7BF /* RCDPhoneAddressBookViewController.m in Sources */,
 				F22FE2AD1B3FFAE600A1A997 /* RCDSelectPersonTableViewCell.m in Sources */,
@@ -1401,6 +1411,7 @@
 				F277AE011B2DC146006E42CB /* DeviceInfo.m in Sources */,
 				F22FE2C11B3FFCAF00A1A997 /* MBProgressHUD.m in Sources */,
 				2B5A59161B48DFBB000382D7 /* MRProgressOverlayView+AFNetworking.m in Sources */,
+				2BC8212F1B57FFDC0090E2C1 /* ProfessionWebViewController.m in Sources */,
 				2B37E45F1B53E9D800F671A1 /* ProfessionDataParse.m in Sources */,
 				2B39C93C1B241212007BAC7A /* MASViewConstraint.m in Sources */,
 				F2F92EFF1B5020CC0047D7BF /* GetPhoneContactListDataParse.m in Sources */,
@@ -1429,7 +1440,6 @@
 				2B39C9941B37E5F2007BAC7A /* ResetPwdViewController.m in Sources */,
 				2B5A590E1B48DFBB000382D7 /* MRActivityIndicatorView.m in Sources */,
 				2B39C9381B241212007BAC7A /* MASConstraint.m in Sources */,
-				2BE8C2381B52536000858CEE /* ProfessionTableViewCell.m in Sources */,
 				2BE8C2331B52506600858CEE /* EditProfessionViewController.m in Sources */,
 				F22FE27F1B3ADAB000A1A997 /* ESUserInfo.m in Sources */,
 				F23059B51B529FAE004599FA /* RCDPhoneAddressBookTableViewCell.m in Sources */,
@@ -1593,7 +1603,7 @@
 					"$(PROJECT_DIR)/MyRill/JPush",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "5848fed7-392d-40a4-b004-b6102538c1dd";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Debug;
@@ -1616,7 +1626,7 @@
 					"$(PROJECT_DIR)/MyRill/JPush",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "5848fed7-392d-40a4-b004-b6102538c1dd";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Release;

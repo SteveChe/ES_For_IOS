@@ -59,6 +59,14 @@
     NSLog(@"删除业务失败,请检查网络");
 }
 
+- (void)orderProfessionListResult:(id)context {
+    if (context == nil) {
+        NSLog(@"排序失败!");
+    } else {
+        
+    }
+}
+
 #pragma mark - UITableViewDataSource&UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 70.0;
@@ -161,7 +169,8 @@
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        [_tableView registerClass:[ProfessionTableViewCell class] forCellReuseIdentifier:@"ProfessionTableCell"];
+        UINib *professionTableCell = [UINib nibWithNibName:@"ProfessionTableViewCell" bundle:nil];
+        [_tableView registerNib:professionTableCell forCellReuseIdentifier:@"ProfessionTableCell"];
     }
     
     return _tableView;
