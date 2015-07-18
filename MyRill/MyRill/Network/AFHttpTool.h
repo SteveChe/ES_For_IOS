@@ -111,4 +111,11 @@ typedef NS_ENUM(NSInteger, RequestMethodType){
  **/
 +(void) getPhoneContactList:(NSArray *)phoneContacts success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
 
+
+/******** 获取联系人详情******
+ 请求方式：POST
+ 参数：无
+ 备注：该接口返回该联系人的详细信息
+ **/
++(void) getContactDetail:(NSString*)userID success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
 @end

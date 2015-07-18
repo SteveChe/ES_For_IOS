@@ -15,17 +15,16 @@
 #import "ESUserInfo.h"
 #import "ESContactList.h"
 #include <ctype.h>
-#import "RCDPersonDetailViewController.h"
 #import "RCDAcceptContactViewController.h"
 #import "RCDSearchFriendViewController.h"
 #import "RCDAddressBookViewTableViewCell.h"
+#import "RCDAddressBookDetailViewController.h"
 
 @interface RCDAddressBookViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,UISearchControllerDelegate,UISearchDisplayDelegate>
 
 //#字符索引对应的user object
 @property (nonatomic,strong) NSMutableArray *tempOtherArr;
 @property (nonatomic,strong) GetContactListDataParse* getContactListDataParse;
-@property (strong, nonatomic) UISearchDisplayController* searchDisplayController1;
 
 @end
 
@@ -39,6 +38,7 @@
     
     UINib *rcdCellNib = [UINib nibWithNibName:@"RCDAddressBookViewTableViewCell" bundle:nil];
     [self.tableView registerNib:rcdCellNib forCellReuseIdentifier:@"RCDAddressBookViewTableViewCell"];
+
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -61,6 +61,9 @@
     _searchDisplayController1.searchResultsDataSource = self;
     _searchDisplayController1.searchResultsDelegate = self;
     _searchDisplayController1.delegate = self;
+    UINib *rcdCellNib = [UINib nibWithNibName:@"RCDAddressBookViewTableViewCell" bundle:nil];
+    [_searchDisplayController1.searchResultsTableView registerNib:rcdCellNib forCellReuseIdentifier:@"RCDAddressBookViewTableViewCell"];
+
     
     UIBarButtonItem *settintBtnItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self                      action:@selector(addButtonOnClicked:)];
     self.navigationItem.rightBarButtonItem = settintBtnItem;
@@ -124,51 +127,68 @@
     static NSString *cellReuseIdentifier = @"RCDAddressBookViewTableViewCell";
     RCDAddressBookViewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellReuseIdentifier forIndexPath:indexPath];
     
-    if (indexPath.section == 0)
-    {
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-
-        switch (indexPath.row)
-        {
-            case 0:
-            {
-                cell.addressBookName.text = @"新的联系人";
-                cell.ivAva.image = [UIImage imageNamed:@"lianxiren_xindelianxiren"];
-            }
-                break;
-            case 1:
-            {
-                cell.addressBookName.text = @"多人聊天组";
-                cell.ivAva.image = [UIImage imageNamed:@"lianxiren_duorenliaotianzu"];
-            }
-                
-            default:
-                break;
-        }
-        return cell;
-    }
-    else
+    if(tableView == self.searchDisplayController.searchResultsTableView)
     {
         cell.accessoryType = UITableViewCellAccessoryNone;
-
-        ESContactList* contactList = _friends[indexPath.section-1];
-        
-        ESUserInfo *user = contactList.contactList[indexPath.row];
+        ESUserInfo *user = _searchResult[indexPath.row];
         if(user){
             cell.addressBookName.text = user.userName;
             [cell.ivAva sd_setImageWithURL:[NSURL URLWithString:user.portraitUri] placeholderImage:[UIImage imageNamed:@"icon"]];
             cell.ivAva.clipsToBounds = YES;
             cell.ivAva.layer.cornerRadius = 18.f;
-
         }
-
         
         return cell;
     }
+    else
+    {
+        if (indexPath.section == 0)
+        {
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            
+            switch (indexPath.row)
+            {
+                case 0:
+                {
+                    cell.addressBookName.text = @"新的联系人";
+                    cell.ivAva.image = [UIImage imageNamed:@"lianxiren_xindelianxiren"];
+                }
+                    break;
+                case 1:
+                {
+                    cell.addressBookName.text = @"多人聊天组";
+                    cell.ivAva.image = [UIImage imageNamed:@"lianxiren_duorenliaotianzu"];
+                }
+                    
+                default:
+                    break;
+            }
+            return cell;
+        }
+        else
+        {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            ESContactList* contactList = _friends[indexPath.section-1];
+            
+            ESUserInfo *user = contactList.contactList[indexPath.row];
+            if(user){
+                cell.addressBookName.text = user.userName;
+                [cell.ivAva sd_setImageWithURL:[NSURL URLWithString:user.portraitUri] placeholderImage:[UIImage imageNamed:@"icon"]];
+                cell.ivAva.clipsToBounds = YES;
+                cell.ivAva.layer.cornerRadius = 18.f;
+            }
+            
+            return cell;
+        }
 
+    }
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if(tableView == self.searchDisplayController.searchResultsTableView)
+    {
+        return [_searchResult count];
+    }
     if (section == 0)
     {
         return 2;
@@ -182,6 +202,10 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    if(tableView == self.searchDisplayController.searchResultsTableView)
+    {
+        return 1;
+    }
     return [_friends count]+1;
 }
 
@@ -193,37 +217,57 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    if (section == 0)
+    if(tableView == self.searchDisplayController.searchResultsTableView)
     {
-        return nil;
+        return @"联系人";
     }
     else
     {
-        ESContactList* contactList = [_friends objectAtIndex:section-1];
-        return contactList.enterpriseName;
+        if (section == 0)
+        {
+            return nil;
+        }
+        else
+        {
+            ESContactList* contactList = [_friends objectAtIndex:section-1];
+            return contactList.enterpriseName;
+        }
     }
 
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0)
-    {
-        if (indexPath.row == 0)
-        {
-            RCDAcceptContactViewController* acceptContactVC = [[RCDAcceptContactViewController alloc] init];
-            [self.navigationController pushViewController:acceptContactVC animated:YES];
-        }
-        
-    }
-    else if (indexPath.section ==1)
+    if(tableView == self.searchDisplayController.searchResultsTableView)
     {
         
     }
     else
     {
-        
+        if (indexPath.section == 0)
+        {
+            if (indexPath.row == 0)
+            {
+                RCDAcceptContactViewController* acceptContactVC = [[RCDAcceptContactViewController alloc] init];
+                [self.navigationController pushViewController:acceptContactVC animated:YES];
+            }
+            else if(indexPath.row == 1)
+            {
+                
+            }
+            
+        }
+        else
+        {
+            RCDAddressBookDetailViewController* addressBookDetailVC = [[RCDAddressBookDetailViewController alloc] init];
+            ESContactList* contactList = [_friends objectAtIndex:indexPath.section-1];
+            ESUserInfo *user = contactList.contactList[indexPath.row];
+            addressBookDetailVC.userInfo = user;
+            [self.navigationController pushViewController:addressBookDetailVC animated:YES];
+
+        }
     }
+
 }
 
 
@@ -250,83 +294,64 @@
     for(int j=0;j<hanZi.length;j++){
         NSString *singlePinyinLetter=[[NSString stringWithFormat:@"%c",pinyinFirstLetter([hanZi characterAtIndex:j])] uppercaseString];
         pinYinResult=[pinYinResult stringByAppendingString:singlePinyinLetter];
-        
     }
     
     return pinYinResult;
 
 }
 
-
-
+#pragma mark - UISearchBarDelegate
 /**
- *  根据转换拼音后的字典排序
+ *  执行delegate搜索好友
  *
- *  @param pinyinDic 转换后的字典
- *
- *  @return 对应排序的字典
+ *  @param searchBar  searchBar description
+ *  @param searchText searchText description
  */
-//-(NSMutableDictionary *) sortedArrayWithPinYinDic:(NSArray *) friends
-//{
-//    if(!friends) return nil;
-//    
-//    NSMutableDictionary *returnDic = [NSMutableDictionary new];
-//    _tempOtherArr = [NSMutableArray new];
-//    BOOL isReturn = NO;
-//    
-//    for (NSString *key in _keys) {
-//        
-//        if ([_tempOtherArr count]) {
-//            isReturn = YES;
-//        }
-//        
-//        NSMutableArray *tempArr = [NSMutableArray new];
-//        for (ESUserInfo *user in friends) {
-//            
-//            NSString *pyResult = [self hanZiToPinYinWithString:user.userName];
-//            NSString *firstLetter = [pyResult substringToIndex:1];
-//            if ([firstLetter isEqualToString:key]){
-//                [tempArr addObject:user];
-//            }
-//            
-//            if(isReturn) continue;
-//            char c = [pyResult characterAtIndex:0];
-//            if (isalpha(c) == 0) {
-//                [_tempOtherArr addObject:user];
-//            }
-//        }
-//        if(![tempArr count]) continue;
-//        [returnDic setObject:tempArr forKey:key];
-//        
-//    }
-//    if([_tempOtherArr count])
-//        [returnDic setObject:_tempOtherArr forKey:@"#"];
-//    
-//    
-//    _allKeys = [[returnDic allKeys] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-//        
-//        return [obj1 compare:obj2 options:NSNumericSearch];
-//    }];
-//    
-//    return returnDic;
-//}
-
-//跳转到个人详细资料
-//-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-//{
-//    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-//    NSString *key = [_allKeys objectAtIndex:indexPath.section];
-//    NSArray *arrayForKey = [_friends objectForKey:key];
-//    ESUserInfo *user = arrayForKey[indexPath.row];
-//    RCUserInfo *userInfo = [RCUserInfo new];
-//    userInfo.userId = user.userId;
-//    userInfo.portraitUri = user.portraitUri;
-//    userInfo.name = user.userName;
-
+-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    if (_searchResult == nil)
+    {
+        _searchResult = [NSMutableArray array];
+    }
     
-//    RCDPersonDetailViewController *detailViewController = [segue destinationViewController];
-//    detailViewController.userInfo = userInfo;
-//}
+    [_searchResult removeAllObjects];
+    
+    if ([searchText length] > 0)
+    {
+        for ( int i = 0 ; i < [_friends count] ; i++ )
+        {
+//            ESContactList* contactListTemp = [[ESContactList alloc] init];
+//            NSMutableArray* contactListArray = [NSMutableArray array];
+            ESContactList* contactList = _friends[i];
+            for (ESUserInfo* user in contactList.contactList )
+            {
+                if(user.userName != nil && [user.userName length] > 0 )
+                {
+                    NSRange range1 = [user.userName rangeOfString:searchText];
+                    if (range1.length > 0)
+                    {
+                        [_searchResult addObject:user];
+                        continue;
+                    }
+                }
+                if (user.phoneNumber != nil && [user.phoneNumber length] > 0)
+                {
+                    NSRange range2 = [user.phoneNumber rangeOfString:searchText];
+                    if (range2.length > 0)
+                    {
+                        [_searchResult addObject:user];
+                        continue;
+                    }
+                }
+                
+            }
+        }
+    }
+    
+    [self.searchDisplayController.searchResultsTableView reloadData];
+
+}
+
 
 
 @end

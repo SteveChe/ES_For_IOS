@@ -249,8 +249,6 @@
 {
     RCDSearchFriendViewController *searchFirendVC = [[RCDSearchFriendViewController alloc] init];
     [self.navigationController pushViewController:searchFirendVC  animated:YES];
-    
 }
-
 
 @end

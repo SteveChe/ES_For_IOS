@@ -28,6 +28,7 @@
     
     UINib *rcdCellNib = [UINib nibWithNibName:@"RCDSelectPersonTableViewCell" bundle:nil];
     [self.tableView registerNib:rcdCellNib forCellReuseIdentifier:@"RCDSelectPersonTableViewCell"];
+    [self.searchDisplayController1.searchResultsTableView registerNib:rcdCellNib forCellReuseIdentifier:@"RCDSelectPersonTableViewCell"];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -80,13 +81,33 @@
 
 #pragma mark -UITableViewDataSource
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if(tableView == self.searchDisplayController.searchResultsTableView)
+    {
+        return @"联系人";
+    }
+    else
+    {
+        ESContactList* contactList = [self.friends objectAtIndex:section];
+        return contactList.enterpriseName;
+    }
+}
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    if(tableView == self.searchDisplayController.searchResultsTableView)
+    {
+        return 1;
+    }
     return [self.friends count];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if(tableView == self.searchDisplayController.searchResultsTableView)
+    {
+        return [self.searchResult count];
+    }
     ESContactList* contactList = [self.friends objectAtIndex:section];
     return [contactList.contactList count];
 }
@@ -100,27 +121,52 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellReuseIdentifier = @"RCDSelectPersonTableViewCell";
+    UINib *rcdCellNib = [UINib nibWithNibName:@"RCDSelectPersonTableViewCell" bundle:nil];
+    [tableView registerNib:rcdCellNib forCellReuseIdentifier:@"RCDSelectPersonTableViewCell"];
     RCDSelectPersonTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellReuseIdentifier forIndexPath:indexPath];
     
     [cell setUserInteractionEnabled:YES];
 
-    ESContactList* contactList = self.friends[indexPath.section];
-    ESUserInfo *user = contactList.contactList[indexPath.row];
-
-    if(user){
-        cell.lblName.text = user.userName;
-        [cell.ivAva sd_setImageWithURL:[NSURL URLWithString:user.portraitUri] placeholderImage:[UIImage imageNamed:@"icon"]];
-    }
-    
-    //设置选中状态
-    for (ESUserInfo *userInfo in self.seletedUsers) {
-        if ([user.userId isEqualToString:userInfo.userId]) {
-            [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionBottom];
-            [cell setUserInteractionEnabled:NO];
+    if(tableView == self.searchDisplayController.searchResultsTableView)
+    {
+        ESUserInfo *user = self.searchResult[indexPath.row];
+        
+        if(user){
+            cell.lblName.text = user.userName;
+            [cell.ivAva sd_setImageWithURL:[NSURL URLWithString:user.portraitUri] placeholderImage:[UIImage imageNamed:@"icon"]];
         }
+        
+
+        //设置选中状态
+        for (ESUserInfo *userInfo in self.seletedUsers) {
+            if ([user.userId isEqualToString:userInfo.userId]) {
+                [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionBottom];
+                [cell setUserInteractionEnabled:NO];
+            }
+        }
+        return cell;
+    }
+    else
+    {
+        ESContactList* contactList = self.friends[indexPath.section];
+        ESUserInfo *user = contactList.contactList[indexPath.row];
+        
+        if(user){
+            cell.lblName.text = user.userName;
+            [cell.ivAva sd_setImageWithURL:[NSURL URLWithString:user.portraitUri] placeholderImage:[UIImage imageNamed:@"icon"]];
+        }
+        
+        //设置选中状态
+        for (ESUserInfo *userInfo in self.seletedUsers) {
+            if ([user.userId isEqualToString:userInfo.userId]) {
+                [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionBottom];
+                [cell setUserInteractionEnabled:NO];
+            }
+        }
+        
+        return cell;
     }
 
-    return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -134,6 +180,5 @@
     RCDSelectPersonTableViewCell *cell = (RCDSelectPersonTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
     [cell setSelected:NO];
 }
-
 
 @end
