@@ -10,15 +10,19 @@
 #import "ProfessionDataParse.h"
 #import "ProfessionTableViewCell.h"
 #import "ColorHandler.h"
+#import "ESProfession.h"
 #import "Masonry.h"
 #import "AddProfessionViewController.h"
+#import "ModifyProfessionViewController.h"
 
 @interface EditProfessionViewController () <UITableViewDataSource, UITableViewDelegate, ProfessionDataDelegate>
 
 @property (nonatomic, strong) UIView *footerView;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
-@property (nonatomic, strong) ProfessionDataParse *professioniDP;
+@property (nonatomic, strong) NSMutableArray *cacheDataSource;
+@property (nonatomic, strong) ProfessionDataParse *professionDP;
+@property (nonatomic, strong) NSIndexPath *deleteIndexPath;
 
 @end
 
@@ -31,7 +35,7 @@
     self.title = @"编辑业务";
     
     UIBarButtonItem *sortBtnItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑"
-                                                                    style:UIBarButtonItemStylePlain
+                                                                    style:UIBarButtonItemStyleDone
                                                                    target:self
                                                                    action:@selector(onSortBtnItemClicked:)];
     self.navigationItem.rightBarButtonItem = sortBtnItem;
@@ -41,13 +45,29 @@
 }
 
 #pragma mark - ProfessionDataDelegate methods
-
-
-#pragma mark - UITableViewDataSource&UITableViewDelegate
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+- (void)professionOperationSuccess:(id)context {
+    [self.dataSource removeObjectAtIndex:self.deleteIndexPath.row];
+    [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:self.deleteIndexPath] withRowAnimation:UITableViewRowAnimationFade];
 }
 
+- (void)professionOperationFailure:(NSString *)errorMsg {
+    self.dataSource = nil;
+    self.dataSource = [NSMutableArray arrayWithArray:self.cacheDataSource];
+    
+    [self.tableView reloadData];
+    
+    NSLog(@"删除业务失败,请检查网络");
+}
+
+- (void)orderProfessionListResult:(id)context {
+    if (context == nil) {
+        NSLog(@"排序失败!");
+    } else {
+        
+    }
+}
+
+#pragma mark - UITableViewDataSource&UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 70.0;
 }
@@ -65,20 +85,24 @@
 }
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
+
     id object = [self.dataSource objectAtIndex:[sourceIndexPath row]];
     [self.dataSource removeObjectAtIndex:[sourceIndexPath row]];
     [self.dataSource insertObject:object atIndex:[destinationIndexPath row]];
-    
+
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if(editingStyle == UITableViewCellEditingStyleDelete)
     {
-        [self.tableView beginUpdates];
-        [self.dataSource removeObjectAtIndex:indexPath.row];
-        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
-        [self.tableView endUpdates];
+        self.deleteIndexPath = [indexPath copy];
+        ESProfession *profession = (ESProfession *)self.dataSource[self.deleteIndexPath.row];
+        [self.professionDP deleteProfessionWithId:[profession.professionId stringValue]];
     }
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return @"删除";
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -86,7 +110,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ProfessionTableViewCell *professionCell = [tableView dequeueReusableCellWithIdentifier:@"Profession TableCell" forIndexPath:indexPath];
+    ProfessionTableViewCell *professionCell = [tableView dequeueReusableCellWithIdentifier:@"ProfessionTableCell" forIndexPath:indexPath];
     
     [professionCell updateProfessionCell:self.dataSource[indexPath.row]];
 
@@ -98,14 +122,25 @@
     return professionCell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    ModifyProfessionViewController *modifyProfessionVC = [[ModifyProfessionViewController alloc] init];
+    modifyProfessionVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    modifyProfessionVC.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
+    [modifyProfessionVC loadProfessionData:self.dataSource[indexPath.row]];
+    [self presentViewController:modifyProfessionVC animated:YES completion:nil];
+}
+
 #pragma mark - response events
 - (void)onSortBtnItemClicked:(UIBarButtonItem *)sender {
     if ([sender.title isEqualToString:@"编辑"]) {
         [self.tableView setEditing:YES animated:YES];
         sender.title = @"完成";
+
     } else {
         [self.tableView setEditing:NO animated:YES];
         sender.title = @"编辑";
+        
+        [self.professionDP updateProfessionListOrderWith:self.dataSource];
     }
 }
 
@@ -118,6 +153,9 @@
 - (void)loadProfessionContent:(NSArray *)array {
     self.dataSource = nil;
     self.dataSource = [NSMutableArray arrayWithArray:array];
+    [self.dataSource removeLastObject];
+    
+    self.cacheDataSource = [NSMutableArray arrayWithArray:self.dataSource];
     
     [self.tableView reloadData];
 }
@@ -125,15 +163,19 @@
 #pragma mark - setters&getters
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
+        //此处不明，为什么使用allocinit方式初始的tableview，进入不到编辑模式
+        _tableView = [UITableView new];
+        _tableView.frame = self.view.bounds;
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        [_tableView registerClass:[ProfessionTableViewCell class] forCellReuseIdentifier:@"Profession TableCell"];
+        UINib *professionTableCell = [UINib nibWithNibName:@"ProfessionTableViewCell" bundle:nil];
+        [_tableView registerNib:professionTableCell forCellReuseIdentifier:@"ProfessionTableCell"];
     }
     
     return _tableView;
 }
+
 
 - (UIView *)footerView {
     if (!_footerView) {
@@ -148,13 +190,13 @@
         imageView.image = [UIImage imageNamed:@"icon.png"];
         [_footerView addSubview:imageView];
         
-        [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.center.equalTo(_footerView);
-        }];
-        
         UIButton *addBtn = [UIButton new];
         [addBtn addTarget:self action:@selector(onAddBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
         [_footerView addSubview:addBtn];
+        
+        [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.center.equalTo(_footerView);
+        }];
         
         [addBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(_footerView);
@@ -164,12 +206,13 @@
     return _footerView;
 }
 
-- (NSMutableArray *)dataSource {
-    if (!_dataSource) {
-        _dataSource = [[NSMutableArray alloc] init];
+- (ProfessionDataParse *)professionDP {
+    if (!_professionDP) {
+        _professionDP = [[ProfessionDataParse alloc] init];
+        _professionDP.delegate = self;
     }
     
-    return _dataSource;
+    return _professionDP;
 }
 
 @end

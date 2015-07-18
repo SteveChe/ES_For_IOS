@@ -13,6 +13,7 @@
 #import "ProfessionCollectionViewCell.h"
 #import "AddProfessionViewController.h"
 #import "EditProfessionViewController.h"
+#import "ProfessionWebViewController.h"
 
 @interface ProfessionViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, ProfessionDataDelegate>
 
@@ -43,14 +44,16 @@
 }
 
 #pragma mark - ProfessionDataDelegate methods
-- (void)loadProfessionList:(NSArray *)list {
-    self.dataSource = nil;
-    [self.dataSource addObjectsFromArray:list];
-    ESProfession *profession = [[ESProfession alloc] init];
-    profession.icon_url = @"add";
-    [self.dataSource addObject:profession];
-    
-    [self.collectionView reloadData];
+- (void)professionOperationSuccess:(NSArray *)list {
+    if ([list isKindOfClass:[NSArray class]]) {
+        self.dataSource = nil;
+        [self.dataSource addObjectsFromArray:list];
+        ESProfession *profession = [[ESProfession alloc] init];
+        profession.icon_url = @"add";
+        [self.dataSource addObject:profession];
+        
+        [self.collectionView reloadData];
+    }
 }
 
 #pragma mark - UICollectionViewDataSource&UICollectionViewDelegateFlowLayout
@@ -63,7 +66,7 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    ProfessionCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Profession Cell" forIndexPath:indexPath];
+    ProfessionCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Profession CollectionCell" forIndexPath:indexPath];
     
     cell.contentView.backgroundColor = [UIColor whiteColor];
 
@@ -75,16 +78,6 @@
     
     return cell;
 }
-
-//- (NSArray*)layoutAttributesForElementsInRect:(CGRect)rect
-//{
-//    NSMutableArray* attributes = [[self.collectionView layoutAttributesForElementsInRect:rect] mutableCopy];
-//    
-//    
-//    for (UICollectionViewLayoutAttributes *attr in attributes) {
-//        NSLog(@"%@", NSStringFromCGRect([attr frame]));
-//    }
-//}
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -112,14 +105,16 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = (UICollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    cell.backgroundColor = [UIColor redColor];
-    NSLog(@"row=======%ld",(long)[indexPath row]);
-    NSLog(@"section===%ld",(long)indexPath.section);
     
     if (indexPath.row == self.dataSource.count - 1) {
         AddProfessionViewController *addProfessionVC = [[AddProfessionViewController alloc] init];
         [self.navigationController pushViewController:addProfessionVC animated:YES];
+    } else {
+        ProfessionWebViewController *webVC = [[ProfessionWebViewController alloc] init];
+        ESProfession *profession = self.dataSource[indexPath.row];
+        webVC.title = profession.name;
+        webVC.urlString = profession.url;
+        [self.navigationController pushViewController:webVC animated:YES];
     }
 }
 
@@ -138,7 +133,7 @@
         [layout setScrollDirection:UICollectionViewScrollDirectionVertical];
         _collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
         UINib *professionCell = [UINib nibWithNibName:@"ProfessionCollectionViewCell" bundle:nil];
-        [_collectionView registerNib:professionCell forCellWithReuseIdentifier:@"Profession Cell"];
+        [_collectionView registerNib:professionCell forCellWithReuseIdentifier:@"Profession CollectionCell"];
         _collectionView.backgroundColor = [ColorHandler colorFromHexRGB:@"DDDDDD"];
         _collectionView.bounces = NO;
         _collectionView.delegate = self;

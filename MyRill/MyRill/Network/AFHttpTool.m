@@ -7,11 +7,10 @@
 //
 
 #import "AFHttpTool.h"
-
 #import "AFNetworking.h"
+#import "ESProfession.h"
 
 #define DEV_SERVER_ADDRESS @"http://120.25.249.144/"
-
 #define ContentType @"text/json"
 
 @implementation AFHttpTool
@@ -25,13 +24,13 @@
     NSURL* baseURL = [NSURL URLWithString:DEV_SERVER_ADDRESS];
     //获得请求管理者
     AFHTTPRequestOperationManager* mgr = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:baseURL];
-    
+
 #ifdef ContentType
 //    mgr.responseSerializer.acceptableContentTypes = [NSSet setWithObject:ContentType];
 #endif
     mgr.requestSerializer.HTTPShouldHandleCookies = YES;
 //    [mgr se]
-
+    
     NSData *cookiesdata = [[NSUserDefaults standardUserDefaults] objectForKey:@"sessionCookies"];
     if([cookiesdata length]) {
         NSArray *cookies = [NSKeyedUnarchiver unarchiveObjectWithData:cookiesdata];
@@ -200,14 +199,53 @@
                           failure:failure];
 }
 
-+ (void)deleteProfessionWithName:(NSString *)name
-                             url:(NSString *)url
-                         success:(void (^)(id))success
-                         failure:(void (^)(NSError *))failure {
++ (void)deleteProfessionWithId:(NSString *)professionId
+                       success:(void (^)(id))success
+                       failure:(void (^)(NSError *))failure {
     NSDictionary *params = @{@"_method":@"DELETE"};
     
     [AFHttpTool requestWithMethod:RequestMethodTypePost
-                              url:@"api/professions/25/.json"
+                              url:[NSString stringWithFormat:@"api/dprofessions/%@/.json",professionId]
+                           params:params
+                          success:success
+                          failure:failure];
+}
+
++ (void)updateProfessioinWithId:(NSString *)professionId
+                           name:(NSString *)name
+                            url:(NSString *)url
+                        success:(void (^)(id))success
+                        failure:(void (^)(NSError *))failure {
+    NSDictionary *params = @{@"name":name,@"url":url};
+    
+    [AFHttpTool requestWithMethod:RequestMethodTypePost
+                              url:[NSString stringWithFormat:@"api/professions/%@/.json",professionId]
+                           params:params
+                          success:success
+                          failure:failure];
+}
+
++ (void)updateProfessioinListOrderWith:(NSArray *)professionArray
+                               success:(void (^)(id))success
+                               failure:(void (^)(NSError *))failure {
+    NSMutableArray *paramArray = [[NSMutableArray alloc] initWithCapacity:professionArray.count];
+    
+    
+    for (int i = 0; i < professionArray.count; i ++) {
+        ESProfession *profession = (ESProfession *)professionArray[i];
+        NSDictionary *orderDic = @{@"id":[profession.sub_id stringValue],@"order":[NSString stringWithFormat:@"%d",(i + 1)]};
+        [paramArray addObject:orderDic];
+    }
+    NSLog(@"%@",paramArray);
+    
+    NSError *error = nil;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:paramArray options:NSJSONWritingPrettyPrinted error:&error];
+    NSString* strJson = [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+    NSDictionary *params = @{@"_content":strJson,@"_content_type":@"application/json"};
+
+    [AFHttpTool requestWithMethod:RequestMethodTypePost
+                              url:@"/api/professions/sort/.json"
                            params:params
                           success:success
                           failure:failure];

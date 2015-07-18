@@ -15,6 +15,18 @@
     self = [super init];
     
     if (self) {
+        
+        if ([ColorHandler isNullOrNilNumber:dic[@"id"]]) {
+            self.professionId = [NSNumber numberWithInt:-1];
+        } else {
+            self.professionId = dic[@"id"];
+        }
+        if ([ColorHandler isNullOrNilNumber:dic[@"sub_id"]]) {
+            self.sub_id = [NSNumber numberWithInt:-1];
+        } else {
+            self.sub_id = dic[@"sub_id"];
+        }
+        
         if ([ColorHandler isNullOrNilNumber:dic[@"order"]]) {
             self.order = [NSNumber numberWithInt:-1];
         } else {
@@ -35,7 +47,7 @@
         if ([ColorHandler isNullOrEmptyString:dic[@"url"]]) {
             self.url = @"";
         } else {
-            self.url = [NSString stringWithFormat:@"http://g.soz.im/%@n?defaulticon=http://soz.im/favicon.ico",dic[@"url"]];
+            self.url = dic[@"url"];
         }
         
         if ([ColorHandler isNullOrEmptyString:dic[@"icon_url"]]) {

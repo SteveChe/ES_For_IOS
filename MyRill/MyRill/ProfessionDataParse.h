@@ -10,9 +10,11 @@
 
 @protocol ProfessionDataDelegate <NSObject>
 
+- (void)professionOperationSuccess:(id)context;
+- (void)professionOperationFailure:(NSString *)errorMsg;
+
 @optional
-- (void)loadProfessionList:(NSArray *)list;
-- (void)addProfessionSuccess;
+- (void)orderProfessionListResult:(id)context;
 
 @end
 
@@ -20,8 +22,15 @@
 
 @property (nonatomic, weak) id<ProfessionDataDelegate> delegate;
 
+//获取业务列表
 - (void)getProfessionList;
+//添加业务
 - (void)addProfessionWithName:(NSString *)name url:(NSString *)url;
-- (void)deleteProfessionWithName:(NSString *)name url:(NSString *)url;
+//删除业务
+- (void)deleteProfessionWithId:(NSString *)professionId;
+//更新业务
+- (void)updateProfessionWithId:(NSString *)professionId name:(NSString *)name url:(NSString *)url;
+//更新业务列表顺序
+- (void)updateProfessionListOrderWith:(NSArray *)professioinArray;
 
 @end
