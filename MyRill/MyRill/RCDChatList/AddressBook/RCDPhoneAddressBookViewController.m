@@ -21,6 +21,7 @@
 @property (nonatomic,strong) GetPhoneContactListDataParse* getPhoneContactListDataParse;
 @property (nonatomic,strong) NSMutableArray* phoneNumberContacts;
 @property (nonatomic,strong) NSMutableArray* searchResult;
+@property (strong,nonatomic) AddContactDataParse* addContactDataParse;
 
 @end
 
@@ -34,6 +35,8 @@
     _phoneNumberList = [[NSMutableArray alloc] init];
     _phoneNumberContacts = [[NSMutableArray alloc] init];
     _addBookDic = [NSMutableDictionary dictionary];
+    _addContactDataParse = [[AddContactDataParse alloc] init];
+    _addContactDataParse.delegate = self;
     
     [self initPhoneContactList];
     
@@ -183,7 +186,7 @@
     [[CustomShowMessage getInstance] showNotificationMessage:errorMessage];
 }
 
-#pragma mark --UITableViewDataSource
+#pragma mark -- UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if(tableView == self.searchDisplayController.searchResultsTableView)
@@ -217,10 +220,14 @@
     if(tableView == self.searchDisplayController.searchResultsTableView)
     {
         user = _searchResult[indexPath.row];
+        cell.tag = 0;
+
     }
     else
     {
         user = _phoneNumberContacts[indexPath.row];
+        cell.tag = 1;
+
     }
     if(user)
     {
@@ -237,6 +244,7 @@
         {
             [cell.addButton setBackgroundImage:[UIImage imageNamed:@"ren_tianjia_chenggong"] forState:UIControlStateNormal];
         }
+        cell.addButton.tag = indexPath.row;
         cell.delegate = self;
     }
 
@@ -268,11 +276,25 @@
 }
 
 #pragma mark --RCDPhoneAddressBookTableViewCellDelegate
-
 -(void)addButtonClick:(id)sender
 {
     RCDPhoneAddressBookTableViewCell* cell = (RCDPhoneAddressBookTableViewCell*) sender;
-    [cell.addButton setBackgroundImage:[UIImage imageNamed:@"ren_tianjia_chenggong"] forState:UIControlStateNormal];
+    NSInteger rowIndex = cell.addButton.tag;
+    ESUserInfo* userInfo = nil;
+
+    if(0 == cell.tag)
+    {
+        userInfo = [_searchResult objectAtIndex:rowIndex];
+    }
+    else if(1 ==cell.tag)
+    {
+        userInfo = [_phoneNumberContacts objectAtIndex:rowIndex];
+    }
+    if (userInfo != nil)
+    {
+        [_addContactDataParse addContact:userInfo.userId];
+    }
+//    [cell.addButton setBackgroundImage:[UIImage imageNamed:@"ren_tianjia_chenggong"] forState:UIControlStateNormal];
 }
 
 #pragma mark - UISearchBarDelegate
@@ -319,7 +341,6 @@
                     [_searchResult addObject:user];
                     continue;
                 }
-
             }
             
         }
@@ -328,5 +349,26 @@
     [self.searchDisplayController.searchResultsTableView reloadData];
     
 }
+
+#pragma mark- AddContactDelegate
+-(void)addContactSucceed
+{
+    [[CustomShowMessage getInstance] showNotificationMessage:@"已经发送"];
+    [self performSelector:@selector( returnToLastView)
+               withObject:nil
+               afterDelay:1];
+    return;
+    
+}
+-(void)returnToLastView
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)addContactFailed:(NSString*)errorMessage
+{
+    [[CustomShowMessage getInstance] showNotificationMessage:errorMessage];
+}
+
 
 @end

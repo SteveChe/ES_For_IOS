@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "GetPhoneContactListDataParse.h"
 #import "RCDPhoneAddressBookTableViewCell.h"
+#import "AddContactDataParse.h"
 
-@interface RCDPhoneAddressBookViewController : UITableViewController<GetPhoneContactListDelegate,RCDPhoneAddressBookTableViewCellDelegate>
+@interface RCDPhoneAddressBookViewController : UITableViewController<GetPhoneContactListDelegate,RCDPhoneAddressBookTableViewCellDelegate,AddContactDelegate>
 
 @end

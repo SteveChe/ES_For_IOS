@@ -21,6 +21,7 @@
 @property (nonatomic,strong) IBOutlet UILabel* descriptionDetailLabel;
 @property (nonatomic,strong) IBOutlet UIImageView* qrCodeImageView;
 @property (nonatomic,strong) IBOutlet UIImageView* enterpriseQRImageView;
+@property (nonatomic,strong) ESUserDetailInfo* userDetailInfo;
 
 -(IBAction)clickSMSButton:(id)sender;
 -(IBAction)clickCallButton:(id)sender;
@@ -43,6 +44,7 @@
 {
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = YES;
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -61,6 +63,7 @@
 #pragma mark - ContactDetailDataDelegate
 - (void)getContactDetail:(ESUserDetailInfo *)userDetailInfo
 {
+    _userDetailInfo = userDetailInfo;
     if (userDetailInfo.userName != nil && ![userDetailInfo.userName isEqual:[NSNull null]] && [userDetailInfo.userName length] > 0)
     {
         _titleLabel.text = userDetailInfo.userName;
@@ -73,6 +76,9 @@
     {
         _descriptionDetailLabel.text = userDetailInfo.contactDescription;
     }
+    _portraitImageView.clipsToBounds = YES;
+    _portraitImageView.layer.cornerRadius = 18.f;
+
     [_portraitImageView sd_setImageWithURL:[NSURL URLWithString:userDetailInfo.portraitUri] placeholderImage:[UIImage imageNamed:@"icon"]];
     [_qrCodeImageView sd_setImageWithURL:[NSURL URLWithString:userDetailInfo.qrcode] placeholderImage:[UIImage imageNamed:@"icon"]];
     [_enterpriseQRImageView sd_setImageWithURL:[NSURL URLWithString:userDetailInfo.enterprise_qrcode] placeholderImage:[UIImage imageNamed:@"icon"]];
@@ -88,10 +94,14 @@
 #pragma mark - Button Event
 -(IBAction)clickSMSButton:(id)sender
 {
-    
+    NSURL* smsURL = [NSURL URLWithString:[NSString stringWithFormat:@"SMS://%@",_userDetailInfo.phoneNumber]];
+    [[UIApplication sharedApplication]openURL:smsURL];
 }
 -(IBAction)clickCallButton:(id)sender
 {
+    NSURL* phoneCallURL = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@",_userDetailInfo.phoneNumber]];
+
+    [[UIApplication sharedApplication] openURL:phoneCallURL];
     
 }
 -(IBAction)clickDeleteButton:(id)sender

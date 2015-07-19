@@ -31,8 +31,8 @@
                                 <constraint firstAttribute="width" constant="36" id="qDG-Vy-VSd"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="张腾/锐捷RILL服务经理" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EQH-jD-KvK">
-                            <rect key="frame" x="101" y="30" width="279" height="21"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="张腾/锐捷RILL服务经理" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EQH-jD-KvK">
+                            <rect key="frame" x="101" y="22" width="279" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="5Kj-Tt-Dm1"/>
                                 <constraint firstAttribute="width" constant="279" id="UXY-nF-GR7"/>
@@ -41,53 +41,85 @@
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="个人简介" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mJM-aj-joG">
-                            <rect key="frame" x="101" y="63" width="279" height="21"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="个人简介" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mJM-aj-joG">
+                            <rect key="frame" x="101" y="83" width="279" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="P1R-fL-SmW"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="P1R-fL-SmW"/>
+                                </mask>
+                            </variation>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="暂无" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dWg-Bf-lhC">
-                            <rect key="frame" x="101" y="91" width="245" height="44"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="电话：" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mIb-rd-Lpg">
+                            <rect key="frame" x="101" y="45" width="245" height="39"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="245" id="wur-g2-atZ"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="暂无" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dWg-Bf-lhC">
+                            <rect key="frame" x="101" y="113" width="245" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="245" id="Gyp-Td-PnH"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="电话：" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mIb-rd-Lpg">
-                            <rect key="frame" x="101" y="141" width="245" height="39"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="39" id="UfY-iy-lKE"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                            <nil key="highlightedColor"/>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="Gyp-Td-PnH"/>
+                                </mask>
+                            </variation>
                         </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="mJM-aj-joG" firstAttribute="trailing" secondItem="EQH-jD-KvK" secondAttribute="trailing" id="5p6-3T-Dwl"/>
+                        <constraint firstItem="mIb-rd-Lpg" firstAttribute="trailing" secondItem="dWg-Bf-lhC" secondAttribute="trailing" id="CeJ-ZE-5y2"/>
                         <constraint firstItem="mIb-rd-Lpg" firstAttribute="leading" secondItem="GuW-qS-ThO" secondAttribute="leading" constant="101" id="Gm1-Kg-Kdr"/>
                         <constraint firstItem="mJM-aj-joG" firstAttribute="leading" secondItem="GuW-qS-ThO" secondAttribute="leading" constant="101" id="K63-bN-xUs"/>
+                        <constraint firstItem="dWg-Bf-lhC" firstAttribute="top" secondItem="mJM-aj-joG" secondAttribute="bottom" constant="9" id="Nuk-zO-d26"/>
                         <constraint firstItem="dWg-Bf-lhC" firstAttribute="leading" secondItem="GuW-qS-ThO" secondAttribute="leading" constant="101" id="QXk-LD-3PI"/>
                         <constraint firstItem="dWg-Bf-lhC" firstAttribute="top" secondItem="mJM-aj-joG" secondAttribute="bottom" constant="7" id="VFt-te-FOz"/>
                         <constraint firstItem="248-YQ-TYu" firstAttribute="leading" secondItem="GuW-qS-ThO" secondAttribute="leading" constant="19" id="Z7D-Fz-abW"/>
                         <constraint firstItem="mJM-aj-joG" firstAttribute="top" secondItem="EQH-jD-KvK" secondAttribute="bottom" constant="12" id="Zbq-pF-lG3"/>
+                        <constraint firstItem="dWg-Bf-lhC" firstAttribute="top" secondItem="mIb-rd-Lpg" secondAttribute="bottom" constant="29" id="Zgz-JS-DMT"/>
+                        <constraint firstItem="mJM-aj-joG" firstAttribute="leading" secondItem="EQH-jD-KvK" secondAttribute="leading" id="Zrb-1u-4vg"/>
                         <constraint firstItem="EQH-jD-KvK" firstAttribute="top" secondItem="GuW-qS-ThO" secondAttribute="top" constant="30" id="atq-mz-skZ"/>
+                        <constraint firstItem="mJM-aj-joG" firstAttribute="top" secondItem="EQH-jD-KvK" secondAttribute="bottom" constant="40" id="csM-xw-0FH"/>
+                        <constraint firstItem="mJM-aj-joG" firstAttribute="leading" secondItem="dWg-Bf-lhC" secondAttribute="leading" id="d8B-ka-gHF"/>
                         <constraint firstItem="mIb-rd-Lpg" firstAttribute="trailing" secondItem="dWg-Bf-lhC" secondAttribute="trailing" id="ePF-7k-Mq5"/>
                         <constraint firstAttribute="bottom" secondItem="mIb-rd-Lpg" secondAttribute="bottom" id="hwY-EV-3af"/>
+                        <constraint firstItem="mJM-aj-joG" firstAttribute="leading" secondItem="mIb-rd-Lpg" secondAttribute="leading" id="jRL-QD-VGb"/>
+                        <constraint firstItem="mIb-rd-Lpg" firstAttribute="top" secondItem="EQH-jD-KvK" secondAttribute="bottom" constant="2" id="kM7-xS-dBx"/>
                         <constraint firstItem="mIb-rd-Lpg" firstAttribute="top" secondItem="dWg-Bf-lhC" secondAttribute="bottom" constant="6" id="m7O-41-eZ9"/>
+                        <constraint firstItem="mJM-aj-joG" firstAttribute="trailing" secondItem="EQH-jD-KvK" secondAttribute="trailing" id="nXR-UF-f0f"/>
                         <constraint firstItem="248-YQ-TYu" firstAttribute="top" secondItem="GuW-qS-ThO" secondAttribute="top" constant="30" id="pd1-VM-aoF"/>
                         <constraint firstItem="EQH-jD-KvK" firstAttribute="leading" secondItem="248-YQ-TYu" secondAttribute="trailing" constant="46" id="vLc-fg-uFL"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="Gm1-Kg-Kdr"/>
+                            <exclude reference="ePF-7k-Mq5"/>
+                            <exclude reference="hwY-EV-3af"/>
+                            <exclude reference="m7O-41-eZ9"/>
+                            <exclude reference="5p6-3T-Dwl"/>
+                            <exclude reference="K63-bN-xUs"/>
+                            <exclude reference="Zbq-pF-lG3"/>
+                            <exclude reference="QXk-LD-3PI"/>
+                            <exclude reference="VFt-te-FOz"/>
+                        </mask>
+                    </variation>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="arv-Fi-c99">
-                    <rect key="frame" x="0.0" y="191" width="600" height="45"/>
+                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="arv-Fi-c99">
+                    <rect key="frame" x="0.0" y="194" width="600" height="45"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="标签" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Viv-6h-cNk">
                             <rect key="frame" x="17" y="12" width="51" height="21"/>
@@ -134,7 +166,7 @@
                     </variation>
                 </view>
                 <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aVW-5Y-YxB">
-                    <rect key="frame" x="0.0" y="301" width="600" height="45"/>
+                    <rect key="frame" x="0.0" y="306" width="600" height="45"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="个人二维码" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lF2-d9-L3D">
                             <rect key="frame" x="16" y="12" width="194" height="21"/>

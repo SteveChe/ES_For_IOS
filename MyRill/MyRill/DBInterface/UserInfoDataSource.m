@@ -78,7 +78,7 @@ static NSString * const userTableName = @"USERINFO_TABLE";
             userInfo.enterprise = [rs stringForColumn:@"enterprise"];
             userInfo.position = [rs stringForColumn:@"position"];
             userInfo.type = [rs stringForColumn:@"type"];
-            userInfo.status = [rs intForColumn:@"status"];            
+            userInfo.status = [NSNumber numberWithInt: [rs intForColumn:@"status"] ];
         }
         [rs close];
     }];
@@ -88,7 +88,6 @@ static NSString * const userTableName = @"USERINFO_TABLE";
 //从表中获取所有联系人的信息
 -(NSArray*) getAddressBookContactList
 {
-    
     __block NSMutableArray *contactList = nil;
     FMDatabaseQueue *queue = [DBHelper getDatabaseQueue];
     [queue inDatabase:^(FMDatabase *db) {
@@ -103,13 +102,39 @@ static NSString * const userTableName = @"USERINFO_TABLE";
             userInfo.enterprise = [rs stringForColumn:@"enterprise"];
             userInfo.position = [rs stringForColumn:@"position"];
             userInfo.type = [rs stringForColumn:@"type"];
-            userInfo.status = [rs intForColumn:@"status"];
+            userInfo.status = [NSNumber numberWithInt:[rs intForColumn:@"status"]];
             [contactList addObject:userInfo];
         }
         [rs close];
     }];
     return contactList;
 }
+
+//从表中获取所有手机联系人的信息
+-(NSArray*) getPhoneAddressBookContactList
+{
+    __block NSMutableArray *contactList = nil;
+    FMDatabaseQueue *queue = [DBHelper getDatabaseQueue];
+    [queue inDatabase:^(FMDatabase *db) {
+        FMResultSet *rs = [db executeQuery:@"SELECT * FROM USERINFO_TABLE where status = 1"];//
+        contactList = [[NSMutableArray alloc] init];
+        while ([rs next]) {
+            ESUserInfo* userInfo = [[ESUserInfo alloc] init];
+            userInfo.userId = [rs stringForColumn:@"user_id"];
+            userInfo.userName = [rs stringForColumn:@"name"];
+            userInfo.portraitUri = [rs stringForColumn:@"portrait_uri"];
+            userInfo.phoneNumber = [rs stringForColumn:@"phone_number"];
+            userInfo.enterprise = [rs stringForColumn:@"enterprise"];
+            userInfo.position = [rs stringForColumn:@"position"];
+            userInfo.type = [rs stringForColumn:@"type"];
+            userInfo.status = [NSNumber numberWithInt:[rs intForColumn:@"status"]];
+            [contactList addObject:userInfo];
+        }
+        [rs close];
+    }];
+    return contactList;
+}
+
 
 -(void) insertContactList:(NSArray*)contactList
 {

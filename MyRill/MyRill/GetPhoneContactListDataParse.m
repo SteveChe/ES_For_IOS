@@ -10,10 +10,20 @@
 #import "AFHttpTool.h"
 #import "ESUserInfo.h"
 #import "DataParseDefine.h"
+#import "PhoneContactListDataSource.h"
 @implementation GetPhoneContactListDataParse
 //获取手机通讯录中的ES联系人
 -(void) getPhoneContactList:(NSMutableArray*)phoneContactList
 {
+    NSArray* phoneContactListFromDB = [[PhoneContactListDataSource shareInstance] getPhoneContactListFromDB];
+    if (phoneContactListFromDB!=nil && ! [phoneContactListFromDB isEqual:[NSNull null]]&& [phoneContactListFromDB count]>0)
+    {
+        if (self.delegate!= nil && [self.delegate respondsToSelector:@selector(getPhoneContactList:)])
+        {
+            [self.delegate getPhoneContactList:phoneContactListFromDB];
+        }
+    }
+    
     [AFHttpTool getPhoneContactList:phoneContactList success:^(id response)
      {
          NSDictionary* reponseDic = (NSDictionary*)response;
@@ -67,7 +77,14 @@
                      NSString* userEnterprise = [temDic valueForKey:@"enterprise"];
                      if (userEnterprise != nil && ![userEnterprise isEqual:[NSNull null]])
                      {
-                         userInfo.enterprise = userEnterprise;
+                         if ([userEnterprise length] <= 0)
+                         {
+                             userInfo.enterprise = @"默认";
+                         }
+                         else
+                         {
+                             userInfo.enterprise = userEnterprise;
+                         }
                      }
                      
                      NSString* userPortraitUri = [temDic valueForKey:@"avatar"];
@@ -86,14 +103,24 @@
                      {
                          userInfo.type = type;
                      }
+                     //所有手机联系人的数据统一置为1
+                     userInfo.status = [NSNumber numberWithInt:1];
                      
                      [userInfoArray addObject:userInfo];
                  }
-                 
-                 if (self.delegate!= nil && [self.delegate respondsToSelector:@selector(getPhoneContactList:)])
+                 if (userInfoArray != nil && ![userInfoArray isEqual:[NSNull null]] && [userInfoArray count]>0)
                  {
-                     [self.delegate getPhoneContactList:userInfoArray];
+                     if (![userInfoArray isEqualToArray:phoneContactListFromDB])
+                     {
+                         [[PhoneContactListDataSource shareInstance] updatePhoneContactList:userInfoArray];
+                         if (self.delegate!= nil && [self.delegate respondsToSelector:@selector(getPhoneContactList:)])
+                         {
+                             [self.delegate getPhoneContactList:userInfoArray];
+                         }
+                     }
+                     
                  }
+
              }
                  break;
              default:

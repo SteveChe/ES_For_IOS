@@ -16,5 +16,8 @@
 //从表中获取所有联系人的信息
 -(NSArray*) getAddressBookContactList;
 
+//从表中获取所有手机联系人的信息
+-(NSArray*) getPhoneAddressBookContactList;
+
 -(void) insertContactList:(NSArray*)contactList;
 @end

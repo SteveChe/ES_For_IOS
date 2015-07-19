@@ -19,7 +19,6 @@
 @property(nonatomic, strong) NSString* phoneNumber;
 /** 公司 */
 @property(nonatomic, strong) NSString* enterprise;
-
 /** 公司 职位*/
 @property(nonatomic, strong) NSString* position;
 
@@ -27,11 +26,7 @@
 /** type */
 @property(nonatomic, strong) NSString* type;
 
-///** 全拼*/
-//@property(nonatomic, strong) NSString* quanPin;
-///** email*/
-//@property(nonatomic, strong) NSString* email;
-///**  0 请求添加, 1 好友
-@property(nonatomic, assign) int status;
+//**  0 非手机通讯录联系人 , 1 手机通讯录联系人 , 2 联系人请求
+@property(nonatomic, assign) NSNumber* status;
 
 @end
