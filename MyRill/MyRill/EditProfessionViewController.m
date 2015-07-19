@@ -15,7 +15,7 @@
 #import "AddProfessionViewController.h"
 #import "ModifyProfessionViewController.h"
 
-@interface EditProfessionViewController () <UITableViewDataSource, UITableViewDelegate, ProfessionDataDelegate>
+@interface EditProfessionViewController () <UITableViewDataSource, UITableViewDelegate, ProfessionDataDelegate,  AddProfessionDelegate, ModifyProfessionDelegate>
 
 @property (nonatomic, strong) UIView *footerView;
 @property (nonatomic, strong) UITableView *tableView;
@@ -67,6 +67,23 @@
     }
 }
 
+- (void)addProfessionSuccess:(ESProfession *)profession {
+    [self.dataSource addObject:profession];
+    [self.tableView reloadData];
+}
+
+- (void)modifyProfessionSuccess:(ESProfession *)profession {
+    for (int i = 0; i < self.dataSource.count; i ++) {
+        ESProfession *temp = (ESProfession *)self.dataSource[i];
+        if ([profession.professionId isEqualToNumber:temp.professionId]) {
+            [self.dataSource removeObjectAtIndex:i];
+            [self.dataSource insertObject:profession atIndex:i];
+        }
+    }
+    
+    [self.tableView reloadData];
+}
+
 #pragma mark - UITableViewDataSource&UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 70.0;
@@ -89,7 +106,6 @@
     id object = [self.dataSource objectAtIndex:[sourceIndexPath row]];
     [self.dataSource removeObjectAtIndex:[sourceIndexPath row]];
     [self.dataSource insertObject:object atIndex:[destinationIndexPath row]];
-
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -127,6 +143,7 @@
     modifyProfessionVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     modifyProfessionVC.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
     [modifyProfessionVC loadProfessionData:self.dataSource[indexPath.row]];
+    modifyProfessionVC.delegate = self;
     [self presentViewController:modifyProfessionVC animated:YES completion:nil];
 }
 
@@ -146,6 +163,7 @@
 
 - (void)onAddBtnClicked:(UIButton *)sender {
     AddProfessionViewController *addProfessionVC = [[AddProfessionViewController alloc] init];
+    addProfessionVC.delegate = self;
     [self.navigationController pushViewController:addProfessionVC animated:YES];
 }
 

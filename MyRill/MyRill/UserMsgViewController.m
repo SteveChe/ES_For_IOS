@@ -15,6 +15,7 @@
 #import "MRProgress.h"
 #import "QRCodeViewController.h"
 #import "ChangeUserImageDataParse.h"
+#import "ESNavigationController.h"
 
 @interface UserMsgViewController () <LogoutDataDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -105,7 +106,8 @@
     
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     LoginViewController *loginVC = [[LoginViewController alloc] init];
-    [appDelegate changeWindow:loginVC];
+    ESNavigationController *nav = [[ESNavigationController alloc] initWithRootViewController:loginVC];
+    [appDelegate changeWindow:nav];
 }
 
 - (void)logoutFail {

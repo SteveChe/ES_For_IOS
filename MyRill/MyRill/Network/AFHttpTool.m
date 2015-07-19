@@ -205,7 +205,7 @@
     NSDictionary *params = @{@"_method":@"DELETE"};
     
     [AFHttpTool requestWithMethod:RequestMethodTypePost
-                              url:[NSString stringWithFormat:@"api/dprofessions/%@/.json",professionId]
+                              url:[NSString stringWithFormat:@"api/professions/%@/.json",professionId]
                            params:params
                           success:success
                           failure:failure];

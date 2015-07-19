@@ -31,6 +31,9 @@
 
 - (void)updateProfessionCell:(ESProfession *)profession {
     self.titleLbl.text = profession.name;
+    NSURL *url = [NSURL URLWithString:profession.icon_url];
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    self.image.image = [UIImage imageWithData:data];
 }
 
 @end

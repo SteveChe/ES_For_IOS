@@ -84,7 +84,7 @@
                                }
                                failure:^(NSError *error) {
                                    [self.delegate professionOperationFailure:nil];
-                                   //NSLog(@"%@",[error debugDescription]);
+                                   NSLog(@"%@",[error debugDescription]);
                                }];
 }
 
@@ -105,7 +105,9 @@
                                     
                                     NSInteger errorCode = [errorCodeNum integerValue];
                                     if (errorCode == 0) {
-                                        [self.delegate professionOperationSuccess:nil];
+                                        NSDictionary *modelDic = (NSDictionary *)responseDic[NETWORK_OK_DATA];
+                                        ESProfession *profession = [[ESProfession alloc] initWithDic:modelDic];
+                                        [self.delegate professionOperationSuccess:profession];
                                     }
                                 } failure:^(NSError *err) {
                                     [self.delegate professionOperationFailure:nil];
