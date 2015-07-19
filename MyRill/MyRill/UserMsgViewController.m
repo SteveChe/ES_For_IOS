@@ -60,7 +60,7 @@
             data = UIImagePNGRepresentation(image);
         }
         
-        [self.changeUserImageDP changeUseImageWithId:@"5"
+        [self.changeUserImageDP changeUseImageWithId:@"2"
                                                 data:data];
 //        //图片保存的路径
 //        //这里将图片放在沙盒的documents文件夹中

@@ -156,7 +156,7 @@
                 <constraint firstItem="AAc-Lc-Zkr" firstAttribute="top" secondItem="oFz-lT-fHa" secondAttribute="top" constant="20" symbolic="YES" id="ID0-QQ-edq"/>
                 <constraint firstAttribute="trailing" secondItem="AAc-Lc-Zkr" secondAttribute="trailing" constant="-1" id="Iiu-nz-Wag"/>
                 <constraint firstAttribute="trailing" secondItem="El0-hz-pkE" secondAttribute="trailing" constant="20" symbolic="YES" id="jA1-Vl-uL1"/>
-                <constraint firstItem="El0-hz-pkE" firstAttribute="top" secondItem="AAc-Lc-Zkr" secondAttribute="bottom" constant="200" id="x8X-cV-bLG"/>
+                <constraint firstItem="El0-hz-pkE" firstAttribute="top" secondItem="AAc-Lc-Zkr" secondAttribute="bottom" constant="44" id="rSq-Zu-Qie"/>
             </constraints>
             <variation key="default">
                 <mask key="constraints">
