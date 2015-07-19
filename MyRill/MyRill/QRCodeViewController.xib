@@ -19,9 +19,40 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ISc-Ey-1eG" userLabel="QRView">
                     <rect key="frame" x="40" y="16" width="520" height="520"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" image="左上" translatesAutoresizingMaskIntoConstraints="NO" id="dcj-A2-VZf">
+                            <rect key="frame" x="0.0" y="0.0" width="15" height="15"/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" image="右上" translatesAutoresizingMaskIntoConstraints="NO" id="lc8-EW-bz0">
+                            <rect key="frame" x="505" y="0.0" width="15" height="15"/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="右下" translatesAutoresizingMaskIntoConstraints="NO" id="j3A-wE-tSA">
+                            <rect key="frame" x="505" y="505" width="15" height="15"/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="左下" translatesAutoresizingMaskIntoConstraints="NO" id="pFk-gc-fdL">
+                            <rect key="frame" x="0.0" y="505" width="15" height="15"/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" verticalHuggingPriority="251" image="扫描线" translatesAutoresizingMaskIntoConstraints="NO" id="DU7-q3-LTH">
+                            <rect key="frame" x="15" y="0.0" width="490" height="2"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="2" id="rDd-6R-bO9"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstItem="dcj-A2-VZf" firstAttribute="top" secondItem="ISc-Ey-1eG" secondAttribute="top" id="34d-0x-x6s"/>
+                        <constraint firstItem="pFk-gc-fdL" firstAttribute="leading" secondItem="ISc-Ey-1eG" secondAttribute="leading" id="MJu-f9-GMo"/>
+                        <constraint firstAttribute="trailing" secondItem="lc8-EW-bz0" secondAttribute="trailing" id="NoK-K9-KOW"/>
+                        <constraint firstItem="dcj-A2-VZf" firstAttribute="leading" secondItem="ISc-Ey-1eG" secondAttribute="leading" id="SCp-ij-WQE"/>
                         <constraint firstAttribute="width" secondItem="ISc-Ey-1eG" secondAttribute="height" multiplier="1:1" id="V25-Dc-hC9"/>
+                        <constraint firstItem="lc8-EW-bz0" firstAttribute="leading" secondItem="DU7-q3-LTH" secondAttribute="trailing" id="dbR-aD-LZa"/>
+                        <constraint firstAttribute="bottom" secondItem="pFk-gc-fdL" secondAttribute="bottom" id="gza-a5-kEJ"/>
+                        <constraint firstAttribute="trailing" secondItem="j3A-wE-tSA" secondAttribute="trailing" id="hbK-4e-sLy"/>
+                        <constraint firstItem="DU7-q3-LTH" firstAttribute="leading" secondItem="dcj-A2-VZf" secondAttribute="trailing" id="kSk-XV-PQt"/>
+                        <constraint firstAttribute="bottom" secondItem="j3A-wE-tSA" secondAttribute="bottom" id="nYE-X1-ZhY"/>
+                        <constraint firstItem="DU7-q3-LTH" firstAttribute="top" secondItem="ISc-Ey-1eG" secondAttribute="top" id="vWi-S7-ZLT"/>
+                        <constraint firstItem="lc8-EW-bz0" firstAttribute="top" secondItem="ISc-Ey-1eG" secondAttribute="top" id="zXM-8I-LRy"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ld5-SX-6SR" userLabel="leftView">
@@ -78,4 +109,11 @@
             <point key="canvasLocation" x="304" y="318"/>
         </view>
     </objects>
+    <resources>
+        <image name="右上" width="15" height="15"/>
+        <image name="右下" width="15" height="15"/>
+        <image name="左上" width="15" height="15"/>
+        <image name="左下" width="15" height="15"/>
+        <image name="扫描线" width="10" height="2"/>
+    </resources>
 </document>

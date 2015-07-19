@@ -380,4 +380,14 @@
                           success:success failure:failure];
 }
 
++ (void)changeUserImageWithId:(NSString *)userId data:(NSData *)data success:(void (^)(id))success failure:(void (^)(NSError *))failure {
+
+    NSDictionary *params = @{@"avatar":data};
+    [AFHttpTool requestWithMethod:RequestMethodTypePost
+                              url:[NSString stringWithFormat:@"/api/accounts/users/%@/.json",userId]
+                           params:params
+                          success:success
+                          failure:failure];
+}
+
 @end

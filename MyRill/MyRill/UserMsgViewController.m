@@ -14,6 +14,7 @@
 #import "SignOutDataParse.h"
 #import "MRProgress.h"
 #import "QRCodeViewController.h"
+#import "ChangeUserImageDataParse.h"
 
 @interface UserMsgViewController () <LogoutDataDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -22,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *logoutBtn;
 @property (nonatomic, strong) SignOutDataParse *signOutDP;
 @property (nonatomic, strong) MRProgressOverlayView *progress;
+@property (nonatomic, strong) ChangeUserImageDataParse *changeUserImageDP;
 
 @end
 
@@ -38,7 +40,6 @@
                                                                       target:self
                                                                       action:@selector(settingBtnItemOnClicked:)];
     self.navigationItem.rightBarButtonItem = settintBtnItem;
-    
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
@@ -59,21 +60,23 @@
             data = UIImagePNGRepresentation(image);
         }
         
-        //图片保存的路径
-        //这里将图片放在沙盒的documents文件夹中
-        NSString * DocumentsPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
-        
-        //文件管理器
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        
-        //把刚刚图片转换的data对象拷贝至沙盒中 并保存为image.png
-        [fileManager createDirectoryAtPath:DocumentsPath withIntermediateDirectories:YES attributes:nil error:nil];
-        [fileManager createFileAtPath:[DocumentsPath stringByAppendingString:@"/userIcon.png"] contents:data attributes:nil];
-        
-        //得到选择后沙盒中图片的完整路径
-        NSString *filePath = [[NSString alloc]initWithFormat:@"%@%@",DocumentsPath, @"/userIcon.png"];
-        NSLog(@"--------- %@",filePath);
-        self.userIcon.image = [UIImage imageWithContentsOfFile:filePath];
+        [self.changeUserImageDP changeUseImageWithId:@"5"
+                                                data:data];
+//        //图片保存的路径
+//        //这里将图片放在沙盒的documents文件夹中
+//        NSString * DocumentsPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+//        
+//        //文件管理器
+//        NSFileManager *fileManager = [NSFileManager defaultManager];
+//        
+//        //把刚刚图片转换的data对象拷贝至沙盒中 并保存为image.png
+//        [fileManager createDirectoryAtPath:DocumentsPath withIntermediateDirectories:YES attributes:nil error:nil];
+//        [fileManager createFileAtPath:[DocumentsPath stringByAppendingString:@"/userIcon.png"] contents:data attributes:nil];
+//        
+//        //得到选择后沙盒中图片的完整路径
+//        NSString *filePath = [[NSString alloc]initWithFormat:@"%@%@",DocumentsPath, @"/userIcon.png"];
+//        NSLog(@"--------- %@",filePath);
+//        self.userIcon.image = [UIImage imageWithContentsOfFile:filePath];
         //关闭相册界面
         [picker dismissViewControllerAnimated:YES completion:nil];
         
@@ -236,6 +239,15 @@
     }
     
     return _progress;
+}
+
+- (ChangeUserImageDataParse *)changeUserImageDP {
+    if (!_changeUserImageDP) {
+        _changeUserImageDP = [[ChangeUserImageDataParse alloc] init];
+        
+    }
+    
+    return _changeUserImageDP;
 }
 
 @end

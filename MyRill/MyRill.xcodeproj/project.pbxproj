@@ -74,6 +74,7 @@
 		2B9CBB6C1B4571D0007D7A45 /* SignOutDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B9CBB6B1B4571D0007D7A45 /* SignOutDataParse.m */; };
 		2BC8212F1B57FFDC0090E2C1 /* ProfessionWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC8212E1B57FFDC0090E2C1 /* ProfessionWebViewController.m */; };
 		2BC821331B5B839F0090E2C1 /* QRCodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BC821321B5B839F0090E2C1 /* QRCodeViewController.xib */; };
+		2BC821361B5BE6B60090E2C1 /* ChangeUserImageDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC821351B5BE6B60090E2C1 /* ChangeUserImageDataParse.m */; };
 		2BE8C21D1B4D60B400858CEE /* ProfessionCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE8C21B1B4D60B400858CEE /* ProfessionCollectionViewCell.m */; };
 		2BE8C21E1B4D60B400858CEE /* ProfessionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE8C21C1B4D60B400858CEE /* ProfessionCollectionViewCell.xib */; };
 		2BE8C22C1B4EB3A200858CEE /* AddProfessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE8C22A1B4EB3A100858CEE /* AddProfessionViewController.m */; };
@@ -337,6 +338,8 @@
 		2BC821301B5B649B0090E2C1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/RongCloudKit.strings"; sourceTree = "<group>"; };
 		2BC821311B5B649B0090E2C1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		2BC821321B5B839F0090E2C1 /* QRCodeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QRCodeViewController.xib; sourceTree = "<group>"; };
+		2BC821341B5BE6B60090E2C1 /* ChangeUserImageDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeUserImageDataParse.h; sourceTree = "<group>"; };
+		2BC821351B5BE6B60090E2C1 /* ChangeUserImageDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeUserImageDataParse.m; sourceTree = "<group>"; };
 		2BE8C21A1B4D60B400858CEE /* ProfessionCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfessionCollectionViewCell.h; sourceTree = "<group>"; };
 		2BE8C21B1B4D60B400858CEE /* ProfessionCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfessionCollectionViewCell.m; sourceTree = "<group>"; };
 		2BE8C21C1B4D60B400858CEE /* ProfessionCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfessionCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -721,7 +724,6 @@
 				2B39C9611B2728F9007BAC7A /* Contacts */,
 				2B39C9621B272915007BAC7A /* Task */,
 				2B39C9631B27293C007BAC7A /* User */,
-				2B39C9521B25CA55007BAC7A /* Others */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -780,6 +782,8 @@
 				F2F92EFE1B5020CC0047D7BF /* GetPhoneContactListDataParse.m */,
 				F23059C11B56AD65004599FA /* GetContactDetailDataParse.h */,
 				F23059C21B56AD65004599FA /* GetContactDetailDataParse.m */,
+				2BC821341B5BE6B60090E2C1 /* ChangeUserImageDataParse.h */,
+				2BC821351B5BE6B60090E2C1 /* ChangeUserImageDataParse.m */,
 			);
 			name = DataDrive;
 			sourceTree = "<group>";
@@ -798,13 +802,6 @@
 				2B39C9961B37E634007BAC7A /* SignUpViewController.xib */,
 			);
 			name = Login;
-			sourceTree = "<group>";
-		};
-		2B39C9521B25CA55007BAC7A /* Others */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Others;
 			sourceTree = "<group>";
 		};
 		2B39C9561B271C95007BAC7A /* Frameworks */ = {
@@ -1472,6 +1469,7 @@
 				F22FE2E41B4000ED00A1A997 /* MKAnnotationView+WebCache.m in Sources */,
 				F29F862D1B2410070058FC9F /* AFURLConnectionOperation.m in Sources */,
 				F23059BE1B54D628004599FA /* RCDAddressBookDetailViewController.m in Sources */,
+				2BC821361B5BE6B60090E2C1 /* ChangeUserImageDataParse.m in Sources */,
 				F22FE3051B458A4100A1A997 /* GetRequestContactListDataParse.m in Sources */,
 				F22FE2731B3AD7BE00A1A997 /* ChatListViewController.m in Sources */,
 				F22FE2B51B3FFAF700A1A997 /* RCDAddFriendViewController.m in Sources */,
@@ -1695,8 +1693,8 @@
 		2B31C3F31B11C3FD004C865A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Xinshuai Che (5242EFF4R7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xinshuai Che (5242EFF4R7)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MyRill/RCloud",
@@ -1710,7 +1708,7 @@
 					"$(PROJECT_DIR)/MyRill/JPush",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7454d704-57b3-4268-8c0e-4426064385b7";
+				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Debug;
@@ -1718,8 +1716,8 @@
 		2B31C3F41B11C3FD004C865A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Xinshuai Che (5242EFF4R7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xinshuai Che (5242EFF4R7)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MyRill/RCloud",
@@ -1733,7 +1731,7 @@
 					"$(PROJECT_DIR)/MyRill/JPush",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7454d704-57b3-4268-8c0e-4426064385b7";
+				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Release;

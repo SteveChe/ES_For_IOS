@@ -18,6 +18,7 @@
 @property ( strong , nonatomic ) AVCaptureMetadataOutput *output;
 @property ( strong , nonatomic ) AVCaptureSession *session;
 @property ( strong , nonatomic ) AVCaptureVideoPreviewLayer *preview;
+@property (nonatomic, strong) NSTimer *scanLineTimer;
 
 @end
 
@@ -75,6 +76,53 @@
     [_session startRunning];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    if (self.scanLineTimer == nil) {
+        [self moveUpAndDownLine];
+        [self createTimer];
+    }
+}
+
+#define LINE_SCAN_TIME  3.0     // 扫描线从上到下扫描所历时间（s）
+
+- (void)createTimer {
+    self.scanLineTimer =
+    [NSTimer scheduledTimerWithTimeInterval:LINE_SCAN_TIME
+                                     target:self
+                                   selector:@selector(moveUpAndDownLine)
+                                   userInfo:nil
+                                    repeats:YES];
+}
+
+// 扫描条上下滚动
+- (void)moveUpAndDownLine {
+//    CGRect readerFrame = self.view.frame;
+//    CGSize viewFinderSize = CGSizeMake(self.view.frame.size.width - 80, self.view.frame.size.width - 80);
+//    
+//    CGRect scanLineframe = self.scanLineImageView.frame;
+//    scanLineframe.origin.y =
+//    (readerFrame.size.height - viewFinderSize.height)/2;
+//    self.scanLineImageView.frame = scanLineframe;
+//    self.scanLineImageView.hidden = NO;
+//    
+//    __weak __typeof(self) weakSelf = self;
+//    
+//    [UIView animateWithDuration:LINE_SCAN_TIME - 0.05
+//                     animations:^{
+//                         CGRect scanLineframe = weakSelf.scanLineImageView.frame;
+//                         scanLineframe.origin.y =
+//                         (readerFrame.size.height + viewFinderSize.height)/2 -
+//                         weakSelf.scanLineImageView.frame.size.height;
+//                         
+//                         weakSelf.scanLineImageView.frame = scanLineframe;
+//                     }
+//                     completion:^(BOOL finished) {
+//                         weakSelf.scanLineImageView.hidden = YES;
+//                     }];
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
@@ -118,6 +166,14 @@
 
 - (void)photoAction:(UIBarButtonItem *)sender {
     
+}
+
+#pragma mark - setters&getters
+- (void)setQrView:(UIView *)qrView {
+    _qrView = qrView;
+    
+    _qrView.layer.borderColor = [UIColor whiteColor].CGColor;
+    _qrView.layer.borderWidth = .5f;
 }
 
 @end
