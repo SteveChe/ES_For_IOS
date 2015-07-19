@@ -61,9 +61,18 @@
 #pragma mark - ContactDetailDataDelegate
 - (void)getContactDetail:(ESUserDetailInfo *)userDetailInfo
 {
-    _titleLabel.text = userDetailInfo.userName;
-    _phoneNumberLabel.text = userDetailInfo.phoneNumber;
-    _descriptionDetailLabel.text = userDetailInfo.contactDescription;
+    if (userDetailInfo.userName != nil && ![userDetailInfo.userName isEqual:[NSNull null]] && [userDetailInfo.userName length] > 0)
+    {
+        _titleLabel.text = userDetailInfo.userName;
+    }
+    if (userDetailInfo.phoneNumber != nil && ![userDetailInfo.phoneNumber isEqual:[NSNull null]] && [userDetailInfo.phoneNumber length] > 0)
+    {
+        _phoneNumberLabel.text = [NSString stringWithFormat:@"电话:%@",userDetailInfo.phoneNumber];
+    }
+    if (userDetailInfo.contactDescription != nil && ![userDetailInfo.contactDescription isEqual:[NSNull null]] && [userDetailInfo.contactDescription length] > 0)
+    {
+        _descriptionDetailLabel.text = userDetailInfo.contactDescription;
+    }
     [_portraitImageView sd_setImageWithURL:[NSURL URLWithString:userDetailInfo.portraitUri] placeholderImage:[UIImage imageNamed:@"icon"]];
     [_qrCodeImageView sd_setImageWithURL:[NSURL URLWithString:userDetailInfo.qrcode] placeholderImage:[UIImage imageNamed:@"icon"]];
     [_enterpriseQRImageView sd_setImageWithURL:[NSURL URLWithString:userDetailInfo.enterprise_qrcode] placeholderImage:[UIImage imageNamed:@"icon"]];

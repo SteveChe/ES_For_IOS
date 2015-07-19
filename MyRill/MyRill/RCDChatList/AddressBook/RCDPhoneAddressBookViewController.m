@@ -224,11 +224,13 @@
     }
     if(user)
     {
-        cell.esName.text = user.userName;
+        cell.title.text = @"联系人";
+        cell.subtitle.text = user.userName;
+        
         NSString* phoneName = [_addBookDic valueForKey:user.phoneNumber];
         if (phoneName != nil && [phoneName length] > 0 )
         {
-            cell.phoneName.text = phoneName;
+            cell.title.text = phoneName;
         }
         [cell.ivAva sd_setImageWithURL:[NSURL URLWithString:user.portraitUri] placeholderImage:[UIImage imageNamed:@"icon"]];
         if([user.type isEqualToString:@"contact"])

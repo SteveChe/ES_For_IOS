@@ -38,6 +38,10 @@
                  if (listArray == nil || [listArray isEqual:[NSNull null]]
                      || [listArray count] <= 0)
                  {
+                     if (self.delegate!= nil && [self.delegate respondsToSelector:@selector(getRequestedContactList:)])
+                     {
+                         [self.delegate getRequestedContactList:nil];
+                     }
                      break;
                  }
                  NSMutableArray* userInfoArray = [NSMutableArray array];
@@ -46,7 +50,10 @@
                      NSDictionary* userDic = [temDic valueForKey:@"user"];
                      if (userDic == nil || [userDic isEqual:[NSNull null]])
                      {
-                         break;
+                         if (self.delegate!= nil && [self.delegate respondsToSelector:@selector(getRequestedContactList:)])
+                         {
+                             [self.delegate getRequestedContactList:nil];
+                         }
                      }
                      
                      ESUserInfo* userInfo = [[ESUserInfo alloc] init];

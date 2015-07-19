@@ -446,6 +446,9 @@ static CustomShowMessage *_sharedInstance = nil;
         case VERSION_UPDATE_WAITING_INDICATOR:
             text = NSLocalizedString(@"CheckUpdate",@"检查更新...");
             break;
+        case REQ_WAITING_INDICATOR:
+            text = @"正在请求";
+            break;
         case LOAD_PAGE_REQ_WAITING_INDICATOR:
             text = NSLocalizedString(@"IsLoadingB",@"正在载入...");
             break;

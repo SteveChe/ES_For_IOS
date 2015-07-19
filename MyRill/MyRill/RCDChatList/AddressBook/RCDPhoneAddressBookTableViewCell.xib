@@ -56,9 +56,9 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="addButton" destination="gD2-9x-gCS" id="GPR-tF-HlO"/>
-                <outlet property="esName" destination="b91-Km-88o" id="qfn-j7-bvM"/>
                 <outlet property="ivAva" destination="YfB-1x-S63" id="j3t-NW-0tw"/>
-                <outlet property="phoneName" destination="HaI-FA-Avr" id="ZRq-6d-dQP"/>
+                <outlet property="subtitle" destination="b91-Km-88o" id="Xc2-0X-nMt"/>
+                <outlet property="title" destination="HaI-FA-Avr" id="psK-tf-Qgy"/>
             </connections>
         </tableViewCell>
     </objects>
