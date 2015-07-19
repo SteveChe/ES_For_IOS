@@ -84,7 +84,7 @@
                                }
                                failure:^(NSError *error) {
                                    [self.delegate professionOperationFailure:nil];
-                                   //NSLog(@"%@",[error debugDescription]);
+                                   NSLog(@"%@",[error debugDescription]);
                                }];
 }
 

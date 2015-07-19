@@ -89,7 +89,6 @@
     id object = [self.dataSource objectAtIndex:[sourceIndexPath row]];
     [self.dataSource removeObjectAtIndex:[sourceIndexPath row]];
     [self.dataSource insertObject:object atIndex:[destinationIndexPath row]];
-
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
