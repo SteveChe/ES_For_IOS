@@ -22,6 +22,7 @@
     // Do any additional setup after loading the view.
     
     [self.view addSubview:self.professionWeb];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -30,6 +31,20 @@
     NSURL *url = [NSURL URLWithString:self.urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [self.professionWeb loadRequest:request];
+}
+
+#pragma mark - UIWebViewDelegate methods
+//以下方法会在加载一个URL中多次调用(加载图片,加载js file,加载css,都有可能调用)
+- (void)webViewDidStartLoad:(UIWebView *)webView {
+    NSLog(@"webViewDidStartLoad");
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    NSLog(@"webViewDidFinishLoad");
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+    NSLog(@"didFailLoadWithError:%@", error);
 }
 
 #pragma mark - setters&getters
