@@ -66,7 +66,7 @@ static NSString * const enterTableName = @"ENTERPRISEINFO_TABLE";
     __block ESEnterpriseInfo *enterpriseInfo = nil;
     FMDatabaseQueue *queue = [DBHelper getDatabaseQueue];
     [queue inDatabase:^(FMDatabase *db) {
-        FMResultSet *rs = [db executeQuery:@"SELECT * FROM ENTERPRISEINFO_TABLE where userid = ?",enterpriseId];
+        FMResultSet *rs = [db executeQuery:@"SELECT * FROM ENTERPRISEINFO_TABLE where enterprise_id = ?",enterpriseId];
         while ([rs next]) {
             enterpriseInfo = [[ESEnterpriseInfo alloc] init];
             enterpriseInfo.enterpriseId = [rs stringForColumn:@"enterprise_id"];

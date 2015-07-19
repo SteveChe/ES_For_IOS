@@ -7,12 +7,12 @@
 //
 
 #import "AddressBookContactListDataSource.h"
+#import "ESUserInfo.h"
 #import "ESContactList.h"
 #import "UserInfoDataSource.h"
 
 
 @interface AddressBookContactListDataSource ()
--(void)createAddressBookContactTable;
 @end
 
 @implementation AddressBookContactListDataSource
@@ -20,7 +20,7 @@
 {
     self = [super init];
     if (self) {
-        [self createAddressBookContactTable];
+//        [self createAddressBookContactTable];
     }
     return self;
 }
@@ -37,10 +37,66 @@
 }
 
 
--(void)createAddressBookContactTable
-{
-    
-}
+//-(void)createAddressBookContactTable
+//{
+//    
+//}
 
+
+-(NSArray*)getContactListFromDB
+{
+    NSArray* contactList = [[UserInfoDataSource shareInstance] getAddressBookContactList];
+    if (contactList == nil || [contactList isEqual:[NSNull null]]
+        || [contactList count] <= 0)
+    {
+        return nil;
+    }
+    
+    NSMutableArray* enterpriseContactList = [[NSMutableArray alloc] init ];
+    for (ESUserInfo* userInfo in contactList)
+    {
+        BOOL bFindEnterprise = FALSE;
+        for (ESContactList* temContactList in enterpriseContactList)
+        {
+            if ([userInfo.enterprise isEqual:temContactList.enterpriseName])
+            {
+                bFindEnterprise = true;
+                [temContactList.contactList addObject:userInfo ];
+                break;
+            }
+        }
+        if (!bFindEnterprise)
+        {
+            ESContactList* newContactList = [[ESContactList alloc] init];
+            NSMutableArray* temContactList = [[NSMutableArray alloc] init];
+            [temContactList addObject:userInfo];
+            newContactList.enterpriseName = userInfo.enterprise;
+            newContactList.contactList = temContactList;
+            
+            [enterpriseContactList addObject:newContactList];
+        }
+    }
+    
+    return enterpriseContactList;
+}
+-(void)updateContactList:(NSArray*)enterpriseContactList
+{
+    if (enterpriseContactList == nil || [enterpriseContactList isEqual:[NSNull null]] || [enterpriseContactList count] <= 0)
+    {
+        return;
+    }
+    NSMutableArray* userInfoArray = [[NSMutableArray alloc] init];
+    for (ESContactList* contactList in enterpriseContactList)
+    {
+        for (ESUserInfo* userInfo in contactList.contactList)
+        {
+            [userInfoArray addObject:userInfo];
+        }
+    }
+    if ([userInfoArray count]>0)
+    {
+        [[UserInfoDataSource shareInstance] insertContactList:userInfoArray];
+    }
+}
 
 @end

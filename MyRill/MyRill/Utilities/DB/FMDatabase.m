@@ -1103,7 +1103,8 @@ static int FMDBDatabaseBusyHandler(void *f, int count) {
     va_list args;
     va_start(args, sql);
     
-    BOOL result = [self executeUpdate:sql error:nil withArgumentsInArray:nil orDictionary:nil orVAList:args];
+    NSError* error = nil;
+    BOOL result = [self executeUpdate:sql error:&error withArgumentsInArray:nil orDictionary:nil orVAList:args];
     
     va_end(args);
     return result;

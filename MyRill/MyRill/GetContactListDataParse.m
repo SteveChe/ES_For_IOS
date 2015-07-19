@@ -11,6 +11,7 @@
 #import "DataParseDefine.h"
 #import "ESUserInfo.h"
 #import "ESContactList.h"
+#import "AddressBookContactListDataSource.h"
 
 @implementation GetContactListDataParse
 
@@ -21,6 +22,14 @@
  **/
 -(void) getContactList
 {
+    NSArray* enterpriseContactListFromDB = [[AddressBookContactListDataSource shareInstance] getContactListFromDB];
+    if (enterpriseContactListFromDB!=nil && ! [enterpriseContactListFromDB isEqual:[NSNull null]]&& [enterpriseContactListFromDB count]>0)
+    {
+        if (self.delegate!= nil && [self.delegate respondsToSelector:@selector(getContactList:)])
+        {
+            [self.delegate getContactList:enterpriseContactListFromDB];
+        }
+    }
     [AFHttpTool getContactListSuccess:^(id response)
      {
          NSDictionary* reponseDic = (NSDictionary*)response;
@@ -89,6 +98,10 @@
                          NSString* userEnterprise = [temDic valueForKey:@"enterprise"];
                          if (userEnterprise != nil && ![userEnterprise isEqual:[NSNull null]])
                          {
+                             if ([userEnterprise length ]<=0)
+                             {
+                                 userEnterprise = @"默认";
+                             }
                              userInfo.enterprise = userEnterprise;
                          }
                          
@@ -97,6 +110,8 @@
                          {
                              userInfo.portraitUri = userPortraitUri;
                          }
+
+                         userInfo.type = @"contact";
                          
                          [userInfoArray addObject:userInfo];
                      
@@ -104,11 +119,19 @@
                      
                      [enterpriseList addObject:contactList];
                  }
-                 
-                 if (self.delegate!= nil && [self.delegate respondsToSelector:@selector(getContactList:)])
+                 if (enterpriseList != nil && ![enterpriseList isEqual:[NSNull null]] && [enterpriseList count]>0)
                  {
-                     [self.delegate getContactList:enterpriseList];
+                     if (![enterpriseList isEqualToArray:enterpriseContactListFromDB])
+                     {
+                         [[AddressBookContactListDataSource shareInstance] updateContactList:enterpriseList];
+                         if (self.delegate!= nil && [self.delegate respondsToSelector:@selector(getContactList:)])
+                         {
+                             [self.delegate getContactList:enterpriseList];
+                         }
+                     }
+
                  }
+
              }
                  break;
              default:

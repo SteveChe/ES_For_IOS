@@ -43,10 +43,10 @@ static NSString * const userTableName = @"USERINFO_TABLE";
     FMDatabaseQueue *queue = [DBHelper getDatabaseQueue];
     [queue inDatabase:^(FMDatabase *db) {
         if (![DBHelper isTableOK: userTableName withDB:db]) {
-            NSString *createTableSQL = @"CREATE TABLE USERINFO_TABLE (id integer PRIMARY KEY autoincrement, user_id text,name text, portrait_uri text, phone_number text, enterprise text, position text, type text, integer status )";
+            NSString *createTableSQL = @"CREATE TABLE USERINFO_TABLE (user_id text not null PRIMARY KEY,name text, portrait_uri text, phone_number text, enterprise text, position text, type text, status integer)";
             [db executeUpdate:createTableSQL];
-            NSString *createIndexSQL = @"CREATE INDEX idx_userid ON USERINFO_TABLE(user_id);";
-            [db executeUpdate:createIndexSQL];
+//            NSString *createIndexSQL = @"CREATE INDEX idx_userid ON USERINFO_TABLE(user_id);";
+//            [db executeUpdate:createIndexSQL];
         }
         
     }];
@@ -55,7 +55,7 @@ static NSString * const userTableName = @"USERINFO_TABLE";
 //存储用户信息
 -(void)insertUserToDB:(ESUserInfo*)user
 {
-    NSString *insertSql = @"REPLACE INTO USERTABLE (user_id, name, portrait_uri,phone_number,enterprise,position,type,status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    NSString *insertSql = @"REPLACE INTO USERINFO_TABLE (user_id, name, portrait_uri,phone_number,enterprise,position,type,status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     FMDatabaseQueue *queue = [DBHelper getDatabaseQueue];
     [queue inDatabase:^(FMDatabase *db) {
         [db executeUpdate:insertSql,user.userId,user.userName,user.portraitUri,user.phoneNumber,user.enterprise,user.position,user.type,user.status];
@@ -68,7 +68,7 @@ static NSString * const userTableName = @"USERINFO_TABLE";
     __block ESUserInfo *userInfo = nil;
     FMDatabaseQueue *queue = [DBHelper getDatabaseQueue];
     [queue inDatabase:^(FMDatabase *db) {
-        FMResultSet *rs = [db executeQuery:@"SELECT * FROM USERTABLE where user_id = ?",userId];
+        FMResultSet *rs = [db executeQuery:@"SELECT * FROM USERINFO_TABLE where user_id = ?",userId];
         while ([rs next]) {
             userInfo = [[ESUserInfo alloc] init];
             userInfo.userId = [rs stringForColumn:@"user_id"];
@@ -85,5 +85,42 @@ static NSString * const userTableName = @"USERINFO_TABLE";
     return userInfo;
 }
 
+//从表中获取所有联系人的信息
+-(NSArray*) getAddressBookContactList
+{
+    
+    __block NSMutableArray *contactList = nil;
+    FMDatabaseQueue *queue = [DBHelper getDatabaseQueue];
+    [queue inDatabase:^(FMDatabase *db) {
+        FMResultSet *rs = [db executeQuery:@"SELECT * FROM USERINFO_TABLE where type = 'contact'"];//
+        contactList = [[NSMutableArray alloc] init];
+        while ([rs next]) {
+            ESUserInfo* userInfo = [[ESUserInfo alloc] init];
+            userInfo.userId = [rs stringForColumn:@"user_id"];
+            userInfo.userName = [rs stringForColumn:@"name"];
+            userInfo.portraitUri = [rs stringForColumn:@"portrait_uri"];
+            userInfo.phoneNumber = [rs stringForColumn:@"phone_number"];
+            userInfo.enterprise = [rs stringForColumn:@"enterprise"];
+            userInfo.position = [rs stringForColumn:@"position"];
+            userInfo.type = [rs stringForColumn:@"type"];
+            userInfo.status = [rs intForColumn:@"status"];
+            [contactList addObject:userInfo];
+        }
+        [rs close];
+    }];
+    return contactList;
+}
 
+-(void) insertContactList:(NSArray*)contactList
+{
+    if (contactList == nil || [contactList isEqual:[NSNull null] ]
+                               || [contactList count]<=0 )
+    {
+        return;
+    }
+    for ( ESUserInfo* userInfo in contactList)
+    {
+        [self insertUserToDB:userInfo];
+    }
+}
 @end

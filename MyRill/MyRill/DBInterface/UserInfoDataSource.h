@@ -10,8 +10,11 @@
 @class ESUserInfo;
 @interface UserInfoDataSource : NSObject
 +(UserInfoDataSource *) shareInstance;
-//从表中获取用户信息
+//根据id从表中获取用户信息
 -(ESUserInfo*) getUserByUserId:(NSString*)userId;
 
+//从表中获取所有联系人的信息
+-(NSArray*) getAddressBookContactList;
 
+-(void) insertContactList:(NSArray*)contactList;
 @end

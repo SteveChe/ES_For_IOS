@@ -10,6 +10,7 @@
 @class ESUserInfo;
 @interface AddressBookContactListDataSource : NSObject
 +(AddressBookContactListDataSource *) shareInstance;
-
+-(NSArray*)getContactListFromDB;
+-(void)updateContactList:(NSArray*)enterpriseContactList;
 
 @end
