@@ -16,7 +16,6 @@
                 <outlet property="verificationBtn" destination="aNS-ld-DBj" id="Ebi-cR-1Y2"/>
                 <outlet property="view" destination="oFz-lT-fHa" id="nOV-Kn-moj"/>
                 <outletCollection property="holdViews" destination="AAc-Lc-Zkr" id="itn-fv-RnD"/>
-                <outletCollection property="holdViews" destination="34c-Wr-dVN" id="NPA-ne-8gJ"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -134,7 +133,7 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="El0-hz-pkE">
-                    <rect key="frame" x="20" y="369" width="560" height="44"/>
+                    <rect key="frame" x="20" y="293" width="560" height="44"/>
                     <color key="backgroundColor" red="0.023529411760000001" green="0.65490196079999996" blue="0.88235294119999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="4xj-jU-eAZ"/>
@@ -148,48 +147,15 @@
                         <action selector="signUpBtnOnClicked:" destination="-1" eventType="touchUpInside" id="vhg-k8-ZMg"/>
                     </connections>
                 </button>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="34c-Wr-dVN" userLabel="JoinHoldView">
-                    <rect key="frame" x="-1" y="269" width="602" height="45"/>
-                    <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="加入企业(可选)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rCM-oq-XsZ">
-                            <rect key="frame" x="20" y="12" width="111" height="20.5"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ijy-kc-HV5">
-                            <rect key="frame" x="0.0" y="0.0" width="602" height="45"/>
-                            <state key="normal">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="compBtnOnClicked:" destination="-1" eventType="touchUpInside" id="YoJ-fN-6hy"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstItem="Ijy-kc-HV5" firstAttribute="top" secondItem="34c-Wr-dVN" secondAttribute="top" id="6fy-3f-kj8"/>
-                        <constraint firstItem="rCM-oq-XsZ" firstAttribute="leading" secondItem="34c-Wr-dVN" secondAttribute="leading" constant="20" symbolic="YES" id="JtK-Bo-doO"/>
-                        <constraint firstAttribute="bottom" secondItem="Ijy-kc-HV5" secondAttribute="bottom" id="UIb-U1-L4v"/>
-                        <constraint firstItem="Ijy-kc-HV5" firstAttribute="leading" secondItem="34c-Wr-dVN" secondAttribute="leading" id="fxs-j8-8k1"/>
-                        <constraint firstAttribute="trailing" secondItem="Ijy-kc-HV5" secondAttribute="trailing" id="kzm-vq-iti"/>
-                        <constraint firstAttribute="centerY" secondItem="rCM-oq-XsZ" secondAttribute="centerY" id="n9t-Ym-tui"/>
-                        <constraint firstAttribute="height" constant="45" id="xqQ-Nr-xFt"/>
-                    </constraints>
-                </view>
             </subviews>
             <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="AAc-Lc-Zkr" firstAttribute="leading" secondItem="oFz-lT-fHa" secondAttribute="leading" constant="-1" id="48j-65-aBr"/>
-                <constraint firstItem="34c-Wr-dVN" firstAttribute="top" secondItem="AAc-Lc-Zkr" secondAttribute="bottom" constant="20" id="5On-mk-C9E"/>
                 <constraint firstItem="El0-hz-pkE" firstAttribute="leading" secondItem="oFz-lT-fHa" secondAttribute="leading" constant="20" symbolic="YES" id="CEV-w9-Scw"/>
-                <constraint firstItem="34c-Wr-dVN" firstAttribute="leading" secondItem="oFz-lT-fHa" secondAttribute="leading" constant="-1" id="ElC-Jq-LEF"/>
                 <constraint firstItem="AAc-Lc-Zkr" firstAttribute="top" secondItem="oFz-lT-fHa" secondAttribute="top" constant="20" symbolic="YES" id="ID0-QQ-edq"/>
                 <constraint firstAttribute="trailing" secondItem="AAc-Lc-Zkr" secondAttribute="trailing" constant="-1" id="Iiu-nz-Wag"/>
-                <constraint firstAttribute="trailing" secondItem="34c-Wr-dVN" secondAttribute="trailing" constant="-1" id="S1l-P3-BLI"/>
-                <constraint firstItem="El0-hz-pkE" firstAttribute="top" secondItem="34c-Wr-dVN" secondAttribute="bottom" constant="55" id="aqj-3A-pcX"/>
                 <constraint firstAttribute="trailing" secondItem="El0-hz-pkE" secondAttribute="trailing" constant="20" symbolic="YES" id="jA1-Vl-uL1"/>
+                <constraint firstItem="El0-hz-pkE" firstAttribute="top" secondItem="AAc-Lc-Zkr" secondAttribute="bottom" constant="44" id="rSq-Zu-Qie"/>
             </constraints>
             <point key="canvasLocation" x="662" y="349"/>
         </view>

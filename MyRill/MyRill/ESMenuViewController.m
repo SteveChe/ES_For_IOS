@@ -27,35 +27,38 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.view.backgroundColor = [ColorHandler colorFromHexRGB:@"E9EEF2"];
+    self.tabBar.barTintColor = [ColorHandler colorFromHexRGB:@"E5E5E5"];
+    self.tabBar.tintColor = [ColorHandler colorFromHexRGB:@"FF5454"];
+    self.tabBar.layer.borderWidth = .5f;
+    self.tabBar.layer.borderColor = [ColorHandler colorFromHexRGB:@"BBBBBB"].CGColor;
 
     ProfessionViewController *businessVC = [[ProfessionViewController alloc] init];
     UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:@"业务"
-                                                             image:[UIImage imageNamed:@"icon"]
-                                                     selectedImage:nil];
+                                                             image:[UIImage imageNamed:@"业务.png"]
+                                                     selectedImage:[UIImage imageNamed:@"业务-选中.png"]];
     businessVC.tabBarItem = tabBarItem;
     
     ChatListViewController *chatVC = [[ChatListViewController alloc] init];
     chatVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"对话"
-                                                      image:[UIImage imageNamed:@"icon"]
-                                              selectedImage:nil];
+                                                      image:[UIImage imageNamed:@"对话.png"]
+                                              selectedImage:[UIImage imageNamed:@"对话-选中.png"]];
 
 //    ContactsContainerViewController *contactsVC = [[ContactsContainerViewController alloc] init];
     RCDAddressBookViewController *contactsVC = [[RCDAddressBookViewController alloc] init];
 
     contactsVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"联系人"
-                                                          image:[UIImage imageNamed:@"icon"]
-                                                  selectedImage:nil];
+                                                          image:[UIImage imageNamed:@"联系人.png"]
+                                                  selectedImage:[UIImage imageNamed:@"联系人-选中.png"]];
     
     TaskContainerViewController *taskVC = [[TaskContainerViewController alloc] init];
     taskVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"任务"
-                                                      image:[UIImage imageNamed:@"icon"]
-                                              selectedImage:nil];
+                                                      image:[UIImage imageNamed:@"任务.png"]
+                                              selectedImage:[UIImage imageNamed:@"任务-选中.png"]];
     
     UserMsgViewController *userVC = [[UserMsgViewController alloc] init];
     userVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"我"
-                                                      image:[UIImage imageNamed:@"icon"]
-                                              selectedImage:nil];
+                                                      image:[UIImage imageNamed:@"我.png"]
+                                              selectedImage:[UIImage imageNamed:@"我-选中.png"]];
     
     self.viewControllers = [NSArray arrayWithObjects:
                                 [[ESNavigationController alloc] initWithRootViewController:businessVC],

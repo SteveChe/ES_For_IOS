@@ -9,7 +9,6 @@
 #import "SignUpViewController.h"
 #import "ColorHandler.h"
 #import "Masonry.h"
-#import "QRCodeViewController.h"
 #import "SignUpDataParse.h"
 #import "CustomShowMessage.h"
 #import "AppDelegate.h"
@@ -53,11 +52,6 @@
     [self.usernameTxtField resignFirstResponder];
     [self.pwdTxtField resignFirstResponder];
     [self.confirmPwdTxtField resignFirstResponder];
-}
-
-- (IBAction)compBtnOnClicked:(UIButton *)sender {
-    QRCodeViewController *qrcodeVC = [[QRCodeViewController alloc] init];
-    [self.navigationController pushViewController:qrcodeVC animated:YES];
 }
 
 - (IBAction)signUpBtnOnClicked:(UIButton *)sender {

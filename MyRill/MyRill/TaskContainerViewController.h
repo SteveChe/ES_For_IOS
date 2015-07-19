@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ESViewController.h"
 
-@interface TaskContainerViewController : UIViewController
+@interface TaskContainerViewController : ESViewController
 
 @end

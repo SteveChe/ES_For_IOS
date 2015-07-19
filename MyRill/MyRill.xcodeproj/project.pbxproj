@@ -73,6 +73,7 @@
 		2B9CBB691B42D897007D7A45 /* UserMsgViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B9CBB681B42D897007D7A45 /* UserMsgViewController.xib */; };
 		2B9CBB6C1B4571D0007D7A45 /* SignOutDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B9CBB6B1B4571D0007D7A45 /* SignOutDataParse.m */; };
 		2BC8212F1B57FFDC0090E2C1 /* ProfessionWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC8212E1B57FFDC0090E2C1 /* ProfessionWebViewController.m */; };
+		2BC821331B5B839F0090E2C1 /* QRCodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BC821321B5B839F0090E2C1 /* QRCodeViewController.xib */; };
 		2BE8C21D1B4D60B400858CEE /* ProfessionCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE8C21B1B4D60B400858CEE /* ProfessionCollectionViewCell.m */; };
 		2BE8C21E1B4D60B400858CEE /* ProfessionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE8C21C1B4D60B400858CEE /* ProfessionCollectionViewCell.xib */; };
 		2BE8C22C1B4EB3A200858CEE /* AddProfessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE8C22A1B4EB3A100858CEE /* AddProfessionViewController.m */; };
@@ -324,6 +325,9 @@
 		2B9CBB6B1B4571D0007D7A45 /* SignOutDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignOutDataParse.m; sourceTree = "<group>"; };
 		2BC8212D1B57FFDC0090E2C1 /* ProfessionWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfessionWebViewController.h; sourceTree = "<group>"; };
 		2BC8212E1B57FFDC0090E2C1 /* ProfessionWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfessionWebViewController.m; sourceTree = "<group>"; };
+		2BC821301B5B649B0090E2C1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/RongCloudKit.strings"; sourceTree = "<group>"; };
+		2BC821311B5B649B0090E2C1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		2BC821321B5B839F0090E2C1 /* QRCodeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QRCodeViewController.xib; sourceTree = "<group>"; };
 		2BE8C21A1B4D60B400858CEE /* ProfessionCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfessionCollectionViewCell.h; sourceTree = "<group>"; };
 		2BE8C21B1B4D60B400858CEE /* ProfessionCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfessionCollectionViewCell.m; sourceTree = "<group>"; };
 		2BE8C21C1B4D60B400858CEE /* ProfessionCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfessionCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -744,8 +748,6 @@
 				F22FE3041B458A4100A1A997 /* GetRequestContactListDataParse.m */,
 				F2F92EFD1B5020CC0047D7BF /* GetPhoneContactListDataParse.h */,
 				F2F92EFE1B5020CC0047D7BF /* GetPhoneContactListDataParse.m */,
-				2B26E0FF1B4A5A46000FE4D3 /* ProfessionDataParse.h */,
-				2B26E1001B4A5A46000FE4D3 /* ProfessionDataParse.m */,
 				F23059C11B56AD65004599FA /* GetContactDetailDataParse.h */,
 				F23059C21B56AD65004599FA /* GetContactDetailDataParse.m */,
 			);
@@ -764,8 +766,6 @@
 				2B39C9531B25CA86007BAC7A /* SignUpViewController.h */,
 				2B39C9541B25CA86007BAC7A /* SignUpViewController.m */,
 				2B39C9961B37E634007BAC7A /* SignUpViewController.xib */,
-				2B39C95D1B272221007BAC7A /* QRCodeViewController.h */,
-				2B39C95E1B272221007BAC7A /* QRCodeViewController.m */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -864,6 +864,9 @@
 				2B5A591B1B48F921000382D7 /* ChangPhoneNumViewController.h */,
 				2B5A591C1B48F921000382D7 /* ChangPhoneNumViewController.m */,
 				2B5A591D1B48F921000382D7 /* ChangPhoneNumViewController.xib */,
+				2B39C95D1B272221007BAC7A /* QRCodeViewController.h */,
+				2B39C95E1B272221007BAC7A /* QRCodeViewController.m */,
+				2BC821321B5B839F0090E2C1 /* QRCodeViewController.xib */,
 			);
 			name = User;
 			sourceTree = "<group>";
@@ -1295,6 +1298,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 2B31C3C61B11C3FD004C865A;
 			productRefGroup = 2B31C3D01B11C3FD004C865A /* Products */;
@@ -1336,6 +1340,7 @@
 				F2F92ECA1B4ABA5F0047D7BF /* RCDAcceptContactTableViewCell.xib in Resources */,
 				2B9CBB621B3ADEC4007D7A45 /* (null) in Resources */,
 				2B7FB8181B56AA5D00DA456E /* ProfessionTableViewCell.xib in Resources */,
+				2BC821331B5B839F0090E2C1 /* QRCodeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1512,6 +1517,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				2B31C3E21B11C3FD004C865A /* Base */,
+				2BC821311B5B649B0090E2C1 /* zh-Hans */,
 			);
 			name = LaunchScreen.xib;
 			sourceTree = "<group>";
@@ -1520,6 +1526,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				F22FE2871B3AF0CB00A1A997 /* Base */,
+				2BC821301B5B649B0090E2C1 /* zh-Hans */,
 			);
 			name = RongCloudKit.strings;
 			sourceTree = "<group>";

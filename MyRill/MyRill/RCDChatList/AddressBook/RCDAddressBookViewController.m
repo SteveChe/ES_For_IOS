@@ -19,6 +19,7 @@
 #import "RCDSearchFriendViewController.h"
 #import "RCDAddressBookViewTableViewCell.h"
 #import "RCDAddressBookDetailViewController.h"
+#import "ColorHandler.h"
 
 @interface RCDAddressBookViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,UISearchControllerDelegate,UISearchDisplayDelegate>
 
@@ -35,7 +36,8 @@
     // Do any additional setup after loading the view.
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationItem.title = @"联系人";
-    
+
+
     UINib *rcdCellNib = [UINib nibWithNibName:@"RCDAddressBookViewTableViewCell" bundle:nil];
     [self.tableView registerNib:rcdCellNib forCellReuseIdentifier:@"RCDAddressBookViewTableViewCell"];
 

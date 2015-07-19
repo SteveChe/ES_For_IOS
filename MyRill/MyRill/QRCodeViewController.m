@@ -8,9 +8,11 @@
 
 #import "QRCodeViewController.h"
 #import <AVFoundation/AVFoundation.h>
+#import "ColorHandler.h"
 
 @interface QRCodeViewController ()<AVCaptureMetadataOutputObjectsDelegate>
 
+@property (weak, nonatomic) IBOutlet UIView *qrView;
 @property ( strong , nonatomic ) AVCaptureDevice *device;
 @property ( strong , nonatomic ) AVCaptureDeviceInput *input;
 @property ( strong , nonatomic ) AVCaptureMetadataOutput *output;
@@ -25,11 +27,18 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.title = @"企业二维码扫描";
-    
-    CGRect bounds = [[UIScreen mainScreen] bounds];
-//    CGFloat screenHigh = bounds.size.height;
-//    CGFloat screenWidth = bounds.size.width;
+    self.title = @"扫描二维码";
+    self.navigationController.navigationBar.barTintColor = [ColorHandler colorFromHexRGB:@"000000"];
+    UIBarButtonItem *cancel = [[UIBarButtonItem alloc] initWithTitle:@"取消"
+                                                               style:UIBarButtonItemStyleDone
+                                                              target:self
+                                                              action:@selector(cancelAction:)];
+    UIBarButtonItem *photo = [[UIBarButtonItem alloc] initWithTitle:@"相册"
+                                                               style:UIBarButtonItemStyleDone
+                                                              target:self
+                                                              action:@selector(photoAction:)];
+    self.navigationItem.leftBarButtonItem = cancel;
+    self.navigationItem.rightBarButtonItem = photo;
     
     _device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     // Input
@@ -37,16 +46,8 @@
     // Output
     _output = [[AVCaptureMetadataOutput alloc] init];
     [_output setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
-//    [_output setRectOfInterest:CGRectMake (( 124 )/ screenHigh ,(( screenWidth - 220 )/ 2 )/ screenWidth, 220 / screenHigh , 220 / screenWidth)];
-    CGSize size = self.view.bounds.size;
-    CGRect cropRect = CGRectMake(40, 100, 240, 240);
-    _output.rectOfInterest = CGRectMake(cropRect.origin.y/size.height,
-                                              cropRect.origin.x/size.width,
-                                              cropRect.size.height/size.height,
-                                              cropRect.size.width/size.width);
-    
+
     // Session
-    
     _session = [[AVCaptureSession alloc] init];
     
     [_session setSessionPreset:AVCaptureSessionPresetHigh];
@@ -74,6 +75,24 @@
     [_session startRunning];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    //设置二维码的有效扫描区域
+    CGSize size = self.view.bounds.size;
+    CGRect cropRect = self.qrView.frame;
+    _output.rectOfInterest = CGRectMake(cropRect.origin.y/size.height,
+                                        cropRect.origin.x/size.width,
+                                        cropRect.size.height/size.height,
+                                        cropRect.size.width/size.width);
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear: animated];
+
+    self.navigationController.navigationBar.barTintColor = [ColorHandler colorFromHexRGB:@"FF5454"];
+}
+
 #pragma mark AVCaptureMetadataOutputObjectsDelegate
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:( AVCaptureConnection *)connection
 {
@@ -90,6 +109,15 @@
         
         [self.navigationController popViewControllerAnimated:YES];
     }
+}
+
+#pragma mark - response events
+- (void)cancelAction:(UIBarButtonItem *)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)photoAction:(UIBarButtonItem *)sender {
+    
 }
 
 @end

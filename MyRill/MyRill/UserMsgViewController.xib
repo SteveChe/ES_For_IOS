@@ -3,12 +3,14 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UserMsgViewController">
             <connections>
                 <outlet property="contentView" destination="uRq-6W-p4u" id="nXI-eJ-eGD"/>
                 <outlet property="logoutBtn" destination="bUB-zm-Xrz" id="Zct-9h-yfZ"/>
+                <outlet property="userIcon" destination="whv-3A-c9c" id="jpc-Pj-zAS"/>
                 <outlet property="view" destination="iN0-l3-epB" id="YTD-FO-2SK"/>
             </connections>
         </placeholder>
@@ -27,7 +29,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="602" height="90"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b7l-ck-ghj">
-                                            <rect key="frame" x="0.0" y="0.0" width="552" height="90"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="508" height="90"/>
                                             <state key="normal">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
@@ -42,13 +44,17 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon" translatesAutoresizingMaskIntoConstraints="NO" id="whv-3A-c9c">
-                                            <rect key="frame" x="560" y="34" width="22" height="22"/>
+                                            <rect key="frame" x="516" y="12" width="66" height="66"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="whv-3A-c9c" secondAttribute="height" multiplier="1:1" id="N1m-3B-jh4"/>
+                                            </constraints>
                                         </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="whv-3A-c9c" secondAttribute="trailing" constant="20" symbolic="YES" id="8ZP-Sx-vZU"/>
                                         <constraint firstAttribute="bottom" secondItem="b7l-ck-ghj" secondAttribute="bottom" id="CZA-bQ-JbP"/>
+                                        <constraint firstItem="whv-3A-c9c" firstAttribute="height" secondItem="UBo-sB-1x5" secondAttribute="height" constant="-24" id="NRQ-fB-Z6i"/>
                                         <constraint firstItem="mMN-zP-lJd" firstAttribute="centerY" secondItem="whv-3A-c9c" secondAttribute="centerY" id="Ni5-Bn-Q2P"/>
                                         <constraint firstAttribute="centerY" secondItem="mMN-zP-lJd" secondAttribute="centerY" id="R9b-9P-LSz"/>
                                         <constraint firstAttribute="height" constant="90" id="TU9-9N-Hro"/>
@@ -145,8 +151,8 @@
                                             <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon" translatesAutoresizingMaskIntoConstraints="NO" id="9Xg-pX-8Ba">
-                                            <rect key="frame" x="560" y="17" width="22" height="22"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="二维码" translatesAutoresizingMaskIntoConstraints="NO" id="9Xg-pX-8Ba">
+                                            <rect key="frame" x="558" y="16" width="24" height="24"/>
                                         </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -166,8 +172,8 @@
                                             <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon" translatesAutoresizingMaskIntoConstraints="NO" id="pv6-MJ-yqc">
-                                            <rect key="frame" x="560" y="16" width="22" height="22"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="二维码" translatesAutoresizingMaskIntoConstraints="NO" id="pv6-MJ-yqc">
+                                            <rect key="frame" x="558" y="15" width="24" height="24"/>
                                         </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -203,6 +209,9 @@
                                     <state key="normal" title="加入企业">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="joinEnterpriseBtnOnClicked:" destination="-1" eventType="touchUpInside" id="JDk-Ty-Jga"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" red="0.8666666666666667" green="0.8666666666666667" blue="0.8666666666666667" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -281,5 +290,6 @@
     </objects>
     <resources>
         <image name="icon" width="22" height="22"/>
+        <image name="二维码" width="24" height="24"/>
     </resources>
 </document>

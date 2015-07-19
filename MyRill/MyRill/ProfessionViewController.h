@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ESViewController.h"
 
-@interface ProfessionViewController : UIViewController
+@interface ProfessionViewController : ESViewController
 
 @end
