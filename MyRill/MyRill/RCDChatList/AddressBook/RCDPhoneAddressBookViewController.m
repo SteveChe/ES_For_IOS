@@ -11,6 +11,7 @@
 #import "CustomShowMessage.h"
 #import "ESUserInfo.h"
 #import "UIImageView+WebCache.h"
+#import "RCDAddressBookDetailViewController.h"
 
 @interface RCDPhoneAddressBookViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,UISearchControllerDelegate,UISearchDisplayDelegate>
 
@@ -19,6 +20,7 @@
 @property (nonatomic,strong) NSMutableDictionary* addBookDic;
 @property (nonatomic,strong) GetPhoneContactListDataParse* getPhoneContactListDataParse;
 @property (nonatomic,strong) NSMutableArray* phoneNumberContacts;
+@property (nonatomic,strong) NSMutableArray* searchResult;
 
 @end
 
@@ -37,7 +39,7 @@
     
     UINib *rcdCellNib = [UINib nibWithNibName:@"RCDPhoneAddressBookTableViewCell" bundle:nil];
     [self.tableView registerNib:rcdCellNib forCellReuseIdentifier:@"RCDPhoneAddressBookTableViewCell"];
-
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -184,6 +186,11 @@
 #pragma mark --UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if(tableView == self.searchDisplayController.searchResultsTableView)
+    {
+        return [_searchResult count];
+    }
+    
     return [_phoneNumberContacts count];
 }
 
@@ -201,9 +208,20 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellReuseIdentifier = @"RCDPhoneAddressBookTableViewCell";
-    RCDPhoneAddressBookTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellReuseIdentifier forIndexPath:indexPath];
-    ESUserInfo *user = _phoneNumberContacts[indexPath.row];
+    UINib *rcdCellNib = [UINib nibWithNibName:@"RCDPhoneAddressBookTableViewCell" bundle:nil];
+    [tableView registerNib:rcdCellNib forCellReuseIdentifier:@"RCDPhoneAddressBookTableViewCell"];
     
+
+    RCDPhoneAddressBookTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellReuseIdentifier forIndexPath:indexPath];
+    ESUserInfo *user = nil;
+    if(tableView == self.searchDisplayController.searchResultsTableView)
+    {
+        user = _searchResult[indexPath.row];
+    }
+    else
+    {
+        user = _phoneNumberContacts[indexPath.row];
+    }
     if(user)
     {
         cell.esName.text = user.userName;
@@ -213,10 +231,12 @@
             cell.phoneName.text = phoneName;
         }
         [cell.ivAva sd_setImageWithURL:[NSURL URLWithString:user.portraitUri] placeholderImage:[UIImage imageNamed:@"icon"]];
+        if([user.type isEqualToString:@"contact"])
+        {
+            [cell.addButton setBackgroundImage:[UIImage imageNamed:@"ren_tianjia_chenggong"] forState:UIControlStateNormal];
+        }
         cell.delegate = self;
     }
-
-    
 
     return cell;
 }
@@ -228,7 +248,21 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    RCDAddressBookDetailViewController * addressBookDetailVC = [[RCDAddressBookDetailViewController alloc] init];
+    ESUserInfo *user = nil;
+    if(tableView == self.searchDisplayController.searchResultsTableView)
+    {
+        user = _searchResult[indexPath.row];
+        addressBookDetailVC.userInfo = user;
+    }
+    else
+    {
+        user = _phoneNumberContacts[indexPath.row];
+    }
+    addressBookDetailVC.userInfo = user;
+
+    [self.navigationController pushViewController:addressBookDetailVC animated:YES];
+
 }
 
 #pragma mark --RCDPhoneAddressBookTableViewCellDelegate
@@ -237,6 +271,60 @@
 {
     RCDPhoneAddressBookTableViewCell* cell = (RCDPhoneAddressBookTableViewCell*) sender;
     [cell.addButton setBackgroundImage:[UIImage imageNamed:@"ren_tianjia_chenggong"] forState:UIControlStateNormal];
+}
+
+#pragma mark - UISearchBarDelegate
+/**
+ *  执行delegate搜索好友
+ *
+ *  @param searchBar  searchBar description
+ *  @param searchText searchText description
+ */
+-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    if (_searchResult == nil)
+    {
+        _searchResult = [NSMutableArray array];
+    }
+    
+    [_searchResult removeAllObjects];
+    
+    if ([searchText length] > 0)
+    {
+        for (ESUserInfo* user in _phoneNumberContacts )
+        {
+            if(user.userName != nil && [user.userName length] > 0 )
+            {
+                NSRange range1 = [user.userName rangeOfString:searchText];
+                if (range1.length > 0)
+                {
+                    [_searchResult addObject:user];
+                    continue;
+                }
+            }
+            if (user.phoneNumber != nil && [user.phoneNumber length] > 0)
+            {
+                NSRange range2 = [user.phoneNumber rangeOfString:searchText];
+                if (range2.length > 0)
+                {
+                    [_searchResult addObject:user];
+                    continue;
+                }
+                NSString* strAddressBookName = [_addBookDic objectForKey:user.phoneNumber];
+                NSRange range3 = [strAddressBookName rangeOfString:searchText];
+                if (range3.length > 0)
+                {
+                    [_searchResult addObject:user];
+                    continue;
+                }
+
+            }
+            
+        }
+    }
+    
+    [self.searchDisplayController.searchResultsTableView reloadData];
+    
 }
 
 @end

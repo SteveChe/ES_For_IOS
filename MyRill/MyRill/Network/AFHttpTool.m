@@ -366,4 +366,18 @@
                           success:success failure:failure];
 }
 
+/******** 获取联系人详情******
+ 请求方式：GET
+ 参数：无
+ 备注：该接口返回该联系人的详细信息
+ **/
++(void) getContactDetail:(NSString*)userID success:(void (^)(id response))success failure:(void (^)(NSError *error))failure
+{
+    NSString* strURL = [NSString stringWithFormat:@"/api/accounts/users/%@/.json",userID];
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet
+                              url:strURL
+                           params:nil
+                          success:success failure:failure];
+}
+
 @end
