@@ -29,9 +29,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"业务";
-    UIBarButtonItem *sortBtnItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
-                                                                               target:self
-                                                                               action:@selector(onSortBtnItemClicked:)];
+    UIBarButtonItem *sortBtnItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"编辑.png"]
+                                                                    style:UIBarButtonItemStyleDone
+                                                                   target:self
+                                                                   action:@selector(onSortBtnItemClicked:)];
     self.navigationItem.rightBarButtonItem = sortBtnItem;
 
     [self.view addSubview:self.collectionView];

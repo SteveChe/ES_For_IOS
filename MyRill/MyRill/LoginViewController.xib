@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
@@ -32,13 +32,12 @@
                         <action selector="onSignUpBtnClicked:" destination="-1" eventType="touchUpInside" id="49u-Se-T7T"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pZG-8d-WGB">
-                    <rect key="frame" x="20" y="339.5" width="560" height="44"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pZG-8d-WGB">
+                    <rect key="frame" x="20" y="339" width="560" height="44"/>
                     <color key="backgroundColor" red="0.023529411760000001" green="0.65490196079999996" blue="0.88235294119999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="YHd-Kq-KTx"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                     <state key="normal" title="登录">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -48,32 +47,32 @@
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4LD-7i-Ot7" userLabel="TextFieldHoldView">
-                    <rect key="frame" x="-1" y="190.5" width="602" height="89"/>
+                    <rect key="frame" x="-1" y="190" width="602" height="89"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="exu-hQ-O2v" userLabel="SplitLine">
-                            <rect key="frame" x="15" y="43.5" width="572" height="1"/>
+                            <rect key="frame" x="15" y="44" width="572" height="1"/>
                             <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="I3k-ug-A42"/>
                             </constraints>
                         </view>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="手机号/用户名" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="zbN-kf-mo2" userLabel="Username TextField">
-                            <rect key="frame" x="72" y="0.0" width="522" height="43.5"/>
+                            <rect key="frame" x="66" y="0.0" width="528" height="44.5"/>
                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="go"/>
                         </textField>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="密码" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="jcz-B7-oGl" userLabel="Pwd TextField">
-                            <rect key="frame" x="72" y="44.5" width="522" height="44.5"/>
+                            <rect key="frame" x="66" y="45" width="528" height="43.5"/>
                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="next" secureTextEntry="YES"/>
                         </textField>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon" translatesAutoresizingMaskIntoConstraints="NO" id="PdC-ah-ZoD">
-                            <rect key="frame" x="20" y="55.5" width="22" height="22"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="密码" translatesAutoresizingMaskIntoConstraints="NO" id="PdC-ah-ZoD">
+                            <rect key="frame" x="20" y="58" width="16" height="18"/>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon" translatesAutoresizingMaskIntoConstraints="NO" id="Whw-eH-iGm">
-                            <rect key="frame" x="20" y="11" width="22" height="22"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="账号" translatesAutoresizingMaskIntoConstraints="NO" id="Whw-eH-iGm">
+                            <rect key="frame" x="20" y="13" width="16" height="18"/>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -106,7 +105,7 @@
                     <rect key="frame" x="289" y="110" width="22" height="22"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Moj-IM-0T9">
-                    <rect key="frame" x="524" y="287.5" width="56" height="29"/>
+                    <rect key="frame" x="524" y="287" width="56" height="29"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                     <state key="normal" title="忘记密码">
                         <color key="titleColor" red="0.023529411760000001" green="0.65490196079999996" blue="0.88235294119999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -139,5 +138,7 @@
     </objects>
     <resources>
         <image name="icon" width="22" height="22"/>
+        <image name="密码" width="16" height="18"/>
+        <image name="账号" width="16" height="18"/>
     </resources>
 </document>

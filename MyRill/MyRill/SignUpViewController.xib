@@ -133,7 +133,7 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="El0-hz-pkE">
-                    <rect key="frame" x="20" y="369" width="560" height="44"/>
+                    <rect key="frame" x="20" y="293" width="560" height="44"/>
                     <color key="backgroundColor" red="0.023529411760000001" green="0.65490196079999996" blue="0.88235294119999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="4xj-jU-eAZ"/>

@@ -187,7 +187,7 @@
         [_footerView.layer addSublayer:layer];
         
         UIImageView *imageView = [UIImageView new];
-        imageView.image = [UIImage imageNamed:@"icon.png"];
+        imageView.image = [UIImage imageNamed:@"编辑业务-添加.png"];
         [_footerView addSubview:imageView];
         
         UIButton *addBtn = [UIButton new];

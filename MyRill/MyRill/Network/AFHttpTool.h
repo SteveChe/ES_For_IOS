@@ -43,21 +43,6 @@ typedef NS_ENUM(NSInteger, RequestMethodType){
                  password:(NSString *) password
                   success:(void (^)(id response))success
                   failure:(void (^)(NSError* err))failure;
-//change password
-+(void) changePassword:(NSString *) oldPassword
-           newPassword:(NSString *) newPassword
-               success:(void (^)(id response))success
-               failure:(void (^)(NSError* err))failure;
-
-+ (void)changePhoneNum:(NSString *)newPhoneNum
-      verificationCode:(NSString *)code
-               success:(void (^)(id response))success
-               failure:(void (^)(NSError *err))failure;
-
-//get verification code
-+(void) getVerificationCode:(NSString *)phoneNum
-                    success:(void (^)(id response))success
-                    failure:(void (^)(NSError *err))failure;
 
 //业务
 + (void)getProfessionSuccess:(void (^)(id response))success
@@ -128,4 +113,26 @@ typedef NS_ENUM(NSInteger, RequestMethodType){
  备注：该接口返回该联系人的详细信息
  **/
 +(void) getContactDetail:(NSString*)userID success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
+
+//change password
++(void) changePassword:(NSString *) oldPassword
+           newPassword:(NSString *) newPassword
+               success:(void (^)(id response))success
+               failure:(void (^)(NSError* err))failure;
+
++ (void)changePhoneNum:(NSString *)newPhoneNum
+      verificationCode:(NSString *)code
+               success:(void (^)(id response))success
+               failure:(void (^)(NSError *err))failure;
+
+//get verification code
++ (void)getVerificationCode:(NSString *)phoneNum
+                    success:(void (^)(id response))success
+                    failure:(void (^)(NSError *err))failure;
+
++ (void)changeUserImageWithId:(NSString *)userId
+                         data:(NSData *)data
+                      success:(void (^)(id response))success
+                      failure:(void (^)(NSError *err))failure;
+
 @end

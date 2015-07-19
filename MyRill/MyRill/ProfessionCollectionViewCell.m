@@ -25,7 +25,7 @@
 - (void)updateCellData:(ESProfession *)profession {
     self.titleLbl.text = profession.name;
     if ([profession.icon_url isEqualToString:@"add"]) {
-        self.icon.image = [UIImage imageNamed:@"icon.png"];
+        self.icon.image = [UIImage imageNamed:@"添加.png"];
     } else {
         NSURL *url = [NSURL URLWithString:profession.icon_url];
         NSData *data = [NSData dataWithContentsOfURL:url];

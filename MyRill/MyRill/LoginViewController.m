@@ -98,10 +98,10 @@
     _textFieldHoldView.layer.borderColor = [ColorHandler colorFromHexRGB:@"DDDDDD"].CGColor;
 }
 
-- (void)setLoginBtn:(UIButton *)loginBtn {
-    _loginBtn = loginBtn;
-    
-    _loginBtn.layer.cornerRadius = 20.0;
-}
+//- (void)setLoginBtn:(UIButton *)loginBtn {
+//    _loginBtn = loginBtn;
+//    
+//    _loginBtn.layer.cornerRadius = 20.0;
+//}
 
 @end
