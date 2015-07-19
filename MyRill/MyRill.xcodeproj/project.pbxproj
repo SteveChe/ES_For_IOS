@@ -131,6 +131,16 @@
 		F23059C01B5535DC004599FA /* RCDAddressBookDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F23059BF1B5535DC004599FA /* RCDAddressBookDetailViewController.xib */; };
 		F23059C31B56AD65004599FA /* GetContactDetailDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F23059C21B56AD65004599FA /* GetContactDetailDataParse.m */; };
 		F23059C61B56ADE3004599FA /* ESUserDetailInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F23059C51B56ADE3004599FA /* ESUserDetailInfo.m */; };
+		F234616D1B5AA0FD00C88FAC /* DBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F23461611B5AA0FD00C88FAC /* DBHelper.m */; };
+		F234616E1B5AA0FD00C88FAC /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = F23461631B5AA0FD00C88FAC /* FMDatabase.m */; };
+		F234616F1B5AA0FD00C88FAC /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = F23461651B5AA0FD00C88FAC /* FMDatabaseAdditions.m */; };
+		F23461701B5AA0FD00C88FAC /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = F23461671B5AA0FD00C88FAC /* FMDatabasePool.m */; };
+		F23461711B5AA0FD00C88FAC /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = F23461691B5AA0FD00C88FAC /* FMDatabaseQueue.m */; };
+		F23461721B5AA0FD00C88FAC /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = F234616C1B5AA0FD00C88FAC /* FMResultSet.m */; };
+		F23461761B5AA6E400C88FAC /* AddressBookContactListDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = F23461751B5AA6E400C88FAC /* AddressBookContactListDataSource.m */; };
+		F23461791B5AAB2500C88FAC /* UserInfoDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = F23461781B5AAB2500C88FAC /* UserInfoDataSource.m */; };
+		F234617C1B5AB49E00C88FAC /* ESEnterpriseInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F234617B1B5AB49E00C88FAC /* ESEnterpriseInfo.m */; };
+		F234617F1B5AB63C00C88FAC /* EnterpriseInfoDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = F234617E1B5AB63C00C88FAC /* EnterpriseInfoDataSource.m */; };
 		F24787721B2D5CE700EC266B /* ChangePwdDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F24787711B2D5CE700EC266B /* ChangePwdDataParse.m */; };
 		F24787751B2D775E00EC266B /* SignUpDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F24787741B2D775E00EC266B /* SignUpDataParse.m */; };
 		F250F2EA1B2471CD000AD021 /* AFHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = F250F2E91B2471CD000AD021 /* AFHttpTool.m */; };
@@ -186,7 +196,6 @@
 		F2D233B51B37E35300F8C65D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2D233B41B37E35300F8C65D /* SystemConfiguration.framework */; };
 		F2D233B71B37E37100F8C65D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2D233B61B37E37100F8C65D /* UIKit.framework */; };
 		F2F92EC51B4AB58F0047D7BF /* RCDAcceptContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2F92EC41B4AB58F0047D7BF /* RCDAcceptContactViewController.m */; };
-		F2F92ECA1B4ABA5F0047D7BF /* RCDAcceptContactTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2F92EC81B4ABA5F0047D7BF /* RCDAcceptContactTableViewCell.xib */; };
 		F2F92ECD1B4D60910047D7BF /* RCDPhoneAddressBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2F92ECC1B4D60910047D7BF /* RCDPhoneAddressBookViewController.m */; };
 		F2F92EFA1B4D7C050047D7BF /* RCDAddressBookQRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2F92EF91B4D7C050047D7BF /* RCDAddressBookQRCodeViewController.m */; };
 		F2F92EFC1B4EC3310047D7BF /* RCDSelectPersonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2F92EFB1B4EC3310047D7BF /* RCDSelectPersonTableViewCell.xib */; };
@@ -432,6 +441,27 @@
 		F23059C21B56AD65004599FA /* GetContactDetailDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetContactDetailDataParse.m; sourceTree = "<group>"; };
 		F23059C41B56ADE3004599FA /* ESUserDetailInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESUserDetailInfo.h; sourceTree = "<group>"; };
 		F23059C51B56ADE3004599FA /* ESUserDetailInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESUserDetailInfo.m; sourceTree = "<group>"; };
+		F23461601B5AA0FD00C88FAC /* DBHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBHelper.h; path = Utilities/DB/DBHelper.h; sourceTree = "<group>"; };
+		F23461611B5AA0FD00C88FAC /* DBHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBHelper.m; path = Utilities/DB/DBHelper.m; sourceTree = "<group>"; };
+		F23461621B5AA0FD00C88FAC /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDatabase.h; path = Utilities/DB/FMDatabase.h; sourceTree = "<group>"; };
+		F23461631B5AA0FD00C88FAC /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMDatabase.m; path = Utilities/DB/FMDatabase.m; sourceTree = "<group>"; };
+		F23461641B5AA0FD00C88FAC /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDatabaseAdditions.h; path = Utilities/DB/FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		F23461651B5AA0FD00C88FAC /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMDatabaseAdditions.m; path = Utilities/DB/FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		F23461661B5AA0FD00C88FAC /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDatabasePool.h; path = Utilities/DB/FMDatabasePool.h; sourceTree = "<group>"; };
+		F23461671B5AA0FD00C88FAC /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMDatabasePool.m; path = Utilities/DB/FMDatabasePool.m; sourceTree = "<group>"; };
+		F23461681B5AA0FD00C88FAC /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDatabaseQueue.h; path = Utilities/DB/FMDatabaseQueue.h; sourceTree = "<group>"; };
+		F23461691B5AA0FD00C88FAC /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMDatabaseQueue.m; path = Utilities/DB/FMDatabaseQueue.m; sourceTree = "<group>"; };
+		F234616A1B5AA0FD00C88FAC /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDB.h; path = Utilities/DB/FMDB.h; sourceTree = "<group>"; };
+		F234616B1B5AA0FD00C88FAC /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMResultSet.h; path = Utilities/DB/FMResultSet.h; sourceTree = "<group>"; };
+		F234616C1B5AA0FD00C88FAC /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMResultSet.m; path = Utilities/DB/FMResultSet.m; sourceTree = "<group>"; };
+		F23461741B5AA6E400C88FAC /* AddressBookContactListDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddressBookContactListDataSource.h; path = DBInterface/AddressBookContactListDataSource.h; sourceTree = "<group>"; };
+		F23461751B5AA6E400C88FAC /* AddressBookContactListDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddressBookContactListDataSource.m; path = DBInterface/AddressBookContactListDataSource.m; sourceTree = "<group>"; };
+		F23461771B5AAB2500C88FAC /* UserInfoDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserInfoDataSource.h; path = DBInterface/UserInfoDataSource.h; sourceTree = "<group>"; };
+		F23461781B5AAB2500C88FAC /* UserInfoDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserInfoDataSource.m; path = DBInterface/UserInfoDataSource.m; sourceTree = "<group>"; };
+		F234617A1B5AB49E00C88FAC /* ESEnterpriseInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ESEnterpriseInfo.h; path = Model/ESEnterpriseInfo.h; sourceTree = "<group>"; };
+		F234617B1B5AB49E00C88FAC /* ESEnterpriseInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ESEnterpriseInfo.m; path = Model/ESEnterpriseInfo.m; sourceTree = "<group>"; };
+		F234617D1B5AB63C00C88FAC /* EnterpriseInfoDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EnterpriseInfoDataSource.h; path = DBInterface/EnterpriseInfoDataSource.h; sourceTree = "<group>"; };
+		F234617E1B5AB63C00C88FAC /* EnterpriseInfoDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EnterpriseInfoDataSource.m; path = DBInterface/EnterpriseInfoDataSource.m; sourceTree = "<group>"; };
 		F247876C1B2BC3CE00EC266B /* DataParseDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataParseDefine.h; sourceTree = "<group>"; };
 		F24787701B2D5CE700EC266B /* ChangePwdDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePwdDataParse.h; sourceTree = "<group>"; };
 		F24787711B2D5CE700EC266B /* ChangePwdDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePwdDataParse.m; sourceTree = "<group>"; };
@@ -520,7 +550,6 @@
 		F2D233B61B37E37100F8C65D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F2F92EC31B4AB58F0047D7BF /* RCDAcceptContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCDAcceptContactViewController.h; path = RCDChatList/AddressBook/RCDAcceptContactViewController.h; sourceTree = "<group>"; };
 		F2F92EC41B4AB58F0047D7BF /* RCDAcceptContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RCDAcceptContactViewController.m; path = RCDChatList/AddressBook/RCDAcceptContactViewController.m; sourceTree = "<group>"; };
-		F2F92EC81B4ABA5F0047D7BF /* RCDAcceptContactTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RCDAcceptContactTableViewCell.xib; path = RCDChatList/AddressBook/RCDAcceptContactTableViewCell.xib; sourceTree = "<group>"; };
 		F2F92ECB1B4D60910047D7BF /* RCDPhoneAddressBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCDPhoneAddressBookViewController.h; path = RCDChatList/AddressBook/RCDPhoneAddressBookViewController.h; sourceTree = "<group>"; };
 		F2F92ECC1B4D60910047D7BF /* RCDPhoneAddressBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RCDPhoneAddressBookViewController.m; path = RCDChatList/AddressBook/RCDPhoneAddressBookViewController.m; sourceTree = "<group>"; };
 		F2F92EF81B4D7C050047D7BF /* RCDAddressBookQRCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCDAddressBookQRCodeViewController.h; path = RCDChatList/AddressBook/RCDAddressBookQRCodeViewController.h; sourceTree = "<group>"; };
@@ -596,6 +625,7 @@
 		2B31C3D11B11C3FD004C865A /* MyRill */ = {
 			isa = PBXGroup;
 			children = (
+				F23461731B5AA60700C88FAC /* DBInterface */,
 				F22FE27C1B3ADA8200A1A997 /* Model */,
 				F2D233571B31AA2600F8C65D /* JPush */,
 				2B39C94D1B247A4E007BAC7A /* DataDrive */,
@@ -744,8 +774,6 @@
 				F22FE3041B458A4100A1A997 /* GetRequestContactListDataParse.m */,
 				F2F92EFD1B5020CC0047D7BF /* GetPhoneContactListDataParse.h */,
 				F2F92EFE1B5020CC0047D7BF /* GetPhoneContactListDataParse.m */,
-				2B26E0FF1B4A5A46000FE4D3 /* ProfessionDataParse.h */,
-				2B26E1001B4A5A46000FE4D3 /* ProfessionDataParse.m */,
 				F23059C11B56AD65004599FA /* GetContactDetailDataParse.h */,
 				F23059C21B56AD65004599FA /* GetContactDetailDataParse.m */,
 			);
@@ -995,6 +1023,8 @@
 				2B26E1031B4AA379000FE4D3 /* ESProfession.m */,
 				F23059C41B56ADE3004599FA /* ESUserDetailInfo.h */,
 				F23059C51B56ADE3004599FA /* ESUserDetailInfo.m */,
+				F234617A1B5AB49E00C88FAC /* ESEnterpriseInfo.h */,
+				F234617B1B5AB49E00C88FAC /* ESEnterpriseInfo.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1048,7 +1078,6 @@
 				F22FE2A51B3FFAC200A1A997 /* RCDPersonDetailViewController.m */,
 				F2F92EC31B4AB58F0047D7BF /* RCDAcceptContactViewController.h */,
 				F2F92EC41B4AB58F0047D7BF /* RCDAcceptContactViewController.m */,
-				F2F92EC81B4ABA5F0047D7BF /* RCDAcceptContactTableViewCell.xib */,
 				F2F92ECB1B4D60910047D7BF /* RCDPhoneAddressBookViewController.h */,
 				F2F92ECC1B4D60910047D7BF /* RCDPhoneAddressBookViewController.m */,
 				F23059B21B529FAE004599FA /* RCDPhoneAddressBookTableViewCell.h */,
@@ -1115,6 +1144,39 @@
 			name = SDWebImage;
 			sourceTree = "<group>";
 		};
+		F234615F1B5AA0EF00C88FAC /* DB */ = {
+			isa = PBXGroup;
+			children = (
+				F23461601B5AA0FD00C88FAC /* DBHelper.h */,
+				F23461611B5AA0FD00C88FAC /* DBHelper.m */,
+				F23461621B5AA0FD00C88FAC /* FMDatabase.h */,
+				F23461631B5AA0FD00C88FAC /* FMDatabase.m */,
+				F23461641B5AA0FD00C88FAC /* FMDatabaseAdditions.h */,
+				F23461651B5AA0FD00C88FAC /* FMDatabaseAdditions.m */,
+				F23461661B5AA0FD00C88FAC /* FMDatabasePool.h */,
+				F23461671B5AA0FD00C88FAC /* FMDatabasePool.m */,
+				F23461681B5AA0FD00C88FAC /* FMDatabaseQueue.h */,
+				F23461691B5AA0FD00C88FAC /* FMDatabaseQueue.m */,
+				F234616A1B5AA0FD00C88FAC /* FMDB.h */,
+				F234616B1B5AA0FD00C88FAC /* FMResultSet.h */,
+				F234616C1B5AA0FD00C88FAC /* FMResultSet.m */,
+			);
+			name = DB;
+			sourceTree = "<group>";
+		};
+		F23461731B5AA60700C88FAC /* DBInterface */ = {
+			isa = PBXGroup;
+			children = (
+				F23461741B5AA6E400C88FAC /* AddressBookContactListDataSource.h */,
+				F23461751B5AA6E400C88FAC /* AddressBookContactListDataSource.m */,
+				F23461771B5AAB2500C88FAC /* UserInfoDataSource.h */,
+				F23461781B5AAB2500C88FAC /* UserInfoDataSource.m */,
+				F234617D1B5AB63C00C88FAC /* EnterpriseInfoDataSource.h */,
+				F234617E1B5AB63C00C88FAC /* EnterpriseInfoDataSource.m */,
+			);
+			name = DBInterface;
+			sourceTree = "<group>";
+		};
 		F250F2E71B247156000AD021 /* AFNetWorkInterface */ = {
 			isa = PBXGroup;
 			children = (
@@ -1156,6 +1218,7 @@
 		F29F86131B240FC30058FC9F /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				F234615F1B5AA0EF00C88FAC /* DB */,
 				2B5A58DA1B48DF4B000382D7 /* MRProgress */,
 				F22FE2C21B4000D400A1A997 /* SDWebImage */,
 				F22FE2BE1B3FFCA200A1A997 /* MBProgressHUD */,
@@ -1333,7 +1396,6 @@
 				F22FE30A1B4A9F1A00A1A997 /* RCDAddFriendViewController.xib in Resources */,
 				F2F92EFC1B4EC3310047D7BF /* RCDSelectPersonTableViewCell.xib in Resources */,
 				F23059C01B5535DC004599FA /* RCDAddressBookDetailViewController.xib in Resources */,
-				F2F92ECA1B4ABA5F0047D7BF /* RCDAcceptContactTableViewCell.xib in Resources */,
 				2B9CBB621B3ADEC4007D7A45 /* (null) in Resources */,
 				2B7FB8181B56AA5D00DA456E /* ProfessionTableViewCell.xib in Resources */,
 			);
@@ -1354,10 +1416,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B37E4601B53E9E000F671A1 /* ProfessionDataParse.h in Sources */,
+				F234617F1B5AB63C00C88FAC /* EnterpriseInfoDataSource.m in Sources */,
 				F22FE2E81B4000ED00A1A997 /* SDWebImageDecoder.m in Sources */,
 				2B39C96D1B2D79DB007BAC7A /* ProfessionViewController.m in Sources */,
 				2B5A590D1B48DFBB000382D7 /* UIImage+MRImageEffects.m in Sources */,
 				2B39C9441B24128F007BAC7A /* LoginViewController.m in Sources */,
+				F23461761B5AA6E400C88FAC /* AddressBookContactListDataSource.m in Sources */,
 				F29F86281B2410070058FC9F /* AFHTTPRequestOperation.m in Sources */,
 				F277AE071B2DC72A006E42CB /* BMBase.m in Sources */,
 				F22FE2E71B4000ED00A1A997 /* SDWebImageCompat.m in Sources */,
@@ -1380,14 +1444,17 @@
 				F29F86481B2410320058FC9F /* UIProgressView+AFNetworking.m in Sources */,
 				2B5A59181B48DFBB000382D7 /* MRMessageInterceptor.m in Sources */,
 				F22FE2781B3AD87800A1A997 /* KxMenu.m in Sources */,
+				F234617C1B5AB49E00C88FAC /* ESEnterpriseInfo.m in Sources */,
 				F22FE2EA1B4000ED00A1A997 /* SDWebImageDownloaderOperation.m in Sources */,
 				2B5A59191B48DFBB000382D7 /* MRMethodCopier.m in Sources */,
 				2B39C9901B37B691007BAC7A /* ESNavigationController.m in Sources */,
 				F22FE2B61B3FFAF700A1A997 /* RCDSearchFriendViewController.m in Sources */,
+				F23461791B5AAB2500C88FAC /* UserInfoDataSource.m in Sources */,
 				2B5A59141B48DFBB000382D7 /* MRStopButton.m in Sources */,
 				F29F862B1B2410070058FC9F /* AFNetworkReachabilityManager.m in Sources */,
 				F22FE3021B4576D100A1A997 /* GetContactListDataParse.m in Sources */,
 				F277AE041B2DC34E006E42CB /* UIDevice+screenType.m in Sources */,
+				F23461711B5AA0FD00C88FAC /* FMDatabaseQueue.m in Sources */,
 				F277AE0A1B2DCF39006E42CB /* StretchImageUtil.m in Sources */,
 				2B39C9761B2D7B05007BAC7A /* TaskContainerViewController.m in Sources */,
 				2BE8C2301B4EC58500858CEE /* ESViewController.m in Sources */,
@@ -1408,6 +1475,7 @@
 				F22FE2AD1B3FFAE600A1A997 /* RCDSelectPersonTableViewCell.m in Sources */,
 				F22FE2941B3B000400A1A997 /* UserSettingViewController.m in Sources */,
 				2B5A59221B494C2B000382D7 /* ChangePhoneNumDataParse.m in Sources */,
+				F234616F1B5AA0FD00C88FAC /* FMDatabaseAdditions.m in Sources */,
 				F22FE2BC1B3FFBB200A1A997 /* RCDAddFriendTableViewController.m in Sources */,
 				F22FE2F01B4000ED00A1A997 /* UIImage+WebP.m in Sources */,
 				F29F86461B2410320058FC9F /* UIButton+AFNetworking.m in Sources */,
@@ -1416,6 +1484,7 @@
 				2B39C93B1B241212007BAC7A /* MASViewAttribute.m in Sources */,
 				F24787721B2D5CE700EC266B /* ChangePwdDataParse.m in Sources */,
 				F22FE2BD1B3FFBB200A1A997 /* RCDChatListCell.m in Sources */,
+				F23461701B5AA0FD00C88FAC /* FMDatabasePool.m in Sources */,
 				2B5A591E1B48F921000382D7 /* ChangPhoneNumViewController.m in Sources */,
 				F277ADFB1B2DBE97006E42CB /* CustomShowMessage.m in Sources */,
 				F22FE2821B3ADB6000A1A997 /* ChatViewController.m in Sources */,
@@ -1428,6 +1497,7 @@
 				2B39C94C1B24501B007BAC7A /* ColorHandler.m in Sources */,
 				F29F86441B2410320058FC9F /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				2B9CBB661B3AEC74007D7A45 /* (null) in Sources */,
+				F234616D1B5AA0FD00C88FAC /* DBHelper.m in Sources */,
 				2B39C9391B241212007BAC7A /* MASConstraintMaker.m in Sources */,
 				F22FE2911B3B000400A1A997 /* ChangePwdViewController.m in Sources */,
 				F22FE2EF1B4000ED00A1A997 /* UIImage+MultiFormat.m in Sources */,
@@ -1445,6 +1515,7 @@
 				2B5A590C1B48DFBB000382D7 /* MRBlurView.m in Sources */,
 				F22FE3081B45989200A1A997 /* ESContactList.m in Sources */,
 				F22FE2A81B3FFAC200A1A997 /* RCDPersonDetailViewController.m in Sources */,
+				F234616E1B5AA0FD00C88FAC /* FMDatabase.m in Sources */,
 				2B39C9371B241212007BAC7A /* MASCompositeConstraint.m in Sources */,
 				F22FE27B1B3AD94200A1A997 /* UIColor+RCColor.m in Sources */,
 				F29F862C1B2410070058FC9F /* AFSecurityPolicy.m in Sources */,
@@ -1466,6 +1537,7 @@
 				2B39C9381B241212007BAC7A /* MASConstraint.m in Sources */,
 				2BE8C2331B52506600858CEE /* EditProfessionViewController.m in Sources */,
 				F22FE27F1B3ADAB000A1A997 /* ESUserInfo.m in Sources */,
+				F23461721B5AA0FD00C88FAC /* FMResultSet.m in Sources */,
 				F23059B51B529FAE004599FA /* RCDPhoneAddressBookTableViewCell.m in Sources */,
 				2B39C9731B2D7AF0007BAC7A /* ContactsContainerViewController.m in Sources */,
 				F29F862E1B2410070058FC9F /* AFURLRequestSerialization.m in Sources */,
@@ -1567,6 +1639,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "7454d704-57b3-4268-8c0e-4426064385b7";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1604,6 +1677,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "7454d704-57b3-4268-8c0e-4426064385b7";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1627,7 +1701,7 @@
 					"$(PROJECT_DIR)/MyRill/JPush",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5848fed7-392d-40a4-b004-b6102538c1dd";
+				PROVISIONING_PROFILE = "7454d704-57b3-4268-8c0e-4426064385b7";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Debug;
@@ -1650,7 +1724,7 @@
 					"$(PROJECT_DIR)/MyRill/JPush",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5848fed7-392d-40a4-b004-b6102538c1dd";
+				PROVISIONING_PROFILE = "7454d704-57b3-4268-8c0e-4426064385b7";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Release;

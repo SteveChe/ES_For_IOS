@@ -16,8 +16,8 @@
 @interface RCDPhoneAddressBookTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *ivAva;
-@property (weak, nonatomic) IBOutlet UILabel *phoneName;
-@property (weak, nonatomic) IBOutlet UILabel *esName;
+@property (weak, nonatomic) IBOutlet UILabel *title;
+@property (weak, nonatomic) IBOutlet UILabel *subtitle;
 @property (weak, nonatomic) IBOutlet UIButton *addButton;
 @property (nonatomic,weak)id<RCDPhoneAddressBookTableViewCellDelegate>delegate;
 

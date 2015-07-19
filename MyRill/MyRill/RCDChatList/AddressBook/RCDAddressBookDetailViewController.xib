@@ -50,7 +50,7 @@
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="暂无" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dWg-Bf-lhC">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="暂无" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dWg-Bf-lhC">
                             <rect key="frame" x="101" y="91" width="245" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="245" id="Gyp-Td-PnH"/>
@@ -75,12 +75,12 @@
                         <constraint firstItem="mIb-rd-Lpg" firstAttribute="leading" secondItem="GuW-qS-ThO" secondAttribute="leading" constant="101" id="Gm1-Kg-Kdr"/>
                         <constraint firstItem="mJM-aj-joG" firstAttribute="leading" secondItem="GuW-qS-ThO" secondAttribute="leading" constant="101" id="K63-bN-xUs"/>
                         <constraint firstItem="dWg-Bf-lhC" firstAttribute="leading" secondItem="GuW-qS-ThO" secondAttribute="leading" constant="101" id="QXk-LD-3PI"/>
+                        <constraint firstItem="dWg-Bf-lhC" firstAttribute="top" secondItem="mJM-aj-joG" secondAttribute="bottom" constant="7" id="VFt-te-FOz"/>
                         <constraint firstItem="248-YQ-TYu" firstAttribute="leading" secondItem="GuW-qS-ThO" secondAttribute="leading" constant="19" id="Z7D-Fz-abW"/>
                         <constraint firstItem="mJM-aj-joG" firstAttribute="top" secondItem="EQH-jD-KvK" secondAttribute="bottom" constant="12" id="Zbq-pF-lG3"/>
                         <constraint firstItem="EQH-jD-KvK" firstAttribute="top" secondItem="GuW-qS-ThO" secondAttribute="top" constant="30" id="atq-mz-skZ"/>
                         <constraint firstItem="mIb-rd-Lpg" firstAttribute="trailing" secondItem="dWg-Bf-lhC" secondAttribute="trailing" id="ePF-7k-Mq5"/>
                         <constraint firstAttribute="bottom" secondItem="mIb-rd-Lpg" secondAttribute="bottom" id="hwY-EV-3af"/>
-                        <constraint firstItem="dWg-Bf-lhC" firstAttribute="top" secondItem="mJM-aj-joG" secondAttribute="bottom" constant="11" id="j2u-8r-jT0"/>
                         <constraint firstItem="mIb-rd-Lpg" firstAttribute="top" secondItem="dWg-Bf-lhC" secondAttribute="bottom" constant="6" id="m7O-41-eZ9"/>
                         <constraint firstItem="248-YQ-TYu" firstAttribute="top" secondItem="GuW-qS-ThO" secondAttribute="top" constant="30" id="pd1-VM-aoF"/>
                         <constraint firstItem="EQH-jD-KvK" firstAttribute="leading" secondItem="248-YQ-TYu" secondAttribute="trailing" constant="46" id="vLc-fg-uFL"/>
@@ -105,7 +105,7 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fNL-pU-5R8">
-                    <rect key="frame" x="0.0" y="250" width="600" height="45"/>
+                    <rect key="frame" x="0.0" y="251" width="600" height="45"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="企业二维码" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hfo-O2-OMm">
                             <rect key="frame" x="16" y="12" width="194" height="21"/>
@@ -113,11 +113,25 @@
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sjk-02-k29">
-                            <rect key="frame" x="524" y="5" width="36" height="36"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sjk-02-k29">
+                            <rect key="frame" x="527" y="5" width="36" height="36"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="36" id="BXi-cN-XZy"/>
+                                <constraint firstAttribute="width" constant="36" id="iza-JO-VRS"/>
+                            </constraints>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="Sjk-02-k29" firstAttribute="top" secondItem="fNL-pU-5R8" secondAttribute="top" constant="5" id="DHh-kp-pPs"/>
+                        <constraint firstAttribute="centerX" secondItem="Sjk-02-k29" secondAttribute="centerX" id="N3p-Ro-Cb2"/>
+                        <constraint firstAttribute="trailing" secondItem="Sjk-02-k29" secondAttribute="trailing" constant="30" id="X9z-hx-ton"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="X9z-hx-ton"/>
+                        </mask>
+                    </variation>
                 </view>
                 <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aVW-5Y-YxB">
                     <rect key="frame" x="0.0" y="301" width="600" height="45"/>
@@ -128,11 +142,35 @@
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xru-Sj-4ZX">
-                            <rect key="frame" x="525" y="5" width="36" height="36"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xru-Sj-4ZX">
+                            <rect key="frame" x="526" y="5" width="36" height="36"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="36" id="7ta-cV-noO"/>
+                                <constraint firstAttribute="height" constant="36" id="AfE-la-2f3"/>
+                                <constraint firstAttribute="width" constant="36" id="Xta-cp-Pj6"/>
+                                <constraint firstAttribute="height" constant="36" id="uxo-gd-vcC"/>
+                            </constraints>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="Xta-cp-Pj6"/>
+                                    <exclude reference="uxo-gd-vcC"/>
+                                </mask>
+                            </variation>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="Xru-Sj-4ZX" secondAttribute="trailing" constant="39" id="Ssd-SX-wwK"/>
+                        <constraint firstAttribute="bottom" secondItem="Xru-Sj-4ZX" secondAttribute="bottom" constant="4" id="dSR-oq-9qf"/>
+                        <constraint firstItem="Xru-Sj-4ZX" firstAttribute="top" secondItem="aVW-5Y-YxB" secondAttribute="top" constant="5" id="jjH-8b-Tmf"/>
+                        <constraint firstAttribute="centerX" secondItem="Xru-Sj-4ZX" secondAttribute="centerX" id="u2I-zs-ljr"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="Ssd-SX-wwK"/>
+                            <exclude reference="dSR-oq-9qf"/>
+                        </mask>
+                    </variation>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gux-iE-AIf">
                     <rect key="frame" x="65" y="382" width="305" height="37"/>

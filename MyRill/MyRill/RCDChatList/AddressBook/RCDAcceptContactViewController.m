@@ -7,22 +7,15 @@
 //
 
 #import "RCDAcceptContactViewController.h"
-//#import "RCDAcceptContactTableViewCell.h"
 #import "CustomShowMessage.h"
 #import "ESUserInfo.h"
 #import "UIImageView+WebCache.h"
 
 @interface RCDAcceptContactViewController ()
-@property (nonatomic,weak)IBOutlet UIImageView* portraitImage;
-@property (nonatomic,weak)IBOutlet UIButton* acceptButton;
-@property (nonatomic,weak)IBOutlet UILabel* nameLabel;
-@property (nonatomic,weak)IBOutlet UILabel* scriptLabel;
-@property (nonatomic,strong)IBOutlet UITableViewCell* acceptCell;
-
 @property (nonatomic,strong)GetRequestContactListDataParse* getRequestContactListDataParse;
 @property (nonatomic,strong)AddContactDataParse* addContactDataParse;
 @property (nonatomic,strong)NSMutableArray* requestContactList;
--(IBAction)acceptButtonClicked:(id)sender;
+@property (nonatomic,strong)ESUserInfo* acceptingUser;
 
 @end
 
@@ -30,13 +23,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"新的联系人";
     _getRequestContactListDataParse = [[GetRequestContactListDataParse alloc] init];
     _getRequestContactListDataParse.delegate = self;
     _addContactDataParse = [[AddContactDataParse alloc] init];
     _addContactDataParse.delegate = self;
     
     _requestContactList = [[NSMutableArray alloc] init];
-    
     [self getRequestContactList];
 
 }
@@ -49,12 +42,14 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    UIBarButtonItem *settintBtnItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd                    target:self action:@selector(rightBtnOnClicked:)];
-    self.navigationItem.rightBarButtonItem = settintBtnItem;
+    UINib *rcdCellNib = [UINib nibWithNibName:@"RCDPhoneAddressBookTableViewCell" bundle:nil];
+    [self.tableView registerNib:rcdCellNib forCellReuseIdentifier:@"RCDPhoneAddressBookTableViewCell"];
+    self.tabBarController.tabBar.hidden = YES;
 }
 
 -(void)getRequestContactList
 {
+    [[CustomShowMessage getInstance] showWaitingIndicator:REQ_WAITING_INDICATOR];
     [_getRequestContactListDataParse getRequestedContactList];
 }
 
@@ -77,27 +72,21 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RCDAcceptContactTableViewCell" ];
-    if(!cell)
+    RCDPhoneAddressBookTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RCDPhoneAddressBookTableViewCell" ];
+    ESUserInfo* userInfo = [_requestContactList objectAtIndex:indexPath.row];
+    if (userInfo != nil)
     {
-//        cell = [[RCDAcceptContactTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"RCDAcceptContactTableViewCell"];
-        NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"RCDAcceptContactTableViewCell" owner:self options:nil];
-        if ([nib count]>0)
+        cell.title.text = userInfo.userName;
+        cell.subtitle.text = [NSString stringWithFormat:@"请求您添加为联系人"];;
+        [cell.ivAva sd_setImageWithURL:[NSURL URLWithString:userInfo.portraitUri] placeholderImage:[UIImage imageNamed:@"icon"]];
+        if([userInfo.type isEqualToString:@"contact"])
         {
-            _acceptCell = [nib objectAtIndex:0];
-            cell = _acceptCell;
+            [cell.addButton setBackgroundImage:[UIImage imageNamed:@"ren_tianjia_chenggong"] forState:UIControlStateNormal];
         }
-        else
-        {
-            return nil;
-        }
+        [cell setTag:indexPath.row];
+        cell.delegate = self;
 
     }
-    ESUserInfo* userInfo = [_requestContactList objectAtIndex:indexPath.row];
-    _nameLabel.text = userInfo.userName;
-    _scriptLabel.text = [NSString stringWithFormat:@"我是%@，想加你为联系人",userInfo.userName];
-    _acceptButton.tag = indexPath.row;
-    [_portraitImage sd_setImageWithURL:[NSURL URLWithString:userInfo.portraitUri] placeholderImage:[UIImage imageNamed:@"icon"]];
     
     return cell;
 }
@@ -105,44 +94,65 @@
 #pragma mark GetRequestContactListDelegate
 -(void)getRequestedContactList:(NSArray*)contactList
 {
+    [[CustomShowMessage getInstance] hideWaitingIndicator];
+
     [_requestContactList removeAllObjects];
     [_requestContactList addObjectsFromArray:contactList];
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
-            
         });
     });
     
 }
 -(void)getRequestedContactListFailed:(NSString*)errorMessage
 {
+    [[CustomShowMessage getInstance] hideWaitingIndicator];
     [[CustomShowMessage getInstance] showNotificationMessage:errorMessage];
 }
 
 #pragma mark AddContactDelegate
 -(void)acceptContactSucceed
 {
+    [[CustomShowMessage getInstance] hideWaitingIndicator];
     [[CustomShowMessage getInstance] showNotificationMessage:@"接受好友成功"];
+    _acceptingUser.type = @"contact";
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+    });//    [_requestingCell.addButton setBackgroundImage:[UIImage imageNamed:@"ren_tianjia_chenggong"] forState:UIControlStateNormal];
 }
 
 -(void)acceptContactFailed:(NSString*)errorMessage
 {
+    [[CustomShowMessage getInstance] hideWaitingIndicator];
     [[CustomShowMessage getInstance] showNotificationMessage:errorMessage];
 }
 
 #pragma mark event - clicked
--(void) rightBtnOnClicked:(id)sender
-{
-    
-}
+//-(IBAction)acceptButtonClicked:(id)sender
+//{
+//    UIButton* button = (UIButton*)sender;
+//    ESUserInfo* userInfo = [_requestContactList objectAtIndex:button.tag];
+//    [_addContactDataParse acceptContact:userInfo.userId];
+//}
 
--(IBAction)acceptButtonClicked:(id)sender
+#pragma mark-- RCDPhoneAddressBookTableViewCellDelegate
+-(void)addButtonClick:(id)sender
 {
-    UIButton* button = (UIButton*)sender;
-    ESUserInfo* userInfo = [_requestContactList objectAtIndex:button.tag];
-    [_addContactDataParse acceptContact:userInfo.userId];
+    RCDPhoneAddressBookTableViewCell* cell = (RCDPhoneAddressBookTableViewCell*) sender;
+    NSInteger rowIndex = cell.tag;
+    if (rowIndex < [_requestContactList count])
+    {
+        ESUserInfo* userInfo = [_requestContactList objectAtIndex:rowIndex];
+        if (userInfo.userId != nil && ![userInfo.userId isEqual:[NSNull null]] && [userInfo.userId length] > 0 )
+        {
+            [_addContactDataParse acceptContact:userInfo.userId];
+            _acceptingUser = userInfo;
+        }
+    }
+    [[CustomShowMessage getInstance] showWaitingIndicator:REQ_WAITING_INDICATOR];
 }
-
 
 @end
