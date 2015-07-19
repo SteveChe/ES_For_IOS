@@ -28,11 +28,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+    [self.view addGestureRecognizer:tapGesture];
 }
 
 #pragma mark - ProfessionDataDelegate methods
 - (void)professionOperationSuccess:(id)context {
+    [self.delegate modifyProfessionSuccess:(ESProfession *)context];
     [self dismissBtn:nil];
+    
 }
 
 #pragma mark - response events
@@ -44,6 +49,11 @@
     [self.professionDP updateProfessionWithId:[self.profession.professionId stringValue]
                                          name:self.nameTxtField.text
                                           url:self.urlTxtField.text];
+}
+
+- (void)hideKeyboard {
+    [self.nameTxtField resignFirstResponder];
+    [self.urlTxtField resignFirstResponder];
 }
 
 #pragma mark - private methods

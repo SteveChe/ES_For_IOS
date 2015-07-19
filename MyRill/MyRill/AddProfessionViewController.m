@@ -34,6 +34,7 @@
 - (void)professionOperationSuccess:(id)context {
     if ([context isKindOfClass:[ESProfession class]]) {
         ESProfession *profession = (ESProfession *)context;
+        [self.delegate addProfessionSuccess:profession];
         [self.navigationController popViewControllerAnimated:YES];
     } else if (YES) {
         

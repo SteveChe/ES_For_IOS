@@ -15,7 +15,7 @@
 #import "AddProfessionViewController.h"
 #import "ModifyProfessionViewController.h"
 
-@interface EditProfessionViewController () <UITableViewDataSource, UITableViewDelegate, ProfessionDataDelegate>
+@interface EditProfessionViewController () <UITableViewDataSource, UITableViewDelegate, ProfessionDataDelegate,  AddProfessionDelegate, ModifyProfessionDelegate>
 
 @property (nonatomic, strong) UIView *footerView;
 @property (nonatomic, strong) UITableView *tableView;
@@ -65,6 +65,23 @@
     } else {
         
     }
+}
+
+- (void)addProfessionSuccess:(ESProfession *)profession {
+    [self.dataSource addObject:profession];
+    [self.tableView reloadData];
+}
+
+- (void)modifyProfessionSuccess:(ESProfession *)profession {
+    for (int i = 0; i < self.dataSource.count; i ++) {
+        ESProfession *temp = (ESProfession *)self.dataSource[i];
+        if ([profession.professionId isEqualToNumber:temp.professionId]) {
+            [self.dataSource removeObjectAtIndex:i];
+            [self.dataSource insertObject:profession atIndex:i];
+        }
+    }
+    
+    [self.tableView reloadData];
 }
 
 #pragma mark - UITableViewDataSource&UITableViewDelegate
@@ -126,6 +143,7 @@
     modifyProfessionVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     modifyProfessionVC.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
     [modifyProfessionVC loadProfessionData:self.dataSource[indexPath.row]];
+    modifyProfessionVC.delegate = self;
     [self presentViewController:modifyProfessionVC animated:YES completion:nil];
 }
 
@@ -145,6 +163,7 @@
 
 - (void)onAddBtnClicked:(UIButton *)sender {
     AddProfessionViewController *addProfessionVC = [[AddProfessionViewController alloc] init];
+    addProfessionVC.delegate = self;
     [self.navigationController pushViewController:addProfessionVC animated:YES];
 }
 
