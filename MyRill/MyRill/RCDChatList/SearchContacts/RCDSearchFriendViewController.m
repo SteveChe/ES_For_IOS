@@ -102,19 +102,19 @@
             case 0:
             {
                 cell.textLabel.text = @"手机添加联系人";
-                cell.imageView.image = [UIImage imageNamed:@"icon_address_book"];
+                cell.imageView.image = [UIImage imageNamed:@"tianjialianxiren_shouji"];
             }
                 break;
             case 1:
             {
                 cell.textLabel.text = @"二维码添加";
-                cell.imageView.image = [UIImage imageNamed:@"icon_qr_code"];
+                cell.imageView.image = [UIImage imageNamed:@"tianjialianxiren_erweima"];
             }
                 break;
             case 2:
             {
                 cell.textLabel.text = @"企业号添加";
-                cell.imageView.image = [UIImage imageNamed:@"icon_enterprise"];
+                cell.imageView.image = [UIImage imageNamed:@"tianjialianxiren_qiyehao"];
             }
                 break;
             default:
