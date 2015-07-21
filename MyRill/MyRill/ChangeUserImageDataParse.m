@@ -16,8 +16,10 @@
     [AFHttpTool changeUserImageWithId:UserId
                                  data:imageData
                               success:^(id response) {
+                                  
                                   NSLog(@"%@",response);
                               } failure:^(NSError *err) {
+                                  
                                   NSLog(@"ASDFASDF");
                               }];
 }

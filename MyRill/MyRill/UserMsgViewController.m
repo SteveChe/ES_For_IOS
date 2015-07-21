@@ -63,6 +63,20 @@
     self.UserPositionLbl.text = [userDefaultes stringForKey:@"UserPosition"];
 }
 
+- (UIImage *)scaleToSize:(UIImage *)img size:(CGSize)size{
+    // 创建一个bitmap的context
+    // 并把它设置成为当前正在使用的context
+    UIGraphicsBeginImageContext(size);
+    // 绘制改变大小的图片
+    [img drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    // 从当前context中创建一个改变大小后的图片
+    UIImage* scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+    // 使当前的context出堆栈
+    UIGraphicsEndImageContext();
+    // 返回新的改变大小后的图片
+    return scaledImage;
+}
+
 #pragma mark - UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
@@ -70,20 +84,22 @@
     //当选择的类型是图片
     if ([type isEqualToString:@"public.image"])
     {
+        //获取编辑框内部的图片，作为上传对象(上传图片不歪了也就)
+        UIImage *image = [info objectForKey:@"UIImagePickerControllerEditedImage"];
         //先把图片转成NSData
-        UIImage *image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+        UIImage *img = [self scaleToSize:image size:CGSizeMake(300, 300)];
         NSLog(@")))))) %ld",(long)image.imageOrientation);
         NSData *data;
-        if (UIImagePNGRepresentation(image) == nil)
+        if (UIImagePNGRepresentation(img) == nil)
         {
-            data = UIImageJPEGRepresentation(image, 1.0);
+            data = UIImageJPEGRepresentation(img, 1.0);
         }
         else
         {
-            data = UIImagePNGRepresentation(image);
+            data = UIImagePNGRepresentation(img);
         }
         
-        [self.changeUserImageDP changeUseImageWithId:@"2"
+        [self.changeUserImageDP changeUseImageWithId:self.userId
                                                 data:data];
 //        //图片保存的路径
 //        //这里将图片放在沙盒的documents文件夹中
@@ -184,6 +200,12 @@
                                                           picker.delegate = self;  
                                                           picker.allowsEditing = YES;//设置可编辑  
                                                           picker.sourceType = sourceType;
+                                                          if([[[UIDevice
+                                                                currentDevice] systemVersion] floatValue]>=8.0) {
+                                                              
+                                                              self.modalPresentationStyle=UIModalPresentationOverCurrentContext;
+                                                              
+                                                          }
                                                           [self presentViewController:picker animated:YES completion:nil];//进入照相界面
                                                       }]];
     [alertController addAction:[UIAlertAction actionWithTitle:@"从相册选取"
@@ -199,6 +221,12 @@
                                                           }  
                                                           pickerImage.delegate = self;  
                                                           pickerImage.allowsEditing = YES;
+                                                          if([[[UIDevice
+                                                                currentDevice] systemVersion] floatValue]>=8.0) {
+                                                              
+                                                              self.modalPresentationStyle=UIModalPresentationOverCurrentContext;
+                                                              
+                                                          }
                                                           [self presentViewController:pickerImage animated:YES completion:nil];//进入照相界面
                                                       }]];
     [alertController addAction:[UIAlertAction actionWithTitle:@"取消"

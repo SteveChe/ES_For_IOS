@@ -380,20 +380,14 @@
                           success:success failure:failure];
 }
 
-+ (void)changeUserImageWithId:(NSString *)userId data:(NSData *)data success:(void (^)(id))success failure:(void (^)(NSError *))failure {
-
-//    NSDictionary *params = @{@"avatar":@"1.png"};
-//    [AFHttpTool requestWithMethod:RequestMethodTypePost
-//                              url:[NSString stringWithFormat:@"/api/accounts/users/%@/.json",userId]
-//                           params:params
-//                          success:success
-//                          failure:failure];
++ (void)changeUserImageWithId:(NSString *)userId
+                         data:(NSData *)data
+                      success:(void (^)(id))success
+                      failure:(void (^)(NSError *))failure {
     NSURL* baseURL = [NSURL URLWithString:DEV_SERVER_ADDRESS];
 
     AFHTTPRequestOperationManager* manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:baseURL];
     manager.requestSerializer.HTTPShouldHandleCookies = YES;
-    //    [mgr se]
-//    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     
     NSData *cookiesdata = [[NSUserDefaults standardUserDefaults] objectForKey:@"sessionCookies"];
     if([cookiesdata length]) {
@@ -403,34 +397,28 @@
             if ([cookie.name  isEqual: @"csrftoken"] )
             {
                 [manager.requestSerializer setValue:cookie.value forHTTPHeaderField:@"X-Csrftoken"];
-                //                NSLog(@"csrftoken = %@",cookie.value);
             }
             [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
         }
     }
     
-//    manager.responseSerializer.acceptableContentTypes = [NSSetsetWithObject:@"text/html"];
-    
-    
-//    NSDictionary *parameters =@{@"参数1":@"value1",@"参数2":@"value2"、、、};
-    
     NSData *imageData = data;
     
-    [manager POST:[NSString stringWithFormat:@"/api/accounts/users/%@/.json",userId] parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        
-        [formData appendPartWithFileData :imageData name:@"avatar" fileName:@"1.png" mimeType:@"image/png"];
-        
-        
-    } success:^(AFHTTPRequestOperation *operation,id responseObject) {
-        NSLog(@"Success: %@", responseObject);
-        
-        
-    } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
-        NSLog(@"Error: %@", error);
-        
-        
-    }];
-    
+    [manager POST:[NSString stringWithFormat:@"/api/accounts/users/%@/.json",userId]
+       parameters:nil
+constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        NSDateFormatter *format = [[NSDateFormatter alloc] init];
+        [format setDateFormat:@"yyyyMMddHHmmss"];
+        NSString *timeStamp = [format stringFromDate:[NSDate date]];
+        NSString *picName = [timeStamp stringByAppendingString:@".png"];
+        [formData appendPartWithFileData :imageData name:@"avatar" fileName:picName mimeType:@"image/png"];
+    }
+          success:^(AFHTTPRequestOperation *operation,id responseObject) {
+              NSLog(@"Success: %@", responseObject);
+          }
+          failure:^(AFHTTPRequestOperation *operation,NSError *error) {
+              NSLog(@"Error: %@", error);
+          }];
 }
 
 
