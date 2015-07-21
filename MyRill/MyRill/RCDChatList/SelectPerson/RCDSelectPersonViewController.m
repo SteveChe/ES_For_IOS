@@ -37,6 +37,8 @@
     
     UIBarButtonItem *settintBtnItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self                      action:@selector(clickedDone:)];
     self.navigationItem.rightBarButtonItem = settintBtnItem;
+    
+    self.tabBarController.tabBar.hidden = YES;
 
 }
 

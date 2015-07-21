@@ -38,7 +38,8 @@
                                                      selectedImage:[UIImage imageNamed:@"业务-选中.png"]];
     businessVC.tabBarItem = tabBarItem;
     
-    ChatListViewController *chatVC = [[ChatListViewController alloc] init];
+    ChatListViewController *chatVC = [[ChatListViewController alloc] initWithDisplayConversationTypes:nil collectionConversationType:nil];
+
     chatVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"对话"
                                                       image:[UIImage imageNamed:@"对话.png"]
                                               selectedImage:[UIImage imageNamed:@"对话-选中.png"]];

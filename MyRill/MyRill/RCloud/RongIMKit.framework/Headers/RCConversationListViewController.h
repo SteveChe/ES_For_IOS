@@ -47,6 +47,10 @@
 @property(nonatomic, assign) BOOL isEnteredToCollectionViewController;
 
 /**
+ *  会话列表为空时的视图
+ */
+@property(nonatomic, strong) UIView *emptyConversationView;
+/**
  *  init
  *
  *  @param conversationTypeArray1 会话类型，NSNumber类型。
@@ -169,9 +173,9 @@
 /**
  *  点击头像事件
  *
- *  @param userId 用户的ID
+ *  @param model 会话model
  */
-- (void)didTapCellPortrait:(NSString *)userId;
+- (void)didTapCellPortrait:(RCConversationModel *)model;
 
 /**
  *  收到新消息,用于刷新会话列表，如果派生类调用了父类方法，请不要再次调用refreshConversationTableViewIfNeeded，避免多次刷新
@@ -186,5 +190,10 @@
  *  重写方法，通知更新未读消息数目，用于显示未读消息，当收到会话消息的时候，会触发一次。
  */
 - (void)notifyUpdateUnreadMessageCount;
+
+/**
+ *  重写方法，设置会话列表emptyConversationView的视图。
+ */
+- (void)showEmptyConversationView;
 @end
 #endif

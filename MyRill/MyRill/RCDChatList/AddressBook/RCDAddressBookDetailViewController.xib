@@ -7,11 +7,14 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RCDAddressBookDetailViewController">
             <connections>
+                <outlet property="callButton" destination="BkQ-dX-lsZ" id="Odu-rg-H04"/>
+                <outlet property="deleteButton" destination="8ED-3z-ikW" id="dJp-EX-e78"/>
                 <outlet property="descriptionDetailLabel" destination="dWg-Bf-lhC" id="KNG-Kw-3eJ"/>
                 <outlet property="enterpriseQRImageView" destination="Sjk-02-k29" id="b5D-5u-151"/>
                 <outlet property="phoneNumberLabel" destination="mIb-rd-Lpg" id="nnd-L0-gUz"/>
                 <outlet property="portraitImageView" destination="248-YQ-TYu" id="o2a-iC-f58"/>
                 <outlet property="qrCodeImageView" destination="Xru-Sj-4ZX" id="DwZ-FC-bg1"/>
+                <outlet property="smsButton" destination="gux-iE-AIf" id="Fg8-1e-GJ1"/>
                 <outlet property="titleLabel" destination="EQH-jD-KvK" id="BjT-Jy-VKZ"/>
                 <outlet property="view" destination="vhS-nV-wjl" id="xCB-mS-og4"/>
             </connections>
@@ -205,8 +208,8 @@
                     </variation>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gux-iE-AIf">
-                    <rect key="frame" x="65" y="382" width="305" height="37"/>
-                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <rect key="frame" x="65" y="382" width="560" height="44"/>
+                    <color key="backgroundColor" red="0.023529411764705882" green="0.65490196078431373" blue="0.88235294117647056" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="37" id="rAm-hO-gyE"/>
                     </constraints>
@@ -219,8 +222,8 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BkQ-dX-lsZ">
-                    <rect key="frame" x="65" y="437" width="305" height="37"/>
-                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <rect key="frame" x="65" y="437" width="560" height="44"/>
+                    <color key="backgroundColor" red="0.023529411764705882" green="0.65490196078431373" blue="0.88235294117647056" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="37" id="cqx-yu-LYI"/>
                     </constraints>
@@ -233,14 +236,13 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ED-3z-ikW">
-                    <rect key="frame" x="65" y="496" width="305" height="37"/>
-                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <rect key="frame" x="65" y="496" width="560" height="37"/>
+                    <color key="backgroundColor" red="1" green="0.32941176470588235" blue="0.32941176470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="37" id="fmk-6N-TiR"/>
                     </constraints>
                     <state key="normal" title="删除">
                         <color key="titleColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="clickDeleteButton:" destination="-1" eventType="touchUpInside" id="OrE-ax-5BA"/>
