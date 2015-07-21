@@ -7,10 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+@class ESUserInfo;
 
 @protocol LoginDataDelegate <NSObject>
 
--(void)loginSucceed;
+-(void)loginSucceed:(ESUserInfo *)userInfo;
 -(void)loginFailed:(NSString*)errorMessage;
 -(void)rongCloudToken:(NSString*)rongCloudToken ;
 @end

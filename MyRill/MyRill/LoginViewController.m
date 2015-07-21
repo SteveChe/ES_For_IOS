@@ -14,6 +14,7 @@
 #import "CustomShowMessage.h"
 #import "ESMenuViewController.h"
 #import "ResetPwdViewController.h"
+#import "ESUserInfo.h"
 
 @interface LoginViewController ()
 
@@ -43,15 +44,22 @@
 }
 
 #pragma mark - LoginDataDelegate
--(void)loginSucceed
+- (void)loginSucceed:(ESUserInfo *)userInfo
 {
     [[CustomShowMessage getInstance] showNotificationMessage:@"登录成功"];
     [_loginDataParse getRongCloudToken];
-    [self performSelector:@selector( changeToESMenuView)
+    [self performSelector:@selector(changeToESMenuView)
                withObject:nil
-               afterDelay:1];
-    return;
+               afterDelay:.5];
     
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:userInfo.userId forKey:@"UserId"];
+    [userDefaults setObject:userInfo.userName forKey:@"UserName"];
+    [userDefaults setObject:userInfo.phoneNumber forKey:@"PhoneNumber"];
+    [userDefaults setObject:userInfo.enterprise forKey:@"Enterprise"];
+    [userDefaults setObject:userInfo.position forKey:@"Position"];
+    [userDefaults setObject:userInfo.portraitUri forKey:@"UserImageURL"];
+    [userDefaults synchronize];
 }
 -(void)changeToESMenuView
 {

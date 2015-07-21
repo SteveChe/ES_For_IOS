@@ -10,5 +10,14 @@
 
 @implementation ESUserDetailInfo
 
+//@synthesize userId;
+//@synthesize userName;
+//@synthesize portraitUri;
+//@synthesize enterprise;
+//@synthesize position;
+//@synthesize contactDescription;
+//@synthesize qrcode;
+//@synthesize enterprise_qrcode;
+//@synthesize tagDataArray;
 
 @end
