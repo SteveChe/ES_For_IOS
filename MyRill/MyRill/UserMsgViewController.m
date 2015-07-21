@@ -16,20 +16,30 @@
 #import "QRCodeViewController.h"
 #import "ChangeUserImageDataParse.h"
 #import "ESNavigationController.h"
+#import "ESUserDetailInfo.h"
+#import "GetContactDetailDataParse.h"
+#import "ShowQRCodeViewController.h"
 
-@interface UserMsgViewController () <LogoutDataDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface UserMsgViewController () <LogoutDataDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ContactDetailDataDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIImageView *userIcon;
 @property (weak, nonatomic) IBOutlet UIButton *logoutBtn;
+@property (weak, nonatomic) IBOutlet UILabel *UserNameLbl;
+@property (weak, nonatomic) IBOutlet UILabel *UserEnterpriseLbl;
+@property (weak, nonatomic) IBOutlet UILabel *UserPositionLbl;
 @property (nonatomic, strong) SignOutDataParse *signOutDP;
 @property (nonatomic, strong) MRProgressOverlayView *progress;
 @property (nonatomic, strong) ChangeUserImageDataParse *changeUserImageDP;
+@property (nonatomic, strong) GetContactDetailDataParse *getContactDetailDP;
+@property (nonatomic, copy) NSString *userId;
+@property (nonatomic, copy) NSString *qrCodeType;
 
 @end
 
 @implementation UserMsgViewController
 
+#pragma mark - lifeCycle methods
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -43,6 +53,17 @@
     self.navigationItem.rightBarButtonItem = settintBtnItem;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
+    self.userId = [userDefaultes stringForKey:@"UserId"];
+    self.UserNameLbl.text = [userDefaultes stringForKey:@"UserName"];
+    self.UserEnterpriseLbl.text = [userDefaultes stringForKey:@"UserEnterprise"];
+    self.UserPositionLbl.text = [userDefaultes stringForKey:@"UserPosition"];
+}
+
+#pragma mark - UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
     
@@ -50,7 +71,8 @@
     if ([type isEqualToString:@"public.image"])
     {
         //先把图片转成NSData
-        UIImage* image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+        UIImage *image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+        NSLog(@")))))) %ld",(long)image.imageOrientation);
         NSData *data;
         if (UIImagePNGRepresentation(image) == nil)
         {
@@ -114,10 +136,32 @@
     [self showTips:@"注销失败!" mode:MRProgressOverlayViewModeCross isDismiss:YES];
 }
 
+- (void)getContactDetail:(ESUserDetailInfo *)userDetailInfo {
+    ShowQRCodeViewController *showQRCodeVC = [[ShowQRCodeViewController alloc] init];
+    if ([self.qrCodeType isEqualToString:@"个人"]) {
+        showQRCodeVC.qrCodeTitle = @"我的二维码";
+        showQRCodeVC.imageUrl = userDetailInfo.qrcode;
+    } else {
+        showQRCodeVC.qrCodeTitle = @"企业二维码";
+        showQRCodeVC.imageUrl = userDetailInfo.enterprise_qrcode;
+    }
+    
+    [self.navigationController pushViewController:showQRCodeVC animated:YES];
+}
+
 #pragma mark - response events
 - (void)settingBtnItemOnClicked:(UIBarButtonItem *)sender {
     UserSettingViewController *settingVC = [[UserSettingViewController alloc] init];
     [self.navigationController pushViewController:settingVC animated:YES];
+}
+- (IBAction)enterprQRcodeBtnOnClicked:(UIButton *)sender {
+    self.qrCodeType = @"企业";
+    [self.getContactDetailDP getContactDetail:self.userId];
+}
+
+- (IBAction)personQRcodeBtnOnClicked:(UIButton *)sender {
+    self.qrCodeType = @"个人";
+    [self.getContactDetailDP getContactDetail:self.userId];
 }
 
 - (IBAction)userImg:(UIButton *)sender {
@@ -246,10 +290,18 @@
 - (ChangeUserImageDataParse *)changeUserImageDP {
     if (!_changeUserImageDP) {
         _changeUserImageDP = [[ChangeUserImageDataParse alloc] init];
-        
     }
     
     return _changeUserImageDP;
+}
+
+- (GetContactDetailDataParse *)getContactDetailDP {
+    if (!_getContactDetailDP) {
+        _getContactDetailDP = [[GetContactDetailDataParse alloc] init];
+        _getContactDetailDP.delegate = self;
+    }
+    
+    return _getContactDetailDP;
 }
 
 @end

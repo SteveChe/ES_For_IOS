@@ -74,6 +74,8 @@
 		2BC8212F1B57FFDC0090E2C1 /* ProfessionWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC8212E1B57FFDC0090E2C1 /* ProfessionWebViewController.m */; };
 		2BC821331B5B839F0090E2C1 /* QRCodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BC821321B5B839F0090E2C1 /* QRCodeViewController.xib */; };
 		2BC821361B5BE6B60090E2C1 /* ChangeUserImageDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC821351B5BE6B60090E2C1 /* ChangeUserImageDataParse.m */; };
+		2BC8213A1B5C9FF70090E2C1 /* ShowQRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC821381B5C9FF70090E2C1 /* ShowQRCodeViewController.m */; };
+		2BC8213B1B5C9FF70090E2C1 /* ShowQRCodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BC821391B5C9FF70090E2C1 /* ShowQRCodeViewController.xib */; };
 		2BE8C21D1B4D60B400858CEE /* ProfessionCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE8C21B1B4D60B400858CEE /* ProfessionCollectionViewCell.m */; };
 		2BE8C21E1B4D60B400858CEE /* ProfessionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE8C21C1B4D60B400858CEE /* ProfessionCollectionViewCell.xib */; };
 		2BE8C22C1B4EB3A200858CEE /* AddProfessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE8C22A1B4EB3A100858CEE /* AddProfessionViewController.m */; };
@@ -339,6 +341,9 @@
 		2BC821321B5B839F0090E2C1 /* QRCodeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QRCodeViewController.xib; sourceTree = "<group>"; };
 		2BC821341B5BE6B60090E2C1 /* ChangeUserImageDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeUserImageDataParse.h; sourceTree = "<group>"; };
 		2BC821351B5BE6B60090E2C1 /* ChangeUserImageDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeUserImageDataParse.m; sourceTree = "<group>"; };
+		2BC821371B5C9FF70090E2C1 /* ShowQRCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowQRCodeViewController.h; sourceTree = "<group>"; };
+		2BC821381B5C9FF70090E2C1 /* ShowQRCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowQRCodeViewController.m; sourceTree = "<group>"; };
+		2BC821391B5C9FF70090E2C1 /* ShowQRCodeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowQRCodeViewController.xib; sourceTree = "<group>"; };
 		2BE8C21A1B4D60B400858CEE /* ProfessionCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfessionCollectionViewCell.h; sourceTree = "<group>"; };
 		2BE8C21B1B4D60B400858CEE /* ProfessionCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfessionCollectionViewCell.m; sourceTree = "<group>"; };
 		2BE8C21C1B4D60B400858CEE /* ProfessionCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfessionCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -885,6 +890,9 @@
 				2B39C9771B2D7B14007BAC7A /* UserMsgViewController.h */,
 				2B39C9781B2D7B14007BAC7A /* UserMsgViewController.m */,
 				2B9CBB681B42D897007D7A45 /* UserMsgViewController.xib */,
+				2BC821371B5C9FF70090E2C1 /* ShowQRCodeViewController.h */,
+				2BC821381B5C9FF70090E2C1 /* ShowQRCodeViewController.m */,
+				2BC821391B5C9FF70090E2C1 /* ShowQRCodeViewController.xib */,
 				F22FE28E1B3B000400A1A997 /* UserSettingViewController.h */,
 				F22FE28F1B3B000400A1A997 /* UserSettingViewController.m */,
 				F22FE2901B3B000400A1A997 /* UserSettingViewController.xib */,
@@ -1393,6 +1401,7 @@
 			files = (
 				2BE8C22D1B4EB3A200858CEE /* AddProfessionViewController.xib in Resources */,
 				2B37E44D1B53967D00F671A1 /* ModifyProfessionViewController.xib in Resources */,
+				2BC8213B1B5C9FF70090E2C1 /* ShowQRCodeViewController.xib in Resources */,
 				F22FE2881B3AF0CB00A1A997 /* RongCloudKit.strings in Resources */,
 				F23059BB1B52C141004599FA /* RCDAddressBookViewTableViewCell.xib in Resources */,
 				F2D2335E1B31B1F400F8C65D /* PushConfig.plist in Resources */,
@@ -1553,6 +1562,7 @@
 				F29F86451B2410320058FC9F /* UIAlertView+AFNetworking.m in Sources */,
 				2B39C9941B37E5F2007BAC7A /* ResetPwdViewController.m in Sources */,
 				2B5A590E1B48DFBB000382D7 /* MRActivityIndicatorView.m in Sources */,
+				2BC8213A1B5C9FF70090E2C1 /* ShowQRCodeViewController.m in Sources */,
 				2B39C9381B241212007BAC7A /* MASConstraint.m in Sources */,
 				2BE8C2331B52506600858CEE /* EditProfessionViewController.m in Sources */,
 				F22FE27F1B3ADAB000A1A997 /* ESUserInfo.m in Sources */,

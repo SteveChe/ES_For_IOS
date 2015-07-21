@@ -8,6 +8,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UserMsgViewController">
             <connections>
+                <outlet property="UserEnterpriseLbl" destination="MAw-KF-Xzg" id="gvt-YG-I5h"/>
+                <outlet property="UserNameLbl" destination="Xhj-LH-Scl" id="tn8-G8-K0i"/>
+                <outlet property="UserPositionLbl" destination="aeB-FY-ozp" id="rEd-DU-91C"/>
                 <outlet property="contentView" destination="uRq-6W-p4u" id="nXI-eJ-eGD"/>
                 <outlet property="logoutBtn" destination="bUB-zm-Xrz" id="Zct-9h-yfZ"/>
                 <outlet property="userIcon" destination="whv-3A-c9c" id="jpc-Pj-zAS"/>
@@ -127,8 +130,8 @@
                                             <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="服务经理" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aeB-FY-ozp">
-                                            <rect key="frame" x="510" y="17" width="72" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="暂 无" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aeB-FY-ozp">
+                                            <rect key="frame" x="540" y="17" width="41.5" height="21"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -152,15 +155,33 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="二维码" translatesAutoresizingMaskIntoConstraints="NO" id="9Xg-pX-8Ba">
-                                            <rect key="frame" x="558" y="16" width="24" height="24"/>
+                                            <rect key="frame" x="538" y="16" width="24" height="24"/>
                                         </imageView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="右箭头" translatesAutoresizingMaskIntoConstraints="NO" id="uKC-P1-caB">
+                                            <rect key="frame" x="572" y="19" width="10" height="17"/>
+                                        </imageView>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wIy-AD-713">
+                                            <rect key="frame" x="0.0" y="0.0" width="602" height="55"/>
+                                            <state key="normal">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="enterprQRcodeBtnOnClicked:" destination="-1" eventType="touchUpInside" id="oNb-jY-4AG"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
+                                        <constraint firstItem="wIy-AD-713" firstAttribute="leading" secondItem="46Q-t3-xqk" secondAttribute="leading" id="1Hb-E7-zvF"/>
                                         <constraint firstAttribute="centerY" secondItem="GCz-fJ-lTj" secondAttribute="centerY" id="2f8-9t-mgB"/>
                                         <constraint firstItem="9Xg-pX-8Ba" firstAttribute="centerY" secondItem="GCz-fJ-lTj" secondAttribute="centerY" id="AxA-y4-Cap"/>
+                                        <constraint firstAttribute="trailing" secondItem="wIy-AD-713" secondAttribute="trailing" id="Bnt-oj-W5a"/>
+                                        <constraint firstItem="GCz-fJ-lTj" firstAttribute="centerY" secondItem="uKC-P1-caB" secondAttribute="centerY" id="TLb-s6-fKL"/>
+                                        <constraint firstAttribute="bottom" secondItem="wIy-AD-713" secondAttribute="bottom" id="aWW-i0-meJ"/>
                                         <constraint firstItem="GCz-fJ-lTj" firstAttribute="leading" secondItem="46Q-t3-xqk" secondAttribute="leading" constant="20" symbolic="YES" id="bZ7-aH-ADO"/>
-                                        <constraint firstAttribute="trailing" secondItem="9Xg-pX-8Ba" secondAttribute="trailing" constant="20" symbolic="YES" id="kET-sA-RId"/>
+                                        <constraint firstItem="wIy-AD-713" firstAttribute="top" secondItem="46Q-t3-xqk" secondAttribute="top" id="fYX-tx-EZm"/>
+                                        <constraint firstAttribute="trailing" secondItem="uKC-P1-caB" secondAttribute="trailing" constant="20" symbolic="YES" id="qVi-FD-EQW"/>
+                                        <constraint firstItem="uKC-P1-caB" firstAttribute="leading" secondItem="9Xg-pX-8Ba" secondAttribute="trailing" constant="10" id="xQD-f2-YLN"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b8M-jt-j0s" userLabel="QRCode2 Hold View">
@@ -173,14 +194,32 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="二维码" translatesAutoresizingMaskIntoConstraints="NO" id="pv6-MJ-yqc">
-                                            <rect key="frame" x="558" y="15" width="24" height="24"/>
+                                            <rect key="frame" x="538" y="15" width="24" height="24"/>
                                         </imageView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="右箭头" translatesAutoresizingMaskIntoConstraints="NO" id="sTY-oT-5TR">
+                                            <rect key="frame" x="572" y="19" width="10" height="17"/>
+                                        </imageView>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yFj-SP-trP">
+                                            <rect key="frame" x="0.0" y="0.0" width="602" height="55"/>
+                                            <state key="normal">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="personQRcodeBtnOnClicked:" destination="-1" eventType="touchUpInside" id="J7R-pz-sH9"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="yFj-SP-trP" secondAttribute="bottom" id="1uf-tr-GT8"/>
                                         <constraint firstItem="m2V-mm-h5Q" firstAttribute="leading" secondItem="b8M-jt-j0s" secondAttribute="leading" constant="20" symbolic="YES" id="62A-7l-zPQ"/>
+                                        <constraint firstItem="yFj-SP-trP" firstAttribute="leading" secondItem="b8M-jt-j0s" secondAttribute="leading" id="8Cg-q1-ZpC"/>
                                         <constraint firstItem="pv6-MJ-yqc" firstAttribute="centerY" secondItem="m2V-mm-h5Q" secondAttribute="centerY" id="KsQ-u7-aEy"/>
-                                        <constraint firstAttribute="trailing" secondItem="pv6-MJ-yqc" secondAttribute="trailing" constant="20" symbolic="YES" id="jWi-nu-Sd7"/>
+                                        <constraint firstAttribute="trailing" secondItem="sTY-oT-5TR" secondAttribute="trailing" constant="20" symbolic="YES" id="Kvy-PM-8wL"/>
+                                        <constraint firstItem="yFj-SP-trP" firstAttribute="top" secondItem="b8M-jt-j0s" secondAttribute="top" id="NFm-Gk-Cwq"/>
+                                        <constraint firstAttribute="trailing" secondItem="yFj-SP-trP" secondAttribute="trailing" id="W3T-Xj-MxC"/>
+                                        <constraint firstItem="sTY-oT-5TR" firstAttribute="leading" secondItem="pv6-MJ-yqc" secondAttribute="trailing" constant="10" id="dJf-6r-VFp"/>
+                                        <constraint firstItem="sTY-oT-5TR" firstAttribute="centerY" secondItem="m2V-mm-h5Q" secondAttribute="centerY" id="w3M-wc-7kV"/>
                                         <constraint firstAttribute="centerY" secondItem="m2V-mm-h5Q" secondAttribute="centerY" id="yry-b0-mnn"/>
                                     </constraints>
                                 </view>
@@ -291,5 +330,6 @@
     <resources>
         <image name="icon" width="22" height="22"/>
         <image name="二维码" width="24" height="24"/>
+        <image name="右箭头" width="10" height="17"/>
     </resources>
 </document>
