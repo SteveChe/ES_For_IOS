@@ -5,7 +5,6 @@
 //  Created by Siyuan Wang on 15/5/24.
 //
 //
-#import <RongIMKit/RongIMKit.h>
 #import <RongIMLib/RongIMLib.h>
 #import "AppDelegate.h"
 #import "LoginViewController.h"
@@ -29,7 +28,9 @@
     NSString *_deviceTokenCache = [[NSUserDefaults standardUserDefaults]objectForKey:kDeviceToken];
     
     //初始化融云SDK，
-    [[RCIM sharedRCIM] initWithAppKey:RONGCLOUD_IM_APPKEY deviceToken:_deviceTokenCache];
+//    [[RCIM sharedRCIM ]initWithAppKey:RONGCLOUD_IM_APPKEY deviceToken:_deviceTokenCache];
+    [[RCIM sharedRCIM ]initWithAppKey:RONGCLOUD_IM_APPKEY];
+
     
     // Required
 #if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_7_1
@@ -56,6 +57,11 @@
     // Required
     [APService setupWithOption:launchOptions];
     [self initRootWindow];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(didReceiveMessageNotification:)
+                                                 name:RCKitDispatchMessageNotification
+                                               object:nil];
     
     return YES;
 }
@@ -170,6 +176,13 @@
     NSLog(@"userInfo= %@",userInfo);
     [APService handleRemoteNotification:userInfo];
     completionHandler(UIBackgroundFetchResultNewData);
+}
+
+#pragma mark - 收到消息监听
+-(void)didReceiveMessageNotification:(NSNotification *)notification
+{
+    [UIApplication sharedApplication].applicationIconBadgeNumber = [UIApplication sharedApplication].applicationIconBadgeNumber+1;
+
 }
 
 

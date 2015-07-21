@@ -22,6 +22,9 @@
 @property (nonatomic,strong) IBOutlet UIImageView* qrCodeImageView;
 @property (nonatomic,strong) IBOutlet UIImageView* enterpriseQRImageView;
 @property (nonatomic,strong) ESUserDetailInfo* userDetailInfo;
+@property (nonatomic,weak) IBOutlet UIButton* smsButton;
+@property (nonatomic,weak) IBOutlet UIButton*callButton;
+@property (nonatomic,weak) IBOutlet UIButton* deleteButton;
 
 -(IBAction)clickSMSButton:(id)sender;
 -(IBAction)clickCallButton:(id)sender;
@@ -109,5 +112,21 @@
     
 }
 
+#pragma mark -- setter&getter
+- (void)setSmsButton:(UIButton *)smsButton
+{
+    _smsButton = smsButton;
+    _smsButton.layer.cornerRadius = 20.0f;
+}
+-(void)setCallButton:(UIButton *)callButton
+{
+    _callButton = callButton;
+    _callButton.layer.cornerRadius = 20.0f;
+}
+-(void)setDeleteButton:(UIButton *)deleteButton
+{
+    _deleteButton = deleteButton;
+    _deleteButton.layer.cornerRadius = 20.0f;
+}
 
 @end

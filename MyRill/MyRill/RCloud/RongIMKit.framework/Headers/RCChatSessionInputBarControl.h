@@ -69,6 +69,20 @@ typedef NS_ENUM(NSInteger, RCChatSessionInputBarControlType) {
     RCChatSessionInputBarControlPubType = 1
 };
 
+/**
+ *  RCChatSessionInputBarInputType
+ */
+typedef NS_ENUM(NSInteger, RCChatSessionInputBarInputType) {
+    /**
+     *  文本输入类型
+     */
+    RCChatSessionInputBarInputText = 0,
+    /**
+     *  语音输入类型
+     */
+    RCChatSessionInputBarInputVoice = 1
+};
+
 @protocol RCChatSessionInputBarControlDelegate;
 
 /**
@@ -147,9 +161,9 @@ typedef NS_ENUM(NSInteger, RCChatSessionInputBarControlType) {
 @property(assign, nonatomic) float inputTextview_height;
 
 /**
- *  pubMenu
+ *  public service menu
  */
-@property(strong, nonatomic) RCPublicServiceMenu *pubMenu;
+@property(strong, nonatomic) RCPublicServiceMenu *publicServiceMenu;
 
 /**
  *  初始化
@@ -174,6 +188,10 @@ typedef NS_ENUM(NSInteger, RCChatSessionInputBarControlType) {
  */
 - (void)setInputBarType:(RCChatSessionInputBarControlType)type style:(RCChatSessionInputBarControlStyle)style;
 
+/**
+ *  dismiss公众账号弹出菜单
+ */
+- (void)dismissPublicServiceMenuPopupView;
 @end
 
 /**
@@ -255,6 +273,14 @@ typedef NS_ENUM(NSInteger, RCChatSessionInputBarControlType) {
 - (void)inputTextView:(UITextView *)inputTextView
     shouldChangeTextInRange:(NSRange)range
             replacementText:(NSString *)text;
+
+/**
+ *  选择公众账号菜单项
+ *
+ *  @param selectedMenuItem 被选择的菜单项
+ */
+- (void)onPublicServiceMenuItemSelected:(RCPublicServiceMenuItem *)selectedMenuItem;
+
 @end
 
 #endif

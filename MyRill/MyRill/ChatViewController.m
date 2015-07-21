@@ -7,6 +7,7 @@
 //
 
 #import "ChatViewController.h"
+#import "ChatSettingViewController.h"
 
 @interface ChatViewController ()
 
@@ -28,8 +29,10 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc]initWithTitle:@"详情" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonItemPressed:)];
-    [rightButton setTintColor:[UIColor whiteColor]];
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"duihua_liaotianxiangqing"]style:UIBarButtonItemStyleDone
+                                                                   target:self
+                                                                   action:@selector(rightBarButtonItemPressed:)];
+
     self.navigationItem.rightBarButtonItem = rightButton;
 
 }
@@ -51,9 +54,9 @@
  */
 -(void)rightBarButtonItemPressed:(id)sender
 {
-    RCSettingViewController* chatSettingVC = [[RCSettingViewController alloc] init];
-    chatSettingVC.conversationType = ConversationType_PRIVATE;
-    chatSettingVC.targetId = @"13";
+    ChatSettingViewController* chatSettingVC = [[ChatSettingViewController alloc] init];
+    chatSettingVC.conversationType = self.conversationType;
+    chatSettingVC.targetId = self.targetId;
     [self.navigationController pushViewController:chatSettingVC animated:YES];
 
 }

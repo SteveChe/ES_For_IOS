@@ -73,9 +73,27 @@
 
 /**
  * 用于查询会话列表未读消息数目显示在返回按钮之上。调用notifyUpdateUnreadMessageCount更新返回图标和设置Target
+ * 设置了此值需要在继承会话VC，并重写leftBarButtonItemPressed函数，参考demo中RCDChatViewController
  * 值为想要统计未读数的会话类型Array。
  */
 @property(nonatomic, strong) NSArray *displayConversationTypeArray;
+
+/**
+ * 是否显示发送者的名字，YES显示，NO不显示，默认是YES。
+ * 有些场景可能用得到，比如单聊时，不需要显示发送者的名字。
+ */
+@property(nonatomic) BOOL displayUserNameInCell;
+
+/**
+ * 默认输入框类型，值为文本或者语言，默认为文本。
+ */
+@property(nonatomic) RCChatSessionInputBarInputType defaultInputType;
+
+/**
+ * 当会话为聊天室时获取的历史信息数目，默认值为10，在viewDidLoad之前设置
+ * -1表示不获取，0表示系统默认数目(现在默认值为10条)，正数表示获取的具体数目
+ */
+@property(nonatomic, assign) int defaultHistoryMessageCountOfChatRoom;
 
 /**
  *  init method
@@ -220,6 +238,16 @@
  *  @return 返回消息内容
  */
 - (RCMessageContent *)willSendMessage:(RCMessageContent *)messageCotent;
+
+#pragma mark override
+/**
+ *  重写方法，消息发送之后需要append到datasource中，并显示。在这之前调用，可以修改要显示的消息。
+ *
+ *  @param message 消息
+ *
+ *  @return 返回消息
+ */
+- (RCMessage *)willAppendAndDisplayMessage:(RCMessage *)message;
 
 #pragma mark override
 /**
