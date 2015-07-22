@@ -382,8 +382,8 @@
 
 + (void)changeUserImageWithId:(NSString *)userId
                          data:(NSData *)data
-                      success:(void (^)(id))success
-                      failure:(void (^)(NSError *))failure {
+                      success:(void (^)(AFHTTPRequestOperation *,id))success
+                      failure:(void (^)(AFHTTPRequestOperation *,NSError *))failure {
     NSURL* baseURL = [NSURL URLWithString:DEV_SERVER_ADDRESS];
 
     AFHTTPRequestOperationManager* manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:baseURL];
@@ -413,12 +413,8 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         NSString *picName = [timeStamp stringByAppendingString:@".png"];
         [formData appendPartWithFileData :imageData name:@"avatar" fileName:picName mimeType:@"image/png"];
     }
-          success:^(AFHTTPRequestOperation *operation,id responseObject) {
-              NSLog(@"Success: %@", responseObject);
-          }
-          failure:^(AFHTTPRequestOperation *operation,NSError *error) {
-              NSLog(@"Error: %@", error);
-          }];
+          success:success
+          failure:failure];
 }
 
 

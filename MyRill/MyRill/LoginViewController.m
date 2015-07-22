@@ -58,7 +58,7 @@
     [userDefaults setObject:userInfo.phoneNumber forKey:@"PhoneNumber"];
     [userDefaults setObject:userInfo.enterprise forKey:@"Enterprise"];
     [userDefaults setObject:userInfo.position forKey:@"Position"];
-    [userDefaults setObject:userInfo.portraitUri forKey:@"UserImageURL"];
+    [userDefaults setObject:[@"http://120.25.249.144" stringByAppendingString:userInfo.portraitUri] forKey:@"UserImageURL"];
     [userDefaults synchronize];
 }
 -(void)changeToESMenuView

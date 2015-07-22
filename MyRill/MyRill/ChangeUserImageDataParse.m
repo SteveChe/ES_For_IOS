@@ -8,6 +8,7 @@
 
 #import "ChangeUserImageDataParse.h"
 #import "AFHttpTool.h"
+#import "DataParseDefine.h"
 
 @implementation ChangeUserImageDataParse
 
@@ -15,12 +16,20 @@
                         data:(NSData *)imageData {
     [AFHttpTool changeUserImageWithId:UserId
                                  data:imageData
-                              success:^(id response) {
+                              success:^(AFHTTPRequestOperation *operation,id responseObject) {
+                                  NSDictionary *reponseDic = (NSDictionary *)responseObject;
+                                  NSNumber* errorCodeNum = [reponseDic valueForKey:NETWORK_ERROR_CODE];
+                                  if (errorCodeNum == nil || [errorCodeNum isEqual:[NSNull null]] )
+                                  {
+                                      return ;
+                                  }
                                   
-                                  NSLog(@"%@",response);
-                              } failure:^(NSError *err) {
+                                  NSDictionary *dataDic = reponseDic[NETWORK_OK_DATA];
+                                  NSString *avatar = dataDic[@"avatar"];
+                                  [self.delegate changeUserImageSuccess:avatar];
+                              } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
                                   
-                                  NSLog(@"ASDFASDF");
+                                  NSLog(@"Error: %@", error);
                               }];
 }
 

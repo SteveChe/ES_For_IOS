@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+@class AFHTTPRequestOperation;
 
 typedef NS_ENUM(NSInteger, RequestMethodType){
     RequestMethodTypePost = 1,
@@ -132,7 +133,7 @@ typedef NS_ENUM(NSInteger, RequestMethodType){
 
 + (void)changeUserImageWithId:(NSString *)userId
                          data:(NSData *)data
-                      success:(void (^)(id response))success
-                      failure:(void (^)(NSError *err))failure;
+                      success:(void (^)(AFHTTPRequestOperation *,id))success
+                      failure:(void (^)(AFHTTPRequestOperation *,NSError *))failure;
 
 @end
