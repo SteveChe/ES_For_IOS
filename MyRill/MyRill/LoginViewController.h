@@ -12,4 +12,6 @@
 
 @interface LoginViewController : UIViewController<LoginDataDelegate>
 
+@property (nonatomic, assign) BOOL isStatus;
+
 @end

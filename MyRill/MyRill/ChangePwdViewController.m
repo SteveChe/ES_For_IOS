@@ -43,12 +43,11 @@
 
 #pragma mark - ChangePwdDataDelegate methods
 - (void)changePasswordSucceed {
-    [self showTips:@"修改成功" mode:MRProgressOverlayViewModeCheckmark isDismiss:YES];
-    [self.navigationController popViewControllerAnimated:YES];
+    [self showTips:@"修改成功!" mode:MRProgressOverlayViewModeCheckmark isDismiss:YES isSucceuss:YES];
 }
 
 - (void)changePasswordFailed:(NSString *)errorMsg {
-    [self showTips:errorMsg mode:MRProgressOverlayViewModeCross isDismiss:YES];
+    [self showTips:@"修改失败!" mode:MRProgressOverlayViewModeCross isDismiss:YES isSucceuss:NO];
 }
 
 #pragma mark - response events
@@ -74,13 +73,11 @@
     
     //首先回收键盘
     [self hideKeyboard];
-    [self showTips:@"修改中" mode:MRProgressOverlayViewModeIndeterminate isDismiss:NO];
-    
     [self.changePwdDP changePassword:self.oldPwdTxtField.text newPassword:self.newpwdAgainTxtField.text];
 }
 
 #pragma mark - private methods
-- (void)showTips:(NSString *)tip mode:(MRProgressOverlayViewMode)mode isDismiss:(BOOL)isDismiss
+- (void)showTips:(NSString *)tip mode:(MRProgressOverlayViewMode)mode isDismiss:(BOOL)isDismiss isSucceuss:(BOOL)success
 {
     [self.view addSubview:self.progress];
     [self.progress show:YES];
@@ -88,15 +85,19 @@
     self.progress.titleLabelText = tip;
     if (isDismiss)
     {
-        [self performSelector:@selector(dismissProgress) withObject:nil afterDelay:1.8];
+        [self performSelector:@selector(dismissProgress:) withObject:@(success) afterDelay:1.8];
     }
 }
 
-- (void)dismissProgress
+//参数作为布尔对象传递，使用Bool会出问题
+- (void)dismissProgress:(Boolean)isSuccess
 {
     if (self.progress)
     {
         [self.progress dismiss:YES];
+        if (isSuccess) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
     }
 }
 

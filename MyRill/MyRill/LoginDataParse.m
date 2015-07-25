@@ -65,7 +65,7 @@
                                       {
                                           userInfo.position = userPosition;
                                       }
-                                      NSString *userAtatar = [temDic valueForKey:@"atatar"];
+                                      NSString *userAtatar = [temDic valueForKey:@"avatar"];
                                       if (userAtatar != nil && ![userAtatar isEqual:[NSNull null]])
                                       {
                                           userInfo.portraitUri = userAtatar;

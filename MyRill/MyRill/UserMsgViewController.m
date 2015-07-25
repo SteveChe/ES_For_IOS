@@ -72,16 +72,23 @@
 - (void)changeUserImageSuccess:(NSString *)avatar {
     //更新头像缓存的url
     NSURL *url = [NSURL URLWithString:avatar];
-    [self.userIcon sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"icon.png"]];
+    [self.userIcon sd_setImageWithURL:url placeholderImage:nil];
     
     //将新的url存储到NSUserDefaults本地中
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setObject:avatar forKey:@"UserImageURL"];
     [userDefaults synchronize];
+    //[self.tabBarController.tabBar.items makeObjectsPerformSelector:@selector(setEnabled:) withObject:@YES];
+    [self dismissProgress];
+    
 }
 
 #pragma mark - UIImagePickerControllerDelegate methods
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+
+//    self.tabBarController.tabBarItem.enabled = NO;
+//    [self.tabBarController.tabBar.items makeObjectsPerformSelector:@selector(setEnabled:) withObject:@NO];
+    
     NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
     
     //当选择的类型是图片
@@ -91,7 +98,6 @@
         UIImage *image = [info objectForKey:@"UIImagePickerControllerEditedImage"];
         //先把图片转成NSData
         UIImage *img = [self scaleToSize:image size:CGSizeMake(300, 300)];
-        NSLog(@")))))) %ld",(long)image.imageOrientation);
         NSData *data;
         if (UIImagePNGRepresentation(img) == nil)
         {
@@ -107,6 +113,8 @@
         //关闭相册界面
         [picker dismissViewControllerAnimated:YES completion:nil];
     }
+//    MRActivityIndicatorView
+    [self showTips:@"正在上传..." mode:MRProgressOverlayViewModeIndeterminateSmallDefault isDismiss:NO];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
@@ -120,6 +128,7 @@
     
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     LoginViewController *loginVC = [[LoginViewController alloc] init];
+    loginVC.isStatus = YES;
     ESNavigationController *nav = [[ESNavigationController alloc] initWithRootViewController:loginVC];
     [appDelegate changeWindow:nav];
 }
@@ -227,7 +236,7 @@
 #pragma mark - private methods
 - (void)showTips:(NSString *)tip mode:(MRProgressOverlayViewMode)mode isDismiss:(BOOL)isDismiss
 {
-    [self.view addSubview:self.progress];
+    [self.tabBarController.view addSubview:self.progress];
     [self.progress show:YES];
     self.progress.mode = mode;
     self.progress.titleLabelText = tip;

@@ -32,7 +32,7 @@
         
         NSLog(@"!!!!!! %@",resultDic[NETWORK_ERROR_MESSAGE]);
     } failure:^(NSError *err) {
-        ;
+        [self.delegate logoutFail];
     }];
 }
 

@@ -458,6 +458,9 @@ static CustomShowMessage *_sharedInstance = nil;
         case SUBMIT_REQ_WAITING_INDICATOR:
             text = NSLocalizedString(@"IsSubmiting",@"正在提交...");
             break;
+        case SUBMIT_PORTRAIT_REQ_WAITTING_INDICATOR:
+            text = @"正在上传头像";
+            break;
         default:
             text = NSLocalizedString(@"IsSearching",@"正在搜索...");
             break;
