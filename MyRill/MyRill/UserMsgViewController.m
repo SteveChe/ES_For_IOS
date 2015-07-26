@@ -128,7 +128,6 @@
     
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     LoginViewController *loginVC = [[LoginViewController alloc] init];
-    loginVC.isStatus = YES;
     ESNavigationController *nav = [[ESNavigationController alloc] initWithRootViewController:loginVC];
     [appDelegate changeWindow:nav];
 }

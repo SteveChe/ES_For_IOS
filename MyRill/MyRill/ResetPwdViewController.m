@@ -8,6 +8,7 @@
 
 #import "ResetPwdViewController.h"
 #import "ColorHandler.h"
+#import "LoginViewController.h"
 
 @interface ResetPwdViewController ()
 
@@ -32,7 +33,7 @@
     // Do any additional setup after loading the view from its nib.
     
     self.title = @"找回密码";
-    
+
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     [self.view addGestureRecognizer:tapGesture];
 }

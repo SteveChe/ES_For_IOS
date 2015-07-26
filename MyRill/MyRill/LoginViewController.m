@@ -45,14 +45,6 @@
     _loginDataParse.delegate = self;
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    if (self.isStatus) {
-        [self showTips:@"注销成功!" mode:MRProgressOverlayViewModeCheckmark isDismiss:YES];
-    }
-}
-
 #pragma mark - LoginDataDelegate
 - (void)loginSucceed:(ESUserInfo *)userInfo
 {
@@ -117,7 +109,7 @@
     self.progress.titleLabelText = tip;
     if (isDismiss)
     {
-        [self performSelector:@selector(dismissProgress) withObject:nil afterDelay:1.8];
+        [self performSelector:@selector(dismissProgress) withObject:nil afterDelay:.8f];
     }
 }
 
