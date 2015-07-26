@@ -135,7 +135,7 @@
         ESUserInfo *user = _searchResult[indexPath.row];
         if(user){
             cell.addressBookName.text = user.userName;
-            [cell.ivAva sd_setImageWithURL:[NSURL URLWithString:user.portraitUri] placeholderImage:[UIImage imageNamed:@"icon"]];
+            [cell.ivAva sd_setImageWithURL:[NSURL URLWithString:user.portraitUri] placeholderImage:[UIImage imageNamed:@"头像_100"]];
             cell.ivAva.clipsToBounds = YES;
             cell.ivAva.layer.cornerRadius = 18.f;
         }
@@ -175,7 +175,7 @@
             ESUserInfo *user = contactList.contactList[indexPath.row];
             if(user){
                 cell.addressBookName.text = user.userName;
-                [cell.ivAva sd_setImageWithURL:[NSURL URLWithString:user.portraitUri] placeholderImage:[UIImage imageNamed:@"icon"]];
+                [cell.ivAva sd_setImageWithURL:[NSURL URLWithString:user.portraitUri] placeholderImage:[UIImage imageNamed:@"头像_100"]];
                 cell.ivAva.clipsToBounds = YES;
                 cell.ivAva.layer.cornerRadius = 18.f;
             }
