@@ -44,6 +44,12 @@
     self.tableView.tableFooterView = self.footerView;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    self.tabBarController.tabBar.hidden = YES;
+}
+
 #pragma mark - ProfessionDataDelegate methods
 - (void)professionOperationSuccess:(id)context {
     [self.dataSource removeObjectAtIndex:self.deleteIndexPath.row];

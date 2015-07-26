@@ -18,4 +18,6 @@ typedef enum
 
 @interface LoginViewController : UIViewController<LoginDataDelegate>
 
+//@property (nonatomic,assign) LOGIN_STATUS eStatus;
+
 @end

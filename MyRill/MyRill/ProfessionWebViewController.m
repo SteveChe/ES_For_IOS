@@ -30,6 +30,7 @@
     NSURL *url = [NSURL URLWithString:self.urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [self.professionWeb loadRequest:request];
+    self.tabBarController.tabBar.hidden = YES;
 }
 
 #pragma mark - UIWebViewDelegate methods

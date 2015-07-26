@@ -30,6 +30,12 @@
     self.title = @"添加业务";
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    self.tabBarController.tabBar.hidden = YES;
+}
+
 #pragma mark - ProfessionDataDelegate methods
 - (void)professionOperationSuccess:(id)context {
     if ([context isKindOfClass:[ESProfession class]]) {

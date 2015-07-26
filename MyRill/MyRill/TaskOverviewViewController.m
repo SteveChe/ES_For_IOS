@@ -38,7 +38,6 @@
     [self.view addSubview:self.tableView];
 }
 
-//在viewWillAppear&Disappear中，控制Controller栈中tabbar的显隐
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     

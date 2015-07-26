@@ -194,7 +194,7 @@
     if ([errorMessage isEqualToString:@"403"])
     {
         LoginViewController *loginVC = [[LoginViewController alloc] init];
-        loginVC.eStatus = e_login_status_invalid;
+//        loginVC.eStatus = e_login_status_invalid;
         ESNavigationController *nav = [[ESNavigationController alloc] initWithRootViewController:loginVC];
         [self changeWindow:nav];
     }
