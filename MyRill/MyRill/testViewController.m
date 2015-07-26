@@ -1,23 +1,22 @@
 //
-//  TaskContainerViewController.m
+//  testViewController.m
 //  MyRill
 //
-//  Created by Siyuan Wang on 15/6/14.
+//  Created by Siyuan Wang on 15/7/26.
 //
 //
 
-#import "TaskContainerViewController.h"
+#import "testViewController.h"
 
-@interface TaskContainerViewController ()
+@interface testViewController ()
 
 @end
 
-@implementation TaskContainerViewController
+@implementation testViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    self.title = @"任务";
+    // Do any additional setup after loading the view from its nib.
 }
 
 - (void)didReceiveMemoryWarning {

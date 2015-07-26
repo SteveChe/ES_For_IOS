@@ -36,7 +36,7 @@
 		2B39C95F1B272221007BAC7A /* QRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C95E1B272221007BAC7A /* QRCodeViewController.m */; };
 		2B39C96D1B2D79DB007BAC7A /* ProfessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C96C1B2D79DB007BAC7A /* ProfessionViewController.m */; };
 		2B39C9731B2D7AF0007BAC7A /* ContactsContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9721B2D7AF0007BAC7A /* ContactsContainerViewController.m */; };
-		2B39C9761B2D7B05007BAC7A /* TaskContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9751B2D7B05007BAC7A /* TaskContainerViewController.m */; };
+		2B39C9761B2D7B05007BAC7A /* TaskOverviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9751B2D7B05007BAC7A /* TaskOverviewViewController.m */; };
 		2B39C9791B2D7B14007BAC7A /* UserMsgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9781B2D7B14007BAC7A /* UserMsgViewController.m */; };
 		2B39C97C1B2D8003007BAC7A /* ESMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C97B1B2D8003007BAC7A /* ESMenuViewController.m */; };
 		2B39C98D1B37B2A4007BAC7A /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B39C98C1B37B2A4007BAC7A /* LoginViewController.xib */; };
@@ -76,6 +76,16 @@
 		2BC821361B5BE6B60090E2C1 /* ChangeUserImageDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC821351B5BE6B60090E2C1 /* ChangeUserImageDataParse.m */; };
 		2BC8213A1B5C9FF70090E2C1 /* ShowQRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC821381B5C9FF70090E2C1 /* ShowQRCodeViewController.m */; };
 		2BC8213B1B5C9FF70090E2C1 /* ShowQRCodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BC821391B5C9FF70090E2C1 /* ShowQRCodeViewController.xib */; };
+		2BE55A081B647324008CDB4B /* TaskOverviewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE55A061B647324008CDB4B /* TaskOverviewTableViewCell.m */; };
+		2BE55A091B647324008CDB4B /* TaskOverviewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE55A071B647324008CDB4B /* TaskOverviewTableViewCell.xib */; };
+		2BE55A0E1B6483D2008CDB4B /* TaskListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE55A0D1B6483D2008CDB4B /* TaskListViewController.m */; };
+		2BE55A121B64843A008CDB4B /* TaskListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE55A101B64843A008CDB4B /* TaskListTableViewCell.m */; };
+		2BE55A131B64843A008CDB4B /* TaskListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE55A111B64843A008CDB4B /* TaskListTableViewCell.xib */; };
+		2BE55A161B64CF17008CDB4B /* AddTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE55A151B64CF17008CDB4B /* AddTaskViewController.m */; };
+		2BE55A181B64DF8F008CDB4B /* TaskOverviewHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE55A171B64DF8F008CDB4B /* TaskOverviewHeadView.xib */; };
+		2BE55A1F1B64E0BE008CDB4B /* testViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE55A1D1B64E0BE008CDB4B /* testViewController.m */; };
+		2BE55A201B64E0BE008CDB4B /* testViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE55A1E1B64E0BE008CDB4B /* testViewController.xib */; };
+		2BE55A221B64EE0C008CDB4B /* TaskOverviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE55A211B64EE0C008CDB4B /* TaskOverviewViewController.xib */; };
 		2BE8C21D1B4D60B400858CEE /* ProfessionCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE8C21B1B4D60B400858CEE /* ProfessionCollectionViewCell.m */; };
 		2BE8C21E1B4D60B400858CEE /* ProfessionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE8C21C1B4D60B400858CEE /* ProfessionCollectionViewCell.xib */; };
 		2BE8C22C1B4EB3A200858CEE /* AddProfessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE8C22A1B4EB3A100858CEE /* AddProfessionViewController.m */; };
@@ -278,8 +288,8 @@
 		2B39C96C1B2D79DB007BAC7A /* ProfessionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfessionViewController.m; sourceTree = "<group>"; };
 		2B39C9711B2D7AF0007BAC7A /* ContactsContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsContainerViewController.h; sourceTree = "<group>"; };
 		2B39C9721B2D7AF0007BAC7A /* ContactsContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsContainerViewController.m; sourceTree = "<group>"; };
-		2B39C9741B2D7B05007BAC7A /* TaskContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskContainerViewController.h; sourceTree = "<group>"; };
-		2B39C9751B2D7B05007BAC7A /* TaskContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskContainerViewController.m; sourceTree = "<group>"; };
+		2B39C9741B2D7B05007BAC7A /* TaskOverviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskOverviewViewController.h; sourceTree = "<group>"; };
+		2B39C9751B2D7B05007BAC7A /* TaskOverviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskOverviewViewController.m; sourceTree = "<group>"; };
 		2B39C9771B2D7B14007BAC7A /* UserMsgViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserMsgViewController.h; sourceTree = "<group>"; };
 		2B39C9781B2D7B14007BAC7A /* UserMsgViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserMsgViewController.m; sourceTree = "<group>"; };
 		2B39C97A1B2D8003007BAC7A /* ESMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESMenuViewController.h; sourceTree = "<group>"; };
@@ -345,6 +355,21 @@
 		2BC821371B5C9FF70090E2C1 /* ShowQRCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowQRCodeViewController.h; sourceTree = "<group>"; };
 		2BC821381B5C9FF70090E2C1 /* ShowQRCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowQRCodeViewController.m; sourceTree = "<group>"; };
 		2BC821391B5C9FF70090E2C1 /* ShowQRCodeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowQRCodeViewController.xib; sourceTree = "<group>"; };
+		2BE55A051B647324008CDB4B /* TaskOverviewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskOverviewTableViewCell.h; sourceTree = "<group>"; };
+		2BE55A061B647324008CDB4B /* TaskOverviewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskOverviewTableViewCell.m; sourceTree = "<group>"; };
+		2BE55A071B647324008CDB4B /* TaskOverviewTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskOverviewTableViewCell.xib; sourceTree = "<group>"; };
+		2BE55A0C1B6483D2008CDB4B /* TaskListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskListViewController.h; sourceTree = "<group>"; };
+		2BE55A0D1B6483D2008CDB4B /* TaskListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskListViewController.m; sourceTree = "<group>"; };
+		2BE55A0F1B64843A008CDB4B /* TaskListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskListTableViewCell.h; sourceTree = "<group>"; };
+		2BE55A101B64843A008CDB4B /* TaskListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskListTableViewCell.m; sourceTree = "<group>"; };
+		2BE55A111B64843A008CDB4B /* TaskListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskListTableViewCell.xib; sourceTree = "<group>"; };
+		2BE55A141B64CF17008CDB4B /* AddTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddTaskViewController.h; sourceTree = "<group>"; };
+		2BE55A151B64CF17008CDB4B /* AddTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddTaskViewController.m; sourceTree = "<group>"; };
+		2BE55A171B64DF8F008CDB4B /* TaskOverviewHeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskOverviewHeadView.xib; sourceTree = "<group>"; };
+		2BE55A1C1B64E0BE008CDB4B /* testViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testViewController.h; sourceTree = "<group>"; };
+		2BE55A1D1B64E0BE008CDB4B /* testViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testViewController.m; sourceTree = "<group>"; };
+		2BE55A1E1B64E0BE008CDB4B /* testViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = testViewController.xib; sourceTree = "<group>"; };
+		2BE55A211B64EE0C008CDB4B /* TaskOverviewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskOverviewViewController.xib; sourceTree = "<group>"; };
 		2BE8C21A1B4D60B400858CEE /* ProfessionCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfessionCollectionViewCell.h; sourceTree = "<group>"; };
 		2BE8C21B1B4D60B400858CEE /* ProfessionCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfessionCollectionViewCell.m; sourceTree = "<group>"; };
 		2BE8C21C1B4D60B400858CEE /* ProfessionCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfessionCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -742,6 +767,7 @@
 			isa = PBXGroup;
 			children = (
 				2BE8C2341B52533E00858CEE /* Profession */,
+				2BE55A041B6472F5008CDB4B /* Task */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -880,8 +906,16 @@
 		2B39C9621B272915007BAC7A /* Task */ = {
 			isa = PBXGroup;
 			children = (
-				2B39C9741B2D7B05007BAC7A /* TaskContainerViewController.h */,
-				2B39C9751B2D7B05007BAC7A /* TaskContainerViewController.m */,
+				2B39C9741B2D7B05007BAC7A /* TaskOverviewViewController.h */,
+				2B39C9751B2D7B05007BAC7A /* TaskOverviewViewController.m */,
+				2BE55A211B64EE0C008CDB4B /* TaskOverviewViewController.xib */,
+				2BE55A0C1B6483D2008CDB4B /* TaskListViewController.h */,
+				2BE55A0D1B6483D2008CDB4B /* TaskListViewController.m */,
+				2BE55A141B64CF17008CDB4B /* AddTaskViewController.h */,
+				2BE55A151B64CF17008CDB4B /* AddTaskViewController.m */,
+				2BE55A1C1B64E0BE008CDB4B /* testViewController.h */,
+				2BE55A1D1B64E0BE008CDB4B /* testViewController.m */,
+				2BE55A1E1B64E0BE008CDB4B /* testViewController.xib */,
 			);
 			name = Task;
 			sourceTree = "<group>";
@@ -1002,6 +1036,20 @@
 				2B5A590B1B48DFBB000382D7 /* MRWeakProxy.m */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		2BE55A041B6472F5008CDB4B /* Task */ = {
+			isa = PBXGroup;
+			children = (
+				2BE55A051B647324008CDB4B /* TaskOverviewTableViewCell.h */,
+				2BE55A061B647324008CDB4B /* TaskOverviewTableViewCell.m */,
+				2BE55A071B647324008CDB4B /* TaskOverviewTableViewCell.xib */,
+				2BE55A0F1B64843A008CDB4B /* TaskListTableViewCell.h */,
+				2BE55A101B64843A008CDB4B /* TaskListTableViewCell.m */,
+				2BE55A111B64843A008CDB4B /* TaskListTableViewCell.xib */,
+				2BE55A171B64DF8F008CDB4B /* TaskOverviewHeadView.xib */,
+			);
+			name = Task;
 			sourceTree = "<group>";
 		};
 		2BE8C2341B52533E00858CEE /* Profession */ = {
@@ -1410,6 +1458,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BE55A181B64DF8F008CDB4B /* TaskOverviewHeadView.xib in Resources */,
 				2BE8C22D1B4EB3A200858CEE /* AddProfessionViewController.xib in Resources */,
 				2B37E44D1B53967D00F671A1 /* ModifyProfessionViewController.xib in Resources */,
 				2BC8213B1B5C9FF70090E2C1 /* ShowQRCodeViewController.xib in Resources */,
@@ -1419,6 +1468,7 @@
 				2B39C98D1B37B2A4007BAC7A /* LoginViewController.xib in Resources */,
 				2B9CBB691B42D897007D7A45 /* UserMsgViewController.xib in Resources */,
 				F22FE2951B3B000400A1A997 /* UserSettingViewController.xib in Resources */,
+				2BE55A221B64EE0C008CDB4B /* TaskOverviewViewController.xib in Resources */,
 				2B9CBB671B3AEC74007D7A45 /* (null) in Resources */,
 				2B5A591F1B48F921000382D7 /* ChangPhoneNumViewController.xib in Resources */,
 				2B39C9971B37E634007BAC7A /* SignUpViewController.xib in Resources */,
@@ -1434,8 +1484,10 @@
 				F22FE30A1B4A9F1A00A1A997 /* RCDAddFriendViewController.xib in Resources */,
 				F2F92EFC1B4EC3310047D7BF /* RCDSelectPersonTableViewCell.xib in Resources */,
 				2B9CBB621B3ADEC4007D7A45 /* (null) in Resources */,
+				2BE55A201B64E0BE008CDB4B /* testViewController.xib in Resources */,
 				2B7FB8181B56AA5D00DA456E /* ProfessionTableViewCell.xib in Resources */,
 				2BC821331B5B839F0090E2C1 /* QRCodeViewController.xib in Resources */,
+				2BE55A091B647324008CDB4B /* TaskOverviewTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1460,6 +1512,7 @@
 				2B5A590D1B48DFBB000382D7 /* UIImage+MRImageEffects.m in Sources */,
 				2B39C9441B24128F007BAC7A /* LoginViewController.m in Sources */,
 				F23461761B5AA6E400C88FAC /* AddressBookContactListDataSource.m in Sources */,
+				2BE55A121B64843A008CDB4B /* TaskListTableViewCell.m in Sources */,
 				F29F86281B2410070058FC9F /* AFHTTPRequestOperation.m in Sources */,
 				F277AE071B2DC72A006E42CB /* BMBase.m in Sources */,
 				F22FE2E71B4000ED00A1A997 /* SDWebImageCompat.m in Sources */,
@@ -1497,12 +1550,13 @@
 				F23461DD1B5E8CBF00C88FAC /* ChatSettingViewController.m in Sources */,
 				F23461711B5AA0FD00C88FAC /* FMDatabaseQueue.m in Sources */,
 				F277AE0A1B2DCF39006E42CB /* StretchImageUtil.m in Sources */,
-				2B39C9761B2D7B05007BAC7A /* TaskContainerViewController.m in Sources */,
+				2B39C9761B2D7B05007BAC7A /* TaskOverviewViewController.m in Sources */,
 				2BE8C2301B4EC58500858CEE /* ESViewController.m in Sources */,
 				2BE8C22C1B4EB3A200858CEE /* AddProfessionViewController.m in Sources */,
 				2B39C9481B241972007BAC7A /* LoginService.m in Sources */,
 				F22FE2E91B4000ED00A1A997 /* SDWebImageDownloader.m in Sources */,
 				F29F862F1B2410070058FC9F /* AFURLResponseSerialization.m in Sources */,
+				2BE55A1F1B64E0BE008CDB4B /* testViewController.m in Sources */,
 				F22FE2E41B4000ED00A1A997 /* MKAnnotationView+WebCache.m in Sources */,
 				F29F862D1B2410070058FC9F /* AFURLConnectionOperation.m in Sources */,
 				2BC821361B5BE6B60090E2C1 /* ChangeUserImageDataParse.m in Sources */,
@@ -1555,6 +1609,7 @@
 				2B5A590C1B48DFBB000382D7 /* MRBlurView.m in Sources */,
 				F22FE3081B45989200A1A997 /* ESContactList.m in Sources */,
 				F22FE2A81B3FFAC200A1A997 /* RCDPersonDetailViewController.m in Sources */,
+				2BE55A081B647324008CDB4B /* TaskOverviewTableViewCell.m in Sources */,
 				F234616E1B5AA0FD00C88FAC /* FMDatabase.m in Sources */,
 				2B39C9371B241212007BAC7A /* MASCompositeConstraint.m in Sources */,
 				F22FE27B1B3AD94200A1A997 /* UIColor+RCColor.m in Sources */,
@@ -1565,6 +1620,7 @@
 				F22FE2EE1B4000ED00A1A997 /* UIImage+GIF.m in Sources */,
 				F23059BA1B52C141004599FA /* RCDAddressBookViewTableViewCell.m in Sources */,
 				F277ADFE1B2DC046006E42CB /* CustomMessageBox.m in Sources */,
+				2BE55A161B64CF17008CDB4B /* AddTaskViewController.m in Sources */,
 				F29F864A1B2410320058FC9F /* UIWebView+AFNetworking.m in Sources */,
 				2B5A59151B48DFBB000382D7 /* MRActivityIndicatorView+AFNetworking.m in Sources */,
 				F22FE2F31B4000ED00A1A997 /* UIView+WebCacheOperation.m in Sources */,
@@ -1593,6 +1649,7 @@
 				F24787751B2D775E00EC266B /* SignUpDataParse.m in Sources */,
 				F277AE0D1B2DD066006E42CB /* UIPageNavigator.m in Sources */,
 				F22FE2FF1B42DAF600A1A997 /* AddContactDataParse.m in Sources */,
+				2BE55A0E1B6483D2008CDB4B /* TaskListViewController.m in Sources */,
 				2B31C3D51B11C3FD004C865A /* main.m in Sources */,
 				F22FE2ED1B4000ED00A1A997 /* UIButton+WebCache.m in Sources */,
 				F22FE2F21B4000ED00A1A997 /* UIImageView+WebCache.m in Sources */,

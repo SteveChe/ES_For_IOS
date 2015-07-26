@@ -12,7 +12,7 @@
 //#import "ChatContainerViewController.h"
 #import "ChatListViewController.h"
 #import "ContactsContainerViewController.h"
-#import "TaskContainerViewController.h"
+#import "TaskOverviewViewController.h"
 #import "UserMsgViewController.h"
 #import "ColorHandler.h"
 #import "RCDAddressBookViewController.h"
@@ -51,7 +51,7 @@
                                                           image:[UIImage imageNamed:@"联系人.png"]
                                                   selectedImage:[UIImage imageNamed:@"联系人-选中.png"]];
     
-    TaskContainerViewController *taskVC = [[TaskContainerViewController alloc] init];
+    TaskOverviewViewController *taskVC = [[TaskOverviewViewController alloc] init];
     taskVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"任务"
                                                       image:[UIImage imageNamed:@"任务.png"]
                                               selectedImage:[UIImage imageNamed:@"任务-选中.png"]];

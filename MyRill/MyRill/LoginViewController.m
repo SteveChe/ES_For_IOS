@@ -45,18 +45,6 @@
     _loginDataParse.delegate = self;
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    if (e_login_status_logout ==  self.eStatus) {
-        [self showTips:@"注销成功!" mode:MRProgressOverlayViewModeCheckmark isDismiss:YES];
-    }
-    else if (e_login_status_invalid ==  self.eStatus) {
-        [self showTips:@"登录失效!" mode:MRProgressOverlayViewModeCheckmark isDismiss:YES];
-    }
-
-}
-
 #pragma mark - LoginDataDelegate
 - (void)loginSucceed:(ESUserInfo *)userInfo
 {
@@ -121,7 +109,7 @@
     self.progress.titleLabelText = tip;
     if (isDismiss)
     {
-        [self performSelector:@selector(dismissProgress) withObject:nil afterDelay:1.8];
+        [self performSelector:@selector(dismissProgress) withObject:nil afterDelay:.8f];
     }
 }
 
