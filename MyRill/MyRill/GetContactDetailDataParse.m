@@ -11,6 +11,7 @@
 #import "AFHttpTool.h"
 #import "DataParseDefine.h"
 #import "ESUserDetailInfo.h"
+#import "UserInfoDataSource.h"
 
 @implementation GetContactDetailDataParse
 //获取联系人的详细信息

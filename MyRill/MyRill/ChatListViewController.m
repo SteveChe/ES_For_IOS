@@ -223,7 +223,7 @@
                     chat.userName                    = discussion.discussionName;
                     chat.conversationType              = ConversationType_DISCUSSION;
                     chat.title                         = @"讨论组";
-                    
+                    chat.userIDList = userIdList;
                     
                     UITabBarController *tabbarVC = weakSelf.navigationController.viewControllers[0];
                     [weakSelf.navigationController popToViewController:tabbarVC animated:YES];

@@ -14,4 +14,6 @@
  */
 @property (strong,nonatomic) RCConversationModel *conversation;
 
+@property (strong,nonatomic) NSMutableArray *userIDList;
+
 @end

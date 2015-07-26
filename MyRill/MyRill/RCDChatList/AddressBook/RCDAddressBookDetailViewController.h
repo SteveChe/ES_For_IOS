@@ -13,5 +13,5 @@
 
 @interface RCDAddressBookDetailViewController : ESViewController <ContactDetailDataDelegate>
 
-@property (nonatomic,strong)ESUserInfo* userInfo;
+@property (nonatomic,strong)NSString* userId;
 @end
