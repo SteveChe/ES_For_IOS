@@ -7,7 +7,9 @@
 //
 
 #import <RongIMKit/RongIMKit.h>
+#import "GetContactDetailDataParse.h"
 
-@interface ChatSettingViewController : RCSettingViewController
+@interface ChatSettingViewController : RCSettingViewController<ContactDetailDataDelegate>
+@property (nonatomic, strong) NSMutableArray *userIdList;
 
 @end

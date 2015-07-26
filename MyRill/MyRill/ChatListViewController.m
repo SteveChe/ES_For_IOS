@@ -15,7 +15,15 @@
 #import "RCDSearchFriendViewController.h"
 #import "RCDChatListCell.h"
 #import "UIImageView+WebCache.h"
-@interface ChatListViewController ()
+#import "UserInfoDataSource.h"
+#import "GetContactDetailDataParse.h"
+#import "ESUserDetailInfo.h"
+
+void(^completionHandler)(RCUserInfo* userInfo);
+
+
+@interface ChatListViewController ()<ContactDetailDataDelegate>
+@property (nonatomic,strong) GetContactDetailDataParse* getContactDetailDataParse;
 
 @end
 
@@ -37,6 +45,8 @@
     
     // 设置用户信息提供者。
     [[RCIM sharedRCIM] setUserInfoDataSource:self];
+    _getContactDetailDataParse = [[GetContactDetailDataParse alloc] init];
+    _getContactDetailDataParse.delegate = self;
 
 }
 
@@ -134,15 +144,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 /**
  *  重载右边导航按钮的事件
@@ -223,7 +224,7 @@
                     chat.userName                    = discussion.discussionName;
                     chat.conversationType              = ConversationType_DISCUSSION;
                     chat.title                         = @"讨论组";
-                    
+                    chat.userIDList = userIdList;
                     
                     UITabBarController *tabbarVC = weakSelf.navigationController.viewControllers[0];
                     [weakSelf.navigationController popToViewController:tabbarVC animated:YES];
@@ -311,7 +312,19 @@
     return cell;
 }
 
-//*********************插入自定义Cell*********************//
+#pragma mark -- ContactDetailDataDelegate
+- (void)getContactDetail:(ESUserDetailInfo *)userDetailInfo
+{
+    RCUserInfo* user = [[RCUserInfo alloc] init];
+    user.userId = userDetailInfo.userId;
+    user.name = userDetailInfo.userName;
+    user.portraitUri = userDetailInfo.portraitUri;
+    completionHandler(user);
+}
+- (void)getContactDetailFailed:(NSString*)errorMessage
+{
+    
+}
 
 
 #pragma mark - 收到消息监听
@@ -368,34 +381,19 @@
 -(void)getUserInfoWithUserId:(NSString *)userId completion:(void(^)(RCUserInfo* userInfo))completion
 {
     // 此处最终代码逻辑实现需要您从本地缓存或服务器端获取用户信息。
-    
-    if ([@"1" isEqual:userId]) {
+    ESUserInfo* userInfo = [[UserInfoDataSource shareInstance] getUserByUserId:userId];
+    if(userInfo == nil || [userInfo isEqual:[NSNull null]])
+    {
+        completionHandler = completion;
+    }
+    else
+    {
         RCUserInfo *user = [[RCUserInfo alloc]init];
-        user.userId = @"1";
-        user.name = @"superadmin";
-        user.portraitUri = @"http://120.25.249.144/media/avatar_img/XM/A%20Crown%20of%20Swords.jpg";
-        
+        user.userId = userInfo.userId;
+        user.name = userInfo.userName;
+        user.portraitUri = userInfo.portraitUri;
         return completion(user);
     }
-    
-    if ([@"2" isEqual:userId]) {
-        RCUserInfo *user = [[RCUserInfo alloc]init];
-        user.userId = @"2";
-        user.name = @"18601929217";
-        user.portraitUri = @"http://120.25.249.144/media/avatar_img/IM/1436164903320.jpg";
-        
-        return completion(user);
-    }
-    
-    if ([@"3" isEqual:userId]) {
-        RCUserInfo *user = [[RCUserInfo alloc]init];
-        user.userId = @"3";
-        user.name = @"13555762177";
-        user.portraitUri = @"http://120.25.249.144/media/avatar_img/HY/Dorothea%20Barth%20Jorgensen.jpg";
-        
-        return completion(user);
-    }
-    
     return completion(nil);
 }
 

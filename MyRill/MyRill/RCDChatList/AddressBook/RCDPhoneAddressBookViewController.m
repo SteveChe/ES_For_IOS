@@ -263,13 +263,13 @@
     if(tableView == self.searchDisplayController.searchResultsTableView)
     {
         user = _searchResult[indexPath.row];
-        addressBookDetailVC.userInfo = user;
+        addressBookDetailVC.userId = user.userId;
     }
     else
     {
         user = _phoneNumberContacts[indexPath.row];
     }
-    addressBookDetailVC.userInfo = user;
+    addressBookDetailVC.userId = user.userId;
 
     [self.navigationController pushViewController:addressBookDetailVC animated:YES];
 

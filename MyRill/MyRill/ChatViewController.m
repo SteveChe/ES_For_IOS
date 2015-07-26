@@ -8,6 +8,7 @@
 
 #import "ChatViewController.h"
 #import "ChatSettingViewController.h"
+#import "RCDAddressBookDetailViewController.h"
 
 @interface ChatViewController ()
 
@@ -57,8 +58,39 @@
     ChatSettingViewController* chatSettingVC = [[ChatSettingViewController alloc] init];
     chatSettingVC.conversationType = self.conversationType;
     chatSettingVC.targetId = self.targetId;
+//    if (self.conversationType == ConversationType_PRIVATE)
+//    {
+//        [chatSettingVC.userIdList addObject:self.targetId];
+//    }
+//    else if(self.conversationType == ConversationType_DISCUSSION)
+//    {
+//        [chatSettingVC.userIdList addObjectsFromArray:self.userIDList];
+//    }
+    
     [self.navigationController pushViewController:chatSettingVC animated:YES];
+}
+
+/**
+ *  点击头像事件
+ *
+ *  @param userId 用户的ID
+ */
+- (void)didTapCellPortrait:(NSString *)userId
+{
+    RCDAddressBookDetailViewController* addressDetailVC = [[RCDAddressBookDetailViewController alloc] init];
+    addressDetailVC.userId = userId;
+    [self.navigationController pushViewController:addressDetailVC animated:YES];
 
 }
+
+#pragma mark-setter&getter
+- (NSMutableArray *)userIDList
+{
+    if (!_userIDList) {
+        _userIDList = [[NSMutableArray alloc] init];
+    }
+    return _userIDList;
+}
+
 
 @end

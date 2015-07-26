@@ -264,7 +264,7 @@
             RCDAddressBookDetailViewController* addressBookDetailVC = [[RCDAddressBookDetailViewController alloc] init];
             ESContactList* contactList = [_friends objectAtIndex:indexPath.section-1];
             ESUserInfo *user = contactList.contactList[indexPath.row];
-            addressBookDetailVC.userInfo = user;
+            addressBookDetailVC.userId = user.userId;
             [self.navigationController pushViewController:addressBookDetailVC animated:YES];
 
         }

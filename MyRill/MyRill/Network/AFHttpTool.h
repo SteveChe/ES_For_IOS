@@ -31,6 +31,7 @@ typedef NS_ENUM(NSInteger, RequestMethodType){
                   failure:(void (^)(NSError* err))failure;
 //sign-up
 +(void) signUpWithPhoneNum:(NSString *) phoneNum
+                  userName:(NSString*) userName
                   password:(NSString *) password
           verificationCode:(NSString*) verificationCode
                    success:(void (^)(id response))success
@@ -135,5 +136,8 @@ typedef NS_ENUM(NSInteger, RequestMethodType){
                          data:(NSData *)data
                       success:(void (^)(AFHTTPRequestOperation *,id))success
                       failure:(void (^)(AFHTTPRequestOperation *,NSError *))failure;
+
++ (void)parseErrorType:(NSError*) error;
+
 
 @end

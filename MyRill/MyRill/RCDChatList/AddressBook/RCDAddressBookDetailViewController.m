@@ -57,9 +57,9 @@
 
 -(void)initContactDetail
 {
-    if (_userInfo != nil && _userInfo.userId != nil && [_userInfo.userId length] > 0)
+    if (_userId != nil && _userId != nil && [_userId length] > 0)
     {
-        [_getContactDetailDataParse getContactDetail:_userInfo.userId];
+        [_getContactDetailDataParse getContactDetail:_userId];
     }
 }
 

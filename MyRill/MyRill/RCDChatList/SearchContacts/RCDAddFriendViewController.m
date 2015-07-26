@@ -41,7 +41,10 @@
                                                                                     action:@selector(rightBarButtonItemPressed:)];
     self.navigationItem.rightBarButtonItem = settintBtnItem;
     
-    NSString* addFriendText = [NSString stringWithFormat:@"我是%@",_targetUserInfo.name];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString* myName = [userDefaults stringForKey:@"UserName"];
+    
+    NSString* addFriendText = [NSString stringWithFormat:@"我是%@",myName];
     _addFriendTextField.text = addFriendText;
 }
 
