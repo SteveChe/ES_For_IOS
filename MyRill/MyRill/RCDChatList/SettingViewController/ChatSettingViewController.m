@@ -16,12 +16,12 @@
 #import "RCDSelectPersonViewController.h"
 #import "ChatViewController.h"
 
-@interface ChatSettingViewController ()<UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate,UIActionSheetDelegate>
-@property (nonatomic, strong) UICollectionView *collectionView;
+@interface ChatSettingViewController ()<UIActionSheetDelegate>
+//@property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 //@property (nonatomic, strong) NSArray* members;
 @property (nonatomic,strong) GetContactDetailDataParse* getContactDetailDataParse;
-
+@property (nonatomic,weak) RCConversationSettingTableViewHeader* tableViewHeader ;
 @end
 
 @implementation ChatSettingViewController
@@ -30,9 +30,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-//    [self updateUsersInfo];
-//    self.tableView.tableHeaderView = self.collectionView;
-//    [self.view addSubview:self.collectionView];
     //显示顶部视图
     self.headerHidden = NO;
     _getContactDetailDataParse = [[GetContactDetailDataParse alloc] init];
@@ -143,14 +140,6 @@
             [self.dataSource addObject:userInfo];
         }
     }
-    if ([self.dataSource count] > 0)
-    {
-        int nRowNumber = (int)([self.dataSource count] / 4) + 1;
-        CGRect rect = self.collectionView.frame;
-        rect.size.height = nRowNumber *([[UIScreen mainScreen] bounds].size.height - 64 - 44 - 9)/6;
-        self.collectionView.frame = rect;
-        [self.collectionView reloadData];
-    }
 }
 
 
@@ -179,17 +168,17 @@
                 __weak typeof(&*self)  weakSelf = self;
 
                 [[RCIMClient sharedRCIMClient] addMemberToDiscussion:self.targetId userIdList:addIdList success:^(RCDiscussion *discussion) {
-                    NSLog(@"成功");
+//                    NSLog(@"成功");
 
                     dispatch_async(dispatch_get_main_queue(), ^{
                         RCUserInfo *myself = [[RCUserInfo alloc] init];
                         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
                         myself.userId =  [userDefaults stringForKey:@"UserId"];
-                        NSLog(@"%@",[userDefaults stringForKey:@"UserId"]);
                         myself.name =  [userDefaults stringForKey:@"UserName"];
                         myself.portraitUri =  [userDefaults stringForKey:@"UserImageURL"];
                         [allUsers insertObject:myself atIndex:0];
                         [weakSelf addUsers:(NSArray *)allUsers];
+                        [weakSelf.tableViewHeader reloadData];
                         
                     });
                 } error:^(RCErrorCode status) {
@@ -291,6 +280,7 @@
 - (void)settingTableViewHeader:(RCConversationSettingTableViewHeader*)settingTableViewHeader indexPathOfSelectedItem:(NSIndexPath*)indexPathOfSelectedItem
             allTheSeletedUsers:(NSArray*)users
 {
+    _tableViewHeader = settingTableViewHeader;
     //点击最后一个+号,调出选择联系人UI
     if (indexPathOfSelectedItem.row == settingTableViewHeader.users.count) {
         
@@ -307,6 +297,19 @@
         };
         [self.navigationController pushViewController:selectPersonVC animated:YES];
     }
+    else if (indexPathOfSelectedItem.row == settingTableViewHeader.users.count + 1)
+    {
+        if (settingTableViewHeader.showDeleteTip)
+        {
+            settingTableViewHeader.showDeleteTip = NO;
+        }
+        else
+        {
+            settingTableViewHeader.showDeleteTip = YES;
+        }
+        [settingTableViewHeader reloadData];
+    }
+
 }
 
 
@@ -363,22 +366,6 @@
 
 
 #pragma mark - setters&getters
-- (UICollectionView *)collectionView {
-    if (!_collectionView) {
-        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-        layout.minimumInteritemSpacing = 0;
-        [layout setScrollDirection:UICollectionViewScrollDirectionVertical];
-        _collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
-        UINib *professionCell = [UINib nibWithNibName:@"ChatSettingCollectionViewCell" bundle:nil];
-        [_collectionView registerNib:professionCell forCellWithReuseIdentifier:@"ChatSettingCollectionViewCell"];
-        _collectionView.backgroundColor = [ColorHandler colorFromHexRGB:@"DDDDDD"];
-        _collectionView.bounces = NO;
-        _collectionView.delegate = self;
-        _collectionView.dataSource = self;
-    }
-    
-    return _collectionView;
-}
 
 - (NSMutableArray *)dataSource {
     if (!_dataSource) {
