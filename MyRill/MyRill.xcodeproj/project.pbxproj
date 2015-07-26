@@ -80,9 +80,7 @@
 		2BE55A091B647324008CDB4B /* TaskOverviewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE55A071B647324008CDB4B /* TaskOverviewTableViewCell.xib */; };
 		2BE55A0E1B6483D2008CDB4B /* TaskListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE55A0D1B6483D2008CDB4B /* TaskListViewController.m */; };
 		2BE55A121B64843A008CDB4B /* TaskListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE55A101B64843A008CDB4B /* TaskListTableViewCell.m */; };
-		2BE55A131B64843A008CDB4B /* TaskListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE55A111B64843A008CDB4B /* TaskListTableViewCell.xib */; };
 		2BE55A161B64CF17008CDB4B /* AddTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE55A151B64CF17008CDB4B /* AddTaskViewController.m */; };
-		2BE55A181B64DF8F008CDB4B /* TaskOverviewHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE55A171B64DF8F008CDB4B /* TaskOverviewHeadView.xib */; };
 		2BE55A1F1B64E0BE008CDB4B /* testViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE55A1D1B64E0BE008CDB4B /* testViewController.m */; };
 		2BE55A201B64E0BE008CDB4B /* testViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE55A1E1B64E0BE008CDB4B /* testViewController.xib */; };
 		2BE55A221B64EE0C008CDB4B /* TaskOverviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE55A211B64EE0C008CDB4B /* TaskOverviewViewController.xib */; };
@@ -365,7 +363,6 @@
 		2BE55A111B64843A008CDB4B /* TaskListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskListTableViewCell.xib; sourceTree = "<group>"; };
 		2BE55A141B64CF17008CDB4B /* AddTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddTaskViewController.h; sourceTree = "<group>"; };
 		2BE55A151B64CF17008CDB4B /* AddTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddTaskViewController.m; sourceTree = "<group>"; };
-		2BE55A171B64DF8F008CDB4B /* TaskOverviewHeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskOverviewHeadView.xib; sourceTree = "<group>"; };
 		2BE55A1C1B64E0BE008CDB4B /* testViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testViewController.h; sourceTree = "<group>"; };
 		2BE55A1D1B64E0BE008CDB4B /* testViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testViewController.m; sourceTree = "<group>"; };
 		2BE55A1E1B64E0BE008CDB4B /* testViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = testViewController.xib; sourceTree = "<group>"; };
@@ -1047,7 +1044,6 @@
 				2BE55A0F1B64843A008CDB4B /* TaskListTableViewCell.h */,
 				2BE55A101B64843A008CDB4B /* TaskListTableViewCell.m */,
 				2BE55A111B64843A008CDB4B /* TaskListTableViewCell.xib */,
-				2BE55A171B64DF8F008CDB4B /* TaskOverviewHeadView.xib */,
 			);
 			name = Task;
 			sourceTree = "<group>";
@@ -1458,7 +1454,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2BE55A181B64DF8F008CDB4B /* TaskOverviewHeadView.xib in Resources */,
 				2BE8C22D1B4EB3A200858CEE /* AddProfessionViewController.xib in Resources */,
 				2B37E44D1B53967D00F671A1 /* ModifyProfessionViewController.xib in Resources */,
 				2BC8213B1B5C9FF70090E2C1 /* ShowQRCodeViewController.xib in Resources */,
