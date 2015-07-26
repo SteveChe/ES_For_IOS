@@ -14,9 +14,9 @@
 
 @end
 @implementation SignUpDataParse
--(void) signUpWithPhoneNum:(NSString *)phoneNum  password:(NSString *)password verificationCode:(NSString*) verificationCode
+-(void) signUpWithPhoneNum:(NSString *)phoneNum name:(NSString*)name password:(NSString *)password verificationCode:(NSString*) verificationCode
 {
-    [AFHttpTool signUpWithPhoneNum:phoneNum password:password verificationCode:verificationCode success:^(id response)
+    [AFHttpTool signUpWithPhoneNum:phoneNum userName:name password:password verificationCode:verificationCode success:^(id response)
      {
          NSDictionary* reponseDic = (NSDictionary*)response;
          NSNumber* errorCodeNum = [reponseDic valueForKey:NETWORK_ERROR_CODE];

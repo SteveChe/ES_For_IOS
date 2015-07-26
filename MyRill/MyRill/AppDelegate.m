@@ -63,6 +63,10 @@
                                                  name:RCKitDispatchMessageNotification
                                                object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(didReceiveErrorMessage:)
+                                                 name:@"NOTIFICATION_ERROR_MESSAGE"
+                                               object:nil];
     return YES;
 }
 
@@ -146,12 +150,6 @@
 
 - (void)application:(UIApplication *)application
     didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-//    NSString* deviceTokenStr = [[[[deviceToken description]
-//                                  stringByReplacingOccurrencesOfString: @"<" withString: @""]
-//                                 stringByReplacingOccurrencesOfString: @">" withString: @""]
-//                                stringByReplacingOccurrencesOfString: @" " withString: @""];
-    
-//    [[BMPushModel getInstance] registPushWithToken:deviceTokenStr];
     NSString *token = [[[[deviceToken description]
                          stringByReplacingOccurrencesOfString:@"<" withString:@""]
                         stringByReplacingOccurrencesOfString:@">" withString:@""]
@@ -185,5 +183,21 @@
 
 }
 
+-(void)didReceiveErrorMessage:(id)notification
+{
+    NSString* errorMessage = [notification object];
+    if (errorMessage == nil || [errorMessage isEqualToString:[NSNull null]] ||
+        [errorMessage length] <= 0)
+    {
+        return;
+    }
+    if ([errorMessage isEqualToString:@"403"])
+    {
+        LoginViewController *loginVC = [[LoginViewController alloc] init];
+        loginVC.eStatus = e_login_status_invalid;
+        ESNavigationController *nav = [[ESNavigationController alloc] initWithRootViewController:loginVC];
+        [self changeWindow:nav];
+    }
+}
 
 @end

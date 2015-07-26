@@ -48,9 +48,13 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    if (self.isStatus) {
+    if (e_login_status_logout ==  self.eStatus) {
         [self showTips:@"注销成功!" mode:MRProgressOverlayViewModeCheckmark isDismiss:YES];
     }
+    else if (e_login_status_invalid ==  self.eStatus) {
+        [self showTips:@"登录失效!" mode:MRProgressOverlayViewModeCheckmark isDismiss:YES];
+    }
+
 }
 
 #pragma mark - LoginDataDelegate

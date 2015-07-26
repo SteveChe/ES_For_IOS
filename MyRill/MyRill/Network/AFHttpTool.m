@@ -60,6 +60,7 @@
              } failure:^(AFHTTPRequestOperation* operation, NSError* error) {
                  if (failure) {
                      failure(error);
+                     [AFHttpTool parseErrorType:error];
                  }
              }];
             
@@ -89,6 +90,7 @@
               } failure:^(AFHTTPRequestOperation* operation, NSError* error) {
                   if (failure) {
                       failure(error);
+                      [AFHttpTool parseErrorType:error];
                   }
               }];
         }
@@ -100,12 +102,13 @@
 
 //sign-up
 +(void) signUpWithPhoneNum:(NSString *) phoneNum
+                  userName:(NSString*) userName
                   password:(NSString *) password
           verificationCode:(NSString*) verificationCode
                    success:(void (^)(id response))success
                    failure:(void (^)(NSError* err))failure
 {
-    NSDictionary *params = @{@"phone_number":phoneNum,@"password":password,@"verification_code":verificationCode};
+    NSDictionary *params = @{@"phone_number":phoneNum,@"username":userName,@"password":password,@"verification_code":verificationCode};
     [AFHttpTool requestWithMethod:RequestMethodTypePost
                               url:@"api/accounts/sign-up/.json"
                            params:params
@@ -415,6 +418,30 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
     }
           success:success
           failure:failure];
+}
+
++ (void)parseErrorType:(NSError*) error
+{
+    if (error == nil || [error isEqual:[NSNull null]])
+    {
+        return;
+    }
+    NSDictionary* errUserInfo = error.userInfo ;
+    
+    NSString* localiedDescription = [errUserInfo objectForKey:@"NSLocalizedDescription"];
+    if (localiedDescription == nil || [localiedDescription isEqual:[NSNull null]])
+    {
+        return;
+    }
+    NSRange range = [localiedDescription rangeOfString:@"403"];
+//    int location = range.location;
+    NSUInteger length = range.length;
+    if (length > 0)
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"NOTIFICATION_ERROR_MESSAGE" object:@"403"];
+    }
+
+
 }
 
 

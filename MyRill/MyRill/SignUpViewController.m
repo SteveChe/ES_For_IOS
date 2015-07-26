@@ -55,8 +55,7 @@
 }
 
 - (IBAction)signUpBtnOnClicked:(UIButton *)sender {
-    [_signUpDataParse signUpWithPhoneNum:self.phoneNumTxtField.text
-                                password:self.pwdTxtField.text
+    [_signUpDataParse signUpWithPhoneNum:self.phoneNumTxtField.text name:self.usernameTxtField.text password:self.pwdTxtField.text
                         verificationCode:self.captchasTxtField.text];
 }
 
