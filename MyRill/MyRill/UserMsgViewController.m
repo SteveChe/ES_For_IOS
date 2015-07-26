@@ -19,8 +19,9 @@
 #import "ESUserDetailInfo.h"
 #import "GetContactDetailDataParse.h"
 #import "ShowQRCodeViewController.h"
+#import "UIImageView+WebCache.h"
 
-@interface UserMsgViewController () <LogoutDataDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ContactDetailDataDelegate>
+@interface UserMsgViewController () <LogoutDataDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ContactDetailDataDelegate, ChangeUserImageDataDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIImageView *userIcon;
@@ -61,64 +62,63 @@
     self.UserNameLbl.text = [userDefaultes stringForKey:@"UserName"];
     self.UserEnterpriseLbl.text = [userDefaultes stringForKey:@"UserEnterprise"];
     self.UserPositionLbl.text = [userDefaultes stringForKey:@"UserPosition"];
+
+    //更新头像缓存的url，若url有变化
+    [self.userIcon sd_setImageWithURL:[NSURL URLWithString:[userDefaultes stringForKey:@"UserImageURL"]] placeholderImage:[UIImage imageNamed:@"icon.png"]];
 }
 
-#pragma mark - UIImagePickerControllerDelegate
+
+#pragma mark - ChangeUserImageDataDelegate methods
+- (void)changeUserImageSuccess:(NSString *)avatar {
+    //更新头像缓存的url
+    NSURL *url = [NSURL URLWithString:avatar];
+    [self.userIcon sd_setImageWithURL:url placeholderImage:nil];
+    
+    //将新的url存储到NSUserDefaults本地中
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:avatar forKey:@"UserImageURL"];
+    [userDefaults synchronize];
+    //[self.tabBarController.tabBar.items makeObjectsPerformSelector:@selector(setEnabled:) withObject:@YES];
+    [self dismissProgress];
+    
+}
+
+#pragma mark - UIImagePickerControllerDelegate methods
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+
+//    self.tabBarController.tabBarItem.enabled = NO;
+//    [self.tabBarController.tabBar.items makeObjectsPerformSelector:@selector(setEnabled:) withObject:@NO];
+    
     NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
     
     //当选择的类型是图片
     if ([type isEqualToString:@"public.image"])
     {
+        //获取编辑框内部的图片，作为上传对象(上传图片不歪了也就)
+        UIImage *image = [info objectForKey:@"UIImagePickerControllerEditedImage"];
         //先把图片转成NSData
-        UIImage *image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
-        NSLog(@")))))) %ld",(long)image.imageOrientation);
+        UIImage *img = [self scaleToSize:image size:CGSizeMake(300, 300)];
         NSData *data;
-        if (UIImagePNGRepresentation(image) == nil)
+        if (UIImagePNGRepresentation(img) == nil)
         {
-            data = UIImageJPEGRepresentation(image, 1.0);
+            data = UIImageJPEGRepresentation(img, 1.0);
         }
         else
         {
-            data = UIImagePNGRepresentation(image);
+            data = UIImagePNGRepresentation(img);
         }
         
-        [self.changeUserImageDP changeUseImageWithId:@"2"
+        [self.changeUserImageDP changeUseImageWithId:self.userId
                                                 data:data];
-//        //图片保存的路径
-//        //这里将图片放在沙盒的documents文件夹中
-//        NSString * DocumentsPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
-//        
-//        //文件管理器
-//        NSFileManager *fileManager = [NSFileManager defaultManager];
-//        
-//        //把刚刚图片转换的data对象拷贝至沙盒中 并保存为image.png
-//        [fileManager createDirectoryAtPath:DocumentsPath withIntermediateDirectories:YES attributes:nil error:nil];
-//        [fileManager createFileAtPath:[DocumentsPath stringByAppendingString:@"/userIcon.png"] contents:data attributes:nil];
-//        
-//        //得到选择后沙盒中图片的完整路径
-//        NSString *filePath = [[NSString alloc]initWithFormat:@"%@%@",DocumentsPath, @"/userIcon.png"];
-//        NSLog(@"--------- %@",filePath);
-//        self.userIcon.image = [UIImage imageWithContentsOfFile:filePath];
         //关闭相册界面
         [picker dismissViewControllerAnimated:YES completion:nil];
-        
-        //创建一个选择后图片的小图标放在下方
-        //类似微薄选择图后的效果
-//        UIImageView *smallimage = [[UIImageView alloc] initWithFrame:
-//                                    CGRectMake(50, 120, 40, 40)];
-//        
-//        smallimage.image = image;
-//        //加在视图中
-//        [self.view addSubview:smallimage];
-        
-    } 
-    
+    }
+//    MRActivityIndicatorView
+    [self showTips:@"正在上传..." mode:MRProgressOverlayViewModeIndeterminateSmallDefault isDismiss:NO];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-    NSLog(@"您取消了选择图片");
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -128,6 +128,7 @@
     
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     LoginViewController *loginVC = [[LoginViewController alloc] init];
+    loginVC.isStatus = YES;
     ESNavigationController *nav = [[ESNavigationController alloc] initWithRootViewController:loginVC];
     [appDelegate changeWindow:nav];
 }
@@ -184,6 +185,12 @@
                                                           picker.delegate = self;  
                                                           picker.allowsEditing = YES;//设置可编辑  
                                                           picker.sourceType = sourceType;
+                                                          if([[[UIDevice
+                                                                currentDevice] systemVersion] floatValue]>=8.0) {
+                                                              
+                                                              self.modalPresentationStyle=UIModalPresentationOverCurrentContext;
+                                                              
+                                                          }
                                                           [self presentViewController:picker animated:YES completion:nil];//进入照相界面
                                                       }]];
     [alertController addAction:[UIAlertAction actionWithTitle:@"从相册选取"
@@ -199,6 +206,12 @@
                                                           }  
                                                           pickerImage.delegate = self;  
                                                           pickerImage.allowsEditing = YES;
+                                                          if([[[UIDevice
+                                                                currentDevice] systemVersion] floatValue]>=8.0) {
+                                                              
+                                                              self.modalPresentationStyle=UIModalPresentationOverCurrentContext;
+                                                              
+                                                          }
                                                           [self presentViewController:pickerImage animated:YES completion:nil];//进入照相界面
                                                       }]];
     [alertController addAction:[UIAlertAction actionWithTitle:@"取消"
@@ -223,7 +236,7 @@
 #pragma mark - private methods
 - (void)showTips:(NSString *)tip mode:(MRProgressOverlayViewMode)mode isDismiss:(BOOL)isDismiss
 {
-    [self.view addSubview:self.progress];
+    [self.tabBarController.view addSubview:self.progress];
     [self.progress show:YES];
     self.progress.mode = mode;
     self.progress.titleLabelText = tip;
@@ -241,6 +254,21 @@
     }
 }
 
+//缩小头像的尺寸
+- (UIImage *)scaleToSize:(UIImage *)img size:(CGSize)size{
+    // 创建一个bitmap的context
+    // 并把它设置成为当前正在使用的context
+    UIGraphicsBeginImageContext(size);
+    // 绘制改变大小的图片
+    [img drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    // 从当前context中创建一个改变大小后的图片
+    UIImage* scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+    // 使当前的context出堆栈
+    UIGraphicsEndImageContext();
+    // 返回新的改变大小后的图片
+    return scaledImage;
+}
+
 #pragma mark - setters&getters
 - (void)setContentView:(UIView *)contentView {
     _contentView = contentView;
@@ -255,13 +283,7 @@
     _userIcon.clipsToBounds = YES;
     _userIcon.layer.cornerRadius = 33.f;
     
-    NSString *documentsPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
-    
-//    if (documentsPath ) {
-//        <#statements#>
-//    }
-    NSString *filePath = [[NSString alloc]initWithFormat:@"%@%@",documentsPath, @"/userIcon.png"];
-    _userIcon.image = [UIImage imageWithContentsOfFile:filePath];
+   
 }
 
 - (void)setLogoutBtn:(UIButton *)logoutBtn {
@@ -290,6 +312,7 @@
 - (ChangeUserImageDataParse *)changeUserImageDP {
     if (!_changeUserImageDP) {
         _changeUserImageDP = [[ChangeUserImageDataParse alloc] init];
+        _changeUserImageDP.delegate = self;
     }
     
     return _changeUserImageDP;

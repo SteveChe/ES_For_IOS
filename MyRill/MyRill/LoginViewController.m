@@ -15,6 +15,7 @@
 #import "ESMenuViewController.h"
 #import "ResetPwdViewController.h"
 #import "ESUserInfo.h"
+#import "MRProgress.h"
 
 @interface LoginViewController ()
 
@@ -25,6 +26,7 @@
 @property (nonatomic, weak) IBOutlet UIButton *loginBtn;
 @property (nonatomic, strong) IBOutlet UIButton *signUpBtn;
 @property (nonatomic, strong) LoginDataParse* loginDataParse;
+@property (nonatomic, strong) MRProgressOverlayView *progress;
 @end
 
 @implementation LoginViewController
@@ -43,6 +45,14 @@
     _loginDataParse.delegate = self;
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    if (self.isStatus) {
+        [self showTips:@"注销成功!" mode:MRProgressOverlayViewModeCheckmark isDismiss:YES];
+    }
+}
+
 #pragma mark - LoginDataDelegate
 - (void)loginSucceed:(ESUserInfo *)userInfo
 {
@@ -58,7 +68,7 @@
     [userDefaults setObject:userInfo.phoneNumber forKey:@"PhoneNumber"];
     [userDefaults setObject:userInfo.enterprise forKey:@"Enterprise"];
     [userDefaults setObject:userInfo.position forKey:@"Position"];
-    [userDefaults setObject:userInfo.portraitUri forKey:@"UserImageURL"];
+    [userDefaults setObject:[@"http://120.25.249.144" stringByAppendingString:userInfo.portraitUri] forKey:@"UserImageURL"];
     [userDefaults synchronize];
 }
 -(void)changeToESMenuView
@@ -98,6 +108,27 @@
     [self.passwordTxtField resignFirstResponder];
 }
 
+#pragma mark - private methods
+- (void)showTips:(NSString *)tip mode:(MRProgressOverlayViewMode)mode isDismiss:(BOOL)isDismiss
+{
+    [self.view addSubview:self.progress];
+    [self.progress show:YES];
+    self.progress.mode = mode;
+    self.progress.titleLabelText = tip;
+    if (isDismiss)
+    {
+        [self performSelector:@selector(dismissProgress) withObject:nil afterDelay:1.8];
+    }
+}
+
+- (void)dismissProgress
+{
+    if (self.progress)
+    {
+        [self.progress dismiss:YES];
+    }
+}
+
 #pragma mark - setters&getters
 -(void)setTextFieldHoldView:(UIView *)textFieldHoldView {
     _textFieldHoldView = textFieldHoldView;
@@ -110,6 +141,14 @@
     _loginBtn = loginBtn;
     
     _loginBtn.layer.cornerRadius = 20.0;
+}
+
+- (MRProgressOverlayView *)progress {
+    if (!_progress) {
+        _progress = [[MRProgressOverlayView alloc] init];
+    }
+    
+    return _progress;
 }
 
 @end

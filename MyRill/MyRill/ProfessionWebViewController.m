@@ -22,7 +22,6 @@
     // Do any additional setup after loading the view.
     
     [self.view addSubview:self.professionWeb];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {

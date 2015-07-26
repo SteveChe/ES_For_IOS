@@ -61,7 +61,7 @@
          
      }
                        failure:^(NSError* err) {
-                           if ([self.delegate respondsToSelector:@selector(changePasswordFailed)])
+                           if ([self.delegate respondsToSelector:@selector(changePasswordFailed:)])
                            {
                                [self.delegate changePasswordFailed:nil];
                            }
