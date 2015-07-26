@@ -16,7 +16,9 @@
 #import "RCDAddFriendViewController.h"
 #import "CustomShowMessage.h"
 #import "RCDPhoneAddressBookViewController.h"
-#import "RCDAddressBookQRCodeViewController.h"
+//#import "RCDAddressBookQRCodeViewController.h"
+#import "QRCodeViewController.h"
+
 
 @interface RCDSearchFriendViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,UISearchControllerDelegate,UISearchDisplayDelegate>
 
@@ -153,7 +155,7 @@
                 break;
             case 1:
             {
-                RCDAddressBookQRCodeViewController* addressBookQRCodeViewController = [[RCDAddressBookQRCodeViewController alloc] init];
+                QRCodeViewController* addressBookQRCodeViewController = [[QRCodeViewController alloc] init];
                 [self.navigationController pushViewController:addressBookQRCodeViewController animated:YES];
             }
                 break;

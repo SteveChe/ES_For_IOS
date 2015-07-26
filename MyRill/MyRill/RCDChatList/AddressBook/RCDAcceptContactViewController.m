@@ -78,7 +78,7 @@
     {
         cell.title.text = userInfo.userName;
         cell.subtitle.text = [NSString stringWithFormat:@"请求您添加为联系人"];;
-        [cell.ivAva sd_setImageWithURL:[NSURL URLWithString:userInfo.portraitUri] placeholderImage:[UIImage imageNamed:@"icon"]];
+        [cell.ivAva sd_setImageWithURL:[NSURL URLWithString:userInfo.portraitUri] placeholderImage:[UIImage imageNamed:@"头像_100"]];
         if([userInfo.type isEqualToString:@"contact"])
         {
             [cell.addButton setBackgroundImage:[UIImage imageNamed:@"ren_tianjia_chenggong"] forState:UIControlStateNormal];
