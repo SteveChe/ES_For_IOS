@@ -11,7 +11,8 @@
 #import "AddContactDataParse.h"
 @interface RCDAddFriendViewController : UIViewController<AddContactDelegate>
 
-@property (nonatomic,strong) RCUserInfo *targetUserInfo;
+//@property (nonatomic,strong) RCUserInfo *targetUserInfo;
+@property (nonatomic,strong) NSString * strUserId;
 
 @property (weak, nonatomic) IBOutlet UITextField *addFriendTextField;
 

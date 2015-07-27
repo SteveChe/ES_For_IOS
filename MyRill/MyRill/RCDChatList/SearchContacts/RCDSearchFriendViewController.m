@@ -140,7 +140,7 @@
         userInfo.name = user.userName;
         userInfo.portraitUri = user.portraitUri;
         RCDAddFriendViewController *addViewController = [[RCDAddFriendViewController alloc] init];
-        addViewController.targetUserInfo = userInfo;
+        addViewController.strUserId = userInfo.userId;
         [self.navigationController pushViewController:addViewController animated:YES];
     }
     else

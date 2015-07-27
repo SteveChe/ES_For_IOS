@@ -56,7 +56,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+    self.tabBarController.tabBar.hidden = NO;
+
     NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
     self.userId = [userDefaultes stringForKey:@"UserId"];
     self.UserNameLbl.text = [userDefaultes stringForKey:@"UserName"];

@@ -9,6 +9,7 @@
 #import "QRCodeViewController.h"
 #import <AVFoundation/AVFoundation.h>
 #import "ColorHandler.h"
+#import "RCDAddFriendViewController.h"
 
 @interface QRCodeViewController ()<AVCaptureMetadataOutputObjectsDelegate>
 
@@ -141,6 +142,37 @@
     self.navigationController.navigationBar.barTintColor = [ColorHandler colorFromHexRGB:@"FF5454"];
 }
 
+-(void)qrCodeStringParse:(NSString*)qrCodeString
+{
+    NSRange range1 = [qrCodeString rangeOfString:@"add_user_contact"];
+    if (range1.length > 0)
+    {
+        NSRange rangeUserId = [qrCodeString rangeOfString:@"user_id="];
+        if (rangeUserId.length > 0)
+        {
+//            int nstrLength = [qrCodeString length];
+            NSString *strUserId = [qrCodeString substringFromIndex:rangeUserId.location+8];
+//            NSLog(@"strUserId = %@",strUserId);
+            RCDAddFriendViewController *addViewController = [[RCDAddFriendViewController alloc] init];
+            addViewController.strUserId = strUserId;
+
+            self.navigationController.navigationBar.barTintColor = [ColorHandler colorFromHexRGB:@"FF5454"];
+            UITabBarController *tabbarVC = self.navigationController.viewControllers[0];
+            [self.navigationController popToViewController:tabbarVC animated:YES];
+            [tabbarVC.navigationController pushViewController:addViewController animated:YES];
+
+        }
+        return;
+    }
+    NSRange range2 = [qrCodeString rangeOfString:@"add_enterprise_contact"];
+    if (range2.length > 0)
+    {
+        
+        return;
+    }
+
+}
+
 #pragma mark AVCaptureMetadataOutputObjectsDelegate
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:( AVCaptureConnection *)connection
 {
@@ -154,8 +186,8 @@
         AVMetadataMachineReadableCodeObject *metadataObject = [metadataObjects objectAtIndex:0];
         stringValue = metadataObject.stringValue;
         NSLog(@"%@",stringValue);
-        
-        [self.navigationController popViewControllerAnimated:YES];
+        [self qrCodeStringParse:stringValue];
+//        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 
