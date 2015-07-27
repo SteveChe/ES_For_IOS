@@ -7,21 +7,24 @@
 //
 
 #import "RCDAddressBookDetailViewController.h"
+#import "RCDAddressBookDetailTableViewCell.h"
 #import "ESUserInfo.h"
 #import "ESUserDetailInfo.h"
 #import "CustomShowMessage.h"
 #import "UIImageView+WebCache.h"
 #import "ChatViewController.h"
+#import "UIImageView+WebCache.h"
+#import "ShowQRCodeViewController.h"
 
 @interface RCDAddressBookDetailViewController ()
 @property (nonatomic,strong) GetContactDetailDataParse* getContactDetailDataParse;
-
+@property (nonatomic,strong) IBOutlet UITableView* tableView;
 @property (nonatomic,strong) IBOutlet UIImageView* portraitImageView;
 @property (nonatomic,strong) IBOutlet UILabel* titleLabel;
 @property (nonatomic,strong) IBOutlet UILabel* phoneNumberLabel;
 @property (nonatomic,strong) IBOutlet UILabel* descriptionDetailLabel;
-@property (nonatomic,strong) IBOutlet UIImageView* qrCodeImageView;
-@property (nonatomic,strong) IBOutlet UIImageView* enterpriseQRImageView;
+//@property (nonatomic,strong) IBOutlet UIImageView* qrCodeImageView;
+//@property (nonatomic,strong) IBOutlet UIImageView* enterpriseQRImageView;
 @property (nonatomic,strong) ESUserDetailInfo* userDetailInfo;
 @property (nonatomic,weak) IBOutlet UIButton* smsButton;
 @property (nonatomic,weak) IBOutlet UIButton*callButton;
@@ -42,6 +45,9 @@
     _getContactDetailDataParse = [[GetContactDetailDataParse alloc] init];
     _getContactDetailDataParse.delegate = self;
     [self initContactDetail];
+    UINib *rcdCellNib = [UINib nibWithNibName:@"RCDAddressBookDetailTableViewCell" bundle:nil];
+    [self.tableView registerNib:rcdCellNib forCellReuseIdentifier:@"RCDAddressBookDetailTableViewCell"];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -84,15 +90,116 @@
     _portraitImageView.layer.cornerRadius = 18.f;
 
     [_portraitImageView sd_setImageWithURL:[NSURL URLWithString:userDetailInfo.portraitUri] placeholderImage:[UIImage imageNamed:@"icon"]];
-    [_qrCodeImageView sd_setImageWithURL:[NSURL URLWithString:userDetailInfo.qrcode] placeholderImage:[UIImage imageNamed:@"icon"]];
-    [_enterpriseQRImageView sd_setImageWithURL:[NSURL URLWithString:userDetailInfo.enterprise_qrcode] placeholderImage:[UIImage imageNamed:@"icon"]];
-    
+//    [_qrCodeImageView sd_setImageWithURL:[NSURL URLWithString:userDetailInfo.qrcode] placeholderImage:[UIImage imageNamed:@"icon"]];
+//    [_enterpriseQRImageView sd_setImageWithURL:[NSURL URLWithString:userDetailInfo.enterprise_qrcode] placeholderImage:[UIImage imageNamed:@"icon"]];
+    [self.tableView reloadData];
 }
 - (void)getContactDetailFailed:(NSString*)errorMessage
 {
     [[CustomShowMessage getInstance] showNotificationMessage:errorMessage];
 }
 
+#pragma mark -- UITableViewDataSource
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    if(_userDetailInfo == nil)
+        return 0;
+
+    if(section == 0)
+    {
+        return 1;
+    }
+    
+    return 2;
+}
+
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    if(_userDetailInfo == nil)
+        return 0;
+
+    return 2;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if(_userDetailInfo == nil)
+        return nil;
+
+    return @" ";
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(_userDetailInfo == nil)
+        return nil;
+    static NSString *cellReuseIdentifier = @"RCDAddressBookDetailTableViewCell";
+    ;
+    RCDAddressBookDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellReuseIdentifier forIndexPath:indexPath];
+
+    if(indexPath.section == 0)
+    {
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.qrCodeImage.hidden = YES;
+        cell.titleLabel.text = @"标签选择";
+
+    }
+    else if (indexPath.section == 1)
+    {
+        if (indexPath.row == 0)
+        {
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.titleLabel.text = @"企业二维码";
+            cell.qrCodeImage.hidden = NO;
+            [cell.qrCodeImage setImage:[UIImage imageNamed:@"二维码"]];
+        }
+        else if(indexPath.row == 1)
+        {
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.titleLabel.text = @"个人二维码";
+            cell.qrCodeImage.hidden = NO;
+            [cell.qrCodeImage setImage:[UIImage imageNamed:@"二维码"]];
+        }
+
+    }
+    
+    return cell;
+}
+
+#pragma mark --UITableViewDelegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 55.0f;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.section == 0)
+    {
+        NSLog(@"跳转标签页面");
+    }
+    else if (indexPath.section == 1)
+    {
+        if (indexPath.row == 0)
+        {
+            ShowQRCodeViewController* showQRCodeVC = [[ShowQRCodeViewController alloc] init];
+            showQRCodeVC.qrCodeTitle = @"企业二维码";
+            showQRCodeVC.imageUrl = _userDetailInfo.enterprise_qrcode;
+            [self.navigationController pushViewController:showQRCodeVC animated:YES];
+
+        }
+        else if(indexPath.row == 1)
+        {
+            ShowQRCodeViewController* showQRCodeVC = [[ShowQRCodeViewController alloc] init];
+            showQRCodeVC.qrCodeTitle = @"个人二维码";
+            showQRCodeVC.imageUrl = _userDetailInfo.qrcode;
+            [self.navigationController pushViewController:showQRCodeVC animated:YES];
+
+        }
+        
+    }
+
+}
 
 
 #pragma mark - Button Event
