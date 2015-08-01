@@ -11,7 +11,7 @@
 #import "GetContactDetailDataParse.h"
 @class ESUserInfo;
 
-@interface RCDAddressBookDetailViewController : ESViewController <ContactDetailDataDelegate>
+@interface RCDAddressBookDetailViewController : UIViewController <ContactDetailDataDelegate>
 
 @property (nonatomic,strong)NSString* userId;
 @end

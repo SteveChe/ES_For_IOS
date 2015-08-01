@@ -57,7 +57,9 @@
 -(void)addContactSucceed
 {
     [[CustomShowMessage getInstance] showNotificationMessage:@"已经发送"];
-//    [self.navigationController popViewControllerAnimated:YES];
+    [self performSelector:@selector(backToLastPage)
+               withObject:nil
+               afterDelay:1];
 }
 
 -(void)addContactFailed:(NSString*)errorMessage
@@ -74,12 +76,12 @@
  */
 -(void)rightBarButtonItemPressed:(id)sender
 {
-    if (_targetUserInfo == nil || _targetUserInfo.userId == nil
-        ||[_targetUserInfo.userId length] <= 0)
+    if (_strUserId == nil || _strUserId == nil
+        ||[_strUserId length] <= 0)
     {
         return;
     }
-    [_addContactDataParse addContact:_targetUserInfo.userId];
+    [_addContactDataParse addContact:_strUserId];
 }
 
 -(void)backToLastPage
