@@ -854,6 +854,10 @@
 				F23059C21B56AD65004599FA /* GetContactDetailDataParse.m */,
 				2BC821341B5BE6B60090E2C1 /* ChangeUserImageDataParse.h */,
 				2BC821351B5BE6B60090E2C1 /* ChangeUserImageDataParse.m */,
+				2BEBBD811B665849008BE7C4 /* GetTaskDashboardDataParse.h */,
+				2BEBBD821B665849008BE7C4 /* GetTaskDashboardDataParse.m */,
+				2BEBBD8A1B67AFA7008BE7C4 /* GetTaskListDataParse.h */,
+				2BEBBD8B1B67AFA7008BE7C4 /* GetTaskListDataParse.m */,
 				F23630BB1B68F61800A12F63 /* TagDataParse.h */,
 				F23630BC1B68F61800A12F63 /* TagDataParse.m */,
 			);
@@ -1137,6 +1141,10 @@
 				F23059C51B56ADE3004599FA /* ESUserDetailInfo.m */,
 				F234617A1B5AB49E00C88FAC /* ESEnterpriseInfo.h */,
 				F234617B1B5AB49E00C88FAC /* ESEnterpriseInfo.m */,
+				2BEBBD841B665BCB008BE7C4 /* ESTaskDashboard.h */,
+				2BEBBD851B665BCB008BE7C4 /* ESTaskDashboard.m */,
+				2BEBBD871B6661FD008BE7C4 /* ESTaskOriginatorInfo.h */,
+				2BEBBD881B6661FD008BE7C4 /* ESTaskOriginatorInfo.m */,
 				F23630B81B67C15200A12F63 /* ESTag.h */,
 				F23630B91B67C15200A12F63 /* ESTag.m */,
 			);
