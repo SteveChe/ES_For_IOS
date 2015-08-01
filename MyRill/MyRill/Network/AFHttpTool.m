@@ -444,5 +444,15 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
 
 }
 
+//获取人的标签
++ (void)getTagByUserid:(NSString*)userId success:(void (^)(id response))success failure:(void (^)(NSError *error))failure
+{
+    NSString* strURL = [NSString stringWithFormat:@"/api/accounts/users/%@/tags/.json",userId];
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet
+                              url:strURL
+                           params:nil
+                          success:success failure:failure];
+}
+
 
 @end

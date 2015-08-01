@@ -159,9 +159,15 @@
 		F23630851B66668900A12F63 /* RCDAddressBookDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F23630831B66668900A12F63 /* RCDAddressBookDetailViewController.xib */; };
 		F23630891B6673B400A12F63 /* RCDAddressBookDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F23630871B6673B400A12F63 /* RCDAddressBookDetailTableViewCell.m */; };
 		F236308A1B6673B400A12F63 /* RCDAddressBookDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F23630881B6673B400A12F63 /* RCDAddressBookDetailTableViewCell.xib */; };
+		F236308D1B67A9AB00A12F63 /* ESTagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F236308C1B67A9AB00A12F63 /* ESTagViewController.m */; };
+		F23630BA1B67C15200A12F63 /* ESTag.m in Sources */ = {isa = PBXBuildFile; fileRef = F23630B91B67C15200A12F63 /* ESTag.m */; };
+		F23630BD1B68F61800A12F63 /* TagDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F23630BC1B68F61800A12F63 /* TagDataParse.m */; };
 		F24787721B2D5CE700EC266B /* ChangePwdDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F24787711B2D5CE700EC266B /* ChangePwdDataParse.m */; };
 		F24787751B2D775E00EC266B /* SignUpDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F24787741B2D775E00EC266B /* SignUpDataParse.m */; };
 		F250F2EA1B2471CD000AD021 /* AFHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = F250F2E91B2471CD000AD021 /* AFHttpTool.m */; };
+		F256CB6D1B6BBCC4009478C2 /* RCDDiscussSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F256CB6C1B6BBCC4009478C2 /* RCDDiscussSettingCell.m */; };
+		F256CB701B6BC397009478C2 /* RCDUpdateNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F256CB6F1B6BC397009478C2 /* RCDUpdateNameViewController.m */; };
+		F256CB721B6BD565009478C2 /* RCDUpdateNameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F256CB711B6BD565009478C2 /* RCDUpdateNameViewController.xib */; };
 		F277ADFB1B2DBE97006E42CB /* CustomShowMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = F277ADFA1B2DBE97006E42CB /* CustomShowMessage.m */; };
 		F277ADFE1B2DC046006E42CB /* CustomMessageBox.m in Sources */ = {isa = PBXBuildFile; fileRef = F277ADFD1B2DC046006E42CB /* CustomMessageBox.m */; };
 		F277AE011B2DC146006E42CB /* DeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F277AE001B2DC146006E42CB /* DeviceInfo.m */; };
@@ -511,6 +517,12 @@
 		F23630861B6673B400A12F63 /* RCDAddressBookDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCDAddressBookDetailTableViewCell.h; path = RCDChatList/AddressBook/RCDAddressBookDetailTableViewCell.h; sourceTree = "<group>"; };
 		F23630871B6673B400A12F63 /* RCDAddressBookDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RCDAddressBookDetailTableViewCell.m; path = RCDChatList/AddressBook/RCDAddressBookDetailTableViewCell.m; sourceTree = "<group>"; };
 		F23630881B6673B400A12F63 /* RCDAddressBookDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RCDAddressBookDetailTableViewCell.xib; path = RCDChatList/AddressBook/RCDAddressBookDetailTableViewCell.xib; sourceTree = "<group>"; };
+		F236308B1B67A9AB00A12F63 /* ESTagViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ESTagViewController.h; path = RCDChatList/AddressBook/ESTagViewController.h; sourceTree = "<group>"; };
+		F236308C1B67A9AB00A12F63 /* ESTagViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ESTagViewController.m; path = RCDChatList/AddressBook/ESTagViewController.m; sourceTree = "<group>"; };
+		F23630B81B67C15200A12F63 /* ESTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESTag.h; sourceTree = "<group>"; };
+		F23630B91B67C15200A12F63 /* ESTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESTag.m; sourceTree = "<group>"; };
+		F23630BB1B68F61800A12F63 /* TagDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagDataParse.h; sourceTree = "<group>"; };
+		F23630BC1B68F61800A12F63 /* TagDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagDataParse.m; sourceTree = "<group>"; };
 		F247876C1B2BC3CE00EC266B /* DataParseDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataParseDefine.h; sourceTree = "<group>"; };
 		F24787701B2D5CE700EC266B /* ChangePwdDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePwdDataParse.h; sourceTree = "<group>"; };
 		F24787711B2D5CE700EC266B /* ChangePwdDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePwdDataParse.m; sourceTree = "<group>"; };
@@ -518,6 +530,11 @@
 		F24787741B2D775E00EC266B /* SignUpDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpDataParse.m; sourceTree = "<group>"; };
 		F250F2E81B2471CD000AD021 /* AFHttpTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHttpTool.h; path = Network/AFHttpTool.h; sourceTree = "<group>"; };
 		F250F2E91B2471CD000AD021 /* AFHttpTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFHttpTool.m; path = Network/AFHttpTool.m; sourceTree = "<group>"; };
+		F256CB6B1B6BBCC4009478C2 /* RCDDiscussSettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCDDiscussSettingCell.h; path = RCDChatList/SettingViewController/RCDDiscussSettingCell.h; sourceTree = "<group>"; };
+		F256CB6C1B6BBCC4009478C2 /* RCDDiscussSettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RCDDiscussSettingCell.m; path = RCDChatList/SettingViewController/RCDDiscussSettingCell.m; sourceTree = "<group>"; };
+		F256CB6E1B6BC397009478C2 /* RCDUpdateNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCDUpdateNameViewController.h; path = RCDChatList/SettingViewController/RCDUpdateNameViewController.h; sourceTree = "<group>"; };
+		F256CB6F1B6BC397009478C2 /* RCDUpdateNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RCDUpdateNameViewController.m; path = RCDChatList/SettingViewController/RCDUpdateNameViewController.m; sourceTree = "<group>"; };
+		F256CB711B6BD565009478C2 /* RCDUpdateNameViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RCDUpdateNameViewController.xib; path = RCDChatList/SettingViewController/RCDUpdateNameViewController.xib; sourceTree = "<group>"; };
 		F277ADF91B2DBE97006E42CB /* CustomShowMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomShowMessage.h; path = Utilities/common/CustomShowMessage.h; sourceTree = "<group>"; };
 		F277ADFA1B2DBE97006E42CB /* CustomShowMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomShowMessage.m; path = Utilities/common/CustomShowMessage.m; sourceTree = "<group>"; };
 		F277ADFC1B2DC046006E42CB /* CustomMessageBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomMessageBox.h; path = Utilities/common/CustomMessageBox.h; sourceTree = "<group>"; };
@@ -825,6 +842,8 @@
 				F23059C21B56AD65004599FA /* GetContactDetailDataParse.m */,
 				2BC821341B5BE6B60090E2C1 /* ChangeUserImageDataParse.h */,
 				2BC821351B5BE6B60090E2C1 /* ChangeUserImageDataParse.m */,
+				F23630BB1B68F61800A12F63 /* TagDataParse.h */,
+				F23630BC1B68F61800A12F63 /* TagDataParse.m */,
 			);
 			name = DataDrive;
 			sourceTree = "<group>";
@@ -1078,6 +1097,8 @@
 				F23630861B6673B400A12F63 /* RCDAddressBookDetailTableViewCell.h */,
 				F23630871B6673B400A12F63 /* RCDAddressBookDetailTableViewCell.m */,
 				F23630881B6673B400A12F63 /* RCDAddressBookDetailTableViewCell.xib */,
+				F236308B1B67A9AB00A12F63 /* ESTagViewController.h */,
+				F236308C1B67A9AB00A12F63 /* ESTagViewController.m */,
 			);
 			name = AddressBookDetail;
 			sourceTree = "<group>";
@@ -1104,6 +1125,8 @@
 				F23059C51B56ADE3004599FA /* ESUserDetailInfo.m */,
 				F234617A1B5AB49E00C88FAC /* ESEnterpriseInfo.h */,
 				F234617B1B5AB49E00C88FAC /* ESEnterpriseInfo.m */,
+				F23630B81B67C15200A12F63 /* ESTag.h */,
+				F23630B91B67C15200A12F63 /* ESTag.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1257,6 +1280,11 @@
 		F23461DA1B5E8B2A00C88FAC /* SettingViewController */ = {
 			isa = PBXGroup;
 			children = (
+				F256CB6E1B6BC397009478C2 /* RCDUpdateNameViewController.h */,
+				F256CB6F1B6BC397009478C2 /* RCDUpdateNameViewController.m */,
+				F256CB711B6BD565009478C2 /* RCDUpdateNameViewController.xib */,
+				F256CB6B1B6BBCC4009478C2 /* RCDDiscussSettingCell.h */,
+				F256CB6C1B6BBCC4009478C2 /* RCDDiscussSettingCell.m */,
 				F23461DB1B5E8CBF00C88FAC /* ChatSettingViewController.h */,
 				F23461DC1B5E8CBF00C88FAC /* ChatSettingViewController.m */,
 				F23461E11B5FCFA900C88FAC /* ChatSettingCollectionViewCell.h */,
@@ -1482,6 +1510,7 @@
 				F23059BB1B52C141004599FA /* RCDAddressBookViewTableViewCell.xib in Resources */,
 				F2D2335E1B31B1F400F8C65D /* PushConfig.plist in Resources */,
 				2B39C98D1B37B2A4007BAC7A /* LoginViewController.xib in Resources */,
+				F256CB721B6BD565009478C2 /* RCDUpdateNameViewController.xib in Resources */,
 				2B9CBB691B42D897007D7A45 /* UserMsgViewController.xib in Resources */,
 				F22FE2951B3B000400A1A997 /* UserSettingViewController.xib in Resources */,
 				2BE55A221B64EE0C008CDB4B /* TaskOverviewViewController.xib in Resources */,
@@ -1526,6 +1555,7 @@
 				F234617F1B5AB63C00C88FAC /* EnterpriseInfoDataSource.m in Sources */,
 				F22FE2E81B4000ED00A1A997 /* SDWebImageDecoder.m in Sources */,
 				2B39C96D1B2D79DB007BAC7A /* ProfessionViewController.m in Sources */,
+				F256CB701B6BC397009478C2 /* RCDUpdateNameViewController.m in Sources */,
 				2B5A590D1B48DFBB000382D7 /* UIImage+MRImageEffects.m in Sources */,
 				2B39C9441B24128F007BAC7A /* LoginViewController.m in Sources */,
 				F23461761B5AA6E400C88FAC /* AddressBookContactListDataSource.m in Sources */,
@@ -1553,6 +1583,7 @@
 				F29F86481B2410320058FC9F /* UIProgressView+AFNetworking.m in Sources */,
 				2B5A59181B48DFBB000382D7 /* MRMessageInterceptor.m in Sources */,
 				F22FE2781B3AD87800A1A997 /* KxMenu.m in Sources */,
+				F256CB6D1B6BBCC4009478C2 /* RCDDiscussSettingCell.m in Sources */,
 				F234617C1B5AB49E00C88FAC /* ESEnterpriseInfo.m in Sources */,
 				F22FE2EA1B4000ED00A1A997 /* SDWebImageDownloaderOperation.m in Sources */,
 				2B5A59191B48DFBB000382D7 /* MRMethodCopier.m in Sources */,
@@ -1564,6 +1595,7 @@
 				F23461E41B5FCFA900C88FAC /* ChatSettingCollectionViewCell.m in Sources */,
 				F22FE3021B4576D100A1A997 /* GetContactListDataParse.m in Sources */,
 				F277AE041B2DC34E006E42CB /* UIDevice+screenType.m in Sources */,
+				F23630BD1B68F61800A12F63 /* TagDataParse.m in Sources */,
 				F23461DD1B5E8CBF00C88FAC /* ChatSettingViewController.m in Sources */,
 				F23461711B5AA0FD00C88FAC /* FMDatabaseQueue.m in Sources */,
 				F277AE0A1B2DCF39006E42CB /* StretchImageUtil.m in Sources */,
@@ -1607,6 +1639,7 @@
 				F250F2EA1B2471CD000AD021 /* AFHttpTool.m in Sources */,
 				2B39C9791B2D7B14007BAC7A /* UserMsgViewController.m in Sources */,
 				2B9CBB611B3ADEC4007D7A45 /* (null) in Sources */,
+				F236308D1B67A9AB00A12F63 /* ESTagViewController.m in Sources */,
 				2B39C94C1B24501B007BAC7A /* ColorHandler.m in Sources */,
 				F29F86441B2410320058FC9F /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				2B9CBB661B3AEC74007D7A45 /* (null) in Sources */,
@@ -1646,6 +1679,7 @@
 				F22FE2F31B4000ED00A1A997 /* UIView+WebCacheOperation.m in Sources */,
 				2B37E44C1B53967D00F671A1 /* ModifyProfessionViewController.m in Sources */,
 				F29F862A1B2410070058FC9F /* AFHTTPSessionManager.m in Sources */,
+				F23630BA1B67C15200A12F63 /* ESTag.m in Sources */,
 				F29F86451B2410320058FC9F /* UIAlertView+AFNetworking.m in Sources */,
 				2B39C9941B37E5F2007BAC7A /* ResetPwdViewController.m in Sources */,
 				2B5A590E1B48DFBB000382D7 /* MRActivityIndicatorView.m in Sources */,

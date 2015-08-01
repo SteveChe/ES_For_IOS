@@ -15,6 +15,8 @@
 #import "ESUserDetailInfo.h"
 #import "RCDSelectPersonViewController.h"
 #import "ChatViewController.h"
+#import "RCDDiscussSettingCell.h"
+#import "RCDUpdateNameViewController.h"
 
 @interface ChatSettingViewController ()<UIActionSheetDelegate>
 //@property (nonatomic, strong) UICollectionView *collectionView;
@@ -59,6 +61,32 @@
         self.tableView.tableFooterView = view;
     }
 
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self initConversationInfo];
+}
+
+-(void) initConversationInfo
+{
+    if (self.conversationType == ConversationType_DISCUSSION)
+    {
+        [[RCIMClient sharedRCIMClient] getDiscussion:self.targetId success:^(RCDiscussion* discussion) {
+            if (discussion) {
+                self.title = discussion.discussionName;
+                self.conversationTitle = discussion.discussionName;
+
+                NSInteger rowNum = [self tableView:self.tableView numberOfRowsInSection:0];
+                if (rowNum > 0) {
+                    [self.tableView reloadData];
+                }
+            }
+        } error:^(RCErrorCode status){
+            
+        }];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -362,6 +390,66 @@
 - (void)addUsers:(NSArray*)users
 {
     [super addUsers:users];
+}
+
+#pragma mark - UITableViewDataSource
+- (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.defaultCells.count + 1;
+}
+
+- (CGFloat)tableView:(UITableView*)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath
+{
+    return 44.f;
+}
+
+- (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath
+{
+    UITableViewCell* cell = nil;
+    switch (indexPath.row) {
+        case 0:
+        {
+            RCDDiscussSettingCell *discussCell = [[RCDDiscussSettingCell alloc] initWithFrame:CGRectZero];
+            discussCell.lblDiscussName.text = self.conversationTitle;
+            discussCell.lblTitle.text = @"讨论组名称";
+            cell = discussCell;
+//            _discussTitle = discussCell.lblDiscussName.text;
+        }
+            break;
+        case 1: {
+            cell = self.defaultCells[0];
+        } break;
+        case 2: {
+            cell = self.defaultCells[1];
+            
+        } break;
+        case 3: {
+            cell = self.defaultCells[2];
+            
+        } break;
+    }
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath
+{
+    if (indexPath.row == 0) {
+        RCDDiscussSettingCell* discussCell = (RCDDiscussSettingCell*)[tableView cellForRowAtIndexPath:indexPath];
+        discussCell.lblTitle.text = @"讨论组名称";
+        
+        RCDUpdateNameViewController* updateNameViewController = [[RCDUpdateNameViewController alloc] init];
+        updateNameViewController.targetId = self.targetId;
+        updateNameViewController.displayText = discussCell.lblDiscussName.text;
+//        updateNameViewController.setDisplayTextCompletion = ^(NSString* text) {
+//            discussCell.lblDiscussName.text = text;
+//            _discussTitle = text;
+//        };
+//        UINavigationController* navi = [[UINavigationController alloc] initWithRootViewController:updateNameViewController];
+//        [self.navigationController presentViewController:navi animated:YES completion:nil];
+        [self.navigationController pushViewController:updateNameViewController animated:YES];
+
+    }
 }
 
 

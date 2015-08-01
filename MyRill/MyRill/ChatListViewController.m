@@ -385,6 +385,7 @@ void(^completionHandler)(RCUserInfo* userInfo);
     if(userInfo == nil || [userInfo isEqual:[NSNull null]])
     {
         completionHandler = completion;
+        [_getContactDetailDataParse getContactDetail:userId];
     }
     else
     {

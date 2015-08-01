@@ -143,8 +143,7 @@
  *
  *  @return RCConversationBaseTableCell
  */
-- (RCConversationBaseCell *)rcConversationListTableView:(UITableView *)tableView
-                                  cellForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (RCConversationBaseCell *)rcConversationListTableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 #pragma mark override
 /**

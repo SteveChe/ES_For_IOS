@@ -139,5 +139,7 @@ typedef NS_ENUM(NSInteger, RequestMethodType){
 
 + (void)parseErrorType:(NSError*) error;
 
+//获取人的标签
++ (void)getTagByUserid:(NSString*)userId success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
 
 @end
