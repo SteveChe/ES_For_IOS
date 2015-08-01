@@ -11,4 +11,6 @@
 
 @interface TaskListViewController : ESViewController
 
+@property (nonatomic, copy) NSString *searchTerm;
+@property (nonatomic, copy) NSString *title;
 @end

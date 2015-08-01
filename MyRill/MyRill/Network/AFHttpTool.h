@@ -116,6 +116,10 @@ typedef NS_ENUM(NSInteger, RequestMethodType){
  **/
 +(void) getContactDetail:(NSString*)userID success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
 
+/****** 获取任务面板信息 ****/
++ (void)getTaskDashboardSuccess:(void (^)(id response))success
+                        failure:(void (^)(NSError *error))failure;
+
 //change password
 +(void) changePassword:(NSString *) oldPassword
            newPassword:(NSString *) newPassword

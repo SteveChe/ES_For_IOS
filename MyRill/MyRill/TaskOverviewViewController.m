@@ -12,13 +12,21 @@
 #import "TaskListViewController.h"
 #import "AddTaskViewController.h"
 #import "ESNavigationController.h"
+#import "GetTaskDashboardDataParse.h"
+#import "ESTaskDashboard.h"
 
-@interface TaskOverviewViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface TaskOverviewViewController () <UITableViewDataSource, UITableViewDelegate, TaskDashboardDelegate>
 
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *holdViews;
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSArray *dataSource;
+@property (nonatomic, strong) GetTaskDashboardDataParse *getTaskDashboardDP;
+
+@property (weak, nonatomic) IBOutlet UILabel *totalTaskLbl;
+@property (weak, nonatomic) IBOutlet UILabel *closedTaskLbl;
+@property (weak, nonatomic) IBOutlet UILabel *totalTaskInSelfLbl;
+@property (weak, nonatomic) IBOutlet UILabel *overdueTaskInSelfLbl;
 
 @end
 
@@ -42,6 +50,17 @@
     [super viewWillAppear:animated];
     
     self.tabBarController.tabBar.hidden = NO;
+    [self.getTaskDashboardDP getTaskDashboard];
+}
+
+- (void)getTaskDashboardSuccess:(ESTaskDashboard *)taskDashboard {
+    self.totalTaskLbl.text = [taskDashboard.totalTask stringValue];
+    self.closedTaskLbl.text = [taskDashboard.closedTask stringValue];
+    self.totalTaskInSelfLbl.text = [[taskDashboard.totalTaskInSelf stringValue] stringByAppendingString:@" 全部"];
+    self.overdueTaskInSelfLbl.text = [[taskDashboard.overdueTaskInSelf stringValue] stringByAppendingString:@" 超期"];
+    self.dataSource = nil;
+    self.dataSource = [NSArray arrayWithArray:taskDashboard.TaskInOriginatorList];
+    [self.tableView reloadData];
 }
 
 #pragma mark - UITableViewDataSource&UITableViewDelegate
@@ -51,7 +70,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TaskOverviewTableViewCell *cell = (TaskOverviewTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"TaskOverviewTableViewCell" forIndexPath:indexPath];
-    
+    [cell updateTaskDashboardCell:self.dataSource[indexPath.row]];
     CALayer *layer = [CALayer layer];
     layer.frame = CGRectMake(0, cell.bounds.size.height - 1, cell.bounds.size.width, 1);
     layer.backgroundColor = [ColorHandler colorFromHexRGB:@"DDDDDD"].CGColor;
@@ -70,8 +89,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//    return self.dataSource.count;
-    return 3;
+    return self.dataSource.count;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -88,11 +106,14 @@
 
 - (IBAction)allTaskBtnOnClicked:(UIButton *)sender {
     TaskListViewController *taskListVC = [[TaskListViewController alloc] init];
+    
     [self.navigationController pushViewController:taskListVC animated:YES];
+    taskListVC.title = @"分配给我的全部任务";
 }
 
 - (IBAction)overdueTaskBtnOnClicked:(UIButton *)sender {
     TaskListViewController *taskListVC = [[TaskListViewController alloc] init];
+    taskListVC.title = @"分配给我的超期任务";
     [self.navigationController pushViewController:taskListVC animated:YES];
 }
 
@@ -122,6 +143,23 @@
         view.layer.borderWidth = 1.f;
         view.layer.borderColor = [ColorHandler colorFromHexRGB:@"DDDDDD"].CGColor;
     }
+}
+
+- (GetTaskDashboardDataParse *)getTaskDashboardDP {
+    if (!_getTaskDashboardDP) {
+        _getTaskDashboardDP = [[GetTaskDashboardDataParse alloc] init];
+        _getTaskDashboardDP.delegate = self;
+    }
+    
+    return _getTaskDashboardDP;
+}
+
+- (NSArray *)dataSource {
+    if (!_dataSource) {
+        _dataSource = [[NSArray alloc] init];
+    }
+    
+    return _dataSource;
 }
 
 @end
