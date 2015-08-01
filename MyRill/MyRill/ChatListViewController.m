@@ -24,6 +24,7 @@ void(^completionHandler)(RCUserInfo* userInfo);
 
 @interface ChatListViewController ()<ContactDetailDataDelegate>
 @property (nonatomic,strong) GetContactDetailDataParse* getContactDetailDataParse;
+@property (atomic,assign)NSInteger nUserDetailRequestNum;
 
 @end
 
@@ -47,6 +48,7 @@ void(^completionHandler)(RCUserInfo* userInfo);
     [[RCIM sharedRCIM] setUserInfoDataSource:self];
     _getContactDetailDataParse = [[GetContactDetailDataParse alloc] init];
     _getContactDetailDataParse.delegate = self;
+    _nUserDetailRequestNum = 0;
 
 }
 
@@ -320,10 +322,19 @@ void(^completionHandler)(RCUserInfo* userInfo);
     user.name = userDetailInfo.userName;
     user.portraitUri = userDetailInfo.portraitUri;
     completionHandler(user);
+    _nUserDetailRequestNum -- ;
+    if (_nUserDetailRequestNum == 0)
+    {
+        [self.conversationListTableView reloadData];
+    }
 }
 - (void)getContactDetailFailed:(NSString*)errorMessage
 {
-    
+    _nUserDetailRequestNum -- ;
+    if (_nUserDetailRequestNum == 0)
+    {
+        [self.conversationListTableView reloadData];
+    }
 }
 
 
@@ -386,6 +397,7 @@ void(^completionHandler)(RCUserInfo* userInfo);
     {
         completionHandler = completion;
         [_getContactDetailDataParse getContactDetail:userId];
+        _nUserDetailRequestNum ++ ;
     }
     else
     {

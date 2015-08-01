@@ -59,7 +59,7 @@
                          userDetailInfo.phoneNumber = userPhoneNum;
                      }
                      NSDictionary* userEnterpriseDic = [temDic valueForKey:@"enterprise"];
-                     if (userEnterpriseDic != nil && ![userEnterpriseDic isEqual:[NSNull null]])
+                     if (userEnterpriseDic != nil && ![userEnterpriseDic isEqual:[NSNull null]] && [userDetailInfo isKindOfClass:[NSDictionary class]])
                      {
                          ESEnterpriseInfo* userEnterprise = [[ESEnterpriseInfo alloc] init];
                          NSNumber* enterPriseIdNum = [userEnterpriseDic valueForKey:@"id"];
