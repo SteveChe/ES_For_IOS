@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@class ESTaskOriginatorInfo;
 
 @interface TaskOverviewTableViewCell : UITableViewCell
+
+- (void)updateTaskDashboardCell:(ESTaskOriginatorInfo *)taskOriginatorInfo;
 
 @end

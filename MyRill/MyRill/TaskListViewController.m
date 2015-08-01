@@ -11,11 +11,13 @@
 #import "ColorHandler.h"
 #import "AddTaskViewController.h"
 #import "ESNavigationController.h"
+#import "GetTaskListDataParse.h"
 
 @interface TaskListViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *dataSource;
+@property (nonatomic, strong) GetTaskListDataParse *getTaskListDP;
 
 @end
 
@@ -25,7 +27,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.title = @"对话相关任务";
+    //self.title = @"对话相关任务";
     
     UIBarButtonItem *addTaskItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
                                                                                  target:self
@@ -39,6 +41,8 @@
     [super viewWillAppear:animated];
     
     self.tabBarController.tabBar.hidden = YES;
+    
+    
 }
 
 #pragma mark - UITableViewDataSource&UITableViewDelegate
@@ -48,7 +52,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TaskListTableViewCell *cell = (TaskListTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"TaskListTableViewCell" forIndexPath:indexPath];
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     CALayer *layer = [CALayer layer];
     layer.frame = CGRectMake(0, cell.bounds.size.height - 10, cell.bounds.size.width, 10);
     layer.backgroundColor = [ColorHandler colorFromHexRGB:@"F5F5F5"].CGColor;
@@ -81,6 +85,7 @@
     [self.navigationController presentViewController:nav animated:YES completion:nil];
 }
 
+#pragma mark - setters&getters
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
@@ -97,6 +102,15 @@
     }
     
     return _tableView;
+}
+
+- (GetTaskListDataParse *)getTaskListDP {
+    if (!_getTaskListDP) {
+        _getTaskListDP = [[GetTaskListDataParse alloc] init];
+        
+    }
+    
+    return _getTaskListDP;
 }
 
 @end

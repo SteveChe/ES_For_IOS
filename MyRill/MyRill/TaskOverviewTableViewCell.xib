@@ -44,6 +44,10 @@
                     <constraint firstItem="Qkd-r5-WJj" firstAttribute="leading" secondItem="Bas-g5-FLA" secondAttribute="trailing" constant="15" id="uXT-uZ-E3T"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="enterpriseNameLbl" destination="Qkd-r5-WJj" id="cor-3k-W7t"/>
+                <outlet property="taskTotalLbl" destination="rdO-tV-VHB" id="eCp-5s-FjI"/>
+            </connections>
             <point key="canvasLocation" x="327.5" y="283"/>
         </tableViewCell>
     </objects>

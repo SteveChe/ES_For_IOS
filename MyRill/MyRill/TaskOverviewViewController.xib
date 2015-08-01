@@ -8,7 +8,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TaskOverviewViewController">
             <connections>
+                <outlet property="closedTaskLbl" destination="zIO-dG-Hwt" id="0i4-wy-jsQ"/>
+                <outlet property="overdueTaskInSelfLbl" destination="wgB-Nr-smr" id="f7l-cC-kWT"/>
                 <outlet property="tableView" destination="oPp-uI-SBA" id="fFz-Hm-J7z"/>
+                <outlet property="totalTaskInSelfLbl" destination="WUI-Gz-v0t" id="MRZ-s9-AjD"/>
+                <outlet property="totalTaskLbl" destination="LDE-fi-30T" id="71Y-Tm-zFI"/>
                 <outlet property="view" destination="iN0-l3-epB" id="8cJ-Bu-k25"/>
                 <outletCollection property="holdViews" destination="zFg-5H-MrC" id="fxQ-LS-i0u"/>
                 <outletCollection property="holdViews" destination="zFm-Y2-BkR" id="hNy-Oy-Seb"/>

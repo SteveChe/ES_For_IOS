@@ -90,6 +90,10 @@
 		2BE8C22D1B4EB3A200858CEE /* AddProfessionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE8C22B1B4EB3A100858CEE /* AddProfessionViewController.xib */; };
 		2BE8C2301B4EC58500858CEE /* ESViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE8C22F1B4EC58500858CEE /* ESViewController.m */; };
 		2BE8C2331B52506600858CEE /* EditProfessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE8C2321B52506600858CEE /* EditProfessionViewController.m */; };
+		2BEBBD831B665849008BE7C4 /* GetTaskDashboardDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEBBD821B665849008BE7C4 /* GetTaskDashboardDataParse.m */; };
+		2BEBBD861B665BCB008BE7C4 /* ESTaskDashboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEBBD851B665BCB008BE7C4 /* ESTaskDashboard.m */; };
+		2BEBBD891B6661FD008BE7C4 /* ESTaskOriginatorInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEBBD881B6661FD008BE7C4 /* ESTaskOriginatorInfo.m */; };
+		2BEBBD8C1B67AFA7008BE7C4 /* GetTaskListDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEBBD8B1B67AFA7008BE7C4 /* GetTaskListDataParse.m */; };
 		F22FE2731B3AD7BE00A1A997 /* ChatListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE2721B3AD7BE00A1A997 /* ChatListViewController.m */; };
 		F22FE2781B3AD87800A1A997 /* KxMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE2771B3AD87800A1A997 /* KxMenu.m */; };
 		F22FE27B1B3AD94200A1A997 /* UIColor+RCColor.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE27A1B3AD94200A1A997 /* UIColor+RCColor.m */; };
@@ -377,6 +381,14 @@
 		2BE8C22F1B4EC58500858CEE /* ESViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESViewController.m; sourceTree = "<group>"; };
 		2BE8C2311B52506600858CEE /* EditProfessionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfessionViewController.h; sourceTree = "<group>"; };
 		2BE8C2321B52506600858CEE /* EditProfessionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProfessionViewController.m; sourceTree = "<group>"; };
+		2BEBBD811B665849008BE7C4 /* GetTaskDashboardDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetTaskDashboardDataParse.h; sourceTree = "<group>"; };
+		2BEBBD821B665849008BE7C4 /* GetTaskDashboardDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetTaskDashboardDataParse.m; sourceTree = "<group>"; };
+		2BEBBD841B665BCB008BE7C4 /* ESTaskDashboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESTaskDashboard.h; sourceTree = "<group>"; };
+		2BEBBD851B665BCB008BE7C4 /* ESTaskDashboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESTaskDashboard.m; sourceTree = "<group>"; };
+		2BEBBD871B6661FD008BE7C4 /* ESTaskOriginatorInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESTaskOriginatorInfo.h; sourceTree = "<group>"; };
+		2BEBBD881B6661FD008BE7C4 /* ESTaskOriginatorInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESTaskOriginatorInfo.m; sourceTree = "<group>"; };
+		2BEBBD8A1B67AFA7008BE7C4 /* GetTaskListDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetTaskListDataParse.h; sourceTree = "<group>"; };
+		2BEBBD8B1B67AFA7008BE7C4 /* GetTaskListDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetTaskListDataParse.m; sourceTree = "<group>"; };
 		F22FE2711B3AD7BE00A1A997 /* ChatListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatListViewController.h; sourceTree = "<group>"; };
 		F22FE2721B3AD7BE00A1A997 /* ChatListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatListViewController.m; sourceTree = "<group>"; };
 		F22FE2761B3AD87800A1A997 /* KxMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KxMenu.h; path = Utilities/KxMenu/KxMenu.h; sourceTree = "<group>"; };
@@ -817,6 +829,10 @@
 				F23059C21B56AD65004599FA /* GetContactDetailDataParse.m */,
 				2BC821341B5BE6B60090E2C1 /* ChangeUserImageDataParse.h */,
 				2BC821351B5BE6B60090E2C1 /* ChangeUserImageDataParse.m */,
+				2BEBBD811B665849008BE7C4 /* GetTaskDashboardDataParse.h */,
+				2BEBBD821B665849008BE7C4 /* GetTaskDashboardDataParse.m */,
+				2BEBBD8A1B67AFA7008BE7C4 /* GetTaskListDataParse.h */,
+				2BEBBD8B1B67AFA7008BE7C4 /* GetTaskListDataParse.m */,
 			);
 			name = DataDrive;
 			sourceTree = "<group>";
@@ -1093,6 +1109,10 @@
 				F23059C51B56ADE3004599FA /* ESUserDetailInfo.m */,
 				F234617A1B5AB49E00C88FAC /* ESEnterpriseInfo.h */,
 				F234617B1B5AB49E00C88FAC /* ESEnterpriseInfo.m */,
+				2BEBBD841B665BCB008BE7C4 /* ESTaskDashboard.h */,
+				2BEBBD851B665BCB008BE7C4 /* ESTaskDashboard.m */,
+				2BEBBD871B6661FD008BE7C4 /* ESTaskOriginatorInfo.h */,
+				2BEBBD881B6661FD008BE7C4 /* ESTaskOriginatorInfo.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1553,6 +1573,7 @@
 				F29F862F1B2410070058FC9F /* AFURLResponseSerialization.m in Sources */,
 				2BE55A1F1B64E0BE008CDB4B /* testViewController.m in Sources */,
 				F22FE2E41B4000ED00A1A997 /* MKAnnotationView+WebCache.m in Sources */,
+				2BEBBD8C1B67AFA7008BE7C4 /* GetTaskListDataParse.m in Sources */,
 				F29F862D1B2410070058FC9F /* AFURLConnectionOperation.m in Sources */,
 				2BC821361B5BE6B60090E2C1 /* ChangeUserImageDataParse.m in Sources */,
 				F22FE3051B458A4100A1A997 /* GetRequestContactListDataParse.m in Sources */,
@@ -1572,6 +1593,7 @@
 				F22FE2EB1B4000ED00A1A997 /* SDWebImageManager.m in Sources */,
 				2B39C93B1B241212007BAC7A /* MASViewAttribute.m in Sources */,
 				F24787721B2D5CE700EC266B /* ChangePwdDataParse.m in Sources */,
+				2BEBBD891B6661FD008BE7C4 /* ESTaskOriginatorInfo.m in Sources */,
 				F22FE2BD1B3FFBB200A1A997 /* RCDChatListCell.m in Sources */,
 				F23461701B5AA0FD00C88FAC /* FMDatabasePool.m in Sources */,
 				2B5A591E1B48F921000382D7 /* ChangPhoneNumViewController.m in Sources */,
@@ -1599,6 +1621,7 @@
 				2B39C93C1B241212007BAC7A /* MASViewConstraint.m in Sources */,
 				F2F92EFF1B5020CC0047D7BF /* GetPhoneContactListDataParse.m in Sources */,
 				2B5A590F1B48DFBB000382D7 /* MRCircularProgressView.m in Sources */,
+				2BEBBD861B665BCB008BE7C4 /* ESTaskDashboard.m in Sources */,
 				2B39C95F1B272221007BAC7A /* QRCodeViewController.m in Sources */,
 				2B5A59111B48DFBB000382D7 /* MRNavigationBarProgressView.m in Sources */,
 				2B5A590C1B48DFBB000382D7 /* MRBlurView.m in Sources */,
@@ -1626,6 +1649,7 @@
 				2B5A590E1B48DFBB000382D7 /* MRActivityIndicatorView.m in Sources */,
 				2BC8213A1B5C9FF70090E2C1 /* ShowQRCodeViewController.m in Sources */,
 				F2E693DD1B6535DC0016FB82 /* RCDAddressBookDetailViewController.m in Sources */,
+				2BEBBD831B665849008BE7C4 /* GetTaskDashboardDataParse.m in Sources */,
 				2B39C9381B241212007BAC7A /* MASConstraint.m in Sources */,
 				2BE8C2331B52506600858CEE /* EditProfessionViewController.m in Sources */,
 				F22FE27F1B3ADAB000A1A997 /* ESUserInfo.m in Sources */,
