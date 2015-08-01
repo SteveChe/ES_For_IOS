@@ -79,7 +79,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+    self.tabBarController.tabBar.hidden = YES;
+
     if (self.scanLineTimer == nil) {
         [self moveUpAndDownLine];
         [self createTimer];
@@ -126,7 +127,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
+
     //设置二维码的有效扫描区域
     CGSize size = self.view.bounds.size;
     CGRect cropRect = self.qrView.frame;

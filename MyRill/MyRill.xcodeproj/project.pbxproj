@@ -1707,7 +1707,6 @@
 				2B39C9941B37E5F2007BAC7A /* ResetPwdViewController.m in Sources */,
 				2B5A590E1B48DFBB000382D7 /* MRActivityIndicatorView.m in Sources */,
 				2BC8213A1B5C9FF70090E2C1 /* ShowQRCodeViewController.m in Sources */,
-				F2E693DD1B6535DC0016FB82 /* RCDAddressBookDetailViewController.m in Sources */,
 				2BEBBD831B665849008BE7C4 /* GetTaskDashboardDataParse.m in Sources */,
 				2B39C9381B241212007BAC7A /* MASConstraint.m in Sources */,
 				2BE8C2331B52506600858CEE /* EditProfessionViewController.m in Sources */,

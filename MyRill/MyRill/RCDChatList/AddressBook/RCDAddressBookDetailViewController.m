@@ -189,7 +189,7 @@
         {
             ShowQRCodeViewController* showQRCodeVC = [[ShowQRCodeViewController alloc] init];
             showQRCodeVC.qrCodeTitle = @"企业二维码";
-            showQRCodeVC.imageUrl = _userDetailInfo.enterprise_qrcode;
+            showQRCodeVC.imageUrl = _userDetailInfo.enterprise.enterpriseQRCode;
             [self.navigationController pushViewController:showQRCodeVC animated:YES];
         }
         else if(indexPath.row == 1)

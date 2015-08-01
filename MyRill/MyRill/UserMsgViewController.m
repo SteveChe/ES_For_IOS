@@ -139,12 +139,22 @@
 
 - (void)getContactDetail:(ESUserDetailInfo *)userDetailInfo {
     ShowQRCodeViewController *showQRCodeVC = [[ShowQRCodeViewController alloc] init];
+    if (userDetailInfo == nil){
+        return;
+    }
     if ([self.qrCodeType isEqualToString:@"个人"]) {
         showQRCodeVC.qrCodeTitle = @"我的二维码";
+        if (userDetailInfo.qrcode==nil || [userDetailInfo.qrcode isEqual:[NSNull null]] ) {
+            return;
+        }
         showQRCodeVC.imageUrl = userDetailInfo.qrcode;
     } else {
         showQRCodeVC.qrCodeTitle = @"企业二维码";
-        showQRCodeVC.imageUrl = userDetailInfo.enterprise_qrcode;
+        if (userDetailInfo.enterprise==nil || [userDetailInfo.enterprise isEqual:[NSNull null]] || userDetailInfo.enterprise.enterpriseQRCode == nil || [userDetailInfo.enterprise.enterpriseQRCode isEqual:[NSNull null]]) {
+            return;
+        }
+//        showQRCodeVC.imageUrl = userDetailInfo.enterprise_qrcode;
+        showQRCodeVC.imageUrl = userDetailInfo.enterprise.enterpriseQRCode;
     }
     
     [self.navigationController pushViewController:showQRCodeVC animated:YES];
