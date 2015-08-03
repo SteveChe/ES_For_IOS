@@ -10,6 +10,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "ColorHandler.h"
 #import "RCDAddFriendViewController.h"
+#import "RCDJoinEnterpriseViewController.h"
 
 @interface QRCodeViewController ()<AVCaptureMetadataOutputObjectsDelegate>
 
@@ -168,7 +169,20 @@
     NSRange range2 = [qrCodeString rangeOfString:@"add_enterprise_contact"];
     if (range2.length > 0)
     {
-        
+        NSString* searchQuery = @"user_id=";
+        NSRange rangeUserId = [qrCodeString rangeOfString:searchQuery];
+        if (rangeUserId.length > 0)
+        {
+            NSString *strUserId = [qrCodeString substringFromIndex:rangeUserId.location+[searchQuery length]];
+            RCDJoinEnterpriseViewController *joinEnterpriseViewController = [[RCDJoinEnterpriseViewController alloc] init];
+            joinEnterpriseViewController.strUserId = strUserId;
+            
+            self.navigationController.navigationBar.barTintColor = [ColorHandler colorFromHexRGB:@"FF5454"];
+            UITabBarController *tabbarVC = self.navigationController.viewControllers[0];
+            [self.navigationController popToViewController:tabbarVC animated:YES];
+            [tabbarVC.navigationController pushViewController:joinEnterpriseViewController animated:YES];
+        }
+
         return;
     }
 

@@ -172,6 +172,11 @@
 		F256CB6D1B6BBCC4009478C2 /* RCDDiscussSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F256CB6C1B6BBCC4009478C2 /* RCDDiscussSettingCell.m */; };
 		F256CB701B6BC397009478C2 /* RCDUpdateNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F256CB6F1B6BC397009478C2 /* RCDUpdateNameViewController.m */; };
 		F256CB721B6BD565009478C2 /* RCDUpdateNameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F256CB711B6BD565009478C2 /* RCDUpdateNameViewController.xib */; };
+		F256CB781B6CAE23009478C2 /* EnterPriseRequestDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F256CB771B6CAE23009478C2 /* EnterPriseRequestDataParse.m */; };
+		F256CB7B1B6D1B82009478C2 /* ESEnterPriseRequestInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F256CB7A1B6D1B82009478C2 /* ESEnterPriseRequestInfo.m */; };
+		F256CB7F1B6E4247009478C2 /* RCDJoinEnterpriseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F256CB7D1B6E4247009478C2 /* RCDJoinEnterpriseViewController.m */; };
+		F256CB801B6E4247009478C2 /* RCDJoinEnterpriseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F256CB7E1B6E4247009478C2 /* RCDJoinEnterpriseViewController.xib */; };
+		F256CB831B6E5921009478C2 /* RCDApprovedJoinEnterpriseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F256CB821B6E5921009478C2 /* RCDApprovedJoinEnterpriseViewController.m */; };
 		F277ADFB1B2DBE97006E42CB /* CustomShowMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = F277ADFA1B2DBE97006E42CB /* CustomShowMessage.m */; };
 		F277ADFE1B2DC046006E42CB /* CustomMessageBox.m in Sources */ = {isa = PBXBuildFile; fileRef = F277ADFD1B2DC046006E42CB /* CustomMessageBox.m */; };
 		F277AE011B2DC146006E42CB /* DeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F277AE001B2DC146006E42CB /* DeviceInfo.m */; };
@@ -547,6 +552,15 @@
 		F256CB6E1B6BC397009478C2 /* RCDUpdateNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCDUpdateNameViewController.h; path = RCDChatList/SettingViewController/RCDUpdateNameViewController.h; sourceTree = "<group>"; };
 		F256CB6F1B6BC397009478C2 /* RCDUpdateNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RCDUpdateNameViewController.m; path = RCDChatList/SettingViewController/RCDUpdateNameViewController.m; sourceTree = "<group>"; };
 		F256CB711B6BD565009478C2 /* RCDUpdateNameViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RCDUpdateNameViewController.xib; path = RCDChatList/SettingViewController/RCDUpdateNameViewController.xib; sourceTree = "<group>"; };
+		F256CB761B6CAE23009478C2 /* EnterPriseRequestDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnterPriseRequestDataParse.h; sourceTree = "<group>"; };
+		F256CB771B6CAE23009478C2 /* EnterPriseRequestDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnterPriseRequestDataParse.m; sourceTree = "<group>"; };
+		F256CB791B6D1B82009478C2 /* ESEnterPriseRequestInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ESEnterPriseRequestInfo.h; path = Model/ESEnterPriseRequestInfo.h; sourceTree = "<group>"; };
+		F256CB7A1B6D1B82009478C2 /* ESEnterPriseRequestInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ESEnterPriseRequestInfo.m; path = Model/ESEnterPriseRequestInfo.m; sourceTree = "<group>"; };
+		F256CB7C1B6E4247009478C2 /* RCDJoinEnterpriseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCDJoinEnterpriseViewController.h; path = RCDChatList/SearchContacts/RCDJoinEnterpriseViewController.h; sourceTree = "<group>"; };
+		F256CB7D1B6E4247009478C2 /* RCDJoinEnterpriseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RCDJoinEnterpriseViewController.m; path = RCDChatList/SearchContacts/RCDJoinEnterpriseViewController.m; sourceTree = "<group>"; };
+		F256CB7E1B6E4247009478C2 /* RCDJoinEnterpriseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RCDJoinEnterpriseViewController.xib; path = RCDChatList/SearchContacts/RCDJoinEnterpriseViewController.xib; sourceTree = "<group>"; };
+		F256CB811B6E5921009478C2 /* RCDApprovedJoinEnterpriseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCDApprovedJoinEnterpriseViewController.h; path = RCDChatList/AddressBook/RCDApprovedJoinEnterpriseViewController.h; sourceTree = "<group>"; };
+		F256CB821B6E5921009478C2 /* RCDApprovedJoinEnterpriseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RCDApprovedJoinEnterpriseViewController.m; path = RCDChatList/AddressBook/RCDApprovedJoinEnterpriseViewController.m; sourceTree = "<group>"; };
 		F277ADF91B2DBE97006E42CB /* CustomShowMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomShowMessage.h; path = Utilities/common/CustomShowMessage.h; sourceTree = "<group>"; };
 		F277ADFA1B2DBE97006E42CB /* CustomShowMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomShowMessage.m; path = Utilities/common/CustomShowMessage.m; sourceTree = "<group>"; };
 		F277ADFC1B2DC046006E42CB /* CustomMessageBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomMessageBox.h; path = Utilities/common/CustomMessageBox.h; sourceTree = "<group>"; };
@@ -860,6 +874,8 @@
 				2BEBBD8B1B67AFA7008BE7C4 /* GetTaskListDataParse.m */,
 				F23630BB1B68F61800A12F63 /* TagDataParse.h */,
 				F23630BC1B68F61800A12F63 /* TagDataParse.m */,
+				F256CB761B6CAE23009478C2 /* EnterPriseRequestDataParse.h */,
+				F256CB771B6CAE23009478C2 /* EnterPriseRequestDataParse.m */,
 			);
 			name = DataDrive;
 			sourceTree = "<group>";
@@ -1147,6 +1163,8 @@
 				2BEBBD881B6661FD008BE7C4 /* ESTaskOriginatorInfo.m */,
 				F23630B81B67C15200A12F63 /* ESTag.h */,
 				F23630B91B67C15200A12F63 /* ESTag.m */,
+				F256CB791B6D1B82009478C2 /* ESEnterPriseRequestInfo.h */,
+				F256CB7A1B6D1B82009478C2 /* ESEnterPriseRequestInfo.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1187,6 +1205,9 @@
 				F22FE2B21B3FFAF700A1A997 /* RCDSearchFriendViewController.m */,
 				F22FE2B31B3FFAF700A1A997 /* RCDSearchResultTableViewCell.h */,
 				F22FE2B41B3FFAF700A1A997 /* RCDSearchResultTableViewCell.m */,
+				F256CB7C1B6E4247009478C2 /* RCDJoinEnterpriseViewController.h */,
+				F256CB7D1B6E4247009478C2 /* RCDJoinEnterpriseViewController.m */,
+				F256CB7E1B6E4247009478C2 /* RCDJoinEnterpriseViewController.xib */,
 			);
 			name = SearchContacts;
 			sourceTree = "<group>";
@@ -1194,6 +1215,8 @@
 		F22FE29F1B3FF9C500A1A997 /* AddressBook */ = {
 			isa = PBXGroup;
 			children = (
+				F256CB811B6E5921009478C2 /* RCDApprovedJoinEnterpriseViewController.h */,
+				F256CB821B6E5921009478C2 /* RCDApprovedJoinEnterpriseViewController.m */,
 				F22FE2A21B3FFAC200A1A997 /* RCDAddressBookViewController.h */,
 				F22FE2A31B3FFAC200A1A997 /* RCDAddressBookViewController.m */,
 				F22FE2A41B3FFAC200A1A997 /* RCDPersonDetailViewController.h */,
@@ -1528,6 +1551,7 @@
 				2BC8213B1B5C9FF70090E2C1 /* ShowQRCodeViewController.xib in Resources */,
 				F22FE2881B3AF0CB00A1A997 /* RongCloudKit.strings in Resources */,
 				F23059BB1B52C141004599FA /* RCDAddressBookViewTableViewCell.xib in Resources */,
+				F256CB801B6E4247009478C2 /* RCDJoinEnterpriseViewController.xib in Resources */,
 				F2D2335E1B31B1F400F8C65D /* PushConfig.plist in Resources */,
 				2B39C98D1B37B2A4007BAC7A /* LoginViewController.xib in Resources */,
 				F256CB721B6BD565009478C2 /* RCDUpdateNameViewController.xib in Resources */,
@@ -1589,6 +1613,7 @@
 				2B5A59101B48DFBB000382D7 /* MRIconView.m in Sources */,
 				2B39C9501B248063007BAC7A /* LoginDataParse.m in Sources */,
 				F29F86471B2410320058FC9F /* UIImageView+AFNetworking.m in Sources */,
+				F256CB7F1B6E4247009478C2 /* RCDJoinEnterpriseViewController.m in Sources */,
 				2B39C97C1B2D8003007BAC7A /* ESMenuViewController.m in Sources */,
 				2B39C9551B25CA86007BAC7A /* SignUpViewController.m in Sources */,
 				2BE8C21D1B4D60B400858CEE /* ProfessionCollectionViewCell.m in Sources */,
@@ -1608,6 +1633,7 @@
 				F22FE2EA1B4000ED00A1A997 /* SDWebImageDownloaderOperation.m in Sources */,
 				2B5A59191B48DFBB000382D7 /* MRMethodCopier.m in Sources */,
 				2B39C9901B37B691007BAC7A /* ESNavigationController.m in Sources */,
+				F256CB781B6CAE23009478C2 /* EnterPriseRequestDataParse.m in Sources */,
 				F22FE2B61B3FFAF700A1A997 /* RCDSearchFriendViewController.m in Sources */,
 				F23461791B5AAB2500C88FAC /* UserInfoDataSource.m in Sources */,
 				2B5A59141B48DFBB000382D7 /* MRStopButton.m in Sources */,
@@ -1624,6 +1650,7 @@
 				2BE8C22C1B4EB3A200858CEE /* AddProfessionViewController.m in Sources */,
 				2B39C9481B241972007BAC7A /* LoginService.m in Sources */,
 				F22FE2E91B4000ED00A1A997 /* SDWebImageDownloader.m in Sources */,
+				F256CB7B1B6D1B82009478C2 /* ESEnterPriseRequestInfo.m in Sources */,
 				F29F862F1B2410070058FC9F /* AFURLResponseSerialization.m in Sources */,
 				F23630841B66668900A12F63 /* RCDAddressBookDetailViewController.m in Sources */,
 				2BE55A1F1B64E0BE008CDB4B /* testViewController.m in Sources */,
@@ -1674,6 +1701,7 @@
 				F22FE2C11B3FFCAF00A1A997 /* MBProgressHUD.m in Sources */,
 				2B5A59161B48DFBB000382D7 /* MRProgressOverlayView+AFNetworking.m in Sources */,
 				2BC8212F1B57FFDC0090E2C1 /* ProfessionWebViewController.m in Sources */,
+				F256CB831B6E5921009478C2 /* RCDApprovedJoinEnterpriseViewController.m in Sources */,
 				2B37E45F1B53E9D800F671A1 /* ProfessionDataParse.m in Sources */,
 				2B39C93C1B241212007BAC7A /* MASViewConstraint.m in Sources */,
 				F2F92EFF1B5020CC0047D7BF /* GetPhoneContactListDataParse.m in Sources */,

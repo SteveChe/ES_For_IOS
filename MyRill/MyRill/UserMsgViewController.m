@@ -20,6 +20,7 @@
 #import "GetContactDetailDataParse.h"
 #import "ShowQRCodeViewController.h"
 #import "UIImageView+WebCache.h"
+#import "UserInfoDataSource.h"
 
 @interface UserMsgViewController () <LogoutDataDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ContactDetailDataDelegate, ChangeUserImageDataDelegate>
 
@@ -126,6 +127,7 @@
 #pragma mark - LogoutDataParse delegate
 - (void)logoutSuccess {
     [self showTips:@"注销成功!" mode:MRProgressOverlayViewModeCheckmark isDismiss:YES];
+    [[UserInfoDataSource shareInstance] clearAllUserInfo];
     
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     LoginViewController *loginVC = [[LoginViewController alloc] init];

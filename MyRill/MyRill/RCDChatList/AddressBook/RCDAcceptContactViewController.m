@@ -130,14 +130,6 @@
     [[CustomShowMessage getInstance] showNotificationMessage:errorMessage];
 }
 
-#pragma mark event - clicked
-//-(IBAction)acceptButtonClicked:(id)sender
-//{
-//    UIButton* button = (UIButton*)sender;
-//    ESUserInfo* userInfo = [_requestContactList objectAtIndex:button.tag];
-//    [_addContactDataParse acceptContact:userInfo.userId];
-//}
-
 #pragma mark-- RCDPhoneAddressBookTableViewCellDelegate
 -(void)addButtonClick:(id)sender
 {

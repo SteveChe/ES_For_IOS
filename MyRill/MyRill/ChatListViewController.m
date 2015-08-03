@@ -76,6 +76,15 @@ void(^completionHandler)(RCUserInfo* userInfo);
     self.navigationItem.rightBarButtonItem = rightButton;
 
     [self updateBadgeValueForTabBarItem];
+    
+    if (_nUserDetailRequestNum == 0)
+    {
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.conversationListTableView reloadData];
+            });
+        });
+    }
 }
 
 - (void)updateBadgeValueForTabBarItem
@@ -325,7 +334,11 @@ void(^completionHandler)(RCUserInfo* userInfo);
     _nUserDetailRequestNum -- ;
     if (_nUserDetailRequestNum == 0)
     {
-        [self.conversationListTableView reloadData];
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.conversationListTableView reloadData];
+            });
+        });
     }
 }
 - (void)getContactDetailFailed:(NSString*)errorMessage
@@ -333,8 +346,28 @@ void(^completionHandler)(RCUserInfo* userInfo);
     _nUserDetailRequestNum -- ;
     if (_nUserDetailRequestNum == 0)
     {
-        [self.conversationListTableView reloadData];
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.conversationListTableView reloadData];
+            });
+        });
     }
+}
+
+#pragma mark override
+/**
+ *  点击头像事件
+ *
+ *  @param model 会话model
+ */
+- (void)didTapCellPortrait:(RCConversationModel *)model
+{
+    ChatViewController *chat =[[ChatViewController alloc]init];
+    chat.targetId                      = model.targetId;
+    chat.userName                    = model.conversationTitle;
+    chat.conversationType              = model.conversationType;
+    chat.title                         = model.conversationTitle;
+    [self.navigationController pushViewController:chat animated:YES];
 }
 
 

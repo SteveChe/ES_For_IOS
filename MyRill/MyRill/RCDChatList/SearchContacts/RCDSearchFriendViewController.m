@@ -92,7 +92,7 @@
         ESUserInfo *user =_searchResult[indexPath.row];
         if(user){
             cell.lblName.text = user.userName;
-            [cell.ivAva sd_setImageWithURL:[NSURL URLWithString:user.portraitUri] placeholderImage:[UIImage imageNamed:@"icon_person"]];
+            [cell.ivAva sd_setImageWithURL:[NSURL URLWithString:user.portraitUri] placeholderImage:[UIImage imageNamed:@"头像_100"]];
         }
     }
     else

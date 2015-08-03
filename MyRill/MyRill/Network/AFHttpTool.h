@@ -146,4 +146,13 @@ typedef NS_ENUM(NSInteger, RequestMethodType){
 //获取人的标签
 + (void)getTagByUserid:(NSString*)userId success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
 
+//请求加入企业
++ (void)requestJoinEnterPriseWithUserId:(NSString*)userId success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
+//获取请求加入企业的人员列表
++ (void)getEnterPriseRequestList:(void (^)(id response))success
+failure:(void (^)(NSError *error))failure;
+
+//同意加入企业
++ (void)approvedEnterPriseRequestId:(NSString*)requestId  approved:(BOOL)bApproved success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
+
 @end

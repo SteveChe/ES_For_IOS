@@ -148,4 +148,15 @@ static NSString * const userTableName = @"USERINFO_TABLE";
         [self insertUserToDB:userInfo];
     }
 }
+
+//删除用户表
+-(void) clearAllUserInfo
+{
+    NSString *dropTableSql = @"DROP TABLE USERINFO_TABLE";
+    FMDatabaseQueue *queue = [DBHelper getDatabaseQueue];
+    [queue inDatabase:^(FMDatabase *db) {
+        [db executeUpdate:dropTableSql];
+    }];
+
+}
 @end

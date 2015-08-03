@@ -20,6 +20,7 @@
 #import "RCDAddressBookViewTableViewCell.h"
 #import "RCDAddressBookDetailViewController.h"
 #import "ColorHandler.h"
+#import "RCDApprovedJoinEnterpriseViewController.h"
 
 @interface RCDAddressBookViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,UISearchControllerDelegate,UISearchDisplayDelegate>
 
@@ -158,6 +159,13 @@
                     break;
                 case 1:
                 {
+                    cell.addressBookName.text = @"加入企业请求";
+                    cell.ivAva.image = [UIImage imageNamed:@"lianxiren_xindelianxiren"];
+                }
+                    break;
+
+                case 2:
+                {
                     cell.addressBookName.text = @"多人聊天组";
                     cell.ivAva.image = [UIImage imageNamed:@"lianxiren_duorenliaotianzu"];
                 }
@@ -193,7 +201,7 @@
     }
     if (section == 0)
     {
-        return 2;
+        return 3;
     }
     else
     {
@@ -254,6 +262,11 @@
                 [self.navigationController pushViewController:acceptContactVC animated:YES];
             }
             else if(indexPath.row == 1)
+            {
+                RCDApprovedJoinEnterpriseViewController* approvedJoinEnterpriseVC = [[RCDApprovedJoinEnterpriseViewController alloc] init ];
+                [self.navigationController pushViewController:approvedJoinEnterpriseVC animated:YES];
+            }
+            else if(indexPath.row == 2)
             {
                 
             }

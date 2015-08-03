@@ -29,6 +29,8 @@
 @property(nonatomic, strong) NSString* contactDescription;
 /** 个人二维码 */
 @property(nonatomic, strong) NSString* qrcode;
+/** 企业二维码 */
+@property(nonatomic, strong) NSString* enterprise_qrcode;
 /** 标签 */
 @property(nonatomic, strong) NSMutableArray* tagDataArray;
 /** 同事 */

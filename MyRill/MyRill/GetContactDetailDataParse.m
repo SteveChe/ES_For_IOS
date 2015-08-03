@@ -59,7 +59,7 @@
                          userDetailInfo.phoneNumber = userPhoneNum;
                      }
                      NSDictionary* userEnterpriseDic = [temDic valueForKey:@"enterprise"];
-                     if (userEnterpriseDic != nil && ![userEnterpriseDic isEqual:[NSNull null]] && [userDetailInfo isKindOfClass:[NSDictionary class]])
+                     if (userEnterpriseDic != nil && ![userEnterpriseDic isEqual:[NSNull null]] )//&& [userEnterpriseDic isKindOfClass:[NSDictionary class]]
                      {
                          ESEnterpriseInfo* userEnterprise = [[ESEnterpriseInfo alloc] init];
                          NSNumber* enterPriseIdNum = [userEnterpriseDic valueForKey:@"id"];
@@ -125,11 +125,11 @@
                          userDetailInfo.qrcode = qrcode;
                      }
                  
-//                     NSString* enterprise_qrcode = [temDic valueForKey:@"qrcode"];
-//                     if (enterprise_qrcode != nil && ![enterprise_qrcode isEqual:[NSNull null]])
-//                     {
-//                         userDetailInfo.enterprise_qrcode = qrcode;
-//                     }
+                     NSString* enterprise_qrcode = [temDic valueForKey:@"enterprise_qrcode"];
+                     if (enterprise_qrcode != nil && ![enterprise_qrcode isEqual:[NSNull null]])
+                     {
+                         userDetailInfo.enterprise_qrcode = qrcode;
+                     }
                  
                      NSMutableArray* tag_data = [temDic valueForKey:@"tag_data"];
                      if (tag_data != nil && ![tag_data isEqual:[NSNull null]])

@@ -1,51 +1,46 @@
 //
-//  RCDAddFriendViewController.m
-//  RCloudMessage
+//  RCDJoinEnterpriseViewController.m
+//  MyRill
 //
-//  Created by Liv on 15/4/16.
-//  Copyright (c) 2015年 胡利武. All rights reserved.
+//  Created by Steve on 15/8/2.
+//
 //
 
-#import "RCDAddFriendViewController.h"
-#import "AFHttpTool.h"
-#import "UIImageView+WebCache.h"
+#import "RCDJoinEnterpriseViewController.h"
 #import "CustomShowMessage.h"
-@interface RCDAddFriendViewController ()
-//@property (weak, nonatomic)  UILabel *lblName;
-//@property (weak, nonatomic)  UIImageView *ivAva;
-@property (strong,nonatomic) AddContactDataParse* addContactDataParse;
+
+@interface RCDJoinEnterpriseViewController ()
+
+@property (nonatomic,strong) EnterPriseRequestDataParse* enterpriseRequestDataParse;
 @end
 
-@implementation RCDAddFriendViewController
+@implementation RCDJoinEnterpriseViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    self.navigationItem.title = @"联系人验证";
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    // Do any additional setup after loading the view from its nib.
+    self.navigationItem.title = @"加入公司验证";
     self.tabBarController.tabBar.hidden = YES;
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc]initWithTitle:@"取消" style:UIBarButtonItemStyleBordered target:self action:@selector(backToLastPage)];
     [self.navigationItem setLeftBarButtonItem:backButton];
     
-    _addContactDataParse = [[AddContactDataParse alloc] init];
-    _addContactDataParse.delegate = self;
+    _enterpriseRequestDataParse = [[EnterPriseRequestDataParse alloc] init];
+    _enterpriseRequestDataParse.joinEnterPriseDelegate = self;
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
-
     //自定义rightBarButtonItem
-    UIBarButtonItem *settintBtnItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                                                    target:self
+    UIBarButtonItem *settintBtnItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self
                                                                                     action:@selector(rightBarButtonItemPressed:)];
     self.navigationItem.rightBarButtonItem = settintBtnItem;
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString* myName = [userDefaults stringForKey:@"UserName"];
     
-    NSString* addFriendText = [NSString stringWithFormat:@"我是%@",myName];
-    _addFriendTextField.text = addFriendText;
+    NSString* joinEnterpriseText = [NSString stringWithFormat:@"我是%@，申请加入你的公司",myName];
+    _joinEnterpriseTextField.text = joinEnterpriseText;
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -53,20 +48,18 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark- AddContactDelegate
--(void)addContactSucceed
+#pragma mark - RequestJoinEnterPriseRequestDelegate
+-(void)requestJoinEnterPriseSucceed
 {
     [[CustomShowMessage getInstance] showNotificationMessage:@"已经发送请求！"];
     [self performSelector:@selector(backToLastPage)
                withObject:nil
                afterDelay:1];
 }
-
--(void)addContactFailed:(NSString*)errorMessage
+-(void)requestJoinEnterPriseFailed:(NSString*)errorMessage
 {
     [[CustomShowMessage getInstance] showNotificationMessage:errorMessage];
 }
-
 
 #pragma mark - response events
 /**
@@ -81,8 +74,9 @@
     {
         return;
     }
-    [_addContactDataParse addContact:_strUserId];
+    [_enterpriseRequestDataParse requestJoinEnterPriseWithUserId:_strUserId];
 }
+
 
 -(void)backToLastPage
 {
