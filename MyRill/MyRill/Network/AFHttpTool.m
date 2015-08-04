@@ -495,5 +495,45 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
     [AFHttpTool requestWithMethod:RequestMethodTypePost                              url:strURL  params:params success:success failure:failure];
 }
 
+//关注/取消关注企业
++ (void)followEnterPriseId:(NSString*)enterpriseId  action:(NSString*)action success:(void (^)(id response))success failure:(void (^)(NSError *error))failure
+{
+    NSString* strURL = [NSString stringWithFormat:@"/api/accounts/enterprises/%@/follow/.json",enterpriseId];
+    NSDictionary *params = @{@"action":action};
+    [AFHttpTool requestWithMethod:RequestMethodTypePost                              url:strURL  params:params success:success failure:failure];
+}
+
+/******** 获取企业详情******
+ 请求方式：POST
+ 参数：无
+ 备注：该接口返回该企业的详细信息
+ **/
++(void) getEnterpriseDetail:(NSString*)enterpriseId success:(void (^)(id response))success failure:(void (^)(NSError *error))failure
+{
+    NSString* strURL = [NSString stringWithFormat:@"/api/accounts/enterprises/%@/.json",enterpriseId];
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet                              url:strURL  params:nil success:success failure:failure];
+}
+
+//获取关注的企业列表
++(void)getFollowedEnterpriseListSuccess:(void (^)(id response))success
+                                failure:(void (^)(NSError *error))failure
+{
+    NSString* strURL = [NSString stringWithFormat:@"/api/accounts/enterprises/?follow.json"];
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet                              url:strURL  params:nil success:success failure:failure];
+
+}
+
+/******** 搜索企业******
+ 参数：?q=keyWord
+ 请求方式：GET
+ 备注：如果keyWord为空，则返回所有联系人
+ **/
++(void)searchEnterprises:(NSString*) keyWord success:(void (^)(id response))success failure:(void (^)(NSError* err))failure
+{
+    NSDictionary *params = @{@"q":keyWord};
+    NSString* strURL = [NSString stringWithFormat:@"/api/accounts/enterprises/.json"];
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet                              url:strURL  params:params success:success failure:failure];
+}
+
 
 @end

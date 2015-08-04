@@ -18,6 +18,7 @@
 @property (nonatomic,strong) NSArray *seletedUsers;
 @property (nonatomic,assign) BOOL hideSectionHeader;
 @property (nonatomic,strong) NSMutableArray *friends;
+@property (nonatomic,strong) NSMutableArray *enterprises;
 @property (strong, nonatomic) NSMutableArray *searchResult;
 @property (strong, nonatomic) UISearchDisplayController* searchDisplayController1;
 

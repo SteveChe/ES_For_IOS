@@ -184,6 +184,10 @@
 		F277AE071B2DC72A006E42CB /* BMBase.m in Sources */ = {isa = PBXBuildFile; fileRef = F277AE061B2DC72A006E42CB /* BMBase.m */; };
 		F277AE0A1B2DCF39006E42CB /* StretchImageUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = F277AE091B2DCF39006E42CB /* StretchImageUtil.m */; };
 		F277AE0D1B2DD066006E42CB /* UIPageNavigator.m in Sources */ = {isa = PBXBuildFile; fileRef = F277AE0C1B2DD066006E42CB /* UIPageNavigator.m */; };
+		F28B6C811B6F8E3D00E0C267 /* FollowEnterpriseDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F28B6C801B6F8E3D00E0C267 /* FollowEnterpriseDataParse.m */; };
+		F28B6C841B6F969100E0C267 /* ESEnterpriseDetailInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F28B6C831B6F969100E0C267 /* ESEnterpriseDetailInfo.m */; };
+		F28B6C871B6F991600E0C267 /* GetEnterpriseDetailDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F28B6C861B6F991600E0C267 /* GetEnterpriseDetailDataParse.m */; };
+		F28B6C8A1B6FAB5D00E0C267 /* GetEnterpriseListDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F28B6C891B6FAB5D00E0C267 /* GetEnterpriseListDataParse.m */; };
 		F29F86281B2410070058FC9F /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F29F86161B2410070058FC9F /* AFHTTPRequestOperation.m */; };
 		F29F86291B2410070058FC9F /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F29F86181B2410070058FC9F /* AFHTTPRequestOperationManager.m */; };
 		F29F862A1B2410070058FC9F /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F29F861A1B2410070058FC9F /* AFHTTPSessionManager.m */; };
@@ -575,6 +579,14 @@
 		F277AE091B2DCF39006E42CB /* StretchImageUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StretchImageUtil.m; path = Utilities/common/StretchImageUtil.m; sourceTree = "<group>"; };
 		F277AE0B1B2DD066006E42CB /* UIPageNavigator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIPageNavigator.h; path = Utilities/common/UIPageNavigator.h; sourceTree = "<group>"; };
 		F277AE0C1B2DD066006E42CB /* UIPageNavigator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIPageNavigator.m; path = Utilities/common/UIPageNavigator.m; sourceTree = "<group>"; };
+		F28B6C7F1B6F8E3D00E0C267 /* FollowEnterpriseDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowEnterpriseDataParse.h; sourceTree = "<group>"; };
+		F28B6C801B6F8E3D00E0C267 /* FollowEnterpriseDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowEnterpriseDataParse.m; sourceTree = "<group>"; };
+		F28B6C821B6F969100E0C267 /* ESEnterpriseDetailInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ESEnterpriseDetailInfo.h; path = Model/ESEnterpriseDetailInfo.h; sourceTree = "<group>"; };
+		F28B6C831B6F969100E0C267 /* ESEnterpriseDetailInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ESEnterpriseDetailInfo.m; path = Model/ESEnterpriseDetailInfo.m; sourceTree = "<group>"; };
+		F28B6C851B6F991600E0C267 /* GetEnterpriseDetailDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetEnterpriseDetailDataParse.h; sourceTree = "<group>"; };
+		F28B6C861B6F991600E0C267 /* GetEnterpriseDetailDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetEnterpriseDetailDataParse.m; sourceTree = "<group>"; };
+		F28B6C881B6FAB5D00E0C267 /* GetEnterpriseListDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetEnterpriseListDataParse.h; sourceTree = "<group>"; };
+		F28B6C891B6FAB5D00E0C267 /* GetEnterpriseListDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetEnterpriseListDataParse.m; sourceTree = "<group>"; };
 		F29F86151B2410070058FC9F /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPRequestOperation.h; path = Utilities/AFNetworking/AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		F29F86161B2410070058FC9F /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFHTTPRequestOperation.m; path = Utilities/AFNetworking/AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		F29F86171B2410070058FC9F /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPRequestOperationManager.h; path = Utilities/AFNetworking/AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -876,6 +888,12 @@
 				F23630BC1B68F61800A12F63 /* TagDataParse.m */,
 				F256CB761B6CAE23009478C2 /* EnterPriseRequestDataParse.h */,
 				F256CB771B6CAE23009478C2 /* EnterPriseRequestDataParse.m */,
+				F28B6C7F1B6F8E3D00E0C267 /* FollowEnterpriseDataParse.h */,
+				F28B6C801B6F8E3D00E0C267 /* FollowEnterpriseDataParse.m */,
+				F28B6C851B6F991600E0C267 /* GetEnterpriseDetailDataParse.h */,
+				F28B6C861B6F991600E0C267 /* GetEnterpriseDetailDataParse.m */,
+				F28B6C881B6FAB5D00E0C267 /* GetEnterpriseListDataParse.h */,
+				F28B6C891B6FAB5D00E0C267 /* GetEnterpriseListDataParse.m */,
 			);
 			name = DataDrive;
 			sourceTree = "<group>";
@@ -1157,6 +1175,8 @@
 				F23059C51B56ADE3004599FA /* ESUserDetailInfo.m */,
 				F234617A1B5AB49E00C88FAC /* ESEnterpriseInfo.h */,
 				F234617B1B5AB49E00C88FAC /* ESEnterpriseInfo.m */,
+				F28B6C821B6F969100E0C267 /* ESEnterpriseDetailInfo.h */,
+				F28B6C831B6F969100E0C267 /* ESEnterpriseDetailInfo.m */,
 				2BEBBD841B665BCB008BE7C4 /* ESTaskDashboard.h */,
 				2BEBBD851B665BCB008BE7C4 /* ESTaskDashboard.m */,
 				2BEBBD871B6661FD008BE7C4 /* ESTaskOriginatorInfo.h */,
@@ -1645,6 +1665,7 @@
 				F23461DD1B5E8CBF00C88FAC /* ChatSettingViewController.m in Sources */,
 				F23461711B5AA0FD00C88FAC /* FMDatabaseQueue.m in Sources */,
 				F277AE0A1B2DCF39006E42CB /* StretchImageUtil.m in Sources */,
+				F28B6C811B6F8E3D00E0C267 /* FollowEnterpriseDataParse.m in Sources */,
 				2B39C9761B2D7B05007BAC7A /* TaskOverviewViewController.m in Sources */,
 				2BE8C2301B4EC58500858CEE /* ESViewController.m in Sources */,
 				2BE8C22C1B4EB3A200858CEE /* AddProfessionViewController.m in Sources */,
@@ -1676,6 +1697,7 @@
 				F22FE2EB1B4000ED00A1A997 /* SDWebImageManager.m in Sources */,
 				2B39C93B1B241212007BAC7A /* MASViewAttribute.m in Sources */,
 				F24787721B2D5CE700EC266B /* ChangePwdDataParse.m in Sources */,
+				F28B6C871B6F991600E0C267 /* GetEnterpriseDetailDataParse.m in Sources */,
 				2BEBBD891B6661FD008BE7C4 /* ESTaskOriginatorInfo.m in Sources */,
 				F22FE2BD1B3FFBB200A1A997 /* RCDChatListCell.m in Sources */,
 				F23461701B5AA0FD00C88FAC /* FMDatabasePool.m in Sources */,
@@ -1725,6 +1747,7 @@
 				F23059BA1B52C141004599FA /* RCDAddressBookViewTableViewCell.m in Sources */,
 				F277ADFE1B2DC046006E42CB /* CustomMessageBox.m in Sources */,
 				2BE55A161B64CF17008CDB4B /* AddTaskViewController.m in Sources */,
+				F28B6C841B6F969100E0C267 /* ESEnterpriseDetailInfo.m in Sources */,
 				F29F864A1B2410320058FC9F /* UIWebView+AFNetworking.m in Sources */,
 				2B5A59151B48DFBB000382D7 /* MRActivityIndicatorView+AFNetworking.m in Sources */,
 				F22FE2F31B4000ED00A1A997 /* UIView+WebCacheOperation.m in Sources */,
@@ -1749,6 +1772,7 @@
 				F2F92EC51B4AB58F0047D7BF /* RCDAcceptContactViewController.m in Sources */,
 				2B39C93D1B241212007BAC7A /* NSArray+MASAdditions.m in Sources */,
 				F2D2338B1B36B0DD00F8C65D /* NSString+MD5Addition.m in Sources */,
+				F28B6C8A1B6FAB5D00E0C267 /* GetEnterpriseListDataParse.m in Sources */,
 				F29F86301B2410070058FC9F /* AFURLSessionManager.m in Sources */,
 				2B31C3D81B11C3FD004C865A /* AppDelegate.m in Sources */,
 				F24787751B2D775E00EC266B /* SignUpDataParse.m in Sources */,

@@ -36,10 +36,6 @@
                  {
                      break;
                  }
-                     if (temDic == nil || [temDic isEqual:[NSNull null]])
-                     {
-                         break;
-                     }
                      
                      ESUserDetailInfo* userDetailInfo = [[ESUserDetailInfo alloc] init];
                      NSNumber* userId = [temDic valueForKey:@"id"];
