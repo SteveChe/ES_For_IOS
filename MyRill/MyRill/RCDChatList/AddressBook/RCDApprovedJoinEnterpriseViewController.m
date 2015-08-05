@@ -11,6 +11,7 @@
 #import "UIImageView+WebCache.h"
 #import "ESEnterPriseRequestInfo.h"
 #import "ESUserInfo.h"
+#import "RCDAddressBookDetailViewController.h"
 
 @interface RCDApprovedJoinEnterpriseViewController ()
 @property (nonatomic,strong)EnterPriseRequestDataParse* enterpriseRequestDataParse;
@@ -91,6 +92,16 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ESEnterPriseRequestInfo* enterpriseRequestInfo = [_enterpriseRequestInfoList objectAtIndex:indexPath.row];
+    RCDAddressBookDetailViewController* addressDetailVC = [[RCDAddressBookDetailViewController alloc] init];
+    if (enterpriseRequestInfo == nil || enterpriseRequestInfo.sender == nil) {
+        return;
+    }
+    addressDetailVC.userId = enterpriseRequestInfo.sender.userId;
+    [self.navigationController pushViewController:addressDetailVC animated:YES];
+}
 
 
 #pragma mark -- GetEnterPriseRequestListDelegate

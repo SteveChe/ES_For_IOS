@@ -60,6 +60,7 @@
                      {
                          enterpriseInfo.enterpriseName = enterpriseName;
                      }
+                     
                      NSString* enterpriseCategory = [temDic valueForKey:@"category"];
                      if (enterpriseCategory != nil && ![enterpriseCategory isEqual:[NSNull null]])
                      {
@@ -78,14 +79,18 @@
                      }
                      
                      NSNumber* bVerifiedNum = [temDic valueForKey:@"verified"];
-                     if (bVerifiedNum != nil && [bVerifiedNum isEqual:[NSNull null]])
+                     if (bVerifiedNum != nil && ![bVerifiedNum isEqual:[NSNull null]])
                      {
                          enterpriseInfo.bVerified = [bVerifiedNum boolValue];
                      }
-                     
+
+                     NSNumber* bFollowedNum = [temDic valueForKey:@"is_following"];
+                     if (bFollowedNum != nil && ![bFollowedNum isEqual:[NSNull null]])
+                     {
+                         enterpriseInfo.bIsFollowed = [bFollowedNum boolValue];
+                     }
                      
                      [enterpriseInfoArray addObject:enterpriseInfo];
-                     
                  }
                  
                  if (self.getFollowedEnterPriseListDelegate!= nil && [self.getFollowedEnterPriseListDelegate respondsToSelector:@selector(getFollowedEnterpriseListSucceed:)])
@@ -181,11 +186,16 @@
                      }
                      
                      NSNumber* bVerifiedNum = [temDic valueForKey:@"verified"];
-                     if (bVerifiedNum != nil && [bVerifiedNum isEqual:[NSNull null]])
+                     if (bVerifiedNum != nil && ![bVerifiedNum isEqual:[NSNull null]])
                      {
                          enterpriseInfo.bVerified = [bVerifiedNum boolValue];
                      }
-                     
+                     NSNumber* bFollowedNum = [temDic valueForKey:@"is_following"];
+                     if (bFollowedNum != nil && ![bFollowedNum isEqual:[NSNull null]])
+                     {
+                         enterpriseInfo.bIsFollowed = [bFollowedNum boolValue];
+                     }
+
                      
                      [enterpriseInfoArray addObject:enterpriseInfo];
                      

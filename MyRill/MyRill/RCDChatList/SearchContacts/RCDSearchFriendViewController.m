@@ -18,6 +18,8 @@
 #import "RCDPhoneAddressBookViewController.h"
 //#import "RCDAddressBookQRCodeViewController.h"
 #import "QRCodeViewController.h"
+#import "RCDSearchEnterpriseViewController.h"
+#import "FollowEnterpriseDataParse.h"
 
 
 @interface RCDSearchFriendViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,UISearchControllerDelegate,UISearchDisplayDelegate>
@@ -161,7 +163,9 @@
                 break;
             case 2:
             {
-                
+                RCDSearchEnterpriseViewController* searchEnterpriseVC = [[RCDSearchEnterpriseViewController alloc] init];
+                [self.navigationController pushViewController:searchEnterpriseVC animated:YES];
+
             }
                 break;
             default:

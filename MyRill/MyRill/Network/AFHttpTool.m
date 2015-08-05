@@ -518,7 +518,7 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
 +(void)getFollowedEnterpriseListSuccess:(void (^)(id response))success
                                 failure:(void (^)(NSError *error))failure
 {
-    NSString* strURL = [NSString stringWithFormat:@"/api/accounts/enterprises/?follow.json"];
+    NSString* strURL = [NSString stringWithFormat:@"/api/accounts/enterprises/?follow"];
     [AFHttpTool requestWithMethod:RequestMethodTypeGet                              url:strURL  params:nil success:success failure:failure];
 
 }

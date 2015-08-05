@@ -177,6 +177,7 @@
 		F256CB7F1B6E4247009478C2 /* RCDJoinEnterpriseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F256CB7D1B6E4247009478C2 /* RCDJoinEnterpriseViewController.m */; };
 		F256CB801B6E4247009478C2 /* RCDJoinEnterpriseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F256CB7E1B6E4247009478C2 /* RCDJoinEnterpriseViewController.xib */; };
 		F256CB831B6E5921009478C2 /* RCDApprovedJoinEnterpriseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F256CB821B6E5921009478C2 /* RCDApprovedJoinEnterpriseViewController.m */; };
+		F2735FBA1B710C2C00138080 /* RCDSearchEnterpriseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2735FB91B710C2C00138080 /* RCDSearchEnterpriseViewController.m */; };
 		F277ADFB1B2DBE97006E42CB /* CustomShowMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = F277ADFA1B2DBE97006E42CB /* CustomShowMessage.m */; };
 		F277ADFE1B2DC046006E42CB /* CustomMessageBox.m in Sources */ = {isa = PBXBuildFile; fileRef = F277ADFD1B2DC046006E42CB /* CustomMessageBox.m */; };
 		F277AE011B2DC146006E42CB /* DeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F277AE001B2DC146006E42CB /* DeviceInfo.m */; };
@@ -565,6 +566,8 @@
 		F256CB7E1B6E4247009478C2 /* RCDJoinEnterpriseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RCDJoinEnterpriseViewController.xib; path = RCDChatList/SearchContacts/RCDJoinEnterpriseViewController.xib; sourceTree = "<group>"; };
 		F256CB811B6E5921009478C2 /* RCDApprovedJoinEnterpriseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCDApprovedJoinEnterpriseViewController.h; path = RCDChatList/AddressBook/RCDApprovedJoinEnterpriseViewController.h; sourceTree = "<group>"; };
 		F256CB821B6E5921009478C2 /* RCDApprovedJoinEnterpriseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RCDApprovedJoinEnterpriseViewController.m; path = RCDChatList/AddressBook/RCDApprovedJoinEnterpriseViewController.m; sourceTree = "<group>"; };
+		F2735FB81B710C2C00138080 /* RCDSearchEnterpriseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCDSearchEnterpriseViewController.h; path = RCDChatList/SearchContacts/RCDSearchEnterpriseViewController.h; sourceTree = "<group>"; };
+		F2735FB91B710C2C00138080 /* RCDSearchEnterpriseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RCDSearchEnterpriseViewController.m; path = RCDChatList/SearchContacts/RCDSearchEnterpriseViewController.m; sourceTree = "<group>"; };
 		F277ADF91B2DBE97006E42CB /* CustomShowMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomShowMessage.h; path = Utilities/common/CustomShowMessage.h; sourceTree = "<group>"; };
 		F277ADFA1B2DBE97006E42CB /* CustomShowMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomShowMessage.m; path = Utilities/common/CustomShowMessage.m; sourceTree = "<group>"; };
 		F277ADFC1B2DC046006E42CB /* CustomMessageBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomMessageBox.h; path = Utilities/common/CustomMessageBox.h; sourceTree = "<group>"; };
@@ -1228,6 +1231,8 @@
 				F256CB7C1B6E4247009478C2 /* RCDJoinEnterpriseViewController.h */,
 				F256CB7D1B6E4247009478C2 /* RCDJoinEnterpriseViewController.m */,
 				F256CB7E1B6E4247009478C2 /* RCDJoinEnterpriseViewController.xib */,
+				F2735FB81B710C2C00138080 /* RCDSearchEnterpriseViewController.h */,
+				F2735FB91B710C2C00138080 /* RCDSearchEnterpriseViewController.m */,
 			);
 			name = SearchContacts;
 			sourceTree = "<group>";
@@ -1703,6 +1708,7 @@
 				F23461701B5AA0FD00C88FAC /* FMDatabasePool.m in Sources */,
 				2B5A591E1B48F921000382D7 /* ChangPhoneNumViewController.m in Sources */,
 				F277ADFB1B2DBE97006E42CB /* CustomShowMessage.m in Sources */,
+				F2735FBA1B710C2C00138080 /* RCDSearchEnterpriseViewController.m in Sources */,
 				F22FE2821B3ADB6000A1A997 /* ChatViewController.m in Sources */,
 				F23059C61B56ADE3004599FA /* ESUserDetailInfo.m in Sources */,
 				F22FE2A71B3FFAC200A1A997 /* RCDAddressBookViewController.m in Sources */,

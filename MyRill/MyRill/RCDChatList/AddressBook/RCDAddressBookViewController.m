@@ -21,12 +21,15 @@
 #import "RCDAddressBookDetailViewController.h"
 #import "ColorHandler.h"
 #import "RCDApprovedJoinEnterpriseViewController.h"
+#import "GetEnterpriseListDataParse.h"
+#import "ESEnterpriseInfo.h"
 
-@interface RCDAddressBookViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,UISearchControllerDelegate,UISearchDisplayDelegate>
+@interface RCDAddressBookViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,UISearchControllerDelegate,UISearchDisplayDelegate,GetFollowedEnterpriseListDelegate>
 
 //#字符索引对应的user object
 @property (nonatomic,strong) NSMutableArray *tempOtherArr;
 @property (nonatomic,strong) GetContactListDataParse* getContactListDataParse;
+@property (nonatomic,strong) GetEnterpriseListDataParse* getEnterpriseListDataParse;
 
 @end
 
@@ -49,6 +52,9 @@
     self.tabBarController.tabBar.hidden = NO;
     _getContactListDataParse = [[GetContactListDataParse alloc] init];
     _getContactListDataParse.delegate = self;
+    
+    _getEnterpriseListDataParse = [[GetEnterpriseListDataParse alloc] init];
+    _getEnterpriseListDataParse.getFollowedEnterPriseListDelegate = self;
 
     [self getAllData];
     
@@ -102,7 +108,24 @@
 -(void) getAllData
 {
     [_getContactListDataParse getContactList];
+    [_getEnterpriseListDataParse getFollowedEnterpriseList];
 }
+
+#pragma mark - GetFollowedEnterpriseListDelegate
+-(void)getFollowedEnterpriseListSucceed:(NSArray*)enterpriseList
+{
+    _enterprises = [NSMutableArray arrayWithArray:enterpriseList];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+    });
+}
+-(void)getFollowedEnterpriseListFailed:(NSString*)errorMessage
+{
+    
+}
+
 
 #pragma mark - GetContactListDelegate
 -(void)getContactList:(NSArray*)contactList
@@ -175,10 +198,52 @@
             }
             return cell;
         }
+        else if (indexPath.section == 1)
+        {
+            if ([_enterprises count] > 0)
+            {
+                cell.accessoryType = UITableViewCellAccessoryNone;
+                ESEnterpriseInfo* enterpriseInfo = _enterprises[indexPath.row];
+                if (enterpriseInfo) {
+                    cell.addressBookName.text = enterpriseInfo.enterpriseName;
+//                    [cell.ivAva sd_setImageWithURL:[NSURL URLWithString:enterpriseInfo.portraitUri] placeholderImage:[UIImage imageNamed:@"头像_100"]];
+                    [cell.ivAva setImage:[UIImage imageNamed:@"头像_100"]];
+                    cell.ivAva.clipsToBounds = YES;
+                    cell.ivAva.layer.cornerRadius = 18.f;
+                    
+                }
+                return cell;
+                
+            }
+            else
+            {
+                cell.accessoryType = UITableViewCellAccessoryNone;
+                ESContactList* contactList = _friends[indexPath.section-1];
+                
+                ESUserInfo *user = contactList.contactList[indexPath.row];
+                if(user){
+                    cell.addressBookName.text = user.userName;
+                    [cell.ivAva sd_setImageWithURL:[NSURL URLWithString:user.portraitUri] placeholderImage:[UIImage imageNamed:@"头像_100"]];
+                    cell.ivAva.clipsToBounds = YES;
+                    cell.ivAva.layer.cornerRadius = 18.f;
+                }
+                
+                return cell;
+            }
+        }
         else
         {
+            ESContactList* contactList = nil;
+            if ([_enterprises count] > 0)
+            {
+                contactList = [_friends objectAtIndex:indexPath.section-2];
+            }
+            else
+            {
+                contactList = [_friends objectAtIndex:indexPath.section-1];
+            }
+
             cell.accessoryType = UITableViewCellAccessoryNone;
-            ESContactList* contactList = _friends[indexPath.section-1];
             
             ESUserInfo *user = contactList.contactList[indexPath.row];
             if(user){
@@ -203,10 +268,31 @@
     {
         return 3;
     }
+    else if (section == 1)
+    {
+        if ([_enterprises count]>0)
+        {
+            return [_enterprises count];
+        }
+        else
+        {
+            ESContactList* contactList = [_friends objectAtIndex:section-1];
+            return [contactList.contactList count];
+        }
+    }
     else
     {
-        ESContactList* contactList = [_friends objectAtIndex:section-1];
-        return [contactList.contactList count];
+        if ([_enterprises count] > 0)
+        {
+            ESContactList* contactList = [_friends objectAtIndex:section-2];
+            return [contactList.contactList count];
+        }
+        else
+        {
+            ESContactList* contactList = [_friends objectAtIndex:section-1];
+            return [contactList.contactList count];
+        }
+
     }
 }
 
@@ -215,6 +301,10 @@
     if(tableView == self.searchDisplayController.searchResultsTableView)
     {
         return 1;
+    }
+    if ([_enterprises count] > 0)
+    {
+        return [_friends count]+1+1;
     }
     return [_friends count]+1;
 }
@@ -237,10 +327,30 @@
         {
             return nil;
         }
+        else if(section == 1)
+        {
+            if ([_enterprises count] > 0)
+            {
+                return @"企业号联系人";
+            }
+            else
+            {
+                ESContactList* contactList = [_friends objectAtIndex:section-1];
+                return contactList.enterpriseName;
+            }
+        }
         else
         {
-            ESContactList* contactList = [_friends objectAtIndex:section-1];
-            return contactList.enterpriseName;
+            if ([_enterprises count] > 0)
+            {
+                ESContactList* contactList = [_friends objectAtIndex:section-2];
+                return contactList.enterpriseName;
+            }
+            else
+            {
+                ESContactList* contactList = [_friends objectAtIndex:section-1];
+                return contactList.enterpriseName;
+            }
         }
     }
 
@@ -272,10 +382,36 @@
             }
             
         }
-        else
+        else if (indexPath.section == 1)
         {
+            if ([_enterprises count]>0)
+            {
+                
+            }
+            else
+            {
+                RCDAddressBookDetailViewController* addressBookDetailVC = [[RCDAddressBookDetailViewController alloc] init];
+                ESContactList* contactList = [_friends objectAtIndex:indexPath.section-1];
+                ESUserInfo *user = contactList.contactList[indexPath.row];
+                addressBookDetailVC.userId = user.userId;
+                [self.navigationController pushViewController:addressBookDetailVC animated:YES];
+            }
+        }
+        else
+            
+        {
+            ESContactList* contactList = nil;
+            if ([_enterprises count] > 0)
+            {
+                contactList = [_friends objectAtIndex:indexPath.section-2];
+            }
+            else
+            {
+                contactList = [_friends objectAtIndex:indexPath.section-1];
+            }
+
             RCDAddressBookDetailViewController* addressBookDetailVC = [[RCDAddressBookDetailViewController alloc] init];
-            ESContactList* contactList = [_friends objectAtIndex:indexPath.section-1];
+//            ESContactList* contactList = [_friends objectAtIndex:indexPath.section-2];
             ESUserInfo *user = contactList.contactList[indexPath.row];
             addressBookDetailVC.userId = user.userId;
             [self.navigationController pushViewController:addressBookDetailVC animated:YES];

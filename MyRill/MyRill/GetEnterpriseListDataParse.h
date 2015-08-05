@@ -15,7 +15,6 @@
 @protocol GetSearchEnterpriseListDelegate <NSObject>
 -(void)getSearchEnterpriseListSucceed:(NSArray*)enterpriseList;
 -(void)getSearchEnterpriseListFailed:(NSString*)errorMessage;
-
 @end
 
 @interface GetEnterpriseListDataParse : NSObject
