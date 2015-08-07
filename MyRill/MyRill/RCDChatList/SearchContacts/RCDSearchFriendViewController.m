@@ -18,6 +18,8 @@
 #import "RCDPhoneAddressBookViewController.h"
 //#import "RCDAddressBookQRCodeViewController.h"
 #import "QRCodeViewController.h"
+#import "RCDSearchEnterpriseViewController.h"
+#import "FollowEnterpriseDataParse.h"
 
 
 @interface RCDSearchFriendViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,UISearchControllerDelegate,UISearchDisplayDelegate>
@@ -92,7 +94,7 @@
         ESUserInfo *user =_searchResult[indexPath.row];
         if(user){
             cell.lblName.text = user.userName;
-            [cell.ivAva sd_setImageWithURL:[NSURL URLWithString:user.portraitUri] placeholderImage:[UIImage imageNamed:@"icon_person"]];
+            [cell.ivAva sd_setImageWithURL:[NSURL URLWithString:user.portraitUri] placeholderImage:[UIImage imageNamed:@"头像_100"]];
         }
     }
     else
@@ -161,7 +163,9 @@
                 break;
             case 2:
             {
-                
+                RCDSearchEnterpriseViewController* searchEnterpriseVC = [[RCDSearchEnterpriseViewController alloc] init];
+                [self.navigationController pushViewController:searchEnterpriseVC animated:YES];
+
             }
                 break;
             default:

@@ -24,6 +24,7 @@ void(^completionHandler)(RCUserInfo* userInfo);
 
 @interface ChatListViewController ()<ContactDetailDataDelegate>
 @property (nonatomic,strong) GetContactDetailDataParse* getContactDetailDataParse;
+@property (atomic,assign)NSInteger nUserDetailRequestNum;
 
 @end
 
@@ -47,6 +48,7 @@ void(^completionHandler)(RCUserInfo* userInfo);
     [[RCIM sharedRCIM] setUserInfoDataSource:self];
     _getContactDetailDataParse = [[GetContactDetailDataParse alloc] init];
     _getContactDetailDataParse.delegate = self;
+    _nUserDetailRequestNum = 0;
 
 }
 
@@ -74,6 +76,15 @@ void(^completionHandler)(RCUserInfo* userInfo);
     self.navigationItem.rightBarButtonItem = rightButton;
 
     [self updateBadgeValueForTabBarItem];
+    
+    if (_nUserDetailRequestNum == 0)
+    {
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.conversationListTableView reloadData];
+            });
+        });
+    }
 }
 
 - (void)updateBadgeValueForTabBarItem
@@ -320,10 +331,43 @@ void(^completionHandler)(RCUserInfo* userInfo);
     user.name = userDetailInfo.userName;
     user.portraitUri = userDetailInfo.portraitUri;
     completionHandler(user);
+    _nUserDetailRequestNum -- ;
+    if (_nUserDetailRequestNum == 0)
+    {
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.conversationListTableView reloadData];
+            });
+        });
+    }
 }
 - (void)getContactDetailFailed:(NSString*)errorMessage
 {
-    
+    _nUserDetailRequestNum -- ;
+    if (_nUserDetailRequestNum == 0)
+    {
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.conversationListTableView reloadData];
+            });
+        });
+    }
+}
+
+#pragma mark override
+/**
+ *  点击头像事件
+ *
+ *  @param model 会话model
+ */
+- (void)didTapCellPortrait:(RCConversationModel *)model
+{
+    ChatViewController *chat =[[ChatViewController alloc]init];
+    chat.targetId                      = model.targetId;
+    chat.userName                    = model.conversationTitle;
+    chat.conversationType              = model.conversationType;
+    chat.title                         = model.conversationTitle;
+    [self.navigationController pushViewController:chat animated:YES];
 }
 
 
@@ -385,6 +429,8 @@ void(^completionHandler)(RCUserInfo* userInfo);
     if(userInfo == nil || [userInfo isEqual:[NSNull null]])
     {
         completionHandler = completion;
+        [_getContactDetailDataParse getContactDetail:userId];
+        _nUserDetailRequestNum ++ ;
     }
     else
     {

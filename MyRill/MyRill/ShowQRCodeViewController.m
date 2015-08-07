@@ -28,6 +28,11 @@
     [self.view layoutIfNeeded];
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.tabBarController.tabBar.hidden = YES;
+}
+
 - (void)setQrCodePNGView:(UIImageView *)qrCodePNGView {
     _qrCodePNGView = qrCodePNGView;
     

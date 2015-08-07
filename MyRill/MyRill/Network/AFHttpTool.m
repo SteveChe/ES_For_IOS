@@ -259,7 +259,7 @@
                    failure:(void (^)(NSError* err))failure
 {
     [AFHttpTool requestWithMethod:RequestMethodTypeGet
-                              url:@"/api/accounts/get-rong-token/.json"
+                              url:@"/api/chat/get-rong-token/.json"
                            params:nil
                           success:success failure:failure];
 }
@@ -491,6 +491,85 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
     }
 
 
+}
+
+//获取人的标签
++ (void)getTagByUserid:(NSString*)userId success:(void (^)(id response))success failure:(void (^)(NSError *error))failure
+{
+    NSString* strURL = [NSString stringWithFormat:@"/api/accounts/users/%@/tags/.json",userId];
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet
+                              url:strURL
+                           params:nil
+                          success:success failure:failure];
+}
+
+//请求加入企业
++ (void)requestJoinEnterPriseWithUserId:(NSString*)userId success:(void (^)(id response))success failure:(void (^)(NSError *error))failure
+{
+    NSString* strURL = [NSString stringWithFormat:@"/api/accounts/enterprise-requests/.json"];
+    NSDictionary *params = @{@"receiver":userId};
+
+    [AFHttpTool requestWithMethod:RequestMethodTypePost
+                              url:strURL
+                           params:params
+                          success:success failure:failure];
+}
+
+//获取请求加入企业的人员列表
++ (void)getEnterPriseRequestList:(void (^)(id response))success
+                         failure:(void (^)(NSError *error))failure
+{
+    NSString* strURL = [NSString stringWithFormat:@"/api/accounts/enterprise-requests/.json"];
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet                              url:strURL  params:nil success:success failure:failure];
+}
+
+//同意加入企业
++ (void)approvedEnterPriseRequestId:(NSString*)requestId  approved:(BOOL)bApproved success:(void (^)(id response))success failure:(void (^)(NSError *error))failure
+{
+    NSString* strURL = [NSString stringWithFormat:@"/api/accounts/enterprise-requests/%@/.json",requestId];
+    NSDictionary *params = @{@"approved":[NSNumber numberWithBool:bApproved]};
+
+    [AFHttpTool requestWithMethod:RequestMethodTypePost                              url:strURL  params:params success:success failure:failure];
+}
+
+//关注/取消关注企业
++ (void)followEnterPriseId:(NSString*)enterpriseId  action:(NSString*)action success:(void (^)(id response))success failure:(void (^)(NSError *error))failure
+{
+    NSString* strURL = [NSString stringWithFormat:@"/api/accounts/enterprises/%@/follow/.json",enterpriseId];
+    NSDictionary *params = @{@"action":action};
+    [AFHttpTool requestWithMethod:RequestMethodTypePost                              url:strURL  params:params success:success failure:failure];
+}
+
+/******** 获取企业详情******
+ 请求方式：POST
+ 参数：无
+ 备注：该接口返回该企业的详细信息
+ **/
++(void) getEnterpriseDetail:(NSString*)enterpriseId success:(void (^)(id response))success failure:(void (^)(NSError *error))failure
+{
+    NSString* strURL = [NSString stringWithFormat:@"/api/accounts/enterprises/%@/.json",enterpriseId];
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet                              url:strURL  params:nil success:success failure:failure];
+}
+
+//获取关注的企业列表
++(void)getFollowedEnterpriseListSuccess:(void (^)(id response))success
+                                failure:(void (^)(NSError *error))failure
+{
+    NSString* strURL = [NSString stringWithFormat:@"/api/accounts/enterprises/?follow"];
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet                              url:strURL  params:nil success:success failure:failure];
+
+}
+
+/******** 搜索企业******
+ 参数：?q=keyWord
+ 请求方式：GET
+ 备注：如果keyWord为空，则返回所有联系人
+ **/
++(void)searchEnterprises:(NSString*) keyWord success:(void (^)(id response))success failure:(void (^)(NSError* err))failure
+{
+    NSDictionary *params = @{@"q":keyWord};
+    NSString* strURL = [NSString stringWithFormat:@"/api/accounts/enterprises/.json"];
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet                              url:strURL  params:params success:success failure:failure];
 }
 
 

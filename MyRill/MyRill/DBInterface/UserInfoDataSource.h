@@ -20,4 +20,8 @@
 -(NSArray*) getPhoneAddressBookContactList;
 
 -(void) insertContactList:(NSArray*)contactList;
+
+//删除用户表
+-(void) clearAllUserInfo;
+
 @end

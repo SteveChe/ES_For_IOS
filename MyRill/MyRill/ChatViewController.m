@@ -35,6 +35,24 @@
                                                                    action:@selector(rightBarButtonItemPressed:)];
 
     self.navigationItem.rightBarButtonItem = rightButton;
+//    self.title = self.conversation.conversationTitle;
+    [self initConversationInfo];
+
+}
+
+-(void) initConversationInfo
+{
+    if (self.conversationType == ConversationType_DISCUSSION)
+    {
+        //        __weak RCSettingViewController* weakSelf = self;
+        [[RCIMClient sharedRCIMClient] getDiscussion:self.targetId success:^(RCDiscussion* discussion) {
+            if (discussion) {
+                self.title = discussion.discussionName;
+            }
+        } error:^(RCErrorCode status){
+            
+        }];
+    }
 
 }
 
@@ -58,15 +76,8 @@
     ChatSettingViewController* chatSettingVC = [[ChatSettingViewController alloc] init];
     chatSettingVC.conversationType = self.conversationType;
     chatSettingVC.targetId = self.targetId;
-//    if (self.conversationType == ConversationType_PRIVATE)
-//    {
-//        [chatSettingVC.userIdList addObject:self.targetId];
-//    }
-//    else if(self.conversationType == ConversationType_DISCUSSION)
-//    {
-//        [chatSettingVC.userIdList addObjectsFromArray:self.userIDList];
-//    }
-    
+    chatSettingVC.conversationTitle = self.userName;
+
     [self.navigationController pushViewController:chatSettingVC animated:YES];
 }
 

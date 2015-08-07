@@ -10,6 +10,7 @@
 #import "CustomShowMessage.h"
 #import "ESUserInfo.h"
 #import "UIImageView+WebCache.h"
+#import "RCDAddressBookDetailViewController.h"
 
 @interface RCDAcceptContactViewController ()
 @property (nonatomic,strong)GetRequestContactListDataParse* getRequestContactListDataParse;
@@ -91,6 +92,16 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ESUserInfo* userInfo = [_requestContactList objectAtIndex:indexPath.row];
+    RCDAddressBookDetailViewController* addressDetailVC = [[RCDAddressBookDetailViewController alloc] init];
+    if (userInfo == nil || userInfo.userId == nil) {
+        return;
+    }
+    addressDetailVC.userId = userInfo.userId;
+    [self.navigationController pushViewController:addressDetailVC animated:YES];
+}
 #pragma mark GetRequestContactListDelegate
 -(void)getRequestedContactList:(NSArray*)contactList
 {
@@ -129,14 +140,6 @@
     [[CustomShowMessage getInstance] hideWaitingIndicator];
     [[CustomShowMessage getInstance] showNotificationMessage:errorMessage];
 }
-
-#pragma mark event - clicked
-//-(IBAction)acceptButtonClicked:(id)sender
-//{
-//    UIButton* button = (UIButton*)sender;
-//    ESUserInfo* userInfo = [_requestContactList objectAtIndex:button.tag];
-//    [_addContactDataParse acceptContact:userInfo.userId];
-//}
 
 #pragma mark-- RCDPhoneAddressBookTableViewCellDelegate
 -(void)addButtonClick:(id)sender

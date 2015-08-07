@@ -15,6 +15,7 @@
 #import "ChatViewController.h"
 #import "UIImageView+WebCache.h"
 #import "ShowQRCodeViewController.h"
+#import "ESTagViewController.h"
 
 @interface RCDAddressBookDetailViewController ()
 @property (nonatomic,strong) GetContactDetailDataParse* getContactDetailDataParse;
@@ -135,7 +136,6 @@
     if(_userDetailInfo == nil)
         return nil;
     static NSString *cellReuseIdentifier = @"RCDAddressBookDetailTableViewCell";
-    ;
     RCDAddressBookDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellReuseIdentifier forIndexPath:indexPath];
 
     if(indexPath.section == 0)
@@ -143,7 +143,7 @@
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.qrCodeImage.hidden = YES;
         cell.titleLabel.text = @"标签选择";
-
+        
     }
     else if (indexPath.section == 1)
     {
@@ -153,6 +153,7 @@
             cell.titleLabel.text = @"企业二维码";
             cell.qrCodeImage.hidden = NO;
             [cell.qrCodeImage setImage:[UIImage imageNamed:@"二维码"]];
+            
         }
         else if(indexPath.row == 1)
         {
@@ -160,6 +161,7 @@
             cell.titleLabel.text = @"个人二维码";
             cell.qrCodeImage.hidden = NO;
             [cell.qrCodeImage setImage:[UIImage imageNamed:@"二维码"]];
+            
         }
 
     }
@@ -176,7 +178,10 @@
 {
     if(indexPath.section == 0)
     {
-        NSLog(@"跳转标签页面");
+        ESTagViewController* tagViewVC = [[ESTagViewController alloc] init];
+        tagViewVC.userId = _userDetailInfo.userId;
+        tagViewVC.tagType = TAG_TYPE_USER;
+        [self.navigationController pushViewController:tagViewVC animated:YES];
     }
     else if (indexPath.section == 1)
     {
@@ -184,9 +189,8 @@
         {
             ShowQRCodeViewController* showQRCodeVC = [[ShowQRCodeViewController alloc] init];
             showQRCodeVC.qrCodeTitle = @"企业二维码";
-            showQRCodeVC.imageUrl = _userDetailInfo.enterprise_qrcode;
+            showQRCodeVC.imageUrl = _userDetailInfo.enterprise.enterpriseQRCode;
             [self.navigationController pushViewController:showQRCodeVC animated:YES];
-
         }
         else if(indexPath.row == 1)
         {
@@ -194,7 +198,6 @@
             showQRCodeVC.qrCodeTitle = @"个人二维码";
             showQRCodeVC.imageUrl = _userDetailInfo.qrcode;
             [self.navigationController pushViewController:showQRCodeVC animated:YES];
-
         }
         
     }
@@ -217,8 +220,8 @@
     
     //跳转到会话页面
     [self.navigationController pushViewController:chatViewController animated:YES];
-
 }
+
 -(IBAction)clickCallButton:(id)sender
 {
     NSURL* phoneCallURL = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@",_userDetailInfo.phoneNumber]];

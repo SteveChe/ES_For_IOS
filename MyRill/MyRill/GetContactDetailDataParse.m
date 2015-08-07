@@ -12,6 +12,7 @@
 #import "DataParseDefine.h"
 #import "ESUserDetailInfo.h"
 #import "UserInfoDataSource.h"
+#import "ESEnterpriseInfo.h"
 
 @implementation GetContactDetailDataParse
 //获取联系人的详细信息
@@ -35,10 +36,6 @@
                  {
                      break;
                  }
-                     if (temDic == nil || [temDic isEqual:[NSNull null]])
-                     {
-                         break;
-                     }
                      
                      ESUserDetailInfo* userDetailInfo = [[ESUserDetailInfo alloc] init];
                      NSNumber* userId = [temDic valueForKey:@"id"];
@@ -57,9 +54,41 @@
                      {
                          userDetailInfo.phoneNumber = userPhoneNum;
                      }
-                     NSString* userEnterprise = [temDic valueForKey:@"enterprise"];
-                     if (userEnterprise != nil && ![userEnterprise isEqual:[NSNull null]])
+                     NSDictionary* userEnterpriseDic = [temDic valueForKey:@"enterprise"];
+                     if (userEnterpriseDic != nil && ![userEnterpriseDic isEqual:[NSNull null]] )//&& [userEnterpriseDic isKindOfClass:[NSDictionary class]]
                      {
+                         ESEnterpriseInfo* userEnterprise = [[ESEnterpriseInfo alloc] init];
+                         NSNumber* enterPriseIdNum = [userEnterpriseDic valueForKey:@"id"];
+                         if (enterPriseIdNum!=nil && ![enterPriseIdNum isEqual:[NSNull null]]) {
+                             userEnterprise.enterpriseId = [NSString stringWithFormat:@"%d",[enterPriseIdNum intValue]];
+                         }
+                         
+                         NSString* enterPriseName = [userEnterpriseDic valueForKey:@"name"];
+                         if (enterPriseName!=nil && ![enterPriseName isEqual:[NSNull null]] && [enterPriseName length] > 0) {
+                             userEnterprise.enterpriseName = enterPriseName;
+                         }
+                         
+                         NSString* enterPriseCategory = [userEnterpriseDic valueForKey:@"category"];
+                         if (enterPriseCategory!=nil && ![enterPriseCategory isEqual:[NSNull null]] && [enterPriseCategory length]>0) {
+                             userEnterprise.enterpriseCategory = enterPriseCategory;
+                         }
+                         
+                         NSString* enterPriseDes = [userEnterpriseDic valueForKey:@"description"];
+                         if(enterPriseDes!=nil && ![enterPriseDes isEqual:[NSNull null] ] && [enterPriseDes length] >0 )
+                         {
+                             userEnterprise.enterpriseDescription = enterPriseDes;
+                         }
+                         
+                         NSString* enterPriseQRCode = [userEnterpriseDic valueForKey:@"qrcode"];
+                         if(enterPriseQRCode!=nil && ![enterPriseQRCode isEqual:[NSNull null]] && [enterPriseQRCode length] >0 ){
+                             userEnterprise.enterpriseQRCode = enterPriseQRCode;
+                         }
+                         
+                         NSNumber* enterPriseVerified = [userEnterpriseDic valueForKey:@"verified"];
+                         if (enterPriseVerified!=nil && ![enterPriseVerified isEqual:[NSNull null]]) {
+                             userEnterprise.bVerified = [enterPriseVerified boolValue];
+                         }
+                                                  
                          userDetailInfo.enterprise = userEnterprise;
                      }
                      
@@ -91,13 +120,13 @@
                      {
                          userDetailInfo.qrcode = qrcode;
                      }
-                     
-                     NSString* enterprise_qrcode = [temDic valueForKey:@"qrcode"];
+                 
+                     NSString* enterprise_qrcode = [temDic valueForKey:@"enterprise_qrcode"];
                      if (enterprise_qrcode != nil && ![enterprise_qrcode isEqual:[NSNull null]])
                      {
                          userDetailInfo.enterprise_qrcode = qrcode;
                      }
-                     
+                 
                      NSMutableArray* tag_data = [temDic valueForKey:@"tag_data"];
                      if (tag_data != nil && ![tag_data isEqual:[NSNull null]])
                      {
