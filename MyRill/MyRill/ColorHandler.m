@@ -12,12 +12,12 @@
 
 + (BOOL)isNullOrNilNumber:(NSNumber *)num
 {
-    return [num isEqual:[NSNull null]] || num == nil;
+    return [num isKindOfClass:[NSNull class]] || num == nil;
 }
 
 + (BOOL)isNullOrEmptyString:(NSString *)str
 {
-    return [str isEqual:[NSNull null]] || str == nil || str.length == 0;
+    return [str isKindOfClass:[NSNull class]] || str == nil || str.length == 0;
 }
 
 + (UIColor *)colorFromHexRGB:(NSString *)inColorString

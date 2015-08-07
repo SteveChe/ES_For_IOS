@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "ESViewController.h"
+#import "GetTaskListDataParse.h"
 
 @interface TaskListViewController : ESViewController
 
-@property (nonatomic, copy) NSString *searchTerm;
-@property (nonatomic, copy) NSString *title;
+@property (nonatomic, assign) ESTaskListType type;
+@property (nonatomic, copy) NSString *identity;
+//@property (nonatomic, copy) NSString *title;
 @end

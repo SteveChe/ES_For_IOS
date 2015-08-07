@@ -45,8 +45,8 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="enterpriseNameLbl" destination="Qkd-r5-WJj" id="cor-3k-W7t"/>
-                <outlet property="taskTotalLbl" destination="rdO-tV-VHB" id="eCp-5s-FjI"/>
+                <outlet property="initiatorNameLbl" destination="Qkd-r5-WJj" id="QRh-TG-Wen"/>
+                <outlet property="taskTotalLbl" destination="rdO-tV-VHB" id="wT2-Pc-TwB"/>
             </connections>
             <point key="canvasLocation" x="327.5" y="283"/>
         </tableViewCell>

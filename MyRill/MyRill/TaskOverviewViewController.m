@@ -10,10 +10,10 @@
 #import "TaskOverviewTableViewCell.h"
 #import "ColorHandler.h"
 #import "TaskListViewController.h"
-#import "AddTaskViewController.h"
 #import "ESNavigationController.h"
 #import "GetTaskDashboardDataParse.h"
 #import "ESTaskDashboard.h"
+#import "ESTaskOriginatorInfo.h"
 
 @interface TaskOverviewViewController () <UITableViewDataSource, UITableViewDelegate, TaskDashboardDelegate>
 
@@ -81,6 +81,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     TaskListViewController *taskListVC = [[TaskListViewController alloc] init];
+    taskListVC.type = ESTaskListWithInitiatorId;
+    ESTaskOriginatorInfo *task = (ESTaskOriginatorInfo *)self.dataSource[indexPath.row];
+    taskListVC.identity = [task.initiatorId stringValue];
+    taskListVC.title = [task.initiatorName stringByAppendingString:@"发起的任务"];
     [self.navigationController pushViewController:taskListVC animated:YES];
 }
 
@@ -98,15 +102,15 @@
 
 #pragma mark - response events
 - (void)addTask {
-    AddTaskViewController *addTaskVC = [[AddTaskViewController alloc] init];
-    addTaskVC.modalPresentationStyle = UIModalPresentationCurrentContext;
-    ESNavigationController *nav = [[ESNavigationController alloc] initWithRootViewController:addTaskVC];
-    [self.navigationController presentViewController:nav animated:YES completion:nil];
+//    AddTaskViewController *addTaskVC = [[AddTaskViewController alloc] init];
+//    addTaskVC.modalPresentationStyle = UIModalPresentationCurrentContext;
+//    ESNavigationController *nav = [[ESNavigationController alloc] initWithRootViewController:addTaskVC];
+//    [self.navigationController presentViewController:nav animated:YES completion:nil];
 }
 
 - (IBAction)allTaskBtnOnClicked:(UIButton *)sender {
     TaskListViewController *taskListVC = [[TaskListViewController alloc] init];
-    
+
     [self.navigationController pushViewController:taskListVC animated:YES];
     taskListVC.title = @"分配给我的全部任务";
 }

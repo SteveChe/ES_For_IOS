@@ -14,6 +14,15 @@ typedef NS_ENUM(NSInteger, RequestMethodType){
     RequestMethodTypeGet = 2
 };
 
+typedef enum : NSUInteger {
+    ESTaskListWithChatId = 200,
+    ESTaskListWithInitiatorId,
+    ESTaskListWithPersonInChargeId,
+    ESTaskListStatus,
+    ESTaskOverdue,
+    ESTaskListQ
+} ESTaskListType;
+
 @interface AFHttpTool : NSObject
 /**
  *  发送一个请求
@@ -97,7 +106,7 @@ typedef NS_ENUM(NSInteger, RequestMethodType){
  参数：无
  备注：该接口返回当前用户所有的联系人信息
  **/
-+(void) getContactListSuccess:(void (^)(id response))success
++ (void)getContactListSuccess:(void (^)(id response))success
                       failure:(void (^)(NSError *error))failure;
 
 
@@ -118,6 +127,11 @@ typedef NS_ENUM(NSInteger, RequestMethodType){
 
 /****** 获取任务面板信息 ****/
 + (void)getTaskDashboardSuccess:(void (^)(id response))success
+                        failure:(void (^)(NSError *error))failure;
+
++ (void)getTaskListWithIdentify:(NSString *)identify
+                           type:(ESTaskListType)taskListType
+                        success:(void (^)(id response))success
                         failure:(void (^)(NSError *error))failure;
 
 //change password

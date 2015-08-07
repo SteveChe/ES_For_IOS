@@ -19,21 +19,3 @@
 - (instancetype)initWithDic:(NSDictionary *)dic;
 
 @end
-
-//"group_by_enterprise": [
-//                        {
-//                            "enterprise_id": null,
-//                            "total": 4,
-//                            "enterprise_name": null
-//                        },
-//                        {
-//                            "enterprise_id": 2,
-//                            "total": 1,
-//                            "enterprise_name": "锐捷网络"
-//                        }
-//                        ],
-//"closed": 0,
-//"total": 0,
-//"open": 0,
-//"in_charge": 0,
-//"overdue": 0
