@@ -193,7 +193,6 @@
 		F28B6C8A1B6FAB5D00E0C267 /* GetEnterpriseListDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F28B6C891B6FAB5D00E0C267 /* GetEnterpriseListDataParse.m */; };
 		F29BC4921B75119900803183 /* SimpleMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F29BC4911B75119900803183 /* SimpleMessageCell.m */; };
 		F29BC4951B75E62500803183 /* ESEnterpriseMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = F29BC4941B75E62500803183 /* ESEnterpriseMessage.m */; };
-		F29BC4981B75EBDC00803183 /* ESTag.m in Sources */ = {isa = PBXBuildFile; fileRef = F29BC4971B75EBDC00803183 /* ESTag.m */; };
 		F29F86281B2410070058FC9F /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F29F86161B2410070058FC9F /* AFHTTPRequestOperation.m */; };
 		F29F86291B2410070058FC9F /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F29F86181B2410070058FC9F /* AFHTTPRequestOperationManager.m */; };
 		F29F862A1B2410070058FC9F /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F29F861A1B2410070058FC9F /* AFHTTPSessionManager.m */; };
@@ -238,8 +237,9 @@
 		F2D233B31B37E34000F8C65D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2D233B21B37E34000F8C65D /* QuartzCore.framework */; };
 		F2D233B51B37E35300F8C65D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2D233B41B37E35300F8C65D /* SystemConfiguration.framework */; };
 		F2D233B71B37E37100F8C65D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2D233B61B37E37100F8C65D /* UIKit.framework */; };
-		F2D99C561B75ED2800759D33 /* ESEnterPriseRequestInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D99C551B75ED2800759D33 /* ESEnterPriseRequestInfo.m */; };
-		F2D99C5A1B75EDDA00759D33 /* ESEnterpriseDetailInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D99C591B75EDDA00759D33 /* ESEnterpriseDetailInfo.m */; };
+		F2D99C5C1B75EEE600759D33 /* ESTag.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D99C5B1B75EEE600759D33 /* ESTag.m */; };
+		F2D99C5F1B75EF0400759D33 /* ESEnterpriseDetailInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D99C5D1B75EF0400759D33 /* ESEnterpriseDetailInfo.m */; };
+		F2D99C601B75EF0400759D33 /* ESEnterPriseRequestInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D99C5E1B75EF0400759D33 /* ESEnterPriseRequestInfo.m */; };
 		F2F92EC51B4AB58F0047D7BF /* RCDAcceptContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2F92EC41B4AB58F0047D7BF /* RCDAcceptContactViewController.m */; };
 		F2F92ECD1B4D60910047D7BF /* RCDPhoneAddressBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2F92ECC1B4D60910047D7BF /* RCDPhoneAddressBookViewController.m */; };
 		F2F92EFC1B4EC3310047D7BF /* RCDSelectPersonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2F92EFB1B4EC3310047D7BF /* RCDSelectPersonTableViewCell.xib */; };
@@ -596,7 +596,6 @@
 		F28B6C7F1B6F8E3D00E0C267 /* FollowEnterpriseDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowEnterpriseDataParse.h; sourceTree = "<group>"; };
 		F28B6C801B6F8E3D00E0C267 /* FollowEnterpriseDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowEnterpriseDataParse.m; sourceTree = "<group>"; };
 		F28B6C821B6F969100E0C267 /* ESEnterpriseDetailInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ESEnterpriseDetailInfo.h; path = Model/ESEnterpriseDetailInfo.h; sourceTree = "<group>"; };
-		F28B6C831B6F969100E0C267 /* ESEnterpriseDetailInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ESEnterpriseDetailInfo.m; path = Model/ESEnterpriseDetailInfo.m; sourceTree = "<group>"; };
 		F28B6C851B6F991600E0C267 /* GetEnterpriseDetailDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetEnterpriseDetailDataParse.h; sourceTree = "<group>"; };
 		F28B6C861B6F991600E0C267 /* GetEnterpriseDetailDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetEnterpriseDetailDataParse.m; sourceTree = "<group>"; };
 		F28B6C881B6FAB5D00E0C267 /* GetEnterpriseListDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetEnterpriseListDataParse.h; sourceTree = "<group>"; };
@@ -606,7 +605,6 @@
 		F29BC4931B75E62500803183 /* ESEnterpriseMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ESEnterpriseMessage.h; path = Model/ESEnterpriseMessage.h; sourceTree = "<group>"; };
 		F29BC4941B75E62500803183 /* ESEnterpriseMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ESEnterpriseMessage.m; path = Model/ESEnterpriseMessage.m; sourceTree = "<group>"; };
 		F29BC4961B75EBDC00803183 /* ESTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESTag.h; sourceTree = "<group>"; };
-		F29BC4971B75EBDC00803183 /* ESTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESTag.m; sourceTree = "<group>"; };
 		F29F86151B2410070058FC9F /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPRequestOperation.h; path = Utilities/AFNetworking/AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		F29F86161B2410070058FC9F /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFHTTPRequestOperation.m; path = Utilities/AFNetworking/AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		F29F86171B2410070058FC9F /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPRequestOperationManager.h; path = Utilities/AFNetworking/AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -673,10 +671,9 @@
 		F2D233B41B37E35300F8C65D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		F2D233B61B37E37100F8C65D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F2D99C541B75ED2800759D33 /* ESEnterPriseRequestInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ESEnterPriseRequestInfo.h; path = Model/ESEnterPriseRequestInfo.h; sourceTree = "<group>"; };
-		F2D99C551B75ED2800759D33 /* ESEnterPriseRequestInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ESEnterPriseRequestInfo.m; path = Model/ESEnterPriseRequestInfo.m; sourceTree = "<group>"; };
-		F2D99C571B75ED7300759D33 /* ESTag.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ESTag.m; path = MyRill/ESTag.m; sourceTree = "<group>"; };
-		F2D99C581B75ED8800759D33 /* ESEnterPriseRequestInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ESEnterPriseRequestInfo.m; path = MyRill/Model/ESEnterPriseRequestInfo.m; sourceTree = "<group>"; };
-		F2D99C591B75EDDA00759D33 /* ESEnterpriseDetailInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ESEnterpriseDetailInfo.m; path = MyRill/Model/ESEnterpriseDetailInfo.m; sourceTree = "<group>"; };
+		F2D99C5B1B75EEE600759D33 /* ESTag.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESTag.m; sourceTree = "<group>"; };
+		F2D99C5D1B75EF0400759D33 /* ESEnterpriseDetailInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ESEnterpriseDetailInfo.m; path = Model/ESEnterpriseDetailInfo.m; sourceTree = "<group>"; };
+		F2D99C5E1B75EF0400759D33 /* ESEnterPriseRequestInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ESEnterPriseRequestInfo.m; path = Model/ESEnterPriseRequestInfo.m; sourceTree = "<group>"; };
 		F2F92EC31B4AB58F0047D7BF /* RCDAcceptContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCDAcceptContactViewController.h; path = RCDChatList/AddressBook/RCDAcceptContactViewController.h; sourceTree = "<group>"; };
 		F2F92EC41B4AB58F0047D7BF /* RCDAcceptContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RCDAcceptContactViewController.m; path = RCDChatList/AddressBook/RCDAcceptContactViewController.m; sourceTree = "<group>"; };
 		F2F92ECB1B4D60910047D7BF /* RCDPhoneAddressBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCDPhoneAddressBookViewController.h; path = RCDChatList/AddressBook/RCDPhoneAddressBookViewController.h; sourceTree = "<group>"; };
@@ -733,9 +730,6 @@
 		2B31C3C61B11C3FD004C865A = {
 			isa = PBXGroup;
 			children = (
-				F2D99C591B75EDDA00759D33 /* ESEnterpriseDetailInfo.m */,
-				F2D99C581B75ED8800759D33 /* ESEnterPriseRequestInfo.m */,
-				F2D99C571B75ED7300759D33 /* ESTag.m */,
 				2B31C3D11B11C3FD004C865A /* MyRill */,
 				2B39C9561B271C95007BAC7A /* Frameworks */,
 				2B31C3EB1B11C3FD004C865A /* MyRillTests */,
@@ -1200,9 +1194,9 @@
 			isa = PBXGroup;
 			children = (
 				F2D99C541B75ED2800759D33 /* ESEnterPriseRequestInfo.h */,
-				F2D99C551B75ED2800759D33 /* ESEnterPriseRequestInfo.m */,
+				F2D99C5D1B75EF0400759D33 /* ESEnterpriseDetailInfo.m */,
 				F29BC4961B75EBDC00803183 /* ESTag.h */,
-				F29BC4971B75EBDC00803183 /* ESTag.m */,
+				F2D99C5B1B75EEE600759D33 /* ESTag.m */,
 				F22FE27D1B3ADAB000A1A997 /* ESUserInfo.h */,
 				F22FE27E1B3ADAB000A1A997 /* ESUserInfo.m */,
 				F22FE3061B45989200A1A997 /* ESContactList.h */,
@@ -1214,7 +1208,7 @@
 				F234617A1B5AB49E00C88FAC /* ESEnterpriseInfo.h */,
 				F234617B1B5AB49E00C88FAC /* ESEnterpriseInfo.m */,
 				F28B6C821B6F969100E0C267 /* ESEnterpriseDetailInfo.h */,
-				F28B6C831B6F969100E0C267 /* ESEnterpriseDetailInfo.m */,
+				F2D99C5E1B75EF0400759D33 /* ESEnterPriseRequestInfo.m */,
 				2BEBBD841B665BCB008BE7C4 /* ESTaskDashboard.h */,
 				2BEBBD851B665BCB008BE7C4 /* ESTaskDashboard.m */,
 				2BEBBD871B6661FD008BE7C4 /* ESTaskOriginatorInfo.h */,
@@ -1658,9 +1652,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F2D99C5A1B75EDDA00759D33 /* ESEnterpriseDetailInfo.m in Sources */,
-				F2D99C561B75ED2800759D33 /* ESEnterPriseRequestInfo.m in Sources */,
-				F29BC4981B75EBDC00803183 /* ESTag.m in Sources */,
+				F2D99C5F1B75EF0400759D33 /* ESEnterpriseDetailInfo.m in Sources */,
+				F2D99C601B75EF0400759D33 /* ESEnterPriseRequestInfo.m in Sources */,
+				F2D99C5C1B75EEE600759D33 /* ESTag.m in Sources */,
 				2B37E4601B53E9E000F671A1 /* ProfessionDataParse.h in Sources */,
 				F234617F1B5AB63C00C88FAC /* EnterpriseInfoDataSource.m in Sources */,
 				F22FE2E81B4000ED00A1A997 /* SDWebImageDecoder.m in Sources */,
