@@ -40,16 +40,16 @@
             self.overdueTaskInSelf = dic[@"overdue"];
         }
         
-        NSArray *array = (NSArray *)dic[@"group_by_enterprise"];
-        if (array != nil) {
+        NSArray *array = (NSArray *)dic[@"group_by_initiator"];
+        if (array != nil && ![array isKindOfClass:[NSNull class]] && array.count != 0) {
             
             NSMutableArray *temp = [[NSMutableArray alloc] initWithCapacity:array.count];
             
             for (NSDictionary *dic in array) {
                 ESTaskOriginatorInfo *taskOriginatorInfo = [[ESTaskOriginatorInfo alloc] init];
-                taskOriginatorInfo.enterpriseId = [ColorHandler isNullOrNilNumber:dic[@"enterprise_id"]]?[NSNumber numberWithInt:-1]:dic[@"enterprise_id"];
-                taskOriginatorInfo.enterpriseName = [ColorHandler isNullOrEmptyString:dic[@"enterprise_name"]]?@"":dic[@"enterprise_name"];
-                taskOriginatorInfo.totalTask = dic[@"total"];
+                taskOriginatorInfo.assignmentNum = [ColorHandler isNullOrNilNumber:dic[@"assignment_num"]]?[NSNumber numberWithInt:-1]:dic[@"assignment_num"];
+                taskOriginatorInfo.initiatorId = [ColorHandler isNullOrNilNumber:dic[@"initiator_id"]]?@"":dic[@"initiator_id"];
+                taskOriginatorInfo.initiatorName = [ColorHandler isNullOrEmptyString:dic[@"initiator_name"]]?@"":dic[@"initiator_name"];
                 [temp addObject:taskOriginatorInfo];
             }
             self.TaskInOriginatorList = [NSArray arrayWithArray:temp];

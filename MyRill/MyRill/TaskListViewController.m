@@ -9,11 +9,10 @@
 #import "TaskListViewController.h"
 #import "TaskListTableViewCell.h"
 #import "ColorHandler.h"
-#import "AddTaskViewController.h"
 #import "ESNavigationController.h"
-#import "GetTaskListDataParse.h"
+#import "TaskViewController.h"
 
-@interface TaskListViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
+@interface TaskListViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, TaskListDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *dataSource;
@@ -26,8 +25,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    //self.title = @"对话相关任务";
     
     UIBarButtonItem *addTaskItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
                                                                                  target:self
@@ -42,7 +39,13 @@
     
     self.tabBarController.tabBar.hidden = YES;
     
-    
+    [self.getTaskListDP getTaskListWithIdentify:self.identity type:self.type];
+}
+
+- (void)getTaskListSuccess:(NSArray *)taskList {
+    self.dataSource = nil;
+    self.dataSource = [NSArray arrayWithArray:taskList];
+    [self.tableView reloadData];
 }
 
 #pragma mark - UITableViewDataSource&UITableViewDelegate
@@ -52,6 +55,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TaskListTableViewCell *cell = (TaskListTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"TaskListTableViewCell" forIndexPath:indexPath];
+    [cell updateTackCell:self.dataSource[indexPath.row]];
+    
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     CALayer *layer = [CALayer layer];
     layer.frame = CGRectMake(0, cell.bounds.size.height - 10, cell.bounds.size.width, 10);
@@ -62,16 +67,17 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    TaskViewController *taskVC = [[TaskViewController alloc] init];
+    taskVC.taskModel = self.dataSource[indexPath.row];
+    [self.navigationController pushViewController:taskVC animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 130;
+    return 150;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    //    return self.dataSource.count;
-    return 3;
+    return self.dataSource.count;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -79,10 +85,10 @@
 }
 
 - (void)addTask {
-    AddTaskViewController *addTaskVC = [[AddTaskViewController alloc] init];
-    addTaskVC.modalPresentationStyle = UIModalPresentationCurrentContext;
-    ESNavigationController *nav = [[ESNavigationController alloc] initWithRootViewController:addTaskVC];
-    [self.navigationController presentViewController:nav animated:YES completion:nil];
+//    AddTaskViewController *addTaskVC = [[AddTaskViewController alloc] init];
+//    addTaskVC.modalPresentationStyle = UIModalPresentationCurrentContext;
+//    ESNavigationController *nav = [[ESNavigationController alloc] initWithRootViewController:addTaskVC];
+//    [self.navigationController presentViewController:nav animated:YES completion:nil];
 }
 
 #pragma mark - setters&getters
@@ -107,7 +113,7 @@
 - (GetTaskListDataParse *)getTaskListDP {
     if (!_getTaskListDP) {
         _getTaskListDP = [[GetTaskListDataParse alloc] init];
-        
+        _getTaskListDP.delegate = self;
     }
     
     return _getTaskListDP;

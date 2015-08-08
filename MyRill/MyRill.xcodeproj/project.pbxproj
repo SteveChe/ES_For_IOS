@@ -80,9 +80,6 @@
 		2BE55A091B647324008CDB4B /* TaskOverviewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE55A071B647324008CDB4B /* TaskOverviewTableViewCell.xib */; };
 		2BE55A0E1B6483D2008CDB4B /* TaskListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE55A0D1B6483D2008CDB4B /* TaskListViewController.m */; };
 		2BE55A121B64843A008CDB4B /* TaskListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE55A101B64843A008CDB4B /* TaskListTableViewCell.m */; };
-		2BE55A161B64CF17008CDB4B /* AddTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE55A151B64CF17008CDB4B /* AddTaskViewController.m */; };
-		2BE55A1F1B64E0BE008CDB4B /* testViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE55A1D1B64E0BE008CDB4B /* testViewController.m */; };
-		2BE55A201B64E0BE008CDB4B /* testViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE55A1E1B64E0BE008CDB4B /* testViewController.xib */; };
 		2BE55A221B64EE0C008CDB4B /* TaskOverviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE55A211B64EE0C008CDB4B /* TaskOverviewViewController.xib */; };
 		2BE8C21D1B4D60B400858CEE /* ProfessionCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE8C21B1B4D60B400858CEE /* ProfessionCollectionViewCell.m */; };
 		2BE8C21E1B4D60B400858CEE /* ProfessionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE8C21C1B4D60B400858CEE /* ProfessionCollectionViewCell.xib */; };
@@ -90,6 +87,8 @@
 		2BE8C22D1B4EB3A200858CEE /* AddProfessionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE8C22B1B4EB3A100858CEE /* AddProfessionViewController.xib */; };
 		2BE8C2301B4EC58500858CEE /* ESViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE8C22F1B4EC58500858CEE /* ESViewController.m */; };
 		2BE8C2331B52506600858CEE /* EditProfessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE8C2321B52506600858CEE /* EditProfessionViewController.m */; };
+		2BEAD04C1B738E3100905E21 /* TaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEAD04A1B738E3100905E21 /* TaskViewController.m */; };
+		2BEAD04D1B738E3100905E21 /* TaskViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BEAD04B1B738E3100905E21 /* TaskViewController.xib */; };
 		2BEBBD831B665849008BE7C4 /* GetTaskDashboardDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEBBD821B665849008BE7C4 /* GetTaskDashboardDataParse.m */; };
 		2BEBBD861B665BCB008BE7C4 /* ESTaskDashboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEBBD851B665BCB008BE7C4 /* ESTaskDashboard.m */; };
 		2BEBBD891B6661FD008BE7C4 /* ESTaskOriginatorInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEBBD881B6661FD008BE7C4 /* ESTaskOriginatorInfo.m */; };
@@ -388,11 +387,6 @@
 		2BE55A0F1B64843A008CDB4B /* TaskListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskListTableViewCell.h; sourceTree = "<group>"; };
 		2BE55A101B64843A008CDB4B /* TaskListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskListTableViewCell.m; sourceTree = "<group>"; };
 		2BE55A111B64843A008CDB4B /* TaskListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskListTableViewCell.xib; sourceTree = "<group>"; };
-		2BE55A141B64CF17008CDB4B /* AddTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddTaskViewController.h; sourceTree = "<group>"; };
-		2BE55A151B64CF17008CDB4B /* AddTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddTaskViewController.m; sourceTree = "<group>"; };
-		2BE55A1C1B64E0BE008CDB4B /* testViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testViewController.h; sourceTree = "<group>"; };
-		2BE55A1D1B64E0BE008CDB4B /* testViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testViewController.m; sourceTree = "<group>"; };
-		2BE55A1E1B64E0BE008CDB4B /* testViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = testViewController.xib; sourceTree = "<group>"; };
 		2BE55A211B64EE0C008CDB4B /* TaskOverviewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskOverviewViewController.xib; sourceTree = "<group>"; };
 		2BE8C21A1B4D60B400858CEE /* ProfessionCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfessionCollectionViewCell.h; sourceTree = "<group>"; };
 		2BE8C21B1B4D60B400858CEE /* ProfessionCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfessionCollectionViewCell.m; sourceTree = "<group>"; };
@@ -404,6 +398,9 @@
 		2BE8C22F1B4EC58500858CEE /* ESViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESViewController.m; sourceTree = "<group>"; };
 		2BE8C2311B52506600858CEE /* EditProfessionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfessionViewController.h; sourceTree = "<group>"; };
 		2BE8C2321B52506600858CEE /* EditProfessionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProfessionViewController.m; sourceTree = "<group>"; };
+		2BEAD0491B738E3100905E21 /* TaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskViewController.h; sourceTree = "<group>"; };
+		2BEAD04A1B738E3100905E21 /* TaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskViewController.m; sourceTree = "<group>"; };
+		2BEAD04B1B738E3100905E21 /* TaskViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskViewController.xib; sourceTree = "<group>"; };
 		2BEBBD811B665849008BE7C4 /* GetTaskDashboardDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetTaskDashboardDataParse.h; sourceTree = "<group>"; };
 		2BEBBD821B665849008BE7C4 /* GetTaskDashboardDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetTaskDashboardDataParse.m; sourceTree = "<group>"; };
 		2BEBBD841B665BCB008BE7C4 /* ESTaskDashboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESTaskDashboard.h; sourceTree = "<group>"; };
@@ -1000,11 +997,9 @@
 				2BE55A211B64EE0C008CDB4B /* TaskOverviewViewController.xib */,
 				2BE55A0C1B6483D2008CDB4B /* TaskListViewController.h */,
 				2BE55A0D1B6483D2008CDB4B /* TaskListViewController.m */,
-				2BE55A141B64CF17008CDB4B /* AddTaskViewController.h */,
-				2BE55A151B64CF17008CDB4B /* AddTaskViewController.m */,
-				2BE55A1C1B64E0BE008CDB4B /* testViewController.h */,
-				2BE55A1D1B64E0BE008CDB4B /* testViewController.m */,
-				2BE55A1E1B64E0BE008CDB4B /* testViewController.xib */,
+				2BEAD0491B738E3100905E21 /* TaskViewController.h */,
+				2BEAD04A1B738E3100905E21 /* TaskViewController.m */,
+				2BEAD04B1B738E3100905E21 /* TaskViewController.xib */,
 			);
 			name = Task;
 			sourceTree = "<group>";
@@ -1204,10 +1199,10 @@
 				2BEBBD851B665BCB008BE7C4 /* ESTaskDashboard.m */,
 				2BEBBD871B6661FD008BE7C4 /* ESTaskOriginatorInfo.h */,
 				2BEBBD881B6661FD008BE7C4 /* ESTaskOriginatorInfo.m */,
-				F23630B81B67C15200A12F63 /* ESTag.h */,
-				F23630B91B67C15200A12F63 /* ESTag.m */,
-				F256CB791B6D1B82009478C2 /* ESEnterPriseRequestInfo.h */,
-				F256CB7A1B6D1B82009478C2 /* ESEnterPriseRequestInfo.m */,
+				2BEBBD8D1B6E46EC008BE7C4 /* ESContactor.h */,
+				2BEBBD8E1B6E46EC008BE7C4 /* ESContactor.m */,
+				2BEBBD901B6E4920008BE7C4 /* ESTask.h */,
+				2BEBBD911B6E4920008BE7C4 /* ESTask.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1591,6 +1586,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BEBBD931B6F5E1F008BE7C4 /* TaskListTableViewCell.xib in Resources */,
 				2BE8C22D1B4EB3A200858CEE /* AddProfessionViewController.xib in Resources */,
 				2B37E44D1B53967D00F671A1 /* ModifyProfessionViewController.xib in Resources */,
 				2BC8213B1B5C9FF70090E2C1 /* ShowQRCodeViewController.xib in Resources */,
@@ -1617,8 +1613,8 @@
 				2BE8C21E1B4D60B400858CEE /* ProfessionCollectionViewCell.xib in Resources */,
 				F22FE30A1B4A9F1A00A1A997 /* RCDAddFriendViewController.xib in Resources */,
 				F2F92EFC1B4EC3310047D7BF /* RCDSelectPersonTableViewCell.xib in Resources */,
+				2BEAD04D1B738E3100905E21 /* TaskViewController.xib in Resources */,
 				2B9CBB621B3ADEC4007D7A45 /* (null) in Resources */,
-				2BE55A201B64E0BE008CDB4B /* testViewController.xib in Resources */,
 				F23630851B66668900A12F63 /* RCDAddressBookDetailViewController.xib in Resources */,
 				2B7FB8181B56AA5D00DA456E /* ProfessionTableViewCell.xib in Resources */,
 				2BC821331B5B839F0090E2C1 /* QRCodeViewController.xib in Resources */,
@@ -1677,6 +1673,7 @@
 				F234617C1B5AB49E00C88FAC /* ESEnterpriseInfo.m in Sources */,
 				F22FE2EA1B4000ED00A1A997 /* SDWebImageDownloaderOperation.m in Sources */,
 				2B5A59191B48DFBB000382D7 /* MRMethodCopier.m in Sources */,
+				2BEBBD921B6E4920008BE7C4 /* ESTask.m in Sources */,
 				2B39C9901B37B691007BAC7A /* ESNavigationController.m in Sources */,
 				F256CB781B6CAE23009478C2 /* EnterPriseRequestDataParse.m in Sources */,
 				F22FE2B61B3FFAF700A1A997 /* RCDSearchFriendViewController.m in Sources */,
@@ -1701,7 +1698,6 @@
 				F256CB7B1B6D1B82009478C2 /* ESEnterPriseRequestInfo.m in Sources */,
 				F29F862F1B2410070058FC9F /* AFURLResponseSerialization.m in Sources */,
 				F23630841B66668900A12F63 /* RCDAddressBookDetailViewController.m in Sources */,
-				2BE55A1F1B64E0BE008CDB4B /* testViewController.m in Sources */,
 				F22FE2E41B4000ED00A1A997 /* MKAnnotationView+WebCache.m in Sources */,
 				2BEBBD8C1B67AFA7008BE7C4 /* GetTaskListDataParse.m in Sources */,
 				F29F862D1B2410070058FC9F /* AFURLConnectionOperation.m in Sources */,
@@ -1750,6 +1746,7 @@
 				F22FE2EF1B4000ED00A1A997 /* UIImage+MultiFormat.m in Sources */,
 				2B39C93F1B241212007BAC7A /* View+MASAdditions.m in Sources */,
 				F277AE011B2DC146006E42CB /* DeviceInfo.m in Sources */,
+				2BEAD04C1B738E3100905E21 /* TaskViewController.m in Sources */,
 				F22FE2C11B3FFCAF00A1A997 /* MBProgressHUD.m in Sources */,
 				2B5A59161B48DFBB000382D7 /* MRProgressOverlayView+AFNetworking.m in Sources */,
 				2BC8212F1B57FFDC0090E2C1 /* ProfessionWebViewController.m in Sources */,
@@ -1776,8 +1773,6 @@
 				F22FE2EE1B4000ED00A1A997 /* UIImage+GIF.m in Sources */,
 				F23059BA1B52C141004599FA /* RCDAddressBookViewTableViewCell.m in Sources */,
 				F277ADFE1B2DC046006E42CB /* CustomMessageBox.m in Sources */,
-				2BE55A161B64CF17008CDB4B /* AddTaskViewController.m in Sources */,
-				F28B6C841B6F969100E0C267 /* ESEnterpriseDetailInfo.m in Sources */,
 				F29F864A1B2410320058FC9F /* UIWebView+AFNetworking.m in Sources */,
 				2B5A59151B48DFBB000382D7 /* MRActivityIndicatorView+AFNetworking.m in Sources */,
 				F22FE2F31B4000ED00A1A997 /* UIView+WebCacheOperation.m in Sources */,
@@ -1798,6 +1793,7 @@
 				F29F862E1B2410070058FC9F /* AFURLRequestSerialization.m in Sources */,
 				F29F86431B2410320058FC9F /* AFNetworkActivityIndicatorManager.m in Sources */,
 				F22FE2F61B40037100A1A997 /* pinyin.c in Sources */,
+				2BEBBD8F1B6E46EC008BE7C4 /* ESContactor.m in Sources */,
 				2B39C93E1B241212007BAC7A /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				F2F92EC51B4AB58F0047D7BF /* RCDAcceptContactViewController.m in Sources */,
 				2B39C93D1B241212007BAC7A /* NSArray+MASAdditions.m in Sources */,

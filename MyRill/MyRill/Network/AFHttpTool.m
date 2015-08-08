@@ -366,7 +366,8 @@
     [AFHttpTool requestWithMethod:RequestMethodTypePost
                               url:@"/api/accounts/phone-contacts/.json"
                            params:params
-                          success:success failure:failure];
+                          success:success
+                          failure:failure];
 }
 
 /******** 获取联系人详情******
@@ -387,10 +388,46 @@
 
 + (void)getTaskDashboardSuccess:(void (^)(id))success
                         failure:(void (^)(NSError *))failure {
-    NSString *strURL = [NSString stringWithFormat:@"/api/assignments/dashboard/.json"];
+    NSString *strURL = @"/api/assignments/dashboard/.json";
     [AFHttpTool requestWithMethod:RequestMethodTypeGet
                               url:strURL
                            params:nil
+                          success:success
+                          failure:failure];
+}
+
++ (void)getTaskListWithIdentify:(NSString *)identify
+                           type:(ESTaskListType)taskListType
+                        success:(void (^)(id))success
+                        failure:(void (^)(NSError *))failure {
+    NSString *strURL = @"/api/assignments/.json";
+    NSDictionary *param = nil;
+    switch (taskListType) {
+        case ESTaskListWithChatId:
+            param = @{@"chat_id":identify};
+            break;
+        case ESTaskListWithInitiatorId:
+            param = @{@"initiator_id":identify};
+            break;
+        case ESTaskListWithPersonInChargeId:
+            param = @{@"person_in_charge_id":identify};
+            break;
+        case ESTaskListStatus:
+            param = @{@"status":identify};
+            break;
+        case ESTaskOverdue:
+            param = @{@"overdue":identify};
+            break;
+        case ESTaskListQ:
+            param = @{@"q":identify};
+            break;
+        default:
+            break;
+    }
+    
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet
+                              url:strURL
+                           params:param
                           success:success
                           failure:failure];
 }

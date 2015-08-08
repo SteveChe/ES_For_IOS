@@ -10,8 +10,8 @@
 
 @interface ESTaskOriginatorInfo : NSObject
 
-@property (nonatomic, strong) NSNumber *enterpriseId;
-@property (nonatomic, strong) NSNumber *totalTask;
-@property (nonatomic, copy) NSString *enterpriseName;
+@property (nonatomic, strong) NSNumber *initiatorId;
+@property (nonatomic, copy) NSString *initiatorName;
+@property (nonatomic, strong) NSNumber *assignmentNum;
 
 @end
