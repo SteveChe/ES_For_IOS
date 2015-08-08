@@ -240,6 +240,8 @@
 		F2D99C5C1B75EEE600759D33 /* ESTag.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D99C5B1B75EEE600759D33 /* ESTag.m */; };
 		F2D99C5F1B75EF0400759D33 /* ESEnterpriseDetailInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D99C5D1B75EF0400759D33 /* ESEnterpriseDetailInfo.m */; };
 		F2D99C601B75EF0400759D33 /* ESEnterPriseRequestInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D99C5E1B75EF0400759D33 /* ESEnterPriseRequestInfo.m */; };
+		F2D99C631B75EFED00759D33 /* ESEnterpriseMessageContent.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D99C621B75EFED00759D33 /* ESEnterpriseMessageContent.m */; };
+		F2D99C661B75F13E00759D33 /* GetEnterpriseMessageDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D99C651B75F13E00759D33 /* GetEnterpriseMessageDataParse.m */; };
 		F2F92EC51B4AB58F0047D7BF /* RCDAcceptContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2F92EC41B4AB58F0047D7BF /* RCDAcceptContactViewController.m */; };
 		F2F92ECD1B4D60910047D7BF /* RCDPhoneAddressBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2F92ECC1B4D60910047D7BF /* RCDPhoneAddressBookViewController.m */; };
 		F2F92EFC1B4EC3310047D7BF /* RCDSelectPersonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2F92EFB1B4EC3310047D7BF /* RCDSelectPersonTableViewCell.xib */; };
@@ -674,6 +676,10 @@
 		F2D99C5B1B75EEE600759D33 /* ESTag.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESTag.m; sourceTree = "<group>"; };
 		F2D99C5D1B75EF0400759D33 /* ESEnterpriseDetailInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ESEnterpriseDetailInfo.m; path = Model/ESEnterpriseDetailInfo.m; sourceTree = "<group>"; };
 		F2D99C5E1B75EF0400759D33 /* ESEnterPriseRequestInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ESEnterPriseRequestInfo.m; path = Model/ESEnterPriseRequestInfo.m; sourceTree = "<group>"; };
+		F2D99C611B75EFED00759D33 /* ESEnterpriseMessageContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ESEnterpriseMessageContent.h; path = Model/ESEnterpriseMessageContent.h; sourceTree = "<group>"; };
+		F2D99C621B75EFED00759D33 /* ESEnterpriseMessageContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ESEnterpriseMessageContent.m; path = Model/ESEnterpriseMessageContent.m; sourceTree = "<group>"; };
+		F2D99C641B75F13E00759D33 /* GetEnterpriseMessageDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetEnterpriseMessageDataParse.h; sourceTree = "<group>"; };
+		F2D99C651B75F13E00759D33 /* GetEnterpriseMessageDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetEnterpriseMessageDataParse.m; sourceTree = "<group>"; };
 		F2F92EC31B4AB58F0047D7BF /* RCDAcceptContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCDAcceptContactViewController.h; path = RCDChatList/AddressBook/RCDAcceptContactViewController.h; sourceTree = "<group>"; };
 		F2F92EC41B4AB58F0047D7BF /* RCDAcceptContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RCDAcceptContactViewController.m; path = RCDChatList/AddressBook/RCDAcceptContactViewController.m; sourceTree = "<group>"; };
 		F2F92ECB1B4D60910047D7BF /* RCDPhoneAddressBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCDPhoneAddressBookViewController.h; path = RCDChatList/AddressBook/RCDPhoneAddressBookViewController.h; sourceTree = "<group>"; };
@@ -916,6 +922,8 @@
 				F28B6C861B6F991600E0C267 /* GetEnterpriseDetailDataParse.m */,
 				F28B6C881B6FAB5D00E0C267 /* GetEnterpriseListDataParse.h */,
 				F28B6C891B6FAB5D00E0C267 /* GetEnterpriseListDataParse.m */,
+				F2D99C641B75F13E00759D33 /* GetEnterpriseMessageDataParse.h */,
+				F2D99C651B75F13E00759D33 /* GetEnterpriseMessageDataParse.m */,
 			);
 			name = DataDrive;
 			sourceTree = "<group>";
@@ -1194,7 +1202,7 @@
 			isa = PBXGroup;
 			children = (
 				F2D99C541B75ED2800759D33 /* ESEnterPriseRequestInfo.h */,
-				F2D99C5D1B75EF0400759D33 /* ESEnterpriseDetailInfo.m */,
+				F2D99C5E1B75EF0400759D33 /* ESEnterPriseRequestInfo.m */,
 				F29BC4961B75EBDC00803183 /* ESTag.h */,
 				F2D99C5B1B75EEE600759D33 /* ESTag.m */,
 				F22FE27D1B3ADAB000A1A997 /* ESUserInfo.h */,
@@ -1208,7 +1216,7 @@
 				F234617A1B5AB49E00C88FAC /* ESEnterpriseInfo.h */,
 				F234617B1B5AB49E00C88FAC /* ESEnterpriseInfo.m */,
 				F28B6C821B6F969100E0C267 /* ESEnterpriseDetailInfo.h */,
-				F2D99C5E1B75EF0400759D33 /* ESEnterPriseRequestInfo.m */,
+				F2D99C5D1B75EF0400759D33 /* ESEnterpriseDetailInfo.m */,
 				2BEBBD841B665BCB008BE7C4 /* ESTaskDashboard.h */,
 				2BEBBD851B665BCB008BE7C4 /* ESTaskDashboard.m */,
 				2BEBBD871B6661FD008BE7C4 /* ESTaskOriginatorInfo.h */,
@@ -1219,6 +1227,8 @@
 				2BEBBD911B6E4920008BE7C4 /* ESTask.m */,
 				F29BC4931B75E62500803183 /* ESEnterpriseMessage.h */,
 				F29BC4941B75E62500803183 /* ESEnterpriseMessage.m */,
+				F2D99C611B75EFED00759D33 /* ESEnterpriseMessageContent.h */,
+				F2D99C621B75EFED00759D33 /* ESEnterpriseMessageContent.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1716,6 +1726,7 @@
 				F22FE2E91B4000ED00A1A997 /* SDWebImageDownloader.m in Sources */,
 				F29F862F1B2410070058FC9F /* AFURLResponseSerialization.m in Sources */,
 				F23630841B66668900A12F63 /* RCDAddressBookDetailViewController.m in Sources */,
+				F2D99C631B75EFED00759D33 /* ESEnterpriseMessageContent.m in Sources */,
 				F22FE2E41B4000ED00A1A997 /* MKAnnotationView+WebCache.m in Sources */,
 				2BEBBD8C1B67AFA7008BE7C4 /* GetTaskListDataParse.m in Sources */,
 				F29F862D1B2410070058FC9F /* AFURLConnectionOperation.m in Sources */,
@@ -1766,6 +1777,7 @@
 				F277AE011B2DC146006E42CB /* DeviceInfo.m in Sources */,
 				F29BC4951B75E62500803183 /* ESEnterpriseMessage.m in Sources */,
 				2BEAD04C1B738E3100905E21 /* TaskViewController.m in Sources */,
+				F2D99C661B75F13E00759D33 /* GetEnterpriseMessageDataParse.m in Sources */,
 				F22FE2C11B3FFCAF00A1A997 /* MBProgressHUD.m in Sources */,
 				2B5A59161B48DFBB000382D7 /* MRProgressOverlayView+AFNetworking.m in Sources */,
 				2BC8212F1B57FFDC0090E2C1 /* ProfessionWebViewController.m in Sources */,
