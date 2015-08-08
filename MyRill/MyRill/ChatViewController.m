@@ -20,6 +20,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.tabBarController.tabBar.hidden = YES;
+    self.enableSaveNewPhotoToLocalSystem = YES;
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -37,7 +39,6 @@
     self.navigationItem.rightBarButtonItem = rightButton;
 //    self.title = self.conversation.conversationTitle;
     [self initConversationInfo];
-
 }
 
 -(void) initConversationInfo
@@ -65,6 +66,7 @@
     // Pass the selected object to the new view controller.
 }
 */
+
 
 /**
  *  重载右边导航按钮的事件

@@ -91,7 +91,7 @@
 
 /**
  * 当会话为聊天室时获取的历史信息数目，默认值为10，在viewDidLoad之前设置
- * -1表示不获取，0表示系统默认数目(现在默认值为10条)，正数表示获取的具体数目
+ * -1表示不获取，0表示系统默认数目(现在默认值为10条)，正数表示获取的具体数目，最大值为50
  */
 @property(nonatomic, assign) int defaultHistoryMessageCountOfChatRoom;
 
@@ -131,6 +131,12 @@
  *  @param model  被删除消息的model
  */
 - (void)deleteMessage:(RCMessageModel *)model;
+/**
+*  append消息到datasource中，并显示。可以用在插入提醒消息的场景。
+*
+*  @param message 消息
+*/
+- (void)appendAndDisplayMessage:(RCMessage *)message;
 #pragma mark override
 /**
  *  返回方法，如果继承，请重写该方法，并且优先调用父类方法;
@@ -203,6 +209,13 @@
  *  @param userId 用户的ID
  */
 - (void)didTapCellPortrait:(NSString *)userId;
+
+/**
+ *  长按头像事件
+ *
+ *  @param userId 用户的ID
+ */
+- (void)didLongPressCellPortrait:(NSString *)userId;
 
 #pragma mark override
 /**

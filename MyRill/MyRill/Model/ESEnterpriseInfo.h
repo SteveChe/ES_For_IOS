@@ -23,5 +23,8 @@
 @property(nonatomic, assign) BOOL bVerified;
 /** 企业是否已经关注 */
 @property(nonatomic, assign) BOOL bIsFollowed;
+/** 企业头像URL **/
+@property(nonatomic, strong) NSString* portraitUri;
+
 
 @end

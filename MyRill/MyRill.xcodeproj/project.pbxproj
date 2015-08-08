@@ -94,6 +94,9 @@
 		2BEBBD861B665BCB008BE7C4 /* ESTaskDashboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEBBD851B665BCB008BE7C4 /* ESTaskDashboard.m */; };
 		2BEBBD891B6661FD008BE7C4 /* ESTaskOriginatorInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEBBD881B6661FD008BE7C4 /* ESTaskOriginatorInfo.m */; };
 		2BEBBD8C1B67AFA7008BE7C4 /* GetTaskListDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEBBD8B1B67AFA7008BE7C4 /* GetTaskListDataParse.m */; };
+		F20C13051B73A2690073BFA9 /* EnterpriseChatListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F20C13041B73A2690073BFA9 /* EnterpriseChatListViewController.m */; };
+		F20C13081B73A2920073BFA9 /* EnterpriseChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F20C13071B73A2920073BFA9 /* EnterpriseChatViewController.m */; };
+		F20C130B1B750A870073BFA9 /* SimpleMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = F20C130A1B750A870073BFA9 /* SimpleMessage.m */; };
 		F22FE2731B3AD7BE00A1A997 /* ChatListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE2721B3AD7BE00A1A997 /* ChatListViewController.m */; };
 		F22FE2781B3AD87800A1A997 /* KxMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE2771B3AD87800A1A997 /* KxMenu.m */; };
 		F22FE27B1B3AD94200A1A997 /* UIColor+RCColor.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE27A1B3AD94200A1A997 /* UIColor+RCColor.m */; };
@@ -189,6 +192,7 @@
 		F28B6C841B6F969100E0C267 /* ESEnterpriseDetailInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F28B6C831B6F969100E0C267 /* ESEnterpriseDetailInfo.m */; };
 		F28B6C871B6F991600E0C267 /* GetEnterpriseDetailDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F28B6C861B6F991600E0C267 /* GetEnterpriseDetailDataParse.m */; };
 		F28B6C8A1B6FAB5D00E0C267 /* GetEnterpriseListDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F28B6C891B6FAB5D00E0C267 /* GetEnterpriseListDataParse.m */; };
+		F29BC4921B75119900803183 /* SimpleMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F29BC4911B75119900803183 /* SimpleMessageCell.m */; };
 		F29F86281B2410070058FC9F /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F29F86161B2410070058FC9F /* AFHTTPRequestOperation.m */; };
 		F29F86291B2410070058FC9F /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F29F86181B2410070058FC9F /* AFHTTPRequestOperationManager.m */; };
 		F29F862A1B2410070058FC9F /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F29F861A1B2410070058FC9F /* AFHTTPSessionManager.m */; };
@@ -408,6 +412,12 @@
 		2BEBBD881B6661FD008BE7C4 /* ESTaskOriginatorInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESTaskOriginatorInfo.m; sourceTree = "<group>"; };
 		2BEBBD8A1B67AFA7008BE7C4 /* GetTaskListDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetTaskListDataParse.h; sourceTree = "<group>"; };
 		2BEBBD8B1B67AFA7008BE7C4 /* GetTaskListDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetTaskListDataParse.m; sourceTree = "<group>"; };
+		F20C13031B73A2690073BFA9 /* EnterpriseChatListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnterpriseChatListViewController.h; sourceTree = "<group>"; };
+		F20C13041B73A2690073BFA9 /* EnterpriseChatListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnterpriseChatListViewController.m; sourceTree = "<group>"; };
+		F20C13061B73A2920073BFA9 /* EnterpriseChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnterpriseChatViewController.h; sourceTree = "<group>"; };
+		F20C13071B73A2920073BFA9 /* EnterpriseChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnterpriseChatViewController.m; sourceTree = "<group>"; };
+		F20C13091B750A870073BFA9 /* SimpleMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleMessage.h; sourceTree = "<group>"; };
+		F20C130A1B750A870073BFA9 /* SimpleMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleMessage.m; sourceTree = "<group>"; };
 		F22FE2711B3AD7BE00A1A997 /* ChatListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatListViewController.h; sourceTree = "<group>"; };
 		F22FE2721B3AD7BE00A1A997 /* ChatListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatListViewController.m; sourceTree = "<group>"; };
 		F22FE2761B3AD87800A1A997 /* KxMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KxMenu.h; path = Utilities/KxMenu/KxMenu.h; sourceTree = "<group>"; };
@@ -590,6 +600,8 @@
 		F28B6C861B6F991600E0C267 /* GetEnterpriseDetailDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetEnterpriseDetailDataParse.m; sourceTree = "<group>"; };
 		F28B6C881B6FAB5D00E0C267 /* GetEnterpriseListDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetEnterpriseListDataParse.h; sourceTree = "<group>"; };
 		F28B6C891B6FAB5D00E0C267 /* GetEnterpriseListDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetEnterpriseListDataParse.m; sourceTree = "<group>"; };
+		F29BC4901B75119900803183 /* SimpleMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimpleMessageCell.h; path = RCDChatList/SimpleMessageCell.h; sourceTree = "<group>"; };
+		F29BC4911B75119900803183 /* SimpleMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SimpleMessageCell.m; path = RCDChatList/SimpleMessageCell.m; sourceTree = "<group>"; };
 		F29F86151B2410070058FC9F /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPRequestOperation.h; path = Utilities/AFNetworking/AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		F29F86161B2410070058FC9F /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFHTTPRequestOperation.m; path = Utilities/AFNetworking/AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		F29F86171B2410070058FC9F /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPRequestOperationManager.h; path = Utilities/AFNetworking/AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -1025,12 +1037,20 @@
 		2B39C9641B272969007BAC7A /* Conversation */ = {
 			isa = PBXGroup;
 			children = (
+				F20C13031B73A2690073BFA9 /* EnterpriseChatListViewController.h */,
+				F20C13041B73A2690073BFA9 /* EnterpriseChatListViewController.m */,
+				F20C13061B73A2920073BFA9 /* EnterpriseChatViewController.h */,
+				F20C13071B73A2920073BFA9 /* EnterpriseChatViewController.m */,
 				F22FE2711B3AD7BE00A1A997 /* ChatListViewController.h */,
 				F22FE2721B3AD7BE00A1A997 /* ChatListViewController.m */,
 				F22FE2801B3ADB6000A1A997 /* ChatViewController.h */,
 				F22FE2811B3ADB6000A1A997 /* ChatViewController.m */,
 				F23461DA1B5E8B2A00C88FAC /* SettingViewController */,
 				F22FE29D1B3FF98500A1A997 /* RCDChatList */,
+				F20C13091B750A870073BFA9 /* SimpleMessage.h */,
+				F20C130A1B750A870073BFA9 /* SimpleMessage.m */,
+				F29BC4901B75119900803183 /* SimpleMessageCell.h */,
+				F29BC4911B75119900803183 /* SimpleMessageCell.m */,
 			);
 			name = Conversation;
 			sourceTree = "<group>";
@@ -1661,11 +1681,13 @@
 				F256CB781B6CAE23009478C2 /* EnterPriseRequestDataParse.m in Sources */,
 				F22FE2B61B3FFAF700A1A997 /* RCDSearchFriendViewController.m in Sources */,
 				F23461791B5AAB2500C88FAC /* UserInfoDataSource.m in Sources */,
+				F20C13051B73A2690073BFA9 /* EnterpriseChatListViewController.m in Sources */,
 				2B5A59141B48DFBB000382D7 /* MRStopButton.m in Sources */,
 				F29F862B1B2410070058FC9F /* AFNetworkReachabilityManager.m in Sources */,
 				F23461E41B5FCFA900C88FAC /* ChatSettingCollectionViewCell.m in Sources */,
 				F22FE3021B4576D100A1A997 /* GetContactListDataParse.m in Sources */,
 				F277AE041B2DC34E006E42CB /* UIDevice+screenType.m in Sources */,
+				F20C130B1B750A870073BFA9 /* SimpleMessage.m in Sources */,
 				F23630BD1B68F61800A12F63 /* TagDataParse.m in Sources */,
 				F23461DD1B5E8CBF00C88FAC /* ChatSettingViewController.m in Sources */,
 				F23461711B5AA0FD00C88FAC /* FMDatabaseQueue.m in Sources */,
@@ -1685,12 +1707,14 @@
 				F29F862D1B2410070058FC9F /* AFURLConnectionOperation.m in Sources */,
 				2BC821361B5BE6B60090E2C1 /* ChangeUserImageDataParse.m in Sources */,
 				F22FE3051B458A4100A1A997 /* GetRequestContactListDataParse.m in Sources */,
+				F20C13081B73A2920073BFA9 /* EnterpriseChatViewController.m in Sources */,
 				F22FE2731B3AD7BE00A1A997 /* ChatListViewController.m in Sources */,
 				F22FE2B51B3FFAF700A1A997 /* RCDAddFriendViewController.m in Sources */,
 				F22FE2B71B3FFAF700A1A997 /* RCDSearchResultTableViewCell.m in Sources */,
 				2B7FB8171B56AA5D00DA456E /* ProfessionTableViewCell.m in Sources */,
 				F22FE2EC1B4000ED00A1A997 /* SDWebImagePrefetcher.m in Sources */,
 				F23630891B6673B400A12F63 /* RCDAddressBookDetailTableViewCell.m in Sources */,
+				F29BC4921B75119900803183 /* SimpleMessageCell.m in Sources */,
 				F2F92ECD1B4D60910047D7BF /* RCDPhoneAddressBookViewController.m in Sources */,
 				F22FE2AD1B3FFAE600A1A997 /* RCDSelectPersonTableViewCell.m in Sources */,
 				F22FE2941B3B000400A1A997 /* UserSettingViewController.m in Sources */,
