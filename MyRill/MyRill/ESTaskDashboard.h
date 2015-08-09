@@ -7,13 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+@class ESTaskMask;
 
 @interface ESTaskDashboard : NSObject
 
-@property (nonatomic, strong) NSNumber *totalTask;
-@property (nonatomic, strong) NSNumber *closedTask;
-@property (nonatomic, strong) NSNumber *totalTaskInSelf;
-@property (nonatomic, strong) NSNumber *overdueTaskInSelf;
+@property (nonatomic, strong) ESTaskMask *totalTask;
+@property (nonatomic, strong) ESTaskMask *closedTask;
+@property (nonatomic, strong) ESTaskMask *totalTaskInSelf;
+@property (nonatomic, strong) ESTaskMask *overdueTaskInSelf;
 @property (nonatomic, strong) NSArray *TaskInOriginatorList;
 
 - (instancetype)initWithDic:(NSDictionary *)dic;

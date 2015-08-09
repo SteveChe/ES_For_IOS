@@ -9,6 +9,8 @@
 #import "AFHttpTool.h"
 #import "AFNetworking.h"
 #import "ESProfession.h"
+#import "ESTask.h"
+#import "ESContactor.h"
 
 #define DEV_SERVER_ADDRESS @"http://120.25.249.144/"
 #define ContentType @"text/json"
@@ -416,7 +418,7 @@
             param = @{@"status":identify};
             break;
         case ESTaskOverdue:
-            param = @{@"overdue":identify};
+            param = @{@"overdue":@"1",@"person_in_charge_id":identify};
             break;
         case ESTaskListQ:
             param = @{@"q":identify};
@@ -427,6 +429,58 @@
     
     [AFHttpTool requestWithMethod:RequestMethodTypeGet
                               url:strURL
+                           params:param
+                          success:success
+                          failure:failure];
+}
+
++ (void)EditTaskWithTaskModel:(ESTask *)task
+               success:(void (^)(id response))success
+               failure:(void (^)(NSError *error))failure {
+    NSMutableArray *observerArray = [[NSMutableArray alloc] initWithCapacity:task.observers.count];
+    for (ESContactor *contractor in task.observers) {
+        [observerArray addObject:contractor.useID];
+    }
+
+    NSDictionary *param = @{@"title":task.title,
+                            @"description":task.taskDescription,
+                            @"due_date":task.endDate,
+                            @"status":task.status,
+                            @"chat_id":task.chatID,
+                            @"person_in_charge":task.personInCharge.useID,
+                            @"observers":observerArray};
+    
+    [AFHttpTool requestWithMethod:RequestMethodTypePost
+                              url:[NSString stringWithFormat:@"/api/assignments/%@/.json",task.taskID]
+                           params:param
+                          success:success
+                          failure:failure];
+}
+
++ (void)getTaskCommentListWithTaskID:(NSString *)taskID
+                            listSize:(NSString *)size
+                             success:(void (^)(id))success
+                             failure:(void (^)(NSError *))failure {
+    NSDictionary *param = nil;
+    if (size != nil) {
+        param = @{@"limit":size};
+    }
+    
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet
+                              url:[NSString stringWithFormat:@"/api/assignments/%@/comments/.json",taskID]
+                           params:param
+                          success:success
+                          failure:failure];
+}
+
++ (void)sendTaskCommentWithTaskID:(NSString *)taskID
+                          comment:(NSString *)comment
+                          success:(void (^)(id))success
+                          failure:(void (^)(NSError *))failure {
+    NSDictionary *param = @{@"content":comment};
+    
+    [AFHttpTool requestWithMethod:RequestMethodTypePost
+                              url:[NSString stringWithFormat:@"/api/assignments/%@/comments/.json",taskID]
                            params:param
                           success:success
                           failure:failure];

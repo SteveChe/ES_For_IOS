@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RemindDateTableViewCell" id="KGk-i7-Jjw" customClass="RemindDateTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="单选框" translatesAutoresizingMaskIntoConstraints="NO" id="oDL-an-Vdk">
+                        <rect key="frame" x="285" y="14.5" width="15" height="15"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="提醒时间" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pxv-47-xFJ">
+                        <rect key="frame" x="20" y="11" width="68" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Pxv-47-xFJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" symbolic="YES" id="4h8-3o-PJx"/>
+                    <constraint firstAttribute="trailing" secondItem="oDL-an-Vdk" secondAttribute="trailing" constant="20" symbolic="YES" id="8Kc-lS-5kj"/>
+                    <constraint firstAttribute="centerY" secondItem="oDL-an-Vdk" secondAttribute="centerY" id="XeQ-ch-xpz"/>
+                    <constraint firstAttribute="centerY" secondItem="Pxv-47-xFJ" secondAttribute="centerY" id="dVT-Uh-nK9"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="checkBoxImg" destination="oDL-an-Vdk" id="FW1-s4-Drq"/>
+                <outlet property="remindTimeLbl" destination="Pxv-47-xFJ" id="xcH-5m-OcA"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="单选框" width="15" height="15"/>
+    </resources>
+</document>

@@ -14,4 +14,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *startDateLbl;
 @property (nonatomic, strong) ESTask *taskModel;
 
+- (IBAction)headViewBtnOnClicked:(UIButton *)sender;
+
 @end

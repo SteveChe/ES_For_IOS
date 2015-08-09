@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SWTableViewCell.h"
 @class ESTask;
 
-@interface TaskListTableViewCell : UITableViewCell
+@interface TaskListTableViewCell : SWTableViewCell
 
 - (void)updateTackCell:(ESTask *)task;
 

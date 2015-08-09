@@ -67,16 +67,16 @@
     
     //创建了两个日期对象
     NSDate *date1=[NSDate date];
-    NSString *curdate=[dateFormatter stringFromDate:date1];
+    NSString *curdate = [dateFormatter stringFromDate:date1];
     NSDate *dateNow = [dateFormatter dateFromString:curdate];
-    NSDate *dateEnd = [dateFormatter dateFromString:@"2015-8-3 23:06"];
+    NSDate *dateEnd = [dateFormatter dateFromString:task.endDate];
     
     //取两个日期对象的时间间隔：
     NSTimeInterval time=[dateEnd timeIntervalSinceDate:dateNow];
     //这里的NSTimeInterval 并不是对象，是基本型，其实是double类型，是由c定义的:typedef double NSTimeInterval;
     
     if (time <= 0) {
-        self.endDateLbl.text = @"";
+        self.endDateLbl.text = @"已过期";
         return;
     }
     
@@ -96,6 +96,12 @@
             }
         }
     }
+}
+
+- (void)setInitiatorImg:(UIImageView *)initiatorImg {
+    _initiatorImg = initiatorImg;
+    
+    _initiatorImg.layer.cornerRadius = 20.f;
 }
 
 @end

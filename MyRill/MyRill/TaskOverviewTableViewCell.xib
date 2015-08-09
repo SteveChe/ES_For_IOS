@@ -27,7 +27,7 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="头像_100" translatesAutoresizingMaskIntoConstraints="NO" id="Bas-g5-FLA">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="头像_100" translatesAutoresizingMaskIntoConstraints="NO" id="Bas-g5-FLA">
                         <rect key="frame" x="20" y="11" width="40" height="40"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="Bas-g5-FLA" secondAttribute="height" multiplier="1:1" id="51x-l5-qhZ"/>
@@ -45,6 +45,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="initaiatorImg" destination="Bas-g5-FLA" id="Nhq-sk-SWl"/>
                 <outlet property="initiatorNameLbl" destination="Qkd-r5-WJj" id="QRh-TG-Wen"/>
                 <outlet property="taskTotalLbl" destination="rdO-tV-VHB" id="wT2-Pc-TwB"/>
             </connections>
