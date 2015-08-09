@@ -208,6 +208,28 @@ failure:(void (^)(NSError *error))failure;
  备注：如果keyWord为空，则返回所有联系人
  **/
 +(void)searchEnterprises:(NSString*) keyWord success:(void (^)(id response))success failure:(void (^)(NSError* err))failure;
+//获取最新消息
++(void)getLastestMessageSucess:(void (^)(id response))success failure:(void (^)(NSError* err))failure;
 
+//获取Rill最新的一条系统消息
++(void)getLastestRillMessageSucess:(void (^)(id response))success failure:(void (^)(NSError* err))failure;
+
+//获取Rill所有系统消息
++(void)getRillMessageListSucess:(void (^)(id response))success failure:(void (^)(NSError* err))failure;
+
+//向Rill发送消息
++(void)replyToRillMessage:(NSString*)content sucess:(void (^)(id response))success failure:(void (^)(NSError* err))failure;
+
+//获取最近的一条企业消息
++(void)getLastestEnterpriseMessageSucess:(void (^)(id response))success failure:(void (^)(NSError* err))failure;
+
+//获取所有企业的最后一条消息列表
++(void)getAllEnterpriseLastestMessageListSucess:(void (^)(id response))success failure:(void (^)(NSError* err))failure;
+
+//获取一个企业的所有消息
++(void)getOneEnterpriseMessage:(NSString*)enterpriseId sucess:(void (^)(id response))success failure:(void (^)(NSError* err))failure;
+
+//向企业发送消息
++(void)replyToOneEnterpriseMessage:(NSString*)enterpriseId content:(NSString*)content sucess:(void (^)(id response))success failure:(void (^)(NSError* err))failure;
 
 @end

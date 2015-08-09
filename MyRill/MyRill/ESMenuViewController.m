@@ -69,6 +69,8 @@
                                 [[ESNavigationController alloc] initWithRootViewController:userVC],nil];
     [self setSelectedIndex:0];
     self.delegate = self;
+    [self loginRongCloud];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -82,7 +84,6 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self loginRongCloud];
 }
 -(void)loginRongCloud
 {

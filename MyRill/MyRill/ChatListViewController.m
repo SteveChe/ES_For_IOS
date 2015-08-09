@@ -18,6 +18,7 @@
 #import "UserInfoDataSource.h"
 #import "GetContactDetailDataParse.h"
 #import "ESUserDetailInfo.h"
+#import "EnterpriseChatViewController.h"
 
 void(^completionHandler)(RCUserInfo* userInfo);
 
@@ -25,6 +26,9 @@ void(^completionHandler)(RCUserInfo* userInfo);
 @interface ChatListViewController ()<ContactDetailDataDelegate>
 @property (nonatomic,strong) GetContactDetailDataParse* getContactDetailDataParse;
 @property (atomic,assign)NSInteger nUserDetailRequestNum;
+@property (nonatomic,strong) NSMutableArray *myDataSource;
+
+-(void)initEnterpriseMessage;
 
 @end
 
@@ -49,6 +53,8 @@ void(^completionHandler)(RCUserInfo* userInfo);
     _getContactDetailDataParse = [[GetContactDetailDataParse alloc] init];
     _getContactDetailDataParse.delegate = self;
     _nUserDetailRequestNum = 0;
+    _myDataSource = [NSMutableArray new];
+    [self initEnterpriseMessage];
 
 }
 
@@ -85,6 +91,37 @@ void(^completionHandler)(RCUserInfo* userInfo);
             });
         });
     }
+
+}
+
+
+-(void)initEnterpriseMessage
+{
+    RCConversationModel *esModel = [RCConversationModel new];
+    esModel.isTop = YES;
+    esModel.conversationModelType = RC_CONVERSATION_MODEL_TYPE_CUSTOMIZATION;
+//    esModel.extend = nil;
+//    esModel.sentTime = 1438868551;
+//    esModel.receivedTime = 1438868551;
+//    [self.conversationListDataSource insertObject:esModel atIndex:0];
+//    [self refreshConversationTableViewWithConversationModel:esModel];
+    [_myDataSource addObject:esModel];
+    
+    RCConversationModel *enterpriseModel = [RCConversationModel new];
+    enterpriseModel.isTop = YES;
+    enterpriseModel.conversationModelType = RC_CONVERSATION_MODEL_TYPE_CUSTOMIZATION;
+//    enterpriseModel.extend = nil;
+//    enterpriseModel.sentTime = 1438868551;
+//    enterpriseModel.receivedTime = 1438868551;
+    [_myDataSource addObject:enterpriseModel];
+//    [self.conversationListDataSource insertObject:enterpriseModel atIndex:1];
+    
+//    [self willReloadTableData:self.conversationListDataSource];
+    //调用父类刷新未读消息数
+//    [self refreshConversationTableViewWithConversationModel:enterpriseModel];
+    //[super didReceiveMessageNotification:notification];
+//    [self refreshConversationTableViewIfNeeded];
+//    [self updateBadgeValueForTabBarItem];
 }
 
 - (void)updateBadgeValueForTabBarItem
@@ -135,16 +172,11 @@ void(^completionHandler)(RCUserInfo* userInfo);
     
     //自定义会话类型
     if (conversationModelType == RC_CONVERSATION_MODEL_TYPE_CUSTOMIZATION) {
-        RCConversationModel *model = self.conversationListDataSource[indexPath.row];
-        RCContactNotificationMessage *_contactNotificationMsg = (RCContactNotificationMessage *)model.lastestMessage;
-        ESUserInfo *userinfo = [ESUserInfo new];
-        
-        NSDictionary *_cache_userinfo = [[NSUserDefaults standardUserDefaults]objectForKey:_contactNotificationMsg.sourceUserId];
-        if (_cache_userinfo) {
-            userinfo.userName       = _cache_userinfo[@"username"];
-            userinfo.portraitUri    = _cache_userinfo[@"portraitUri"];
-            userinfo.userId         = _contactNotificationMsg.sourceUserId;
-        }
+//        RCConversationModel *model = self.conversationListDataSource[indexPath.row];
+
+        EnterpriseChatViewController* enterpriseChatVC = [[EnterpriseChatViewController alloc] init];
+        enterpriseChatVC.title = @"ES系统消息";
+        [self.navigationController pushViewController:enterpriseChatVC animated:YES];
     }
     
 }
@@ -154,7 +186,6 @@ void(^completionHandler)(RCUserInfo* userInfo);
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 /**
  *  重载右边导航按钮的事件
@@ -265,16 +296,16 @@ void(^completionHandler)(RCUserInfo* userInfo);
 //*********************插入自定义Cell*********************//
 
 //插入自定义会话model
--(NSMutableArray *)willReloadTableData:(NSMutableArray *)dataSource
-{
-    
-    //    for (int i=0; i<_myDataSource.count; i++) {
-    //        RCConversationModel *customModel =[_myDataSource objectAtIndex:i];
-    //        [dataSource insertObject:customModel atIndex:0];
-    //    }
-    
-    return dataSource;
-}
+//-(NSMutableArray *)willReloadTableData:(NSMutableArray *)dataSource
+//{
+//    
+////    for (int i=0; i<_myDataSource.count; i++) {
+////        RCConversationModel *customModel =[_myDataSource objectAtIndex:i];
+////        [dataSource insertObject:customModel atIndex:0];
+////    }
+//    
+//    return dataSource;
+//}
 
 //左滑删除
 -(void)rcConversationListTableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -287,6 +318,11 @@ void(^completionHandler)(RCUserInfo* userInfo);
     [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
+- (void)willDisplayConversationTableCell:(RCConversationBaseCell *)cell atIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"willDisplayConversationTableCell");
+}
+
 //高度
 -(CGFloat)rcConversationListTableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -297,31 +333,40 @@ void(^completionHandler)(RCUserInfo* userInfo);
 -(RCConversationBaseCell *)rcConversationListTableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     RCConversationModel *model = self.conversationListDataSource[indexPath.row];
-    
-    __block NSString *userName    = nil;
-    __block NSString *portraitUri = nil;
-    
-    //此处需要添加根据userid来获取用户信息的逻辑，extend字段不存在于DB中，当数据来自db时没有extend字段内容，只有userid
-    if (nil == model.extend) {
-        // Not finished yet, To Be Continue...
-        RCContactNotificationMessage *_contactNotificationMsg = (RCContactNotificationMessage *)model.lastestMessage;
-        NSDictionary *_cache_userinfo = [[NSUserDefaults standardUserDefaults]objectForKey:_contactNotificationMsg.sourceUserId];
-        if (_cache_userinfo) {
-            userName = _cache_userinfo[@"username"];
-            portraitUri = _cache_userinfo[@"portraitUri"];
-        }
-        
-    }else{
-        ESUserInfo *user = (ESUserInfo *)model.extend;
-        userName    = user.userName;
-        portraitUri = user.portraitUri;
+    RCDChatListCell *cell = [[RCDChatListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ESEnterpriseCell"];
+
+    [cell setModel:model];
+    if(indexPath.row == 0)
+    {
+        cell.lblName.text = @"ES系统消息";
+        cell.lblDetail.text =[NSString stringWithFormat:@"你反馈的需求已受理，请在任务查收"];
+        [cell.ivAva setImage:[UIImage imageNamed:@"duihua_xitongxiaoxi"]];
     }
-    
-    RCDChatListCell *cell = [[RCDChatListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@""];
-    cell.lblDetail.text =[NSString stringWithFormat:@"来自%@的好友请求",userName];
-    [cell.ivAva sd_setImageWithURL:[NSURL URLWithString:portraitUri] placeholderImage:[UIImage imageNamed:@"system_notice"]];
+    else if ( indexPath.row == 1)
+    {
+        cell.lblName.text = @"企业消息";
+        cell.lblDetail.text =[NSString stringWithFormat:@"RILL:BMC6.7.3发布！"];
+        [cell.ivAva setImage:[UIImage imageNamed:@"duihua_qiyexiaoxi"]];
+        
+    }
+
     return cell;
 }
+
+//*********************插入自定义Cell*********************//
+
+//插入自定义会话model
+-(NSMutableArray *)willReloadTableData:(NSMutableArray *)dataSource
+{
+    
+    for (int i=0; i<_myDataSource.count; i++) {
+        RCConversationModel *customModel =[_myDataSource objectAtIndex:i];
+        [dataSource insertObject:customModel atIndex:0];
+    }
+    
+    return dataSource;
+}
+
 
 #pragma mark -- ContactDetailDataDelegate
 - (void)getContactDetail:(ESUserDetailInfo *)userDetailInfo

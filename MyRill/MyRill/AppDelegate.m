@@ -29,9 +29,8 @@
     
     //初始化融云SDK，
 //    [[RCIM sharedRCIM ]initWithAppKey:RONGCLOUD_IM_APPKEY deviceToken:_deviceTokenCache];
-    [[RCIM sharedRCIM ]initWithAppKey:RONGCLOUD_IM_APPKEY];
+    [[RCIM sharedRCIM ]initWithAppKey:RONGCLOUD_IM_APPKEY ];
 
-    
     // Required
 #if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_7_1
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {

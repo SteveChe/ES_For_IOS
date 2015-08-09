@@ -74,6 +74,16 @@
 @property(nonatomic) BOOL enableNotification;
 
 /**
+ *  cell 背景颜色
+ */
+@property(nonatomic) UIColor *cellBackgroundColor;
+
+/**
+ *  置顶cell 背景颜色
+ */
+@property(nonatomic) UIColor *topCellBackgroundColor;
+
+/**
  *  设置用户头像样式
  *
  *  @param portraitStyle portraitStyle
@@ -100,6 +110,13 @@
  *  @param model 会话的model
  */
 - (void)didTapCellPortrait:(RCConversationModel *)model;
+
+/**
+ *  长按头像事件
+ *
+ *  @param userId 用户的ID
+ */
+- (void)didLongPressCellPortrait:(RCConversationModel *)model;
 
 @end
 
