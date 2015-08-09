@@ -9,6 +9,11 @@
 #import <Foundation/Foundation.h>
 @class ESEnterpriseMessage;
 
+@protocol GetLastestMessageDelegate <NSObject>
+-(void)getLastestMessageSucceed:(NSArray*)enterpriseMessage;
+-(void)getLastestMessageFailed:(NSString*)errorMessage;
+@end
+
 @protocol GetLastestRILLMessageDelegate <NSObject>
 -(void)getLastestRILLMessageSucceed:(ESEnterpriseMessage*)enterpriseMessage;
 -(void)getLastestRILLMessageFailed:(NSString*)errorMessage;
@@ -41,20 +46,23 @@
 
 @protocol ReplyToOneEnterpriseMessageDelegate <NSObject>
 -(void)replyOneEnterpriseMessageSucceed;
--(void)replyOneEnterpriseMessageFailed;
+-(void)replyOneEnterpriseMessageFailed:(NSString*)errorMessage;
 @end
 
 
 @interface GetEnterpriseMessageDataParse : NSObject
 
-@property (nonatomic, weak) id<GetLastestRILLMessageDelegate> getLastestRillMessageDelegate;
+@property (nonatomic, weak) id<GetLastestMessageDelegate> getLastestMessageDelegate;
 @property (nonatomic, weak) id<GetRILLMessageListDelegate> getRillMessageListDelegate;
 @property (nonatomic, weak) id<ReplyToRILLMessageDelegate> replyToRillMessageDelegate;
-@property (nonatomic, weak) id<GetLastestEnterpriseMessageDelegate> getLastestEnterpriseMessageDelegate;
-@property (nonatomic, weak) id<GetOneEnterpriseMessageListDelegate> getOneEnterpriseMessageListDelegate;
 @property (nonatomic, weak) id<GetALLEnterpriseLastestMessageListDelegate> getAllEnterpriseLastestMessageListDelegate;
+@property (nonatomic, weak) id<GetOneEnterpriseMessageListDelegate> getOneEnterpriseMessageListDelegate;
 @property (nonatomic, weak) id<ReplyToOneEnterpriseMessageDelegate> replyToOneEnterpriseMessageDelegate;
+//@property (nonatomic, weak) id<GetLastestRILLMessageDelegate> getLastestRillMessageDelegate;
+//@property (nonatomic, weak) id<GetLastestEnterpriseMessageDelegate> getLastestEnterpriseMessageDelegate;
 
+//获取最新消息
+-(void)getLastestMessage;
 -(void)getLastestRillMessage;
 //获取rill的所有消息
 -(void)getRillMessageList;

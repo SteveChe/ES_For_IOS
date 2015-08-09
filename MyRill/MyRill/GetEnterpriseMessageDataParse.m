@@ -14,11 +14,167 @@
 #import "ESEnterpriseMessageContent.h"
 #import "ESUserInfo.h"
 
+@interface GetEnterpriseMessageDataParse()
+
+-(ESEnterpriseMessage*)parseEnterpriseMessage:(NSDictionary*)messageDic;
+@end
+
 @implementation GetEnterpriseMessageDataParse
 
--(void)getLastestRillMessage
+//获取最新消息
+-(void)getLastestMessage
 {
-    [AFHttpTool getLastestRillMessageSucess:^(id response)
+    [AFHttpTool getLastestMessageSucess:^(id response)
+    {
+        NSDictionary* reponseDic = (NSDictionary*)response;
+        NSNumber* errorCodeNum = [reponseDic valueForKey:NETWORK_ERROR_CODE];
+        if (errorCodeNum == nil || [errorCodeNum isEqual:[NSNull null]] )
+        {
+            return ;
+        }
+        int errorCode = [errorCodeNum intValue];
+        switch (errorCode)
+        {
+            case 0:
+            {
+                NSDictionary* temDic = [reponseDic valueForKey:NETWORK_OK_DATA];
+                if (temDic == nil || [temDic isEqual:[NSNull null]])
+                {
+                    break;
+                }
+                NSMutableArray* enterpriseMessageList = [[NSMutableArray alloc] init];
+                NSDictionary* rillMessageDic = [temDic objectForKey:@"riil"];
+                if (rillMessageDic != nil && [rillMessageDic isKindOfClass:[NSDictionary class]]  )
+                {
+                    ESEnterpriseMessage* rillMessage = [self parseEnterpriseMessage:rillMessageDic];
+                    if (rillMessage != nil)
+                    {
+                        [enterpriseMessageList addObject:rillMessage];
+                    }
+                }
+                
+                NSDictionary* enterpriseMessageDic = [temDic objectForKey:@"enterprise"];
+                if (enterpriseMessageDic != nil && [enterpriseMessageDic isKindOfClass:[NSDictionary class]] )
+                {
+                    ESEnterpriseMessage* enterpriseMessage = [self parseEnterpriseMessage:enterpriseMessageDic];
+                    if (enterpriseMessage != nil)
+                    {
+                        [enterpriseMessageList addObject:enterpriseMessage];
+                    }
+
+                }
+                
+                if (self.getLastestMessageDelegate!= nil &&[self.getLastestMessageDelegate respondsToSelector:@selector(getLastestMessageSucceed:)])
+                {
+                        [self.getLastestMessageDelegate getLastestMessageSucceed:enterpriseMessageList];
+                }
+                
+            }
+                break;
+            default:
+            {
+                NSString* errorMessage = [reponseDic valueForKey:NETWORK_ERROR_MESSAGE];
+                if(errorMessage==nil)
+                    return;
+                errorMessage= [errorMessage stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+                NSLog(@"%@",errorMessage);
+                if (self.getLastestMessageDelegate!= nil &&[self.getLastestMessageDelegate respondsToSelector:@selector(getLastestMessageFailed:)])
+                {
+                    [self.getLastestMessageDelegate getLastestMessageFailed:errorMessage];
+                }
+            }
+                break;
+        }
+    }failure:^(NSError* err)
+    {
+        NSLog(@"%@",err);
+        if (self.getLastestMessageDelegate!= nil &&[self.getLastestMessageDelegate respondsToSelector:@selector(getLastestMessageFailed:)])
+        {
+            [self.getLastestMessageDelegate getLastestMessageFailed:@"网络请求失败"];
+        }
+    }];
+
+}
+
+-(void)getRillMessageList
+{
+    [AFHttpTool getRillMessageListSucess:^(id response)
+     {
+         NSDictionary* reponseDic = (NSDictionary*)response;
+         NSNumber* errorCodeNum = [reponseDic valueForKey:NETWORK_ERROR_CODE];
+         if (errorCodeNum == nil || [errorCodeNum isEqual:[NSNull null]] )
+         {
+             return ;
+         }
+         int errorCode = [errorCodeNum intValue];
+         switch (errorCode)
+         {
+             case 0:
+             {
+                 NSDictionary* temDic = [reponseDic valueForKey:NETWORK_OK_DATA];
+                 if (temDic == nil || [temDic isEqual:[NSNull null]])
+                 {
+                     break;
+                 }
+                 NSArray* listArray = [temDic valueForKey:NETWORK_DATA_LIST];
+                 if (listArray == nil || [listArray isEqual:[NSNull null]]
+                     || [listArray count] <= 0)
+                 {
+                     if (self.getRillMessageListDelegate!= nil && [self.getRillMessageListDelegate respondsToSelector:@selector(getRILLMessageSucceed:)])
+                     {
+                         [self.getRillMessageListDelegate getRILLMessageSucceed:nil];
+                     }
+                     break;
+                 }
+                 NSMutableArray* enterpriseMessageList = [[NSMutableArray alloc] init];
+                 
+                 for(NSDictionary * enterpriseMessageDic in listArray)
+                 {
+                     if (enterpriseMessageDic == nil || ![enterpriseMessageDic isKindOfClass:[NSDictionary class]])
+                     {
+                         continue;
+                     }
+                     ESEnterpriseMessage* enterpriseMessage = [self parseEnterpriseMessage:enterpriseMessageDic];
+                     if (enterpriseMessage!= nil)
+                     {
+                         [enterpriseMessageList addObject:enterpriseMessage];
+                     }
+                 }
+                 
+                
+                 if (self.getRillMessageListDelegate!= nil &&[self.getRillMessageListDelegate respondsToSelector:@selector(getRILLMessageSucceed:)])
+                 {
+                     [self.getRillMessageListDelegate getRILLMessageSucceed:enterpriseMessageList];
+                 }
+                 
+             }
+                 break;
+             default:
+             {
+                 NSString* errorMessage = [reponseDic valueForKey:NETWORK_ERROR_MESSAGE];
+                 if(errorMessage==nil)
+                     return;
+                 errorMessage= [errorMessage stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+                 NSLog(@"%@",errorMessage);
+                 if (self.getRillMessageListDelegate!= nil &&[self.getRillMessageListDelegate respondsToSelector:@selector(getRILLMessageFailed:)])
+                 {
+                     [self.getRillMessageListDelegate getRILLMessageFailed:errorMessage];
+                 }
+             }
+                 break;
+         }
+     }failure:^(NSError* err)
+     {
+         NSLog(@"%@",err);
+         if (self.getRillMessageListDelegate!= nil &&[self.getRillMessageListDelegate respondsToSelector:@selector(getRILLMessageFailed:)])
+         {
+             [self.getRillMessageListDelegate getRILLMessageFailed:@"网络请求失败"];
+         }
+     }];
+}
+-(void)replyToRillMessage:(NSString*)content
+{
+    [AFHttpTool replyToRillMessage:content sucess:^(id response)
      {
          NSDictionary* reponseDic = (NSDictionary*)response;
          NSNumber* errorCodeNum = [reponseDic valueForKey:NETWORK_ERROR_CODE];
@@ -37,67 +193,250 @@
                      break;
                  }
                  
-                 
-//                 if (self.getLastestRillMessageDelegate!= nil &&[self.getLastestRillMessageDelegate respondsToSelector:@selector(getLastestRILLMessageSucceed:)])
-//                 {
-//                     [self.getLastestRillMessageDelegate getLastestRILLMessageSucceed:enterpriseMessage];
-//                 }
+                 if (self.replyToRillMessageDelegate!= nil &&[self.replyToRillMessageDelegate respondsToSelector:@selector(replyToRillMessageSucceed)])
+                 {
+                     [self.replyToRillMessageDelegate replyToRillMessageSucceed];
+                 }
                  
              }
                  break;
              default:
              {
-//                 NSString* errorMessage = [reponseDic valueForKey:NETWORK_ERROR_MESSAGE];
-//                 if(errorMessage==nil)
-//                     return;
-//                 errorMessage= [errorMessage stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-//                 NSLog(@"%@",errorMessage);
-//                 if (self.followEnterPriseDelegate!= nil &&[self.followEnterPriseDelegate respondsToSelector:@selector(followEnterpriseFailed:)])
-//                 {
-//                     [self.followEnterPriseDelegate followEnterpriseFailed:errorMessage];
-//                 }
+                 NSString* errorMessage = [reponseDic valueForKey:NETWORK_ERROR_MESSAGE];
+                 if(errorMessage==nil)
+                     return;
+                 errorMessage= [errorMessage stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+                 NSLog(@"%@",errorMessage);
+                 if (self.replyToRillMessageDelegate!= nil &&[self.replyToRillMessageDelegate respondsToSelector:@selector(replyToRillMessageFailed:)])
+                 {
+                     [self.replyToRillMessageDelegate replyToRillMessageFailed:errorMessage];
+                 }
              }
                  break;
          }
      }failure:^(NSError* err)
      {
          NSLog(@"%@",err);
-//         if (self.followEnterPriseDelegate!= nil &&[self.followEnterPriseDelegate respondsToSelector:@selector(followEnterpriseFailed:)])
-//         {
-//             [self.followEnterPriseDelegate followEnterpriseFailed:@"网络请求失败"];
-//         }
+         if (self.replyToRillMessageDelegate!= nil &&[self.replyToRillMessageDelegate respondsToSelector:@selector(getLastestMessageFailed:)])
+         {
+             [self.replyToRillMessageDelegate replyToRillMessageFailed:@"网络请求失败"];
+         }
+     }];
+}
+
+
+-(void)getAllEnterpriseLastestMessageList
+{
+    [AFHttpTool getAllEnterpriseLastestMessageListSucess:^(id response)
+     {
+         NSDictionary* reponseDic = (NSDictionary*)response;
+         NSNumber* errorCodeNum = [reponseDic valueForKey:NETWORK_ERROR_CODE];
+         if (errorCodeNum == nil || [errorCodeNum isEqual:[NSNull null]] )
+         {
+             return ;
+         }
+         int errorCode = [errorCodeNum intValue];
+         switch (errorCode)
+         {
+             case 0:
+             {
+                 NSDictionary* temDic = [reponseDic valueForKey:NETWORK_OK_DATA];
+                 if (temDic == nil || [temDic isEqual:[NSNull null]])
+                 {
+                     break;
+                 }
+                 NSArray* listArray = [temDic valueForKey:NETWORK_DATA_LIST];
+                 if (listArray == nil || [listArray isEqual:[NSNull null]]
+                     || [listArray count] <= 0)
+                 {
+                     if (self.getAllEnterpriseLastestMessageListDelegate!= nil && [self.getAllEnterpriseLastestMessageListDelegate respondsToSelector:@selector(getALLEnterpriseLastestMessageListSucceed:)])
+                     {
+                         [self.getAllEnterpriseLastestMessageListDelegate getALLEnterpriseLastestMessageListSucceed:nil];
+                     }
+                     break;
+                 }
+                 NSMutableArray* enterpriseMessageList = [[NSMutableArray alloc] init];
+                 
+                 for(NSDictionary * enterpriseMessageDic in listArray)
+                 {
+                     if (enterpriseMessageDic == nil || ![enterpriseMessageDic isKindOfClass:[NSDictionary class]])
+                     {
+                         continue;
+                     }
+                     ESEnterpriseMessage* enterpriseMessage = [self parseEnterpriseMessage:enterpriseMessageDic];
+                     if (enterpriseMessage!= nil)
+                     {
+                         [enterpriseMessageList addObject:enterpriseMessage];
+                     }
+                 }
+                 
+                 
+                 if (self.getAllEnterpriseLastestMessageListDelegate!= nil &&[self.getAllEnterpriseLastestMessageListDelegate respondsToSelector:@selector(getALLEnterpriseLastestMessageListSucceed:)])
+                 {
+                     [self.getAllEnterpriseLastestMessageListDelegate getALLEnterpriseLastestMessageListSucceed:enterpriseMessageList];
+                 }
+                 
+             }
+                 break;
+             default:
+             {
+                 NSString* errorMessage = [reponseDic valueForKey:NETWORK_ERROR_MESSAGE];
+                 if(errorMessage==nil)
+                     return;
+                 errorMessage= [errorMessage stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+                 NSLog(@"%@",errorMessage);
+                 if (self.getAllEnterpriseLastestMessageListDelegate!= nil &&[self.getAllEnterpriseLastestMessageListDelegate respondsToSelector:@selector(getALLEnterpriseLastestMessageListFailed:)])
+                 {
+                     [self.getAllEnterpriseLastestMessageListDelegate getALLEnterpriseLastestMessageListFailed:errorMessage];
+                 }
+             }
+                 break;
+         }
+     }failure:^(NSError* err)
+     {
+         NSLog(@"%@",err);
+         if (self.getAllEnterpriseLastestMessageListDelegate!= nil &&[self.getAllEnterpriseLastestMessageListDelegate respondsToSelector:@selector(getALLEnterpriseLastestMessageListFailed:)])
+         {
+             [self.getAllEnterpriseLastestMessageListDelegate getALLEnterpriseLastestMessageListFailed:@"网络请求失败"];
+         }
      }];
 
 }
--(void)getRillMessageList
-{
-    
-}
--(void)replyToRillMessage:(NSString*)content
-{
-    
-}
 
--(void)getLastestEnterpriseMessage
-{
-    
-}
--(void)getAllEnterpriseLastestMessageList
-{
-    
-}
+//获取一个企业的所有消息
 -(void)getOneEnterpriseMessage:(NSString*)enterpriseId
 {
-    
+    [AFHttpTool getOneEnterpriseMessage:enterpriseId sucess:^(id response)
+     {
+         NSDictionary* reponseDic = (NSDictionary*)response;
+         NSNumber* errorCodeNum = [reponseDic valueForKey:NETWORK_ERROR_CODE];
+         if (errorCodeNum == nil || [errorCodeNum isEqual:[NSNull null]] )
+         {
+             return ;
+         }
+         int errorCode = [errorCodeNum intValue];
+         switch (errorCode)
+         {
+             case 0:
+             {
+                 NSDictionary* temDic = [reponseDic valueForKey:NETWORK_OK_DATA];
+                 if (temDic == nil || [temDic isEqual:[NSNull null]])
+                 {
+                     break;
+                 }
+                 NSArray* listArray = [temDic valueForKey:NETWORK_DATA_LIST];
+                 if (listArray == nil || [listArray isEqual:[NSNull null]]
+                     || [listArray count] <= 0)
+                 {
+                     if (self.getOneEnterpriseMessageListDelegate!= nil && [self.getOneEnterpriseMessageListDelegate respondsToSelector:@selector(getOneEnterpriseMessageListSucceed:)])
+                     {
+                         [self.getOneEnterpriseMessageListDelegate getOneEnterpriseMessageListSucceed:nil];
+                     }
+                     break;
+                 }
+                 NSMutableArray* enterpriseMessageList = [[NSMutableArray alloc] init];
+                 
+                 for(NSDictionary * enterpriseMessageDic in listArray)
+                 {
+                     if (enterpriseMessageDic == nil || ![enterpriseMessageDic isKindOfClass:[NSDictionary class]])
+                     {
+                         continue;
+                     }
+                     
+                     ESEnterpriseMessage* enterpriseMessage = [self parseEnterpriseMessage:enterpriseMessageDic];
+                     if (enterpriseMessage!= nil)
+                     {
+                         [enterpriseMessageList addObject:enterpriseMessage];
+                     }
+                 }
+                 
+                 
+                 if (self.getOneEnterpriseMessageListDelegate!= nil &&[self.getOneEnterpriseMessageListDelegate respondsToSelector:@selector(getOneEnterpriseMessageListSucceed:)])
+                 {
+                     [self.getOneEnterpriseMessageListDelegate getOneEnterpriseMessageListSucceed:enterpriseMessageList];
+                 }
+                 
+             }
+                 break;
+             default:
+             {
+                 NSString* errorMessage = [reponseDic valueForKey:NETWORK_ERROR_MESSAGE];
+                 if(errorMessage==nil)
+                     return;
+                 errorMessage= [errorMessage stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+                 NSLog(@"%@",errorMessage);
+                 if (self.getOneEnterpriseMessageListDelegate!= nil &&[self.getOneEnterpriseMessageListDelegate respondsToSelector:@selector(getOneEnterpriseMessageListFailed:)])
+                 {
+                     [self.getOneEnterpriseMessageListDelegate getOneEnterpriseMessageListFailed:errorMessage];
+                 }
+             }
+                 break;
+         }
+     }failure:^(NSError* err)
+     {
+         NSLog(@"%@",err);
+         if (self.getOneEnterpriseMessageListDelegate!= nil &&[self.getOneEnterpriseMessageListDelegate respondsToSelector:@selector(getOneEnterpriseMessageListFailed:)])
+         {
+             [self.getOneEnterpriseMessageListDelegate getOneEnterpriseMessageListFailed:@"网络请求失败"];
+         }
+     }];
 }
+
+//向企业发送消息
 -(void)replyToOneEnterpriseMessage:(NSString*)enterpriseId content:(NSString*)content
 {
-    
+    [AFHttpTool replyToOneEnterpriseMessage:enterpriseId content:content sucess:^(id response)
+     {
+         NSDictionary* reponseDic = (NSDictionary*)response;
+         NSNumber* errorCodeNum = [reponseDic valueForKey:NETWORK_ERROR_CODE];
+         if (errorCodeNum == nil || [errorCodeNum isEqual:[NSNull null]] )
+         {
+             return ;
+         }
+         int errorCode = [errorCodeNum intValue];
+         switch (errorCode)
+         {
+             case 0:
+             {
+                 NSDictionary* temDic = [reponseDic valueForKey:NETWORK_OK_DATA];
+                 if (temDic == nil || [temDic isEqual:[NSNull null]])
+                 {
+                     break;
+                 }
+                 
+                 if (self.replyToOneEnterpriseMessageDelegate!= nil &&[self.replyToOneEnterpriseMessageDelegate respondsToSelector:@selector(replyOneEnterpriseMessageSucceed)])
+                 {
+                     [self.replyToOneEnterpriseMessageDelegate replyOneEnterpriseMessageSucceed];
+                 }
+                 
+             }
+             break;
+         default:
+             {
+                 NSString* errorMessage = [reponseDic valueForKey:NETWORK_ERROR_MESSAGE];
+                 if(errorMessage==nil)
+                     return;
+                 errorMessage= [errorMessage stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+                 NSLog(@"%@",errorMessage);
+                 if (self.replyToOneEnterpriseMessageDelegate!= nil &&[self.replyToOneEnterpriseMessageDelegate respondsToSelector:@selector(replyOneEnterpriseMessageFailed:)])
+                 {
+                     [self.replyToOneEnterpriseMessageDelegate replyOneEnterpriseMessageFailed:errorMessage];
+                 }
+             }
+             break;
+         }
+     }failure:^(NSError* err)
+     {
+         NSLog(@"%@",err);
+         if (self.replyToOneEnterpriseMessageDelegate!= nil &&[self.replyToOneEnterpriseMessageDelegate respondsToSelector:@selector(replyOneEnterpriseMessageFailed:)])
+         {
+             [self.replyToOneEnterpriseMessageDelegate replyOneEnterpriseMessageFailed:@"网络请求失败"];
+         }
+     }];
 }
 
 -(ESEnterpriseMessage*)parseEnterpriseMessage:(NSDictionary*)messageDic
 {
-
     if (messageDic == nil || ![messageDic isKindOfClass:[NSDictionary class]])
     {
         return  nil;
@@ -219,4 +558,12 @@
     return enterpriseMessage;
 }
 
+
+#pragma mark -- 接口废弃
+-(void)getLastestRillMessage
+{
+}
+-(void)getLastestEnterpriseMessage
+{
+}
 @end

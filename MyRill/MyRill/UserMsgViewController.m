@@ -152,11 +152,11 @@
         showQRCodeVC.imageUrl = userDetailInfo.qrcode;
     } else {
         showQRCodeVC.qrCodeTitle = @"企业二维码";
-        if (userDetailInfo.enterprise==nil || [userDetailInfo.enterprise isEqual:[NSNull null]] || userDetailInfo.enterprise.enterpriseQRCode == nil || [userDetailInfo.enterprise.enterpriseQRCode isEqual:[NSNull null]]) {
+        if (userDetailInfo.enterprise_qrcode == nil || [userDetailInfo.enterprise_qrcode isEqual:[NSNull null]] || [userDetailInfo.enterprise_qrcode length]<=0 ) {
             return;
         }
-//        showQRCodeVC.imageUrl = userDetailInfo.enterprise_qrcode;
-        showQRCodeVC.imageUrl = userDetailInfo.enterprise.enterpriseQRCode;
+        showQRCodeVC.imageUrl = userDetailInfo.enterprise_qrcode;
+//        showQRCodeVC.imageUrl = userDetailInfo.enterprise.enterpriseQRCode;
     }
     
     [self.navigationController pushViewController:showQRCodeVC animated:YES];
