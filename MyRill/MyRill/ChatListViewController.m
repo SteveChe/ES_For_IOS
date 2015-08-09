@@ -19,17 +19,22 @@
 #import "GetContactDetailDataParse.h"
 #import "ESUserDetailInfo.h"
 #import "EnterpriseChatViewController.h"
+#import "GetEnterpriseMessageDataParse.h"
+#import "ESEnterpriseMessage.h"
+#import "ESEnterpriseMessageContent.h"
+#import "DeviceInfo.h"
 
 void(^completionHandler)(RCUserInfo* userInfo);
 
 
-@interface ChatListViewController ()<ContactDetailDataDelegate>
+@interface ChatListViewController ()<ContactDetailDataDelegate,GetLastestMessageDelegate>
 @property (nonatomic,strong) GetContactDetailDataParse* getContactDetailDataParse;
 @property (atomic,assign)NSInteger nUserDetailRequestNum;
 @property (nonatomic,strong) NSMutableArray *myDataSource;
+@property (nonatomic,strong) GetEnterpriseMessageDataParse* getEnterpriseMessageDataParse;
 
--(void)initEnterpriseMessage;
-
+//-(void)initEnterpriseMessage;
+-(void)updateEnterpriseMessage;
 @end
 
 @implementation ChatListViewController
@@ -54,8 +59,10 @@ void(^completionHandler)(RCUserInfo* userInfo);
     _getContactDetailDataParse.delegate = self;
     _nUserDetailRequestNum = 0;
     _myDataSource = [NSMutableArray new];
-    [self initEnterpriseMessage];
-
+    
+    _getEnterpriseMessageDataParse = [[GetEnterpriseMessageDataParse alloc] init];
+    _getEnterpriseMessageDataParse.getLastestMessageDelegate = self;
+//    [self initEnterpriseMessage];
 }
 
 
@@ -91,9 +98,13 @@ void(^completionHandler)(RCUserInfo* userInfo);
             });
         });
     }
-
+    [self updateEnterpriseMessage];
 }
 
+-(void)updateEnterpriseMessage
+{
+    [_getEnterpriseMessageDataParse getLastestMessage];
+}
 
 -(void)initEnterpriseMessage
 {
@@ -115,11 +126,11 @@ void(^completionHandler)(RCUserInfo* userInfo);
 //    enterpriseModel.receivedTime = 1438868551;
     [_myDataSource addObject:enterpriseModel];
 //    [self.conversationListDataSource insertObject:enterpriseModel atIndex:1];
-    
+//    
 //    [self willReloadTableData:self.conversationListDataSource];
-    //调用父类刷新未读消息数
+//    调用父类刷新未读消息数
 //    [self refreshConversationTableViewWithConversationModel:enterpriseModel];
-    //[super didReceiveMessageNotification:notification];
+//    [super didReceiveMessageNotification:notification];
 //    [self refreshConversationTableViewIfNeeded];
 //    [self updateBadgeValueForTabBarItem];
 }
@@ -171,12 +182,16 @@ void(^completionHandler)(RCUserInfo* userInfo);
     }
     
     //自定义会话类型
-    if (conversationModelType == RC_CONVERSATION_MODEL_TYPE_CUSTOMIZATION) {
-//        RCConversationModel *model = self.conversationListDataSource[indexPath.row];
+    if (conversationModelType == RC_CONVERSATION_MODEL_TYPE_CUSTOMIZATION)
+    {
+        if (indexPath.row == 0)
+        {
+            EnterpriseChatViewController* enterpriseChatVC = [[EnterpriseChatViewController alloc] init];
+            enterpriseChatVC.title = @"ES系统消息";//ES系统消息
+            enterpriseChatVC.chatType = e_Enterprise_Chat_Riil;
+            [self.navigationController pushViewController:enterpriseChatVC animated:YES];
+        }
 
-        EnterpriseChatViewController* enterpriseChatVC = [[EnterpriseChatViewController alloc] init];
-        enterpriseChatVC.title = @"ES系统消息";
-        [self.navigationController pushViewController:enterpriseChatVC animated:YES];
     }
     
 }
@@ -333,19 +348,22 @@ void(^completionHandler)(RCUserInfo* userInfo);
 -(RCConversationBaseCell *)rcConversationListTableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     RCConversationModel *model = self.conversationListDataSource[indexPath.row];
+    //RCDChatListCell
     RCDChatListCell *cell = [[RCDChatListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ESEnterpriseCell"];
 
     [cell setModel:model];
     if(indexPath.row == 0)
     {
         cell.lblName.text = @"ES系统消息";
-        cell.lblDetail.text =[NSString stringWithFormat:@"你反馈的需求已受理，请在任务查收"];
+        cell.lblDetail.text = model.conversationTitle;
+        cell.timeLabel.text = [DeviceInfo getShowTime:[NSDate dateWithTimeIntervalSince1970:model.sentTime]];
         [cell.ivAva setImage:[UIImage imageNamed:@"duihua_xitongxiaoxi"]];
     }
     else if ( indexPath.row == 1)
     {
         cell.lblName.text = @"企业消息";
-        cell.lblDetail.text =[NSString stringWithFormat:@"RILL:BMC6.7.3发布！"];
+        cell.lblDetail.text = model.conversationTitle;
+        cell.timeLabel.text = [DeviceInfo getShowTime:[NSDate dateWithTimeIntervalSince1970:model.sentTime]];
         [cell.ivAva setImage:[UIImage imageNamed:@"duihua_qiyexiaoxi"]];
         
     }
@@ -358,10 +376,14 @@ void(^completionHandler)(RCUserInfo* userInfo);
 //插入自定义会话model
 -(NSMutableArray *)willReloadTableData:(NSMutableArray *)dataSource
 {
-    
-    for (int i=0; i<_myDataSource.count; i++) {
+    if (_myDataSource == nil || [_myDataSource count] <= 0)
+    {
+        return dataSource;
+    }
+    for (int i=0; i<_myDataSource.count; i++)
+    {
         RCConversationModel *customModel =[_myDataSource objectAtIndex:i];
-        [dataSource insertObject:customModel atIndex:0];
+        [dataSource replaceObjectAtIndex:i withObject:customModel];
     }
     
     return dataSource;
@@ -397,6 +419,94 @@ void(^completionHandler)(RCUserInfo* userInfo);
             });
         });
     }
+}
+
+#pragma mark - GetLastestMessageDelegate
+-(void)getLastestMessageSucceed:(NSDictionary*)enterpriseMessageDic
+{
+    if (enterpriseMessageDic == nil)
+    {
+        return;
+    }
+    
+    ESEnterpriseMessage* riilMessage = [enterpriseMessageDic objectForKey:@"riil"];
+    if (riilMessage != nil)
+    {
+        RCConversationModel *esModel = [RCConversationModel new];
+        esModel.isTop = YES;
+        esModel.conversationModelType = RC_CONVERSATION_MODEL_TYPE_CUSTOMIZATION;
+        
+        if (!riilMessage.bRead) {
+            esModel.unreadMessageCount = 1;
+        }
+        if (riilMessage.bSuggestion)
+        {
+            esModel.conversationTitle = riilMessage.suggetstionText;
+        }
+        else
+        {
+            if(riilMessage.enterprise_messageContent != nil)
+            {
+                esModel.conversationTitle = riilMessage.enterprise_messageContent.title;
+            }
+        }
+        if (riilMessage.message_time!=nil)
+        {
+            esModel.sentTime = [riilMessage.message_time timeIntervalSince1970];
+            esModel.receivedTime = [[NSDate date] timeIntervalSince1970];
+        }
+        if ([_myDataSource count] >1)
+        {
+            [_myDataSource replaceObjectAtIndex:0 withObject:esModel];
+
+        }
+        else
+        {
+            [_myDataSource insertObject:esModel atIndex:0];
+        }
+    }
+    
+    ESEnterpriseMessage* enterpriseMessage = [enterpriseMessageDic objectForKey:@"enterprise"];
+    if (enterpriseMessage != nil)
+    {
+        RCConversationModel *enterpriseModel = [RCConversationModel new];
+        enterpriseModel.isTop = YES;
+        enterpriseModel.conversationModelType = RC_CONVERSATION_MODEL_TYPE_CUSTOMIZATION;
+        if (!enterpriseMessage.bRead) {
+            enterpriseModel.unreadMessageCount = 1;
+        }
+        if (riilMessage.enterprise_messageContent != nil)
+        {
+            enterpriseModel.conversationTitle = enterpriseMessage.enterprise_messageContent.title;
+        }
+        else
+        {
+            if (enterpriseMessage.bSuggestion)
+            {
+                enterpriseModel.conversationTitle = riilMessage.suggetstionText;
+            }
+        }
+        if (enterpriseMessage.message_time!=nil)
+        {
+            enterpriseModel.sentTime = [enterpriseMessage.message_time timeIntervalSince1970];
+            enterpriseModel.receivedTime = [[NSDate date] timeIntervalSince1970];
+        }
+        if ([_myDataSource count] >1)
+        {
+            [_myDataSource replaceObjectAtIndex:1 withObject:enterpriseModel];
+
+        }
+        else
+        {
+            [_myDataSource insertObject:enterpriseModel atIndex:1];
+
+        }
+    }
+    [self refreshConversationTableViewIfNeeded];
+}
+-(void)getLastestMessageFailed:(NSString*)errorMessage
+{
+    
 }
 
 #pragma mark override

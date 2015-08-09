@@ -10,17 +10,17 @@
 @class ESEnterpriseMessage;
 
 @protocol GetLastestMessageDelegate <NSObject>
--(void)getLastestMessageSucceed:(NSArray*)enterpriseMessage;
+-(void)getLastestMessageSucceed:(NSDictionary*)enterpriseMessageDic;
 -(void)getLastestMessageFailed:(NSString*)errorMessage;
 @end
 
-@protocol GetLastestRILLMessageDelegate <NSObject>
--(void)getLastestRILLMessageSucceed:(ESEnterpriseMessage*)enterpriseMessage;
--(void)getLastestRILLMessageFailed:(NSString*)errorMessage;
-@end
+//@protocol GetLastestRILLMessageDelegate <NSObject>
+//-(void)getLastestRILLMessageSucceed:(ESEnterpriseMessage*)enterpriseMessage;
+//-(void)getLastestRILLMessageFailed:(NSString*)errorMessage;
+//@end
 
 @protocol GetRILLMessageListDelegate <NSObject>
--(void)getRILLMessageSucceed:(NSArray*)enterpriseList;
+-(void)getRILLMessageSucceed:(NSArray*)enterpriseMessageList;
 -(void)getRILLMessageFailed:(NSString*)errorMessage;
 @end
 
@@ -29,10 +29,10 @@
 -(void)replyToRillMessageFailed:(NSString*)errorMessage;
 @end
 
-@protocol GetLastestEnterpriseMessageDelegate <NSObject>
--(void)getLastestEnterpriseMessageSucceed:(NSArray*)enterpriseList;
--(void)getLastestEnterpriseMessageFailed:(NSString*)errorMessage;
-@end
+//@protocol GetLastestEnterpriseMessageDelegate <NSObject>
+//-(void)getLastestEnterpriseMessageSucceed:(NSArray*)enterpriseList;
+//-(void)getLastestEnterpriseMessageFailed:(NSString*)errorMessage;
+//@end
 
 @protocol GetALLEnterpriseLastestMessageListDelegate <NSObject>
 -(void)getALLEnterpriseLastestMessageListSucceed:(NSArray*)enterpriseList;
@@ -63,13 +63,13 @@
 
 //获取最新消息
 -(void)getLastestMessage;
--(void)getLastestRillMessage;
+//-(void)getLastestRillMessage;
 //获取rill的所有消息
 -(void)getRillMessageList;
 //想Rill发送消息
 -(void)replyToRillMessage:(NSString*)content;
 //获取最后的一条企业消息
--(void)getLastestEnterpriseMessage;
+//-(void)getLastestEnterpriseMessage;
 //获取所有企业的最后一条消息列表
 -(void)getAllEnterpriseLastestMessageList;
 //获取一个企业的所有消息

@@ -42,14 +42,14 @@
                 {
                     break;
                 }
-                NSMutableArray* enterpriseMessageList = [[NSMutableArray alloc] init];
+                NSMutableDictionary* enterpriseMessageDicList = [[NSMutableDictionary alloc] init];
                 NSDictionary* rillMessageDic = [temDic objectForKey:@"riil"];
                 if (rillMessageDic != nil && [rillMessageDic isKindOfClass:[NSDictionary class]]  )
                 {
                     ESEnterpriseMessage* rillMessage = [self parseEnterpriseMessage:rillMessageDic];
                     if (rillMessage != nil)
                     {
-                        [enterpriseMessageList addObject:rillMessage];
+                        [enterpriseMessageDicList setObject:rillMessage forKey:@"riil"];
                     }
                 }
                 
@@ -59,14 +59,13 @@
                     ESEnterpriseMessage* enterpriseMessage = [self parseEnterpriseMessage:enterpriseMessageDic];
                     if (enterpriseMessage != nil)
                     {
-                        [enterpriseMessageList addObject:enterpriseMessage];
+                        [enterpriseMessageDicList setObject:enterpriseMessage forKey:@"enterprise"];
                     }
-
                 }
                 
                 if (self.getLastestMessageDelegate!= nil &&[self.getLastestMessageDelegate respondsToSelector:@selector(getLastestMessageSucceed:)])
                 {
-                        [self.getLastestMessageDelegate getLastestMessageSucceed:enterpriseMessageList];
+                    [self.getLastestMessageDelegate getLastestMessageSucceed:enterpriseMessageDicList];
                 }
                 
             }
@@ -224,7 +223,7 @@
      }];
 }
 
-
+//获取所有企业的最后一条消息列表
 -(void)getAllEnterpriseLastestMessageList
 {
     [AFHttpTool getAllEnterpriseLastestMessageListSucess:^(id response)
@@ -533,13 +532,15 @@
     NSNumber* bReadNum = [messageDic objectForKey:@"is_read"];
     if (bReadNum != nil && ![bReadNum isEqual:[NSNull null]])
     {
-        enterpriseMessage.bRead = [bReadNum boolValue];
+        enterpriseMessage.bRead = NO;
+
+//        enterpriseMessage.bRead = [bReadNum boolValue];
     }
     
     NSNumber* bSuggestion = [messageDic objectForKey:@"is_suggestion"];
     if (bSuggestion != nil && ![bSuggestion isEqual:[NSNull null]])
     {
-        enterpriseMessage.bSuggestion = [bReadNum boolValue];
+        enterpriseMessage.bSuggestion = [bSuggestion boolValue];
     }
     
     NSString* suggestion = [messageDic objectForKey:@"suggestion"];
@@ -549,15 +550,22 @@
         enterpriseMessage.suggetstionText = suggestion;
     }
     
-    NSDate* message_time = [messageDic objectForKey:@"timestamp"];
+    NSString* message_time = [messageDic objectForKey:@"timestamp"];
     if (message_time != nil && ![message_time isEqual:[NSNull null]])
     {
-        enterpriseMessage.message_time = message_time;
+        enterpriseMessage.message_time = [self dateFromString:message_time];
     }
     
     return enterpriseMessage;
 }
 
+- (NSDate *)dateFromString:(NSString *)dateString
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat: @"yyyy-MM-dd HH:mm:ss"];
+    NSDate *destDate= [dateFormatter dateFromString:dateString];
+    return destDate;
+}
 
 #pragma mark -- 接口废弃
 -(void)getLastestRillMessage

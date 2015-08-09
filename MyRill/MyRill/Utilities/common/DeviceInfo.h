@@ -201,6 +201,9 @@ __VA_ARGS__ \
 + (NSString*) getDocumentsPath;
 + (NSString*) getCachePath;
 + (NSString*) getTmpPath;
++ (NSString*) getShowTime:(NSDate*)timeDate;
++ (BOOL)isCurrentDay:(NSDate *)aDate;
++ (BOOL)isYesterDay:(NSDate *)aDate;
 /*
  * 获得系统 精确时间
  */
