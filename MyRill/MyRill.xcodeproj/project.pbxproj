@@ -89,6 +89,32 @@
 		2BE8C2331B52506600858CEE /* EditProfessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE8C2321B52506600858CEE /* EditProfessionViewController.m */; };
 		2BEAD04C1B738E3100905E21 /* TaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEAD04A1B738E3100905E21 /* TaskViewController.m */; };
 		2BEAD04D1B738E3100905E21 /* TaskViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BEAD04B1B738E3100905E21 /* TaskViewController.xib */; };
+		2BEAD0511B74F37C00905E21 /* AddTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEAD04F1B74F37C00905E21 /* AddTaskViewController.m */; };
+		2BEAD0521B74F37C00905E21 /* AddTaskViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BEAD0501B74F37C00905E21 /* AddTaskViewController.xib */; };
+		2BEAD0551B75D6FD00905E21 /* EditTaskDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEAD0541B75D6FD00905E21 /* EditTaskDataParse.m */; };
+		2BEAD0591B75D76A00905E21 /* AddTaskDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEAD0581B75D76A00905E21 /* AddTaskDataParse.m */; };
+		2BEAD05C1B76294500905E21 /* ESTaskMask.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEAD05B1B76294500905E21 /* ESTaskMask.m */; };
+		2BEAD06A1B76FF2400905E21 /* NSMutableArray+SWUtilityButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEAD05F1B76FF2400905E21 /* NSMutableArray+SWUtilityButtons.m */; };
+		2BEAD06B1B76FF2400905E21 /* SWCellScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEAD0611B76FF2400905E21 /* SWCellScrollView.m */; };
+		2BEAD06C1B76FF2400905E21 /* SWLongPressGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEAD0631B76FF2400905E21 /* SWLongPressGestureRecognizer.m */; };
+		2BEAD06D1B76FF2400905E21 /* SWTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEAD0651B76FF2400905E21 /* SWTableViewCell.m */; };
+		2BEAD06E1B76FF2400905E21 /* SWUtilityButtonTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEAD0671B76FF2400905E21 /* SWUtilityButtonTapGestureRecognizer.m */; };
+		2BEAD06F1B76FF2400905E21 /* SWUtilityButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEAD0691B76FF2400905E21 /* SWUtilityButtonView.m */; };
+		2BEAD0731B770B2A00905E21 /* RemindDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEAD0711B770B2A00905E21 /* RemindDateViewController.m */; };
+		2BEAD0741B770B2A00905E21 /* RemindDateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BEAD0721B770B2A00905E21 /* RemindDateViewController.xib */; };
+		2BEAD0781B77195300905E21 /* RemindDateTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEAD0761B77195300905E21 /* RemindDateTableViewCell.m */; };
+		2BEAD0791B77195300905E21 /* RemindDateTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BEAD0771B77195300905E21 /* RemindDateTableViewCell.xib */; };
+		2BEAD07C1B77360F00905E21 /* RemindView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEAD07B1B77360F00905E21 /* RemindView.m */; };
+		2BEAD07F1B77369F00905E21 /* ZCActionOnCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEAD07E1B77369F00905E21 /* ZCActionOnCalendar.m */; };
+		2BEAD0831B77508D00905E21 /* MessageListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEAD0811B77508D00905E21 /* MessageListViewController.m */; };
+		2BEAD0841B77508D00905E21 /* MessageListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BEAD0821B77508D00905E21 /* MessageListViewController.xib */; };
+		2BEAD0881B775C4500905E21 /* MessageListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEAD0861B775C4500905E21 /* MessageListTableViewCell.m */; };
+		2BEAD0891B775C4500905E21 /* MessageListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BEAD0871B775C4500905E21 /* MessageListTableViewCell.xib */; };
+		2BEAD08D1B775FC900905E21 /* MessageListSelfTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEAD08B1B775FC900905E21 /* MessageListSelfTableViewCell.m */; };
+		2BEAD08E1B775FC900905E21 /* MessageListSelfTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BEAD08C1B775FC900905E21 /* MessageListSelfTableViewCell.xib */; };
+		2BEAD0911B776C2E00905E21 /* GetTaskCommentListDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEAD0901B776C2E00905E21 /* GetTaskCommentListDataParse.m */; };
+		2BEAD0941B779A8E00905E21 /* SendTaskCommentDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEAD0931B779A8E00905E21 /* SendTaskCommentDataParse.m */; };
+		2BEAD0971B779C4900905E21 /* ESTaskComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEAD0961B779C4900905E21 /* ESTaskComment.m */; };
 		2BEBBD831B665849008BE7C4 /* GetTaskDashboardDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEBBD821B665849008BE7C4 /* GetTaskDashboardDataParse.m */; };
 		2BEBBD861B665BCB008BE7C4 /* ESTaskDashboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEBBD851B665BCB008BE7C4 /* ESTaskDashboard.m */; };
 		2BEBBD891B6661FD008BE7C4 /* ESTaskOriginatorInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEBBD881B6661FD008BE7C4 /* ESTaskOriginatorInfo.m */; };
@@ -400,6 +426,52 @@
 		2BEAD0491B738E3100905E21 /* TaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskViewController.h; sourceTree = "<group>"; };
 		2BEAD04A1B738E3100905E21 /* TaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskViewController.m; sourceTree = "<group>"; };
 		2BEAD04B1B738E3100905E21 /* TaskViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskViewController.xib; sourceTree = "<group>"; };
+		2BEAD04E1B74F37C00905E21 /* AddTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddTaskViewController.h; sourceTree = "<group>"; };
+		2BEAD04F1B74F37C00905E21 /* AddTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddTaskViewController.m; sourceTree = "<group>"; };
+		2BEAD0501B74F37C00905E21 /* AddTaskViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddTaskViewController.xib; sourceTree = "<group>"; };
+		2BEAD0531B75D6FD00905E21 /* EditTaskDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditTaskDataParse.h; sourceTree = "<group>"; };
+		2BEAD0541B75D6FD00905E21 /* EditTaskDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditTaskDataParse.m; sourceTree = "<group>"; };
+		2BEAD0571B75D76A00905E21 /* AddTaskDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddTaskDataParse.h; sourceTree = "<group>"; };
+		2BEAD0581B75D76A00905E21 /* AddTaskDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddTaskDataParse.m; sourceTree = "<group>"; };
+		2BEAD05A1B76294500905E21 /* ESTaskMask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESTaskMask.h; sourceTree = "<group>"; };
+		2BEAD05B1B76294500905E21 /* ESTaskMask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESTaskMask.m; sourceTree = "<group>"; };
+		2BEAD05E1B76FF2400905E21 /* NSMutableArray+SWUtilityButtons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+SWUtilityButtons.h"; sourceTree = "<group>"; };
+		2BEAD05F1B76FF2400905E21 /* NSMutableArray+SWUtilityButtons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+SWUtilityButtons.m"; sourceTree = "<group>"; };
+		2BEAD0601B76FF2400905E21 /* SWCellScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWCellScrollView.h; sourceTree = "<group>"; };
+		2BEAD0611B76FF2400905E21 /* SWCellScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWCellScrollView.m; sourceTree = "<group>"; };
+		2BEAD0621B76FF2400905E21 /* SWLongPressGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWLongPressGestureRecognizer.h; sourceTree = "<group>"; };
+		2BEAD0631B76FF2400905E21 /* SWLongPressGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWLongPressGestureRecognizer.m; sourceTree = "<group>"; };
+		2BEAD0641B76FF2400905E21 /* SWTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWTableViewCell.h; sourceTree = "<group>"; };
+		2BEAD0651B76FF2400905E21 /* SWTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWTableViewCell.m; sourceTree = "<group>"; };
+		2BEAD0661B76FF2400905E21 /* SWUtilityButtonTapGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWUtilityButtonTapGestureRecognizer.h; sourceTree = "<group>"; };
+		2BEAD0671B76FF2400905E21 /* SWUtilityButtonTapGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUtilityButtonTapGestureRecognizer.m; sourceTree = "<group>"; };
+		2BEAD0681B76FF2400905E21 /* SWUtilityButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWUtilityButtonView.h; sourceTree = "<group>"; };
+		2BEAD0691B76FF2400905E21 /* SWUtilityButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUtilityButtonView.m; sourceTree = "<group>"; };
+		2BEAD0701B770B2A00905E21 /* RemindDateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemindDateViewController.h; sourceTree = "<group>"; };
+		2BEAD0711B770B2A00905E21 /* RemindDateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemindDateViewController.m; sourceTree = "<group>"; };
+		2BEAD0721B770B2A00905E21 /* RemindDateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RemindDateViewController.xib; sourceTree = "<group>"; };
+		2BEAD0751B77195300905E21 /* RemindDateTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemindDateTableViewCell.h; sourceTree = "<group>"; };
+		2BEAD0761B77195300905E21 /* RemindDateTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemindDateTableViewCell.m; sourceTree = "<group>"; };
+		2BEAD0771B77195300905E21 /* RemindDateTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RemindDateTableViewCell.xib; sourceTree = "<group>"; };
+		2BEAD07A1B77360F00905E21 /* RemindView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemindView.h; sourceTree = "<group>"; };
+		2BEAD07B1B77360F00905E21 /* RemindView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemindView.m; sourceTree = "<group>"; };
+		2BEAD07D1B77369F00905E21 /* ZCActionOnCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZCActionOnCalendar.h; sourceTree = "<group>"; };
+		2BEAD07E1B77369F00905E21 /* ZCActionOnCalendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZCActionOnCalendar.m; sourceTree = "<group>"; };
+		2BEAD0801B77508D00905E21 /* MessageListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageListViewController.h; sourceTree = "<group>"; };
+		2BEAD0811B77508D00905E21 /* MessageListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageListViewController.m; sourceTree = "<group>"; };
+		2BEAD0821B77508D00905E21 /* MessageListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageListViewController.xib; sourceTree = "<group>"; };
+		2BEAD0851B775C4500905E21 /* MessageListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageListTableViewCell.h; sourceTree = "<group>"; };
+		2BEAD0861B775C4500905E21 /* MessageListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageListTableViewCell.m; sourceTree = "<group>"; };
+		2BEAD0871B775C4500905E21 /* MessageListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageListTableViewCell.xib; sourceTree = "<group>"; };
+		2BEAD08A1B775FC900905E21 /* MessageListSelfTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageListSelfTableViewCell.h; sourceTree = "<group>"; };
+		2BEAD08B1B775FC900905E21 /* MessageListSelfTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageListSelfTableViewCell.m; sourceTree = "<group>"; };
+		2BEAD08C1B775FC900905E21 /* MessageListSelfTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageListSelfTableViewCell.xib; sourceTree = "<group>"; };
+		2BEAD08F1B776C2E00905E21 /* GetTaskCommentListDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetTaskCommentListDataParse.h; sourceTree = "<group>"; };
+		2BEAD0901B776C2E00905E21 /* GetTaskCommentListDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetTaskCommentListDataParse.m; sourceTree = "<group>"; };
+		2BEAD0921B779A8E00905E21 /* SendTaskCommentDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendTaskCommentDataParse.h; sourceTree = "<group>"; };
+		2BEAD0931B779A8E00905E21 /* SendTaskCommentDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendTaskCommentDataParse.m; sourceTree = "<group>"; };
+		2BEAD0951B779C4900905E21 /* ESTaskComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESTaskComment.h; sourceTree = "<group>"; };
+		2BEAD0961B779C4900905E21 /* ESTaskComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESTaskComment.m; sourceTree = "<group>"; };
 		2BEBBD811B665849008BE7C4 /* GetTaskDashboardDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetTaskDashboardDataParse.h; sourceTree = "<group>"; };
 		2BEBBD821B665849008BE7C4 /* GetTaskDashboardDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetTaskDashboardDataParse.m; sourceTree = "<group>"; };
 		2BEBBD841B665BCB008BE7C4 /* ESTaskDashboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESTaskDashboard.h; sourceTree = "<group>"; };
@@ -860,6 +932,7 @@
 		2B39C94D1B247A4E007BAC7A /* DataDrive */ = {
 			isa = PBXGroup;
 			children = (
+				2BEAD0561B75D70500905E21 /* Task */,
 				F247876C1B2BC3CE00EC266B /* DataParseDefine.h */,
 				2B39C94E1B248063007BAC7A /* LoginDataParse.h */,
 				2B39C94F1B248063007BAC7A /* LoginDataParse.m */,
@@ -887,10 +960,6 @@
 				F23059C21B56AD65004599FA /* GetContactDetailDataParse.m */,
 				2BC821341B5BE6B60090E2C1 /* ChangeUserImageDataParse.h */,
 				2BC821351B5BE6B60090E2C1 /* ChangeUserImageDataParse.m */,
-				2BEBBD811B665849008BE7C4 /* GetTaskDashboardDataParse.h */,
-				2BEBBD821B665849008BE7C4 /* GetTaskDashboardDataParse.m */,
-				2BEBBD8A1B67AFA7008BE7C4 /* GetTaskListDataParse.h */,
-				2BEBBD8B1B67AFA7008BE7C4 /* GetTaskListDataParse.m */,
 				F23630BB1B68F61800A12F63 /* TagDataParse.h */,
 				F23630BC1B68F61800A12F63 /* TagDataParse.m */,
 				F256CB761B6CAE23009478C2 /* EnterPriseRequestDataParse.h */,
@@ -995,6 +1064,15 @@
 				2BEAD0491B738E3100905E21 /* TaskViewController.h */,
 				2BEAD04A1B738E3100905E21 /* TaskViewController.m */,
 				2BEAD04B1B738E3100905E21 /* TaskViewController.xib */,
+				2BEAD04E1B74F37C00905E21 /* AddTaskViewController.h */,
+				2BEAD04F1B74F37C00905E21 /* AddTaskViewController.m */,
+				2BEAD0501B74F37C00905E21 /* AddTaskViewController.xib */,
+				2BEAD0701B770B2A00905E21 /* RemindDateViewController.h */,
+				2BEAD0711B770B2A00905E21 /* RemindDateViewController.m */,
+				2BEAD0721B770B2A00905E21 /* RemindDateViewController.xib */,
+				2BEAD0801B77508D00905E21 /* MessageListViewController.h */,
+				2BEAD0811B77508D00905E21 /* MessageListViewController.m */,
+				2BEAD0821B77508D00905E21 /* MessageListViewController.xib */,
 			);
 			name = Task;
 			sourceTree = "<group>";
@@ -1126,6 +1204,17 @@
 				2BE55A0F1B64843A008CDB4B /* TaskListTableViewCell.h */,
 				2BE55A101B64843A008CDB4B /* TaskListTableViewCell.m */,
 				2BE55A111B64843A008CDB4B /* TaskListTableViewCell.xib */,
+				2BEAD0751B77195300905E21 /* RemindDateTableViewCell.h */,
+				2BEAD0761B77195300905E21 /* RemindDateTableViewCell.m */,
+				2BEAD0771B77195300905E21 /* RemindDateTableViewCell.xib */,
+				2BEAD07A1B77360F00905E21 /* RemindView.h */,
+				2BEAD07B1B77360F00905E21 /* RemindView.m */,
+				2BEAD0851B775C4500905E21 /* MessageListTableViewCell.h */,
+				2BEAD0861B775C4500905E21 /* MessageListTableViewCell.m */,
+				2BEAD0871B775C4500905E21 /* MessageListTableViewCell.xib */,
+				2BEAD08A1B775FC900905E21 /* MessageListSelfTableViewCell.h */,
+				2BEAD08B1B775FC900905E21 /* MessageListSelfTableViewCell.m */,
+				2BEAD08C1B775FC900905E21 /* MessageListSelfTableViewCell.xib */,
 			);
 			name = Task;
 			sourceTree = "<group>";
@@ -1141,6 +1230,44 @@
 				2B7FB8161B56AA5D00DA456E /* ProfessionTableViewCell.xib */,
 			);
 			name = Profession;
+			sourceTree = "<group>";
+		};
+		2BEAD0561B75D70500905E21 /* Task */ = {
+			isa = PBXGroup;
+			children = (
+				2BEBBD811B665849008BE7C4 /* GetTaskDashboardDataParse.h */,
+				2BEBBD821B665849008BE7C4 /* GetTaskDashboardDataParse.m */,
+				2BEBBD8A1B67AFA7008BE7C4 /* GetTaskListDataParse.h */,
+				2BEBBD8B1B67AFA7008BE7C4 /* GetTaskListDataParse.m */,
+				2BEAD0571B75D76A00905E21 /* AddTaskDataParse.h */,
+				2BEAD0581B75D76A00905E21 /* AddTaskDataParse.m */,
+				2BEAD0531B75D6FD00905E21 /* EditTaskDataParse.h */,
+				2BEAD0541B75D6FD00905E21 /* EditTaskDataParse.m */,
+				2BEAD08F1B776C2E00905E21 /* GetTaskCommentListDataParse.h */,
+				2BEAD0901B776C2E00905E21 /* GetTaskCommentListDataParse.m */,
+				2BEAD0921B779A8E00905E21 /* SendTaskCommentDataParse.h */,
+				2BEAD0931B779A8E00905E21 /* SendTaskCommentDataParse.m */,
+			);
+			name = Task;
+			sourceTree = "<group>";
+		};
+		2BEAD05D1B76FEFE00905E21 /* SWTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				2BEAD05E1B76FF2400905E21 /* NSMutableArray+SWUtilityButtons.h */,
+				2BEAD05F1B76FF2400905E21 /* NSMutableArray+SWUtilityButtons.m */,
+				2BEAD0601B76FF2400905E21 /* SWCellScrollView.h */,
+				2BEAD0611B76FF2400905E21 /* SWCellScrollView.m */,
+				2BEAD0621B76FF2400905E21 /* SWLongPressGestureRecognizer.h */,
+				2BEAD0631B76FF2400905E21 /* SWLongPressGestureRecognizer.m */,
+				2BEAD0641B76FF2400905E21 /* SWTableViewCell.h */,
+				2BEAD0651B76FF2400905E21 /* SWTableViewCell.m */,
+				2BEAD0661B76FF2400905E21 /* SWUtilityButtonTapGestureRecognizer.h */,
+				2BEAD0671B76FF2400905E21 /* SWUtilityButtonTapGestureRecognizer.m */,
+				2BEAD0681B76FF2400905E21 /* SWUtilityButtonView.h */,
+				2BEAD0691B76FF2400905E21 /* SWUtilityButtonView.m */,
+			);
+			name = SWTableViewCell;
 			sourceTree = "<group>";
 		};
 		F20060311B652F0500FBD8AF /* AddressBookDetail */ = {
@@ -1190,6 +1317,14 @@
 				2BEBBD8E1B6E46EC008BE7C4 /* ESContactor.m */,
 				2BEBBD901B6E4920008BE7C4 /* ESTask.h */,
 				2BEBBD911B6E4920008BE7C4 /* ESTask.m */,
+				F23630B81B67C15200A12F63 /* ESTag.h */,
+				F23630B91B67C15200A12F63 /* ESTag.m */,
+				F256CB791B6D1B82009478C2 /* ESEnterPriseRequestInfo.h */,
+				F256CB7A1B6D1B82009478C2 /* ESEnterPriseRequestInfo.m */,
+				2BEAD05A1B76294500905E21 /* ESTaskMask.h */,
+				2BEAD05B1B76294500905E21 /* ESTaskMask.m */,
+				2BEAD0951B779C4900905E21 /* ESTaskComment.h */,
+				2BEAD0961B779C4900905E21 /* ESTaskComment.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1414,6 +1549,9 @@
 		F29F86131B240FC30058FC9F /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				2BEAD07D1B77369F00905E21 /* ZCActionOnCalendar.h */,
+				2BEAD07E1B77369F00905E21 /* ZCActionOnCalendar.m */,
+				2BEAD05D1B76FEFE00905E21 /* SWTableViewCell */,
 				F236307D1B66639000A12F63 /* MKNumberBadgeView */,
 				F234615F1B5AA0EF00C88FAC /* DB */,
 				2B5A58DA1B48DF4B000382D7 /* MRProgress */,
@@ -1592,12 +1730,18 @@
 				2B31C3E31B11C3FD004C865A /* LaunchScreen.xib in Resources */,
 				2B39C9951B37E5F2007BAC7A /* ResetPwdViewController.xib in Resources */,
 				F23059B61B529FAE004599FA /* RCDPhoneAddressBookTableViewCell.xib in Resources */,
+				2BEAD0741B770B2A00905E21 /* RemindDateViewController.xib in Resources */,
 				F23461E51B5FCFA900C88FAC /* ChatSettingCollectionViewCell.xib in Resources */,
+				2BEAD08E1B775FC900905E21 /* MessageListSelfTableViewCell.xib in Resources */,
 				F22FE2921B3B000400A1A997 /* ChangePwdViewController.xib in Resources */,
+				2BEAD0841B77508D00905E21 /* MessageListViewController.xib in Resources */,
 				F2D2338F1B37DE6400F8C65D /* RongCloud.bundle in Resources */,
 				2B31C3E01B11C3FD004C865A /* Images.xcassets in Resources */,
+				2BEAD0891B775C4500905E21 /* MessageListTableViewCell.xib in Resources */,
+				2BEAD0791B77195300905E21 /* RemindDateTableViewCell.xib in Resources */,
 				F236308A1B6673B400A12F63 /* RCDAddressBookDetailTableViewCell.xib in Resources */,
 				2BE8C21E1B4D60B400858CEE /* ProfessionCollectionViewCell.xib in Resources */,
+				2BEAD0521B74F37C00905E21 /* AddTaskViewController.xib in Resources */,
 				F22FE30A1B4A9F1A00A1A997 /* RCDAddFriendViewController.xib in Resources */,
 				F2F92EFC1B4EC3310047D7BF /* RCDSelectPersonTableViewCell.xib in Resources */,
 				2BEAD04D1B738E3100905E21 /* TaskViewController.xib in Resources */,
@@ -1625,6 +1769,7 @@
 			files = (
 				2B37E4601B53E9E000F671A1 /* ProfessionDataParse.h in Sources */,
 				F234617F1B5AB63C00C88FAC /* EnterpriseInfoDataSource.m in Sources */,
+				2BEAD06A1B76FF2400905E21 /* NSMutableArray+SWUtilityButtons.m in Sources */,
 				F22FE2E81B4000ED00A1A997 /* SDWebImageDecoder.m in Sources */,
 				2B39C96D1B2D79DB007BAC7A /* ProfessionViewController.m in Sources */,
 				F256CB701B6BC397009478C2 /* RCDUpdateNameViewController.m in Sources */,
@@ -1652,14 +1797,17 @@
 				2B5A59131B48DFBB000382D7 /* MRProgressView.m in Sources */,
 				2B39C93A1B241212007BAC7A /* MASLayoutConstraint.m in Sources */,
 				F22FE2E51B4000ED00A1A997 /* NSData+ImageContentType.m in Sources */,
+				2BEAD0731B770B2A00905E21 /* RemindDateViewController.m in Sources */,
 				2B9CBB5B1B39AA43007D7A45 /* (null) in Sources */,
 				F29F86481B2410320058FC9F /* UIProgressView+AFNetworking.m in Sources */,
 				2B5A59181B48DFBB000382D7 /* MRMessageInterceptor.m in Sources */,
 				F22FE2781B3AD87800A1A997 /* KxMenu.m in Sources */,
+				2BEAD0511B74F37C00905E21 /* AddTaskViewController.m in Sources */,
 				F256CB6D1B6BBCC4009478C2 /* RCDDiscussSettingCell.m in Sources */,
 				F234617C1B5AB49E00C88FAC /* ESEnterpriseInfo.m in Sources */,
 				F22FE2EA1B4000ED00A1A997 /* SDWebImageDownloaderOperation.m in Sources */,
 				2B5A59191B48DFBB000382D7 /* MRMethodCopier.m in Sources */,
+				2BEAD0971B779C4900905E21 /* ESTaskComment.m in Sources */,
 				2BEBBD921B6E4920008BE7C4 /* ESTask.m in Sources */,
 				2B39C9901B37B691007BAC7A /* ESNavigationController.m in Sources */,
 				F256CB781B6CAE23009478C2 /* EnterPriseRequestDataParse.m in Sources */,
@@ -1692,6 +1840,7 @@
 				F22FE2B51B3FFAF700A1A997 /* RCDAddFriendViewController.m in Sources */,
 				F22FE2B71B3FFAF700A1A997 /* RCDSearchResultTableViewCell.m in Sources */,
 				2B7FB8171B56AA5D00DA456E /* ProfessionTableViewCell.m in Sources */,
+				2BEAD0551B75D6FD00905E21 /* EditTaskDataParse.m in Sources */,
 				F22FE2EC1B4000ED00A1A997 /* SDWebImagePrefetcher.m in Sources */,
 				F23630891B6673B400A12F63 /* RCDAddressBookDetailTableViewCell.m in Sources */,
 				F2F92ECD1B4D60910047D7BF /* RCDPhoneAddressBookViewController.m in Sources */,
@@ -1716,13 +1865,16 @@
 				F23059C61B56ADE3004599FA /* ESUserDetailInfo.m in Sources */,
 				F22FE2A71B3FFAC200A1A997 /* RCDAddressBookViewController.m in Sources */,
 				F22FE2E61B4000ED00A1A997 /* SDImageCache.m in Sources */,
+				2BEAD0881B775C4500905E21 /* MessageListTableViewCell.m in Sources */,
 				F250F2EA1B2471CD000AD021 /* AFHttpTool.m in Sources */,
 				2B39C9791B2D7B14007BAC7A /* UserMsgViewController.m in Sources */,
 				2B9CBB611B3ADEC4007D7A45 /* (null) in Sources */,
 				F236308D1B67A9AB00A12F63 /* ESTagViewController.m in Sources */,
 				2B39C94C1B24501B007BAC7A /* ColorHandler.m in Sources */,
+				2BEAD06D1B76FF2400905E21 /* SWTableViewCell.m in Sources */,
 				F29F86441B2410320058FC9F /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				2B9CBB661B3AEC74007D7A45 /* (null) in Sources */,
+				2BEAD06B1B76FF2400905E21 /* SWCellScrollView.m in Sources */,
 				F234616D1B5AA0FD00C88FAC /* DBHelper.m in Sources */,
 				2B39C9391B241212007BAC7A /* MASConstraintMaker.m in Sources */,
 				F22FE2911B3B000400A1A997 /* ChangePwdViewController.m in Sources */,
@@ -1742,7 +1894,9 @@
 				2B39C95F1B272221007BAC7A /* QRCodeViewController.m in Sources */,
 				2B5A59111B48DFBB000382D7 /* MRNavigationBarProgressView.m in Sources */,
 				2B5A590C1B48DFBB000382D7 /* MRBlurView.m in Sources */,
+				2BEAD06C1B76FF2400905E21 /* SWLongPressGestureRecognizer.m in Sources */,
 				F22FE3081B45989200A1A997 /* ESContactList.m in Sources */,
+				2BEAD07F1B77369F00905E21 /* ZCActionOnCalendar.m in Sources */,
 				F22FE2A81B3FFAC200A1A997 /* RCDPersonDetailViewController.m in Sources */,
 				2BE55A081B647324008CDB4B /* TaskOverviewTableViewCell.m in Sources */,
 				F234616E1B5AA0FD00C88FAC /* FMDatabase.m in Sources */,
@@ -1756,9 +1910,13 @@
 				F22FE2EE1B4000ED00A1A997 /* UIImage+GIF.m in Sources */,
 				F23059BA1B52C141004599FA /* RCDAddressBookViewTableViewCell.m in Sources */,
 				F277ADFE1B2DC046006E42CB /* CustomMessageBox.m in Sources */,
+				2BEAD08D1B775FC900905E21 /* MessageListSelfTableViewCell.m in Sources */,
+				F28B6C841B6F969100E0C267 /* ESEnterpriseDetailInfo.m in Sources */,
 				F29F864A1B2410320058FC9F /* UIWebView+AFNetworking.m in Sources */,
 				2B5A59151B48DFBB000382D7 /* MRActivityIndicatorView+AFNetworking.m in Sources */,
 				F22FE2F31B4000ED00A1A997 /* UIView+WebCacheOperation.m in Sources */,
+				2BEAD06E1B76FF2400905E21 /* SWUtilityButtonTapGestureRecognizer.m in Sources */,
+				2BEAD0831B77508D00905E21 /* MessageListViewController.m in Sources */,
 				2B37E44C1B53967D00F671A1 /* ModifyProfessionViewController.m in Sources */,
 				F29F862A1B2410070058FC9F /* AFHTTPSessionManager.m in Sources */,
 				F23630BA1B67C15200A12F63 /* ESTag.m in Sources */,
@@ -1768,8 +1926,10 @@
 				2BC8213A1B5C9FF70090E2C1 /* ShowQRCodeViewController.m in Sources */,
 				2BEBBD831B665849008BE7C4 /* GetTaskDashboardDataParse.m in Sources */,
 				2B39C9381B241212007BAC7A /* MASConstraint.m in Sources */,
+				2BEAD07C1B77360F00905E21 /* RemindView.m in Sources */,
 				2BE8C2331B52506600858CEE /* EditProfessionViewController.m in Sources */,
 				F22FE27F1B3ADAB000A1A997 /* ESUserInfo.m in Sources */,
+				2BEAD0591B75D76A00905E21 /* AddTaskDataParse.m in Sources */,
 				F23461721B5AA0FD00C88FAC /* FMResultSet.m in Sources */,
 				F23059B51B529FAE004599FA /* RCDPhoneAddressBookTableViewCell.m in Sources */,
 				2B39C9731B2D7AF0007BAC7A /* ContactsContainerViewController.m in Sources */,
@@ -1781,6 +1941,7 @@
 				F2F92EC51B4AB58F0047D7BF /* RCDAcceptContactViewController.m in Sources */,
 				2B39C93D1B241212007BAC7A /* NSArray+MASAdditions.m in Sources */,
 				F2D2338B1B36B0DD00F8C65D /* NSString+MD5Addition.m in Sources */,
+				2BEAD0781B77195300905E21 /* RemindDateTableViewCell.m in Sources */,
 				F28B6C8A1B6FAB5D00E0C267 /* GetEnterpriseListDataParse.m in Sources */,
 				F29F86301B2410070058FC9F /* AFURLSessionManager.m in Sources */,
 				2B31C3D81B11C3FD004C865A /* AppDelegate.m in Sources */,
@@ -1788,11 +1949,15 @@
 				F277AE0D1B2DD066006E42CB /* UIPageNavigator.m in Sources */,
 				F22FE2FF1B42DAF600A1A997 /* AddContactDataParse.m in Sources */,
 				2BE55A0E1B6483D2008CDB4B /* TaskListViewController.m in Sources */,
+				2BEAD0911B776C2E00905E21 /* GetTaskCommentListDataParse.m in Sources */,
 				2B31C3D51B11C3FD004C865A /* main.m in Sources */,
 				F22FE2ED1B4000ED00A1A997 /* UIButton+WebCache.m in Sources */,
 				F22FE2F21B4000ED00A1A997 /* UIImageView+WebCache.m in Sources */,
+				2BEAD06F1B76FF2400905E21 /* SWUtilityButtonView.m in Sources */,
 				2B5A59171B48DFBB000382D7 /* MRProgressView+AFNetworking.m in Sources */,
 				F22FE2AE1B3FFAE600A1A997 /* RCDSelectPersonViewController.m in Sources */,
+				2BEAD05C1B76294500905E21 /* ESTaskMask.m in Sources */,
+				2BEAD0941B779A8E00905E21 /* SendTaskCommentDataParse.m in Sources */,
 				F22FE2F91B4042B700A1A997 /* SearchContactDataParse.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

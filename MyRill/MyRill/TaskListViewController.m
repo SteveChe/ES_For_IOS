@@ -11,8 +11,12 @@
 #import "ColorHandler.h"
 #import "ESNavigationController.h"
 #import "TaskViewController.h"
+#import "AddTaskViewController.h"
+#import "SWTableViewCell.h"
+#import "RemindDateViewController.h"
+#import "ESTask.h"
 
-@interface TaskListViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, TaskListDelegate>
+@interface TaskListViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, TaskListDelegate, SWTableViewCellDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *dataSource;
@@ -56,6 +60,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TaskListTableViewCell *cell = (TaskListTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"TaskListTableViewCell" forIndexPath:indexPath];
     [cell updateTackCell:self.dataSource[indexPath.row]];
+    cell.rightUtilityButtons = [self rightButttons];
+    cell.delegate = self;
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     CALayer *layer = [CALayer layer];
@@ -80,15 +86,35 @@
     return self.dataSource.count;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return @"设置提醒";
+- (void)addTask {
+    AddTaskViewController *addTaskVC = [[AddTaskViewController alloc] init];
+    addTaskVC.modalPresentationStyle = UIModalPresentationCurrentContext;
+    ESNavigationController *nav = [[ESNavigationController alloc] initWithRootViewController:addTaskVC];
+    [self.navigationController presentViewController:nav animated:YES completion:nil];
 }
 
-- (void)addTask {
-//    AddTaskViewController *addTaskVC = [[AddTaskViewController alloc] init];
-//    addTaskVC.modalPresentationStyle = UIModalPresentationCurrentContext;
-//    ESNavigationController *nav = [[ESNavigationController alloc] initWithRootViewController:addTaskVC];
-//    [self.navigationController presentViewController:nav animated:YES completion:nil];
+#pragma mark - SWTableViewCellDelegate
+- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index {
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    ESTask *task = (ESTask *)self.dataSource[indexPath.row];
+    
+    RemindDateViewController *remindDateVC = [[RemindDateViewController alloc] init];
+    remindDateVC.taskTitle = task.title;
+    remindDateVC.taskDescriptsion = task.taskDescription;
+    remindDateVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    remindDateVC.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
+
+    [self presentViewController:remindDateVC animated:YES completion:nil];
+}
+
+#pragma mark - private methods
+- (NSArray *)rightButttons
+{
+    NSMutableArray *rightUtilityButtons = [NSMutableArray new];
+    [rightUtilityButtons sw_addUtilityButtonWithColor:[UIColor colorWithRed:1.0f green:0.231f blue:0.188 alpha:1.0f]
+                                                title:@"设置提醒"];
+    
+    return rightUtilityButtons;
 }
 
 #pragma mark - setters&getters

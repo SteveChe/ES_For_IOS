@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RemindDateViewController">
+            <connections>
+                <outlet property="popOverView" destination="Wdy-OQ-suy" id="vuR-2o-OXp"/>
+                <outlet property="tableView" destination="hQn-Np-alx" id="hdq-uN-7Ih"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wdy-OQ-suy" userLabel="Frame View" customClass="RemindView">
+                    <rect key="frame" x="20" y="145.5" width="560" height="309"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="选择提醒日期" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JPt-vh-72S">
+                            <rect key="frame" x="0.0" y="0.0" width="560" height="44"/>
+                            <color key="backgroundColor" red="0.96078431369999995" green="0.96862745100000003" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="cVB-TS-Mix"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="hQn-Np-alx">
+                            <rect key="frame" x="0.0" y="45" width="560" height="264"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="264" id="o6T-Mn-iHb"/>
+                            </constraints>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="CKL-lt-sJK"/>
+                                <outlet property="delegate" destination="-1" id="fsY-AJ-MOK"/>
+                            </connections>
+                        </tableView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.8666666666666667" green="0.8666666666666667" blue="0.8666666666666667" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="hQn-Np-alx" secondAttribute="bottom" id="9cY-qh-TvH"/>
+                        <constraint firstItem="hQn-Np-alx" firstAttribute="leading" secondItem="Wdy-OQ-suy" secondAttribute="leading" id="AIB-J2-YqG"/>
+                        <constraint firstItem="hQn-Np-alx" firstAttribute="top" secondItem="JPt-vh-72S" secondAttribute="bottom" constant="1" id="E7n-9E-Ayv"/>
+                        <constraint firstItem="JPt-vh-72S" firstAttribute="leading" secondItem="Wdy-OQ-suy" secondAttribute="leading" id="NyH-pQ-mfB"/>
+                        <constraint firstAttribute="trailing" secondItem="JPt-vh-72S" secondAttribute="trailing" id="fQQ-VV-tSZ"/>
+                        <constraint firstAttribute="trailing" secondItem="hQn-Np-alx" secondAttribute="trailing" id="jLg-3P-auA"/>
+                        <constraint firstItem="JPt-vh-72S" firstAttribute="top" secondItem="Wdy-OQ-suy" secondAttribute="top" id="pzn-yc-7HM"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="centerY" secondItem="Wdy-OQ-suy" secondAttribute="centerY" id="L7z-t7-Fve"/>
+                <constraint firstItem="Wdy-OQ-suy" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="k5Q-cv-YSD"/>
+                <constraint firstAttribute="trailing" secondItem="Wdy-OQ-suy" secondAttribute="trailing" constant="20" id="xEo-YE-CHW"/>
+            </constraints>
+        </view>
+    </objects>
+</document>

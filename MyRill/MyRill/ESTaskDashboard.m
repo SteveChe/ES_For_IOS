@@ -9,6 +9,7 @@
 #import "ESTaskDashboard.h"
 #import "ColorHandler.h"
 #import "ESTaskOriginatorInfo.h"
+#import "ESTaskMask.h"
 
 @implementation ESTaskDashboard
 
@@ -17,27 +18,27 @@
     
     if (self) {
 
-        if ([ColorHandler isNullOrNilNumber:dic[@"total"]]) {
-            self.totalTask = [NSNumber numberWithInt:-1];
+        if (dic[@"total"] == nil || [dic[@"total"] isKindOfClass:[NSNull class]]) {
+            self.totalTask = nil;
         } else {
-            self.totalTask = dic[@"total"];
+            self.totalTask = [[ESTaskMask alloc] initWithDic:dic[@"total"]];
         }
-        if ([ColorHandler isNullOrNilNumber:dic[@"closed"]]) {
-            self.closedTask = [NSNumber numberWithInt:-1];
+        if (dic[@"closed"] == nil || [dic[@"closed"] isKindOfClass:[NSNull class]]) {
+            self.closedTask = nil;
         } else {
-            self.closedTask = dic[@"closed"];
-        }
-        
-        if ([ColorHandler isNullOrNilNumber:dic[@"in_charge"]]) {
-            self.totalTaskInSelf = [NSNumber numberWithInt:-1];
-        } else {
-            self.totalTaskInSelf = dic[@"in_charge"];
+            self.closedTask = [[ESTaskMask alloc] initWithDic:dic[@"closed"]];
         }
         
-        if ([ColorHandler isNullOrNilNumber:dic[@"overdue"]]) {
-            self.overdueTaskInSelf = [NSNumber numberWithInt:-1];
+        if (dic[@"in_charge"] == nil || [dic[@"in_charge"] isKindOfClass:[NSNull class]]) {
+            self.totalTaskInSelf = nil;
         } else {
-            self.overdueTaskInSelf = dic[@"overdue"];
+            self.totalTaskInSelf = [[ESTaskMask alloc] initWithDic:dic[@"in_charge"]];
+        }
+        
+        if (dic[@"overdue"] == nil || [dic[@"overdue"] isKindOfClass:[NSNull class]]) {
+            self.overdueTaskInSelf = nil;
+        } else {
+            self.overdueTaskInSelf = [[ESTaskMask alloc] initWithDic:dic[@"overdue"]];
         }
         
         NSArray *array = (NSArray *)dic[@"group_by_initiator"];
@@ -50,6 +51,8 @@
                 taskOriginatorInfo.assignmentNum = [ColorHandler isNullOrNilNumber:dic[@"assignment_num"]]?[NSNumber numberWithInt:-1]:dic[@"assignment_num"];
                 taskOriginatorInfo.initiatorId = [ColorHandler isNullOrNilNumber:dic[@"initiator_id"]]?@"":dic[@"initiator_id"];
                 taskOriginatorInfo.initiatorName = [ColorHandler isNullOrEmptyString:dic[@"initiator_name"]]?@"":dic[@"initiator_name"];
+                taskOriginatorInfo.initiatorImgURL = [ColorHandler isNullOrEmptyString:dic[@"initiator_avatar"]]?nil:dic[@"initiator_avatar"];
+                taskOriginatorInfo.isUpdate = dic[@"has_update"] == nil ? NO : dic[@"has_update"];
                 [temp addObject:taskOriginatorInfo];
             }
             self.TaskInOriginatorList = [NSArray arrayWithArray:temp];

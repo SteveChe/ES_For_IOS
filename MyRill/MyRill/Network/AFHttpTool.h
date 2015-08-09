@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 @class AFHTTPRequestOperation;
+@class ESTask;
 
 typedef NS_ENUM(NSInteger, RequestMethodType){
     RequestMethodTypePost = 1,
@@ -129,10 +130,28 @@ typedef enum : NSUInteger {
 + (void)getTaskDashboardSuccess:(void (^)(id response))success
                         failure:(void (^)(NSError *error))failure;
 
+/****** 获取任务列表 ****/
 + (void)getTaskListWithIdentify:(NSString *)identify
                            type:(ESTaskListType)taskListType
                         success:(void (^)(id response))success
                         failure:(void (^)(NSError *error))failure;
+
+/****** 获取任务评论列表 ****/
++ (void)getTaskCommentListWithTaskID:(NSString *)taskID
+                            listSize:(NSString *)size
+                             success:(void (^)(id response))success
+                             failure:(void (^)(NSError *error))failure;
+
+/****** 提交任务评论 ****/
++ (void)sendTaskCommentWithTaskID:(NSString *)taskID
+                          comment:(NSString *)comment
+                          success:(void (^)(id response))success
+                          failure:(void (^)(NSError *error))failure;
+
+/****** 编辑任务 ****/
++ (void)EditTaskWithTaskModel:(ESTask *)task
+               success:(void (^)(id response))success
+               failure:(void (^)(NSError *error))failure;
 
 //change password
 +(void) changePassword:(NSString *) oldPassword

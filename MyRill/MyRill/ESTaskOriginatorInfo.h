@@ -12,6 +12,8 @@
 
 @property (nonatomic, strong) NSNumber *initiatorId;
 @property (nonatomic, copy) NSString *initiatorName;
+@property (nonatomic, copy) NSString *initiatorImgURL;
 @property (nonatomic, strong) NSNumber *assignmentNum;
+@property (nonatomic, assign) BOOL isUpdate;
 
 @end

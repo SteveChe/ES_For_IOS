@@ -48,11 +48,11 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon" translatesAutoresizingMaskIntoConstraints="NO" id="cMv-zh-Cxm" userLabel="initiator icon">
-                                <rect key="frame" x="364" y="66" width="30" height="30"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon" translatesAutoresizingMaskIntoConstraints="NO" id="cMv-zh-Cxm" userLabel="initiator icon">
+                                <rect key="frame" x="361.5" y="61" width="35" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="cMv-zh-Cxm" secondAttribute="height" multiplier="1:1" id="HWI-1U-9Az"/>
-                                    <constraint firstAttribute="height" constant="30" id="Qun-6u-7b8"/>
+                                    <constraint firstAttribute="height" constant="35" id="Qun-6u-7b8"/>
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon" translatesAutoresizingMaskIntoConstraints="NO" id="Diz-NJ-7qc">

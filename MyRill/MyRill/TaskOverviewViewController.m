@@ -9,11 +9,13 @@
 #import "TaskOverviewViewController.h"
 #import "TaskOverviewTableViewCell.h"
 #import "ColorHandler.h"
+#import "AddTaskViewController.h"
 #import "TaskListViewController.h"
 #import "ESNavigationController.h"
 #import "GetTaskDashboardDataParse.h"
 #import "ESTaskDashboard.h"
 #import "ESTaskOriginatorInfo.h"
+#import "ESTaskMask.h"
 
 @interface TaskOverviewViewController () <UITableViewDataSource, UITableViewDelegate, TaskDashboardDelegate>
 
@@ -54,10 +56,10 @@
 }
 
 - (void)getTaskDashboardSuccess:(ESTaskDashboard *)taskDashboard {
-    self.totalTaskLbl.text = [taskDashboard.totalTask stringValue];
-    self.closedTaskLbl.text = [taskDashboard.closedTask stringValue];
-    self.totalTaskInSelfLbl.text = [[taskDashboard.totalTaskInSelf stringValue] stringByAppendingString:@" 全部"];
-    self.overdueTaskInSelfLbl.text = [[taskDashboard.overdueTaskInSelf stringValue] stringByAppendingString:@" 超期"];
+    self.totalTaskLbl.text = [taskDashboard.totalTask.num stringValue];
+    self.closedTaskLbl.text = [taskDashboard.closedTask.num stringValue];
+    self.totalTaskInSelfLbl.text = [[taskDashboard.totalTaskInSelf.num stringValue] stringByAppendingString:@" 全部"];
+    self.overdueTaskInSelfLbl.text = [[taskDashboard.overdueTaskInSelf.num stringValue] stringByAppendingString:@" 超期"];
     self.dataSource = nil;
     self.dataSource = [NSArray arrayWithArray:taskDashboard.TaskInOriginatorList];
     [self.tableView reloadData];
@@ -84,7 +86,15 @@
     taskListVC.type = ESTaskListWithInitiatorId;
     ESTaskOriginatorInfo *task = (ESTaskOriginatorInfo *)self.dataSource[indexPath.row];
     taskListVC.identity = [task.initiatorId stringValue];
-    taskListVC.title = [task.initiatorName stringByAppendingString:@"发起的任务"];
+    
+    NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
+    if ([task.initiatorId.stringValue isEqualToString:[userDefaultes stringForKey:@"UserId"]]) {
+        taskListVC.title = @"我发起的任务";
+    } else {
+        taskListVC.title = [task.initiatorName stringByAppendingString:@"发起的任务"];
+    }
+    
+    
     [self.navigationController pushViewController:taskListVC animated:YES];
 }
 
@@ -102,32 +112,45 @@
 
 #pragma mark - response events
 - (void)addTask {
-//    AddTaskViewController *addTaskVC = [[AddTaskViewController alloc] init];
-//    addTaskVC.modalPresentationStyle = UIModalPresentationCurrentContext;
-//    ESNavigationController *nav = [[ESNavigationController alloc] initWithRootViewController:addTaskVC];
-//    [self.navigationController presentViewController:nav animated:YES completion:nil];
+    AddTaskViewController *addTaskVC = [[AddTaskViewController alloc] init];
+    addTaskVC.modalPresentationStyle = UIModalPresentationCurrentContext;
+    ESNavigationController *nav = [[ESNavigationController alloc] initWithRootViewController:addTaskVC];
+    [self.navigationController presentViewController:nav animated:YES completion:nil];
 }
 
 - (IBAction)allTaskBtnOnClicked:(UIButton *)sender {
     TaskListViewController *taskListVC = [[TaskListViewController alloc] init];
-
+    taskListVC.title = @"全部进行中任务";
+    taskListVC.type = ESTaskListStatus;
+    taskListVC.identity = @"0";
     [self.navigationController pushViewController:taskListVC animated:YES];
-    taskListVC.title = @"分配给我的全部任务";
 }
 
 - (IBAction)overdueTaskBtnOnClicked:(UIButton *)sender {
     TaskListViewController *taskListVC = [[TaskListViewController alloc] init];
-    taskListVC.title = @"分配给我的超期任务";
+    taskListVC.title = @"结束归档任务";
+    taskListVC.type = ESTaskListStatus;
+    taskListVC.identity = @"1";
     [self.navigationController pushViewController:taskListVC animated:YES];
 }
 
 - (IBAction)allTaskInSelfBtnOnClicked:(UIButton *)sender {
+    NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
+    
     TaskListViewController *taskListVC = [[TaskListViewController alloc] init];
+    taskListVC.title = @"分配给我的全部任务";
+    taskListVC.type = ESTaskListWithPersonInChargeId;
+    taskListVC.identity = [userDefaultes stringForKey:@"UserId"];
     [self.navigationController pushViewController:taskListVC animated:YES];
 }
 
 - (IBAction)overdueTaskInSelfBtnOnClicked:(UIButton *)sender {
+    NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
+    
     TaskListViewController *taskListVC = [[TaskListViewController alloc] init];
+    taskListVC.title = @"分配给我的已超期任务";
+    taskListVC.type = ESTaskOverdue;
+    taskListVC.identity = [userDefaultes stringForKey:@"UserId"];
     [self.navigationController pushViewController:taskListVC animated:YES];
 }
 
