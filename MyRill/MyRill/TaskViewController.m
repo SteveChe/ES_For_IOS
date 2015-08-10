@@ -5,6 +5,7 @@
 //  Created by Siyuan Wang on 15/8/6.
 //
 //
+#import <RongIMKit/RongIMKit.h>
 
 #import "TaskViewController.h"
 #import "ColorHandler.h"
@@ -13,6 +14,11 @@
 #import "EditTaskDataParse.h"
 #import "ESContactor.h"
 #import "MessageListViewController.h"
+#import "ESTagViewController.h"
+#import "CustomShowMessage.h"
+#import "ESUserInfo.h"
+#import "RCDSelectPersonViewController.h"
+#import "ChatViewController.h"
 
 @interface TaskViewController () <EditTaskDelegate>
 
@@ -26,6 +32,8 @@
 @property (weak, nonatomic) IBOutlet UISwitch *taskStatusSwitch;
 @property (nonatomic, strong) MessageListViewController *messageListVC;
 @property (nonatomic, strong) EditTaskDataParse *editTaskDP;
+@property (nonatomic,strong) NSMutableArray* tastObserversList;//关注人列表,ESUserInfo
+@property (nonatomic,strong) NSMutableArray* tastRecipientsList;//负责人列表,ESUserInfo
 
 @end
 
@@ -96,6 +104,12 @@
     } else {
         
     }
+    if (self.tastRecipientsList == nil) {
+        self.tastRecipientsList = [NSMutableArray array];
+    }
+    if (self.tastObserversList == nil) {
+        self.tastObserversList = [NSMutableArray array];
+    }
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -118,15 +132,94 @@
 #pragma mark - response events methods
 - (void)startConversationEvent {
     //发起会话功能
-    
+    if ([self.tastRecipientsList count] <=0 ) {
+        [[CustomShowMessage getInstance] showNotificationMessage:@"缺少分配人!"];
+        return;
+    }
+    if ([self.tastObserversList count] <=0 ) {
+        [[CustomShowMessage getInstance] showNotificationMessage:@"缺少关注人!"];
+        return;
+    }
+    NSMutableArray* selectedUsers = [NSMutableArray new];
+    [selectedUsers addObjectsFromArray:self.tastRecipientsList];
+    [selectedUsers addObjectsFromArray:self.tastObserversList];
+    NSMutableString *discussionTitle = [NSMutableString string];
+    NSMutableArray *userIdList = [NSMutableArray new];
+    for (ESUserInfo *user in selectedUsers) {
+        [discussionTitle appendString:[NSString stringWithFormat:@"%@%@", user.userName,@","]];
+        [userIdList addObject:user.userId];
+    }
+    [discussionTitle deleteCharactersInRange:NSMakeRange(discussionTitle.length - 1, 1)];
+    __weak typeof(&*self)  weakSelf = self;
+
+    [[RCIMClient sharedRCIMClient] createDiscussion:discussionTitle userIdList:userIdList success:^(RCDiscussion *discussion) {
+        NSLog(@"create discussion ssucceed!");
+        dispatch_async(dispatch_get_main_queue(), ^{
+            ChatViewController *chat =[[ChatViewController alloc]init];
+            chat.targetId                      = discussion.discussionId;
+            chat.userName                    = discussion.discussionName;
+            chat.conversationType              = ConversationType_DISCUSSION;
+            chat.title                         = @"讨论组";
+            chat.userIDList = userIdList;
+            
+            UITabBarController *tabbarVC = weakSelf.navigationController.viewControllers[0];
+            [weakSelf.navigationController popToViewController:tabbarVC animated:YES];
+            [tabbarVC.navigationController  pushViewController:chat animated:YES];
+        });
+    } error:^(RCErrorCode status) {
+        NSLog(@"create discussion Failed > %ld!", (long)status);
+    }];
+
 }
 
 - (IBAction)chooseTagBtnOnClicked:(UIButton *)sender {
     //标签选择
+    if (_taskModel == nil) {
+        return;
+    }
+    ESTagViewController* tagVC = [[ESTagViewController alloc] init];
+    tagVC.tagType = TAG_TYPE_ASSIGNMENT;
+    tagVC.taskId = [NSString stringWithFormat:@"%d",[_taskModel.taskID intValue] ];
+    [self.navigationController pushViewController:tagVC animated:YES];
 }
 
 - (IBAction)chooseContactorBtnOnClicked:(UIButton *)sender {
 //    负责人btn的tag是1001，关注人是1002
+    if (sender.tag == 1001) {
+        __weak typeof(&*self)  weakSelf = self;
+        RCDSelectPersonViewController* selectPersonVC = [[RCDSelectPersonViewController alloc] init];
+        [selectPersonVC setSeletedUsers:self.tastRecipientsList];
+        //设置回调
+        selectPersonVC.clickDoneCompletion = ^(RCDSelectPersonViewController* selectPersonViewController, NSArray* selectedUsers) {
+            
+            if (selectedUsers && selectedUsers.count)
+            {
+                [self.tastRecipientsList removeAllObjects];
+                [self.tastRecipientsList addObjectsFromArray:selectedUsers];
+            }
+            
+            [weakSelf.navigationController popViewControllerAnimated:YES ];
+        };
+        [self.navigationController pushViewController:selectPersonVC animated:YES];
+    }
+    else if (sender.tag == 1002){
+        RCDSelectPersonViewController* selectPersonVC = [[RCDSelectPersonViewController alloc] init];
+        [selectPersonVC setSeletedUsers:self.tastRecipientsList];
+        __weak typeof(&*self)  weakSelf = self;
+
+        //设置回调
+        selectPersonVC.clickDoneCompletion = ^(RCDSelectPersonViewController* selectPersonViewController, NSArray* selectedUsers) {
+            
+            if (selectedUsers && selectedUsers.count)
+            {
+                [self.tastObserversList removeAllObjects];
+                [self.tastObserversList addObjectsFromArray:selectedUsers];
+            }
+            [weakSelf.navigationController popViewControllerAnimated:YES ];
+            
+        };
+        [self.navigationController pushViewController:selectPersonVC animated:YES];
+    }
     
 }
 
