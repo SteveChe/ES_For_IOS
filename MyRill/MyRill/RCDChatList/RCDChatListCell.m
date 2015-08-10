@@ -9,6 +9,7 @@
 #define HEXCOLOR(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 #import "RCDChatListCell.h"
+#import "Masonry.h"
 
 @implementation RCDChatListCell
 
@@ -42,9 +43,16 @@
         [_lblName setTextColor:HEXCOLOR(0x252525)];
         _lblName.text = @"好友消息";
         
+        _timeLabel = [UILabel new];
+        [_timeLabel setFont:[UIFont systemFontOfSize:14.f]];
+        [_timeLabel setTextColor:HEXCOLOR(0x8c8c8c)];
+        _timeLabel.text = [NSString stringWithFormat:@"昨天"];
+
+        
         [self addSubview:_ivAva];
         [self addSubview:_lblDetail];
         [self addSubview:_lblName];
+        [self addSubview:_timeLabel];
         
         _ivAva.translatesAutoresizingMaskIntoConstraints = NO;
         _lblName.translatesAutoresizingMaskIntoConstraints = NO;
@@ -65,7 +73,13 @@
         [self addConstraint:[NSLayoutConstraint constraintWithItem:_lblName attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:_ivAva attribute:NSLayoutAttributeRight multiplier:1.0 constant:8]];
         
         [self addConstraint:[NSLayoutConstraint constraintWithItem:_lblDetail attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:_lblName attribute:NSLayoutAttributeLeft multiplier:1.0 constant:1]];
-
+        
+        __weak UIView *ws = self;
+        [_timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(ws.mas_top).with.offset(12);
+            make.trailing.equalTo(ws.mas_trailing).with.offset(-8);
+        }];
+        
     }
     return self;
 }

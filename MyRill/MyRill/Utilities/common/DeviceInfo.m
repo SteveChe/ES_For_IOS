@@ -481,4 +481,61 @@ enum
     
 }
 
++ (NSString*) getShowTime:(NSDate*)timeDate
+{
+    if (timeDate == nil)
+    {
+        return nil;
+    }
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+
+    if ([DeviceInfo isCurrentDay:timeDate])
+    {
+        [dateFormatter setDateFormat:@"HH:mm"];
+        NSString *destDateString = [dateFormatter stringFromDate:timeDate];
+        return destDateString;
+    }
+    else if([DeviceInfo isYesterDay:timeDate])
+    {
+        return @"昨天";
+    }
+    else
+    {
+        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+        NSString *destDateString = [dateFormatter stringFromDate:timeDate];
+        return destDateString;
+    }
+    
+}
++ (BOOL)isCurrentDay:(NSDate *)aDate
+{
+    if (aDate==nil) return NO;
+    
+    NSCalendar *cal = [NSCalendar currentCalendar];
+    NSDateComponents *components = [cal components:(NSEraCalendarUnit|NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit) fromDate:[NSDate date]];
+    NSDate *today = [cal dateFromComponents:components];
+    components = [cal components:(NSEraCalendarUnit|NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit) fromDate:aDate];
+    NSDate *otherDate = [cal dateFromComponents:components];
+    if([today isEqualToDate:otherDate])
+        return YES;
+    
+    return NO;
+}
+
++ (BOOL)isYesterDay:(NSDate *)aDate
+{
+    
+    NSDate * today = [NSDate date];
+    NSDate * yesterday = [NSDate dateWithTimeIntervalSinceNow:-86400];
+    NSDate * refDate = aDate;
+    NSString * yesterdayString = [[yesterday description] substringToIndex:10];
+    NSString * refDateString = [[refDate description] substringToIndex:10];
+    
+    if ([refDateString isEqualToString:yesterdayString])
+    {
+        return YES;
+    }
+    else
+        return NO;
+}
 @end
