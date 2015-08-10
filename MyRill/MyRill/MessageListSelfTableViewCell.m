@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *userImg;
 @property (weak, nonatomic) IBOutlet UILabel *nameAndEnterpriseLbl;
 @property (weak, nonatomic) IBOutlet UILabel *createDate;
+@property (strong, nonatomic) NSMutableAttributedString *attrString;
 
 @end
 
@@ -24,8 +25,15 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"chat_to_bg_normal.png"]];
+    UIImage *image = [UIImage imageNamed:@"对话框背景1.png"];
+    UIEdgeInsets insets = UIEdgeInsetsMake(25, 20, 10, 50);
+    image = [image resizableImageWithCapInsets:insets];
+    // 指定为拉伸模式，伸缩后重新赋值
+//    image = [image resizableImageWithCapInsets:insets resizingMode:UIImageResizingModeStretch];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+    imageView.bounds = CGRectMake(0, 0, 200, 60);
     [self.contentTxtVIew addSubview:imageView];
+    [self.contentTxtVIew sendSubviewToBack:imageView];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -42,9 +50,15 @@
         self.nameAndEnterpriseLbl.text = [NSString stringWithFormat:@"%@/%@", taskComment.user.enterprise, @"我"];
     }
     
-    self.createDate.text = taskComment.createDate;
-    UIView *view = [self.contentTxtVIew subviews].lastObject;
-    view.bounds = CGRectMake(0, 0, 240, 60);
+    NSString *createDateStr = [taskComment.createDate substringToIndex:16];
+    self.createDate.text = [createDateStr stringByReplacingOccurrencesOfString:@"-" withString:@"/"];
+    self.contentTxtVIew.text = taskComment.content;
+
+    self.attrString = [[NSMutableAttributedString alloc] initWithString:taskComment.content];
+    
+    CGRect bounds = [self.attrString boundingRectWithSize:CGSizeMake(150, 1000)
+                                                 options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
+                                                 context:nil];
 }
 
 - (void)setUserImg:(UIImageView *)userImg {

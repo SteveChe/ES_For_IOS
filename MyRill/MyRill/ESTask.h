@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-@class ESContactor;
+@class ESContactor,ESTaskComment;
 
 @interface ESTask : NSObject
 
@@ -21,7 +21,8 @@
 @property (nonatomic, copy) NSString *endDate;
 @property (nonatomic, strong) NSArray *observers;
 @property (nonatomic, strong) ESContactor *personInCharge;
-//"comment": {}
+@property (nonatomic, assign) BOOL isUpdate;
+@property (nonatomic, strong) ESTaskComment *comments;
 
 //designed initilize
 - (instancetype)initWithDic:(NSDictionary *)dic;

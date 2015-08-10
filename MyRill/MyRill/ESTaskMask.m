@@ -21,7 +21,7 @@
             self.num = dic[@"num"];
         }
         
-        if (dic[@"isUpdate"] == nil ) {
+        if (dic[@"has_update"] == nil ) {
             self.isUpdate = NO;
         } else {
             self.isUpdate = YES;

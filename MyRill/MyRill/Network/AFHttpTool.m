@@ -409,7 +409,7 @@
             param = @{@"chat_id":identify};
             break;
         case ESTaskListWithInitiatorId:
-            param = @{@"initiator_id":identify};
+            param = @{@"initiator_id":identify,@"status":@"0"};
             break;
         case ESTaskListWithPersonInChargeId:
             param = @{@"person_in_charge_id":identify};

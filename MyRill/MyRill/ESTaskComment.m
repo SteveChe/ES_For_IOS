@@ -29,7 +29,7 @@
             self.createDate = dic[@"created_at"];
         }
         
-        if ([ColorHandler isNullOrEmptyString:dic[@"entercontentprise"]]) {
+        if ([ColorHandler isNullOrEmptyString:dic[@"content"]]) {
             self.content = @"";
         } else {
             self.content = dic[@"content"];

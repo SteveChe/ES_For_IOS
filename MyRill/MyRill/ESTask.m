@@ -9,6 +9,7 @@
 #import "ESTask.h"
 #import "ColorHandler.h"
 #import "ESContactor.h"
+#import "ESTaskComment.h"
 
 @implementation ESTask
 
@@ -85,6 +86,18 @@
             self.personInCharge = [[ESContactor alloc] initWithDic:picDic];
         } else {
             self.personInCharge = nil;
+        }
+        
+        if (dic[@"has_update"] == nil ) {
+            self.isUpdate = NO;
+        } else {
+            self.isUpdate = YES;
+        }
+        
+        if (dic[@"comment"] != nil && ![dic[@"comment"] isKindOfClass:[NSNull class]]) {
+            self.comments = [[ESTaskComment alloc] initWithDic:dic[@"comment"]];
+        } else {
+            self.comments = nil;
         }
     }
     
