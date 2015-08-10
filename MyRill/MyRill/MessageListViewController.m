@@ -12,6 +12,8 @@
 #import "MessageListTableViewCell.h"
 #import "GetTaskCommentListDataParse.h"
 #import "SendTaskCommentDataParse.h"
+#import "ESContactor.h"
+#import "ESTaskComment.h"
 
 @interface MessageListViewController () <UITableViewDataSource, UITableViewDelegate, GetTaskCommentListDelegate, UITextFieldDelegate, SendTaskCommenDelegate>
 
@@ -85,15 +87,16 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSString *userID = @"5";
+    ESTaskComment *taskComment = (ESTaskComment *)self.dataSource[indexPath.row];
+    
     UITableViewCell *cell = nil;
-    if (YES) {
+    if ([taskComment.user.useID.stringValue isEqualToString:self.userID]) {
         MessageListSelfTableViewCell *selfCell = (MessageListSelfTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"MessageListSelfTableViewCell" forIndexPath:indexPath];
         [selfCell updateMessage:self.dataSource[indexPath.row]];
         cell = selfCell;
     } else {
         MessageListTableViewCell *normalCell = (MessageListTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"MessageListTableViewCell" forIndexPath:indexPath];
-        
+        [normalCell updateMessage:self.dataSource[indexPath.row]];
         cell = normalCell;
     }
     

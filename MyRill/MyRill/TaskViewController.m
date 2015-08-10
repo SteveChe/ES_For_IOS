@@ -121,6 +121,15 @@
     
 }
 
+- (IBAction)chooseTagBtnOnClicked:(UIButton *)sender {
+    //标签选择
+}
+
+- (IBAction)chooseContactorBtnOnClicked:(UIButton *)sender {
+//    负责人btn的tag是1001，关注人是1002
+    
+}
+
 - (void)saveBarItemOnClicked {
     NSMutableArray *observerArray = [[NSMutableArray alloc] initWithCapacity:self.taskModel.observers.count];
 //    for (ESContactor *contractor in ) {

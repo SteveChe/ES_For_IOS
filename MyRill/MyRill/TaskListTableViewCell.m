@@ -101,7 +101,7 @@
 - (void)setInitiatorImg:(UIImageView *)initiatorImg {
     _initiatorImg = initiatorImg;
     
-    _initiatorImg.layer.cornerRadius = 20.f;
+    _initiatorImg.layer.cornerRadius = 18.5f;
 }
 
 @end
