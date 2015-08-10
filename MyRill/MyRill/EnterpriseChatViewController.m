@@ -97,7 +97,7 @@
     RCMessageModel *model1 = [[RCMessageModel alloc] initWithMessage:rcMessage];
     model1.receivedTime = 1438868551;
     model1.objectName = @"RC:TxtMsg";
-    [self.conversationDataRepository addObject:model1];
+    [self.conversationDataRepository insertObject:model1 atIndex:0];
 
     
     SimpleMessage* messageContent2 = [SimpleMessage messageWithContent:@"hello\n hello \n lllhsafasfasfasasfasdasfdadasdhsafasfasfasasfasdasfdadasdellohsafasfasfasasfasdasfdadasdellohsafasfasfasasfasdasfdadasdellohsafasfasfasasfasdasfdadasdellohsafasfasfasasfasdasfdadasdellohsafasfasfasasfasdasfdadasdellohsafasfasfasasfasdasfdadasdelloello"];
@@ -107,11 +107,10 @@
     model2.receivedTime = 1438868558;
     model2.objectName = @"RC:TxtMsg";
     
-    [self.conversationDataRepository addObject:model2];
+//    [self.conversationDataRepository addObject:model2];
+    [self.conversationDataRepository insertObject:model2 atIndex:0];
     [self.conversationMessageCollectionView reloadData];
 //    NSIndexPath* index =  [NSIndexPath indexPathWithIndex:self.conversationDataRepository.count];
-
-
 }
 
 /**
@@ -223,7 +222,7 @@
         }
         RCMessageModel *templeModel = [[RCMessageModel alloc] initWithMessage:rcMessage];
         templeModel.isDisplayNickname = YES;
-        templeModel.isDisplayMessageTime = YES;
+        templeModel.isDisplayMessageTime = NO;
         templeModel.objectName = @"RC:TxtMsg";
 
         if (enterpriseMessage.message_time!=nil)

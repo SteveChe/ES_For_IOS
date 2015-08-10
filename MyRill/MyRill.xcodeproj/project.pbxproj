@@ -218,7 +218,6 @@
 		F28B6C871B6F991600E0C267 /* GetEnterpriseDetailDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F28B6C861B6F991600E0C267 /* GetEnterpriseDetailDataParse.m */; };
 		F28B6C8A1B6FAB5D00E0C267 /* GetEnterpriseListDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F28B6C891B6FAB5D00E0C267 /* GetEnterpriseListDataParse.m */; };
 		F29BC4921B75119900803183 /* SimpleMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F29BC4911B75119900803183 /* SimpleMessageCell.m */; };
-		F29BC4951B75E62500803183 /* ESEnterpriseMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = F29BC4941B75E62500803183 /* ESEnterpriseMessage.m */; };
 		F29F86281B2410070058FC9F /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F29F86161B2410070058FC9F /* AFHTTPRequestOperation.m */; };
 		F29F86291B2410070058FC9F /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F29F86181B2410070058FC9F /* AFHTTPRequestOperationManager.m */; };
 		F29F862A1B2410070058FC9F /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F29F861A1B2410070058FC9F /* AFHTTPSessionManager.m */; };
@@ -266,8 +265,8 @@
 		F2D99C5C1B75EEE600759D33 /* ESTag.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D99C5B1B75EEE600759D33 /* ESTag.m */; };
 		F2D99C5F1B75EF0400759D33 /* ESEnterpriseDetailInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D99C5D1B75EF0400759D33 /* ESEnterpriseDetailInfo.m */; };
 		F2D99C601B75EF0400759D33 /* ESEnterPriseRequestInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D99C5E1B75EF0400759D33 /* ESEnterPriseRequestInfo.m */; };
-		F2D99C631B75EFED00759D33 /* ESEnterpriseMessageContent.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D99C621B75EFED00759D33 /* ESEnterpriseMessageContent.m */; };
-		F2D99C661B75F13E00759D33 /* GetEnterpriseMessageDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D99C651B75F13E00759D33 /* GetEnterpriseMessageDataParse.m */; };
+		F2F397741B77AC50006FAE3B /* ESEnterpriseMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = F2F397711B77AC50006FAE3B /* ESEnterpriseMessage.m */; };
+		F2F397751B77AC50006FAE3B /* ESEnterpriseMessageContent.m in Sources */ = {isa = PBXBuildFile; fileRef = F2F397731B77AC50006FAE3B /* ESEnterpriseMessageContent.m */; };
 		F2F92EC51B4AB58F0047D7BF /* RCDAcceptContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2F92EC41B4AB58F0047D7BF /* RCDAcceptContactViewController.m */; };
 		F2F92ECD1B4D60910047D7BF /* RCDPhoneAddressBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2F92ECC1B4D60910047D7BF /* RCDPhoneAddressBookViewController.m */; };
 		F2F92EFC1B4EC3310047D7BF /* RCDSelectPersonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2F92EFB1B4EC3310047D7BF /* RCDSelectPersonTableViewCell.xib */; };
@@ -676,8 +675,6 @@
 		F28B6C891B6FAB5D00E0C267 /* GetEnterpriseListDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetEnterpriseListDataParse.m; sourceTree = "<group>"; };
 		F29BC4901B75119900803183 /* SimpleMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimpleMessageCell.h; path = RCDChatList/SimpleMessageCell.h; sourceTree = "<group>"; };
 		F29BC4911B75119900803183 /* SimpleMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SimpleMessageCell.m; path = RCDChatList/SimpleMessageCell.m; sourceTree = "<group>"; };
-		F29BC4931B75E62500803183 /* ESEnterpriseMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ESEnterpriseMessage.h; path = Model/ESEnterpriseMessage.h; sourceTree = "<group>"; };
-		F29BC4941B75E62500803183 /* ESEnterpriseMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ESEnterpriseMessage.m; path = Model/ESEnterpriseMessage.m; sourceTree = "<group>"; };
 		F29BC4961B75EBDC00803183 /* ESTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESTag.h; sourceTree = "<group>"; };
 		F29F86151B2410070058FC9F /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPRequestOperation.h; path = Utilities/AFNetworking/AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		F29F86161B2410070058FC9F /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFHTTPRequestOperation.m; path = Utilities/AFNetworking/AFHTTPRequestOperation.m; sourceTree = "<group>"; };
@@ -748,10 +745,12 @@
 		F2D99C5B1B75EEE600759D33 /* ESTag.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESTag.m; sourceTree = "<group>"; };
 		F2D99C5D1B75EF0400759D33 /* ESEnterpriseDetailInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ESEnterpriseDetailInfo.m; path = Model/ESEnterpriseDetailInfo.m; sourceTree = "<group>"; };
 		F2D99C5E1B75EF0400759D33 /* ESEnterPriseRequestInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ESEnterPriseRequestInfo.m; path = Model/ESEnterPriseRequestInfo.m; sourceTree = "<group>"; };
-		F2D99C611B75EFED00759D33 /* ESEnterpriseMessageContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ESEnterpriseMessageContent.h; path = Model/ESEnterpriseMessageContent.h; sourceTree = "<group>"; };
-		F2D99C621B75EFED00759D33 /* ESEnterpriseMessageContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ESEnterpriseMessageContent.m; path = Model/ESEnterpriseMessageContent.m; sourceTree = "<group>"; };
 		F2D99C641B75F13E00759D33 /* GetEnterpriseMessageDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetEnterpriseMessageDataParse.h; sourceTree = "<group>"; };
 		F2D99C651B75F13E00759D33 /* GetEnterpriseMessageDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetEnterpriseMessageDataParse.m; sourceTree = "<group>"; };
+		F2F397701B77AC50006FAE3B /* ESEnterpriseMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ESEnterpriseMessage.h; path = Model/ESEnterpriseMessage.h; sourceTree = "<group>"; };
+		F2F397711B77AC50006FAE3B /* ESEnterpriseMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ESEnterpriseMessage.m; path = Model/ESEnterpriseMessage.m; sourceTree = "<group>"; };
+		F2F397721B77AC50006FAE3B /* ESEnterpriseMessageContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ESEnterpriseMessageContent.h; path = Model/ESEnterpriseMessageContent.h; sourceTree = "<group>"; };
+		F2F397731B77AC50006FAE3B /* ESEnterpriseMessageContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ESEnterpriseMessageContent.m; path = Model/ESEnterpriseMessageContent.m; sourceTree = "<group>"; };
 		F2F92EC31B4AB58F0047D7BF /* RCDAcceptContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCDAcceptContactViewController.h; path = RCDChatList/AddressBook/RCDAcceptContactViewController.h; sourceTree = "<group>"; };
 		F2F92EC41B4AB58F0047D7BF /* RCDAcceptContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RCDAcceptContactViewController.m; path = RCDChatList/AddressBook/RCDAcceptContactViewController.m; sourceTree = "<group>"; };
 		F2F92ECB1B4D60910047D7BF /* RCDPhoneAddressBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCDPhoneAddressBookViewController.h; path = RCDChatList/AddressBook/RCDPhoneAddressBookViewController.h; sourceTree = "<group>"; };
@@ -1328,6 +1327,10 @@
 		F22FE27C1B3ADA8200A1A997 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F2F397701B77AC50006FAE3B /* ESEnterpriseMessage.h */,
+				F2F397711B77AC50006FAE3B /* ESEnterpriseMessage.m */,
+				F2F397721B77AC50006FAE3B /* ESEnterpriseMessageContent.h */,
+				F2F397731B77AC50006FAE3B /* ESEnterpriseMessageContent.m */,
 				F2D99C541B75ED2800759D33 /* ESEnterPriseRequestInfo.h */,
 				F2D99C5E1B75EF0400759D33 /* ESEnterPriseRequestInfo.m */,
 				F29BC4961B75EBDC00803183 /* ESTag.h */,
@@ -1352,10 +1355,6 @@
 				2BEBBD8E1B6E46EC008BE7C4 /* ESContactor.m */,
 				2BEBBD901B6E4920008BE7C4 /* ESTask.h */,
 				2BEBBD911B6E4920008BE7C4 /* ESTask.m */,
-				F23630B81B67C15200A12F63 /* ESTag.h */,
-				F23630B91B67C15200A12F63 /* ESTag.m */,
-				F256CB791B6D1B82009478C2 /* ESEnterPriseRequestInfo.h */,
-				F256CB7A1B6D1B82009478C2 /* ESEnterPriseRequestInfo.m */,
 				2BEAD05A1B76294500905E21 /* ESTaskMask.h */,
 				2BEAD05B1B76294500905E21 /* ESTaskMask.m */,
 				2BEAD0951B779C4900905E21 /* ESTaskComment.h */,
@@ -1870,8 +1869,8 @@
 				F22FE2E91B4000ED00A1A997 /* SDWebImageDownloader.m in Sources */,
 				F29F862F1B2410070058FC9F /* AFURLResponseSerialization.m in Sources */,
 				F23630841B66668900A12F63 /* RCDAddressBookDetailViewController.m in Sources */,
-				F2D99C631B75EFED00759D33 /* ESEnterpriseMessageContent.m in Sources */,
 				F22FE2E41B4000ED00A1A997 /* MKAnnotationView+WebCache.m in Sources */,
+				F2F397741B77AC50006FAE3B /* ESEnterpriseMessage.m in Sources */,
 				2BEBBD8C1B67AFA7008BE7C4 /* GetTaskListDataParse.m in Sources */,
 				F29F862D1B2410070058FC9F /* AFURLConnectionOperation.m in Sources */,
 				2BC821361B5BE6B60090E2C1 /* ChangeUserImageDataParse.m in Sources */,
@@ -1923,9 +1922,7 @@
 				F22FE2EF1B4000ED00A1A997 /* UIImage+MultiFormat.m in Sources */,
 				2B39C93F1B241212007BAC7A /* View+MASAdditions.m in Sources */,
 				F277AE011B2DC146006E42CB /* DeviceInfo.m in Sources */,
-				F29BC4951B75E62500803183 /* ESEnterpriseMessage.m in Sources */,
 				2BEAD04C1B738E3100905E21 /* TaskViewController.m in Sources */,
-				F2D99C661B75F13E00759D33 /* GetEnterpriseMessageDataParse.m in Sources */,
 				F22FE2C11B3FFCAF00A1A997 /* MBProgressHUD.m in Sources */,
 				2B5A59161B48DFBB000382D7 /* MRProgressOverlayView+AFNetworking.m in Sources */,
 				2BC8212F1B57FFDC0090E2C1 /* ProfessionWebViewController.m in Sources */,
@@ -1955,7 +1952,6 @@
 				F23059BA1B52C141004599FA /* RCDAddressBookViewTableViewCell.m in Sources */,
 				F277ADFE1B2DC046006E42CB /* CustomMessageBox.m in Sources */,
 				2BEAD08D1B775FC900905E21 /* MessageListSelfTableViewCell.m in Sources */,
-				F28B6C841B6F969100E0C267 /* ESEnterpriseDetailInfo.m in Sources */,
 				F29F864A1B2410320058FC9F /* UIWebView+AFNetworking.m in Sources */,
 				2B5A59151B48DFBB000382D7 /* MRActivityIndicatorView+AFNetworking.m in Sources */,
 				F22FE2F31B4000ED00A1A997 /* UIView+WebCacheOperation.m in Sources */,
@@ -1988,6 +1984,7 @@
 				F28B6C8A1B6FAB5D00E0C267 /* GetEnterpriseListDataParse.m in Sources */,
 				F29F86301B2410070058FC9F /* AFURLSessionManager.m in Sources */,
 				2B31C3D81B11C3FD004C865A /* AppDelegate.m in Sources */,
+				F2F397751B77AC50006FAE3B /* ESEnterpriseMessageContent.m in Sources */,
 				F24787751B2D775E00EC266B /* SignUpDataParse.m in Sources */,
 				F277AE0D1B2DD066006E42CB /* UIPageNavigator.m in Sources */,
 				F22FE2FF1B42DAF600A1A997 /* AddContactDataParse.m in Sources */,

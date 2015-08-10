@@ -23,6 +23,7 @@
 #import "ESEnterpriseMessage.h"
 #import "ESEnterpriseMessageContent.h"
 #import "DeviceInfo.h"
+#import "EnterpriseChatListViewController.h"
 
 void(^completionHandler)(RCUserInfo* userInfo);
 
@@ -190,6 +191,11 @@ void(^completionHandler)(RCUserInfo* userInfo);
             enterpriseChatVC.title = @"ES系统消息";//ES系统消息
             enterpriseChatVC.chatType = e_Enterprise_Chat_Riil;
             [self.navigationController pushViewController:enterpriseChatVC animated:YES];
+        }
+        else if (indexPath.row == 1)
+        {
+            EnterpriseChatListViewController* enterpriseChatlistVC = [[EnterpriseChatListViewController alloc] init];
+            [self.navigationController pushViewController:enterpriseChatlistVC animated:YES];
         }
 
     }
@@ -383,7 +389,8 @@ void(^completionHandler)(RCUserInfo* userInfo);
     for (int i=0; i<_myDataSource.count; i++)
     {
         RCConversationModel *customModel =[_myDataSource objectAtIndex:i];
-        [dataSource replaceObjectAtIndex:i withObject:customModel];
+//        [dataSource replaceObjectAtIndex:i withObject:customModel];
+        [dataSource insertObject:customModel atIndex:i];
     }
     
     return dataSource;
@@ -475,7 +482,7 @@ void(^completionHandler)(RCUserInfo* userInfo);
         if (!enterpriseMessage.bRead) {
             enterpriseModel.unreadMessageCount = 1;
         }
-        if (riilMessage.enterprise_messageContent != nil)
+        if (enterpriseMessage.enterprise_messageContent != nil)
         {
             enterpriseModel.conversationTitle = enterpriseMessage.enterprise_messageContent.title;
         }
@@ -483,7 +490,7 @@ void(^completionHandler)(RCUserInfo* userInfo);
         {
             if (enterpriseMessage.bSuggestion)
             {
-                enterpriseModel.conversationTitle = riilMessage.suggetstionText;
+                enterpriseModel.conversationTitle = enterpriseMessage.suggetstionText;
             }
         }
         if (enterpriseMessage.message_time!=nil)

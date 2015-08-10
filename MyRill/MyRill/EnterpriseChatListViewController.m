@@ -7,18 +7,46 @@
 //
 
 #import "EnterpriseChatListViewController.h"
+#import "GetEnterpriseMessageDataParse.m"
+#import "RCDChatListCell.h"
+#import "DeviceInfo.h"
+#import "UIColor+RCColor.h"
 
-@interface EnterpriseChatListViewController ()
 
--(void)initEnterpriseLatestMessageList;
+@interface EnterpriseChatListViewController ()<GetALLEnterpriseLastestMessageListDelegate>
+@property (nonatomic,strong)GetEnterpriseMessageDataParse* getEnterpriseMessageDataParse;
+@property (nonatomic,strong)NSMutableArray* myDataSource;
+@property (nonatomic,strong)NSMutableArray* enterpriseMessageList;
+
+-(void)updateEnterpriseLatestMessageList;
 @end
 
 @implementation EnterpriseChatListViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"企业消息列表";
+
+    [self setDisplayConversationTypes:@[@(ConversationType_PRIVATE),@(ConversationType_DISCUSSION),@(ConversationType_SYSTEM),@(ConversationType_APPSERVICE)]];
+    //聚合会话类型
+//    [self setCollectionConversationType:@[@(ConversationType_SYSTEM),@(ConversationType_APPSERVICE)]];
+    
     // Do any additional setup after loading the view.
-    [self initEnterpriseLatestMessageList];
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    
+    //设置tableView样式
+    self.conversationListTableView.separatorColor = [UIColor colorWithHexString:@"dfdfdf" alpha:1.0f];
+//    self.conversationListTableView.tableFooterView = [UIView new];
+    // Do any additional setup after loading the view.
+    _getEnterpriseMessageDataParse = [[GetEnterpriseMessageDataParse alloc] init];
+    _getEnterpriseMessageDataParse.getAllEnterpriseLastestMessageListDelegate = self;
+    _myDataSource = [NSMutableArray new];
+    _enterpriseMessageList = [NSMutableArray new];
+    
+    NSLog(@"width = %f,height =%f",self.view.frame.size.width,self.view.frame.size.height);
+    CGRect frame = self.conversationListTableView.frame;
+    frame.size.height += self.tabBarController.tabBar.frame.size.height;
+    self.conversationListTableView.frame = frame;
 
 }
 
@@ -26,10 +54,118 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.tabBarController.tabBar.hidden = YES;
 
--(void)initEnterpriseLatestMessageList
+//    self.navigationItem.rightBarButtonItem = rightButton;
+    //    self.title = self.conversation.conversationTitle;
+    //    [self initEnterpriseChatInfoList];
+    [self updateEnterpriseLatestMessageList];
+}
+
+-(void)updateEnterpriseLatestMessageList
+{
+    [_getEnterpriseMessageDataParse getAllEnterpriseLastestMessageList];
+}
+
+
+- (void)willDisplayConversationTableCell:(RCConversationBaseCell *)cell atIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"willDisplayConversationTableCell");
+}
+
+//高度
+-(CGFloat)rcConversationListTableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 67.0f;
+}
+
+//自定义cell
+-(RCConversationBaseCell *)rcConversationListTableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    RCConversationModel *model = self.conversationListDataSource[indexPath.row];
+    //RCDChatListCell
+    RCDChatListCell *cell = [[RCDChatListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ESEnterpriseCell"];
+    [cell setModel:model];
+
+    cell.lblName.text = model.conversationTitle;
+    cell.lblDetail.text = model.conversationTitle;
+    cell.timeLabel.text = [DeviceInfo getShowTime:[NSDate dateWithTimeIntervalSince1970:model.sentTime]];
+    [cell.ivAva setImage:[UIImage imageNamed:@"duihua_xitongxiaoxi"]];
+
+    return cell;
+}
+
+//*********************插入自定义Cell*********************//
+
+//插入自定义会话model
+-(NSMutableArray *)willReloadTableData:(NSMutableArray *)dataSource
+{
+    [dataSource removeAllObjects];
+    if (_myDataSource == nil || [_myDataSource count] <= 0)
+    {
+        return dataSource;
+    }
+    for (int i=0; i<_myDataSource.count; i++)
+    {
+        RCConversationModel *customModel =[_myDataSource objectAtIndex:i];
+        [dataSource addObject:customModel];
+    }
+    
+    return dataSource;
+}
+
+
+#pragma mark-- GetALLEnterpriseLastestMessageListDelegate
+-(void)getALLEnterpriseLastestMessageListSucceed:(NSArray*)enterpriseList
+{
+    if (enterpriseList == nil || [enterpriseList count] <= 0)
+    {
+        return;
+    }
+    [_myDataSource removeAllObjects];
+    for (ESEnterpriseMessage* enterpriseMessage in enterpriseList)
+    {
+        if (enterpriseMessage == nil)
+        {
+            continue;
+        }
+        RCConversationModel *enterpriseModel = [RCConversationModel new];
+        enterpriseModel.isTop = YES;
+        enterpriseModel.conversationModelType = RC_CONVERSATION_MODEL_TYPE_CUSTOMIZATION;
+        if (!enterpriseMessage.bRead) {
+            enterpriseModel.unreadMessageCount = 1;
+        }
+        if (enterpriseMessage.enterprise_messageContent != nil)
+        {
+            enterpriseModel.conversationTitle = enterpriseMessage.enterprise_messageContent.title;
+        }
+        else
+        {
+            if (enterpriseMessage.bSuggestion)
+            {
+                enterpriseModel.conversationTitle = enterpriseMessage.suggetstionText;
+            }
+        }
+        if (enterpriseMessage.message_time!=nil)
+        {
+            enterpriseModel.sentTime = [enterpriseMessage.message_time timeIntervalSince1970];
+            enterpriseModel.receivedTime = [[NSDate date] timeIntervalSince1970];
+        }
+
+        [_myDataSource addObject:enterpriseModel ];
+            
+    }    
+  
+    [self refreshConversationTableViewIfNeeded];
+
+}
+-(void)getALLEnterpriseLastestMessageListFailed:(NSString*)errorMessage
 {
     
 }
+
 
 @end
