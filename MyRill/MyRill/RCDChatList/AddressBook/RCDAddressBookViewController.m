@@ -206,8 +206,8 @@
                 ESEnterpriseInfo* enterpriseInfo = _enterprises[indexPath.row];
                 if (enterpriseInfo) {
                     cell.addressBookName.text = enterpriseInfo.enterpriseName;
-//                    [cell.ivAva sd_setImageWithURL:[NSURL URLWithString:enterpriseInfo.portraitUri] placeholderImage:[UIImage imageNamed:@"头像_100"]];
-                    [cell.ivAva setImage:[UIImage imageNamed:@"头像_100"]];
+                    [cell.ivAva sd_setImageWithURL:[NSURL URLWithString:enterpriseInfo.portraitUri] placeholderImage:[UIImage imageNamed:@"头像_100"]];
+//                    [cell.ivAva setImage:[UIImage imageNamed:@"头像_100"]];
                     cell.ivAva.clipsToBounds = YES;
                     cell.ivAva.layer.cornerRadius = 18.f;
                     

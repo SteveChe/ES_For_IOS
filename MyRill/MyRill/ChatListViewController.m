@@ -482,15 +482,15 @@ void(^completionHandler)(RCUserInfo* userInfo);
         if (!enterpriseMessage.bRead) {
             enterpriseModel.unreadMessageCount = 1;
         }
-        if (enterpriseMessage.enterprise_messageContent != nil)
+        if (enterpriseMessage.bSuggestion)
         {
-            enterpriseModel.conversationTitle = enterpriseMessage.enterprise_messageContent.title;
+            enterpriseModel.conversationTitle = enterpriseMessage.suggetstionText;
         }
         else
         {
-            if (enterpriseMessage.bSuggestion)
+            if(enterpriseMessage.enterprise_messageContent != nil)
             {
-                enterpriseModel.conversationTitle = enterpriseMessage.suggetstionText;
+                enterpriseModel.conversationTitle = enterpriseMessage.enterprise_messageContent.title;
             }
         }
         if (enterpriseMessage.message_time!=nil)
