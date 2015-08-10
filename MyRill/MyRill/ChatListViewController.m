@@ -112,19 +112,11 @@ void(^completionHandler)(RCUserInfo* userInfo);
     RCConversationModel *esModel = [RCConversationModel new];
     esModel.isTop = YES;
     esModel.conversationModelType = RC_CONVERSATION_MODEL_TYPE_CUSTOMIZATION;
-//    esModel.extend = nil;
-//    esModel.sentTime = 1438868551;
-//    esModel.receivedTime = 1438868551;
-//    [self.conversationListDataSource insertObject:esModel atIndex:0];
-//    [self refreshConversationTableViewWithConversationModel:esModel];
     [_myDataSource addObject:esModel];
     
     RCConversationModel *enterpriseModel = [RCConversationModel new];
     enterpriseModel.isTop = YES;
     enterpriseModel.conversationModelType = RC_CONVERSATION_MODEL_TYPE_CUSTOMIZATION;
-//    enterpriseModel.extend = nil;
-//    enterpriseModel.sentTime = 1438868551;
-//    enterpriseModel.receivedTime = 1438868551;
     [_myDataSource addObject:enterpriseModel];
 //    [self.conversationListDataSource insertObject:enterpriseModel atIndex:1];
 //    
@@ -197,7 +189,6 @@ void(^completionHandler)(RCUserInfo* userInfo);
             EnterpriseChatListViewController* enterpriseChatlistVC = [[EnterpriseChatListViewController alloc] init];
             [self.navigationController pushViewController:enterpriseChatlistVC animated:YES];
         }
-
     }
     
 }

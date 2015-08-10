@@ -15,6 +15,7 @@
 #import "ESEnterpriseMessageContent.h"
 #import "ESUserInfo.h"
 #import "CustomShowMessage.h"
+#import "RCDAddressBookEnterpriseDetailViewController.h"
 
 @interface EnterpriseChatViewController ()<GetRILLMessageListDelegate,ReplyToRILLMessageDelegate,GetOneEnterpriseMessageListDelegate,ReplyToOneEnterpriseMessageDelegate>
 @property (nonatomic,strong)GetEnterpriseMessageDataParse *getEnterpriseMessageDataParse;
@@ -351,7 +352,13 @@
  */
 -(void)rightBarButtonItemPressed:(id)sender
 {
-    
+    if (_enterpriseId == nil || [_enterpriseId length] <= 0)
+    {
+        return;
+    }
+    RCDAddressBookEnterpriseDetailViewController* addressBookEnterpriseDetailVC = [[RCDAddressBookEnterpriseDetailViewController alloc] init];
+    addressBookEnterpriseDetailVC.enterpriseId = _enterpriseId;
+    [self.navigationController pushViewController:addressBookEnterpriseDetailVC animated:YES];
 }
 /**
  *  重写方法，输入框监控方法

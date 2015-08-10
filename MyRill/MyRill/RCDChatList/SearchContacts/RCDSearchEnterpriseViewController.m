@@ -12,6 +12,7 @@
 #import "RCDPhoneAddressBookTableViewCell.h"
 #import "ESEnterpriseInfo.h"
 #import "FollowEnterpriseDataParse.h"
+#import "RCDAddressBookEnterpriseDetailViewController.h"
 
 @interface RCDSearchEnterpriseViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,UISearchControllerDelegate,UISearchDisplayDelegate,GetSearchEnterpriseListDelegate,RCDPhoneAddressBookTableViewCellDelegate,FollowEnterpriseDelegate,UnFollowEnterpriseDelegate>
 @property (nonatomic,strong)GetEnterpriseListDataParse* getEnterpriseListDataParse;
@@ -182,7 +183,19 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    ESEnterpriseInfo* enterpriseInfo = nil;
+
+    if(tableView == self.searchDisplayController.searchResultsTableView)
+    {
+        enterpriseInfo = [_searchResult objectAtIndex:indexPath.row];
+    }
+    else
+    {
+        enterpriseInfo = [_allEnterpriseList objectAtIndex:indexPath.row];
+    }
+    RCDAddressBookEnterpriseDetailViewController* addressBookEnterpriseDetailVC = [[RCDAddressBookEnterpriseDetailViewController alloc] init];
+    addressBookEnterpriseDetailVC.enterpriseId = enterpriseInfo.enterpriseId;
+    [self.navigationController pushViewController:addressBookEnterpriseDetailVC animated:YES];
 }
 
 #pragma mark-- RCDPhoneAddressBookTableViewCellDelegate

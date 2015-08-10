@@ -23,6 +23,8 @@
 #import "RCDApprovedJoinEnterpriseViewController.h"
 #import "GetEnterpriseListDataParse.h"
 #import "ESEnterpriseInfo.h"
+#import "RCDAddressBookEnterpriseDetailViewController.h"
+#import "DiscussionChatListViewController.h"
 
 @interface RCDAddressBookViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,UISearchControllerDelegate,UISearchDisplayDelegate,GetFollowedEnterpriseListDelegate>
 
@@ -378,7 +380,9 @@
             }
             else if(indexPath.row == 2)
             {
-                
+                DiscussionChatListViewController* discussionChatListVC = [[DiscussionChatListViewController alloc] init];
+                [self.navigationController pushViewController:discussionChatListVC animated:YES];
+
             }
             
         }
@@ -386,7 +390,10 @@
         {
             if ([_enterprises count]>0)
             {
-                
+                RCDAddressBookEnterpriseDetailViewController* addressBookEnterpriseDetailVC = [[RCDAddressBookEnterpriseDetailViewController alloc] init];
+                ESEnterpriseInfo* enterpriseInfo = [_enterprises objectAtIndex:indexPath.row];
+                addressBookEnterpriseDetailVC.enterpriseId = enterpriseInfo.enterpriseId;
+                [self.navigationController pushViewController:addressBookEnterpriseDetailVC animated:YES];
             }
             else
             {
@@ -411,7 +418,6 @@
             }
 
             RCDAddressBookDetailViewController* addressBookDetailVC = [[RCDAddressBookDetailViewController alloc] init];
-//            ESContactList* contactList = [_friends objectAtIndex:indexPath.section-2];
             ESUserInfo *user = contactList.contactList[indexPath.row];
             addressBookDetailVC.userId = user.userId;
             [self.navigationController pushViewController:addressBookDetailVC animated:YES];

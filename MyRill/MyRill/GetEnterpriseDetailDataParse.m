@@ -73,7 +73,12 @@
                      enterpriseDetailInfo.bCanFollowed = [enterPriseCanFollowed boolValue];
                  }
 
-                 
+                 NSString* enterprisePortraitUrl = [temDic objectForKey:@"avatar"];
+                 if (enterprisePortraitUrl != nil && ![enterprisePortraitUrl isEqual:[NSNull null]] && [enterprisePortraitUrl length] >0 )
+                 {
+                     enterpriseDetailInfo.portraitUri = enterprisePortraitUrl;
+                 }
+
                  if (self.delegate!= nil &&[self.delegate respondsToSelector:@selector(getEnterpriseDetailSucceed:)])
                  {
                      [self.delegate getEnterpriseDetailSucceed:enterpriseDetailInfo];
