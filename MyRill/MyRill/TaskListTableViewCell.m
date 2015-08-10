@@ -11,16 +11,17 @@
 #import "ESTask.h"
 #import "ESContactor.h"
 #import "UIImageView+WebCache.h"
+#import "ESTaskComment.h"
 
 @interface TaskListTableViewCell ()
 
 @property (nonatomic, weak) IBOutlet UIView *layerView;
 @property (nonatomic, weak) IBOutlet UILabel *titleLbl;
 @property (nonatomic, weak) IBOutlet UILabel *leadLbl;
-@property (nonatomic, weak) IBOutlet UILabel *initiatorLbl;
+@property (nonatomic, weak) IBOutlet UILabel *replyUserLbl;
 @property (nonatomic, weak) IBOutlet UILabel *lastReplyLbl;
 @property (nonatomic, weak) IBOutlet UILabel *endDateLbl;
-@property (nonatomic, weak) IBOutlet UIImageView *initiatorImg;
+@property (nonatomic, weak) IBOutlet UIImageView *replyUserImg;
 @property (nonatomic, weak) IBOutlet UILabel *replyTimeLbl;
 @property (weak, nonatomic) IBOutlet UIImageView *tagImg;
 
@@ -41,7 +42,7 @@
 }
 
 - (void)updateTackCell:(ESTask *)task {
-    self.titleLbl.text = [@"任务说明：" stringByAppendingString:task.title];
+    self.titleLbl.text = [@"任务名称：" stringByAppendingString:task.title];
     
     NSString *leadStr = [NSString stringWithFormat:@"负责人：%@",task.personInCharge.name];
     if (![task.personInCharge.enterprise isEqualToString:@""]) {
@@ -50,11 +51,20 @@
     }
     self.leadLbl.text = leadStr;
     
-    self.initiatorLbl.text = task.initiator.name;
-    [self.initiatorImg sd_setImageWithURL:[NSURL URLWithString:task.initiator.imgURLstr] placeholderImage:nil];
+    NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
+    NSString *userID = [userDefaultes stringForKey:@"UserId"];
+    if ([userID isEqualToString:task.comments.user.useID.stringValue]) {
+        self.replyUserLbl.text = @"我";
+    } else {
+        self.replyUserLbl.text = task.comments.user.name;
+    }
     
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *userID = [userDefaults stringForKey:@"UserId"];
+    [self.replyUserImg sd_setImageWithURL:[NSURL URLWithString:task.comments.user.imgURLstr] placeholderImage:nil];
+    
+    NSString *replyDateStr = [task.comments.createDate stringByReplacingOccurrencesOfString:@"-" withString:@"/"];
+    self.replyTimeLbl.text = [replyDateStr isEqualToString:@""]?@"----/--/-- --:--":[replyDateStr substringToIndex:16];
+    self.lastReplyLbl.text = [task.comments.content isEqualToString:@""]?@"最新回复:——":[@"最新回复:" stringByAppendingString:task.comments.content];
+    
     if ([task.initiator.useID.stringValue isEqualToString:userID]) {
         self.tagImg.image = [UIImage imageNamed:@"发起人.png"];
     } else {
@@ -76,7 +86,7 @@
     //这里的NSTimeInterval 并不是对象，是基本型，其实是double类型，是由c定义的:typedef double NSTimeInterval;
     
     if (time <= 0) {
-        self.endDateLbl.text = @"已过期";
+        self.endDateLbl.text = @"超期";
         return;
     }
     
@@ -98,10 +108,10 @@
     }
 }
 
-- (void)setInitiatorImg:(UIImageView *)initiatorImg {
-    _initiatorImg = initiatorImg;
+- (void)setReplyUserImg:(UIImageView *)replyUserImg {
+    _replyUserImg = replyUserImg;
     
-    _initiatorImg.layer.cornerRadius = 18.5f;
+    _replyUserImg.layer.cornerRadius = 18.5f;
 }
 
 @end
