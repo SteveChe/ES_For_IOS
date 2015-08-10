@@ -37,9 +37,9 @@
         
         NSDictionary *userDic = (NSDictionary *)dic[@"user"];
         if (userDic != nil && ![userDic isKindOfClass:[NSNull class]]) {
-            self.user = nil;
-        } else {
             self.user = [[ESContactor alloc] initWithDic:dic[@"user"]];
+        } else {
+            self.user = nil;
         }
     }
     

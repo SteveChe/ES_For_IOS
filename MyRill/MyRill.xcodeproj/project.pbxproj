@@ -1360,6 +1360,10 @@
 				2BEAD05B1B76294500905E21 /* ESTaskMask.m */,
 				2BEAD0951B779C4900905E21 /* ESTaskComment.h */,
 				2BEAD0961B779C4900905E21 /* ESTaskComment.m */,
+				F29BC4931B75E62500803183 /* ESEnterpriseMessage.h */,
+				F29BC4941B75E62500803183 /* ESEnterpriseMessage.m */,
+				F2D99C611B75EFED00759D33 /* ESEnterpriseMessageContent.h */,
+				F2D99C621B75EFED00759D33 /* ESEnterpriseMessageContent.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";

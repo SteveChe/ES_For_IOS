@@ -10,6 +10,7 @@
 #import "ESTaskComment.h"
 #import "UIImageView+WebCache.h"
 #import "ESContactor.h"
+#import "ColorHandler.h"
 
 @interface MessageListSelfTableViewCell ()
 @property (weak, nonatomic) IBOutlet UITextView *contentTxtVIew;
@@ -23,8 +24,8 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    
-    self.contentTxtVIew.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"chat_to_bg_normal.png"]];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"chat_to_bg_normal.png"]];
+    [self.contentTxtVIew addSubview:imageView];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -35,8 +36,21 @@
 
 - (void)updateMessage:(ESTaskComment *)taskComment {
     [self.userImg sd_setImageWithURL:[NSURL URLWithString:taskComment.user.imgURLstr] placeholderImage:nil];
-    self.nameAndEnterpriseLbl.text = [NSString stringWithFormat:@"%@/%@",taskComment.user.name,taskComment.user.enterprise];
+    if ([ColorHandler isNullOrEmptyString:taskComment.user.enterprise]) {
+        self.nameAndEnterpriseLbl.text = @"我";
+    } else {
+        self.nameAndEnterpriseLbl.text = [NSString stringWithFormat:@"%@/%@", taskComment.user.enterprise, @"我"];
+    }
+    
     self.createDate.text = taskComment.createDate;
+    UIView *view = [self.contentTxtVIew subviews].lastObject;
+    view.bounds = CGRectMake(0, 0, 240, 60);
+}
+
+- (void)setUserImg:(UIImageView *)userImg {
+    _userImg = userImg;
+    
+    _userImg.layer.cornerRadius = 18.5f;
 }
 
 @end

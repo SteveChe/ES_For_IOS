@@ -27,7 +27,10 @@
 
     UIBarButtonItem *btn1=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemRewind target:self action:nil];
     UIBarButtonItem *btn2=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFastForward target:self action:nil];
-    UIBarButtonItem *btn3=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:nil];
+    UIBarButtonItem *btn3=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"刷新.png"]
+                                                           style:UIBarButtonItemStylePlain
+                                                          target:self
+                                                          action:nil];
     UIBarButtonItem *btn4=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
     NSArray *arr1=[[NSArray alloc]initWithObjects:btn4,btn1,btn4,btn2,btn4,btn3,btn4, nil];
     self.toolbarItems=arr1;
