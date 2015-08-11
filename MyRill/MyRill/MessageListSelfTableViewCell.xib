@@ -16,7 +16,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="----/--/-- --/--" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AEk-SF-Taq">
-                        <rect key="frame" x="147" y="25" width="77.5" height="15.5"/>
+                        <rect key="frame" x="167" y="25" width="77.5" height="15.5"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -35,15 +35,18 @@
                         </constraints>
                     </imageView>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XNl-l5-DrX">
-                        <rect key="frame" x="147" y="48" width="200" height="60"/>
+                        <rect key="frame" x="167" y="48" width="180" height="45"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="200" placeholder="YES" id="BRF-9q-EfL"/>
-                            <constraint firstAttribute="height" constant="60" placeholder="YES" id="IWR-Ej-GV3"/>
+                            <constraint firstAttribute="width" constant="180" id="BRF-9q-EfL"/>
+                            <constraint firstAttribute="height" constant="45" id="IWR-Ej-GV3"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="8BV-NX-SGI">
+                        <rect key="frame" x="139" y="60.5" width="20" height="20"/>
+                    </activityIndicatorView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Hb5-T0-5NV" firstAttribute="leading" secondItem="XNl-l5-DrX" secondAttribute="trailing" constant="8" symbolic="YES" id="0A2-hj-PIW"/>
@@ -51,13 +54,16 @@
                     <constraint firstItem="Hb5-T0-5NV" firstAttribute="top" secondItem="cDw-sZ-0lP" secondAttribute="top" id="2MT-zO-Za8"/>
                     <constraint firstAttribute="trailing" secondItem="Hb5-T0-5NV" secondAttribute="trailing" constant="20" symbolic="YES" id="4hP-ge-dSm"/>
                     <constraint firstItem="AEk-SF-Taq" firstAttribute="leading" secondItem="XNl-l5-DrX" secondAttribute="leading" priority="750" id="5SC-Oz-tcz"/>
+                    <constraint firstItem="8BV-NX-SGI" firstAttribute="centerY" secondItem="XNl-l5-DrX" secondAttribute="centerY" id="Ldm-jh-YUa"/>
                     <constraint firstItem="Hb5-T0-5NV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" symbolic="YES" id="Sk7-og-W3m"/>
                     <constraint firstItem="cDw-sZ-0lP" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="AEk-SF-Taq" secondAttribute="trailing" constant="8" symbolic="YES" id="Z9Z-5A-odz"/>
                     <constraint firstItem="cDw-sZ-0lP" firstAttribute="bottom" secondItem="AEk-SF-Taq" secondAttribute="bottom" id="fAO-Uy-wUQ"/>
                     <constraint firstItem="XNl-l5-DrX" firstAttribute="top" secondItem="cDw-sZ-0lP" secondAttribute="bottom" constant="8" symbolic="YES" id="ghX-zu-4Cf"/>
+                    <constraint firstItem="XNl-l5-DrX" firstAttribute="leading" secondItem="8BV-NX-SGI" secondAttribute="trailing" constant="8" symbolic="YES" id="ms9-a9-d7E"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="activityView" destination="8BV-NX-SGI" id="JtK-4D-cYV"/>
                 <outlet property="contentTxtVIew" destination="XNl-l5-DrX" id="168-HY-jmf"/>
                 <outlet property="createDate" destination="AEk-SF-Taq" id="6yZ-LQ-GZf"/>
                 <outlet property="nameAndEnterpriseLbl" destination="cDw-sZ-0lP" id="Y3a-Ol-Kqp"/>

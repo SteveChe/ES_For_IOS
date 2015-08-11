@@ -6,7 +6,6 @@
 //
 //
 #import <RongIMKit/RongIMKit.h>
-
 #import "TaskViewController.h"
 #import "ColorHandler.h"
 #import "Masonry.h"
@@ -19,8 +18,9 @@
 #import "ESUserInfo.h"
 #import "RCDSelectPersonViewController.h"
 #import "ChatViewController.h"
+#import "TaskContactorCollectionViewCell.h"
 
-@interface TaskViewController () <EditTaskDelegate>
+@interface TaskViewController () <EditTaskDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate>
 
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *holdViews;
 @property (weak, nonatomic) IBOutlet UIView *headerView;
@@ -32,8 +32,11 @@
 @property (weak, nonatomic) IBOutlet UISwitch *taskStatusSwitch;
 @property (nonatomic, strong) MessageListViewController *messageListVC;
 @property (nonatomic, strong) EditTaskDataParse *editTaskDP;
+@property (nonatomic, strong) NSMutableArray *dataSource;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (nonatomic,strong) NSMutableArray* tastObserversList;//关注人列表,ESUserInfo
 @property (nonatomic,strong) NSMutableArray* tastRecipientsList;//负责人列表,ESUserInfo
+@property (nonatomic, assign) BOOL isOpen;
 
 @end
 
@@ -53,7 +56,7 @@
                                                                 target:self
                                                                 action:@selector(saveBarItemOnClicked)];
     self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:saveItem, startConversationItem, nil];
-    
+    self.isOpen = YES;
     //增加监听，当键盘出现或改变时收出消息
 //    [[NSNotificationCenter defaultCenter] addObserver:self
 //                                             selector:@selector(keyboardWillShow:)
@@ -89,10 +92,10 @@
     NSString *startDateStr = [self.taskModel.startDate substringToIndex:10];
     self.startDateLbl.text = [@"发起时间：" stringByAppendingString:[startDateStr stringByReplacingOccurrencesOfString:@"-" withString:@"/"]];
     
-    self.taskTitleLbl.text = [@"任务名称：" stringByAppendingString:self.taskModel.title];
+    self.taskTitleLbl.text = self.taskModel.title;
     
     NSString *endDateStr = [self.taskModel.endDate substringToIndex:10];
-    self.endDateLbl.text = [@"截止时间：" stringByAppendingString:[endDateStr stringByReplacingOccurrencesOfString:@"-" withString:@"/"]];
+    self.endDateLbl.text = [endDateStr stringByReplacingOccurrencesOfString:@"-" withString:@"/"];
     
     self.taskDescriptionLbl.text = [@"任务说明：" stringByAppendingString:self.taskModel.taskDescription];
     if (self.taskModel.status.integerValue == 0) {
@@ -104,6 +107,13 @@
     } else {
         
     }
+    
+    self.dataSource = nil;
+    for (ESContactor *contactor in self.taskModel.observers) {
+        [self.dataSource addObject:contactor];
+    }
+    [self.collectionView reloadData];
+    
     if (self.tastRecipientsList == nil) {
         self.tastRecipientsList = [NSMutableArray array];
     }
@@ -224,10 +234,6 @@
 }
 
 - (void)saveBarItemOnClicked {
-    NSMutableArray *observerArray = [[NSMutableArray alloc] initWithCapacity:self.taskModel.observers.count];
-//    for (ESContactor *contractor in ) {
-//        [observerArray addObject:contractor.useID];
-//    }
     ESTask *task = [[ESTask alloc] init];
     task.taskID = self.taskModel.taskID;
     task.title = self.taskTitleLbl.text;
@@ -241,50 +247,94 @@
     [self.editTaskDP EditTaskWithTaskModel:task];
 }
 
-
-
-////当键盘出现或改变时调用
-//- (void)keyboardWillShow:(NSNotification *)aNotification
-//{
-//    //获取键盘的高度
-//    NSDictionary *userInfo = [aNotification userInfo];
-//    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
-//    CGRect keyboardRect = [aValue CGRectValue];
-//    int height = keyboardRect.size.height;
-//    
-//    [UIView animateWithDuration:.1f
-//                          delay:0
-//                        options:UIViewAnimationOptionCurveEaseIn
-//                     animations:^{
-//                         [self headViewBtnOnClicked:nil];
-//                         self.sendViewBottomConstraint.constant = height;
-//                         [self.view layoutIfNeeded];
-//                     } completion:nil];
-//}
-//
-////当键退出时调用
-//- (void)keyboardWillHide:(NSNotification *)aNotification {
-//    [UIView animateWithDuration:.1f
-//                          delay:0
-//                        options:UIViewAnimationOptionCurveEaseOut
-//                     animations:^{
-//                         self.sendViewBottomConstraint.constant = 0.f;
-//                         [self.view layoutIfNeeded];
-//                     } completion:^(BOOL finished) {
-//                         
-//                     }];
-//}
-
 - (IBAction)headViewBtnOnClicked:(UIButton *)sender {
-    
     CGFloat height = self.headerView.bounds.size.height;
-    [UIView animateWithDuration:.5f
-                          delay:0
-                        options:UIViewAnimationOptionCurveLinear
-                     animations:^{
-                         self.headerViewTopConstraint.constant = 30 - height;
-                         [self.view layoutIfNeeded];
-                     } completion:nil];
+    
+    if (self.isOpen) {
+        [UIView animateWithDuration:.5f
+                              delay:0
+                            options:UIViewAnimationOptionCurveLinear
+                         animations:^{
+                             self.headerViewTopConstraint.constant = 30 - height;
+                             [self.view layoutIfNeeded];
+                         } completion:nil];
+    } else {
+        [UIView animateWithDuration:.5f
+                              delay:0
+                            options:UIViewAnimationOptionCurveLinear
+                         animations:^{
+                             self.headerViewTopConstraint.constant = 0;
+                             [self.messageListVC hideKeyboard];
+                             [self.view layoutIfNeeded];
+                         } completion:nil];
+    }
+    self.isOpen = !self.isOpen;
+}
+
+
+- (void)headViewAnotherBtnOnClicked:(BOOL)isOpen {
+    CGFloat height = self.headerView.bounds.size.height;
+    
+    if (isOpen) {
+        [UIView animateWithDuration:.5f
+                              delay:0
+                            options:UIViewAnimationOptionCurveLinear
+                         animations:^{
+                             self.headerViewTopConstraint.constant = 30 - height;
+                             [self.view layoutIfNeeded];
+                         } completion:nil];
+    } else {
+        [UIView animateWithDuration:.5f
+                              delay:0
+                            options:UIViewAnimationOptionCurveLinear
+                         animations:^{
+                             self.headerViewTopConstraint.constant = 0;
+                             [self.view layoutIfNeeded];
+                         } completion:nil];
+    }
+}
+
+#pragma mark - UICollectionViewDataSource&UICollectionViewDelegateFlowLayout
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.dataSource.count;
+}
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return 1;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    TaskContactorCollectionViewCell *cell = (TaskContactorCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"TaskContactorCollectionViewCell" forIndexPath:indexPath];
+    
+    cell.contentView.backgroundColor = [UIColor whiteColor];
+    
+    ESContactor *contactor = (ESContactor *)self.dataSource[indexPath.row];
+    [cell updateCell:contactor];
+    
+    return cell;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return CGSizeMake(54,54);
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 0;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+    return 0;
+}
+
+//设置Cell的边界
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    return UIEdgeInsetsMake(0,0,0,0);
+}
+
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
 }
 
 #pragma mark - setters&getters
@@ -295,6 +345,28 @@
         view.layer.borderWidth = 1.f;
         view.layer.borderColor = [ColorHandler colorFromHexRGB:@"eeeeee"].CGColor;
     }
+}
+
+- (void)setCollectionView:(UICollectionView *)collectionView {
+    _collectionView = collectionView;
+    
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    layout.minimumInteritemSpacing = 0;
+    [layout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
+    _collectionView.collectionViewLayout = layout;
+    
+    UINib *professionCell = [UINib nibWithNibName:@"TaskContactorCollectionViewCell" bundle:nil];
+    [_collectionView registerNib:professionCell forCellWithReuseIdentifier:@"TaskContactorCollectionViewCell"];
+    _collectionView.bounces = NO;
+    _collectionView.delegate = self;
+    _collectionView.dataSource = self;
+}
+
+- (NSMutableArray *)dataSource {
+    if (!_dataSource) {
+        _dataSource = [[NSMutableArray alloc] init];
+    }
+    return _dataSource;
 }
 
 - (EditTaskDataParse *)editTaskDP {

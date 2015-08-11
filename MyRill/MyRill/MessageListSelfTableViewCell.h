@@ -11,6 +11,8 @@
 
 @interface MessageListSelfTableViewCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityView;
+
 - (void)updateMessage:(ESTaskComment *)taskComment;
 
 @end

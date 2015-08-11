@@ -48,10 +48,6 @@
                     [eventStore saveEvent:event span:EKSpanThisEvent error:&err];
                     NSLog(@"保存成功");
                     
-                    
-                    
-                    
-                    
                     //是否写入提醒事项，提醒事项为iOS原生自带的，但是模拟器没有的
                     if (isReminder) {
                         EKCalendar * iDefaultCalendar = [eventStore defaultCalendarForNewReminders];

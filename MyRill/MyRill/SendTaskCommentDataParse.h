@@ -7,10 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+@class ESTaskComment;
 
 @protocol SendTaskCommenDelegate <NSObject>
 
-- (void)SendTaskCommentSuccess;
+- (void)SendTaskCommentSuccess:(ESTaskComment *)taskComment;
 
 @end
 
