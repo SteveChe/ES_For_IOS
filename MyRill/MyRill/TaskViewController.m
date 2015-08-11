@@ -204,7 +204,7 @@
     }
     else if (sender.tag == 1002){
         RCDSelectPersonViewController* selectPersonVC = [[RCDSelectPersonViewController alloc] init];
-        [selectPersonVC setSeletedUsers:self.tastRecipientsList];
+        [selectPersonVC setSeletedUsers:self.tastObserversList];
         __weak typeof(&*self)  weakSelf = self;
 
         //设置回调
