@@ -16,6 +16,7 @@
 #import "ESUserInfo.h"
 #import "CustomShowMessage.h"
 #import "RCDAddressBookEnterpriseDetailViewController.h"
+#import "RCDAddressBookDetailViewController.h"
 
 @interface EnterpriseChatViewController ()<GetRILLMessageListDelegate,ReplyToRILLMessageDelegate,GetOneEnterpriseMessageListDelegate,ReplyToOneEnterpriseMessageDelegate>
 @property (nonatomic,strong)GetEnterpriseMessageDataParse *getEnterpriseMessageDataParse;
@@ -182,6 +183,19 @@
 - (void)sendImageMessage:(RCImageMessage *)imageMessage pushContent:(NSString *)pushContent
 {
     [[CustomShowMessage getInstance] showNotificationMessage:@"图片功能暂不支持"];
+}
+
+/**
+ *  点击头像事件
+ *
+ *  @param userId 用户的ID
+ */
+- (void)didTapCellPortrait:(NSString *)userId
+{
+    RCDAddressBookDetailViewController* addressDetailVC = [[RCDAddressBookDetailViewController alloc] init];
+    addressDetailVC.userId = userId;
+    [self.navigationController pushViewController:addressDetailVC animated:YES];
+    
 }
 
 #pragma mark-  GetRILLMessageListDelegate
