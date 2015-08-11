@@ -43,6 +43,7 @@
     }
     NSString *createDateStr = [taskComment.createDate substringToIndex:16];
     self.createDate.text = [createDateStr stringByReplacingOccurrencesOfString:@"-" withString:@"/"];
+    self.contentTxtVIew.text = taskComment.content;
     UIView *view = [self.contentTxtVIew subviews].lastObject;
     view.bounds = CGRectMake(0, 0, 240, 60);
 }
@@ -51,6 +52,13 @@
     _userImg = userImg;
     
     _userImg.layer.cornerRadius = 18.5f;
+}
+
+- (void)setContentTxtVIew:(UITextView *)contentTxtVIew {
+    _contentTxtVIew = contentTxtVIew;
+    
+    _contentTxtVIew.layer.borderColor = [ColorHandler colorFromHexRGB:@"EEEEEE"].CGColor;
+    _contentTxtVIew.layer.borderWidth = 1.f;
 }
 
 @end

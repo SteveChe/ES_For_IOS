@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TaskContactorCollectionViewCell" id="gTV-IL-0wX" customClass="TaskContactorCollectionViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="87" height="101"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="87" height="101"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="头像_100" translatesAutoresizingMaskIntoConstraints="NO" id="qHp-Ig-nMJ">
+                        <rect key="frame" x="25.5" y="20.5" width="35" height="35"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="qHp-Ig-nMJ" secondAttribute="height" multiplier="1:1" id="5tC-GA-l1o"/>
+                            <constraint firstAttribute="height" constant="35" id="Flh-ot-FFh"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="——" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ozS-Jn-F44">
+                        <rect key="frame" x="26.5" y="57.5" width="34.5" height="20.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="60" id="GUl-G3-60J"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <color key="backgroundColor" red="0.023529411760000001" green="0.65490196079999996" blue="0.88235294119999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="qHp-Ig-nMJ" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" multiplier="0.75" id="Lit-ol-sya"/>
+                <constraint firstAttribute="centerX" secondItem="qHp-Ig-nMJ" secondAttribute="centerX" id="aI0-3T-chI"/>
+                <constraint firstItem="ozS-Jn-F44" firstAttribute="top" secondItem="qHp-Ig-nMJ" secondAttribute="bottom" id="vbd-PU-Qzx"/>
+                <constraint firstAttribute="centerX" secondItem="ozS-Jn-F44" secondAttribute="centerX" id="wnf-mT-hP4"/>
+            </constraints>
+            <size key="customSize" width="87" height="101"/>
+            <connections>
+                <outlet property="name" destination="ozS-Jn-F44" id="5sy-QU-b60"/>
+                <outlet property="userImg" destination="qHp-Ig-nMJ" id="c4q-z3-NvH"/>
+            </connections>
+            <point key="canvasLocation" x="350.5" y="266.5"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="头像_100" width="50" height="50"/>
+    </resources>
+</document>

@@ -32,8 +32,10 @@
 //    image = [image resizableImageWithCapInsets:insets resizingMode:UIImageResizingModeStretch];
     UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
     imageView.bounds = CGRectMake(0, 0, 200, 60);
-    [self.contentTxtVIew addSubview:imageView];
-    [self.contentTxtVIew sendSubviewToBack:imageView];
+    //[self.contentTxtVIew addSubview:imageView];
+    //[self.contentTxtVIew sendSubviewToBack:imageView];
+    
+    self.activityView.hidden = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -65,6 +67,13 @@
     _userImg = userImg;
     
     _userImg.layer.cornerRadius = 18.5f;
+}
+
+- (void)setContentTxtVIew:(UITextView *)contentTxtVIew {
+    _contentTxtVIew = contentTxtVIew;
+    
+    _contentTxtVIew.layer.borderColor = [ColorHandler colorFromHexRGB:@"EEEEEE"].CGColor;
+    _contentTxtVIew.layer.borderWidth = 1.f;
 }
 
 @end

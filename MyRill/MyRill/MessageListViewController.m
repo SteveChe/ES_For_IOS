@@ -69,6 +69,13 @@
 - (void)getTaskCommentListSuccess:(NSArray *)taskCommentList {
     self.dataSource = [NSMutableArray arrayWithArray:taskCommentList];
     [self.tableView reloadData];
+}
+
+- (void)SendTaskCommentSuccess:(ESTaskComment *)taskComment {
+    
+    [self.dataSource addObject:taskComment];
+    [self.tableView reloadData];
+//    [self.tableView scrollToRowAtIndexPath:nil atScrollPosition:nil animated:nil];
     
 }
 
@@ -106,18 +113,7 @@
 - (void)send {
     [self.sendTaskCommentDP sendTaskCommentWithTaskID:self.taskID
                                               comment:self.sendTxtfield.text];
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    if ([textField isEqual:self.sendTxtfield]) {
-        
-    }
-    
-    return YES;
-}
-
-- (void)SendTaskCommentSuccess {
-    NSLog(@"asdf");
+    self.sendTxtfield.text = nil;
 }
 
 - (void)hideKeyboard {
@@ -137,9 +133,8 @@
                           delay:0
                         options:UIViewAnimationOptionCurveEaseIn
                      animations:^{
-//                         [self headViewBtnOnClicked:nil];
                          TaskViewController *taskVC = (TaskViewController *)self.parentViewController;
-                         [taskVC headViewBtnOnClicked:nil];
+                         [taskVC headViewAnotherBtnOnClicked:YES];
                          self.sendViewBottomConstraint.constant = height;
                          [self.view layoutIfNeeded];
                      } completion:nil];
@@ -151,6 +146,8 @@
                           delay:0
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^{
+//                         TaskViewController *taskVC = (TaskViewController *)self.parentViewController;
+//                         [taskVC headViewAnotherBtnOnClicked:NO];
                          self.sendViewBottomConstraint.constant = 0.f;
                          [self.view layoutIfNeeded];
                      } completion:^(BOOL finished) {

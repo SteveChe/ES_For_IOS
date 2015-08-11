@@ -12,4 +12,6 @@
 
 @property (nonatomic, copy) NSString *taskID;
 
+- (void)hideKeyboard;
+
 @end
