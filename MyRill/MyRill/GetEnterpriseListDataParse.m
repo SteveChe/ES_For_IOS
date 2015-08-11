@@ -90,6 +90,13 @@
                          enterpriseInfo.bIsFollowed = [bFollowedNum boolValue];
                      }
                      
+                     NSString* enterprisePortraitUrl = [temDic objectForKey:@"avatar"];
+                     if (enterprisePortraitUrl != nil && ![enterprisePortraitUrl isEqual:[NSNull null]] && [enterprisePortraitUrl length] >0 )
+                     {
+                         enterpriseInfo.portraitUri = enterprisePortraitUrl;
+                     }
+
+                     
                      [enterpriseInfoArray addObject:enterpriseInfo];
                  }
                  
@@ -195,7 +202,11 @@
                      {
                          enterpriseInfo.bIsFollowed = [bFollowedNum boolValue];
                      }
-
+                     NSString* enterprisePortraitUrl = [temDic objectForKey:@"avatar"];
+                     if (enterprisePortraitUrl != nil && ![enterprisePortraitUrl isEqual:[NSNull null]] && [enterprisePortraitUrl length] >0 )
+                     {
+                         enterpriseInfo.portraitUri = enterprisePortraitUrl;
+                     }
                      
                      [enterpriseInfoArray addObject:enterpriseInfo];
                      

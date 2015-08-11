@@ -20,5 +20,8 @@ typedef enum
 
 @property (nonatomic,strong) NSString* userId;
 @property (nonatomic,assign) TAG_TYPE tagType;
+@property (nonatomic,strong) NSString* enterpriseId;
+@property (nonatomic,strong) NSString* taskId;
+
 
 @end

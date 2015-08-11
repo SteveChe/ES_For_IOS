@@ -11,6 +11,8 @@
 #import "RCDChatListCell.h"
 #import "DeviceInfo.h"
 #import "UIColor+RCColor.h"
+#import "UIImageView+WebCache.h"
+#import "EnterpriseChatViewController.h"
 
 
 @interface EnterpriseChatListViewController ()<GetALLEnterpriseLastestMessageListDelegate>
@@ -43,7 +45,6 @@
     _myDataSource = [NSMutableArray new];
     _enterpriseMessageList = [NSMutableArray new];
     
-    NSLog(@"width = %f,height =%f",self.view.frame.size.width,self.view.frame.size.height);
     CGRect frame = self.conversationListTableView.frame;
     frame.size.height += self.tabBarController.tabBar.frame.size.height;
     self.conversationListTableView.frame = frame;
@@ -59,9 +60,6 @@
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = YES;
 
-//    self.navigationItem.rightBarButtonItem = rightButton;
-    //    self.title = self.conversation.conversationTitle;
-    //    [self initEnterpriseChatInfoList];
     [self updateEnterpriseLatestMessageList];
 }
 
@@ -86,16 +84,56 @@
 -(RCConversationBaseCell *)rcConversationListTableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     RCConversationModel *model = self.conversationListDataSource[indexPath.row];
+    ESEnterpriseMessage* enterpriseMessage = [self.enterpriseMessageList objectAtIndex:indexPath.row];
     //RCDChatListCell
     RCDChatListCell *cell = [[RCDChatListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ESEnterpriseCell"];
     [cell setModel:model];
+    if (enterpriseMessage.send_enterprise!=nil)
+    {
+        cell.lblName.text = enterpriseMessage.send_enterprise.enterpriseName;
+        [cell.ivAva sd_setImageWithURL:[NSURL URLWithString:enterpriseMessage.send_enterprise.portraitUri] placeholderImage:[UIImage imageNamed:@"头像_100"]];
+    }
+    if (enterpriseMessage.bSuggestion)
+    {
+        cell.lblDetail.text = enterpriseMessage.suggetstionText;
+    }
+    else if (enterpriseMessage.enterprise_messageContent != nil)
+    {
+        
+        cell.lblDetail.text = enterpriseMessage.enterprise_messageContent.title;
 
-    cell.lblName.text = model.conversationTitle;
-    cell.lblDetail.text = model.conversationTitle;
-    cell.timeLabel.text = [DeviceInfo getShowTime:[NSDate dateWithTimeIntervalSince1970:model.sentTime]];
-    [cell.ivAva setImage:[UIImage imageNamed:@"duihua_xitongxiaoxi"]];
+    }
+    if (enterpriseMessage.message_time!=nil)
+    {
+        cell.timeLabel.text = [DeviceInfo getShowTime:enterpriseMessage.message_time];
+    }
+
 
     return cell;
+}
+
+/**
+ *  表格选中事件
+ *
+ *  @param conversationModelType 数据模型类型
+ *  @param model                 数据模型
+ *  @param indexPath             索引
+ */
+- (void)onSelectedTableRow:(RCConversationModelType)conversationModelType
+         conversationModel:(RCConversationModel *)model
+               atIndexPath:(NSIndexPath *)indexPath
+{
+    ESEnterpriseMessage* enterpriseMessage = [self.enterpriseMessageList objectAtIndex:indexPath.row];
+    EnterpriseChatViewController* enterpriseChatVC = [[EnterpriseChatViewController alloc] init];
+    enterpriseChatVC.title = @"企业消息";
+    if (enterpriseMessage.send_enterprise!=nil)
+    {
+        enterpriseChatVC.title = enterpriseMessage.send_enterprise.enterpriseName;
+        enterpriseChatVC.enterpriseId = enterpriseMessage.send_enterprise.enterpriseId;
+    }
+    
+    enterpriseChatVC.chatType = e_Enterprise_Chat_Enterprise;
+    [self.navigationController pushViewController:enterpriseChatVC animated:YES];
 }
 
 //*********************插入自定义Cell*********************//
@@ -126,6 +164,7 @@
         return;
     }
     [_myDataSource removeAllObjects];
+    [_enterpriseMessageList removeAllObjects];
     for (ESEnterpriseMessage* enterpriseMessage in enterpriseList)
     {
         if (enterpriseMessage == nil)
@@ -156,6 +195,7 @@
         }
 
         [_myDataSource addObject:enterpriseModel ];
+        [_enterpriseMessageList addObject:enterpriseMessage];
             
     }    
   

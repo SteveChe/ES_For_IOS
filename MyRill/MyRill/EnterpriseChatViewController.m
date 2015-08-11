@@ -15,6 +15,7 @@
 #import "ESEnterpriseMessageContent.h"
 #import "ESUserInfo.h"
 #import "CustomShowMessage.h"
+#import "RCDAddressBookEnterpriseDetailViewController.h"
 
 @interface EnterpriseChatViewController ()<GetRILLMessageListDelegate,ReplyToRILLMessageDelegate,GetOneEnterpriseMessageListDelegate,ReplyToOneEnterpriseMessageDelegate>
 @property (nonatomic,strong)GetEnterpriseMessageDataParse *getEnterpriseMessageDataParse;
@@ -44,7 +45,7 @@
     _getEnterpriseMessageDataParse.replyToRillMessageDelegate = self;
     _getEnterpriseMessageDataParse.getOneEnterpriseMessageListDelegate = self;
     _getEnterpriseMessageDataParse.replyToOneEnterpriseMessageDelegate = self;
-    [self initEnterpriseChatInfoList];
+//    [self initEnterpriseChatInfoList];
 //    self.defaultHistoryMessageCountOfChatRoom = 50;
 //    self.conversationMessageCollectionView.alwaysBounceVertical = YES;
     [self.chatSessionInputBarControl setInputBarType:RCChatSessionInputBarControlDefaultType style:RC_CHAT_INPUT_BAR_STYLE_CONTAINER];
@@ -76,7 +77,7 @@
     }
     else if(_chatType == e_Enterprise_Chat_Enterprise)
     {
-        
+        [_getEnterpriseMessageDataParse getOneEnterpriseMessage:_enterpriseId];
     }
         
 }
@@ -97,6 +98,7 @@
     RCMessageModel *model1 = [[RCMessageModel alloc] initWithMessage:rcMessage];
     model1.receivedTime = 1438868551;
     model1.objectName = @"RC:TxtMsg";
+    
     [self.conversationDataRepository insertObject:model1 atIndex:0];
 
     
@@ -255,9 +257,76 @@
 }
 
 #pragma mark - GetOneEnterpriseMessageListDelegate
--(void)getOneEnterpriseMessageListSucceed:(NSArray*)enterpriseList
+-(void)getOneEnterpriseMessageListSucceed:(NSArray*)enterpriseMessageList
 {
+    if (enterpriseMessageList == nil || [enterpriseMessageList count] <= 0)
+    {
+        return;
+    }
     
+    for (ESEnterpriseMessage* enterpriseMessage in enterpriseMessageList)
+    {
+        _enterprise = enterpriseMessage.send_enterprise;
+        _userInfo = enterpriseMessage.receiver_userInfo;
+        if (enterpriseMessage == nil)
+        {
+            continue;
+        }
+        NSString* contentString = nil;
+        RCMessage * rcMessage = nil;
+        SimpleMessage* messageContent = nil;
+        NSString* nickName = nil;
+        NSString* portraitImageUrl = nil;
+        NSString* userId = nil;
+        if (enterpriseMessage.bSuggestion)
+        {
+            contentString = enterpriseMessage.suggetstionText;
+            messageContent = [SimpleMessage messageWithContent:contentString];
+            rcMessage = [[RCMessage alloc] initWithType:ConversationType_PRIVATE targetId:enterpriseMessage.receiver_userInfo.userId direction:MessageDirection_SEND messageId:[enterpriseMessage.message_id intValue] content:messageContent];
+            nickName = enterpriseMessage.receiver_userInfo.userName;
+            portraitImageUrl = enterpriseMessage.receiver_userInfo.portraitUri;
+            userId = enterpriseMessage.receiver_userInfo.userId;
+        }
+        else
+        {
+            if(enterpriseMessage.enterprise_messageContent != nil)
+            {
+                contentString = enterpriseMessage.enterprise_messageContent.content;
+                messageContent = [SimpleMessage messageWithContent:contentString];
+                rcMessage = [[RCMessage alloc] initWithType:ConversationType_PRIVATE targetId:enterpriseMessage.receiver_userInfo.userId direction:MessageDirection_RECEIVE messageId:[enterpriseMessage.message_id intValue] content:messageContent];
+                nickName = enterpriseMessage.send_enterprise.enterpriseName;
+                portraitImageUrl = enterpriseMessage.send_enterprise.portraitUri;
+                userId = enterpriseMessage.send_enterprise.enterpriseId;
+            }
+        }
+        RCMessageModel *templeModel = [[RCMessageModel alloc] initWithMessage:rcMessage];
+
+        templeModel.isDisplayNickname = YES;
+        templeModel.isDisplayMessageTime = NO;
+        templeModel.objectName = @"RC:TxtMsg";
+        
+        RCUserInfo* userInfo = [[RCUserInfo alloc] init];
+        userInfo.name = nickName;
+        userInfo.portraitUri = portraitImageUrl;
+        userInfo.userId = userId;
+        templeModel.userInfo = userInfo;
+        templeModel.content.senderUserInfo = userInfo;
+        
+        if (enterpriseMessage.message_time!=nil)
+        {
+            templeModel.receivedTime = [enterpriseMessage.message_time timeIntervalSince1970];
+        }
+        [self.conversationDataRepository insertObject:templeModel atIndex:0];
+        
+    }
+    if ([self.conversationDataRepository count] > 0)
+    {
+        [self.conversationMessageCollectionView reloadData];
+        
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.conversationDataRepository.count-1 inSection:0];
+        [self.conversationMessageCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionBottom animated:NO];
+    }
+
 }
 -(void)getOneEnterpriseMessageListFailed:(NSString*)errorMessage
 {
@@ -283,7 +352,13 @@
  */
 -(void)rightBarButtonItemPressed:(id)sender
 {
-    
+    if (_enterpriseId == nil || [_enterpriseId length] <= 0)
+    {
+        return;
+    }
+    RCDAddressBookEnterpriseDetailViewController* addressBookEnterpriseDetailVC = [[RCDAddressBookEnterpriseDetailViewController alloc] init];
+    addressBookEnterpriseDetailVC.enterpriseId = _enterpriseId;
+    [self.navigationController pushViewController:addressBookEnterpriseDetailVC animated:YES];
 }
 /**
  *  重写方法，输入框监控方法

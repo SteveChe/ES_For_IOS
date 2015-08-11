@@ -26,4 +26,8 @@
 /** 企业是否已经关注*/
 @property(nonatomic, assign) BOOL bCanFollowed;
 
+/** 企业头像URL **/
+@property(nonatomic, strong) NSString* portraitUri;
+
+
 @end
