@@ -108,11 +108,12 @@
         
     }
     
-    self.dataSource = nil;
-    for (ESContactor *contactor in self.taskModel.observers) {
-        [self.dataSource addObject:contactor];
+    if (self.dataSource == nil) {
+        for (ESContactor *contactor in self.taskModel.observers) {
+            [self.dataSource addObject:contactor];
+        }
+        [self.collectionView reloadData];
     }
-    [self.collectionView reloadData];
     
     if (self.tastRecipientsList == nil) {
         self.tastRecipientsList = [NSMutableArray array];
@@ -224,9 +225,19 @@
             {
                 [self.tastObserversList removeAllObjects];
                 [self.tastObserversList addObjectsFromArray:selectedUsers];
+                weakSelf.dataSource = nil;
+                for (ESUserInfo *user in self.tastObserversList) {
+                    ESContactor *contactor = [[ESContactor alloc] init];
+                    contactor.useID = [NSNumber numberWithInteger:[user.userId integerValue]];
+                    contactor.name = user.userName;
+                    contactor.imgURLstr = user.portraitUri;
+                    contactor.enterprise = user.enterprise;
+                    [weakSelf.dataSource addObject:contactor];
+                }
+                
             }
             [weakSelf.navigationController popViewControllerAnimated:YES ];
-            
+            [self.collectionView reloadData];
         };
         [self.navigationController pushViewController:selectPersonVC animated:YES];
     }
@@ -242,7 +253,7 @@
     task.taskDescription = self.taskModel.taskDescription;
     task.status = [NSNumber numberWithInt:1];
     task.personInCharge = self.taskModel.personInCharge;
-    task.observers = self.taskModel.observers;
+    task.observers = self.dataSource;
     
     [self.editTaskDP EditTaskWithTaskModel:task];
 }
