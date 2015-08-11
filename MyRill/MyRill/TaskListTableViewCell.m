@@ -79,7 +79,7 @@
     NSDate *date1=[NSDate date];
     NSString *curdate = [dateFormatter stringFromDate:date1];
     NSDate *dateNow = [dateFormatter dateFromString:curdate];
-    NSDate *dateEnd = [dateFormatter dateFromString:task.endDate];
+    NSDate *dateEnd = [dateFormatter dateFromString:[task.endDate substringToIndex:16]];
     
     //取两个日期对象的时间间隔：
     NSTimeInterval time=[dateEnd timeIntervalSinceDate:dateNow];

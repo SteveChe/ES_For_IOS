@@ -65,17 +65,12 @@
                         [reminder addAlarm:alarm];
                         NSError *error=nil;
                         
-                        
                         [eventStore saveReminder:reminder commit:YES error:&error];
                         if (error) {
-                            
                             NSLog(@"error=%@",error);
-                            
                         }
-                        
                     }
                 }
-                
             });
         }];
         
