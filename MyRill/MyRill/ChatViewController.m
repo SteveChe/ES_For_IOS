@@ -9,6 +9,7 @@
 #import "ChatViewController.h"
 #import "ChatSettingViewController.h"
 #import "RCDAddressBookDetailViewController.h"
+#import "TaskListViewController.h"
 
 @interface ChatViewController ()
 -(void)chatDetailButtonItemPressed:(id)sender;
@@ -100,7 +101,11 @@
 }
 -(void)startTaskButtonItemPressed:(id)sender
 {
-    
+    TaskListViewController* tastListVC = [[TaskListViewController alloc] init];
+    tastListVC.type = ESTaskListWithChatId;
+    tastListVC.identity = self.targetId;
+    [self.navigationController pushViewController:tastListVC animated:YES];
+
 }
 /**
  *  点击头像事件
