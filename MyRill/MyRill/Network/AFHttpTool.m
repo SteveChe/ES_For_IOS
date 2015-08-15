@@ -398,6 +398,27 @@
                           failure:failure];
 }
 
++ (void)addTaskWithModel:(ESTask *)task
+                 success:(void (^)(id))success
+                 failure:(void (^)(NSError *))failure {
+    NSMutableArray *observerArray = [[NSMutableArray alloc] initWithCapacity:task.observers.count];
+    for (ESContactor *contactor in task.observers) {
+        [observerArray addObject:contactor.useID];
+    }
+
+    NSDictionary *param = @{@"title":task.title,
+                            @"description":task.description,
+                            @"due_date":task.endDate,
+                            @"person_in_charge":task.personInCharge.useID,
+                            @"observers":observerArray,};
+    
+    [AFHttpTool requestWithMethod:RequestMethodTypePost
+                              url:@"/api/assignments/.json"
+                           params:param
+                          success:success
+                          failure:failure];
+}
+
 + (void)getTaskListWithIdentify:(NSString *)identify
                            type:(ESTaskListType)taskListType
                         success:(void (^)(id))success
@@ -406,19 +427,26 @@
     NSDictionary *param = nil;
     switch (taskListType) {
         case ESTaskListWithChatId:
-            param = @{@"chat_id":identify};
+            param = @{@"chat_id":identify,@"status":@"0"};
             break;
         case ESTaskListWithInitiatorId:
             param = @{@"initiator_id":identify,@"status":@"0"};
             break;
         case ESTaskListWithPersonInChargeId:
-            param = @{@"person_in_charge_id":identify};
+            param = @{@"person_in_charge_id":identify,@"status":@"0"};
             break;
         case ESTaskListStatus:
-            param = @{@"status":identify};
+            {
+                if ([identify isEqualToString:@"0"]) {
+                    param = nil;
+                } else {
+                    param = @{@"status":identify};
+                }
+            }
+            
             break;
         case ESTaskOverdue:
-            param = @{@"overdue":@"1",@"person_in_charge_id":identify};
+            param = @{@"overdue":@"1",@"person_in_charge_id":identify,@"status":@"0"};
             break;
         case ESTaskListQ:
             param = @{@"q":identify};
