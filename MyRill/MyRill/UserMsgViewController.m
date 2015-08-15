@@ -69,7 +69,6 @@
     [self.userIcon sd_setImageWithURL:[NSURL URLWithString:[userDefaultes stringForKey:@"UserImageURL"]] placeholderImage:[UIImage imageNamed:@"icon.png"]];
 }
 
-
 #pragma mark - ChangeUserImageDataDelegate methods
 - (void)changeUserImageSuccess:(NSString *)avatar {
     //更新头像缓存的url

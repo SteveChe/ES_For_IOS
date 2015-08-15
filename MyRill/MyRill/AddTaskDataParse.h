@@ -7,7 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+@class ESTask;
+
+@protocol AddTaskDelegate <NSObject>
+
+- (void)AddTaskSuccess;
+
+@end
 
 @interface AddTaskDataParse : NSObject
+
+@property (nonatomic, weak) id<AddTaskDelegate> delegate;
+
+- (void)addTaskWithModel:(ESTask *)task;
 
 @end
