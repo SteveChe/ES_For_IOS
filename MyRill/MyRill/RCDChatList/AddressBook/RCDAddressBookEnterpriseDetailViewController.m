@@ -68,6 +68,19 @@
     }
 }
 
+
+-(void)refreshEnterpriseDetailButton
+{
+    if (_enterpriseDetailInfo == nil)
+    {
+        return;
+    }
+    if (_enterpriseDetailInfo.bFollowed )
+    {
+        
+    }
+}
+
 #pragma mark -- EnterpriseDetailInfoDataDelegate
 - (void)getEnterpriseDetailSucceed:(ESEnterpriseDetailInfo *)enterpriseDetailInfo
 {
@@ -85,6 +98,8 @@
     
     [_portraitImageView sd_setImageWithURL:[NSURL URLWithString:enterpriseDetailInfo.portraitUri] placeholderImage:[UIImage imageNamed:@"icon"]];
     [self.tableView reloadData];
+    
+    
 }
 - (void)getEnterpriseDetailFailed:(NSString*)errorMessage
 {
