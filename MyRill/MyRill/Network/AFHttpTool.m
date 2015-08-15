@@ -584,6 +584,25 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
                            params:nil
                           success:success failure:failure];
 }
+//获取企业的标签
++ (void)getTagByEnterpriseId:(NSString*)enterpriseId success:(void (^)(id response))success failure:(void (^)(NSError *error))failure
+{
+    NSString* strURL = [NSString stringWithFormat:@"/api/accounts/enterprises/%@/tags/.json",enterpriseId];
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet
+                              url:strURL
+                           params:nil
+                          success:success failure:failure];
+}
+//获取任务的标签
++ (void)getTagByTaskId:(NSString*)tagId success:(void (^)(id response))success failure:(void (^)(NSError *error))failure
+{
+    NSString* strURL = [NSString stringWithFormat:@"/api/assignments/%@/tags/.json",tagId];
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet
+                              url:strURL
+                           params:nil
+                          success:success failure:failure];
+}
+
 
 //请求加入企业
 + (void)requestJoinEnterPriseWithUserId:(NSString*)userId success:(void (^)(id response))success failure:(void (^)(NSError *error))failure

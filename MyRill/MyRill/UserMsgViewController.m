@@ -242,6 +242,7 @@
 
 - (IBAction)logoutBtnOnClicked:(UIButton *)sender {
     [self.signOutDP logout];
+    [[RCIM sharedRCIM] logout];
 }
 
 #pragma mark - private methods

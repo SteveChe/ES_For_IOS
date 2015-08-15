@@ -26,12 +26,13 @@ enum
 };
 
 
-@interface ESTagViewController ()<TagDataDelegate,UIPickerViewDelegate, UIPickerViewDataSource>
+@interface ESTagViewController ()<TagDataDelegate,UIPickerViewDelegate, UIPickerViewDataSource,UIActionSheetDelegate>
 @property(nonatomic,strong) UIPickerView* pickerView;
 @property(nonatomic,strong) NSMutableArray* tagListArray;
 @property(nonatomic,strong) TagDataParse* tagDataParse;
 @property(nonatomic,assign) NSInteger selectedTableViewSection;
-
+@property(nonatomic,strong) UIToolbar *pickerTagToolbar;
+@property(nonatomic,strong) UIView* myPickView;
 @end
 
 @implementation ESTagViewController
@@ -44,6 +45,50 @@ enum
     _tagDataParse.delegate = self;
     _tagListArray = [[NSMutableArray alloc] init];
     [self initTagInfo];
+    
+    if (_myPickView == nil)
+    {
+        _myPickView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 300)];
+        //创建picker
+        if (_pickerView == nil)
+        {
+            _pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0.0, PICKER_VIEW_Y, IPHONE_SCREEN_WIDTH, PICKER_VIEW_HEIGHT)];
+            //        _pickerView.backgroundColor = [UIColor blackColor];
+            _pickerView.showsSelectionIndicator = true;
+            _pickerView.delegate = self;
+            _pickerView.dataSource = self;
+            [self.view addSubview:_pickerView];
+        }
+        if (_pickerTagToolbar == nil)
+        {
+            _pickerTagToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+            _pickerTagToolbar.barStyle = UIBarStyleBlackOpaque;
+            [_pickerTagToolbar sizeToFit];
+            
+            NSMutableArray *barItems = [[NSMutableArray alloc] init];
+            
+            //
+            UIBarButtonItem *cancelBtn = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleBordered target:self action:@selector(toolBarCanelClick)];
+            [barItems addObject:cancelBtn];
+            
+            //
+            UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+            [barItems addObject:flexSpace];
+            
+            //
+            UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(toolBarDoneClick)];
+            [barItems addObject:doneBtn];
+            
+            [_pickerTagToolbar setItems:barItems animated:YES];
+            [_myPickView addSubview:_pickerTagToolbar];
+            //        [_actionSheet setBounds:CGRectMake(0,0,320, 100)];
+            
+        }
+        [self.tableView addSubview:_pickerView];
+    }
+
+    
+
 }
 
 
@@ -55,12 +100,8 @@ enum
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    //创建picker
-    _pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0.0, PICKER_VIEW_Y, IPHONE_SCREEN_WIDTH, PICKER_VIEW_HEIGHT)];
-    _pickerView.showsSelectionIndicator = true;
-    _pickerView.delegate = self;
-    _pickerView.dataSource = self;
-    [self.view addSubview:_pickerView];
+
+
     
 }
 -(void)initTagInfo
@@ -76,13 +117,19 @@ enum
             break;
         case TAG_TYPE_ENTERPRISE:
         {
-            
+            if (_enterpriseId != nil && [_enterpriseId length]>0)
+            {
+                [_tagDataParse getEnterpriseTag:_enterpriseId];
+            }
         }
             break;
             
         case TAG_TYPE_ASSIGNMENT:
         {
-            
+            if (_taskId != nil && [_taskId length]>0 )
+            {
+                [_tagDataParse getTaskTag:_taskId];
+            }
         }
             break;
         default:

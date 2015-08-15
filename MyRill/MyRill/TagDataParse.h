@@ -20,4 +20,10 @@
 //获取人的标签
 -(void) getUserTag:(NSString*)userId;
 
+//获取企业的标签
+-(void) getEnterpriseTag:(NSString*)enterpriseId;
+
+//获取任务的标签
+-(void) getTaskTag:(NSString*)taskTag;
+
 @end
