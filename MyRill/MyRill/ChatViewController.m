@@ -11,7 +11,8 @@
 #import "RCDAddressBookDetailViewController.h"
 
 @interface ChatViewController ()
-
+-(void)chatDetailButtonItemPressed:(id)sender;
+-(void)startTaskButtonItemPressed:(id)sender;
 @end
 
 @implementation ChatViewController
@@ -33,13 +34,27 @@
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = YES;
 
-    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"duihua_liaotianxiangqing"]style:UIBarButtonItemStyleDone
+    UIBarButtonItem *chatDetailButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"duihua_liaotianxiangqing"]style:UIBarButtonItemStyleDone
                                                                    target:self
-                                                                   action:@selector(rightBarButtonItemPressed:)];
+                                                                   action:@selector(chatDetailButtonItemPressed:)];
+    
+    UIBarButtonItem *startTaskButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"changguiduihua_liebiao"]style:UIBarButtonItemStyleDone
+                                                                        target:self
+                                                                        action:@selector(startTaskButtonItemPressed:)];
 
-    self.navigationItem.rightBarButtonItem = rightButton;
+//    self.navigationItem.rightBarButtonItem = rightButton;
 //    self.title = self.conversation.conversationTitle;
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects: startTaskButtonItem,chatDetailButtonItem, nil];
+
+    
     [self initConversationInfo];
+    
+//    UIBarButtonItem *startConversationItem = [[UIBarButtonItem alloc] initWithTitle:@"会话" style:UIBarButtonItemStyleDone target:self
+//        action:@selector(startConversationEvent)];
+//    UIBarButtonItem *saveItem = [[UIBarButtonItem alloc] initWithTitle:@"保存"
+//                                                                 style:UIBarButtonItemStyleDone
+//                                                                target:self
+//                                                                action:@selector(saveBarItemOnClicked)];
 }
 
 -(void) initConversationInfo
@@ -74,16 +89,19 @@
  *
  *  @param sender
  */
--(void)rightBarButtonItemPressed:(id)sender
+-(void)chatDetailButtonItemPressed:(id)sender
 {
     ChatSettingViewController* chatSettingVC = [[ChatSettingViewController alloc] init];
     chatSettingVC.conversationType = self.conversationType;
     chatSettingVC.targetId = self.targetId;
     chatSettingVC.conversationTitle = self.userName;
-
+    
     [self.navigationController pushViewController:chatSettingVC animated:YES];
 }
-
+-(void)startTaskButtonItemPressed:(id)sender
+{
+    
+}
 /**
  *  点击头像事件
  *

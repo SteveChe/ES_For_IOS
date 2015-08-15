@@ -64,7 +64,8 @@
     {
         [_session addOutput:self.output];
     }
-    
+
+#pragma mark--奔溃
     // 条码类型 AVMetadataObjectTypeQRCode
     _output.metadataObjectTypes = @[AVMetadataObjectTypeQRCode];
     
