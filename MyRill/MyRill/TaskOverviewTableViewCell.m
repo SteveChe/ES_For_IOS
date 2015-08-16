@@ -38,7 +38,7 @@
     }
     
     self.taskTotalLbl.text = [taskOriginatorInfo.assignmentNum stringValue];
-    [self.initaiatorImg sd_setImageWithURL:[NSURL URLWithString:taskOriginatorInfo.initiatorImgURL] placeholderImage:nil];
+    [self.initaiatorImg sd_setImageWithURL:[NSURL URLWithString:taskOriginatorInfo.initiatorImgURL] placeholderImage:[UIImage imageNamed:@"头像_100"]];
 }
 
 - (void)setInitaiatorImg:(UIImageView *)initaiatorImg {

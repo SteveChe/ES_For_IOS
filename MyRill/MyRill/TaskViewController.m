@@ -109,6 +109,14 @@
     if (self.tastObserversList == nil) {
         self.tastObserversList = [NSMutableArray array];
     }
+    
+    self.assignerDataSource = nil;
+    [self.assignerDataSource addObject:self.taskModel.personInCharge];
+    
+    self.followsDataSource = nil;
+    for (ESContactor *contactor in self.taskModel.observers) {
+        [self.followsDataSource addObject:contactor];
+    }
 
     [self.tableView registerNib:[UINib nibWithNibName:@"MessageListSelfTableViewCell" bundle:nil] forCellReuseIdentifier:@"MessageListSelfTableViewCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"MessageListTableViewCell" bundle:nil] forCellReuseIdentifier:@"MessageListTableViewCell"];
@@ -135,14 +143,6 @@
         self.taskStatusSwitch.on = YES;
     } else {
         
-    }
-    
-    self.assignerDataSource = nil;
-    [self.assignerDataSource addObject:self.taskModel.personInCharge];
-    
-    self.followsDataSource = nil;
-    for (ESContactor *contactor in self.taskModel.observers) {
-        [self.followsDataSource addObject:contactor];
     }
 
     [self.assignerCollectionView reloadData];

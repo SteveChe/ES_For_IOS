@@ -17,7 +17,7 @@
 #import "RCDSelectPersonViewController.h"
 #import "ChatViewController.h"
 
-@interface AddTaskViewController () <AddTaskDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate>
+@interface AddTaskViewController () <AddTaskDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UITextFieldDelegate, UITextViewDelegate>
 
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *holdViews;
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *txtHoldViews;
@@ -55,7 +55,7 @@
     self.navigationItem.rightBarButtonItem = confirmItem;
     self.navigationItem.leftBarButtonItem = cancelItem;
     
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapBackground)];
     [self.view addGestureRecognizer:tap];
     
     [self.view addSubview:self.dateSelectedPicker];
@@ -147,11 +147,29 @@
     return YES;
 }
 
+#pragma mark - UITextField Delegate
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    [self hideDatePicker];
+    return YES;
+}
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
+    [self hideDatePicker];
+    return YES;
+}
+
 #pragma mark - response methods
-- (void)hideKeyboard {
+- (void)tapBackground {
+    [self freeKeyboard];
+    [self hideDatePicker];
+}
+
+- (void)freeKeyboard {
     [self.taskTitleTxtField resignFirstResponder];
     [self.taskDescriptionTxtView resignFirstResponder];
-    
+}
+
+- (void)hideDatePicker {
     if (self.dateSelectedPicker) {
         [UIView animateWithDuration:.3f
                               delay:0
@@ -178,6 +196,8 @@
 }
 
 - (IBAction)dateBtnOnClicked:(UIButton *)sender {
+    [self freeKeyboard];
+    
     if (self.dateSelectedPicker.hidden == YES) {
         self.dateSelectedPicker.hidden = NO;
         [UIView animateWithDuration:.3f
@@ -195,6 +215,8 @@
 }
 
 - (IBAction)chooseContactorBtnOnClicked:(UIButton *)sender {
+    [self tapBackground];
+    
     if (sender.tag == 1003) {
         __weak typeof(&*self)  weakSelf = self;
         RCDSelectPersonViewController* selectPersonVC = [[RCDSelectPersonViewController alloc] init];

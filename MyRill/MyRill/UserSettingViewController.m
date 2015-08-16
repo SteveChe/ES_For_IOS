@@ -22,9 +22,9 @@
     self.title = @"信息修改";
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.tabBarController.tabBar.hidden = YES;
 }
 
 - (IBAction)changePwdBtnOnClicked:(UIButton *)sender {
