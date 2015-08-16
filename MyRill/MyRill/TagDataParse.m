@@ -310,11 +310,30 @@
                  {
                      break;
                  }
-                 
-                 
-                 if (self.delegate!= nil && [self.delegate respondsToSelector:@selector(setTagSucceed)]){
-                     [self.delegate setTagSucceed];
+                 NSArray* listArray = [responseData valueForKey:NETWORK_DATA_LIST];
+                 if (listArray == nil || [listArray isEqual:[NSNull null]]
+                     || [listArray count] <= 0)
+                 {
+                     break;
                  }
+                 NSMutableArray* taskTagArray = [NSMutableArray array];
+                 for (NSDictionary* temDic in listArray)
+                 {
+                     if (temDic == nil || [temDic isEqual:[NSNull null]])
+                     {
+                         break;
+                     }
+                     ESTag* taskTag = [self parseTagJson:temDic];
+                     
+                     [taskTagArray addObject:taskTag];
+                 }
+                 
+                 if (taskTagArray != nil && ![taskTagArray isEqual:[NSNull null]] && [taskTagArray count]>0){
+                     if (self.delegate!= nil && [self.delegate respondsToSelector:@selector(setTagSucceed:)]){
+                         [self.delegate setTagSucceed:taskTagArray];
+                     }
+                 }
+             
 
              }
                  break;
@@ -368,10 +387,28 @@
                  {
                      break;
                  }
+                 NSArray* listArray = [responseData valueForKey:NETWORK_DATA_LIST];
+                 if (listArray == nil || [listArray isEqual:[NSNull null]]
+                     || [listArray count] <= 0)
+                 {
+                     break;
+                 }
+                 NSMutableArray* taskTagArray = [NSMutableArray array];
+                 for (NSDictionary* temDic in listArray)
+                 {
+                     if (temDic == nil || [temDic isEqual:[NSNull null]])
+                     {
+                         break;
+                     }
+                     ESTag* taskTag = [self parseTagJson:temDic];
+                     
+                     [taskTagArray addObject:taskTag];
+                 }
                  
-                 
-                 if (self.delegate!= nil && [self.delegate respondsToSelector:@selector(setTagSucceed)]){
-                     [self.delegate setTagSucceed];
+                 if (taskTagArray != nil && ![taskTagArray isEqual:[NSNull null]] && [taskTagArray count]>0){
+                     if (self.delegate!= nil && [self.delegate respondsToSelector:@selector(setTagSucceed:)]){
+                         [self.delegate setTagSucceed:taskTagArray];
+                     }
                  }
                  
              }
@@ -426,9 +463,28 @@
                      break;
                  }
                  
+                 NSArray* listArray = [responseData valueForKey:NETWORK_DATA_LIST];
+                 if (listArray == nil || [listArray isEqual:[NSNull null]]
+                     || [listArray count] <= 0)
+                 {
+                     break;
+                 }
+                 NSMutableArray* taskTagArray = [NSMutableArray array];
+                 for (NSDictionary* temDic in listArray)
+                 {
+                     if (temDic == nil || [temDic isEqual:[NSNull null]])
+                     {
+                         break;
+                     }
+                     ESTag* taskTag = [self parseTagJson:temDic];
+                     
+                     [taskTagArray addObject:taskTag];
+                 }
                  
-                 if (self.delegate!= nil && [self.delegate respondsToSelector:@selector(setTagSucceed)]){
-                     [self.delegate setTagSucceed];
+                 if (taskTagArray != nil && ![taskTagArray isEqual:[NSNull null]] && [taskTagArray count]>0){
+                     if (self.delegate!= nil && [self.delegate respondsToSelector:@selector(setTagSucceed:)]){
+                         [self.delegate setTagSucceed:taskTagArray];
+                     }
                  }
                  
              }
@@ -449,7 +505,7 @@
                  break;
          }
      }
-                                failure:^(NSError* err)
+    failure:^(NSError* err)
      {
          NSLog(@"%@",err);
          if (self.delegate!= nil &&[self.delegate respondsToSelector:@selector(setTagFailed:)])
