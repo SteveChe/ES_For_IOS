@@ -15,9 +15,11 @@
 #import "SWTableViewCell.h"
 #import "RemindDateViewController.h"
 #import "ESTask.h"
+#import "Masonry.h"
 
 @interface TaskListViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, TaskListDelegate, SWTableViewCellDelegate>
 
+@property (nonatomic, strong) UILabel *msgLbl;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *dataSource;
 @property (nonatomic, strong) GetTaskListDataParse *getTaskListDP;
@@ -34,8 +36,6 @@
                                                                                  target:self
                                                                                  action:@selector(addTask)];
     self.navigationItem.rightBarButtonItem = addTaskItem;
-    
-    [self.view addSubview:self.tableView];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -47,9 +47,20 @@
 }
 
 - (void)getTaskListSuccess:(NSArray *)taskList {
-    self.dataSource = nil;
-    self.dataSource = [NSArray arrayWithArray:taskList];
-    [self.tableView reloadData];
+    if (taskList.count) {
+        self.dataSource = nil;
+        self.dataSource = [NSArray arrayWithArray:taskList];
+        [self.view addSubview:self.tableView];
+    } else {
+        [self.view addSubview:self.msgLbl];
+        
+        __weak UIView *ws = self.view;
+        [self.msgLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(ws.mas_centerX);
+            make.centerY.equalTo(ws.mas_centerY);
+        }];
+        [self.view layoutIfNeeded];
+    }
 }
 
 #pragma mark - UITableViewDataSource&UITableViewDelegate
@@ -118,6 +129,16 @@
 }
 
 #pragma mark - setters&getters
+- (UILabel *)msgLbl {
+    if (!_msgLbl) {
+        _msgLbl = [UILabel new];
+        _msgLbl.numberOfLines = 2;
+        _msgLbl.text = @"当前任务列表为空，可以通过点击右上角的加号创建新的任务~";
+    }
+    
+    return _msgLbl;
+}
+
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:self.view.bounds];

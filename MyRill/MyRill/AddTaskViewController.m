@@ -12,19 +12,28 @@
 #import "ESTask.h"
 #import "ESContactor.h"
 #import "Masonry.h"
+#import "TaskContactorCollectionViewCell.h"
+#import "ESUserInfo.h"
+#import "RCDSelectPersonViewController.h"
+#import "ChatViewController.h"
 
-@interface AddTaskViewController () <AddTaskDelegate>
+@interface AddTaskViewController () <AddTaskDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate>
 
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *holdViews;
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *txtHoldViews;
 
-@property (weak, nonatomic) IBOutlet UITextField *TaskTitleTxtfield;
-@property (weak, nonatomic) IBOutlet UITextField *taskTitleLbl;
+@property (weak, nonatomic) IBOutlet UITextField *taskTitleTxtField;
 @property (weak, nonatomic) IBOutlet UITextView *taskDescriptionTxtView;
 @property (weak, nonatomic) IBOutlet UILabel *endDateLbl;
 @property (nonatomic, strong) UIDatePicker *dateSelectedPicker;
+@property (weak, nonatomic) IBOutlet UICollectionView *assignerCollectionView;
+@property (weak, nonatomic) IBOutlet UICollectionView *followsCollectionView;
 
+@property (nonatomic, strong) NSMutableArray *assignerDataSource;
+@property (nonatomic, strong) NSMutableArray *followsDataSource;
 @property (nonatomic, strong) AddTaskDataParse *addTaskDataDP;
+@property (nonatomic,strong) NSMutableArray* tastObserversList;//关注人列表,ESUserInfo
+@property (nonatomic,strong) NSMutableArray* tastRecipientsList;//负责人列表,ESUserInfo
 
 @end
 
@@ -60,6 +69,19 @@
     }];
     
     [self.view layoutIfNeeded];
+    
+    if (self.tastRecipientsList == nil) {
+        self.tastRecipientsList = [NSMutableArray array];
+    }
+    if (self.tastObserversList == nil) {
+        self.tastObserversList = [NSMutableArray array];
+    }
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"yyyy/MM/dd HH:mm";
+    NSDate *date = self.dateSelectedPicker.date;
+    date = [date dateByAddingTimeInterval:24 *3600];
+    self.endDateLbl.text = [dateFormatter stringFromDate:date];
 }
 
 #pragma mark - AddTaskDelegate method
@@ -67,17 +89,70 @@
     
 }
 
+#pragma mark - UICollectionViewDataSource&UICollectionViewDelegateFlowLayout
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    if (collectionView == self.assignerCollectionView) {
+        return self.assignerDataSource.count;
+    } else if (collectionView == self.followsCollectionView) {
+        return self.followsDataSource.count;
+    } else {
+        return 0;
+    }
+}
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return 1;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    TaskContactorCollectionViewCell *cell = (TaskContactorCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"TaskContactorCollectionViewCell" forIndexPath:indexPath];
+    
+    cell.contentView.backgroundColor = [UIColor whiteColor];
+    
+    ESContactor *contactor = nil;
+    
+    if (collectionView == self.assignerCollectionView) {
+        contactor = (ESContactor *)self.assignerDataSource[indexPath.row];
+        [cell updateCell:contactor];
+        return cell;
+    } else if (collectionView == self.followsCollectionView) {
+        contactor = (ESContactor *)self.followsDataSource[indexPath.row];
+        [cell updateCell:contactor];
+        return cell;
+    } else {
+        return nil;
+    }
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return CGSizeMake(54,54);
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 0;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+    return 0;
+}
+
+//设置Cell的边界
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    return UIEdgeInsetsMake(0,0,0,0);
+}
+
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
 #pragma mark - response methods
 - (void)hideKeyboard {
-    [self.TaskTitleTxtfield resignFirstResponder];
+    [self.taskTitleTxtField resignFirstResponder];
+    [self.taskDescriptionTxtView resignFirstResponder];
     
     if (self.dateSelectedPicker) {
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        dateFormatter.dateFormat = @"yyyy/MM/dd HH:mm";
-        
-        NSDate *date = self.dateSelectedPicker.date;
-        self.endDateLbl.text = [dateFormatter stringFromDate:date];
-        
         [UIView animateWithDuration:.3f
                               delay:0
                             options:UIViewAnimationOptionCurveEaseIn
@@ -92,6 +167,14 @@
                              self.dateSelectedPicker.hidden = YES;
                          }];
     }
+}
+
+- (void)dateChanged:(UIDatePicker *)sender {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"yyyy/MM/dd HH:mm";
+    
+    NSDate *date = self.dateSelectedPicker.date;
+    self.endDateLbl.text = [dateFormatter stringFromDate:date];
 }
 
 - (IBAction)dateBtnOnClicked:(UIButton *)sender {
@@ -111,38 +194,83 @@
     }
 }
 
+- (IBAction)chooseContactorBtnOnClicked:(UIButton *)sender {
+    if (sender.tag == 1003) {
+        __weak typeof(&*self)  weakSelf = self;
+        RCDSelectPersonViewController* selectPersonVC = [[RCDSelectPersonViewController alloc] init];
+        [selectPersonVC setSeletedUsers:self.tastRecipientsList];
+        //设置回调
+        selectPersonVC.clickDoneCompletion = ^(RCDSelectPersonViewController* selectPersonViewController, NSArray* selectedUsers) {
+            
+            if (selectedUsers && selectedUsers.count)
+            {
+                [self.tastRecipientsList removeAllObjects];
+                [self.tastRecipientsList addObjectsFromArray:selectedUsers];
+                weakSelf.assignerDataSource = nil;
+                for (ESUserInfo *user in self.tastRecipientsList) {
+                    ESContactor *contactor = [[ESContactor alloc] init];
+                    contactor.useID = [NSNumber numberWithInteger:[user.userId integerValue]];
+                    contactor.name = user.userName;
+                    contactor.imgURLstr = user.portraitUri;
+                    contactor.enterprise = user.enterprise;
+                    [weakSelf.assignerDataSource addObject:contactor];
+                }
+            }
+            
+            [weakSelf.navigationController popViewControllerAnimated:YES ];
+            [self.assignerCollectionView reloadData];
+        };
+        [self.navigationController pushViewController:selectPersonVC animated:YES];
+    }
+    else if (sender.tag == 1004){
+        RCDSelectPersonViewController* selectPersonVC = [[RCDSelectPersonViewController alloc] init];
+        [selectPersonVC setSeletedUsers:self.tastObserversList];
+        __weak typeof(&*self)  weakSelf = self;
+        
+        //设置回调
+        selectPersonVC.clickDoneCompletion = ^(RCDSelectPersonViewController* selectPersonViewController, NSArray* selectedUsers) {
+            
+            if (selectedUsers && selectedUsers.count)
+            {
+                [self.tastObserversList removeAllObjects];
+                [self.tastObserversList addObjectsFromArray:selectedUsers];
+                weakSelf.followsDataSource = nil;
+                for (ESUserInfo *user in self.tastObserversList) {
+                    ESContactor *contactor = [[ESContactor alloc] init];
+                    contactor.useID = [NSNumber numberWithInteger:[user.userId integerValue]];
+                    contactor.name = user.userName;
+                    contactor.imgURLstr = user.portraitUri;
+                    contactor.enterprise = user.enterprise;
+                    [weakSelf.followsDataSource addObject:contactor];
+                }
+            }
+            [weakSelf.navigationController popViewControllerAnimated:YES ];
+            [self.followsCollectionView reloadData];
+        };
+        [self.navigationController pushViewController:selectPersonVC animated:YES];
+    }
+}
+
 - (void)confirmItemOnClicked {
-    
     ESTask *task = [[ESTask alloc] init];
-    task.title = self.taskTitleLbl.text;
-    task.taskDescription = self.TaskTitleTxtfield.text;
-    task.endDate = @"2015-08-12 04:00:00";
+    task.title = self.taskTitleTxtField.text;
+    task.taskDescription = self.taskDescriptionTxtView.text;
     
-    ESContactor *personInCharge = [[ESContactor alloc] init];
-    personInCharge.useID = [NSNumber numberWithInteger:[@"3" integerValue]];
-    personInCharge.name = @"13555762177";
-    personInCharge.enterprise = @"锐捷网络";
-    personInCharge.imgURLstr = @"http://120.25.249.144/media/avatar_img/01/20150808101546.png";
-    task.personInCharge = personInCharge;
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    NSDate *date = self.dateSelectedPicker.date;
+    task.endDate = [dateFormatter stringFromDate:date];
     
-    ESContactor *observe = [[ESContactor alloc] init];
-    observe.useID = [NSNumber numberWithInteger:[@"3" integerValue]];
-    observe.name = @"13555762177";
-    observe.enterprise = @"锐捷网络";
-    observe.imgURLstr = @"http://120.25.249.144/media/avatar_img/01/20150808101546.png";
-    task.personInCharge = observe;
+    if ([self.chatID isKindOfClass:[NSNull class]] || [self.chatID isEqualToString:@""]) {
+        task.chatID = @"";
+    } else {
+        task.chatID = self.chatID;
+    }
     
-    ESContactor *observe1 = [[ESContactor alloc] init];
-    observe1.useID = [NSNumber numberWithInteger:[@"5" integerValue]];
-    observe1.name = @"18511893717";
-    observe1.enterprise = @"";
-    observe1.imgURLstr = @"http://120.25.249.144/media/avatar_img/XJ/20150803223129.png";
-    task.personInCharge = observe1;
-    
-    task.observers = [NSArray arrayWithObjects:observe,observe1,nil];
+    task.personInCharge = [self.assignerDataSource firstObject];
+    task.observers = [NSArray arrayWithArray:self.followsDataSource];
     
     [self.addTaskDataDP addTaskWithModel:task];
-    
     [self cancelItemOnClicked];
 }
 
@@ -171,6 +299,32 @@
     }
 }
 
+- (void)setAssignerCollectionView:(UICollectionView *)assignerCollectionView {
+    _assignerCollectionView = assignerCollectionView;
+    
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    layout.minimumInteritemSpacing = 0;
+    [layout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
+    _assignerCollectionView.collectionViewLayout = layout;
+    
+    UINib *professionCell = [UINib nibWithNibName:@"TaskContactorCollectionViewCell" bundle:nil];
+    [_assignerCollectionView registerNib:professionCell forCellWithReuseIdentifier:@"TaskContactorCollectionViewCell"];
+    _assignerCollectionView.bounces = NO;
+}
+
+- (void)setFollowsCollectionView:(UICollectionView *)followsCollectionView {
+    _followsCollectionView = followsCollectionView;
+    
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    layout.minimumInteritemSpacing = 0;
+    [layout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
+    _followsCollectionView.collectionViewLayout = layout;
+    
+    UINib *professionCell = [UINib nibWithNibName:@"TaskContactorCollectionViewCell" bundle:nil];
+    [_followsCollectionView registerNib:professionCell forCellWithReuseIdentifier:@"TaskContactorCollectionViewCell"];
+    _followsCollectionView.bounces = NO;
+}
+
 - (UIDatePicker *)dateSelectedPicker {
     if (!_dateSelectedPicker) {
         _dateSelectedPicker = [UIDatePicker new];
@@ -182,6 +336,9 @@
                                                                      sinceDate:dateNow];
         _dateSelectedPicker.backgroundColor = [UIColor grayColor];
         _dateSelectedPicker.hidden = YES;
+        [_dateSelectedPicker addTarget:self
+                                action:@selector(dateChanged:)
+                      forControlEvents:UIControlEventValueChanged ];
     }
     
     return _dateSelectedPicker;
@@ -194,6 +351,20 @@
     }
     
     return _addTaskDataDP;
+}
+
+- (NSMutableArray *)assignerDataSource {
+    if (!_assignerDataSource) {
+        _assignerDataSource = [[NSMutableArray alloc] init];
+    }
+    return _assignerDataSource;
+}
+
+- (NSMutableArray *)followsDataSource {
+    if (!_followsDataSource) {
+        _followsDataSource = [[NSMutableArray alloc] init];
+    }
+    return _followsDataSource;
 }
 
 @end

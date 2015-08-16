@@ -10,4 +10,7 @@
 
 @interface AddTaskViewController : UIViewController
 
+//如果是从对话模块创建的任务需要设置此属性
+@property (nonatomic, copy) NSString *chatID;
+
 @end

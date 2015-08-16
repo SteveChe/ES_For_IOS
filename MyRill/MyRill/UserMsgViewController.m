@@ -21,6 +21,8 @@
 #import "ShowQRCodeViewController.h"
 #import "UIImageView+WebCache.h"
 #import "UserInfoDataSource.h"
+#import "UserNameAndPositionViewController.h"
+#import "ESNavigationController.h"
 
 @interface UserMsgViewController () <LogoutDataDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ContactDetailDataDelegate, ChangeUserImageDataDelegate>
 
@@ -166,15 +168,51 @@
     UserSettingViewController *settingVC = [[UserSettingViewController alloc] init];
     [self.navigationController pushViewController:settingVC animated:YES];
 }
-- (IBAction)enterprQRcodeBtnOnClicked:(UIButton *)sender {
-    self.qrCodeType = @"企业";
-    [self.getContactDetailDP getContactDetail:self.userId];
+
+- (IBAction)buttonsOnClicked:(UIButton *)sender {
+    switch (sender.tag) {
+        case 902:
+            {
+                UserNameAndPositionViewController *nameAndPositionVC = [[UserNameAndPositionViewController alloc] init];
+                nameAndPositionVC.title = @"用户名修改";
+                nameAndPositionVC.nameAndPositionStr = self.UserNameLbl.text;
+                nameAndPositionVC.userID = self.userId;
+                nameAndPositionVC.type = ESUserMsgName;
+                ESNavigationController *nav = [[ESNavigationController alloc] initWithRootViewController:nameAndPositionVC];
+                [self.navigationController presentViewController:nav
+                                                        animated:YES
+                                                      completion:nil];
+            }
+            break;
+            
+        case 903:
+            {
+                UserNameAndPositionViewController *nameAndPositionVC = [[UserNameAndPositionViewController alloc] init];
+                nameAndPositionVC.title = @"职位修改";
+                nameAndPositionVC.nameAndPositionStr = self.UserPositionLbl.text;
+                nameAndPositionVC.userID = self.userId;
+                nameAndPositionVC.type = ESUserMsgPosition;
+                ESNavigationController *nav = [[ESNavigationController alloc] initWithRootViewController:nameAndPositionVC];
+                [self.navigationController presentViewController:nav
+                                                        animated:YES
+                                                      completion:nil];
+            }
+            break;
+        case 904:
+            self.qrCodeType = @"企业";
+            [self.getContactDetailDP getContactDetail:self.userId];
+            break;
+        case 905:
+            self.qrCodeType = @"个人";
+            [self.getContactDetailDP getContactDetail:self.userId];
+            break;
+            
+        default:
+            break;
+    }
+    
 }
 
-- (IBAction)personQRcodeBtnOnClicked:(UIButton *)sender {
-    self.qrCodeType = @"个人";
-    [self.getContactDetailDP getContactDetail:self.userId];
-}
 
 - (IBAction)userImg:(UIButton *)sender {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil

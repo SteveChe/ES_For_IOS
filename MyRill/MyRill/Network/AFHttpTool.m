@@ -407,7 +407,7 @@
     }
 
     NSDictionary *param = @{@"title":task.title,
-                            @"description":task.description,
+                            @"description":task.taskDescription,
                             @"due_date":task.endDate,
                             @"person_in_charge":task.personInCharge.useID,
                             @"observers":observerArray,};
@@ -443,7 +443,6 @@
                     param = @{@"status":identify};
                 }
             }
-            
             break;
         case ESTaskOverdue:
             param = @{@"overdue":@"1",@"person_in_charge_id":identify,@"status":@"0"};
@@ -512,6 +511,39 @@
                            params:param
                           success:success
                           failure:failure];
+}
+
++ (void)changeUserMsgWithUserID:(NSString *)userID
+                           type:(ESUserMsgType)type
+                        content:(NSString *)content
+                        success:(void (^)(id response))success
+                        failure:(void (^)(NSError *err))failure {
+    NSDictionary *param = nil;
+    switch (type) {
+        case ESUserMsgName:
+            param = @{@"name":content};
+            [AFHttpTool requestWithMethod:RequestMethodTypePost
+                                      url:[NSString stringWithFormat:@"/api/accounts/users/%@/.json",userID]
+                                   params:param
+                                  success:success
+                                  failure:failure];
+            break;
+        case ESUserMsgPosition:
+            param = @{@"position":content};
+            [AFHttpTool requestWithMethod:RequestMethodTypeGet
+                                      url:[NSString stringWithFormat:@"/api/accounts/users/%@/.json",userID]
+                                   params:param
+                                  success:success
+                                  failure:failure];
+            break;
+        case ESUserMSgDescription:
+            param = @{@"description":content};
+            break;
+        default:
+            break;
+    }
+    
+    
 }
 
 + (void)changeUserImageWithId:(NSString *)userId
