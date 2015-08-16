@@ -287,4 +287,177 @@
     userTag.tagItemList = userTagItemArray;
     return userTag;
 }
+
+//设置人的标签
+-(void) setUserTag:(NSString*)userId TagId:(NSString*)tagId tagItemId:(NSString*)tagItemId;
+{
+    [AFHttpTool setUserTagByUserId:userId TagId:tagId TagItemId:tagItemId success:^(id response)
+     {
+         NSDictionary* reponseDic = (NSDictionary*)response;
+         NSNumber* errorCodeNum = [reponseDic valueForKey:NETWORK_ERROR_CODE];
+         if (errorCodeNum == nil || [errorCodeNum isEqual:[NSNull null]] )
+         {
+             return ;
+         }
+         
+         int errorCode = [errorCodeNum intValue];
+         switch (errorCode)
+         {
+             case 0:
+             {
+                 NSDictionary* responseData = [reponseDic valueForKey:NETWORK_OK_DATA];
+                 if (responseData == nil || [responseData isEqual:[NSNull null]])
+                 {
+                     break;
+                 }
+                 
+                 
+                 if (self.delegate!= nil && [self.delegate respondsToSelector:@selector(setTagSucceed)]){
+                     [self.delegate setTagSucceed];
+                 }
+
+             }
+                 break;
+             default:
+             {
+                 NSString* errorMessage = [reponseDic valueForKey:NETWORK_ERROR_MESSAGE];
+                 if(errorMessage==nil)
+                     return;
+                 
+                 errorMessage= [errorMessage stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+                 NSLog(@"%@",errorMessage);
+                 if (self.delegate!= nil &&[self.delegate respondsToSelector:@selector(setTagFailed:)])
+                 {
+                     [self.delegate setTagFailed:errorMessage];
+                 }
+             }
+                 break;
+         }
+     }
+    failure:^(NSError* err)
+     {
+         NSLog(@"%@",err);
+         if (self.delegate!= nil &&[self.delegate respondsToSelector:@selector(setTagFailed:)])
+         {
+             [self.delegate setTagFailed:@"标签设定失败"];
+         }
+         
+     }];
+
+}
+
+//设置企业的标签
+-(void) setEnterpriseTag:(NSString*)enterpriseId TagId:(NSString*)tagId tagItemId:(NSString*)tagItemId
+{
+    [AFHttpTool setEnterpriseTagByEnterpriseId:enterpriseId TagId:tagId TagItemId:tagItemId success:^(id response)
+     {
+         NSDictionary* reponseDic = (NSDictionary*)response;
+         NSNumber* errorCodeNum = [reponseDic valueForKey:NETWORK_ERROR_CODE];
+         if (errorCodeNum == nil || [errorCodeNum isEqual:[NSNull null]] )
+         {
+             return ;
+         }
+         
+         int errorCode = [errorCodeNum intValue];
+         switch (errorCode)
+         {
+             case 0:
+             {
+                 NSDictionary* responseData = [reponseDic valueForKey:NETWORK_OK_DATA];
+                 if (responseData == nil || [responseData isEqual:[NSNull null]])
+                 {
+                     break;
+                 }
+                 
+                 
+                 if (self.delegate!= nil && [self.delegate respondsToSelector:@selector(setTagSucceed)]){
+                     [self.delegate setTagSucceed];
+                 }
+                 
+             }
+                 break;
+             default:
+             {
+                 NSString* errorMessage = [reponseDic valueForKey:NETWORK_ERROR_MESSAGE];
+                 if(errorMessage==nil)
+                     return;
+                 
+                 errorMessage= [errorMessage stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+                 NSLog(@"%@",errorMessage);
+                 if (self.delegate!= nil &&[self.delegate respondsToSelector:@selector(setTagFailed:)])
+                 {
+                     [self.delegate setTagFailed:errorMessage];
+                 }
+             }
+                 break;
+         }
+     }
+    failure:^(NSError* err)
+     {
+         NSLog(@"%@",err);
+         if (self.delegate!= nil &&[self.delegate respondsToSelector:@selector(setTagFailed:)])
+         {
+             [self.delegate setTagFailed:@"标签设定失败"];
+         }
+         
+     }];
+}
+
+//设置任务的标签
+-(void) setTaskTag:(NSString*)taskId TagId:(NSString*)tagId tagItemId:(NSString*)tagItemId
+{
+    [AFHttpTool setTaskTagByTaskId:taskId TagId:tagId TagItemId:tagItemId success:^(id response)
+     {
+         NSDictionary* reponseDic = (NSDictionary*)response;
+         NSNumber* errorCodeNum = [reponseDic valueForKey:NETWORK_ERROR_CODE];
+         if (errorCodeNum == nil || [errorCodeNum isEqual:[NSNull null]] )
+         {
+             return ;
+         }
+         
+         int errorCode = [errorCodeNum intValue];
+         switch (errorCode)
+         {
+             case 0:
+             {
+                 NSDictionary* responseData = [reponseDic valueForKey:NETWORK_OK_DATA];
+                 if (responseData == nil || [responseData isEqual:[NSNull null]])
+                 {
+                     break;
+                 }
+                 
+                 
+                 if (self.delegate!= nil && [self.delegate respondsToSelector:@selector(setTagSucceed)]){
+                     [self.delegate setTagSucceed];
+                 }
+                 
+             }
+                 break;
+             default:
+             {
+                 NSString* errorMessage = [reponseDic valueForKey:NETWORK_ERROR_MESSAGE];
+                 if(errorMessage==nil)
+                     return;
+                 
+                 errorMessage= [errorMessage stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+                 NSLog(@"%@",errorMessage);
+                 if (self.delegate!= nil &&[self.delegate respondsToSelector:@selector(setTagFailed:)])
+                 {
+                     [self.delegate setTagFailed:errorMessage];
+                 }
+             }
+                 break;
+         }
+     }
+                                failure:^(NSError* err)
+     {
+         NSLog(@"%@",err);
+         if (self.delegate!= nil &&[self.delegate respondsToSelector:@selector(setTagFailed:)])
+         {
+             [self.delegate setTagFailed:@"标签设定失败"];
+         }
+         
+     }];
+}
+
 @end

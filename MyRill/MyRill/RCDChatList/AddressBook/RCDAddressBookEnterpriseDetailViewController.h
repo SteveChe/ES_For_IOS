@@ -10,7 +10,7 @@
 #import "ESViewController.h"
 #import "GetEnterpriseDetailDataParse.h"
 
-@interface RCDAddressBookEnterpriseDetailViewController : UIViewController<EnterpriseDetailInfoDataDelegate>
+@interface RCDAddressBookEnterpriseDetailViewController : ESViewController<EnterpriseDetailInfoDataDelegate>
 
 @property (nonatomic,strong) NSString* enterpriseId;
 @end

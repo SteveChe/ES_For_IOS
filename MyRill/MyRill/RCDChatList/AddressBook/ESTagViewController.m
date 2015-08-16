@@ -32,7 +32,7 @@ enum
 @property(nonatomic,strong) TagDataParse* tagDataParse;
 @property(nonatomic,assign) NSInteger selectedTableViewSection;
 @property(nonatomic,strong) UIToolbar *pickerTagToolbar;
-@property(nonatomic,strong) UIView* myPickView;
+//@property(nonatomic,strong) UIView* myPickView;
 @end
 
 @implementation ESTagViewController
@@ -46,9 +46,10 @@ enum
     _tagListArray = [[NSMutableArray alloc] init];
     [self initTagInfo];
     
-    if (_myPickView == nil)
+//    if (_myPickView == nil)
     {
-        _myPickView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 300)];
+//        _myPickView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 300)];
+        
         //创建picker
         if (_pickerView == nil)
         {
@@ -57,34 +58,35 @@ enum
             _pickerView.showsSelectionIndicator = true;
             _pickerView.delegate = self;
             _pickerView.dataSource = self;
+            _pickerView.backgroundColor = [UIColor grayColor];
+            _pickerView.hidden = YES;
+            _pickerView.tintColor = [UIColor whiteColor];
+            _pickerView.layer.borderColor = [UIColor whiteColor].CGColor;
+            
             [self.view addSubview:_pickerView];
+
         }
         if (_pickerTagToolbar == nil)
         {
-            _pickerTagToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
-            _pickerTagToolbar.barStyle = UIBarStyleBlackOpaque;
+            _pickerTagToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, PICKER_VIEW_Y-44, IPHONE_SCREEN_WIDTH, 44)];
+            _pickerTagToolbar.barStyle = UIBarStyleDefault;
             [_pickerTagToolbar sizeToFit];
             
             NSMutableArray *barItems = [[NSMutableArray alloc] init];
-            
-            //
-            UIBarButtonItem *cancelBtn = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleBordered target:self action:@selector(toolBarCanelClick)];
+            UIBarButtonItem *cancelBtn = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleBordered target:self action:@selector(toolBarCancelClick)];
             [barItems addObject:cancelBtn];
             
-            //
             UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
             [barItems addObject:flexSpace];
             
-            //
             UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(toolBarDoneClick)];
             [barItems addObject:doneBtn];
             
             [_pickerTagToolbar setItems:barItems animated:YES];
-            [_myPickView addSubview:_pickerTagToolbar];
-            //        [_actionSheet setBounds:CGRectMake(0,0,320, 100)];
+            _pickerTagToolbar.hidden = YES;
+            [self.view addSubview:_pickerTagToolbar];
             
         }
-        [self.tableView addSubview:_pickerView];
     }
 
     
@@ -100,9 +102,6 @@ enum
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-
-
-    
 }
 -(void)initTagInfo
 {
@@ -137,20 +136,16 @@ enum
     }
 }
 
-#pragma mark -
 #pragma mark UIPickerViewDelegate
-
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     [self.tableView reloadData];
 }
 
-#pragma mark -
 #pragma mark UIPickerViewDataSource
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    
     NSString *returnStr = @"";
     if ([_tagListArray count]<= 0)
     {
@@ -217,6 +212,25 @@ enum
 }
 
 
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
+    UILabel* pickerLabel = (UILabel*)view;
+    if (!pickerLabel){
+        pickerLabel = [[UILabel alloc] init];
+        // Setup label properties - frame, font, colors etc
+        //adjustsFontSizeToFitWidth property to YES
+        //        pickerLabel.minimumFontSize = 8.;
+        pickerLabel.adjustsFontSizeToFitWidth = YES;
+        [pickerLabel setTextAlignment:NSTextAlignmentCenter];
+        [pickerLabel setBackgroundColor:[UIColor clearColor]];
+        pickerLabel.textColor = [UIColor whiteColor];
+        [pickerLabel setFont:[UIFont boldSystemFontOfSize:25]];
+    }
+    // Fill the label text here
+    pickerLabel.text=[self pickerView:pickerView titleForRow:row forComponent:component];
+    return pickerLabel;
+}
+
+
 #pragma mark - Table view data source
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -257,10 +271,12 @@ enum
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:MyIdentifier];
     }
+    
     if (indexPath.section > [_tagListArray count])
     {
         return nil;
     }
+    
     ESTag* tag = [_tagListArray objectAtIndex:indexPath.section];
     if (tag == nil)
     {
@@ -300,6 +316,11 @@ enum
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [self.view bringSubviewToFront:_pickerView];
+    [self.view bringSubviewToFront:_pickerTagToolbar];
+    
+    _pickerView.hidden = NO;
+    _pickerTagToolbar.hidden = NO;
     _selectedTableViewSection = indexPath.section;
     [_pickerView reloadAllComponents];
 }
@@ -323,5 +344,71 @@ enum
     [[CustomShowMessage getInstance] showNotificationMessage:errorMessage];
 }
 
+- (void)setTagSucceed
+{
+    _pickerTagToolbar.hidden = YES;
+    _pickerView.hidden = YES;
+    [[CustomShowMessage getInstance] hideWaitingIndicator];
 
+    [[CustomShowMessage getInstance] showNotificationMessage:@"标签设定成功!"];
+}
+- (void)setTagFailed:(NSString*)errorMessage
+{
+    [[CustomShowMessage getInstance] hideWaitingIndicator];
+    [[CustomShowMessage getInstance] showNotificationMessage:errorMessage];
+}
+
+#pragma mark - button event
+-(void) toolBarCancelClick
+{
+    _pickerTagToolbar.hidden = YES;
+    _pickerView.hidden = YES;
+}
+
+-(void)toolBarDoneClick
+{
+    ESTag *tag = [_tagListArray objectAtIndex:_selectedTableViewSection];
+    if (tag == nil || tag.tagItemList == nil )
+    {
+        return;
+    }
+
+    NSInteger nSelectedIndex = [_pickerView selectedRowInComponent:TAG_PICKER_INDEX_FIRST];
+//    [_pickerView selectedRowInComponent:TAG_PICKER_INDEX_FIRST];
+    if (nSelectedIndex >= [tag.tagItemList count])
+    {
+        return;
+    }
+    ESTagItem* tagItem = [tag.tagItemList objectAtIndex:nSelectedIndex];
+    if (tagItem == nil)
+    {
+        return;
+    }
+    
+    
+    switch (_tagType) {
+        case TAG_TYPE_USER:
+        {
+            [_tagDataParse setUserTag:_userId TagId:tag.tagId tagItemId:tagItem.tagItemId];
+            [[CustomShowMessage getInstance] showWaitingIndicator:REQ_WAITING_INDICATOR];
+        }
+            break;
+        case TAG_TYPE_ENTERPRISE:
+        {
+            [_tagDataParse setEnterpriseTag:_enterpriseId TagId:tag.tagId tagItemId:tagItem.tagItemId];
+            [[CustomShowMessage getInstance] showWaitingIndicator:REQ_WAITING_INDICATOR];
+
+        }
+            break;
+            
+        case TAG_TYPE_ASSIGNMENT:
+        {
+            [_tagDataParse setTaskTag:_taskId TagId:tag.tagId tagItemId:tagItem.tagItemId];
+            [[CustomShowMessage getInstance] showWaitingIndicator:REQ_WAITING_INDICATOR];
+        }
+            break;
+        default:
+            break;
+    }
+}
 @end
