@@ -99,6 +99,9 @@
 
 - (void)addTask {
     AddTaskViewController *addTaskVC = [[AddTaskViewController alloc] init];
+    if (self.type == ESTaskListWithChatId) {
+        addTaskVC.chatID = self.identity;
+    }
     addTaskVC.modalPresentationStyle = UIModalPresentationCurrentContext;
     ESNavigationController *nav = [[ESNavigationController alloc] initWithRootViewController:addTaskVC];
     [self.navigationController presentViewController:nav animated:YES completion:nil];

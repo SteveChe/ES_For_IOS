@@ -47,7 +47,7 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X3I-ul-aBZ" userLabel="TxtField Hold View">
                                     <rect key="frame" x="96" y="6" width="485.5" height="39"/>
                                     <subviews>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入任务名称" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QZF-t4-TDo">
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QZF-t4-TDo">
                                             <rect key="frame" x="8" y="0.0" width="477.5" height="39"/>
                                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
@@ -78,13 +78,7 @@
                                         <constraint firstAttribute="trailing" secondItem="fZi-SC-GJk" secondAttribute="trailing" id="kL9-S3-UCd"/>
                                         <constraint firstItem="fZi-SC-GJk" firstAttribute="top" secondItem="v3Y-c5-dLw" secondAttribute="top" id="kQt-Fr-W80"/>
                                         <constraint firstItem="fZi-SC-GJk" firstAttribute="leading" secondItem="v3Y-c5-dLw" secondAttribute="leading" constant="8" id="q4n-ha-zol"/>
-                                        <constraint firstAttribute="bottom" secondItem="fZi-SC-GJk" secondAttribute="bottom" constant="20" symbolic="YES" id="ssv-Wi-MRq"/>
                                     </constraints>
-                                    <variation key="default">
-                                        <mask key="constraints">
-                                            <exclude reference="ssv-Wi-MRq"/>
-                                        </mask>
-                                    </variation>
                                 </view>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

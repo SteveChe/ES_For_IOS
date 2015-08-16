@@ -12,31 +12,49 @@
 #import "ESTask.h"
 #import "EditTaskDataParse.h"
 #import "ESContactor.h"
-#import "MessageListViewController.h"
 #import "ESTagViewController.h"
 #import "CustomShowMessage.h"
 #import "ESUserInfo.h"
 #import "RCDSelectPersonViewController.h"
 #import "ChatViewController.h"
+#import "GetTaskCommentListDataParse.h"
+#import "SendTaskCommentDataParse.h"
 #import "TaskContactorCollectionViewCell.h"
+#import "MessageListSelfTableViewCell.h"
+#import "MessageListTableViewCell.h"
+#import "ESTaskComment.h"
 
-@interface TaskViewController () <EditTaskDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate>
+@interface TaskViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate, GetTaskCommentListDelegate, UITextFieldDelegate, SendTaskCommenDelegate, EditTaskDelegate>
 
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *holdViews;
+@property (strong, nonatomic) IBOutletCollection(UIView) NSArray *txtHoldViews;
 @property (weak, nonatomic) IBOutlet UIView *headerView;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerViewTopConstraint;
-@property (weak, nonatomic) IBOutlet UILabel *taskTitleLbl;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *sendViewBottomConstraint;
+@property (weak, nonatomic) IBOutlet UITextField *taskTitleTxtField;
+@property (weak, nonatomic) IBOutlet UITextView *taskDescriptioinTextView;
 @property (weak, nonatomic) IBOutlet UILabel *endDateLbl;
-@property (weak, nonatomic) IBOutlet UILabel *taskDescriptionLbl;
 @property (weak, nonatomic) IBOutlet UISwitch *taskStatusSwitch;
-@property (nonatomic, strong) MessageListViewController *messageListVC;
 @property (nonatomic, strong) EditTaskDataParse *editTaskDP;
-@property (nonatomic, strong) NSMutableArray *dataSource;
-@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (nonatomic, strong) NSMutableArray *assignerDataSource;
+@property (nonatomic, strong) NSMutableArray *followsDataSource;
+@property (weak, nonatomic) IBOutlet UICollectionView *assignerCollectionView;
+@property (weak, nonatomic) IBOutlet UICollectionView *followsCollectionView;
+@property (nonatomic, strong) UIDatePicker *dateSelectedPicker;
+
+@property (nonatomic, copy) NSString *userID;
+@property (nonatomic, strong) GetTaskCommentListDataParse *getTaskCommentListDP;
+@property (nonatomic, strong) SendTaskCommentDataParse *sendTaskCommentDP;
+
 @property (nonatomic,strong) NSMutableArray* tastObserversList;//关注人列表,ESUserInfo
 @property (nonatomic,strong) NSMutableArray* tastRecipientsList;//负责人列表,ESUserInfo
 @property (nonatomic, assign) BOOL isOpen;
+@property (nonatomic, strong) NSMutableArray *dataSource;
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIView *sendView;
+@property (weak, nonatomic) IBOutlet UITextField *sendTxtfield;
 
 @end
 
@@ -46,6 +64,18 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title = @"任务详情";
+    
+    //增加监听，当键盘出现或改变时收出消息
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    
+    //增加监听，当键退出时收出消息
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
     
     UIBarButtonItem *startConversationItem = [[UIBarButtonItem alloc] initWithTitle:@"会话"
                                                                               style:UIBarButtonItemStyleDone
@@ -57,19 +87,28 @@
                                                                 action:@selector(saveBarItemOnClicked)];
     self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:saveItem, startConversationItem, nil];
     self.isOpen = YES;
-
-    self.messageListVC.taskID = [self.taskModel.taskID stringValue];
-    [self addChildViewController:self.messageListVC];
-    [self.view addSubview:self.messageListVC.view];
     
-    __weak UIView *weakHeaderView = self.headerView;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+    [self.view addGestureRecognizer:tap];
+    
+    [self.view addSubview:self.dateSelectedPicker];
+    
     __weak UIView *ws = self.view;
-    [self.messageListVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakHeaderView.mas_bottom);
+    [self.dateSelectedPicker mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(ws.mas_leading);
         make.trailing.equalTo(ws.mas_trailing);
-        make.bottom.equalTo(ws.mas_bottom);
+        make.bottom.equalTo(ws.mas_bottom).with.offset(216);
+        make.height.equalTo(@216);
     }];
+    
+    [self.view layoutIfNeeded];
+    
+    if (self.tastRecipientsList == nil) {
+        self.tastRecipientsList = [NSMutableArray array];
+    }
+    if (self.tastObserversList == nil) {
+        self.tastObserversList = [NSMutableArray array];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -78,12 +117,11 @@
     NSString *startDateStr = [self.taskModel.startDate substringToIndex:10];
     self.startDateLbl.text = [@"发起时间：" stringByAppendingString:[startDateStr stringByReplacingOccurrencesOfString:@"-" withString:@"/"]];
     
-    self.taskTitleLbl.text = self.taskModel.title;
-    
-    NSString *endDateStr = [self.taskModel.endDate substringToIndex:10];
+    self.taskTitleTxtField.text = self.taskModel.title;
+    self.taskDescriptioinTextView.text = self.taskModel.taskDescription;
+    NSString *endDateStr = [self.taskModel.endDate substringToIndex:16];
     self.endDateLbl.text = [endDateStr stringByReplacingOccurrencesOfString:@"-" withString:@"/"];
     
-    self.taskDescriptionLbl.text = [@"任务说明：" stringByAppendingString:self.taskModel.taskDescription];
     if (self.taskModel.status.integerValue == 0) {
         //任务状态为新
         self.taskStatusSwitch.on = NO;
@@ -94,19 +132,18 @@
         
     }
     
-    if (self.dataSource == nil) {
-        for (ESContactor *contactor in self.taskModel.observers) {
-            [self.dataSource addObject:contactor];
-        }
-        [self.collectionView reloadData];
-    }
+    self.assignerDataSource = nil;
+    [self.assignerDataSource addObject:self.taskModel.personInCharge];
     
-    if (self.tastRecipientsList == nil) {
-        self.tastRecipientsList = [NSMutableArray array];
+    self.followsDataSource = nil;
+    for (ESContactor *contactor in self.taskModel.observers) {
+        [self.followsDataSource addObject:contactor];
     }
-    if (self.tastObserversList == nil) {
-        self.tastObserversList = [NSMutableArray array];
-    }
+
+    [self.assignerCollectionView reloadData];
+    [self.followsCollectionView reloadData];
+    
+    [self.getTaskCommentListDP getTaskCommentListWithTaskID:[self.taskModel.taskID stringValue] listSize:nil];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -116,7 +153,78 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
+- (void)getTaskCommentListSuccess:(NSArray *)taskCommentList {
+    self.dataSource = [NSMutableArray arrayWithArray:taskCommentList];
+    [self.tableView reloadData];
+}
+
+- (void)SendTaskCommentSuccess:(ESTaskComment *)taskComment {
+    
+    [self.dataSource addObject:taskComment];
+    [self.tableView reloadData];
+    //    [self.tableView scrollToRowAtIndexPath:nil atScrollPosition:nil animated:nil];
+    
+}
+
+#pragma mark - UITableViewDataSource&UITableViewDelegate methods
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 120;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.dataSource.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    ESTaskComment *taskComment = (ESTaskComment *)self.dataSource[indexPath.row];
+    
+    UITableViewCell *cell = nil;
+    if ([taskComment.user.useID.stringValue isEqualToString:self.userID]) {
+        MessageListSelfTableViewCell *selfCell = (MessageListSelfTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"MessageListSelfTableViewCell" forIndexPath:indexPath];
+        [selfCell updateMessage:self.dataSource[indexPath.row]];
+        cell = selfCell;
+    } else {
+        MessageListTableViewCell *normalCell = (MessageListTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"MessageListTableViewCell" forIndexPath:indexPath];
+        [normalCell updateMessage:self.dataSource[indexPath.row]];
+        cell = normalCell;
+    }
+    
+    return cell;
+}
+
+- (void)send {
+    [self.sendTaskCommentDP sendTaskCommentWithTaskID:[self.taskModel.taskID stringValue]
+                                              comment:self.sendTxtfield.text];
+    self.sendTxtfield.text = nil;
+}
+
 #pragma mark - response events methods
+- (void)hideKeyboard {
+    [self.taskTitleTxtField resignFirstResponder];
+    [self.taskDescriptioinTextView resignFirstResponder];
+    
+    if (self.dateSelectedPicker) {
+        [UIView animateWithDuration:.3f
+                              delay:0
+                            options:UIViewAnimationOptionCurveEaseIn
+                         animations:^{
+                             __weak UIView *ws = self.view;
+                             [self.dateSelectedPicker mas_updateConstraints:^(MASConstraintMaker *make) {
+                                 make.bottom.equalTo(ws.mas_bottom).with.offset(216);
+                             }];
+                             [self.view layoutIfNeeded];
+                         }
+                         completion:^(BOOL finished) {
+                             self.dateSelectedPicker.hidden = YES;
+                         }];
+    }
+}
+
 - (void)startConversationEvent {
     //发起会话功能
     if ([self.tastRecipientsList count] <=0 ) {
@@ -183,9 +291,19 @@
             {
                 [self.tastRecipientsList removeAllObjects];
                 [self.tastRecipientsList addObjectsFromArray:selectedUsers];
+                weakSelf.assignerDataSource = nil;
+                for (ESUserInfo *user in self.tastRecipientsList) {
+                    ESContactor *contactor = [[ESContactor alloc] init];
+                    contactor.useID = [NSNumber numberWithInteger:[user.userId integerValue]];
+                    contactor.name = user.userName;
+                    contactor.imgURLstr = user.portraitUri;
+                    contactor.enterprise = user.enterprise;
+                    [weakSelf.assignerDataSource addObject:contactor];
+                }
             }
             
             [weakSelf.navigationController popViewControllerAnimated:YES ];
+            [self.assignerCollectionView reloadData];
         };
         [self.navigationController pushViewController:selectPersonVC animated:YES];
     }
@@ -201,19 +319,19 @@
             {
                 [self.tastObserversList removeAllObjects];
                 [self.tastObserversList addObjectsFromArray:selectedUsers];
-                weakSelf.dataSource = nil;
+                weakSelf.followsDataSource = nil;
                 for (ESUserInfo *user in self.tastObserversList) {
                     ESContactor *contactor = [[ESContactor alloc] init];
                     contactor.useID = [NSNumber numberWithInteger:[user.userId integerValue]];
                     contactor.name = user.userName;
                     contactor.imgURLstr = user.portraitUri;
                     contactor.enterprise = user.enterprise;
-                    [weakSelf.dataSource addObject:contactor];
+                    [weakSelf.followsDataSource addObject:contactor];
                 }
                 
             }
             [weakSelf.navigationController popViewControllerAnimated:YES ];
-            [self.collectionView reloadData];
+            [self.followsCollectionView reloadData];
         };
         [self.navigationController pushViewController:selectPersonVC animated:YES];
     }
@@ -223,13 +341,21 @@
 - (void)saveBarItemOnClicked {
     ESTask *task = [[ESTask alloc] init];
     task.taskID = self.taskModel.taskID;
-    task.title = self.taskTitleLbl.text;
+    task.title = self.taskTitleTxtField.text;
     task.endDate = self.taskModel.endDate;
     task.chatID = self.taskModel.chatID;
-    task.taskDescription = self.taskModel.taskDescription;
-    task.status = [NSNumber numberWithInt:1];
-    task.personInCharge = self.taskModel.personInCharge;
-    task.observers = self.dataSource;
+    task.taskDescription = self.taskDescriptioinTextView.text;
+    
+    if (self.taskStatusSwitch.on == NO) {
+        task.status = [NSNumber numberWithInt:0];
+    } else if (self.taskStatusSwitch.on == YES) {
+        task.status = [NSNumber numberWithInt:1];
+    } else {
+        
+    }
+    
+    task.personInCharge = [self.assignerDataSource firstObject];
+    task.observers = [NSArray arrayWithArray:self.followsDataSource];
     
     [self.editTaskDP EditTaskWithTaskModel:task];
 }
@@ -251,7 +377,7 @@
                             options:UIViewAnimationOptionCurveLinear
                          animations:^{
                              self.headerViewTopConstraint.constant = 0;
-                             [self.messageListVC hideKeyboard];
+                             [self hideKeyboard];
                              [self.view layoutIfNeeded];
                          } completion:nil];
     }
@@ -281,9 +407,50 @@
     }
 }
 
+//当键盘出现或改变时调用
+- (void)keyboardWillShow:(NSNotification *)aNotification
+{
+    //获取键盘的高度
+    NSDictionary *userInfo = [aNotification userInfo];
+    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardRect = [aValue CGRectValue];
+    int height = keyboardRect.size.height;
+    
+    [UIView animateWithDuration:.1f
+                          delay:0
+                        options:UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         TaskViewController *taskVC = (TaskViewController *)self.parentViewController;
+                         [taskVC headViewAnotherBtnOnClicked:YES];
+                         self.sendViewBottomConstraint.constant = height;
+                         [self.view layoutIfNeeded];
+                     } completion:nil];
+}
+
+//当键退出时调用
+- (void)keyboardWillHide:(NSNotification *)aNotification {
+    [UIView animateWithDuration:.1f
+                          delay:0
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^{
+                         //                         TaskViewController *taskVC = (TaskViewController *)self.parentViewController;
+                         //                         [taskVC headViewAnotherBtnOnClicked:NO];
+                         self.sendViewBottomConstraint.constant = 0.f;
+                         [self.view layoutIfNeeded];
+                     } completion:^(BOOL finished) {
+                         
+                     }];
+}
+
 #pragma mark - UICollectionViewDataSource&UICollectionViewDelegateFlowLayout
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.dataSource.count;
+    if (collectionView == self.assignerCollectionView) {
+        return self.assignerDataSource.count;
+    } else if (collectionView == self.followsCollectionView) {
+        return self.followsDataSource.count;
+    } else {
+        return 0;
+    };
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -295,10 +462,19 @@
     
     cell.contentView.backgroundColor = [UIColor whiteColor];
     
-    ESContactor *contactor = (ESContactor *)self.dataSource[indexPath.row];
-    [cell updateCell:contactor];
+    ESContactor *contactor = nil;
     
-    return cell;
+    if (collectionView == self.assignerCollectionView) {
+        contactor = (ESContactor *)self.assignerDataSource[indexPath.row];
+        [cell updateCell:contactor];
+        return cell;
+    } else if (collectionView == self.followsCollectionView) {
+        contactor = (ESContactor *)self.followsDataSource[indexPath.row];
+        [cell updateCell:contactor];
+        return cell;
+    } else {
+        return nil;
+    }
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -324,6 +500,31 @@
     return YES;
 }
 
+- (void)dateChanged:(UIDatePicker *)sender {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"yyyy/MM/dd HH:mm";
+    
+    NSDate *date = self.dateSelectedPicker.date;
+    self.endDateLbl.text = [dateFormatter stringFromDate:date];
+}
+
+- (IBAction)dateBtnOnClicked:(UIButton *)sender {
+    if (self.dateSelectedPicker.hidden == YES) {
+        self.dateSelectedPicker.hidden = NO;
+        [UIView animateWithDuration:.3f
+                              delay:0
+                            options:UIViewAnimationOptionCurveEaseOut
+                         animations:^{
+                             __weak UIView *ws = self.view;
+                             [self.dateSelectedPicker mas_updateConstraints:^(MASConstraintMaker *make) {
+                                 make.bottom.equalTo(ws.mas_bottom);
+                             }];
+                             [self.view layoutIfNeeded];
+                         }
+                         completion:nil];
+    }
+}
+
 #pragma mark - setters&getters
 - (void)setHoldViews:(NSArray *)holdViews {
     _holdViews = holdViews;
@@ -334,26 +535,56 @@
     }
 }
 
-- (void)setCollectionView:(UICollectionView *)collectionView {
-    _collectionView = collectionView;
+- (void)setTxtHoldViews:(NSArray *)txtHoldViews {
+    _txtHoldViews = txtHoldViews;
+    
+    for (UIView *view in _txtHoldViews) {
+        view.layer.borderColor = [ColorHandler colorFromHexRGB:@"EEEEEE"].CGColor;
+        view.layer.borderWidth = .8f;
+        view.layer.cornerRadius = 5.f;
+    }
+}
+
+- (void)setAssignerCollectionView:(UICollectionView *)assignerCollectionView {
+    _assignerCollectionView = assignerCollectionView;
     
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.minimumInteritemSpacing = 0;
     [layout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
-    _collectionView.collectionViewLayout = layout;
+    _assignerCollectionView.collectionViewLayout = layout;
     
     UINib *professionCell = [UINib nibWithNibName:@"TaskContactorCollectionViewCell" bundle:nil];
-    [_collectionView registerNib:professionCell forCellWithReuseIdentifier:@"TaskContactorCollectionViewCell"];
-    _collectionView.bounces = NO;
-    _collectionView.delegate = self;
-    _collectionView.dataSource = self;
+    [_assignerCollectionView registerNib:professionCell forCellWithReuseIdentifier:@"TaskContactorCollectionViewCell"];
+    _assignerCollectionView.bounces = NO;
 }
 
-- (NSMutableArray *)dataSource {
-    if (!_dataSource) {
-        _dataSource = [[NSMutableArray alloc] init];
+- (void)setFollowsCollectionView:(UICollectionView *)followsCollectionView {
+    _followsCollectionView = followsCollectionView;
+    
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    layout.minimumInteritemSpacing = 0;
+    [layout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
+    _followsCollectionView.collectionViewLayout = layout;
+    
+    UINib *professionCell = [UINib nibWithNibName:@"TaskContactorCollectionViewCell" bundle:nil];
+    [_followsCollectionView registerNib:professionCell forCellWithReuseIdentifier:@"TaskContactorCollectionViewCell"];
+    _followsCollectionView.bounces = NO;
+}
+
+- (NSMutableArray *)assignerDataSource {
+    if (!_assignerDataSource) {
+        _assignerDataSource = [[NSMutableArray alloc] init];
     }
-    return _dataSource;
+    
+    return _assignerDataSource;
+}
+
+- (NSMutableArray *)followsDataSource {
+    if (!_followsDataSource) {
+        _followsDataSource = [[NSMutableArray alloc] init];
+    }
+    
+    return _followsDataSource;
 }
 
 - (EditTaskDataParse *)editTaskDP {
@@ -365,12 +596,49 @@
     return _editTaskDP;
 }
 
-- (MessageListViewController *)messageListVC {
-    if (!_messageListVC) {
-        _messageListVC = [[MessageListViewController alloc] init];
+- (UIDatePicker *)dateSelectedPicker {
+    if (!_dateSelectedPicker) {
+        _dateSelectedPicker = [UIDatePicker new];
+        _dateSelectedPicker.datePickerMode = UIDatePickerModeDateAndTime;
+        _dateSelectedPicker.minuteInterval = 10;
+        NSDate *dateNow = [NSDate date];
+        _dateSelectedPicker.minimumDate = dateNow;
+        _dateSelectedPicker.maximumDate = [[NSDate alloc] initWithTimeInterval:365 * 24 * 3600
+                                                                     sinceDate:dateNow];
+        _dateSelectedPicker.backgroundColor = [UIColor grayColor];
+        _dateSelectedPicker.hidden = YES;
+        [_dateSelectedPicker addTarget:self
+                                action:@selector(dateChanged:)
+                      forControlEvents:UIControlEventValueChanged ];
     }
     
-    return _messageListVC;
+    return _dateSelectedPicker;
+}
+
+#pragma mark - setters&getters
+- (NSMutableArray *)dataSource {
+    if (!_dataSource) {
+        _dataSource = [[NSMutableArray alloc] init];
+    }
+    
+    return _dataSource;
+}
+
+- (GetTaskCommentListDataParse *)getTaskCommentListDP {
+    if (!_getTaskCommentListDP) {
+        _getTaskCommentListDP = [[GetTaskCommentListDataParse alloc ] init];
+        _getTaskCommentListDP.delegate = self;
+    }
+    return _getTaskCommentListDP;
+}
+
+- (SendTaskCommentDataParse *)sendTaskCommentDP {
+    if (!_sendTaskCommentDP) {
+        _sendTaskCommentDP = [[SendTaskCommentDataParse alloc] init];
+        _sendTaskCommentDP.delegate = self;
+    }
+    
+    return _sendTaskCommentDP;
 }
 
 @end
