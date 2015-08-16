@@ -14,11 +14,15 @@
 #import "CustomShowMessage.h"
 #import "UIImageView+WebCache.h"
 #import "EnterpriseChatViewController.h"
+#import "FollowEnterpriseDataParse.h"
+#import "CustomShowMessage.h"
 
-@interface RCDAddressBookEnterpriseDetailViewController ()
+
+@interface RCDAddressBookEnterpriseDetailViewController ()<FollowEnterpriseDelegate,UnFollowEnterpriseDelegate>
 
 @property(nonatomic,strong)GetEnterpriseDetailDataParse* getEnterpriseDetailDataParse;
 @property (nonatomic,strong) ESEnterpriseDetailInfo* enterpriseDetailInfo;
+@property (nonatomic,strong) FollowEnterpriseDataParse* followEnterpriseDataParse;
 
 @property (nonatomic,strong) IBOutlet UITableView* tableView;
 @property (nonatomic,strong) IBOutlet UIImageView* portraitImageView;
@@ -39,10 +43,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.title = @"企业详情";
+    
     _getEnterpriseDetailDataParse = [[GetEnterpriseDetailDataParse alloc] init];
     _getEnterpriseDetailDataParse.delegate = self;
     
+    _followEnterpriseDataParse = [[FollowEnterpriseDataParse alloc] init];
+    _followEnterpriseDataParse.followEnterPriseDelegate = self;
+    _followEnterpriseDataParse.unfollowEnterPriseDelegate = self;
+    
     [self initEnterpriseDetail];
+    
     UINib *rcdCellNib = [UINib nibWithNibName:@"RCDAddressBookDetailTableViewCell" bundle:nil];
     [self.tableView registerNib:rcdCellNib forCellReuseIdentifier:@"RCDAddressBookDetailTableViewCell"];
 
@@ -65,7 +76,9 @@
     if (_enterpriseId != nil && _enterpriseId != nil && [_enterpriseId length] > 0)
     {
         [_getEnterpriseDetailDataParse getEnterpriseDetailInfo:_enterpriseId];
+        [[CustomShowMessage getInstance] showWaitingIndicator:REQ_WAITING_INDICATOR];
     }
+    self.tableView.hidden = YES;
 }
 
 
@@ -77,13 +90,26 @@
     }
     if (_enterpriseDetailInfo.bFollowed )
     {
-        
+        _smsButton.titleLabel.text = @"进入企业号";
+        _deleteButton.hidden = NO;
+        [_smsButton removeTarget:self action:@selector(clickStartChatButton:)  forControlEvents:UIControlEventTouchUpInside];
+        [_smsButton addTarget:self action:@selector(followEnterpriseButton:) forControlEvents:UIControlEventTouchUpInside];
+
+    }
+    else
+    {
+        _smsButton.titleLabel.text = @"关注企业";
+        _deleteButton.hidden = YES;
+        [_smsButton removeTarget:self action:@selector(clickStartChatButton:)  forControlEvents:UIControlEventTouchUpInside];
+        [_smsButton addTarget:self action:@selector(followEnterpriseButton:) forControlEvents:UIControlEventTouchUpInside];
     }
 }
 
 #pragma mark -- EnterpriseDetailInfoDataDelegate
 - (void)getEnterpriseDetailSucceed:(ESEnterpriseDetailInfo *)enterpriseDetailInfo
 {
+    self.tableView.hidden = NO;
+
     _enterpriseDetailInfo = enterpriseDetailInfo;
     if (enterpriseDetailInfo.enterpriseName != nil && ![enterpriseDetailInfo.enterpriseName isEqual:[NSNull null]] && [enterpriseDetailInfo.enterpriseName length] > 0)
     {
@@ -98,12 +124,15 @@
     
     [_portraitImageView sd_setImageWithURL:[NSURL URLWithString:enterpriseDetailInfo.portraitUri] placeholderImage:[UIImage imageNamed:@"icon"]];
     [self.tableView reloadData];
+    [self refreshEnterpriseDetailButton];
+    [[CustomShowMessage getInstance] hideWaitingIndicator];
     
     
 }
 - (void)getEnterpriseDetailFailed:(NSString*)errorMessage
 {
     [[CustomShowMessage getInstance] showNotificationMessage:errorMessage];
+    [[CustomShowMessage getInstance] hideWaitingIndicator];
 }
 
 #pragma mark -- UITableViewDataSource
@@ -181,6 +210,35 @@
     
 }
 
+#pragma mark - FollowEnterpriseDelegate
+-(void)followEnterpriseSucceed
+{
+    [self refreshEnterpriseDetailButton];
+    [[CustomShowMessage getInstance] showNotificationMessage:@"关注企业成功！"];
+    [[CustomShowMessage getInstance] hideWaitingIndicator];
+
+}
+
+-(void)followEnterpriseFailed:(NSString*)errorMessage
+{
+    [[CustomShowMessage getInstance] showNotificationMessage:errorMessage];
+    [[CustomShowMessage getInstance] hideWaitingIndicator];
+}
+
+#pragma mark - UnFollowEnterpriseDelegate
+-(void)unFollowEnterpriseSucceed
+{
+    [self refreshEnterpriseDetailButton];
+    [[CustomShowMessage getInstance] showNotificationMessage:@"取消关注企业成功！"];
+    [[CustomShowMessage getInstance] hideWaitingIndicator];
+}
+-(void)unFollowEnterpriseFailed:(NSString*)errorMessage
+{
+    [[CustomShowMessage getInstance] showNotificationMessage:errorMessage];
+    [[CustomShowMessage getInstance] hideWaitingIndicator];
+}
+
+
 #pragma mark - event 
 -(IBAction)clickStartChatButton:(id)sender
 {
@@ -196,9 +254,23 @@
     [self.navigationController pushViewController:enterpriseChatVC animated:YES];
 }
 
+-(IBAction)followEnterpriseButton:(id)sender
+{
+    if(_enterpriseDetailInfo == nil)
+        return;
+    [_followEnterpriseDataParse followEnterPriseWithEnterpriseId:_enterpriseDetailInfo.enterpriseId];
+    [[CustomShowMessage getInstance] showWaitingIndicator:REQ_WAITING_INDICATOR];
+
+}
+
 -(IBAction)clickDeleteButton:(id)sender
 {
+    if(_enterpriseDetailInfo == nil)
+        return;
     
+    [_followEnterpriseDataParse unfollowEnterPriseWithEnterpriseId:_enterpriseDetailInfo.enterpriseId];
+    [[CustomShowMessage getInstance] showWaitingIndicator:REQ_WAITING_INDICATOR];
+
 }
 
 #pragma mark -- setter&getter

@@ -182,14 +182,22 @@ typedef enum : NSUInteger {
 
 //获取人的标签
 + (void)getTagByUserid:(NSString*)userId success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
+//设置人的标签
++ (void)setUserTagByUserId:(NSString*)userId TagId:(NSString*)tagId TagItemId:(NSString*)tagitemid success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
+
 //获取企业的标签
 + (void)getTagByEnterpriseId:(NSString*)enterpriseId success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
+//设置企业的标签
++ (void)setEnterpriseTagByEnterpriseId:(NSString*)enterpriseId TagId:(NSString*)tagId TagItemId:(NSString*)tagitemid success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
+
 //获取任务的标签
 + (void)getTagByTaskId:(NSString*)tagId success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
-
+//设置任务的标签
++ (void)setTaskTagByTaskId:(NSString*)taskId TagId:(NSString*)tagId TagItemId:(NSString*)tagitemid success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
 
 //请求加入企业
 + (void)requestJoinEnterPriseWithUserId:(NSString*)userId success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
+
 //获取请求加入企业的人员列表
 + (void)getEnterPriseRequestList:(void (^)(id response))success
 failure:(void (^)(NSError *error))failure;

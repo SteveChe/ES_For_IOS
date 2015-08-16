@@ -63,7 +63,7 @@
                      enterpriseDetailInfo.bVerified = [enterPriseVerified boolValue];
                  }
                  
-                 NSNumber* enterPriseFollowed = [temDic valueForKey:@"following"];
+                 NSNumber* enterPriseFollowed = [temDic valueForKey:@"is_following"];
                  if (enterPriseFollowed!=nil && ![enterPriseFollowed isEqual:[NSNull null]]) {
                      enterpriseDetailInfo.bFollowed = [enterPriseFollowed boolValue];
                  }
