@@ -14,6 +14,4 @@
 @property (weak, nonatomic) IBOutlet UILabel *startDateLbl;
 @property (nonatomic, strong) ESTask *taskModel;
 
-- (void)headViewAnotherBtnOnClicked:(BOOL)isOpen;
-
 @end

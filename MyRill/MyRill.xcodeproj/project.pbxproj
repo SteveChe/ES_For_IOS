@@ -113,8 +113,6 @@
 		2BEAD0791B77195300905E21 /* RemindDateTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BEAD0771B77195300905E21 /* RemindDateTableViewCell.xib */; };
 		2BEAD07C1B77360F00905E21 /* RemindView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEAD07B1B77360F00905E21 /* RemindView.m */; };
 		2BEAD07F1B77369F00905E21 /* ZCActionOnCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEAD07E1B77369F00905E21 /* ZCActionOnCalendar.m */; };
-		2BEAD0831B77508D00905E21 /* MessageListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEAD0811B77508D00905E21 /* MessageListViewController.m */; };
-		2BEAD0841B77508D00905E21 /* MessageListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BEAD0821B77508D00905E21 /* MessageListViewController.xib */; };
 		2BEAD0881B775C4500905E21 /* MessageListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEAD0861B775C4500905E21 /* MessageListTableViewCell.m */; };
 		2BEAD0891B775C4500905E21 /* MessageListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BEAD0871B775C4500905E21 /* MessageListTableViewCell.xib */; };
 		2BEAD08D1B775FC900905E21 /* MessageListSelfTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEAD08B1B775FC900905E21 /* MessageListSelfTableViewCell.m */; };
@@ -485,9 +483,6 @@
 		2BEAD07B1B77360F00905E21 /* RemindView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemindView.m; sourceTree = "<group>"; };
 		2BEAD07D1B77369F00905E21 /* ZCActionOnCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZCActionOnCalendar.h; sourceTree = "<group>"; };
 		2BEAD07E1B77369F00905E21 /* ZCActionOnCalendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZCActionOnCalendar.m; sourceTree = "<group>"; };
-		2BEAD0801B77508D00905E21 /* MessageListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageListViewController.h; sourceTree = "<group>"; };
-		2BEAD0811B77508D00905E21 /* MessageListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageListViewController.m; sourceTree = "<group>"; };
-		2BEAD0821B77508D00905E21 /* MessageListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageListViewController.xib; sourceTree = "<group>"; };
 		2BEAD0851B775C4500905E21 /* MessageListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageListTableViewCell.h; sourceTree = "<group>"; };
 		2BEAD0861B775C4500905E21 /* MessageListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageListTableViewCell.m; sourceTree = "<group>"; };
 		2BEAD0871B775C4500905E21 /* MessageListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageListTableViewCell.xib; sourceTree = "<group>"; };
@@ -1131,9 +1126,6 @@
 				2BEAD0701B770B2A00905E21 /* RemindDateViewController.h */,
 				2BEAD0711B770B2A00905E21 /* RemindDateViewController.m */,
 				2BEAD0721B770B2A00905E21 /* RemindDateViewController.xib */,
-				2BEAD0801B77508D00905E21 /* MessageListViewController.h */,
-				2BEAD0811B77508D00905E21 /* MessageListViewController.m */,
-				2BEAD0821B77508D00905E21 /* MessageListViewController.xib */,
 			);
 			name = Task;
 			sourceTree = "<group>";
@@ -1826,7 +1818,6 @@
 				F23461E51B5FCFA900C88FAC /* ChatSettingCollectionViewCell.xib in Resources */,
 				2BEAD08E1B775FC900905E21 /* MessageListSelfTableViewCell.xib in Resources */,
 				F22FE2921B3B000400A1A997 /* ChangePwdViewController.xib in Resources */,
-				2BEAD0841B77508D00905E21 /* MessageListViewController.xib in Resources */,
 				F2D2338F1B37DE6400F8C65D /* RongCloud.bundle in Resources */,
 				2B31C3E01B11C3FD004C865A /* Images.xcassets in Resources */,
 				2BEAD0891B775C4500905E21 /* MessageListTableViewCell.xib in Resources */,
@@ -2020,7 +2011,6 @@
 				2B5A59151B48DFBB000382D7 /* MRActivityIndicatorView+AFNetworking.m in Sources */,
 				F22FE2F31B4000ED00A1A997 /* UIView+WebCacheOperation.m in Sources */,
 				2BEAD06E1B76FF2400905E21 /* SWUtilityButtonTapGestureRecognizer.m in Sources */,
-				2BEAD0831B77508D00905E21 /* MessageListViewController.m in Sources */,
 				2B37E44C1B53967D00F671A1 /* ModifyProfessionViewController.m in Sources */,
 				F29F862A1B2410070058FC9F /* AFHTTPSessionManager.m in Sources */,
 				F29F86451B2410320058FC9F /* UIAlertView+AFNetworking.m in Sources */,
