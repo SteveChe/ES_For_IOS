@@ -57,20 +57,6 @@
                                                                 action:@selector(saveBarItemOnClicked)];
     self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:saveItem, startConversationItem, nil];
     self.isOpen = YES;
-    //增加监听，当键盘出现或改变时收出消息
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(keyboardWillShow:)
-//                                                 name:UIKeyboardWillShowNotification
-//                                               object:nil];
-//    
-//    //增加监听，当键退出时收出消息
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(keyboardWillHide:)
-//                                                 name:UIKeyboardWillHideNotification
-//                                               object:nil];
-//    
-//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
-//    [self.view addGestureRecognizer:tap];
 
     self.messageListVC.taskID = [self.taskModel.taskID stringValue];
     [self addChildViewController:self.messageListVC];
@@ -129,16 +115,6 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
-
-//- (void)textFieldDidChange:(UITextField *)textField {
-//    CGSize size = [textField.text sizeWithFont:textField.font];
-//    if (size.width >= textField.bounds.size.width) {
-//        [self.sendTxtfield mas_updateConstraints:^(MASConstraintMaker *make) {
-//            make.height.equalTo(@72);
-//        }];
-//        [self.view layoutIfNeeded];
-//    }
-//}
 
 #pragma mark - response events methods
 - (void)startConversationEvent {

@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B1B88E11B803BA900FAF650 /* ChangeUserMsgDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B1B88E01B803BA900FAF650 /* ChangeUserMsgDataParse.m */; };
+		2B1B88E51B803CEA00FAF650 /* UserNameAndPositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B1B88E31B803CEA00FAF650 /* UserNameAndPositionViewController.m */; };
+		2B1B88E61B803CEA00FAF650 /* UserNameAndPositionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B1B88E41B803CEA00FAF650 /* UserNameAndPositionViewController.xib */; };
+		2B1B88EA1B803D0C00FAF650 /* UserDescriptionChangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B1B88E81B803D0C00FAF650 /* UserDescriptionChangeViewController.m */; };
+		2B1B88EB1B803D0C00FAF650 /* UserDescriptionChangeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B1B88E91B803D0C00FAF650 /* UserDescriptionChangeViewController.xib */; };
 		2B26E1041B4AA379000FE4D3 /* ESProfession.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B26E1031B4AA379000FE4D3 /* ESProfession.m */; };
 		2B31C3D51B11C3FD004C865A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B31C3D41B11C3FD004C865A /* main.m */; };
 		2B31C3D81B11C3FD004C865A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B31C3D71B11C3FD004C865A /* AppDelegate.m */; };
@@ -289,6 +294,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2B1B88DF1B803BA900FAF650 /* ChangeUserMsgDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeUserMsgDataParse.h; sourceTree = "<group>"; };
+		2B1B88E01B803BA900FAF650 /* ChangeUserMsgDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeUserMsgDataParse.m; sourceTree = "<group>"; };
+		2B1B88E21B803CEA00FAF650 /* UserNameAndPositionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserNameAndPositionViewController.h; sourceTree = "<group>"; };
+		2B1B88E31B803CEA00FAF650 /* UserNameAndPositionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserNameAndPositionViewController.m; sourceTree = "<group>"; };
+		2B1B88E41B803CEA00FAF650 /* UserNameAndPositionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserNameAndPositionViewController.xib; sourceTree = "<group>"; };
+		2B1B88E71B803D0C00FAF650 /* UserDescriptionChangeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDescriptionChangeViewController.h; sourceTree = "<group>"; };
+		2B1B88E81B803D0C00FAF650 /* UserDescriptionChangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDescriptionChangeViewController.m; sourceTree = "<group>"; };
+		2B1B88E91B803D0C00FAF650 /* UserDescriptionChangeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserDescriptionChangeViewController.xib; sourceTree = "<group>"; };
 		2B26E1021B4AA379000FE4D3 /* ESProfession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESProfession.h; sourceTree = "<group>"; };
 		2B26E1031B4AA379000FE4D3 /* ESProfession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESProfession.m; sourceTree = "<group>"; };
 		2B31C3CF1B11C3FD004C865A /* MyRill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyRill.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -817,6 +830,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B1B88DE1B803B2200FAF650 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				F24787701B2D5CE700EC266B /* ChangePwdDataParse.h */,
+				F24787711B2D5CE700EC266B /* ChangePwdDataParse.m */,
+				2B5A59201B494C2B000382D7 /* ChangePhoneNumDataParse.h */,
+				2B5A59211B494C2B000382D7 /* ChangePhoneNumDataParse.m */,
+				2BC821341B5BE6B60090E2C1 /* ChangeUserImageDataParse.h */,
+				2BC821351B5BE6B60090E2C1 /* ChangeUserImageDataParse.m */,
+				2B1B88DF1B803BA900FAF650 /* ChangeUserMsgDataParse.h */,
+				2B1B88E01B803BA900FAF650 /* ChangeUserMsgDataParse.m */,
+				2B9CBB6A1B4571D0007D7A45 /* SignOutDataParse.h */,
+				2B9CBB6B1B4571D0007D7A45 /* SignOutDataParse.m */,
+			);
+			name = User;
+			sourceTree = "<group>";
+		};
 		2B31C3C61B11C3FD004C865A = {
 			isa = PBXGroup;
 			children = (
@@ -965,24 +995,19 @@
 		2B39C94D1B247A4E007BAC7A /* DataDrive */ = {
 			isa = PBXGroup;
 			children = (
-				2BEAD0561B75D70500905E21 /* Task */,
 				F247876C1B2BC3CE00EC266B /* DataParseDefine.h */,
 				2B39C94E1B248063007BAC7A /* LoginDataParse.h */,
 				2B39C94F1B248063007BAC7A /* LoginDataParse.m */,
-				F24787701B2D5CE700EC266B /* ChangePwdDataParse.h */,
-				F24787711B2D5CE700EC266B /* ChangePwdDataParse.m */,
-				2B5A59201B494C2B000382D7 /* ChangePhoneNumDataParse.h */,
-				2B5A59211B494C2B000382D7 /* ChangePhoneNumDataParse.m */,
 				F24787731B2D775E00EC266B /* SignUpDataParse.h */,
 				F24787741B2D775E00EC266B /* SignUpDataParse.m */,
-				2B9CBB6A1B4571D0007D7A45 /* SignOutDataParse.h */,
-				2B9CBB6B1B4571D0007D7A45 /* SignOutDataParse.m */,
+				2B37E45D1B53E9D800F671A1 /* ProfessionDataParse.h */,
+				2B37E45E1B53E9D800F671A1 /* ProfessionDataParse.m */,
+				2BEAD0561B75D70500905E21 /* Task */,
+				2B1B88DE1B803B2200FAF650 /* User */,
 				F22FE2F71B4042B700A1A997 /* SearchContactDataParse.h */,
 				F22FE2F81B4042B700A1A997 /* SearchContactDataParse.m */,
 				F22FE2FD1B42DAF600A1A997 /* AddContactDataParse.h */,
 				F22FE2FE1B42DAF600A1A997 /* AddContactDataParse.m */,
-				2B37E45D1B53E9D800F671A1 /* ProfessionDataParse.h */,
-				2B37E45E1B53E9D800F671A1 /* ProfessionDataParse.m */,
 				F22FE3001B4576D100A1A997 /* GetContactListDataParse.h */,
 				F22FE3011B4576D100A1A997 /* GetContactListDataParse.m */,
 				F22FE3031B458A4100A1A997 /* GetRequestContactListDataParse.h */,
@@ -991,8 +1016,6 @@
 				F2F92EFE1B5020CC0047D7BF /* GetPhoneContactListDataParse.m */,
 				F23059C11B56AD65004599FA /* GetContactDetailDataParse.h */,
 				F23059C21B56AD65004599FA /* GetContactDetailDataParse.m */,
-				2BC821341B5BE6B60090E2C1 /* ChangeUserImageDataParse.h */,
-				2BC821351B5BE6B60090E2C1 /* ChangeUserImageDataParse.m */,
 				F23630BB1B68F61800A12F63 /* TagDataParse.h */,
 				F23630BC1B68F61800A12F63 /* TagDataParse.m */,
 				F256CB761B6CAE23009478C2 /* EnterPriseRequestDataParse.h */,
@@ -1133,6 +1156,12 @@
 				2B39C95D1B272221007BAC7A /* QRCodeViewController.h */,
 				2B39C95E1B272221007BAC7A /* QRCodeViewController.m */,
 				2BC821321B5B839F0090E2C1 /* QRCodeViewController.xib */,
+				2B1B88E21B803CEA00FAF650 /* UserNameAndPositionViewController.h */,
+				2B1B88E31B803CEA00FAF650 /* UserNameAndPositionViewController.m */,
+				2B1B88E41B803CEA00FAF650 /* UserNameAndPositionViewController.xib */,
+				2B1B88E71B803D0C00FAF650 /* UserDescriptionChangeViewController.h */,
+				2B1B88E81B803D0C00FAF650 /* UserDescriptionChangeViewController.m */,
+				2B1B88E91B803D0C00FAF650 /* UserDescriptionChangeViewController.xib */,
 			);
 			name = User;
 			sourceTree = "<group>";
@@ -1773,6 +1802,7 @@
 				2BC8213B1B5C9FF70090E2C1 /* ShowQRCodeViewController.xib in Resources */,
 				F22FE2881B3AF0CB00A1A997 /* RongCloudKit.strings in Resources */,
 				F23059BB1B52C141004599FA /* RCDAddressBookViewTableViewCell.xib in Resources */,
+				2B1B88E61B803CEA00FAF650 /* UserNameAndPositionViewController.xib in Resources */,
 				F256CB801B6E4247009478C2 /* RCDJoinEnterpriseViewController.xib in Resources */,
 				F2D2335E1B31B1F400F8C65D /* PushConfig.plist in Resources */,
 				2B39C98D1B37B2A4007BAC7A /* LoginViewController.xib in Resources */,
@@ -1796,6 +1826,7 @@
 				2B31C3E01B11C3FD004C865A /* Images.xcassets in Resources */,
 				2BEAD0891B775C4500905E21 /* MessageListTableViewCell.xib in Resources */,
 				2BEAD0791B77195300905E21 /* RemindDateTableViewCell.xib in Resources */,
+				2B1B88EB1B803D0C00FAF650 /* UserDescriptionChangeViewController.xib in Resources */,
 				F236308A1B6673B400A12F63 /* RCDAddressBookDetailTableViewCell.xib in Resources */,
 				2BE8C21E1B4D60B400858CEE /* ProfessionCollectionViewCell.xib in Resources */,
 				2BEAD0521B74F37C00905E21 /* AddTaskViewController.xib in Resources */,
@@ -1894,6 +1925,7 @@
 				F29F862F1B2410070058FC9F /* AFURLResponseSerialization.m in Sources */,
 				F23630841B66668900A12F63 /* RCDAddressBookDetailViewController.m in Sources */,
 				F22FE2E41B4000ED00A1A997 /* MKAnnotationView+WebCache.m in Sources */,
+				2B1B88E11B803BA900FAF650 /* ChangeUserMsgDataParse.m in Sources */,
 				F2F397741B77AC50006FAE3B /* ESEnterpriseMessage.m in Sources */,
 				2BEBBD8C1B67AFA7008BE7C4 /* GetTaskListDataParse.m in Sources */,
 				F29F862D1B2410070058FC9F /* AFURLConnectionOperation.m in Sources */,
@@ -1911,6 +1943,7 @@
 				F2F92ECD1B4D60910047D7BF /* RCDPhoneAddressBookViewController.m in Sources */,
 				F22FE2AD1B3FFAE600A1A997 /* RCDSelectPersonTableViewCell.m in Sources */,
 				F22FE2941B3B000400A1A997 /* UserSettingViewController.m in Sources */,
+				2B1B88E51B803CEA00FAF650 /* UserNameAndPositionViewController.m in Sources */,
 				2B5A59221B494C2B000382D7 /* ChangePhoneNumDataParse.m in Sources */,
 				F234616F1B5AA0FD00C88FAC /* FMDatabaseAdditions.m in Sources */,
 				F22FE2BC1B3FFBB200A1A997 /* RCDAddFriendTableViewController.m in Sources */,
@@ -1950,6 +1983,7 @@
 				F22FE2C11B3FFCAF00A1A997 /* MBProgressHUD.m in Sources */,
 				2B5A59161B48DFBB000382D7 /* MRProgressOverlayView+AFNetworking.m in Sources */,
 				2BC8212F1B57FFDC0090E2C1 /* ProfessionWebViewController.m in Sources */,
+				2B1B88EA1B803D0C00FAF650 /* UserDescriptionChangeViewController.m in Sources */,
 				F256CB831B6E5921009478C2 /* RCDApprovedJoinEnterpriseViewController.m in Sources */,
 				2B37E45F1B53E9D800F671A1 /* ProfessionDataParse.m in Sources */,
 				2B39C93C1B241212007BAC7A /* MASViewConstraint.m in Sources */,

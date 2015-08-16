@@ -24,6 +24,12 @@ typedef enum : NSUInteger {
     ESTaskListQ
 } ESTaskListType;
 
+typedef enum : NSUInteger {
+    ESUserMsgName = 300,
+    ESUserMsgPosition,
+    ESUserMSgDescription
+} ESUserMsgType;
+
 @interface AFHttpTool : NSObject
 /**
  *  发送一个请求
@@ -126,6 +132,7 @@ typedef enum : NSUInteger {
  **/
 +(void) getContactDetail:(NSString*)userID success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
 
+#pragma mark - 任务模块
 /****** 获取任务面板信息 ****/
 + (void)getTaskDashboardSuccess:(void (^)(id response))success
                         failure:(void (^)(NSError *error))failure;
@@ -136,6 +143,7 @@ typedef enum : NSUInteger {
                         success:(void (^)(id response))success
                         failure:(void (^)(NSError *error))failure;
 
+/****** 添加任务 ****/
 + (void)addTaskWithModel:(ESTask *)task
                  success:(void (^)(id response))success
                  failure:(void (^)(NSError *error))failure;
@@ -146,27 +154,36 @@ typedef enum : NSUInteger {
                              success:(void (^)(id response))success
                              failure:(void (^)(NSError *error))failure;
 
+/****** 编辑任务 ****/
++ (void)EditTaskWithTaskModel:(ESTask *)task
+                      success:(void (^)(id response))success
+                      failure:(void (^)(NSError *error))failure;
+
 /****** 提交任务评论 ****/
 + (void)sendTaskCommentWithTaskID:(NSString *)taskID
                           comment:(NSString *)comment
                           success:(void (^)(id response))success
                           failure:(void (^)(NSError *error))failure;
 
-/****** 编辑任务 ****/
-+ (void)EditTaskWithTaskModel:(ESTask *)task
-               success:(void (^)(id response))success
-               failure:(void (^)(NSError *error))failure;
-
-//change password
-+(void) changePassword:(NSString *) oldPassword
-           newPassword:(NSString *) newPassword
+#pragma mark - 个人设置模块
+/****** 修改密码 ****/
++ (void)changePassword:(NSString *)oldPassword
+           newPassword:(NSString *)newPassword
                success:(void (^)(id response))success
                failure:(void (^)(NSError* err))failure;
 
+/****** 修改手机号 ****/
 + (void)changePhoneNum:(NSString *)newPhoneNum
       verificationCode:(NSString *)code
                success:(void (^)(id response))success
                failure:(void (^)(NSError *err))failure;
+
+/****** 修改个人静态信息 ****/
++ (void)changeUserMsgWithUserID:(NSString *)userID
+                           type:(ESUserMsgType)type
+                        content:(NSString *)content
+                        success:(void (^)(id response))success
+                        failure:(void (^)(NSError *err))failure;
 
 //get verification code
 + (void)getVerificationCode:(NSString *)phoneNum

@@ -50,9 +50,9 @@
         }
         
         if ([ColorHandler isNullOrNilNumber:dic[@"chat_id"]]) {
-            self.chatID = [NSNumber numberWithInt:-1];
-        } else {
             self.chatID = dic[@"chat_id"];
+        } else {
+            self.chatID = @"";
         }
         
         if ([ColorHandler isNullOrEmptyString:dic[@"created_at"]]) {
