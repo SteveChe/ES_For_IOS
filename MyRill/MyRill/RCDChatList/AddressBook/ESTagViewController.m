@@ -344,13 +344,22 @@ enum
     [[CustomShowMessage getInstance] showNotificationMessage:errorMessage];
 }
 
-- (void)setTagSucceed
+- (void)setTagSucceed:(NSMutableArray *)tagInfoArray
 {
     _pickerTagToolbar.hidden = YES;
     _pickerView.hidden = YES;
     [[CustomShowMessage getInstance] hideWaitingIndicator];
 
     [[CustomShowMessage getInstance] showNotificationMessage:@"标签设定成功!"];
+    
+    [_tagListArray removeAllObjects];
+    [_tagListArray addObjectsFromArray:tagInfoArray];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+            
+        });
+    });
 }
 - (void)setTagFailed:(NSString*)errorMessage
 {

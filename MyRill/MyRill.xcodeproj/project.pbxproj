@@ -219,6 +219,7 @@
 		F277AE071B2DC72A006E42CB /* BMBase.m in Sources */ = {isa = PBXBuildFile; fileRef = F277AE061B2DC72A006E42CB /* BMBase.m */; };
 		F277AE0A1B2DCF39006E42CB /* StretchImageUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = F277AE091B2DCF39006E42CB /* StretchImageUtil.m */; };
 		F277AE0D1B2DD066006E42CB /* UIPageNavigator.m in Sources */ = {isa = PBXBuildFile; fileRef = F277AE0C1B2DD066006E42CB /* UIPageNavigator.m */; };
+		F28442B81B80D0BD004F94E2 /* ComplexMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F28442B71B80D0BD004F94E2 /* ComplexMessageCell.m */; };
 		F28B6C811B6F8E3D00E0C267 /* FollowEnterpriseDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F28B6C801B6F8E3D00E0C267 /* FollowEnterpriseDataParse.m */; };
 		F28B6C871B6F991600E0C267 /* GetEnterpriseDetailDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F28B6C861B6F991600E0C267 /* GetEnterpriseDetailDataParse.m */; };
 		F28B6C8A1B6FAB5D00E0C267 /* GetEnterpriseListDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F28B6C891B6FAB5D00E0C267 /* GetEnterpriseListDataParse.m */; };
@@ -682,6 +683,8 @@
 		F277AE091B2DCF39006E42CB /* StretchImageUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StretchImageUtil.m; path = Utilities/common/StretchImageUtil.m; sourceTree = "<group>"; };
 		F277AE0B1B2DD066006E42CB /* UIPageNavigator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIPageNavigator.h; path = Utilities/common/UIPageNavigator.h; sourceTree = "<group>"; };
 		F277AE0C1B2DD066006E42CB /* UIPageNavigator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIPageNavigator.m; path = Utilities/common/UIPageNavigator.m; sourceTree = "<group>"; };
+		F28442B61B80D0BD004F94E2 /* ComplexMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ComplexMessageCell.h; path = RCDChatList/ComplexMessageCell.h; sourceTree = "<group>"; };
+		F28442B71B80D0BD004F94E2 /* ComplexMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ComplexMessageCell.m; path = RCDChatList/ComplexMessageCell.m; sourceTree = "<group>"; };
 		F28B6C7F1B6F8E3D00E0C267 /* FollowEnterpriseDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowEnterpriseDataParse.h; sourceTree = "<group>"; };
 		F28B6C801B6F8E3D00E0C267 /* FollowEnterpriseDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowEnterpriseDataParse.m; sourceTree = "<group>"; };
 		F28B6C821B6F969100E0C267 /* ESEnterpriseDetailInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ESEnterpriseDetailInfo.h; path = Model/ESEnterpriseDetailInfo.h; sourceTree = "<group>"; };
@@ -1177,6 +1180,8 @@
 				F20C130A1B750A870073BFA9 /* SimpleMessage.m */,
 				F29BC4901B75119900803183 /* SimpleMessageCell.h */,
 				F29BC4911B75119900803183 /* SimpleMessageCell.m */,
+				F28442B61B80D0BD004F94E2 /* ComplexMessageCell.h */,
+				F28442B71B80D0BD004F94E2 /* ComplexMessageCell.m */,
 			);
 			name = Conversation;
 			sourceTree = "<group>";
@@ -2002,6 +2007,7 @@
 				F277ADFE1B2DC046006E42CB /* CustomMessageBox.m in Sources */,
 				2BEAD08D1B775FC900905E21 /* MessageListSelfTableViewCell.m in Sources */,
 				F29F864A1B2410320058FC9F /* UIWebView+AFNetworking.m in Sources */,
+				F28442B81B80D0BD004F94E2 /* ComplexMessageCell.m in Sources */,
 				2B5A59151B48DFBB000382D7 /* MRActivityIndicatorView+AFNetworking.m in Sources */,
 				F22FE2F31B4000ED00A1A997 /* UIView+WebCacheOperation.m in Sources */,
 				2BEAD06E1B76FF2400905E21 /* SWUtilityButtonTapGestureRecognizer.m in Sources */,

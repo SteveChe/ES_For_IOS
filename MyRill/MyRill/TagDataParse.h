@@ -13,7 +13,7 @@
 - (void)getTag:(NSMutableArray *)tagInfoArray;
 - (void)getTagFailed:(NSString*)errorMessage;
 
-- (void)setTagSucceed;
+- (void)setTagSucceed:(NSMutableArray *)tagInfoArray;
 - (void)setTagFailed:(NSString*)errorMessage;
 
 @end
