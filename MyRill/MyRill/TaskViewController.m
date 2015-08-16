@@ -109,6 +109,11 @@
     if (self.tastObserversList == nil) {
         self.tastObserversList = [NSMutableArray array];
     }
+
+    [self.tableView registerNib:[UINib nibWithNibName:@"MessageListSelfTableViewCell" bundle:nil] forCellReuseIdentifier:@"MessageListSelfTableViewCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"MessageListTableViewCell" bundle:nil] forCellReuseIdentifier:@"MessageListTableViewCell"];
+    
+    [self.sendTxtfield addTarget:self action:@selector(send) forControlEvents:UIControlEventEditingDidEndOnExit];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -207,6 +212,7 @@
 - (void)hideKeyboard {
     [self.taskTitleTxtField resignFirstResponder];
     [self.taskDescriptioinTextView resignFirstResponder];
+    [self.sendTxtfield resignFirstResponder];
     
     if (self.dateSelectedPicker) {
         [UIView animateWithDuration:.3f
@@ -420,8 +426,7 @@
                           delay:0
                         options:UIViewAnimationOptionCurveEaseIn
                      animations:^{
-                         TaskViewController *taskVC = (TaskViewController *)self.parentViewController;
-                         [taskVC headViewAnotherBtnOnClicked:YES];
+                         [self headViewAnotherBtnOnClicked:YES];
                          self.sendViewBottomConstraint.constant = height;
                          [self.view layoutIfNeeded];
                      } completion:nil];
@@ -433,8 +438,6 @@
                           delay:0
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^{
-                         //                         TaskViewController *taskVC = (TaskViewController *)self.parentViewController;
-                         //                         [taskVC headViewAnotherBtnOnClicked:NO];
                          self.sendViewBottomConstraint.constant = 0.f;
                          [self.view layoutIfNeeded];
                      } completion:^(BOOL finished) {

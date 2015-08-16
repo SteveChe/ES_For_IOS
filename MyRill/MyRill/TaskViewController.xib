@@ -11,6 +11,8 @@
                 <outlet property="endDateLbl" destination="u89-OX-g9g" id="DiI-Hp-5am"/>
                 <outlet property="followsCollectionView" destination="UXc-Co-idq" id="jqD-FH-VvO"/>
                 <outlet property="headerView" destination="tIf-Qc-aKA" id="ek2-Ij-fsM"/>
+                <outlet property="sendTxtfield" destination="fPT-KS-mfD" id="cbk-RY-Hbu"/>
+                <outlet property="sendView" destination="M3z-J2-Kdw" id="fBP-Hc-2bL"/>
                 <outlet property="sendViewBottomConstraint" destination="6FY-qM-tmh" id="iiJ-EK-bS9"/>
                 <outlet property="startDateLbl" destination="b3r-ns-CGu" id="PVD-gS-t1y"/>
                 <outlet property="tableView" destination="Kd5-uX-Twr" id="Bxy-8d-mmX"/>
@@ -350,6 +352,10 @@
                             <constraint firstAttribute="bottom" secondItem="PVg-8B-Vsc" secondAttribute="bottom" id="vPM-Vr-S7n"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="t2g-iY-sW7"/>
+                        <outlet property="delegate" destination="-1" id="oi1-XP-4NU"/>
+                    </connections>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M3z-J2-Kdw" userLabel="Send View">
                     <rect key="frame" x="0.0" y="556" width="600" height="44"/>
