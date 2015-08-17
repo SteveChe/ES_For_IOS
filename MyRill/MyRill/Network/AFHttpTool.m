@@ -18,7 +18,7 @@
 
 @implementation AFHttpTool
 
-+ (void)requestWithMethod:(RequestMethodType)methodType
++ (void)requestWithMethod:(RequestMethodType)methodType protocolType:(RequestProtocolType) protocolType
                       url:(NSString*)url
                    params:(NSDictionary*)params
                   success:(void (^)(id response))success
@@ -28,7 +28,10 @@
     //获得请求管理者
     AFHTTPRequestOperationManager* mgr = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:baseURL];
     
-    mgr.requestSerializer = [AFJSONRequestSerializer serializer];
+    if (protocolType == RequestProtocolTypeJson)
+    {
+        mgr.requestSerializer = [AFJSONRequestSerializer serializer];
+    }
 #ifdef ContentType
 //    mgr.responseSerializer.acceptableContentTypes = [NSSet setWithObject:ContentType];
 #endif
@@ -113,7 +116,7 @@
                    failure:(void (^)(NSError* err))failure
 {
     NSDictionary *params = @{@"phone_number":phoneNum,@"username":userName,@"password":password,@"verification_code":verificationCode};
-    [AFHttpTool requestWithMethod:RequestMethodTypePost
+    [AFHttpTool requestWithMethod:RequestMethodTypePost protocolType:RequestProtocolTypeText
                               url:@"api/accounts/sign-up/.json"
                            params:params
                           success:success
@@ -123,7 +126,7 @@
 //sign-out
 + (void)signOutSuccess:(void (^)(id))success
                failure:(void (^)(NSError *))failure {
-    [AFHttpTool requestWithMethod:RequestMethodTypeGet
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet protocolType:RequestProtocolTypeText
                               url:@"/api/accounts/sign-out/.json"
                            params:nil
                           success:success
@@ -137,7 +140,7 @@
                   failure:(void (^)(NSError* err))failure
 {
     NSDictionary *params = @{@"username":userName,@"password":password};
-    [AFHttpTool requestWithMethod:RequestMethodTypePost
+    [AFHttpTool requestWithMethod:RequestMethodTypePost protocolType:RequestProtocolTypeText
                               url:@"api/accounts/sign-in/.json"
                            params:params
                           success:success
@@ -151,7 +154,7 @@
                failure:(void (^)(NSError* err))failure
 {
     NSDictionary *params = @{@"old_password":oldPassword,@"new_password":newPassword};
-    [AFHttpTool requestWithMethod:RequestMethodTypePost
+    [AFHttpTool requestWithMethod:RequestMethodTypePost protocolType:RequestProtocolTypeText
                               url:@"api/accounts/change-password/.json"
                            params:params
                           success:success
@@ -163,7 +166,7 @@
                success:(void (^)(id))success
                failure:(void (^)(NSError *))failure {
     NSDictionary *params = @{@"new_phone_number":newPhoneNum,@"verification_code":code};
-    [AFHttpTool requestWithMethod:RequestMethodTypePost
+    [AFHttpTool requestWithMethod:RequestMethodTypePost protocolType:RequestProtocolTypeText
                               url:@"/api/accounts/change-phone-number/.json"
                            params:params
                           success:success
@@ -176,7 +179,7 @@
                     failure:(void (^)(NSError *err))failure;
 {
     NSDictionary *params = @{@"phone_number":phoneNum};
-    [AFHttpTool requestWithMethod:RequestMethodTypePost
+    [AFHttpTool requestWithMethod:RequestMethodTypePost protocolType:RequestProtocolTypeText
                               url:@"/api/accounts/send-verification-code/.json"
                            params:params
                           success:success
@@ -186,7 +189,7 @@
 + (void)getProfessionSuccess:(void (^)(id))success
                      failure:(void (^)(NSError *))failure {
 
-    [AFHttpTool requestWithMethod:RequestMethodTypeGet
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet protocolType:RequestProtocolTypeText
                               url:@"api/professions/.json"
                            params:nil
                           success:success
@@ -199,7 +202,7 @@
                       failure:(void (^)(NSError *))failure {
     NSDictionary *params = @{@"name":name,@"url":url};
     
-    [AFHttpTool requestWithMethod:RequestMethodTypePost
+    [AFHttpTool requestWithMethod:RequestMethodTypePost protocolType:RequestProtocolTypeText
                               url:@"api/professions/.json"
                            params:params
                           success:success
@@ -211,7 +214,7 @@
                        failure:(void (^)(NSError *))failure {
     NSDictionary *params = @{@"_method":@"DELETE"};
     
-    [AFHttpTool requestWithMethod:RequestMethodTypePost
+    [AFHttpTool requestWithMethod:RequestMethodTypePost protocolType:RequestProtocolTypeText
                               url:[NSString stringWithFormat:@"api/professions/%@/.json",professionId]
                            params:params
                           success:success
@@ -225,7 +228,7 @@
                         failure:(void (^)(NSError *))failure {
     NSDictionary *params = @{@"name":name,@"url":url};
     
-    [AFHttpTool requestWithMethod:RequestMethodTypePost
+    [AFHttpTool requestWithMethod:RequestMethodTypePost protocolType:RequestProtocolTypeText
                               url:[NSString stringWithFormat:@"api/professions/%@/.json",professionId]
                            params:params
                           success:success
@@ -251,7 +254,7 @@
     
     NSDictionary *params = @{@"_content":strJson,@"_content_type":@"application/json"};
 
-    [AFHttpTool requestWithMethod:RequestMethodTypePost
+    [AFHttpTool requestWithMethod:RequestMethodTypePost protocolType:RequestProtocolTypeText
                               url:@"/api/professions/sort/.json"
                            params:params
                           success:success
@@ -262,7 +265,7 @@
 +(void)getRongTokenSuccess:(void (^)(id response))success
                    failure:(void (^)(NSError* err))failure
 {
-    [AFHttpTool requestWithMethod:RequestMethodTypeGet
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet protocolType:RequestProtocolTypeText
                               url:@"/api/chat/get-rong-token/.json"
                            params:nil
                           success:success failure:failure];
@@ -278,7 +281,7 @@
 {
     NSDictionary *params = @{@"q":keyWord};
 
-    [AFHttpTool requestWithMethod:RequestMethodTypeGet
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet protocolType:RequestProtocolTypeText
                               url:@"api/accounts/users/.json"
                            params:params
                           success:success failure:failure];
@@ -291,7 +294,7 @@
     NSString* strURL = [NSString stringWithFormat:@"/api/accounts/users/%@/add/.json",userId];
 
 
-    [AFHttpTool requestWithMethod:RequestMethodTypePost
+    [AFHttpTool requestWithMethod:RequestMethodTypePost protocolType:RequestProtocolTypeText
                               url:strURL
                            params:nil
                           success:success failure:failure];
@@ -302,7 +305,7 @@
 {
     NSDictionary *params = @{@"approved":[NSNumber numberWithInt:1]};
     NSString* strURL = [NSString stringWithFormat:@"/api/accounts/users/%@/accept/.json",userId];
-    [AFHttpTool requestWithMethod:RequestMethodTypePost
+    [AFHttpTool requestWithMethod:RequestMethodTypePost protocolType:RequestProtocolTypeText
                               url:strURL
                            params:params
                           success:success failure:failure];
@@ -312,7 +315,7 @@
 +(void) getContactRequestSuccess:(void (^)(id response))success
                          failure:(void (^)(NSError *error))failure
 {
-    [AFHttpTool requestWithMethod:RequestMethodTypeGet
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet protocolType:RequestProtocolTypeText
                               url:@"/api/accounts/contact-requests/.json"
                            params:nil
                           success:success failure:failure];
@@ -326,7 +329,7 @@
 +(void) getContactListSuccess:(void (^)(id response))success
                       failure:(void (^)(NSError *error))failure
 {
-    [AFHttpTool requestWithMethod:RequestMethodTypeGet
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet protocolType:RequestProtocolTypeText
                               url:@"/api/accounts/contacts/.json"
                            params:nil
                           success:success failure:failure];
@@ -367,7 +370,7 @@
     
     NSDictionary *params = @{@"_content":cartJSON,@"_content_type":@"application/json"};
 
-    [AFHttpTool requestWithMethod:RequestMethodTypePost
+    [AFHttpTool requestWithMethod:RequestMethodTypePost protocolType:RequestProtocolTypeText
                               url:@"/api/accounts/phone-contacts/.json"
                            params:params
                           success:success
@@ -384,7 +387,7 @@
                  failure:(void (^)(NSError *error))failure
 {
     NSString* strURL = [NSString stringWithFormat:@"/api/accounts/users/%@/.json",userID];
-    [AFHttpTool requestWithMethod:RequestMethodTypeGet
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet protocolType:RequestProtocolTypeText
                               url:strURL
                            params:nil
                           success:success failure:failure];
@@ -393,7 +396,7 @@
 + (void)getTaskDashboardSuccess:(void (^)(id))success
                         failure:(void (^)(NSError *))failure {
     NSString *strURL = @"/api/assignments/dashboard/.json";
-    [AFHttpTool requestWithMethod:RequestMethodTypeGet
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet protocolType:RequestProtocolTypeText
                               url:strURL
                            params:nil
                           success:success
@@ -418,7 +421,7 @@
                             @"chat_id":@""
                             };
     
-    [AFHttpTool requestWithMethod:RequestMethodTypePost
+    [AFHttpTool requestWithMethod:RequestMethodTypePost protocolType:RequestProtocolTypeJson
                               url:@"/api/assignments/.json"
                            params:param
                           success:success
@@ -460,7 +463,7 @@
             break;
     }
     
-    [AFHttpTool requestWithMethod:RequestMethodTypeGet
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet protocolType:RequestProtocolTypeText
                               url:strURL
                            params:param
                           success:success
@@ -490,7 +493,7 @@
                             @"person_in_charge":task.personInCharge.useID,
                             @"observers":observerArray};
     
-    [AFHttpTool requestWithMethod:RequestMethodTypePost
+    [AFHttpTool requestWithMethod:RequestMethodTypePost protocolType:RequestProtocolTypeJson
                               url:[NSString stringWithFormat:@"/api/assignments/%@/.json",task.taskID]
                            params:param
                           success:success
@@ -509,7 +512,7 @@
     NSDictionary *param = @{@"_method":@"PATCH",
                             @"_content_type":@"application/json",
                             @"_content":cartJSON};
-    [AFHttpTool requestWithMethod:RequestMethodTypePost
+    [AFHttpTool requestWithMethod:RequestMethodTypePost  protocolType:RequestProtocolTypeText
                               url:[NSString stringWithFormat:@"/api/assignments/%@/.json",taskID]
                            params:param
                           success:success
@@ -525,7 +528,7 @@
         param = @{@"limit":size};
     }
     
-    [AFHttpTool requestWithMethod:RequestMethodTypeGet
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet protocolType:RequestProtocolTypeText
                               url:[NSString stringWithFormat:@"/api/assignments/%@/comments/.json",taskID]
                            params:param
                           success:success
@@ -538,7 +541,7 @@
                           failure:(void (^)(NSError *))failure {
     NSDictionary *param = @{@"content":comment};
     
-    [AFHttpTool requestWithMethod:RequestMethodTypePost
+    [AFHttpTool requestWithMethod:RequestMethodTypePost protocolType:RequestProtocolTypeText
                               url:[NSString stringWithFormat:@"/api/assignments/%@/comments/.json",taskID]
                            params:param
                           success:success
@@ -552,7 +555,7 @@
                             @"position":userInfo.position,
                             @"description":userInfo.contactDescription};
     
-    [AFHttpTool requestWithMethod:RequestMethodTypePost
+    [AFHttpTool requestWithMethod:RequestMethodTypePost protocolType:RequestProtocolTypeText
                               url:[NSString stringWithFormat:@"/api/accounts/users/%@/.json",userInfo.userId]
                            params:param
                           success:success
@@ -622,7 +625,7 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
 + (void)getTagByUserid:(NSString*)userId success:(void (^)(id response))success failure:(void (^)(NSError *error))failure
 {
     NSString* strURL = [NSString stringWithFormat:@"/api/accounts/users/%@/tags/.json",userId];
-    [AFHttpTool requestWithMethod:RequestMethodTypeGet
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet protocolType:RequestProtocolTypeText
                               url:strURL
                            params:nil
                           success:success failure:failure];
@@ -634,7 +637,7 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
     NSString* strURL = [NSString stringWithFormat:@"/api/accounts/users/%@/tags/.json",userId];
     NSString* strKey = [NSString stringWithFormat:@"attr_%@",tagId];
     NSDictionary *params = @{strKey:tagitemid};
-    [AFHttpTool requestWithMethod:RequestMethodTypePost
+    [AFHttpTool requestWithMethod:RequestMethodTypePost protocolType:RequestProtocolTypeText
                               url:strURL
                            params:params
                           success:success failure:failure];
@@ -644,7 +647,7 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
 + (void)getTagByEnterpriseId:(NSString*)enterpriseId success:(void (^)(id response))success failure:(void (^)(NSError *error))failure
 {
     NSString* strURL = [NSString stringWithFormat:@"/api/accounts/enterprises/%@/tags/.json",enterpriseId];
-    [AFHttpTool requestWithMethod:RequestMethodTypeGet
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet protocolType:RequestProtocolTypeText
                               url:strURL
                            params:nil
                           success:success failure:failure];
@@ -656,7 +659,7 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
     NSString* strKey = [NSString stringWithFormat:@"attr_%@",tagId];
     NSDictionary *params = @{strKey:tagitemid};
 
-    [AFHttpTool requestWithMethod:RequestMethodTypePost
+    [AFHttpTool requestWithMethod:RequestMethodTypePost protocolType:RequestProtocolTypeText
                               url:strURL
                            params:params
                           success:success failure:failure];
@@ -668,7 +671,7 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
 {
     NSString* strURL = [NSString stringWithFormat:@"/api/assignments/%@/tags/.json",tagId];
     
-    [AFHttpTool requestWithMethod:RequestMethodTypeGet
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet protocolType:RequestProtocolTypeText
                               url:strURL
                            params:nil
                           success:success failure:failure];
@@ -681,7 +684,7 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
     NSString* strKey = [NSString stringWithFormat:@"attr_%@",tagId];
     NSDictionary *params = @{strKey:tagitemid};
 
-    [AFHttpTool requestWithMethod:RequestMethodTypePost
+    [AFHttpTool requestWithMethod:RequestMethodTypePost protocolType:RequestProtocolTypeText
                               url:strURL
                            params:params
                           success:success failure:failure];
@@ -693,7 +696,7 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
     NSString* strURL = [NSString stringWithFormat:@"/api/accounts/enterprise-requests/.json"];
     NSDictionary *params = @{@"receiver":userId};
 
-    [AFHttpTool requestWithMethod:RequestMethodTypePost
+    [AFHttpTool requestWithMethod:RequestMethodTypePost protocolType:RequestProtocolTypeText
                               url:strURL
                            params:params
                           success:success failure:failure];
@@ -704,7 +707,7 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
                          failure:(void (^)(NSError *error))failure
 {
     NSString* strURL = [NSString stringWithFormat:@"/api/accounts/enterprise-requests/.json"];
-    [AFHttpTool requestWithMethod:RequestMethodTypeGet                              url:strURL  params:nil success:success failure:failure];
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet       protocolType:RequestProtocolTypeText                        url:strURL  params:nil success:success failure:failure];
 }
 
 //同意加入企业
@@ -713,7 +716,7 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
     NSString* strURL = [NSString stringWithFormat:@"/api/accounts/enterprise-requests/%@/.json",requestId];
     NSDictionary *params = @{@"approved":[NSNumber numberWithBool:bApproved]};
 
-    [AFHttpTool requestWithMethod:RequestMethodTypePost                              url:strURL  params:params success:success failure:failure];
+    [AFHttpTool requestWithMethod:RequestMethodTypePost   protocolType:RequestProtocolTypeText                           url:strURL  params:params success:success failure:failure];
 }
 
 //关注/取消关注企业
@@ -721,7 +724,7 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
 {
     NSString* strURL = [NSString stringWithFormat:@"/api/accounts/enterprises/%@/follow/.json",enterpriseId];
     NSDictionary *params = @{@"action":action};
-    [AFHttpTool requestWithMethod:RequestMethodTypePost                              url:strURL  params:params success:success failure:failure];
+    [AFHttpTool requestWithMethod:RequestMethodTypePost    protocolType:RequestProtocolTypeText                          url:strURL  params:params success:success failure:failure];
 }
 
 /******** 获取企业详情******
@@ -732,7 +735,7 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
 +(void) getEnterpriseDetail:(NSString*)enterpriseId success:(void (^)(id response))success failure:(void (^)(NSError *error))failure
 {
     NSString* strURL = [NSString stringWithFormat:@"/api/accounts/enterprises/%@/.json",enterpriseId];
-    [AFHttpTool requestWithMethod:RequestMethodTypeGet                              url:strURL  params:nil success:success failure:failure];
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet   protocolType:RequestProtocolTypeText                           url:strURL  params:nil success:success failure:failure];
 }
 
 //获取关注的企业列表
@@ -740,7 +743,7 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
                                 failure:(void (^)(NSError *error))failure
 {
     NSString* strURL = [NSString stringWithFormat:@"/api/accounts/enterprises/?follow"];
-    [AFHttpTool requestWithMethod:RequestMethodTypeGet                              url:strURL  params:nil success:success failure:failure];
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet   protocolType:RequestProtocolTypeText                           url:strURL  params:nil success:success failure:failure];
 
 }
 
@@ -753,7 +756,7 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
 {
     NSDictionary *params = @{@"q":keyWord};
     NSString* strURL = [NSString stringWithFormat:@"/api/accounts/enterprises/.json"];
-    [AFHttpTool requestWithMethod:RequestMethodTypeGet                              url:strURL  params:params success:success failure:failure];
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet  protocolType:RequestProtocolTypeText                            url:strURL  params:params success:success failure:failure];
 }
 
 //获取最新消息
@@ -761,7 +764,7 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
 {
     ///api/subscriptions/latest-message/
     NSString* strURL = [NSString stringWithFormat:@"/api/subscriptions/latest-message/.json"];
-    [AFHttpTool requestWithMethod:RequestMethodTypeGet                              url:strURL  params:nil success:success failure:failure];
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet protocolType:RequestProtocolTypeText                             url:strURL  params:nil success:success failure:failure];
     
 }
 
@@ -769,14 +772,14 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
 +(void)getLastestRillMessageSucess:(void (^)(id response))success failure:(void (^)(NSError* err))failure
 {
     NSString* strURL = [NSString stringWithFormat:@"/api/subscriptions/latest-riil-message/.json"];
-    [AFHttpTool requestWithMethod:RequestMethodTypeGet                              url:strURL  params:nil success:success failure:failure];
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet protocolType:RequestProtocolTypeText                             url:strURL  params:nil success:success failure:failure];
 }
 
 //获取Rill所有系统消息
 +(void)getRillMessageListSucess:(void (^)(id response))success failure:(void (^)(NSError* err))failure
 {
     NSString* strURL = [NSString stringWithFormat:@"/api/subscriptions/.json"];
-    [AFHttpTool requestWithMethod:RequestMethodTypeGet                              url:strURL  params:nil success:success failure:failure];
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet   protocolType:RequestProtocolTypeText                           url:strURL  params:nil success:success failure:failure];
 }
 
 //向Rill发送消息
@@ -784,21 +787,21 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
 {
     NSString* strURL = [NSString stringWithFormat:@"/api/subscriptions/.json"];
     NSDictionary *params = @{@"suggestion":content};
-    [AFHttpTool requestWithMethod:RequestMethodTypePost                              url:strURL  params:params success:success failure:failure];
+    [AFHttpTool requestWithMethod:RequestMethodTypePost   protocolType:RequestProtocolTypeText                           url:strURL  params:params success:success failure:failure];
 }
 
 //获取最近的一条企业消息
 +(void)getLastestEnterpriseMessageSucess:(void (^)(id response))success failure:(void (^)(NSError* err))failure
 {
     NSString* strURL = [NSString stringWithFormat:@"/api/subscriptions/latest-message/.json"];
-    [AFHttpTool requestWithMethod:RequestMethodTypeGet                              url:strURL  params:nil success:success failure:failure];
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet  protocolType:RequestProtocolTypeText                            url:strURL  params:nil success:success failure:failure];
 }
 
 //获取所有企业的最后一条消息列表
 +(void)getAllEnterpriseLastestMessageListSucess:(void (^)(id response))success failure:(void (^)(NSError* err))failure
 {
     NSString* strURL = [NSString stringWithFormat:@"/api/subscriptions/list-latest-messages/.json"];
-    [AFHttpTool requestWithMethod:RequestMethodTypeGet                              url:strURL  params:nil success:success failure:failure];
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet   protocolType:RequestProtocolTypeText                           url:strURL  params:nil success:success failure:failure];
 
 }
 
@@ -807,7 +810,7 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
 {
     NSString* strURL = [NSString stringWithFormat:@"/api/subscriptions/%@/.json",enterpriseId];
     
-    [AFHttpTool requestWithMethod:RequestMethodTypeGet                              url:strURL  params:nil success:success failure:failure];
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet protocolType:RequestProtocolTypeText                             url:strURL  params:nil success:success failure:failure];
 }
 
 //向企业发送消息
@@ -817,6 +820,6 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
     
     NSDictionary *params = @{@"suggestion":content};
 
-    [AFHttpTool requestWithMethod:RequestMethodTypePost                              url:strURL  params:params success:success failure:failure];
+    [AFHttpTool requestWithMethod:RequestMethodTypePost protocolType:RequestProtocolTypeText                             url:strURL  params:params success:success failure:failure];
 }
 @end

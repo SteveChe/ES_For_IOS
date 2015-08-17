@@ -16,6 +16,12 @@ typedef NS_ENUM(NSInteger, RequestMethodType){
     RequestMethodTypeGet = 2
 };
 
+typedef NS_ENUM(NSInteger, RequestProtocolType){
+    RequestProtocolTypeText = 0,
+    RequestProtocolTypeJson = 1
+};
+
+
 typedef enum : NSUInteger {
     ESTaskListWithChatId = 200,
     ESTaskListWithInitiatorId,
@@ -35,7 +41,7 @@ typedef enum : NSUInteger {
  *  @param success      请求成功后的回调（请将请求成功后想做的事情写到这个block中）
  *  @param failure      请求失败后的回调（请将请求失败后想做的事情写到这个block中）
  */
-+ (void)requestWithMethod:(RequestMethodType)methodType
++ (void)requestWithMethod:(RequestMethodType)methodType protocolType:(RequestProtocolType) protocolType
                       url:(NSString*)url
                    params:(NSDictionary*)params
                   success:(void (^)(id response))success
