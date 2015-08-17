@@ -529,11 +529,8 @@
                           success:(void (^)(id))success
                           failure:(void (^)(NSError *))failure {
     NSDictionary *param = @{@"name":userInfo.userName,
-
-
                             @"position":userInfo.position,
-                            @"description":userInfo.contactDescription,
-};
+                            @"description":userInfo.contactDescription};
     
     [AFHttpTool requestWithMethod:RequestMethodTypePost
                               url:[NSString stringWithFormat:@"/api/accounts/users/%@/.json",userInfo.userId]
