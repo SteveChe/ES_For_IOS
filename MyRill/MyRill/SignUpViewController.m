@@ -55,6 +55,7 @@
 }
 
 - (IBAction)signUpBtnOnClicked:(UIButton *)sender {
+    [self hideKeyboard];
     [_signUpDataParse signUpWithPhoneNum:self.phoneNumTxtField.text name:self.usernameTxtField.text password:self.pwdTxtField.text
                         verificationCode:self.captchasTxtField.text];
 }
@@ -93,7 +94,7 @@
 #pragma mark SignUpDataDelegate - method
 -(void)signUpSucceed
 {
-    [[CustomShowMessage getInstance] showNotificationMessage:@"登录成功"];
+    [[CustomShowMessage getInstance] showNotificationMessage:@"注册成功"];
     
     [self performSelector:@selector(changeToLoginView)
                withObject:nil

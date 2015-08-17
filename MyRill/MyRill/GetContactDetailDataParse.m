@@ -124,7 +124,7 @@
                      NSString* enterprise_qrcode = [temDic valueForKey:@"enterprise_qrcode"];
                      if (enterprise_qrcode != nil && ![enterprise_qrcode isEqual:[NSNull null]])
                      {
-                         userDetailInfo.enterprise_qrcode = qrcode;
+                         userDetailInfo.enterprise_qrcode = enterprise_qrcode;
                      }
                  
                      NSMutableArray* tag_data = [temDic valueForKey:@"tag_data"];
