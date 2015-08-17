@@ -8,12 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "ChangeUserMsgDataParse.h"
+typedef enum : NSUInteger {
+    ESUserMsgName = 300,
+    ESUserMsgPosition
+} ESUserMsg;
 
 @interface UserNameAndPositionViewController : UIViewController
 
+@property (nonatomic, assign) ESUserMsg type;
 @property (nonatomic, copy) NSString *nameAndPositionStr;
-
-@property (nonatomic, assign) ESUserMsgType type;
-@property (nonatomic, copy) NSString *userID;
 
 @end

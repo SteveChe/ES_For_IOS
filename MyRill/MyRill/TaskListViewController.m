@@ -51,13 +51,15 @@
         self.dataSource = nil;
         self.dataSource = [NSArray arrayWithArray:taskList];
         [self.view addSubview:self.tableView];
+        [self.tableView reloadData];
     } else {
         [self.view addSubview:self.msgLbl];
         
         __weak UIView *ws = self.view;
         [self.msgLbl mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(ws.mas_centerX);
-            make.centerY.equalTo(ws.mas_centerY);
+            make.centerY.equalTo(ws.mas_centerY).with.offset(-20);
+            make.width.equalTo(ws.mas_width).with.offset(-60);
         }];
         [self.view layoutIfNeeded];
     }

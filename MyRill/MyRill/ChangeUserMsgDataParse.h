@@ -7,11 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AFHttpTool.h"
+@class ESUserDetailInfo;
 
 @protocol ChangeUserMsgDelegate <NSObject>
 
-- (void)changeUserMsgSuccess;
+- (void)changeUserMsgSuccess:(ESUserDetailInfo *)userInfo;
+- (void)changeUserMsgFailed:(NSString *)error;
 
 @end
 
@@ -19,8 +20,6 @@
 
 @property (nonatomic, weak) id<ChangeUserMsgDelegate> delegate;
 
-- (void)changeUserMsgWithUserID:(NSString *)userID
-                           type:(ESUserMsgType)type
-                        content:(NSString *)content;
+- (void)changeUserMsgWithUserInfo:(ESUserDetailInfo *)userInfo;
 
 @end

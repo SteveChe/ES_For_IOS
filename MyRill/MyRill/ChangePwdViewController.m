@@ -39,6 +39,9 @@
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                  action:@selector(hideKeyboard)];
     [self.view addGestureRecognizer:tapGesture];
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    self.titleLabel.text = [@"用户ID:" stringByAppendingString:[userDefaults stringForKey:@"UserName"]];
 }
 
 #pragma mark - ChangePwdDataDelegate methods
@@ -79,7 +82,7 @@
 #pragma mark - private methods
 - (void)showTips:(NSString *)tip mode:(MRProgressOverlayViewMode)mode isDismiss:(BOOL)isDismiss isSucceuss:(BOOL)success
 {
-    [self.view addSubview:self.progress];
+    [self.navigationController.view addSubview:self.progress];
     [self.progress show:YES];
     self.progress.mode = mode;
     self.progress.titleLabelText = tip;

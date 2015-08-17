@@ -23,8 +23,9 @@
 #import "MessageListSelfTableViewCell.h"
 #import "MessageListTableViewCell.h"
 #import "ESTaskComment.h"
+#import "CloseTaskDataParse.h"
 
-@interface TaskViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate, GetTaskCommentListDelegate, UITextFieldDelegate, SendTaskCommenDelegate, EditTaskDelegate>
+@interface TaskViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate, GetTaskCommentListDelegate, UITextFieldDelegate, SendTaskCommenDelegate, EditTaskDelegate, CloseTaskDelegate>
 
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *holdViews;
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *txtHoldViews;
@@ -46,6 +47,7 @@
 @property (nonatomic, copy) NSString *userID;
 @property (nonatomic, strong) GetTaskCommentListDataParse *getTaskCommentListDP;
 @property (nonatomic, strong) SendTaskCommentDataParse *sendTaskCommentDP;
+@property (nonatomic, strong) CloseTaskDataParse *closeTaskDP;
 
 @property (nonatomic,strong) NSMutableArray* tastObserversList;//关注人列表,ESUserInfo
 @property (nonatomic,strong) NSMutableArray* tastRecipientsList;//负责人列表,ESUserInfo
@@ -168,6 +170,10 @@
     [self.dataSource addObject:taskComment];
     [self.tableView reloadData];
     //    [self.tableView scrollToRowAtIndexPath:nil atScrollPosition:nil animated:nil];
+    
+}
+
+- (void)closeTaskSuccess {
     
 }
 
@@ -348,7 +354,11 @@
     ESTask *task = [[ESTask alloc] init];
     task.taskID = self.taskModel.taskID;
     task.title = self.taskTitleTxtField.text;
-    task.endDate = self.taskModel.endDate;
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    NSDate *date = self.dateSelectedPicker.date;
+    task.endDate = [dateFormatter stringFromDate:date];
     task.chatID = self.taskModel.chatID;
     task.taskDescription = self.taskDescriptioinTextView.text;
     
@@ -361,7 +371,7 @@
     }
     
     task.personInCharge = [self.assignerDataSource firstObject];
-    task.observers = [NSArray arrayWithArray:self.followsDataSource];
+    task.observers = self.followsDataSource;
     
     [self.editTaskDP EditTaskWithTaskModel:task];
 }
@@ -528,6 +538,13 @@
     }
 }
 
+
+- (IBAction)switchOnClicked:(UISwitch *)sender {
+    if (sender.on == YES) {
+        [self.closeTaskDP closeTaskWithTaskID:[self.taskModel.taskID stringValue]];
+    }
+}
+
 #pragma mark - setters&getters
 - (void)setHoldViews:(NSArray *)holdViews {
     _holdViews = holdViews;
@@ -642,6 +659,14 @@
     }
     
     return _sendTaskCommentDP;
+}
+
+- (CloseTaskDataParse *)closeTaskDP {
+    if (!_closeTaskDP) {
+        _closeTaskDP = [[CloseTaskDataParse alloc] init];
+        _closeTaskDP.delegate = self;
+    }
+    return _closeTaskDP;
 }
 
 @end

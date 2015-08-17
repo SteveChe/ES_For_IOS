@@ -16,6 +16,7 @@
 #import "ESUserInfo.h"
 #import "RCDSelectPersonViewController.h"
 #import "ChatViewController.h"
+#import "MRProgress.h"
 
 @interface AddTaskViewController () <AddTaskDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UITextFieldDelegate, UITextViewDelegate>
 
@@ -34,6 +35,7 @@
 @property (nonatomic, strong) AddTaskDataParse *addTaskDataDP;
 @property (nonatomic,strong) NSMutableArray* tastObserversList;//关注人列表,ESUserInfo
 @property (nonatomic,strong) NSMutableArray* tastRecipientsList;//负责人列表,ESUserInfo
+@property (nonatomic, strong) MRProgressOverlayView *progress;
 
 @end
 
@@ -85,8 +87,12 @@
 }
 
 #pragma mark - AddTaskDelegate method
-- (void)AddTaskSuccess {
-    
+- (void)addTaskSuccess {
+    [self showTips:@"添加成功!" mode:MRProgressOverlayViewModeCheckmark isDismiss:YES isSucceuss:YES];
+}
+
+- (void)addTaskFailed:(NSString *)errorMessage {
+    [self showTips:@"添加失败!" mode:MRProgressOverlayViewModeCross isDismiss:YES isSucceuss:NO];
 }
 
 #pragma mark - UICollectionViewDataSource&UICollectionViewDelegateFlowLayout
@@ -274,30 +280,93 @@
 }
 
 - (void)confirmItemOnClicked {
-    ESTask *task = [[ESTask alloc] init];
-    task.title = self.taskTitleTxtField.text;
-    task.taskDescription = self.taskDescriptionTxtView.text;
     
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
-    NSDate *date = self.dateSelectedPicker.date;
-    task.endDate = [dateFormatter stringFromDate:date];
-    
-    if ([self.chatID isKindOfClass:[NSNull class]] || [self.chatID isEqualToString:@""]) {
-        task.chatID = @"";
+    if ([ColorHandler isNullOrEmptyString:self.taskTitleTxtField.text]) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"注意"
+                                                                                 message:@"请输入任务名称!"
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"好的!" style:UIAlertActionStyleDefault handler:nil]];
+        [self presentViewController:alertController
+                           animated:YES
+                         completion:nil];
+        return;
+    } else if ([ColorHandler isNullOrEmptyString:self.taskDescriptionTxtView.text]) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"注意"
+                                                                                 message:@"请输入任务说明!"
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"好的!" style:UIAlertActionStyleDefault handler:nil]];
+        [self presentViewController:alertController
+                           animated:YES
+                         completion:nil];
+        return;
+    } else if (self.assignerDataSource.count == 0) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"注意"
+                                                                                 message:@"分配人不能为空!"
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"好的!" style:UIAlertActionStyleDefault handler:nil]];
+        [self presentViewController:alertController
+                           animated:YES
+                         completion:nil];
+        return;
+    } else if (self.followsDataSource.count == 0) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"注意"
+                                                                                 message:@"关注人不能为空!"
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"好的!" style:UIAlertActionStyleDefault handler:nil]];
+        [self presentViewController:alertController
+                           animated:YES
+                         completion:nil];
+        return;
     } else {
-        task.chatID = self.chatID;
+        ESTask *task = [[ESTask alloc] init];
+        task.title = self.taskTitleTxtField.text;
+        task.taskDescription = self.taskDescriptionTxtView.text;
+        
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+        NSDate *date = self.dateSelectedPicker.date;
+        task.endDate = [dateFormatter stringFromDate:date];
+        
+        if ([self.chatID isKindOfClass:[NSNull class]] || [self.chatID isEqualToString:@""]) {
+            task.chatID = @"";
+        } else {
+            task.chatID = self.chatID;
+        }
+        
+        task.personInCharge = [self.assignerDataSource firstObject];
+        task.observers = self.followsDataSource;
+        
+        [self.addTaskDataDP addTaskWithModel:task];
     }
-    
-    task.personInCharge = [self.assignerDataSource firstObject];
-    task.observers = [NSArray arrayWithArray:self.followsDataSource];
-    
-    [self.addTaskDataDP addTaskWithModel:task];
-    [self cancelItemOnClicked];
 }
 
 - (void)cancelItemOnClicked {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - private methods
+- (void)showTips:(NSString *)tip mode:(MRProgressOverlayViewMode)mode isDismiss:(BOOL)isDismiss isSucceuss:(BOOL)success
+{
+    [self.navigationController.view addSubview:self.progress];
+    [self.progress show:YES];
+    self.progress.mode = mode;
+    self.progress.titleLabelText = tip;
+    if (isDismiss)
+    {
+        [self performSelector:@selector(dismissProgress:) withObject:@(success) afterDelay:1.8];
+    }
+}
+
+//参数作为布尔对象传递，使用Bool会出问题
+- (void)dismissProgress:(Boolean)isSuccess
+{
+    if (self.progress)
+    {
+        [self.progress dismiss:YES];
+        if (isSuccess) {
+            [self cancelItemOnClicked];
+        }
+    }
 }
 
 #pragma mark - setters&getters
@@ -386,6 +455,14 @@
         _followsDataSource = [[NSMutableArray alloc] init];
     }
     return _followsDataSource;
+}
+
+- (MRProgressOverlayView *)progress {
+    if (!_progress) {
+        _progress = [[MRProgressOverlayView alloc] init];
+    }
+    
+    return _progress;
 }
 
 @end

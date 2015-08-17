@@ -58,8 +58,8 @@
     [userDefaults setObject:userInfo.userId forKey:@"UserId"];
     [userDefaults setObject:userInfo.userName forKey:@"UserName"];
     [userDefaults setObject:userInfo.phoneNumber forKey:@"PhoneNumber"];
-    [userDefaults setObject:userInfo.enterprise forKey:@"Enterprise"];
-    [userDefaults setObject:userInfo.position forKey:@"Position"];
+    [userDefaults setObject:userInfo.enterprise forKey:@"UserEnterprise"];
+    [userDefaults setObject:userInfo.position forKey:@"UserPosition"];
     [userDefaults setObject:[@"http://120.25.249.144" stringByAppendingString:userInfo.portraitUri] forKey:@"UserImageURL"];
     [userDefaults synchronize];
 }

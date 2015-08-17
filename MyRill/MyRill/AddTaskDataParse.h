@@ -11,7 +11,8 @@
 
 @protocol AddTaskDelegate <NSObject>
 
-- (void)AddTaskSuccess;
+- (void)addTaskSuccess;
+- (void)addTaskFailed:(NSString *)errorMessage;
 
 @end
 

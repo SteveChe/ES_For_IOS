@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 @class AFHTTPRequestOperation;
 @class ESTask;
+@class ESUserDetailInfo;
 
 typedef NS_ENUM(NSInteger, RequestMethodType){
     RequestMethodTypePost = 1,
@@ -23,12 +24,6 @@ typedef enum : NSUInteger {
     ESTaskOverdue,
     ESTaskListQ
 } ESTaskListType;
-
-typedef enum : NSUInteger {
-    ESUserMsgName = 300,
-    ESUserMsgPosition,
-    ESUserMSgDescription
-} ESUserMsgType;
 
 @interface AFHttpTool : NSObject
 /**
@@ -159,6 +154,11 @@ typedef enum : NSUInteger {
                       success:(void (^)(id response))success
                       failure:(void (^)(NSError *error))failure;
 
+/****** 关闭任务 ****/
++ (void)closeTaskWithTaskID:(NSString *)taskID
+                    success:(void (^)(id response))success
+                    failure:(void (^)(NSError *error))failure;
+
 /****** 提交任务评论 ****/
 + (void)sendTaskCommentWithTaskID:(NSString *)taskID
                           comment:(NSString *)comment
@@ -179,11 +179,9 @@ typedef enum : NSUInteger {
                failure:(void (^)(NSError *err))failure;
 
 /****** 修改个人静态信息 ****/
-+ (void)changeUserMsgWithUserID:(NSString *)userID
-                           type:(ESUserMsgType)type
-                        content:(NSString *)content
-                        success:(void (^)(id response))success
-                        failure:(void (^)(NSError *err))failure;
++ (void)changeUserMsgWithUserInfo:(ESUserDetailInfo *)userInfo
+                           success:(void (^)(id response))success
+                           failure:(void (^)(NSError *err))failure;
 
 //get verification code
 + (void)getVerificationCode:(NSString *)phoneNum
