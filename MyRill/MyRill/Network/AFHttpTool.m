@@ -474,12 +474,12 @@
         [observerArray addObject:contractor.useID];
     }
 
-    NSError *error = nil;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:observerArray
-                                                       options:NSJSONWritingPrettyPrinted
-                                                         error:&error];
-    NSString* strJson = [[NSString alloc]initWithData:jsonData
-                                             encoding:NSUTF8StringEncoding];
+//    NSError *error = nil;
+//    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:observerArray
+//                                                       options:NSJSONWritingPrettyPrinted
+//                                                         error:&error];
+//    NSString* strJson = [[NSString alloc]initWithData:jsonData
+//                                             encoding:NSUTF8StringEncoding];
     
     NSDictionary *param = @{@"title":task.title,
                             @"description":task.taskDescription,
@@ -487,10 +487,29 @@
                             @"status":task.status,
                             @"chat_id":task.chatID,
                             @"person_in_charge":task.personInCharge.useID,
-                            @"observers":strJson};
+                            @"observers":observerArray};
     
     [AFHttpTool requestWithMethod:RequestMethodTypePost
                               url:[NSString stringWithFormat:@"/api/assignments/%@/.json",task.taskID]
+                           params:param
+                          success:success
+                          failure:failure];
+}
+
++ (void)closeTaskWithTaskID:(NSString *)taskID
+                    success:(void (^)(id))success
+                    failure:(void (^)(NSError *))failure {
+    
+    NSError* error;
+    NSString *cartJSON = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:@{@"status":@"1"}
+                                                                                        options:NSJSONWritingPrettyPrinted
+                                                                                          error:&error]
+                                               encoding:NSUTF8StringEncoding];
+    NSDictionary *param = @{@"_method":@"PATCH",
+                            @"_content_type":@"application/json",
+                            @"_content":cartJSON};
+    [AFHttpTool requestWithMethod:RequestMethodTypePost
+                              url:[NSString stringWithFormat:@"/api/assignments/%@/.json",taskID]
                            params:param
                           success:success
                           failure:failure];

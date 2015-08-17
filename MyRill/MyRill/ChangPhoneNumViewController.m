@@ -15,6 +15,7 @@
 @interface ChangPhoneNumViewController () <ChangePhoneNumDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *contentView;
+@property (weak, nonatomic) IBOutlet UILabel *phoneNumLbl;
 @property (weak, nonatomic) IBOutlet UITextField *newphoneNumTxtField;
 @property (weak, nonatomic) IBOutlet UITextField *verificationTxtField;
 @property (weak, nonatomic) IBOutlet UIButton *verificationBtn;
@@ -41,6 +42,9 @@
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                  action:@selector(hideKeyboard)];
     [self.view addGestureRecognizer:tapGesture];
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    self.phoneNumLbl.text = [@"当前手机号:" stringByAppendingString:[userDefaults stringForKey:@"PhoneNumber"]];
 }
 
 #pragma mark - ChangePhoneNumDelegate methods
@@ -102,7 +106,7 @@
 #pragma mark - private methods
 - (void)showTips:(NSString *)tip mode:(MRProgressOverlayViewMode)mode isDismiss:(BOOL)isDismiss isSucceuss:(BOOL)success
 {
-    [self.view addSubview:self.progress];
+    [self.navigationController.view addSubview:self.progress];
     [self.progress show:YES];
     self.progress.mode = mode;
     self.progress.titleLabelText = tip;

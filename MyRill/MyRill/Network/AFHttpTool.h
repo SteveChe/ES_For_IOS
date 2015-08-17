@@ -154,6 +154,11 @@ typedef enum : NSUInteger {
                       success:(void (^)(id response))success
                       failure:(void (^)(NSError *error))failure;
 
+/****** 关闭任务 ****/
++ (void)closeTaskWithTaskID:(NSString *)taskID
+                    success:(void (^)(id response))success
+                    failure:(void (^)(NSError *error))failure;
+
 /****** 提交任务评论 ****/
 + (void)sendTaskCommentWithTaskID:(NSString *)taskID
                           comment:(NSString *)comment

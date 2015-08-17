@@ -23,7 +23,7 @@
 }
 
 - (void)updateCell:(ESContactor *)contactor {
-    [self.userImg sd_setImageWithURL:[NSURL URLWithString:contactor.imgURLstr] placeholderImage:nil];
+    [self.userImg sd_setImageWithURL:[NSURL URLWithString:contactor.imgURLstr] placeholderImage:[UIImage imageNamed:@"头像_100"]];
     self.name.text = contactor.name;
 }
 

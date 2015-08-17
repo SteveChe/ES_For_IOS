@@ -129,6 +129,9 @@
                                     </label>
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="rlD-Em-wye">
                                         <rect key="frame" x="533" y="7" width="51" height="31"/>
+                                        <connections>
+                                            <action selector="switchOnClicked:" destination="-1" eventType="valueChanged" id="fI5-5b-5FP"/>
+                                        </connections>
                                     </switch>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
