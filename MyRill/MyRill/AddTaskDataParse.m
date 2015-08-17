@@ -8,6 +8,7 @@
 
 #import "AddTaskDataParse.h"
 #import "AFHttpTool.h"
+#import "DataParseDefine.h"
 
 @implementation AddTaskDataParse
 
@@ -15,8 +16,20 @@
     [AFHttpTool addTaskWithModel:task
                          success:^(id response) {
                              NSDictionary *responseDic = (NSDictionary *)response;
+                             NSNumber *errorCodeNum = responseDic[NETWORK_ERROR_CODE];
+                             
+                             if (errorCodeNum == nil || [errorCodeNum isEqual:[NSNull null]]) {
+                                 NSLog(@"请求有误！");
+                                 return;
+                             }
+                             
+                             NSInteger errorCode = [errorCodeNum integerValue];
+                             if (errorCode == 0) {
+                                 [self.delegate addTaskSuccess];
+                             }
                          } failure:^(NSError *error) {
                              NSLog(@"%@",[error debugDescription]);
+                             [self.delegate addTaskFailed:[error debugDescription]];
                          }];
 }
 

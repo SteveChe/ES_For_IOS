@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ChangeUserMsgDataParse.h"
 
 @interface UserDescriptionChangeViewController : UIViewController
+
+@property (nonatomic, copy) NSString *descriptionStr;
 
 @end

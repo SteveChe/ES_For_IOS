@@ -348,7 +348,11 @@
     ESTask *task = [[ESTask alloc] init];
     task.taskID = self.taskModel.taskID;
     task.title = self.taskTitleTxtField.text;
-    task.endDate = self.taskModel.endDate;
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    NSDate *date = self.dateSelectedPicker.date;
+    task.endDate = [dateFormatter stringFromDate:date];
     task.chatID = self.taskModel.chatID;
     task.taskDescription = self.taskDescriptioinTextView.text;
     
@@ -361,7 +365,7 @@
     }
     
     task.personInCharge = [self.assignerDataSource firstObject];
-    task.observers = [NSArray arrayWithArray:self.followsDataSource];
+    task.observers = self.followsDataSource;
     
     [self.editTaskDP EditTaskWithTaskModel:task];
 }

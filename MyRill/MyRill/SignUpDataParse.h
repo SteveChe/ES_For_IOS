@@ -7,13 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+
 @protocol SignUpDataDelegate <NSObject>
 
 -(void)signUpSucceed;
--(void)signUpFailed:(NSString*)errorMessage;
+-(void)signUpFailed:(NSString *)errorMessage;
 
 @end
-
 
 @interface SignUpDataParse : NSObject
 @property (nonatomic,weak)id<SignUpDataDelegate>delegate;

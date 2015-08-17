@@ -23,6 +23,7 @@
 #import "UserInfoDataSource.h"
 #import "UserNameAndPositionViewController.h"
 #import "ESNavigationController.h"
+#import "UserDescriptionChangeViewController.h"
 
 @interface UserMsgViewController () <LogoutDataDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ContactDetailDataDelegate, ChangeUserImageDataDelegate>
 
@@ -32,6 +33,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *UserNameLbl;
 @property (weak, nonatomic) IBOutlet UILabel *UserEnterpriseLbl;
 @property (weak, nonatomic) IBOutlet UILabel *UserPositionLbl;
+@property (weak, nonatomic) IBOutlet UILabel *userDescriptionLbl;
 @property (nonatomic, strong) SignOutDataParse *signOutDP;
 @property (nonatomic, strong) MRProgressOverlayView *progress;
 @property (nonatomic, strong) ChangeUserImageDataParse *changeUserImageDP;
@@ -66,6 +68,7 @@
     self.UserNameLbl.text = [userDefaultes stringForKey:@"UserName"];
     self.UserEnterpriseLbl.text = [userDefaultes stringForKey:@"UserEnterprise"];
     self.UserPositionLbl.text = [userDefaultes stringForKey:@"UserPosition"];
+    self.userDescriptionLbl.text = [userDefaultes stringForKey:@"UserDecription"];
 
     //更新头像缓存的url，若url有变化
     [self.userIcon sd_setImageWithURL:[NSURL URLWithString:[userDefaultes stringForKey:@"UserImageURL"]] placeholderImage:[UIImage imageNamed:@"icon.png"]];
@@ -175,9 +178,8 @@
             {
                 UserNameAndPositionViewController *nameAndPositionVC = [[UserNameAndPositionViewController alloc] init];
                 nameAndPositionVC.title = @"用户名修改";
-                nameAndPositionVC.nameAndPositionStr = self.UserNameLbl.text;
-                nameAndPositionVC.userID = self.userId;
                 nameAndPositionVC.type = ESUserMsgName;
+                nameAndPositionVC.nameAndPositionStr = self.UserNameLbl.text;
                 ESNavigationController *nav = [[ESNavigationController alloc] initWithRootViewController:nameAndPositionVC];
                 [self.navigationController presentViewController:nav
                                                         animated:YES
@@ -189,9 +191,8 @@
             {
                 UserNameAndPositionViewController *nameAndPositionVC = [[UserNameAndPositionViewController alloc] init];
                 nameAndPositionVC.title = @"职位修改";
-                nameAndPositionVC.nameAndPositionStr = self.UserPositionLbl.text;
-                nameAndPositionVC.userID = self.userId;
                 nameAndPositionVC.type = ESUserMsgPosition;
+                nameAndPositionVC.nameAndPositionStr = self.UserPositionLbl.text;
                 ESNavigationController *nav = [[ESNavigationController alloc] initWithRootViewController:nameAndPositionVC];
                 [self.navigationController presentViewController:nav
                                                         animated:YES
@@ -206,6 +207,16 @@
             self.qrCodeType = @"个人";
             [self.getContactDetailDP getContactDetail:self.userId];
             break;
+        case 906:
+            {
+                UserDescriptionChangeViewController *userDescriptionVC = [[UserDescriptionChangeViewController alloc] init];
+                userDescriptionVC.title = @"个人简介修改";
+                userDescriptionVC.descriptionStr = [self.userDescriptionLbl.text substringFromIndex:3];
+                ESNavigationController *nav = [[ESNavigationController alloc] initWithRootViewController:userDescriptionVC];
+                [self.navigationController presentViewController:nav
+                                                        animated:YES
+                                                      completion:nil];
+            }
             
         default:
             break;

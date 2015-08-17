@@ -8,6 +8,7 @@
 
 #import "UserNameAndPositionViewController.h"
 #import "ColorHandler.h"
+#import "ESUserDetailInfo.h"
 
 @interface UserNameAndPositionViewController () <ChangeUserMsgDelegate>
 
@@ -53,9 +54,21 @@
 }
 
 - (void)confirmItemOnClicked {
-    [self.changeUserMsgDP changeUserMsgWithUserID:self.userID
-                                             type:self.type
-                                          content:self.nameAndPositionTxtField.text];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    ESUserDetailInfo *userInfo = [[ESUserDetailInfo alloc] init];
+    userInfo.userId = [userDefaults stringForKey:@"UserId"];
+    
+    if (self.type == ESUserMsgName) {
+        userInfo.userName = self.nameAndPositionTxtField.text;
+        userInfo.position = [userDefaults stringForKey:@"UserPosition"];
+    } else {
+        userInfo.userName = [userDefaults stringForKey:@"UserName"];
+        userInfo.position = self.nameAndPositionTxtField.text;
+    }
+    
+    userInfo.contactDescription = [userDefaults stringForKey:@"UserDecription"];
+    
+    [self.changeUserMsgDP changeUserMsgWithUserInfo:userInfo];
 }
 
 - (void)cancelItemOnClicked {

@@ -11,6 +11,7 @@
 #import "ESProfession.h"
 #import "ESTask.h"
 #import "ESContactor.h"
+#import "ESUserDetailInfo.h"
 
 #define DEV_SERVER_ADDRESS @"http://120.25.249.144/"
 #define ContentType @"text/json"
@@ -406,11 +407,15 @@
         [observerArray addObject:contactor.useID];
     }
 
+    NSLog(@"%@",observerArray);
+    
     NSDictionary *param = @{@"title":task.title,
                             @"description":task.taskDescription,
                             @"due_date":task.endDate,
                             @"person_in_charge":task.personInCharge.useID,
-                            @"observers":observerArray,};
+                            @"observers":observerArray,
+                            @"chat_id":@""
+                            };
     
     [AFHttpTool requestWithMethod:RequestMethodTypePost
                               url:@"/api/assignments/.json"
@@ -469,13 +474,20 @@
         [observerArray addObject:contractor.useID];
     }
 
+    NSError *error = nil;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:observerArray
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:&error];
+    NSString* strJson = [[NSString alloc]initWithData:jsonData
+                                             encoding:NSUTF8StringEncoding];
+    
     NSDictionary *param = @{@"title":task.title,
                             @"description":task.taskDescription,
                             @"due_date":task.endDate,
                             @"status":task.status,
                             @"chat_id":task.chatID,
                             @"person_in_charge":task.personInCharge.useID,
-                            @"observers":observerArray};
+                            @"observers":strJson};
     
     [AFHttpTool requestWithMethod:RequestMethodTypePost
                               url:[NSString stringWithFormat:@"/api/assignments/%@/.json",task.taskID]
@@ -513,37 +525,21 @@
                           failure:failure];
 }
 
-+ (void)changeUserMsgWithUserID:(NSString *)userID
-                           type:(ESUserMsgType)type
-                        content:(NSString *)content
-                        success:(void (^)(id response))success
-                        failure:(void (^)(NSError *err))failure {
-    NSDictionary *param = nil;
-    switch (type) {
-        case ESUserMsgName:
-            param = @{@"name":content};
-            [AFHttpTool requestWithMethod:RequestMethodTypePost
-                                      url:[NSString stringWithFormat:@"/api/accounts/users/%@/.json",userID]
-                                   params:param
-                                  success:success
-                                  failure:failure];
-            break;
-        case ESUserMsgPosition:
-            param = @{@"position":content};
-            [AFHttpTool requestWithMethod:RequestMethodTypeGet
-                                      url:[NSString stringWithFormat:@"/api/accounts/users/%@/.json",userID]
-                                   params:param
-                                  success:success
-                                  failure:failure];
-            break;
-        case ESUserMSgDescription:
-            param = @{@"description":content};
-            break;
-        default:
-            break;
-    }
++ (void)changeUserMsgWithUserInfo:(ESUserDetailInfo *)userInfo
+                          success:(void (^)(id))success
+                          failure:(void (^)(NSError *))failure {
+    NSDictionary *param = @{@"name":userInfo.userName,
+
+
+                            @"position":userInfo.position,
+                            @"description":userInfo.contactDescription,
+};
     
-    
+    [AFHttpTool requestWithMethod:RequestMethodTypePost
+                              url:[NSString stringWithFormat:@"/api/accounts/users/%@/.json",userInfo.userId]
+                           params:param
+                          success:success
+                          failure:failure];
 }
 
 + (void)changeUserImageWithId:(NSString *)userId
@@ -560,7 +556,7 @@
         NSArray *cookies = [NSKeyedUnarchiver unarchiveObjectWithData:cookiesdata];
         NSHTTPCookie *cookie;
         for (cookie in cookies) {
-            if ([cookie.name  isEqual: @"csrftoken"] )
+            if ([cookie.name  isEqual:@"csrftoken"] )
             {
                 [manager.requestSerializer setValue:cookie.value forHTTPHeaderField:@"X-Csrftoken"];
             }
@@ -577,7 +573,7 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         [format setDateFormat:@"yyyyMMddHHmmss"];
         NSString *timeStamp = [format stringFromDate:[NSDate date]];
         NSString *picName = [timeStamp stringByAppendingString:@".png"];
-        [formData appendPartWithFileData :imageData name:@"avatar" fileName:picName mimeType:@"image/png"];
+        [formData appendPartWithFileData:imageData name:@"avatar" fileName:picName mimeType:@"image/png"];
     }
           success:success
           failure:failure];
@@ -603,8 +599,6 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
     {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"NOTIFICATION_ERROR_MESSAGE" object:@"403"];
     }
-
-
 }
 
 //获取人的标签
