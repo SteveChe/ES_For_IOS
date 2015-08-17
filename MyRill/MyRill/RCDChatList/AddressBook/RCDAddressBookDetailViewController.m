@@ -16,6 +16,7 @@
 #import "UIImageView+WebCache.h"
 #import "ShowQRCodeViewController.h"
 #import "ESTagViewController.h"
+#import "RCDAddFriendViewController.h"
 
 @interface RCDAddressBookDetailViewController ()
 @property (nonatomic,strong) GetContactDetailDataParse* getContactDetailDataParse;
@@ -28,12 +29,13 @@
 //@property (nonatomic,strong) IBOutlet UIImageView* enterpriseQRImageView;
 @property (nonatomic,strong) ESUserDetailInfo* userDetailInfo;
 @property (nonatomic,weak) IBOutlet UIButton* smsButton;
-@property (nonatomic,weak) IBOutlet UIButton*callButton;
+@property (nonatomic,weak) IBOutlet UIButton* callButton;
 @property (nonatomic,weak) IBOutlet UIButton* deleteButton;
 
 -(IBAction)clickStartChatButton:(id)sender;
 -(IBAction)clickCallButton:(id)sender;
 -(IBAction)clickDeleteButton:(id)sender;
+-(IBAction)clickAddContractButton:(id)sender;
 
 @end
 
@@ -48,6 +50,8 @@
     [self initContactDetail];
     UINib *rcdCellNib = [UINib nibWithNibName:@"RCDAddressBookDetailTableViewCell" bundle:nil];
     [self.tableView registerNib:rcdCellNib forCellReuseIdentifier:@"RCDAddressBookDetailTableViewCell"];
+    
+    self.tableView.hidden = YES;
 
 }
 
@@ -71,9 +75,35 @@
     }
 }
 
+-(void)refreshUserDetailButton
+{
+    if (_userDetailInfo == nil)
+    {
+        return;
+    }
+    if (_userDetailInfo.bContact || _userDetailInfo.bMember)
+    {
+        _smsButton.titleLabel.text = @"发起会话";
+        _deleteButton.hidden = NO;
+        _callButton.hidden = NO;
+        [_smsButton removeTarget:self action:@selector(clickStartChatButton:)  forControlEvents:UIControlEventTouchUpInside];
+        [_smsButton addTarget:self action:@selector(clickAddContractButton:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    else
+    {
+        _smsButton.titleLabel.text = @"加为联系人";
+        _deleteButton.hidden = YES;
+        _callButton.hidden = YES;
+        [_smsButton removeTarget:self action:@selector(clickStartChatButton:)  forControlEvents:UIControlEventTouchUpInside];
+        [_smsButton addTarget:self action:@selector(clickAddContractButton:) forControlEvents:UIControlEventTouchUpInside];
+    }
+}
+
 #pragma mark - ContactDetailDataDelegate
 - (void)getContactDetail:(ESUserDetailInfo *)userDetailInfo
 {
+    self.tableView.hidden = NO;
+
     _userDetailInfo = userDetailInfo;
     if (userDetailInfo.userName != nil && ![userDetailInfo.userName isEqual:[NSNull null]] && [userDetailInfo.userName length] > 0)
     {
@@ -91,13 +121,16 @@
     _portraitImageView.layer.cornerRadius = 18.f;
 
     [_portraitImageView sd_setImageWithURL:[NSURL URLWithString:userDetailInfo.portraitUri] placeholderImage:[UIImage imageNamed:@"icon"]];
-//    [_qrCodeImageView sd_setImageWithURL:[NSURL URLWithString:userDetailInfo.qrcode] placeholderImage:[UIImage imageNamed:@"icon"]];
-//    [_enterpriseQRImageView sd_setImageWithURL:[NSURL URLWithString:userDetailInfo.enterprise_qrcode] placeholderImage:[UIImage imageNamed:@"icon"]];
+    
+    [self refreshUserDetailButton];
+    [[CustomShowMessage getInstance] hideWaitingIndicator];
     [self.tableView reloadData];
+    
 }
 - (void)getContactDetailFailed:(NSString*)errorMessage
 {
     [[CustomShowMessage getInstance] showNotificationMessage:errorMessage];
+    
 }
 
 #pragma mark -- UITableViewDataSource
@@ -199,17 +232,12 @@
             showQRCodeVC.imageUrl = _userDetailInfo.qrcode;
             [self.navigationController pushViewController:showQRCodeVC animated:YES];
         }
-        
     }
-
 }
-
 
 #pragma mark - Button Event
 -(IBAction)clickStartChatButton:(id)sender
 {
-//    NSURL* smsURL = [NSURL URLWithString:[NSString stringWithFormat:@"SMS://%@",_userDetailInfo.phoneNumber]];
-//    [[UIApplication sharedApplication]openURL:smsURL];
     if(_userDetailInfo == nil || _userDetailInfo.userId == nil ||
        [_userDetailInfo.userId length]<= 0)
         return;
@@ -231,6 +259,15 @@
 }
 -(IBAction)clickDeleteButton:(id)sender
 {
+    
+}
+-(IBAction)clickAddContractButton:(id)sender
+{
+    if(_userDetailInfo == nil || _userDetailInfo.userId == nil)
+        return;
+    RCDAddFriendViewController *addViewController = [[RCDAddFriendViewController alloc] init];
+    addViewController.strUserId = _userDetailInfo.userId;
+    [self.navigationController pushViewController:addViewController animated:YES];
     
 }
 

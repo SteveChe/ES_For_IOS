@@ -13,14 +13,14 @@
 //#import "RCDRCIMDataSource.h"
 #import "ESUserInfo.h"
 #import "RCDSearchResultTableViewCell.h"
-#import "RCDAddFriendViewController.h"
+//#import "RCDAddFriendViewController.h"
 #import "CustomShowMessage.h"
 #import "RCDPhoneAddressBookViewController.h"
 //#import "RCDAddressBookQRCodeViewController.h"
 #import "QRCodeViewController.h"
 #import "RCDSearchEnterpriseViewController.h"
 #import "FollowEnterpriseDataParse.h"
-
+#import "RCDAddressBookDetailViewController.h"
 
 @interface RCDSearchFriendViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,UISearchControllerDelegate,UISearchDisplayDelegate>
 
@@ -137,13 +137,16 @@
     if(tableView == self.searchDisplayController.searchResultsTableView)
     {
         ESUserInfo *user = _searchResult[indexPath.row];
-        RCUserInfo *userInfo = [RCUserInfo new];
-        userInfo.userId = user.userId;
-        userInfo.name = user.userName;
-        userInfo.portraitUri = user.portraitUri;
-        RCDAddFriendViewController *addViewController = [[RCDAddFriendViewController alloc] init];
-        addViewController.strUserId = userInfo.userId;
-        [self.navigationController pushViewController:addViewController animated:YES];
+//        RCUserInfo *userInfo = [RCUserInfo new];
+//        userInfo.userId = user.userId;
+//        userInfo.name = user.userName;
+//        userInfo.portraitUri = user.portraitUri;
+//        RCDAddFriendViewController *addViewController = [[RCDAddFriendViewController alloc] init];
+//        addViewController.strUserId = userInfo.userId;
+//        [self.navigationController pushViewController:addViewController animated:YES];
+        RCDAddressBookDetailViewController* addressBookDetailVC = [[RCDAddressBookDetailViewController alloc] init];
+        addressBookDetailVC.userId = user.userId;
+        [self.navigationController pushViewController:addressBookDetailVC animated:YES];
     }
     else
     {
