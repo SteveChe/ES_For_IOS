@@ -69,10 +69,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xPl-dS-Ekt" userLabel="Notice View">
-                                <rect key="frame" x="0.0" y="0.0" width="8" height="62"/>
+                                <rect key="frame" x="0.0" y="0.0" width="7" height="62"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="8" id="ORv-Gr-Rtn"/>
+                                    <constraint firstAttribute="width" constant="7" id="ORv-Gr-Rtn"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="----/--/-- --:--" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zOp-C2-Baf">
@@ -124,6 +124,7 @@
                 <outlet property="lastReplyLbl" destination="mSx-v5-V4B" id="P7f-6E-vUt"/>
                 <outlet property="layerView" destination="mol-Gu-x1h" id="4Qa-hO-AF0"/>
                 <outlet property="leadLbl" destination="Bzn-zf-r90" id="pAu-P4-YBF"/>
+                <outlet property="noticeView" destination="xPl-dS-Ekt" id="jw3-Rg-OCq"/>
                 <outlet property="replyTimeLbl" destination="zOp-C2-Baf" id="nxH-Yr-5Q6"/>
                 <outlet property="replyUserImg" destination="cMv-zh-Cxm" id="haH-xd-CYK"/>
                 <outlet property="replyUserLbl" destination="3tC-7d-iW2" id="t6o-fI-RIx"/>

@@ -11,7 +11,8 @@
 
 @protocol EditTaskDelegate <NSObject>
 
-- (void)EditTaskSuccess;
+- (void)editTaskSuccess;
+- (void)editTaskFailed:(NSString *)errorMessage;
 
 @end
 

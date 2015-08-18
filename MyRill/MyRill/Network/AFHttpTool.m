@@ -470,6 +470,17 @@
                           failure:failure];
 }
 
++ (void)getTaskDetailWithTaskID:(NSString *)taskID
+                        success:(void (^)(id))success
+                        failure:(void (^)(NSError *))failure {
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet
+                     protocolType:RequestProtocolTypeText
+                              url:[NSString stringWithFormat:@"/api/assignments/%@/.json",taskID]
+                           params:nil
+                          success:success
+                          failure:failure];
+}
+
 + (void)EditTaskWithTaskModel:(ESTask *)task
                success:(void (^)(id response))success
                failure:(void (^)(NSError *error))failure {
@@ -488,7 +499,7 @@
     NSDictionary *param = @{@"title":task.title,
                             @"description":task.taskDescription,
                             @"due_date":task.endDate,
-                            @"status":task.status,
+                            @"status":[task.status stringValue],
                             @"chat_id":task.chatID,
                             @"person_in_charge":task.personInCharge.useID,
                             @"observers":observerArray};

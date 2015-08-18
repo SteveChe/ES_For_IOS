@@ -16,6 +16,7 @@
 @interface TaskListTableViewCell ()
 
 @property (nonatomic, weak) IBOutlet UIView *layerView;
+@property (weak, nonatomic) IBOutlet UIView *noticeView;
 @property (nonatomic, weak) IBOutlet UILabel *titleLbl;
 @property (nonatomic, weak) IBOutlet UILabel *leadLbl;
 @property (nonatomic, weak) IBOutlet UILabel *replyUserLbl;
@@ -42,6 +43,10 @@
 }
 
 - (void)updateTackCell:(ESTask *)task {
+    if (task.isUpdate == YES) {
+        self.noticeView.backgroundColor = [ColorHandler colorFromHexRGB:@"06A7E1"];
+    }
+    
     self.titleLbl.text = [@"任务名称：" stringByAppendingString:task.title];
     
     NSString *leadStr = [NSString stringWithFormat:@"负责人：%@",task.personInCharge.name];

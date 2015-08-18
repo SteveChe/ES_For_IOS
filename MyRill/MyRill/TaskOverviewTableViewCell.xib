@@ -34,10 +34,22 @@
                             <constraint firstAttribute="width" constant="40" id="HVn-N1-CFa"/>
                         </constraints>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bvu-X7-GJk" userLabel="RedBadge">
+                        <rect key="frame" x="348.5" y="15" width="9.5" height="9.5"/>
+                        <color key="backgroundColor" red="0.96470588239999999" green="0.30980392159999998" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="Bvu-X7-GJk" secondAttribute="height" multiplier="1:1" id="eeq-Af-EWh"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="8"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="rdO-tV-VHB" firstAttribute="centerY" secondItem="Bas-g5-FLA" secondAttribute="centerY" id="2gJ-9h-tmI"/>
+                    <constraint firstItem="Bvu-X7-GJk" firstAttribute="trailing" secondItem="rdO-tV-VHB" secondAttribute="trailing" constant="9" id="D5P-Qt-23g"/>
                     <constraint firstItem="Qkd-r5-WJj" firstAttribute="centerY" secondItem="Bas-g5-FLA" secondAttribute="centerY" id="G25-cH-fM4"/>
+                    <constraint firstItem="Bvu-X7-GJk" firstAttribute="top" secondItem="rdO-tV-VHB" secondAttribute="top" constant="-6" id="O8z-3X-NNi"/>
                     <constraint firstAttribute="trailing" secondItem="rdO-tV-VHB" secondAttribute="trailing" constant="20" symbolic="YES" id="OLW-8r-u4b"/>
                     <constraint firstAttribute="centerY" secondItem="Bas-g5-FLA" secondAttribute="centerY" id="hgX-hr-OYf"/>
                     <constraint firstItem="Bas-g5-FLA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" symbolic="YES" id="kjA-Bm-f51"/>
@@ -47,6 +59,7 @@
             <connections>
                 <outlet property="initaiatorImg" destination="Bas-g5-FLA" id="Nhq-sk-SWl"/>
                 <outlet property="initiatorNameLbl" destination="Qkd-r5-WJj" id="QRh-TG-Wen"/>
+                <outlet property="redBadgeLbl" destination="Bvu-X7-GJk" id="uMF-RE-DUg"/>
                 <outlet property="taskTotalLbl" destination="rdO-tV-VHB" id="wT2-Pc-TwB"/>
             </connections>
             <point key="canvasLocation" x="327.5" y="283"/>

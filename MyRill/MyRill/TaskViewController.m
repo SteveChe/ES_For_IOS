@@ -24,6 +24,7 @@
 #import "MessageListTableViewCell.h"
 #import "ESTaskComment.h"
 #import "CloseTaskDataParse.h"
+#import "MRProgress.h"
 
 @interface TaskViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate, GetTaskCommentListDelegate, UITextFieldDelegate, SendTaskCommenDelegate, EditTaskDelegate, CloseTaskDelegate>
 
@@ -36,32 +37,33 @@
 @property (weak, nonatomic) IBOutlet UITextField *taskTitleTxtField;
 @property (weak, nonatomic) IBOutlet UITextView *taskDescriptioinTextView;
 @property (weak, nonatomic) IBOutlet UILabel *endDateLbl;
+@property (nonatomic, strong) UIDatePicker *dateSelectedPicker;
 @property (weak, nonatomic) IBOutlet UISwitch *taskStatusSwitch;
-@property (nonatomic, strong) EditTaskDataParse *editTaskDP;
-@property (nonatomic, strong) NSMutableArray *assignerDataSource;
-@property (nonatomic, strong) NSMutableArray *followsDataSource;
 @property (weak, nonatomic) IBOutlet UICollectionView *assignerCollectionView;
 @property (weak, nonatomic) IBOutlet UICollectionView *followsCollectionView;
-@property (nonatomic, strong) UIDatePicker *dateSelectedPicker;
-
-@property (nonatomic, copy) NSString *userID;
-@property (nonatomic, strong) GetTaskCommentListDataParse *getTaskCommentListDP;
-@property (nonatomic, strong) SendTaskCommentDataParse *sendTaskCommentDP;
-@property (nonatomic, strong) CloseTaskDataParse *closeTaskDP;
-
-@property (nonatomic,strong) NSMutableArray* tastObserversList;//关注人列表,ESUserInfo
-@property (nonatomic,strong) NSMutableArray* tastRecipientsList;//负责人列表,ESUserInfo
-@property (nonatomic, assign) BOOL isOpen;
-@property (nonatomic, strong) NSMutableArray *dataSource;
-
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *sendView;
 @property (weak, nonatomic) IBOutlet UITextField *sendTxtfield;
+@property (nonatomic, strong) MRProgressOverlayView *progress;
+
+@property (nonatomic, strong) NSMutableArray *assignerDataSource;
+@property (nonatomic, strong) NSMutableArray *followsDataSource;
+@property (nonatomic,strong) NSMutableArray* tastObserversList;//关注人列表,ESUserInfo
+@property (nonatomic,strong) NSMutableArray* tastRecipientsList;//负责人列表,ESUserInfo
+@property (nonatomic, strong) NSMutableArray *dataSource;
+
+@property (nonatomic, strong) GetTaskCommentListDataParse *getTaskCommentListDP;
+@property (nonatomic, strong) EditTaskDataParse *editTaskDP;
+@property (nonatomic, strong) SendTaskCommentDataParse *sendTaskCommentDP;
+@property (nonatomic, strong) CloseTaskDataParse *closeTaskDP;
+
+@property (nonatomic, copy) NSString *userID;
+@property (nonatomic, assign) BOOL isOpen;
 
 @end
 
 @implementation TaskViewController
-
+#pragma mark - lifeCycle methods
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -106,10 +108,10 @@
     [self.view layoutIfNeeded];
     
     if (self.tastRecipientsList == nil) {
-        self.tastRecipientsList = [NSMutableArray array];
+        self.tastRecipientsList = [[NSMutableArray alloc] initWithObjects:self.taskModel.personInCharge, nil];
     }
     if (self.tastObserversList == nil) {
-        self.tastObserversList = [NSMutableArray array];
+        self.tastObserversList = [[NSMutableArray alloc] initWithArray:self.taskModel.observers];
     }
     
     self.assignerDataSource = nil;
@@ -160,17 +162,24 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
+#pragma mark - EditTaskDelegate methods
+- (void)editTaskSuccess {
+    [self showTips:@"修改成功!" mode:MRProgressOverlayViewModeCheckmark isDismiss:YES isSucceuss:YES];
+}
+
+- (void)editTaskFailed:(NSString *)errorMessage {
+    [self showTips:@"修改失败!" mode:MRProgressOverlayViewModeCross isDismiss:YES isSucceuss:NO];
+}
+
 - (void)getTaskCommentListSuccess:(NSArray *)taskCommentList {
     self.dataSource = [NSMutableArray arrayWithArray:taskCommentList];
     [self.tableView reloadData];
 }
 
 - (void)SendTaskCommentSuccess:(ESTaskComment *)taskComment {
-    
     [self.dataSource addObject:taskComment];
     [self.tableView reloadData];
     //    [self.tableView scrollToRowAtIndexPath:nil atScrollPosition:nil animated:nil];
-    
 }
 
 - (void)closeTaskSuccess {
@@ -252,31 +261,39 @@
     [selectedUsers addObjectsFromArray:self.tastObserversList];
     NSMutableString *discussionTitle = [NSMutableString string];
     NSMutableArray *userIdList = [NSMutableArray new];
-    for (ESUserInfo *user in selectedUsers) {
-        [discussionTitle appendString:[NSString stringWithFormat:@"%@%@", user.userName,@","]];
-        [userIdList addObject:user.userId];
+    for (ESContactor *user in selectedUsers) {
+        [discussionTitle appendString:[NSString stringWithFormat:@"%@%@", user.name,@","]];
+        [userIdList addObject:[user.useID stringValue]];
     }
     [discussionTitle deleteCharactersInRange:NSMakeRange(discussionTitle.length - 1, 1)];
     __weak typeof(&*self)  weakSelf = self;
 
-    [[RCIMClient sharedRCIMClient] createDiscussion:discussionTitle userIdList:userIdList success:^(RCDiscussion *discussion) {
-        NSLog(@"create discussion ssucceed!");
-        dispatch_async(dispatch_get_main_queue(), ^{
-            ChatViewController *chat =[[ChatViewController alloc]init];
-            chat.targetId                      = discussion.discussionId;
-            chat.userName                    = discussion.discussionName;
-            chat.conversationType              = ConversationType_DISCUSSION;
-            chat.title                         = @"讨论组";
-            chat.userIDList = userIdList;
-            
-            UITabBarController *tabbarVC = weakSelf.navigationController.viewControllers[0];
-            [weakSelf.navigationController popToViewController:tabbarVC animated:YES];
-            [tabbarVC.navigationController  pushViewController:chat animated:YES];
-        });
-    } error:^(RCErrorCode status) {
-        NSLog(@"create discussion Failed > %ld!", (long)status);
-    }];
-
+    if ([self.taskModel.chatID isKindOfClass:[NSNull class]] || self.taskModel.chatID == nil || [self.taskModel.chatID isEqualToString:@""]) {
+        [[RCIMClient sharedRCIMClient] createDiscussion:discussionTitle userIdList:userIdList success:^(RCDiscussion *discussion) {
+            NSLog(@"create discussion ssucceed!");
+            dispatch_async(dispatch_get_main_queue(), ^{
+                ChatViewController *chat =[[ChatViewController alloc]init];
+                chat.targetId                      = discussion.discussionId;
+                chat.userName                    = discussion.discussionName;
+                chat.conversationType              = ConversationType_DISCUSSION;
+                chat.title                         = @"讨论组";
+                chat.userIDList = userIdList;
+                
+                //保存chat_id请求
+                self.taskModel.chatID = chat.targetId;
+                [self saveBarItemOnClicked];
+                
+                UITabBarController *tabbarVC = weakSelf.navigationController.viewControllers[0];
+                [weakSelf.navigationController popToViewController:tabbarVC animated:YES];
+                [tabbarVC.navigationController  pushViewController:chat animated:YES];
+            });
+        } error:^(RCErrorCode status) {
+            NSLog(@"create discussion Failed > %ld!", (long)status);
+        }];
+    } else {
+        //如果有chat_id直接进入会话界面
+        
+    }
 }
 
 - (IBAction)chooseTagBtnOnClicked:(UIButton *)sender {
@@ -364,10 +381,8 @@
     
     if (self.taskStatusSwitch.on == NO) {
         task.status = [NSNumber numberWithInt:0];
-    } else if (self.taskStatusSwitch.on == YES) {
-        task.status = [NSNumber numberWithInt:1];
     } else {
-        
+        task.status = [NSNumber numberWithInt:1];
     }
     
     task.personInCharge = [self.assignerDataSource firstObject];
@@ -545,6 +560,26 @@
     }
 }
 
+#pragma mark - private methods
+- (void)showTips:(NSString *)tip mode:(MRProgressOverlayViewMode)mode isDismiss:(BOOL)isDismiss isSucceuss:(BOOL)success {
+    [self.navigationController.view addSubview:self.progress];
+    [self.progress show:YES];
+    self.progress.mode = mode;
+    self.progress.titleLabelText = tip;
+    if (isDismiss)
+    {
+        [self performSelector:@selector(dismissProgress:) withObject:@(success) afterDelay:1.8];
+    }
+}
+
+//参数作为布尔对象传递，使用Bool会出问题
+- (void)dismissProgress:(Boolean)isSuccess {
+    if (self.progress)
+    {
+        [self.progress dismiss:YES];
+    }
+}
+
 #pragma mark - setters&getters
 - (void)setHoldViews:(NSArray *)holdViews {
     _holdViews = holdViews;
@@ -591,31 +626,6 @@
     _followsCollectionView.bounces = NO;
 }
 
-- (NSMutableArray *)assignerDataSource {
-    if (!_assignerDataSource) {
-        _assignerDataSource = [[NSMutableArray alloc] init];
-    }
-    
-    return _assignerDataSource;
-}
-
-- (NSMutableArray *)followsDataSource {
-    if (!_followsDataSource) {
-        _followsDataSource = [[NSMutableArray alloc] init];
-    }
-    
-    return _followsDataSource;
-}
-
-- (EditTaskDataParse *)editTaskDP {
-    if (!_editTaskDP) {
-        _editTaskDP = [[EditTaskDataParse alloc] init];
-        _editTaskDP.delegate = self;
-    }
-    
-    return _editTaskDP;
-}
-
 - (UIDatePicker *)dateSelectedPicker {
     if (!_dateSelectedPicker) {
         _dateSelectedPicker = [UIDatePicker new];
@@ -635,7 +645,30 @@
     return _dateSelectedPicker;
 }
 
-#pragma mark - setters&getters
+- (MRProgressOverlayView *)progress {
+    if (!_progress) {
+        _progress = [[MRProgressOverlayView alloc] init];
+    }
+    
+    return _progress;
+}
+
+- (NSMutableArray *)assignerDataSource {
+    if (!_assignerDataSource) {
+        _assignerDataSource = [[NSMutableArray alloc] init];
+    }
+    
+    return _assignerDataSource;
+}
+
+- (NSMutableArray *)followsDataSource {
+    if (!_followsDataSource) {
+        _followsDataSource = [[NSMutableArray alloc] init];
+    }
+    
+    return _followsDataSource;
+}
+
 - (NSMutableArray *)dataSource {
     if (!_dataSource) {
         _dataSource = [[NSMutableArray alloc] init];
@@ -650,6 +683,15 @@
         _getTaskCommentListDP.delegate = self;
     }
     return _getTaskCommentListDP;
+}
+
+- (EditTaskDataParse *)editTaskDP {
+    if (!_editTaskDP) {
+        _editTaskDP = [[EditTaskDataParse alloc] init];
+        _editTaskDP.delegate = self;
+    }
+    
+    return _editTaskDP;
 }
 
 - (SendTaskCommentDataParse *)sendTaskCommentDP {

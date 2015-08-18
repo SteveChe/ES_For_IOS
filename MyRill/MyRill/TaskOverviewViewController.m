@@ -20,6 +20,11 @@
 @interface TaskOverviewViewController () <UISearchBarDelegate, UISearchDisplayDelegate, UITableViewDataSource, UITableViewDelegate, TaskDashboardDelegate>
 
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *holdViews;
+@property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *redBadgeLbls;
+@property (weak, nonatomic) IBOutlet UILabel *redAllLbl;
+@property (weak, nonatomic) IBOutlet UILabel *redEndLbl;
+@property (weak, nonatomic) IBOutlet UILabel *redMeAllLbl;
+@property (weak, nonatomic) IBOutlet UILabel *redMeOverLbl;
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSArray *dataSource;
@@ -67,8 +72,27 @@
 - (void)getTaskDashboardSuccess:(ESTaskDashboard *)taskDashboard {
     self.totalTaskLbl.text = [taskDashboard.totalTask.num stringValue];
     self.closedTaskLbl.text = [taskDashboard.closedTask.num stringValue];
+    
     self.totalTaskInSelfLbl.text = [[taskDashboard.totalTaskInSelf.num stringValue] stringByAppendingString:@" 全部"];
+    NSMutableAttributedString *attribute = [[NSMutableAttributedString alloc] initWithString:self.totalTaskInSelfLbl.text];
+    [attribute addAttributes:@{NSForegroundColorAttributeName:[ColorHandler colorFromHexRGB:@"999999"]}
+                       range:NSMakeRange(attribute.length - 2, 2)];
+    [attribute addAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]}
+                       range:NSMakeRange(attribute.length - 2, 2)];
+    self.totalTaskInSelfLbl.attributedText = attribute;
+    
     self.overdueTaskInSelfLbl.text = [[taskDashboard.overdueTaskInSelf.num stringValue] stringByAppendingString:@" 超期"];
+    NSMutableAttributedString *attribute1 = [[NSMutableAttributedString alloc] initWithString:self.overdueTaskInSelfLbl.text];
+    [attribute1 addAttributes:@{NSForegroundColorAttributeName:[ColorHandler colorFromHexRGB:@"999999"]}
+                       range:NSMakeRange(attribute.length - 2, 2)];
+    [attribute1 addAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]}
+                       range:NSMakeRange(attribute.length - 2, 2)];
+    self.overdueTaskInSelfLbl.attributedText = attribute1;
+    
+    self.redAllLbl.hidden = !taskDashboard.totalTask.isUpdate;
+    self.redEndLbl.hidden = !taskDashboard.closedTask.isUpdate;
+    self.redMeAllLbl.hidden = !taskDashboard.totalTaskInSelf.isUpdate;
+    self.redMeOverLbl.hidden = !taskDashboard.overdueTaskInSelf.isUpdate;
     self.dataSource = nil;
     self.dataSource = [NSArray arrayWithArray:taskDashboard.TaskInOriginatorList];
     [self.tableView reloadData];
@@ -178,6 +202,17 @@
     for (UIView *view in _holdViews) {
         view.layer.borderWidth = 1.f;
         view.layer.borderColor = [ColorHandler colorFromHexRGB:@"DDDDDD"].CGColor;
+    }
+}
+
+- (void)setRedBadgeLbls:(NSArray *)redBadgeLbls {
+    _redBadgeLbls = redBadgeLbls;
+    
+    for (UILabel *lbl in _redBadgeLbls) {
+        lbl.font = [UIFont systemFontOfSize:8];
+        lbl.textColor = [ColorHandler colorFromHexRGB:@"F64F50"];
+        lbl.clipsToBounds = YES;
+        lbl.layer.cornerRadius = 5.f;
     }
 }
 

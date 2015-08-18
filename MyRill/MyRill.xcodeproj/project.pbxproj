@@ -84,6 +84,7 @@
 		2BC8213A1B5C9FF70090E2C1 /* ShowQRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC821381B5C9FF70090E2C1 /* ShowQRCodeViewController.m */; };
 		2BC8213B1B5C9FF70090E2C1 /* ShowQRCodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BC821391B5C9FF70090E2C1 /* ShowQRCodeViewController.xib */; };
 		2BE2FFF41B8212E80006EB99 /* CloseTaskDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE2FFF31B8212E80006EB99 /* CloseTaskDataParse.m */; };
+		2BE2FFFD1B837DEE0006EB99 /* GetTaskDetailDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE2FFFC1B837DEE0006EB99 /* GetTaskDetailDataParse.m */; };
 		2BE55A081B647324008CDB4B /* TaskOverviewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE55A061B647324008CDB4B /* TaskOverviewTableViewCell.m */; };
 		2BE55A091B647324008CDB4B /* TaskOverviewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE55A071B647324008CDB4B /* TaskOverviewTableViewCell.xib */; };
 		2BE55A0E1B6483D2008CDB4B /* TaskListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE55A0D1B6483D2008CDB4B /* TaskListViewController.m */; };
@@ -433,6 +434,8 @@
 		2BC821391B5C9FF70090E2C1 /* ShowQRCodeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowQRCodeViewController.xib; sourceTree = "<group>"; };
 		2BE2FFF21B8212E80006EB99 /* CloseTaskDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CloseTaskDataParse.h; sourceTree = "<group>"; };
 		2BE2FFF31B8212E80006EB99 /* CloseTaskDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CloseTaskDataParse.m; sourceTree = "<group>"; };
+		2BE2FFFB1B837DEE0006EB99 /* GetTaskDetailDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetTaskDetailDataParse.h; sourceTree = "<group>"; };
+		2BE2FFFC1B837DEE0006EB99 /* GetTaskDetailDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetTaskDetailDataParse.m; sourceTree = "<group>"; };
 		2BE55A051B647324008CDB4B /* TaskOverviewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskOverviewTableViewCell.h; sourceTree = "<group>"; };
 		2BE55A061B647324008CDB4B /* TaskOverviewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskOverviewTableViewCell.m; sourceTree = "<group>"; };
 		2BE55A071B647324008CDB4B /* TaskOverviewTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskOverviewTableViewCell.xib; sourceTree = "<group>"; };
@@ -1326,6 +1329,8 @@
 				2BEAD0901B776C2E00905E21 /* GetTaskCommentListDataParse.m */,
 				2BEAD0921B779A8E00905E21 /* SendTaskCommentDataParse.h */,
 				2BEAD0931B779A8E00905E21 /* SendTaskCommentDataParse.m */,
+				2BE2FFFB1B837DEE0006EB99 /* GetTaskDetailDataParse.h */,
+				2BE2FFFC1B837DEE0006EB99 /* GetTaskDetailDataParse.m */,
 			);
 			name = Task;
 			sourceTree = "<group>";
@@ -1964,6 +1969,7 @@
 				F22FE2821B3ADB6000A1A997 /* ChatViewController.m in Sources */,
 				F23059C61B56ADE3004599FA /* ESUserDetailInfo.m in Sources */,
 				F22FE2A71B3FFAC200A1A997 /* RCDAddressBookViewController.m in Sources */,
+				2BE2FFFD1B837DEE0006EB99 /* GetTaskDetailDataParse.m in Sources */,
 				F22FE2E61B4000ED00A1A997 /* SDImageCache.m in Sources */,
 				2BEAD0881B775C4500905E21 /* MessageListTableViewCell.m in Sources */,
 				F250F2EA1B2471CD000AD021 /* AFHttpTool.m in Sources */,
