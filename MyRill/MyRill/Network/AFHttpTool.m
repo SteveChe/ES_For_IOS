@@ -418,7 +418,7 @@
                             @"due_date":task.endDate,
                             @"person_in_charge":task.personInCharge.useID,
                             @"observers":observerArray,
-                            @"chat_id":@""
+                            @"chat_id":task.chatID
                             };
     
     [AFHttpTool requestWithMethod:RequestMethodTypePost protocolType:RequestProtocolTypeJson

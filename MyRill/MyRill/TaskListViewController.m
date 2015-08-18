@@ -36,32 +36,37 @@
                                                                                  target:self
                                                                                  action:@selector(addTask)];
     self.navigationItem.rightBarButtonItem = addTaskItem;
+    [self.view addSubview:self.tableView];
+    [self.view addSubview:self.msgLbl];
+    
+    __weak UIView *ws = self.view;
+    [self.msgLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(ws.mas_centerX);
+        make.centerY.equalTo(ws.mas_centerY).with.offset(-20);
+        make.width.equalTo(ws.mas_width).with.offset(-60);
+    }];
+    [self.view layoutIfNeeded];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     self.tabBarController.tabBar.hidden = YES;
+    //每次先隐藏tableView和msgLbl,待请求完成后决定那个显示
+    self.msgLbl.hidden = YES;
+    self.tableView.hidden = YES;
     
     [self.getTaskListDP getTaskListWithIdentify:self.identity type:self.type];
 }
 
 - (void)getTaskListSuccess:(NSArray *)taskList {
     if (taskList.count) {
+        self.tableView.hidden = NO;
         self.dataSource = nil;
         self.dataSource = [NSArray arrayWithArray:taskList];
-        [self.view addSubview:self.tableView];
         [self.tableView reloadData];
     } else {
-        [self.view addSubview:self.msgLbl];
-        
-        __weak UIView *ws = self.view;
-        [self.msgLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(ws.mas_centerX);
-            make.centerY.equalTo(ws.mas_centerY).with.offset(-20);
-            make.width.equalTo(ws.mas_width).with.offset(-60);
-        }];
-        [self.view layoutIfNeeded];
+        self.msgLbl.hidden = NO;
     }
 }
 
@@ -139,6 +144,7 @@
         _msgLbl = [UILabel new];
         _msgLbl.numberOfLines = 2;
         _msgLbl.text = @"当前任务列表为空，可以通过点击右上角的加号创建新的任务~";
+        _msgLbl.hidden = YES;
     }
     
     return _msgLbl;
@@ -150,6 +156,7 @@
         _tableView.backgroundColor = [UIColor clearColor];
         _tableView.dataSource = self;
         _tableView.delegate = self;
+        _tableView.hidden = YES;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, _tableView.bounds.size.width, 0)];
         searchBar.delegate = self;

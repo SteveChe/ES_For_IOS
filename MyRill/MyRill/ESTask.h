@@ -16,7 +16,7 @@
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *taskDescription;
 @property (nonatomic, strong) NSNumber *status;
-@property (nonatomic, strong) NSString *chatID;
+@property (nonatomic, copy) NSString *chatID;
 @property (nonatomic, copy) NSString *startDate;
 @property (nonatomic, copy) NSString *endDate;
 @property (nonatomic, strong) NSArray *observers;

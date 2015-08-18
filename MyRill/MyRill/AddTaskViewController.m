@@ -327,7 +327,7 @@
         NSDate *date = self.dateSelectedPicker.date;
         task.endDate = [dateFormatter stringFromDate:date];
         
-        if ([self.chatID isKindOfClass:[NSNull class]] || [self.chatID isEqualToString:@""]) {
+        if ([self.chatID isKindOfClass:[NSNull class]] || self.chatID == nil || [self.chatID isEqualToString:@""]) {
             task.chatID = @"";
         } else {
             task.chatID = self.chatID;
