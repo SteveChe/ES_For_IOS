@@ -25,8 +25,9 @@
 #import "ESTaskComment.h"
 #import "CloseTaskDataParse.h"
 #import "MRProgress.h"
+#import "GetTaskDetailDataParse.h"
 
-@interface TaskViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate, GetTaskCommentListDelegate, UITextFieldDelegate, SendTaskCommenDelegate, EditTaskDelegate, CloseTaskDelegate>
+@interface TaskViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate, GetTaskCommentListDelegate, UITextFieldDelegate, SendTaskCommenDelegate, EditTaskDelegate, CloseTaskDelegate, GetTaskDetailDelegate>
 
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *holdViews;
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *txtHoldViews;
@@ -52,6 +53,7 @@
 @property (nonatomic,strong) NSMutableArray* tastRecipientsList;//负责人列表,ESUserInfo
 @property (nonatomic, strong) NSMutableArray *dataSource;
 
+@property (nonatomic, strong) GetTaskDetailDataParse *getTaskDetailDP;
 @property (nonatomic, strong) GetTaskCommentListDataParse *getTaskCommentListDP;
 @property (nonatomic, strong) EditTaskDataParse *editTaskDP;
 @property (nonatomic, strong) SendTaskCommentDataParse *sendTaskCommentDP;
@@ -152,6 +154,7 @@
     [self.assignerCollectionView reloadData];
     [self.followsCollectionView reloadData];
     
+    [self.getTaskDetailDP getTaskDetailWithTaskID:[self.taskModel.taskID stringValue]];
     [self.getTaskCommentListDP getTaskCommentListWithTaskID:[self.taskModel.taskID stringValue] listSize:nil];
 }
 
@@ -160,6 +163,10 @@
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)getTaskDetailSuccess:(ESTask *)task {
+    NSLog(@"adsfafas");
 }
 
 #pragma mark - EditTaskDelegate methods
@@ -709,6 +716,15 @@
         _closeTaskDP.delegate = self;
     }
     return _closeTaskDP;
+}
+
+- (GetTaskDetailDataParse *)getTaskDetailDP {
+    if (!_getTaskDetailDP) {
+        _getTaskDetailDP = [[GetTaskDetailDataParse alloc] init];
+        _getTaskDetailDP.delegate = self;
+    }
+    
+    return _getTaskDetailDP;
 }
 
 @end

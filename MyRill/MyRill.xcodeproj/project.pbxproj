@@ -1319,6 +1319,8 @@
 				2BEBBD821B665849008BE7C4 /* GetTaskDashboardDataParse.m */,
 				2BEBBD8A1B67AFA7008BE7C4 /* GetTaskListDataParse.h */,
 				2BEBBD8B1B67AFA7008BE7C4 /* GetTaskListDataParse.m */,
+				2BE2FFFB1B837DEE0006EB99 /* GetTaskDetailDataParse.h */,
+				2BE2FFFC1B837DEE0006EB99 /* GetTaskDetailDataParse.m */,
 				2BEAD0571B75D76A00905E21 /* AddTaskDataParse.h */,
 				2BEAD0581B75D76A00905E21 /* AddTaskDataParse.m */,
 				2BEAD0531B75D6FD00905E21 /* EditTaskDataParse.h */,
@@ -1329,8 +1331,6 @@
 				2BEAD0901B776C2E00905E21 /* GetTaskCommentListDataParse.m */,
 				2BEAD0921B779A8E00905E21 /* SendTaskCommentDataParse.h */,
 				2BEAD0931B779A8E00905E21 /* SendTaskCommentDataParse.m */,
-				2BE2FFFB1B837DEE0006EB99 /* GetTaskDetailDataParse.h */,
-				2BE2FFFC1B837DEE0006EB99 /* GetTaskDetailDataParse.m */,
 			);
 			name = Task;
 			sourceTree = "<group>";

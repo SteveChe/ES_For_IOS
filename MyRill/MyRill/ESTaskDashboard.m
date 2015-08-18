@@ -52,7 +52,7 @@
                 taskOriginatorInfo.initiatorId = [ColorHandler isNullOrNilNumber:dic[@"initiator_id"]]?@"":dic[@"initiator_id"];
                 taskOriginatorInfo.initiatorName = [ColorHandler isNullOrEmptyString:dic[@"initiator_name"]]?@"":dic[@"initiator_name"];
                 taskOriginatorInfo.initiatorImgURL = [ColorHandler isNullOrEmptyString:dic[@"initiator_avatar"]]?nil:dic[@"initiator_avatar"];
-                taskOriginatorInfo.isUpdate = dic[@"has_update"] == nil ? NO : dic[@"has_update"];
+                taskOriginatorInfo.isUpdate = [dic[@"has_update"] boolValue];
                 [temp addObject:taskOriginatorInfo];
             }
             self.TaskInOriginatorList = [NSArray arrayWithArray:temp];

@@ -88,11 +88,13 @@
             self.personInCharge = nil;
         }
         
-        if (dic[@"has_update"] == nil ) {
-            self.isUpdate = NO;
-        } else {
-            self.isUpdate = YES;
-        }
+//        if (dic[@"has_update"] == nil) {
+//            self.isUpdate = NO;
+//        } else {
+//            
+//        }
+
+        self.isUpdate = [dic[@"has_update"] boolValue];
         
         if (dic[@"comment"] != nil && ![dic[@"comment"] isKindOfClass:[NSNull class]]) {
             self.comments = [[ESTaskComment alloc] initWithDic:dic[@"comment"]];

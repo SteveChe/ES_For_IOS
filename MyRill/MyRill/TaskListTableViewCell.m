@@ -45,6 +45,8 @@
 - (void)updateTackCell:(ESTask *)task {
     if (task.isUpdate == YES) {
         self.noticeView.backgroundColor = [ColorHandler colorFromHexRGB:@"06A7E1"];
+    } else {
+        self.noticeView.backgroundColor = [UIColor whiteColor];
     }
     
     self.titleLbl.text = [@"任务名称：" stringByAppendingString:task.title];
