@@ -17,7 +17,7 @@
 #import "ESTaskOriginatorInfo.h"
 #import "ESTaskMask.h"
 
-@interface TaskOverviewViewController () <UITableViewDataSource, UITableViewDelegate, TaskDashboardDelegate>
+@interface TaskOverviewViewController () <UISearchBarDelegate, UISearchDisplayDelegate, UITableViewDataSource, UITableViewDelegate, TaskDashboardDelegate>
 
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *holdViews;
 
@@ -29,6 +29,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *closedTaskLbl;
 @property (weak, nonatomic) IBOutlet UILabel *totalTaskInSelfLbl;
 @property (weak, nonatomic) IBOutlet UILabel *overdueTaskInSelfLbl;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (nonatomic, strong) UISearchDisplayController *searchDisplayVC;
 
 @end
 
@@ -46,6 +48,13 @@
     self.navigationItem.rightBarButtonItem = addItem;
     
     [self.view addSubview:self.tableView];
+    
+    self.searchDisplayVC = [[UISearchDisplayController alloc] initWithSearchBar:self.searchBar
+                                                             contentsController:self];
+    
+    self.searchDisplayVC.searchResultsDataSource = self;
+    self.searchDisplayVC.searchResultsDelegate = self;
+    self.searchDisplayVC.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
