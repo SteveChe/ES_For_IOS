@@ -138,6 +138,7 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     application.applicationIconBadgeNumber = 0;
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
 
 }
 
@@ -178,14 +179,14 @@
 #pragma mark - 收到消息监听
 -(void)didReceiveMessageNotification:(NSNotification *)notification
 {
-    [UIApplication sharedApplication].applicationIconBadgeNumber = [UIApplication sharedApplication].applicationIconBadgeNumber+1;
+//    [UIApplication sharedApplication].applicationIconBadgeNumber = [UIApplication sharedApplication].applicationIconBadgeNumber+1;
 
 }
 
 -(void)didReceiveErrorMessage:(id)notification
 {
     NSString* errorMessage = [notification object];
-    if (errorMessage == nil || [errorMessage isEqualToString:[NSNull null]] ||
+    if (errorMessage == nil || [errorMessage isEqual:[NSNull null]] ||
         [errorMessage length] <= 0)
     {
         return;

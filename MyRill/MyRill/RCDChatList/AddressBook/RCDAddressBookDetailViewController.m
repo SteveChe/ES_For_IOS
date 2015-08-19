@@ -83,11 +83,11 @@
     }
     if (_userDetailInfo.bContact || _userDetailInfo.bMember)
     {
-        _smsButton.titleLabel.text = @"发起会话";
+        _smsButton.titleLabel.text = @"发消息";
         _deleteButton.hidden = NO;
         _callButton.hidden = NO;
-        [_smsButton removeTarget:self action:@selector(clickStartChatButton:)  forControlEvents:UIControlEventTouchUpInside];
-        [_smsButton addTarget:self action:@selector(clickAddContractButton:) forControlEvents:UIControlEventTouchUpInside];
+        [_smsButton removeTarget:self action:@selector(clickAddContractButton:)  forControlEvents:UIControlEventTouchUpInside];
+        [_smsButton addTarget:self action:@selector(clickStartChatButton:) forControlEvents:UIControlEventTouchUpInside];
     }
     else
     {

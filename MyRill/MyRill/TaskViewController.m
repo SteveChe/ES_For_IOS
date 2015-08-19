@@ -288,8 +288,8 @@
                 chat.userIDList = userIdList;
                 
                 //保存chat_id请求
-                self.taskModel.chatID = chat.targetId;
-                [self saveBarItemOnClicked];
+                weakSelf.taskModel.chatID = chat.targetId;
+                [weakSelf saveBarItemOnClicked];
                 
                 UITabBarController *tabbarVC = weakSelf.navigationController.viewControllers[0];
                 [weakSelf.navigationController popToViewController:tabbarVC animated:YES];
