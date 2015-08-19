@@ -167,6 +167,7 @@
 
 - (void)getTaskDetailSuccess:(ESTask *)task {
     NSLog(@"adsfafas");
+    self.taskModel = task;
 }
 
 #pragma mark - EditTaskDelegate methods
