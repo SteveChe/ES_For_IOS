@@ -26,6 +26,7 @@
 #import "CloseTaskDataParse.h"
 #import "MRProgress.h"
 #import "GetTaskDetailDataParse.h"
+#import "ChatViewController.h"
 
 @interface TaskViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate, GetTaskCommentListDelegate, UITextFieldDelegate, SendTaskCommenDelegate, EditTaskDelegate, CloseTaskDelegate, GetTaskDetailDelegate>
 
@@ -299,7 +300,22 @@
         }];
     } else {
         //如果有chat_id直接进入会话界面
+        NSString* chat_id =self.taskModel.chatID;
         
+        [[RCIMClient sharedRCIMClient] getDiscussion:chat_id success:^(RCDiscussion* discussion) {
+            if (discussion) {
+                ChatViewController *chatViewController = [[ChatViewController alloc] init];
+                chatViewController.conversationType = ConversationType_DISCUSSION;
+                chatViewController.targetId = chat_id;
+                chatViewController.title = discussion.discussionName;
+                
+                [self.navigationController pushViewController:chatViewController animated:YES];
+            }
+        } error:^(RCErrorCode status){
+            
+        }];
+        
+
     }
 }
 
