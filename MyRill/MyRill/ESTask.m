@@ -49,10 +49,11 @@
             self.status = dic[@"status"];
         }
         
-        if ([ColorHandler isNullOrNilNumber:dic[@"chat_id"]]) {
-            self.chatID = dic[@"chat_id"];
-        } else {
+        NSLog(@"%@",[dic[@"chat_id"] class]);
+        if ([ColorHandler isNullOrEmptyString:dic[@"chat_id"]]) {
             self.chatID = @"";
+        } else {
+            self.chatID = dic[@"chat_id"];
         }
         
         if ([ColorHandler isNullOrEmptyString:dic[@"created_at"]]) {
