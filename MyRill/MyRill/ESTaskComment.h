@@ -7,14 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-@class ESContactor;
+@class ESUserInfo;
 
 @interface ESTaskComment : NSObject
 
 @property (nonatomic, strong) NSNumber *commentID;
 @property (nonatomic, copy) NSString *createDate;
 @property (nonatomic, copy) NSString *content;
-@property (nonatomic, strong) ESContactor *user;
+@property (nonatomic, strong) ESUserInfo *user;
 
 //designed initilize
 - (instancetype)initWithDic:(NSDictionary *)dic;

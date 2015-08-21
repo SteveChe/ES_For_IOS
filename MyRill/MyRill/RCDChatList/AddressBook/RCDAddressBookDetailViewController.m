@@ -120,7 +120,7 @@
     _portraitImageView.clipsToBounds = YES;
     _portraitImageView.layer.cornerRadius = 18.f;
 
-    [_portraitImageView sd_setImageWithURL:[NSURL URLWithString:userDetailInfo.portraitUri] placeholderImage:[UIImage imageNamed:@"icon"]];
+    [_portraitImageView sd_setImageWithURL:[NSURL URLWithString:userDetailInfo.portraitUri] placeholderImage:[UIImage imageNamed:@"头像_100"]];
     
     [self refreshUserDetailButton];
     [[CustomShowMessage getInstance] hideWaitingIndicator];

@@ -92,8 +92,7 @@
 }
 
 #pragma mark SignUpDataDelegate - method
--(void)signUpSucceed
-{
+-(void)signUpSucceed{
     [[CustomShowMessage getInstance] showNotificationMessage:@"注册成功"];
     
     [self performSelector:@selector(changeToLoginView)

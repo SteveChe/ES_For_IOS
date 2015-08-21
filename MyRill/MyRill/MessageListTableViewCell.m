@@ -8,7 +8,7 @@
 
 #import "MessageListTableViewCell.h"
 #import "ESTaskComment.h"
-#import "ESContactor.h"
+#import "ESUserInfo.h"
 #import "UIImageView+WebCache.h"
 #import "ColorHandler.h"
 
@@ -34,12 +34,12 @@
 }
 
 - (void)updateMessage:(ESTaskComment *)taskComment {
-    [self.userImg sd_setImageWithURL:[NSURL URLWithString:taskComment.user.imgURLstr] placeholderImage:nil];
+    [self.userImg sd_setImageWithURL:[NSURL URLWithString:taskComment.user.portraitUri] placeholderImage:[UIImage imageNamed:@"头像_100"]];
     
     if ([ColorHandler isNullOrEmptyString:taskComment.user.enterprise]) {
-        self.nameAndEnterpriseLbl.text = taskComment.user.name;
+        self.nameAndEnterpriseLbl.text = taskComment.user.userName;
     } else {
-        self.nameAndEnterpriseLbl.text = [NSString stringWithFormat:@"%@/%@",taskComment.user.name,taskComment.user.enterprise];
+        self.nameAndEnterpriseLbl.text = [NSString stringWithFormat:@"%@/%@",taskComment.user.userName,taskComment.user.enterprise];
     }
     NSString *createDateStr = [taskComment.createDate substringToIndex:16];
     self.createDate.text = [createDateStr stringByReplacingOccurrencesOfString:@"-" withString:@"/"];

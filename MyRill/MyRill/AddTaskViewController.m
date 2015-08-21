@@ -10,7 +10,7 @@
 #import "ColorHandler.h"
 #import "AddTaskDataParse.h"
 #import "ESTask.h"
-#import "ESContactor.h"
+#import "ESUserInfo.h"
 #import "Masonry.h"
 #import "TaskContactorCollectionViewCell.h"
 #import "ESUserInfo.h"
@@ -29,13 +29,11 @@
 @property (nonatomic, strong) UIDatePicker *dateSelectedPicker;
 @property (weak, nonatomic) IBOutlet UICollectionView *assignerCollectionView;
 @property (weak, nonatomic) IBOutlet UICollectionView *followsCollectionView;
-
-@property (nonatomic, strong) NSMutableArray *assignerDataSource;
-@property (nonatomic, strong) NSMutableArray *followsDataSource;
-@property (nonatomic, strong) AddTaskDataParse *addTaskDataDP;
-@property (nonatomic,strong) NSMutableArray* tastObserversList;//关注人列表,ESUserInfo
-@property (nonatomic,strong) NSMutableArray* tastRecipientsList;//负责人列表,ESUserInfo
 @property (nonatomic, strong) MRProgressOverlayView *progress;
+
+@property (nonatomic, strong) NSMutableArray *assignerDataSource; //负责人列表,ESUserInfo
+@property (nonatomic, strong) NSMutableArray *followsDataSource;  //关注人列表,ESUserInfo
+@property (nonatomic, strong) AddTaskDataParse *addTaskDataDP;
 
 @end
 
@@ -71,13 +69,6 @@
     }];
     
     [self.view layoutIfNeeded];
-    
-    if (self.tastRecipientsList == nil) {
-        self.tastRecipientsList = [NSMutableArray array];
-    }
-    if (self.tastObserversList == nil) {
-        self.tastObserversList = [NSMutableArray array];
-    }
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.dateFormat = @"yyyy/MM/dd HH:mm";
@@ -115,15 +106,15 @@
     
     cell.contentView.backgroundColor = [UIColor whiteColor];
     
-    ESContactor *contactor = nil;
+    ESUserInfo *user = nil;
     
     if (collectionView == self.assignerCollectionView) {
-        contactor = (ESContactor *)self.assignerDataSource[indexPath.row];
-        [cell updateCell:contactor];
+        user = (ESUserInfo *)self.assignerDataSource[indexPath.row];
+        [cell updateCell:user];
         return cell;
     } else if (collectionView == self.followsCollectionView) {
-        contactor = (ESContactor *)self.followsDataSource[indexPath.row];
-        [cell updateCell:contactor];
+        user = (ESUserInfo *)self.followsDataSource[indexPath.row];
+        [cell updateCell:user];
         return cell;
     } else {
         return nil;
@@ -226,23 +217,14 @@
     if (sender.tag == 1003) {
         __weak typeof(&*self)  weakSelf = self;
         RCDSelectPersonViewController* selectPersonVC = [[RCDSelectPersonViewController alloc] init];
-        [selectPersonVC setSeletedUsers:self.tastRecipientsList];
+        [selectPersonVC setSeletedUsers:self.assignerDataSource];
         //设置回调
         selectPersonVC.clickDoneCompletion = ^(RCDSelectPersonViewController* selectPersonViewController, NSArray* selectedUsers) {
             
             if (selectedUsers && selectedUsers.count)
             {
-                [self.tastRecipientsList removeAllObjects];
-                [self.tastRecipientsList addObjectsFromArray:selectedUsers];
-                weakSelf.assignerDataSource = nil;
-                for (ESUserInfo *user in self.tastRecipientsList) {
-                    ESContactor *contactor = [[ESContactor alloc] init];
-                    contactor.useID = [NSNumber numberWithInteger:[user.userId integerValue]];
-                    contactor.name = user.userName;
-                    contactor.imgURLstr = user.portraitUri;
-                    contactor.enterprise = user.enterprise;
-                    [weakSelf.assignerDataSource addObject:contactor];
-                }
+                [self.assignerDataSource removeAllObjects];
+                [self.assignerDataSource addObjectsFromArray:selectedUsers];
             }
             
             [weakSelf.navigationController popViewControllerAnimated:YES ];
@@ -252,7 +234,7 @@
     }
     else if (sender.tag == 1004){
         RCDSelectPersonViewController* selectPersonVC = [[RCDSelectPersonViewController alloc] init];
-        [selectPersonVC setSeletedUsers:self.tastObserversList];
+        [selectPersonVC setSeletedUsers:self.followsDataSource];
         __weak typeof(&*self)  weakSelf = self;
         
         //设置回调
@@ -260,17 +242,8 @@
             
             if (selectedUsers && selectedUsers.count)
             {
-                [self.tastObserversList removeAllObjects];
-                [self.tastObserversList addObjectsFromArray:selectedUsers];
-                weakSelf.followsDataSource = nil;
-                for (ESUserInfo *user in self.tastObserversList) {
-                    ESContactor *contactor = [[ESContactor alloc] init];
-                    contactor.useID = [NSNumber numberWithInteger:[user.userId integerValue]];
-                    contactor.name = user.userName;
-                    contactor.imgURLstr = user.portraitUri;
-                    contactor.enterprise = user.enterprise;
-                    [weakSelf.followsDataSource addObject:contactor];
-                }
+                [self.followsDataSource removeAllObjects];
+                [self.followsDataSource addObjectsFromArray:selectedUsers];
             }
             [weakSelf.navigationController popViewControllerAnimated:YES ];
             [self.followsCollectionView reloadData];
@@ -302,15 +275,6 @@
     } else if (self.assignerDataSource.count == 0) {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"注意"
                                                                                  message:@"分配人不能为空!"
-                                                                          preferredStyle:UIAlertControllerStyleAlert];
-        [alertController addAction:[UIAlertAction actionWithTitle:@"好的!" style:UIAlertActionStyleDefault handler:nil]];
-        [self presentViewController:alertController
-                           animated:YES
-                         completion:nil];
-        return;
-    } else if (self.followsDataSource.count == 0) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"注意"
-                                                                                 message:@"关注人不能为空!"
                                                                           preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:[UIAlertAction actionWithTitle:@"好的!" style:UIAlertActionStyleDefault handler:nil]];
         [self presentViewController:alertController
