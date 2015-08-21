@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-@class ESContactor;
+@class ESUserInfo;
 
 @interface TaskContactorCollectionViewCell : UICollectionViewCell
 
-- (void)updateCell:(ESContactor *)contactor;
+- (void)updateCell:(ESUserInfo *)user;
 
 @end

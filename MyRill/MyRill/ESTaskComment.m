@@ -8,7 +8,7 @@
 
 #import "ESTaskComment.h"
 #import "ColorHandler.h"
-#import "ESContactor.h"
+#import "ESUserInfo.h"
 
 @implementation ESTaskComment
 
@@ -37,7 +37,7 @@
         
         NSDictionary *userDic = (NSDictionary *)dic[@"user"];
         if (userDic != nil && ![userDic isKindOfClass:[NSNull class]]) {
-            self.user = [[ESContactor alloc] initWithDic:dic[@"user"]];
+            self.user = [[ESUserInfo alloc] initWithDic:dic[@"user"]];
         } else {
             self.user = nil;
         }

@@ -10,7 +10,7 @@
 #import "AFNetworking.h"
 #import "ESProfession.h"
 #import "ESTask.h"
-#import "ESContactor.h"
+#import "ESUserInfo.h"
 #import "ESUserDetailInfo.h"
 
 #define DEV_SERVER_ADDRESS @"http://120.25.249.144/"
@@ -417,16 +417,14 @@
                  success:(void (^)(id))success
                  failure:(void (^)(NSError *))failure {
     NSMutableArray *observerArray = [[NSMutableArray alloc] initWithCapacity:task.observers.count];
-    for (ESContactor *contactor in task.observers) {
-        [observerArray addObject:contactor.useID];
+    for (ESUserInfo *user in task.observers) {
+        [observerArray addObject:user.userId];
     }
-
-    NSLog(@"%@",observerArray);
     
     NSDictionary *param = @{@"title":task.title,
                             @"description":task.taskDescription,
                             @"due_date":task.endDate,
-                            @"person_in_charge":task.personInCharge.useID,
+                            @"person_in_charge":task.personInCharge.userId,
                             @"observers":observerArray,
                             @"chat_id":task.chatID
                             };
@@ -495,8 +493,8 @@
                success:(void (^)(id response))success
                failure:(void (^)(NSError *error))failure {
     NSMutableArray *observerArray = [[NSMutableArray alloc] initWithCapacity:task.observers.count];
-    for (ESContactor *contractor in task.observers) {
-        [observerArray addObject:contractor.useID];
+    for (ESUserInfo *user in task.observers) {
+        [observerArray addObject:user.userId];
     }
 
 //    NSError *error = nil;
@@ -511,7 +509,7 @@
                             @"due_date":task.endDate,
                             @"status":[task.status stringValue],
                             @"chat_id":task.chatID,
-                            @"person_in_charge":task.personInCharge.useID,
+                            @"person_in_charge":task.personInCharge.userId,
                             @"observers":observerArray};
     
     [AFHttpTool requestWithMethod:RequestMethodTypePost protocolType:RequestProtocolTypeJson

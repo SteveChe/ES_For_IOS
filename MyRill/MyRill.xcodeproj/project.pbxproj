@@ -126,7 +126,6 @@
 		2BEBBD861B665BCB008BE7C4 /* ESTaskDashboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEBBD851B665BCB008BE7C4 /* ESTaskDashboard.m */; };
 		2BEBBD891B6661FD008BE7C4 /* ESTaskOriginatorInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEBBD881B6661FD008BE7C4 /* ESTaskOriginatorInfo.m */; };
 		2BEBBD8C1B67AFA7008BE7C4 /* GetTaskListDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEBBD8B1B67AFA7008BE7C4 /* GetTaskListDataParse.m */; };
-		2BEBBD8F1B6E46EC008BE7C4 /* ESContactor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEBBD8E1B6E46EC008BE7C4 /* ESContactor.m */; };
 		2BEBBD921B6E4920008BE7C4 /* ESTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEBBD911B6E4920008BE7C4 /* ESTask.m */; };
 		2BEBBD931B6F5E1F008BE7C4 /* TaskListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE55A111B64843A008CDB4B /* TaskListTableViewCell.xib */; };
 		F20C13051B73A2690073BFA9 /* EnterpriseChatListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F20C13041B73A2690073BFA9 /* EnterpriseChatListViewController.m */; };
@@ -510,8 +509,6 @@
 		2BEBBD881B6661FD008BE7C4 /* ESTaskOriginatorInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESTaskOriginatorInfo.m; sourceTree = "<group>"; };
 		2BEBBD8A1B67AFA7008BE7C4 /* GetTaskListDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetTaskListDataParse.h; sourceTree = "<group>"; };
 		2BEBBD8B1B67AFA7008BE7C4 /* GetTaskListDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetTaskListDataParse.m; sourceTree = "<group>"; };
-		2BEBBD8D1B6E46EC008BE7C4 /* ESContactor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESContactor.h; sourceTree = "<group>"; };
-		2BEBBD8E1B6E46EC008BE7C4 /* ESContactor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESContactor.m; sourceTree = "<group>"; };
 		2BEBBD901B6E4920008BE7C4 /* ESTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESTask.h; sourceTree = "<group>"; };
 		2BEBBD911B6E4920008BE7C4 /* ESTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESTask.m; sourceTree = "<group>"; };
 		F20C13031B73A2690073BFA9 /* EnterpriseChatListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnterpriseChatListViewController.h; sourceTree = "<group>"; };
@@ -1413,8 +1410,6 @@
 				2BEBBD851B665BCB008BE7C4 /* ESTaskDashboard.m */,
 				2BEBBD871B6661FD008BE7C4 /* ESTaskOriginatorInfo.h */,
 				2BEBBD881B6661FD008BE7C4 /* ESTaskOriginatorInfo.m */,
-				2BEBBD8D1B6E46EC008BE7C4 /* ESContactor.h */,
-				2BEBBD8E1B6E46EC008BE7C4 /* ESContactor.m */,
 				2BEBBD901B6E4920008BE7C4 /* ESTask.h */,
 				2BEBBD911B6E4920008BE7C4 /* ESTask.m */,
 				2BEAD05A1B76294500905E21 /* ESTaskMask.h */,
@@ -2048,7 +2043,6 @@
 				F29F862E1B2410070058FC9F /* AFURLRequestSerialization.m in Sources */,
 				F29F86431B2410320058FC9F /* AFNetworkActivityIndicatorManager.m in Sources */,
 				F22FE2F61B40037100A1A997 /* pinyin.c in Sources */,
-				2BEBBD8F1B6E46EC008BE7C4 /* ESContactor.m in Sources */,
 				2B39C93E1B241212007BAC7A /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				F2F92EC51B4AB58F0047D7BF /* RCDAcceptContactViewController.m in Sources */,
 				2B39C93D1B241212007BAC7A /* NSArray+MASAdditions.m in Sources */,
@@ -2205,8 +2199,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Xinshuai Che (6XH6L3AH29)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Xinshuai Che (6XH6L3AH29)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MyRill/RCloud",
@@ -2230,8 +2224,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Xinshuai Che (6XH6L3AH29)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Xinshuai Che (6XH6L3AH29)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MyRill/RCloud",

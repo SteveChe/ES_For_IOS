@@ -15,7 +15,7 @@
                 <outlet property="sendTxtfield" destination="fPT-KS-mfD" id="cbk-RY-Hbu"/>
                 <outlet property="sendView" destination="M3z-J2-Kdw" id="fBP-Hc-2bL"/>
                 <outlet property="sendViewBottomConstraint" destination="6FY-qM-tmh" id="iiJ-EK-bS9"/>
-                <outlet property="startDateLbl" destination="b3r-ns-CGu" id="PVD-gS-t1y"/>
+                <outlet property="startDateLbl" destination="b3r-ns-CGu" id="I20-cY-v0x"/>
                 <outlet property="tableView" destination="Kd5-uX-Twr" id="Bxy-8d-mmX"/>
                 <outlet property="taskDescriptioinTextView" destination="AbA-ts-l62" id="k6V-gf-ogW"/>
                 <outlet property="taskStatusSwitch" destination="rlD-Em-wye" id="0ye-wM-J7u"/>
@@ -152,10 +152,10 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="右箭头" translatesAutoresizingMaskIntoConstraints="NO" id="i8i-wV-QyP">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="右箭头" translatesAutoresizingMaskIntoConstraints="NO" id="i8i-wV-QyP">
                                         <rect key="frame" x="572" y="14" width="10" height="17"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="----/--/-- --:--" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u89-OX-g9g">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="----/--/-- --:--" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u89-OX-g9g">
                                         <rect key="frame" x="462" y="12" width="101.5" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -195,7 +195,7 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="右箭头" translatesAutoresizingMaskIntoConstraints="NO" id="CFH-zx-WIc">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="右箭头" translatesAutoresizingMaskIntoConstraints="NO" id="CFH-zx-WIc">
                                         <rect key="frame" x="572" y="14" width="10" height="17"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="brd-0V-wWy">
@@ -246,7 +246,7 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="UXc-Co-idq">
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="UXc-Co-idq">
                                         <rect key="frame" x="74" y="55" width="478" height="55"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="YkY-Bm-K0C">
@@ -260,13 +260,13 @@
                                             <outlet property="delegate" destination="-1" id="6WG-o5-r2i"/>
                                         </connections>
                                     </collectionView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="右箭头" translatesAutoresizingMaskIntoConstraints="NO" id="6nv-my-Ghb">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="右箭头" translatesAutoresizingMaskIntoConstraints="NO" id="6nv-my-Ghb">
                                         <rect key="frame" x="572" y="18" width="10" height="17"/>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" misplaced="YES" image="右箭头" translatesAutoresizingMaskIntoConstraints="NO" id="1FS-et-JXj">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" image="右箭头" translatesAutoresizingMaskIntoConstraints="NO" id="1FS-et-JXj">
                                         <rect key="frame" x="572" y="74" width="10" height="17"/>
                                     </imageView>
-                                    <button opaque="NO" tag="1002" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iDd-i0-la5">
+                                    <button opaque="NO" tag="1002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iDd-i0-la5">
                                         <rect key="frame" x="552" y="55" width="50" height="55"/>
                                         <state key="normal">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -275,7 +275,7 @@
                                             <action selector="chooseContactorBtnOnClicked:" destination="-1" eventType="touchUpInside" id="ps8-4T-hMS"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="1001" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ch-Ox-k6g">
+                                    <button opaque="NO" tag="1001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ch-Ox-k6g">
                                         <rect key="frame" x="552" y="0.0" width="50" height="54"/>
                                         <state key="normal">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -284,7 +284,7 @@
                                             <action selector="chooseContactorBtnOnClicked:" destination="-1" eventType="touchUpInside" id="wQJ-3O-d7y"/>
                                         </connections>
                                     </button>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="JEw-9h-N3Q">
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="JEw-9h-N3Q">
                                         <rect key="frame" x="74" y="0.0" width="478" height="54"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="bKq-t0-bCF">

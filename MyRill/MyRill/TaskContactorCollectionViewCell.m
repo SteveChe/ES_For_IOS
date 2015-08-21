@@ -7,7 +7,7 @@
 //
 
 #import "TaskContactorCollectionViewCell.h"
-#import "ESContactor.h"
+#import "ESUserInfo.h"
 #import "UIImageView+WebCache.h"
 
 @interface TaskContactorCollectionViewCell ()
@@ -22,9 +22,9 @@
     // Initialization code
 }
 
-- (void)updateCell:(ESContactor *)contactor {
-    [self.userImg sd_setImageWithURL:[NSURL URLWithString:contactor.imgURLstr] placeholderImage:[UIImage imageNamed:@"头像_100"]];
-    self.name.text = contactor.name;
+- (void)updateCell:(ESUserInfo *)user {
+    [self.userImg sd_setImageWithURL:[NSURL URLWithString:user.portraitUri] placeholderImage:[UIImage imageNamed:@"头像_100"]];
+    self.name.text = user.userName;
 }
 
 - (void)setUserImg:(UIImageView *)userImg {

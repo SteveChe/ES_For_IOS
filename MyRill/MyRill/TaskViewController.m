@@ -11,7 +11,7 @@
 #import "Masonry.h"
 #import "ESTask.h"
 #import "EditTaskDataParse.h"
-#import "ESContactor.h"
+#import "ESUserInfo.h"
 #import "ESTagViewController.h"
 #import "CustomShowMessage.h"
 #import "ESUserInfo.h"
@@ -36,6 +36,7 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerViewTopConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *sendViewBottomConstraint;
+@property (weak, nonatomic) IBOutlet UILabel *startDateLbl;
 @property (weak, nonatomic) IBOutlet UITextField *taskTitleTxtField;
 @property (weak, nonatomic) IBOutlet UITextView *taskDescriptioinTextView;
 @property (weak, nonatomic) IBOutlet UILabel *endDateLbl;
@@ -48,10 +49,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *sendTxtfield;
 @property (nonatomic, strong) MRProgressOverlayView *progress;
 
-@property (nonatomic, strong) NSMutableArray *assignerDataSource;
-@property (nonatomic, strong) NSMutableArray *followsDataSource;
-@property (nonatomic,strong) NSMutableArray* tastObserversList;//关注人列表,ESUserInfo
-@property (nonatomic,strong) NSMutableArray* tastRecipientsList;//负责人列表,ESUserInfo
+@property (nonatomic, strong) NSMutableArray *assignerDataSource; //负责人列表,ESUserInfo
+@property (nonatomic, strong) NSMutableArray *followsDataSource; //关注人列表,ESUserInfo
 @property (nonatomic, strong) NSMutableArray *dataSource;
 
 @property (nonatomic, strong) GetTaskDetailDataParse *getTaskDetailDP;
@@ -60,6 +59,7 @@
 @property (nonatomic, strong) SendTaskCommentDataParse *sendTaskCommentDP;
 @property (nonatomic, strong) CloseTaskDataParse *closeTaskDP;
 
+@property (nonatomic, strong) ESTask *taskModel;
 @property (nonatomic, copy) NSString *userID;
 @property (nonatomic, assign) BOOL isOpen;
 
@@ -93,13 +93,12 @@
                                                                 target:self
                                                                 action:@selector(saveBarItemOnClicked)];
     self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:saveItem, startConversationItem, nil];
-    self.isOpen = YES;
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     [self.view addGestureRecognizer:tap];
+    [self.sendTxtfield addTarget:self action:@selector(send) forControlEvents:UIControlEventEditingDidEndOnExit];
     
     [self.view addSubview:self.dateSelectedPicker];
-    
     __weak UIView *ws = self.view;
     [self.dateSelectedPicker mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(ws.mas_leading);
@@ -107,32 +106,34 @@
         make.bottom.equalTo(ws.mas_bottom).with.offset(216);
         make.height.equalTo(@216);
     }];
-    
     [self.view layoutIfNeeded];
-    
-    if (self.tastRecipientsList == nil) {
-        self.tastRecipientsList = [[NSMutableArray alloc] initWithObjects:self.taskModel.personInCharge, nil];
-    }
-    if (self.tastObserversList == nil) {
-        self.tastObserversList = [[NSMutableArray alloc] initWithArray:self.taskModel.observers];
-    }
-    
-    self.assignerDataSource = nil;
-    [self.assignerDataSource addObject:self.taskModel.personInCharge];
-    
-    self.followsDataSource = nil;
-    for (ESContactor *contactor in self.taskModel.observers) {
-        [self.followsDataSource addObject:contactor];
-    }
 
     [self.tableView registerNib:[UINib nibWithNibName:@"MessageListSelfTableViewCell" bundle:nil] forCellReuseIdentifier:@"MessageListSelfTableViewCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"MessageListTableViewCell" bundle:nil] forCellReuseIdentifier:@"MessageListTableViewCell"];
     
-    [self.sendTxtfield addTarget:self action:@selector(send) forControlEvents:UIControlEventEditingDidEndOnExit];
+    self.isOpen = YES;
+    NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
+    self.userID = [userDefaultes stringForKey:@"UserId"];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    //请求任务详情
+    [self.getTaskDetailDP getTaskDetailWithTaskID:self.requestTaskID];
+    //请求任务列表
+    [self.getTaskCommentListDP getTaskCommentListWithTaskID:self.requestTaskID listSize:nil];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)getTaskDetailSuccess:(ESTask *)task {
+    self.taskModel = task;
     
     NSString *startDateStr = [self.taskModel.startDate substringToIndex:10];
     self.startDateLbl.text = [@"发起时间：" stringByAppendingString:[startDateStr stringByReplacingOccurrencesOfString:@"-" withString:@"/"]];
@@ -145,30 +146,19 @@
     if (self.taskModel.status.integerValue == 0) {
         //任务状态为新
         self.taskStatusSwitch.on = NO;
-    } else if (self.taskModel.status.integerValue == 1) {
-        //任务状态为已关闭
-        self.taskStatusSwitch.on = YES;
     } else {
-        
+        //任务状态为已关闭status=1
+        self.taskStatusSwitch.on = YES;
     }
-
+    
+    [self.assignerDataSource removeAllObjects];
+    [self.assignerDataSource addObject:self.taskModel.personInCharge];
+    
+    [self.followsDataSource removeAllObjects];
+    [self.followsDataSource addObjectsFromArray:self.taskModel.observers];
+    
     [self.assignerCollectionView reloadData];
     [self.followsCollectionView reloadData];
-    
-    [self.getTaskDetailDP getTaskDetailWithTaskID:[self.taskModel.taskID stringValue]];
-    [self.getTaskCommentListDP getTaskCommentListWithTaskID:[self.taskModel.taskID stringValue] listSize:nil];
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
-}
-
-- (void)getTaskDetailSuccess:(ESTask *)task {
-    NSLog(@"adsfafas");
-    self.taskModel = task;
 }
 
 #pragma mark - EditTaskDelegate methods
@@ -213,7 +203,7 @@
     ESTaskComment *taskComment = (ESTaskComment *)self.dataSource[indexPath.row];
     
     UITableViewCell *cell = nil;
-    if ([taskComment.user.useID.stringValue isEqualToString:self.userID]) {
+    if ([taskComment.user.userId isEqualToString:self.userID]) {
         MessageListSelfTableViewCell *selfCell = (MessageListSelfTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"MessageListSelfTableViewCell" forIndexPath:indexPath];
         [selfCell updateMessage:self.dataSource[indexPath.row]];
         cell = selfCell;
@@ -257,22 +247,24 @@
 
 - (void)startConversationEvent {
     //发起会话功能
-    if ([self.tastRecipientsList count] <=0 ) {
+    if ([self.assignerDataSource count] <=0 ) {
         [[CustomShowMessage getInstance] showNotificationMessage:@"缺少分配人!"];
         return;
     }
-    if ([self.tastObserversList count] <=0 ) {
+    if ([self.followsDataSource count] <=0 ) {
         [[CustomShowMessage getInstance] showNotificationMessage:@"缺少关注人!"];
         return;
     }
-    NSMutableArray* selectedUsers = [NSMutableArray new];
-    [selectedUsers addObjectsFromArray:self.tastRecipientsList];
-    [selectedUsers addObjectsFromArray:self.tastObserversList];
+    //创建set过滤分配和关注中的重复联系人
+    NSMutableSet *contactorSet = [[NSMutableSet alloc] initWithCapacity:self.assignerDataSource.count + self.followsDataSource.count];
+    [contactorSet addObjectsFromArray:self.assignerDataSource];
+    [contactorSet addObjectsFromArray:self.followsDataSource];
+    
     NSMutableString *discussionTitle = [NSMutableString string];
     NSMutableArray *userIdList = [NSMutableArray new];
-    for (ESContactor *user in selectedUsers) {
-        [discussionTitle appendString:[NSString stringWithFormat:@"%@%@", user.name,@","]];
-        [userIdList addObject:[user.useID stringValue]];
+    for (ESUserInfo *contactor in contactorSet) {
+        [discussionTitle appendString:[NSString stringWithFormat:@"%@%@", contactor.userName,@","]];
+        [userIdList addObject:contactor.userId];
     }
     [discussionTitle deleteCharactersInRange:NSMakeRange(discussionTitle.length - 1, 1)];
     __weak typeof(&*self)  weakSelf = self;
@@ -315,8 +307,6 @@
         } error:^(RCErrorCode status){
             
         }];
-        
-
     }
 }
 
@@ -336,23 +326,13 @@
     if (sender.tag == 1001) {
         __weak typeof(&*self)  weakSelf = self;
         RCDSelectPersonViewController* selectPersonVC = [[RCDSelectPersonViewController alloc] init];
-        [selectPersonVC setSeletedUsers:self.tastRecipientsList];
+        [selectPersonVC setSeletedUsers:self.assignerDataSource];
         //设置回调
         selectPersonVC.clickDoneCompletion = ^(RCDSelectPersonViewController* selectPersonViewController, NSArray* selectedUsers) {
             
-            if (selectedUsers && selectedUsers.count)
-            {
-                [self.tastRecipientsList removeAllObjects];
-                [self.tastRecipientsList addObjectsFromArray:selectedUsers];
-                weakSelf.assignerDataSource = nil;
-                for (ESUserInfo *user in self.tastRecipientsList) {
-                    ESContactor *contactor = [[ESContactor alloc] init];
-                    contactor.useID = [NSNumber numberWithInteger:[user.userId integerValue]];
-                    contactor.name = user.userName;
-                    contactor.imgURLstr = user.portraitUri;
-                    contactor.enterprise = user.enterprise;
-                    [weakSelf.assignerDataSource addObject:contactor];
-                }
+            if (selectedUsers && selectedUsers.count) {
+                [weakSelf.assignerDataSource removeAllObjects];
+                [weakSelf.assignerDataSource addObjectsFromArray:selectedUsers];
             }
             
             [weakSelf.navigationController popViewControllerAnimated:YES ];
@@ -362,7 +342,7 @@
     }
     else if (sender.tag == 1002){
         RCDSelectPersonViewController* selectPersonVC = [[RCDSelectPersonViewController alloc] init];
-        [selectPersonVC setSeletedUsers:self.tastObserversList];
+        [selectPersonVC setSeletedUsers:self.followsDataSource];
         __weak typeof(&*self)  weakSelf = self;
 
         //设置回调
@@ -370,18 +350,8 @@
             
             if (selectedUsers && selectedUsers.count)
             {
-                [self.tastObserversList removeAllObjects];
-                [self.tastObserversList addObjectsFromArray:selectedUsers];
-                weakSelf.followsDataSource = nil;
-                for (ESUserInfo *user in self.tastObserversList) {
-                    ESContactor *contactor = [[ESContactor alloc] init];
-                    contactor.useID = [NSNumber numberWithInteger:[user.userId integerValue]];
-                    contactor.name = user.userName;
-                    contactor.imgURLstr = user.portraitUri;
-                    contactor.enterprise = user.enterprise;
-                    [weakSelf.followsDataSource addObject:contactor];
-                }
-                
+                [weakSelf.followsDataSource removeAllObjects];
+                [weakSelf.followsDataSource addObject:selectedUsers];
             }
             [weakSelf.navigationController popViewControllerAnimated:YES ];
             [self.followsCollectionView reloadData];
@@ -514,15 +484,15 @@
     
     cell.contentView.backgroundColor = [UIColor whiteColor];
     
-    ESContactor *contactor = nil;
+    ESUserInfo *user = nil;
     
     if (collectionView == self.assignerCollectionView) {
-        contactor = (ESContactor *)self.assignerDataSource[indexPath.row];
-        [cell updateCell:contactor];
+        user = (ESUserInfo *)self.assignerDataSource[indexPath.row];
+        [cell updateCell:user];
         return cell;
     } else if (collectionView == self.followsCollectionView) {
-        contactor = (ESContactor *)self.followsDataSource[indexPath.row];
-        [cell updateCell:contactor];
+        user = (ESUserInfo *)self.followsDataSource[indexPath.row];
+        [cell updateCell:user];
         return cell;
     } else {
         return nil;

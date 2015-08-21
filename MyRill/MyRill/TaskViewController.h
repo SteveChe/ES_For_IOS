@@ -11,7 +11,6 @@
 
 @interface TaskViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet UILabel *startDateLbl;
-@property (nonatomic, strong) ESTask *taskModel;
+@property (nonatomic, copy) NSString *requestTaskID;
 
 @end

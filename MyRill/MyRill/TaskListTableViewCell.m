@@ -9,7 +9,7 @@
 #import "TaskListTableViewCell.h"
 #import "ColorHandler.h"
 #import "ESTask.h"
-#import "ESContactor.h"
+#import "ESUserInfo.h"
 #import "UIImageView+WebCache.h"
 #import "ESTaskComment.h"
 
@@ -51,7 +51,7 @@
     
     self.titleLbl.text = [@"任务名称：" stringByAppendingString:task.title];
     
-    NSString *leadStr = [NSString stringWithFormat:@"负责人：%@",task.personInCharge.name];
+    NSString *leadStr = [NSString stringWithFormat:@"负责人：%@",task.personInCharge.userName];
     if (![task.personInCharge.enterprise isEqualToString:@""]) {
         leadStr = [leadStr stringByAppendingString:@"/"];
         leadStr = [leadStr stringByAppendingString:task.personInCharge.enterprise];
@@ -60,19 +60,19 @@
     
     NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
     NSString *userID = [userDefaultes stringForKey:@"UserId"];
-    if ([userID isEqualToString:task.comments.user.useID.stringValue]) {
+    if ([userID isEqualToString:task.comments.user.userId]) {
         self.replyUserLbl.text = @"我";
     } else {
-        self.replyUserLbl.text = task.comments.user.name;
+        self.replyUserLbl.text = task.comments.user.userName;
     }
     
-    [self.replyUserImg sd_setImageWithURL:[NSURL URLWithString:task.comments.user.imgURLstr] placeholderImage:nil];
+    [self.replyUserImg sd_setImageWithURL:[NSURL URLWithString:task.comments.user.portraitUri] placeholderImage:[UIImage imageNamed:@"头像_100"]];
     
     NSString *replyDateStr = [task.comments.createDate stringByReplacingOccurrencesOfString:@"-" withString:@"/"];
     self.replyTimeLbl.text = [replyDateStr isEqualToString:@""]?@"----/--/-- --:--":[replyDateStr substringToIndex:16];
     self.lastReplyLbl.text = [task.comments.content isEqualToString:@""]?@"最新回复:——":[@"最新回复:" stringByAppendingString:task.comments.content];
     
-    if ([task.initiator.useID.stringValue isEqualToString:userID]) {
+    if ([task.initiator.userId isEqualToString:userID]) {
         self.tagImg.image = [UIImage imageNamed:@"发起人.png"];
     } else {
         self.tagImg.image = [UIImage imageNamed:@"关注人.png"];

@@ -71,7 +71,7 @@
     self.userDescriptionLbl.text = [@"简介：" stringByAppendingString:[userDefaultes stringForKey:@"UserDecription"]?[userDefaultes stringForKey:@"UserDecription"]:@""];
 
     //更新头像缓存的url，若url有变化
-    [self.userIcon sd_setImageWithURL:[NSURL URLWithString:[userDefaultes stringForKey:@"UserImageURL"]] placeholderImage:[UIImage imageNamed:@"icon.png"]];
+    [self.userIcon sd_setImageWithURL:[NSURL URLWithString:[userDefaultes stringForKey:@"UserImageURL"]] placeholderImage:[UIImage imageNamed:@"头像_100"]];
 }
 
 #pragma mark - ChangeUserImageDataDelegate methods

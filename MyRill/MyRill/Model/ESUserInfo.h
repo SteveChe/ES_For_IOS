@@ -26,4 +26,7 @@
 //**  0 非手机通讯录联系人 , 1 手机通讯录联系人 , 2 联系人请求
 @property(nonatomic, assign) NSNumber *status;
 
+//designed initilize
+- (instancetype)initWithDic:(NSDictionary *)dic;
+
 @end

@@ -8,7 +8,7 @@
 
 #import "ESTask.h"
 #import "ColorHandler.h"
-#import "ESContactor.h"
+#import "ESUserInfo.h"
 #import "ESTaskComment.h"
 
 @implementation ESTask
@@ -26,7 +26,7 @@
         
         NSDictionary *initiatorDic = (NSDictionary *)dic[@"initiator"];
         if (initiatorDic != nil && ![initiatorDic isKindOfClass:[NSNull class]]) {
-            self.initiator = [[ESContactor alloc] initWithDic:initiatorDic];
+            self.initiator = [[ESUserInfo alloc] initWithDic:initiatorDic];
         } else {
             self.initiator = nil;
         }
@@ -74,7 +74,7 @@
             NSMutableArray *temp = [[NSMutableArray alloc] initWithCapacity:array.count];
             
             for (NSDictionary *dic1 in array) {
-                ESContactor *contactor = [[ESContactor alloc] initWithDic:dic1];
+                ESUserInfo *contactor = [[ESUserInfo alloc] initWithDic:dic1];
                 [temp addObject:contactor];
             }
             self.observers = [NSArray arrayWithArray:temp];
@@ -84,16 +84,10 @@
         
         NSDictionary *picDic = (NSDictionary *)dic[@"person_in_charge"];
         if (picDic != nil && ![picDic isKindOfClass:[NSNull class]]) {
-            self.personInCharge = [[ESContactor alloc] initWithDic:picDic];
+            self.personInCharge = [[ESUserInfo alloc] initWithDic:picDic];
         } else {
             self.personInCharge = nil;
         }
-        
-//        if (dic[@"has_update"] == nil) {
-//            self.isUpdate = NO;
-//        } else {
-//            
-//        }
 
         self.isUpdate = [dic[@"has_update"] boolValue];
         

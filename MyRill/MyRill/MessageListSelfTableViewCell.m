@@ -9,7 +9,7 @@
 #import "MessageListSelfTableViewCell.h"
 #import "ESTaskComment.h"
 #import "UIImageView+WebCache.h"
-#import "ESContactor.h"
+#import "ESUserInfo.h"
 #import "ColorHandler.h"
 
 @interface MessageListSelfTableViewCell ()
@@ -45,7 +45,8 @@
 }
 
 - (void)updateMessage:(ESTaskComment *)taskComment {
-    [self.userImg sd_setImageWithURL:[NSURL URLWithString:taskComment.user.imgURLstr] placeholderImage:nil];
+    [self.userImg sd_setImageWithURL:[NSURL URLWithString:taskComment.user.portraitUri]
+                    placeholderImage:[UIImage imageNamed:@"头像_100"]];
     if ([ColorHandler isNullOrEmptyString:taskComment.user.enterprise]) {
         self.nameAndEnterpriseLbl.text = @"我";
     } else {
