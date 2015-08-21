@@ -11,6 +11,6 @@
 
 @interface TaskViewController : UIViewController
 
-@property (nonatomic, copy) NSString *taskID;
+@property (nonatomic, copy) NSString *requestTaskID;
 
 @end

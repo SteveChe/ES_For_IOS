@@ -120,9 +120,9 @@
     [super viewWillAppear:animated];
     
     //请求任务详情
-    [self.getTaskDetailDP getTaskDetailWithTaskID:self.taskID];
+    [self.getTaskDetailDP getTaskDetailWithTaskID:self.requestTaskID];
     //请求任务列表
-    [self.getTaskCommentListDP getTaskCommentListWithTaskID:[self.taskModel.taskID stringValue] listSize:nil];
+    [self.getTaskCommentListDP getTaskCommentListWithTaskID:self.requestTaskID listSize:nil];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {

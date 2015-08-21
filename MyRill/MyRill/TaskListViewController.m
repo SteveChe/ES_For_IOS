@@ -93,7 +93,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     TaskViewController *taskVC = [[TaskViewController alloc] init];
     ESTask *task = (ESTask *)self.dataSource[indexPath.row];
-    taskVC.taskID = [task.taskID stringValue];
+    taskVC.requestTaskID = [task.taskID stringValue];
     [self.navigationController pushViewController:taskVC animated:YES];
 }
 
