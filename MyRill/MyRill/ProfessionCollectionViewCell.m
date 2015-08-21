@@ -8,6 +8,7 @@
 
 #import "ProfessionCollectionViewCell.h"
 #import "ESProfession.h"
+#import "UIImageView+WebCache.h"
 
 @interface ProfessionCollectionViewCell ()
 
@@ -25,11 +26,9 @@
 - (void)updateCellData:(ESProfession *)profession {
     self.titleLbl.text = profession.name;
     if ([profession.icon_url isEqualToString:@"add"]) {
-        self.icon.image = [UIImage imageNamed:@"添加.png"];
+        self.icon.image = [UIImage imageNamed:@"添加"];
     } else {
-        NSURL *url = [NSURL URLWithString:profession.icon_url];
-        NSData *data = [NSData dataWithContentsOfURL:url];
-        self.icon.image = [UIImage imageWithData:data];
+        [self.icon sd_setImageWithURL:[NSURL URLWithString:profession.icon_url] placeholderImage:nil];
     }
 }
 

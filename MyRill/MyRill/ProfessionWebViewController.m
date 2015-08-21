@@ -73,8 +73,4 @@
     return _professionWeb;
 }
 
-- (void)setUrlString:(NSString *)urlString {
-    _urlString = urlString;
-}
-
 @end
