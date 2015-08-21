@@ -106,6 +106,9 @@ typedef enum : NSUInteger {
 +(void) acceptContacts:(NSString *)userId success:(void (^)(id response))success
                failure:(void (^)(NSError* err))failure;
 
+//deleteContacts
++(void) deleteContact:(NSString *)userId success:(void (^)(id response))success failure:(void (^)(NSError* err))failure;
+
 //获取已经请求添加自己的联系人列表
 +(void) getContactRequestSuccess:(void (^)(id response))success
                          failure:(void (^)(NSError *error))failure;

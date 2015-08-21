@@ -17,9 +17,11 @@
 #import "ShowQRCodeViewController.h"
 #import "ESTagViewController.h"
 #import "RCDAddFriendViewController.h"
+#import "DeleteContactDataParse.h"
 
-@interface RCDAddressBookDetailViewController ()
+@interface RCDAddressBookDetailViewController ()<DeleteContactDelegate>
 @property (nonatomic,strong) GetContactDetailDataParse* getContactDetailDataParse;
+@property (nonatomic,strong) DeleteContactDataParse* deleteContactDataParse;
 @property (nonatomic,strong) IBOutlet UITableView* tableView;
 @property (nonatomic,strong) IBOutlet UIImageView* portraitImageView;
 @property (nonatomic,strong) IBOutlet UILabel* titleLabel;
@@ -47,6 +49,9 @@
     
     _getContactDetailDataParse = [[GetContactDetailDataParse alloc] init];
     _getContactDetailDataParse.delegate = self;
+    _deleteContactDataParse = [[DeleteContactDataParse alloc] init];
+    _deleteContactDataParse.delegate = self;
+    
     [self initContactDetail];
     UINib *rcdCellNib = [UINib nibWithNibName:@"RCDAddressBookDetailTableViewCell" bundle:nil];
     [self.tableView registerNib:rcdCellNib forCellReuseIdentifier:@"RCDAddressBookDetailTableViewCell"];
@@ -59,6 +64,7 @@
 {
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = YES;
+    [self refreshUserDetailButton];
     
 }
 
@@ -91,7 +97,7 @@
     }
     else
     {
-        _smsButton.titleLabel.text = @"加为联系人";
+        _smsButton.titleLabel.text = @"加联系人";
         _deleteButton.hidden = YES;
         _callButton.hidden = YES;
         [_smsButton removeTarget:self action:@selector(clickStartChatButton:)  forControlEvents:UIControlEventTouchUpInside];
@@ -130,8 +136,21 @@
 - (void)getContactDetailFailed:(NSString*)errorMessage
 {
     [[CustomShowMessage getInstance] showNotificationMessage:errorMessage];
+    [[CustomShowMessage getInstance] hideWaitingIndicator];
     
 }
+
+#pragma mark - DeleteContactDelegate
+-(void)deleteContactSucceed
+{
+    [self initContactDetail];
+}
+-(void)deleteContactFailed:(NSString*)errorMessage
+{
+    [[CustomShowMessage getInstance] showNotificationMessage:errorMessage];
+    [[CustomShowMessage getInstance] hideWaitingIndicator];
+}
+
 
 #pragma mark -- UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -259,7 +278,11 @@
 }
 -(IBAction)clickDeleteButton:(id)sender
 {
-    
+    if(_deleteContactDataParse!=nil)
+    {
+        [_deleteContactDataParse deleteContact:_userId];
+        [[CustomShowMessage getInstance] showWaitingIndicator:REQ_WAITING_INDICATOR];
+    }
 }
 -(IBAction)clickAddContractButton:(id)sender
 {
@@ -268,7 +291,6 @@
     RCDAddFriendViewController *addViewController = [[RCDAddFriendViewController alloc] init];
     addViewController.strUserId = _userDetailInfo.userId;
     [self.navigationController pushViewController:addViewController animated:YES];
-    
 }
 
 #pragma mark -- setter&getter

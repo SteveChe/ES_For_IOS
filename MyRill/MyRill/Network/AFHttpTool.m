@@ -311,6 +311,16 @@
                           success:success failure:failure];
 }
 
+//deleteContacts
++(void) deleteContact:(NSString *)userId success:(void (^)(id response))success failure:(void (^)(NSError* err))failure
+{
+    NSString* strURL = [NSString stringWithFormat:@"/api/accounts/users/%@/delete/.json",userId];
+    [AFHttpTool requestWithMethod:RequestMethodTypePost protocolType:RequestProtocolTypeText
+                              url:strURL
+                           params:nil
+                          success:success failure:failure];
+}
+
 //获取已经请求添加自己的联系人列表
 +(void) getContactRequestSuccess:(void (^)(id response))success
                          failure:(void (^)(NSError *error))failure
