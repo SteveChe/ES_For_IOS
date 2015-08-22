@@ -15,7 +15,9 @@
     [AFHttpTool EditTaskWithTaskModel:task
                        success:^(id response) {
                            NSDictionary *responseDic = (NSDictionary *)response;
+                           [self.delegate editTaskSuccess];
                        } failure:^(NSError *error) {
+                           [self.delegate editTaskFailed:nil];
                            NSLog(@"%@",[error debugDescription]);
                        }];
 }

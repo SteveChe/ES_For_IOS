@@ -54,6 +54,9 @@
     
     [self.view addSubview:self.tableView];
     
+    [self setAutomaticallyAdjustsScrollViewInsets:YES];
+    [self setExtendedLayoutIncludesOpaqueBars:YES];
+    
     self.searchDisplayVC = [[UISearchDisplayController alloc] initWithSearchBar:self.searchBar
                                                              contentsController:self];
     

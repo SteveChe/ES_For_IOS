@@ -29,6 +29,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"业务";
+    self.view.backgroundColor = [UIColor whiteColor];
     UIBarButtonItem *sortBtnItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"编辑.png"]
                                                                     style:UIBarButtonItemStyleDone
                                                                    target:self

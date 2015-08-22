@@ -114,11 +114,6 @@
     self.isOpen = YES;
     NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
     self.userID = [userDefaultes stringForKey:@"UserId"];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
     //请求任务详情
     [self.getTaskDetailDP getTaskDetailWithTaskID:self.requestTaskID];
     //请求任务列表
@@ -336,7 +331,7 @@
             }
             
             [weakSelf.navigationController popViewControllerAnimated:YES ];
-            [self.assignerCollectionView reloadData];
+            [weakSelf.assignerCollectionView reloadData];
         };
         [self.navigationController pushViewController:selectPersonVC animated:YES];
     }
@@ -351,10 +346,10 @@
             if (selectedUsers && selectedUsers.count)
             {
                 [weakSelf.followsDataSource removeAllObjects];
-                [weakSelf.followsDataSource addObject:selectedUsers];
+                [weakSelf.followsDataSource addObjectsFromArray:selectedUsers];
             }
             [weakSelf.navigationController popViewControllerAnimated:YES ];
-            [self.followsCollectionView reloadData];
+            [weakSelf.followsCollectionView reloadData];
         };
         [self.navigationController pushViewController:selectPersonVC animated:YES];
     }
@@ -486,11 +481,11 @@
     
     ESUserInfo *user = nil;
     
-    if (collectionView == self.assignerCollectionView) {
+    if ([collectionView isEqual:self.assignerCollectionView]) {
         user = (ESUserInfo *)self.assignerDataSource[indexPath.row];
         [cell updateCell:user];
         return cell;
-    } else if (collectionView == self.followsCollectionView) {
+    } else if ([collectionView isEqual:self.followsCollectionView]) {
         user = (ESUserInfo *)self.followsDataSource[indexPath.row];
         [cell updateCell:user];
         return cell;
