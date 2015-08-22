@@ -101,4 +101,8 @@
     return self;
 }
 
+- (NSString *)description {
+    return [NSString stringWithFormat:@"%@ %@ %@",self.title, self.personInCharge.userName, self.personInCharge.enterprise];
+}
+
 @end
