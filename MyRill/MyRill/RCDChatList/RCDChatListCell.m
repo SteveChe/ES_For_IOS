@@ -46,7 +46,7 @@
         _timeLabel = [UILabel new];
         [_timeLabel setFont:[UIFont systemFontOfSize:14.f]];
         [_timeLabel setTextColor:HEXCOLOR(0x8c8c8c)];
-        _timeLabel.text = [NSString stringWithFormat:@"昨天"];
+        _timeLabel.text = [NSString stringWithFormat:@""];
 
         
         [self addSubview:_ivAva];
