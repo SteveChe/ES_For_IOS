@@ -17,11 +17,14 @@
 #import "ESTask.h"
 #import "Masonry.h"
 
-@interface TaskListViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, TaskListDelegate, SWTableViewCellDelegate>
+@interface TaskListViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate, TaskListDelegate, SWTableViewCellDelegate>
 
 @property (nonatomic, strong) UILabel *msgLbl;
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) UISearchDisplayController *displayController;
+
 @property (nonatomic, strong) NSArray *dataSource;
+@property (nonatomic, strong) NSMutableArray *searchResultDataSource;
 @property (nonatomic, strong) GetTaskListDataParse *getTaskListDP;
 
 @end
@@ -46,6 +49,22 @@
         make.width.equalTo(ws.mas_width).with.offset(-60);
     }];
     [self.view layoutIfNeeded];
+    
+    [self setAutomaticallyAdjustsScrollViewInsets:YES];
+    [self setExtendedLayoutIncludesOpaqueBars:YES];
+    
+    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44)];
+    searchBar.placeholder = @"搜索";
+    [self.view addSubview:searchBar];
+    
+    self.displayController = [[UISearchDisplayController alloc] initWithSearchBar:searchBar contentsController:self];
+    self.displayController.delegate = self;
+    self.displayController.searchResultsDelegate=self;
+    self.displayController.searchResultsDataSource = self;
+    self.displayController.searchResultsTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.tableHeaderView = searchBar;
+    
+    [self.displayController.searchResultsTableView registerNib:[UINib nibWithNibName:@"TaskListTableViewCell" bundle:nil] forCellReuseIdentifier:@"TaskListTableViewCell"];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -76,8 +95,14 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    TaskListTableViewCell *cell = (TaskListTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"TaskListTableViewCell" forIndexPath:indexPath];
-    [cell updateTackCell:self.dataSource[indexPath.row]];
+    TaskListTableViewCell *cell = nil;
+    if ([tableView isEqual:self.displayController.searchResultsTableView]) {
+        cell = (TaskListTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"TaskListTableViewCell" forIndexPath:indexPath];
+        [cell updateTackCell:self.searchResultDataSource[indexPath.row]];
+    } else {
+        cell = (TaskListTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"TaskListTableViewCell" forIndexPath:indexPath];
+        [cell updateTackCell:self.dataSource[indexPath.row]];
+    }
     cell.rightUtilityButtons = [self rightButttons];
     cell.delegate = self;
     
@@ -92,7 +117,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     TaskViewController *taskVC = [[TaskViewController alloc] init];
-    ESTask *task = (ESTask *)self.dataSource[indexPath.row];
+    ESTask *task = nil;
+    if ([tableView isEqual:self.displayController.searchResultsTableView]) {
+        task = (ESTask *)self.searchResultDataSource[indexPath.row];
+    } else {
+        task = (ESTask *)self.dataSource[indexPath.row];
+    }
     taskVC.requestTaskID = [task.taskID stringValue];
     [self.navigationController pushViewController:taskVC animated:YES];
 }
@@ -102,17 +132,11 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.dataSource.count;
-}
-
-- (void)addTask {
-    AddTaskViewController *addTaskVC = [[AddTaskViewController alloc] init];
-    if (self.type == ESTaskListWithChatId) {
-        addTaskVC.chatID = self.identity;
+    if ([tableView isEqual:self.displayController.searchResultsTableView]) {
+        return self.searchResultDataSource.count;
+    } else {
+        return self.dataSource.count;
     }
-    addTaskVC.modalPresentationStyle = UIModalPresentationCurrentContext;
-    ESNavigationController *nav = [[ESNavigationController alloc] initWithRootViewController:addTaskVC];
-    [self.navigationController presentViewController:nav animated:YES completion:nil];
 }
 
 #pragma mark - SWTableViewCellDelegate
@@ -125,8 +149,32 @@
     remindDateVC.taskDescriptsion = task.taskDescription;
     remindDateVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     remindDateVC.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
-
+    
     [self presentViewController:remindDateVC animated:YES completion:nil];
+}
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString{
+
+    NSPredicate *preicate = [NSPredicate predicateWithFormat:@"SELF.description CONTAINS[c] %@",searchString];
+    
+    if (self.searchResultDataSource!= nil) {
+        [self.searchResultDataSource removeAllObjects];
+    }
+    //过滤数据
+    self.searchResultDataSource = [NSMutableArray arrayWithArray:[self.dataSource filteredArrayUsingPredicate:preicate]];
+    //刷新表格
+    return YES;
+}
+
+#pragma mark - response events
+- (void)addTask {
+    AddTaskViewController *addTaskVC = [[AddTaskViewController alloc] init];
+    if (self.type == ESTaskListWithChatId) {
+        addTaskVC.chatID = self.identity;
+    }
+    addTaskVC.modalPresentationStyle = UIModalPresentationCurrentContext;
+    ESNavigationController *nav = [[ESNavigationController alloc] initWithRootViewController:addTaskVC];
+    [self.navigationController presentViewController:nav animated:YES completion:nil];
 }
 
 #pragma mark - private methods
@@ -168,6 +216,14 @@
     }
     
     return _tableView;
+}
+
+- (NSMutableArray *)searchResultDataSource {
+    if (!_searchResultDataSource) {
+        _searchResultDataSource = [[NSMutableArray alloc] init];
+    }
+    
+    return _searchResultDataSource;
 }
 
 - (GetTaskListDataParse *)getTaskListDP {

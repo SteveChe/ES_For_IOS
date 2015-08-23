@@ -8,6 +8,7 @@
 
 #import "ProfessionTableViewCell.h"
 #import "ESProfession.h"
+#import "UIImageView+WebCache.h"
 
 @interface ProfessionTableViewCell ()
 
@@ -31,9 +32,7 @@
 
 - (void)updateProfessionCell:(ESProfession *)profession {
     self.titleLbl.text = profession.name;
-    NSURL *url = [NSURL URLWithString:profession.icon_url];
-    NSData *data = [NSData dataWithContentsOfURL:url];
-    self.image.image = [UIImage imageWithData:data];
+    [self.image sd_setImageWithURL:[NSURL URLWithString:profession.icon_url] placeholderImage:nil];
 }
 
 @end
