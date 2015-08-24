@@ -49,9 +49,9 @@
         self.noticeView.backgroundColor = [UIColor whiteColor];
     }
     
-    self.titleLbl.text = [@"任务名称：" stringByAppendingString:task.title];
+    self.titleLbl.text = [@"任务名称:" stringByAppendingString:task.title];
     
-    NSString *leadStr = [NSString stringWithFormat:@"负责人：%@",task.personInCharge.userName];
+    NSString *leadStr = [NSString stringWithFormat:@"负责人:%@",task.personInCharge.userName];
     if (![task.personInCharge.enterprise isEqualToString:@""]) {
         leadStr = [leadStr stringByAppendingString:@"/"];
         leadStr = [leadStr stringByAppendingString:task.personInCharge.enterprise];

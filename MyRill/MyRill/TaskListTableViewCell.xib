@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
@@ -25,7 +25,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="-天" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zH5-C0-Ifc">
-                                <rect key="frame" x="344" y="21" width="24" height="20.5"/>
+                                <rect key="frame" x="356" y="21" width="24" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -59,7 +59,7 @@
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" image="icon" translatesAutoresizingMaskIntoConstraints="NO" id="Diz-NJ-7qc">
-                                <rect key="frame" x="376" y="20" width="22" height="22"/>
+                                <rect key="frame" x="388" y="22.5" width="10" height="17"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VP8-kp-lFJ" userLabel="SplitLine">
                                 <rect key="frame" x="0.0" y="62" width="418" height="1"/>
@@ -95,6 +95,7 @@
                             <constraint firstItem="VP8-kp-lFJ" firstAttribute="leading" secondItem="mol-Gu-x1h" secondAttribute="leading" id="P6S-Y9-a72"/>
                             <constraint firstAttribute="trailing" secondItem="3tC-7d-iW2" secondAttribute="trailing" constant="16" id="PtI-8t-isN"/>
                             <constraint firstAttribute="trailing" secondItem="Diz-NJ-7qc" secondAttribute="trailing" constant="20" symbolic="YES" id="Skb-S7-EL8"/>
+                            <constraint firstItem="Amj-Sf-4aS" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="zH5-C0-Ifc" secondAttribute="leading" priority="751" constant="-4" id="TR5-zN-zUU"/>
                             <constraint firstItem="3tC-7d-iW2" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="mSx-v5-V4B" secondAttribute="trailing" priority="750" constant="8" id="V9P-cE-vn1"/>
                             <constraint firstItem="3tC-7d-iW2" firstAttribute="top" secondItem="cMv-zh-Cxm" secondAttribute="bottom" constant="4" id="bRD-Ez-exA"/>
                             <constraint firstItem="Diz-NJ-7qc" firstAttribute="centerY" secondItem="xPl-dS-Ekt" secondAttribute="centerY" id="bYZ-3I-iRh"/>
@@ -103,7 +104,7 @@
                             <constraint firstItem="Amj-Sf-4aS" firstAttribute="top" secondItem="mol-Gu-x1h" secondAttribute="top" constant="10" id="dUV-5S-SVt"/>
                             <constraint firstItem="VP8-kp-lFJ" firstAttribute="top" secondItem="xPl-dS-Ekt" secondAttribute="bottom" id="fj9-jm-96f"/>
                             <constraint firstItem="mSx-v5-V4B" firstAttribute="leading" secondItem="mol-Gu-x1h" secondAttribute="leading" constant="20" symbolic="YES" id="h3F-Gr-XzJ"/>
-                            <constraint firstItem="Bzn-zf-r90" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="zH5-C0-Ifc" secondAttribute="leading" priority="751" constant="-8" id="jUf-He-kVL"/>
+                            <constraint firstItem="Bzn-zf-r90" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="zH5-C0-Ifc" secondAttribute="leading" priority="751" constant="-4" id="jUf-He-kVL"/>
                             <constraint firstItem="cMv-zh-Cxm" firstAttribute="centerX" secondItem="3tC-7d-iW2" secondAttribute="centerX" id="m4g-Uz-kaK"/>
                             <constraint firstItem="Bzn-zf-r90" firstAttribute="leading" secondItem="mol-Gu-x1h" secondAttribute="leading" constant="20" symbolic="YES" id="sbq-Eq-9b4"/>
                             <constraint firstItem="mSx-v5-V4B" firstAttribute="top" secondItem="VP8-kp-lFJ" secondAttribute="bottom" constant="8" id="w8K-nk-KXg"/>
