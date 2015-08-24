@@ -52,19 +52,6 @@
     
     [self setAutomaticallyAdjustsScrollViewInsets:YES];
     [self setExtendedLayoutIncludesOpaqueBars:YES];
-    
-    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44)];
-    searchBar.placeholder = @"搜索";
-    [self.view addSubview:searchBar];
-    
-    self.displayController = [[UISearchDisplayController alloc] initWithSearchBar:searchBar contentsController:self];
-    self.displayController.delegate = self;
-    self.displayController.searchResultsDelegate=self;
-    self.displayController.searchResultsDataSource = self;
-    self.displayController.searchResultsTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.tableHeaderView = searchBar;
-    
-    [self.displayController.searchResultsTableView registerNib:[UINib nibWithNibName:@"TaskListTableViewCell" bundle:nil] forCellReuseIdentifier:@"TaskListTableViewCell"];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -207,12 +194,20 @@
         _tableView.delegate = self;
         _tableView.hidden = YES;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, _tableView.bounds.size.width, 0)];
+        UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, _tableView.bounds.size.width, 44)];
         searchBar.delegate = self;
         searchBar.placeholder = @"搜索";
         _tableView.tableHeaderView = searchBar;
         UINib *nib = [UINib nibWithNibName:@"TaskListTableViewCell" bundle:nil];
         [_tableView registerNib:nib forCellReuseIdentifier:@"TaskListTableViewCell"];
+        
+        self.displayController = [[UISearchDisplayController alloc] initWithSearchBar:searchBar contentsController:self];
+        self.displayController.delegate = self;
+        self.displayController.searchResultsDelegate=self;
+        self.displayController.searchResultsDataSource = self;
+        self.displayController.searchResultsTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        
+        [self.displayController.searchResultsTableView registerNib:[UINib nibWithNibName:@"TaskListTableViewCell" bundle:nil] forCellReuseIdentifier:@"TaskListTableViewCell"];
     }
     
     return _tableView;

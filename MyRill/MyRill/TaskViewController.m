@@ -28,14 +28,14 @@
 #import "GetTaskDetailDataParse.h"
 #import "ChatViewController.h"
 
-@interface TaskViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate, GetTaskCommentListDelegate, UITextFieldDelegate, SendTaskCommenDelegate, EditTaskDelegate, CloseTaskDelegate, GetTaskDetailDelegate>
+@interface TaskViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, GetTaskCommentListDelegate, SendTaskCommenDelegate, EditTaskDelegate, CloseTaskDelegate, GetTaskDetailDelegate>
 
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *holdViews;
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *txtHoldViews;
 @property (weak, nonatomic) IBOutlet UIView *headerView;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerViewTopConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *sendViewBottomConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *sendViewHeightConstraint;
 @property (weak, nonatomic) IBOutlet UILabel *startDateLbl;
 @property (weak, nonatomic) IBOutlet UITextField *taskTitleTxtField;
 @property (weak, nonatomic) IBOutlet UITextView *taskDescriptioinTextView;
@@ -46,7 +46,7 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *followsCollectionView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *sendView;
-@property (weak, nonatomic) IBOutlet UITextField *sendTxtfield;
+@property (weak, nonatomic) IBOutlet UITextView *sendTxtView;
 @property (nonatomic, strong) MRProgressOverlayView *progress;
 
 @property (nonatomic, strong) NSMutableArray *assignerDataSource; //负责人列表,ESUserInfo
@@ -61,8 +61,7 @@
 
 @property (nonatomic, strong) ESTask *taskModel;
 @property (nonatomic, copy) NSString *userID;
-@property (nonatomic, assign) BOOL isOpen;
-
+@property (nonatomic, strong) UITableViewCell *prototypeCell;
 @end
 
 @implementation TaskViewController
@@ -96,8 +95,8 @@
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     [self.view addGestureRecognizer:tap];
-    [self.sendTxtfield addTarget:self action:@selector(send) forControlEvents:UIControlEventEditingDidEndOnExit];
-    
+    //[self.sendTxtView addTarget:self action:@selector(send) forControlEvents:UIControlEventEditingDidEndOnExit];
+
     [self.view addSubview:self.dateSelectedPicker];
     __weak UIView *ws = self.view;
     [self.dateSelectedPicker mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -108,18 +107,25 @@
     }];
     [self.view layoutIfNeeded];
 
+    self.tableView.tableFooterView = nil;
     [self.tableView registerNib:[UINib nibWithNibName:@"MessageListSelfTableViewCell" bundle:nil] forCellReuseIdentifier:@"MessageListSelfTableViewCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"MessageListTableViewCell" bundle:nil] forCellReuseIdentifier:@"MessageListTableViewCell"];
     
-    self.isOpen = YES;
     NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
     self.userID = [userDefaultes stringForKey:@"UserId"];
     //请求任务详情
     [self.getTaskDetailDP getTaskDetailWithTaskID:self.requestTaskID];
     //请求任务列表
     [self.getTaskCommentListDP getTaskCommentListWithTaskID:self.requestTaskID listSize:nil];
+    self.automaticallyAdjustsScrollViewInsets = NO;
 }
 
+
+- (void)setTableView:(UITableView *)tableView {
+    _tableView = tableView;
+    _tableView.tableFooterView = nil;
+    _tableView.sectionFooterHeight = 0;
+}
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     
@@ -173,7 +179,11 @@
 - (void)SendTaskCommentSuccess:(ESTaskComment *)taskComment {
     [self.dataSource addObject:taskComment];
     [self.tableView reloadData];
-    //    [self.tableView scrollToRowAtIndexPath:nil atScrollPosition:nil animated:nil];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.dataSource.count - 1
+                                                inSection:0];
+    [self.tableView scrollToRowAtIndexPath:indexPath
+                          atScrollPosition:UITableViewScrollPositionBottom
+                                  animated:YES];
 }
 
 - (void)closeTaskSuccess {
@@ -186,6 +196,18 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    MessageListSelfTableViewCell *cell = (MessageListSelfTableViewCell *)self.prototypeCell;
+    ESTaskComment *taskComment = (ESTaskComment *)[self.dataSource objectAtIndex:indexPath.row];
+    cell.contentTxtVIew.text = taskComment.content;
+    CGSize size = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+    CGSize textViewSize = [cell.contentTxtVIew sizeThatFits:CGSizeMake(cell.contentTxtVIew.frame.size.width, FLT_MAX)];
+    CGFloat h = size.height + textViewSize.height;
+    h = h > 89 ? h : 89;  //89是图片显示的最低高度， 见xib
+    NSLog(@"h=%f", h);
+    return 1 + h;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 120;
 }
 
@@ -193,35 +215,135 @@
     return self.dataSource.count;
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return [NSString stringWithFormat:@"评论(%lu)",(unsigned long)self.dataSource.count];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     ESTaskComment *taskComment = (ESTaskComment *)self.dataSource[indexPath.row];
     
-    UITableViewCell *cell = nil;
+    self.prototypeCell  = nil;
     if ([taskComment.user.userId isEqualToString:self.userID]) {
         MessageListSelfTableViewCell *selfCell = (MessageListSelfTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"MessageListSelfTableViewCell" forIndexPath:indexPath];
         [selfCell updateMessage:self.dataSource[indexPath.row]];
-        cell = selfCell;
+        self.prototypeCell = selfCell;
     } else {
         MessageListTableViewCell *normalCell = (MessageListTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"MessageListTableViewCell" forIndexPath:indexPath];
         [normalCell updateMessage:self.dataSource[indexPath.row]];
-        cell = normalCell;
+        self.prototypeCell = normalCell;
     }
     
-    return cell;
+    CALayer *layer = [CALayer layer];
+    layer.frame = CGRectMake(0, self.prototypeCell.bounds.size.height - 1, self.prototypeCell.bounds.size.width, 1);
+    layer.backgroundColor = [ColorHandler colorFromHexRGB:@"F5F5F5"].CGColor;
+    [self.prototypeCell.layer addSublayer:layer];
+    
+    return self.prototypeCell;
 }
 
-- (void)send {
-    [self.sendTaskCommentDP sendTaskCommentWithTaskID:[self.taskModel.taskID stringValue]
-                                              comment:self.sendTxtfield.text];
-    self.sendTxtfield.text = nil;
+#pragma mark - UICollectionViewDataSource&UICollectionViewDelegateFlowLayout
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    if (collectionView == self.assignerCollectionView) {
+        return self.assignerDataSource.count;
+    } else if (collectionView == self.followsCollectionView) {
+        return self.followsDataSource.count;
+    } else {
+        return 0;
+    };
+}
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return 1;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    TaskContactorCollectionViewCell *cell = (TaskContactorCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"TaskContactorCollectionViewCell" forIndexPath:indexPath];
+    
+    cell.contentView.backgroundColor = [UIColor whiteColor];
+    
+    ESUserInfo *user = nil;
+    
+    if ([collectionView isEqual:self.assignerCollectionView]) {
+        user = (ESUserInfo *)self.assignerDataSource[indexPath.row];
+        [cell updateCell:user];
+        return cell;
+    } else if ([collectionView isEqual:self.followsCollectionView]) {
+        user = (ESUserInfo *)self.followsDataSource[indexPath.row];
+        [cell updateCell:user];
+        return cell;
+    } else {
+        return nil;
+    }
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return CGSizeMake(54,54);
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 0;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+    return 0;
+}
+
+//设置Cell的边界
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    return UIEdgeInsetsMake(0,0,0,0);
+}
+
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+#pragma mark - UITextViewDelegate methods
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    //textView的发送事件
+    if ([text isEqualToString:@"\n"])
+    {
+        [self.sendTaskCommentDP sendTaskCommentWithTaskID:[self.taskModel.taskID stringValue]
+                                                  comment:self.sendTxtView.text];
+        self.sendTxtView.text = nil;
+        
+        if (self.sendViewHeightConstraint.constant > 50) {
+            [UIView animateWithDuration:.3
+                                  delay:0
+                                options:UIViewAnimationOptionCurveEaseInOut
+                             animations:^{
+                                 self.sendViewHeightConstraint.constant = 50;
+                                 [self.view layoutIfNeeded];
+                             }
+                             completion:nil];
+        }
+        
+        return NO;
+    }
+    return YES;
+}
+
+- (void)textViewDidChange:(UITextView *)textView {
+    if ([textView isEqual:self.sendTxtView]) {
+        [UIView animateWithDuration:.3
+                              delay:0
+                            options:UIViewAnimationOptionCurveEaseInOut
+                         animations:^{
+                             self.sendViewHeightConstraint.constant = textView.contentSize.height + 6 * 2;
+                             [self.view layoutIfNeeded];
+                         }
+                         completion:nil];
+    }
 }
 
 #pragma mark - response events methods
 - (void)hideKeyboard {
     [self.taskTitleTxtField resignFirstResponder];
     [self.taskDescriptioinTextView resignFirstResponder];
-    [self.sendTxtfield resignFirstResponder];
+    [self.sendTxtView resignFirstResponder];
     
     if (self.dateSelectedPicker) {
         [UIView animateWithDuration:.3f
@@ -380,143 +502,6 @@
     [self.editTaskDP EditTaskWithTaskModel:task];
 }
 
-- (IBAction)headViewBtnOnClicked:(UIButton *)sender {
-    CGFloat height = self.headerView.bounds.size.height;
-    
-    if (self.isOpen) {
-        [UIView animateWithDuration:.5f
-                              delay:0
-                            options:UIViewAnimationOptionCurveLinear
-                         animations:^{
-                             self.headerViewTopConstraint.constant = 30 - height;
-                             [self.view layoutIfNeeded];
-                         } completion:nil];
-    } else {
-        [UIView animateWithDuration:.5f
-                              delay:0
-                            options:UIViewAnimationOptionCurveLinear
-                         animations:^{
-                             self.headerViewTopConstraint.constant = 0;
-                             [self hideKeyboard];
-                             [self.view layoutIfNeeded];
-                         } completion:nil];
-    }
-    self.isOpen = !self.isOpen;
-}
-
-
-- (void)headViewAnotherBtnOnClicked:(BOOL)isOpen {
-    CGFloat height = self.headerView.bounds.size.height;
-    
-    if (isOpen) {
-        [UIView animateWithDuration:.5f
-                              delay:0
-                            options:UIViewAnimationOptionCurveLinear
-                         animations:^{
-                             self.headerViewTopConstraint.constant = 30 - height;
-                             [self.view layoutIfNeeded];
-                         } completion:nil];
-    } else {
-        [UIView animateWithDuration:.5f
-                              delay:0
-                            options:UIViewAnimationOptionCurveLinear
-                         animations:^{
-                             self.headerViewTopConstraint.constant = 0;
-                             [self.view layoutIfNeeded];
-                         } completion:nil];
-    }
-}
-
-//当键盘出现或改变时调用
-- (void)keyboardWillShow:(NSNotification *)aNotification
-{
-    //获取键盘的高度
-    NSDictionary *userInfo = [aNotification userInfo];
-    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
-    CGRect keyboardRect = [aValue CGRectValue];
-    int height = keyboardRect.size.height;
-    
-    [UIView animateWithDuration:.1f
-                          delay:0
-                        options:UIViewAnimationOptionCurveEaseIn
-                     animations:^{
-                         [self headViewAnotherBtnOnClicked:YES];
-                         self.sendViewBottomConstraint.constant = height;
-                         [self.view layoutIfNeeded];
-                     } completion:nil];
-}
-
-//当键退出时调用
-- (void)keyboardWillHide:(NSNotification *)aNotification {
-    [UIView animateWithDuration:.1f
-                          delay:0
-                        options:UIViewAnimationOptionCurveEaseOut
-                     animations:^{
-                         self.sendViewBottomConstraint.constant = 0.f;
-                         [self.view layoutIfNeeded];
-                     } completion:^(BOOL finished) {
-                         
-                     }];
-}
-
-#pragma mark - UICollectionViewDataSource&UICollectionViewDelegateFlowLayout
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    if (collectionView == self.assignerCollectionView) {
-        return self.assignerDataSource.count;
-    } else if (collectionView == self.followsCollectionView) {
-        return self.followsDataSource.count;
-    } else {
-        return 0;
-    };
-}
-
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 1;
-}
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    TaskContactorCollectionViewCell *cell = (TaskContactorCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"TaskContactorCollectionViewCell" forIndexPath:indexPath];
-    
-    cell.contentView.backgroundColor = [UIColor whiteColor];
-    
-    ESUserInfo *user = nil;
-    
-    if ([collectionView isEqual:self.assignerCollectionView]) {
-        user = (ESUserInfo *)self.assignerDataSource[indexPath.row];
-        [cell updateCell:user];
-        return cell;
-    } else if ([collectionView isEqual:self.followsCollectionView]) {
-        user = (ESUserInfo *)self.followsDataSource[indexPath.row];
-        [cell updateCell:user];
-        return cell;
-    } else {
-        return nil;
-    }
-}
-
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    return CGSizeMake(54,54);
-}
-
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
-{
-    return 0;
-}
-
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    return 0;
-}
-
-//设置Cell的边界
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    return UIEdgeInsetsMake(0,0,0,0);
-}
-
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
-}
-
 - (void)dateChanged:(UIDatePicker *)sender {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.dateFormat = @"yyyy/MM/dd HH:mm";
@@ -549,6 +534,44 @@
     }
 }
 
+//当键盘出现或改变时调用
+- (void)keyboardWillShow:(NSNotification *)aNotification
+{
+    //获取键盘的高度
+    NSDictionary *userInfo = [aNotification userInfo];
+    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardRect = [aValue CGRectValue];
+    int height = keyboardRect.size.height;
+    
+    [UIView animateWithDuration:.1f
+                          delay:0
+                        options:UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         self.sendViewBottomConstraint.constant = height;
+                         [self.view layoutIfNeeded];
+                         
+                         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.dataSource.count - 1
+                                                                     inSection:0];
+                         [self.tableView scrollToRowAtIndexPath:indexPath
+                                               atScrollPosition:UITableViewScrollPositionBottom
+                                                       animated:YES];
+                     }
+                     completion:nil];
+}
+
+//当键退出时调用
+- (void)keyboardWillHide:(NSNotification *)aNotification {
+    [UIView animateWithDuration:.1f
+                          delay:0
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^{
+                         self.sendViewBottomConstraint.constant = 0.f;
+                         [self.view layoutIfNeeded];
+                     } completion:^(BOOL finished) {
+                         
+                     }];
+}
+
 #pragma mark - private methods
 - (void)showTips:(NSString *)tip mode:(MRProgressOverlayViewMode)mode isDismiss:(BOOL)isDismiss isSucceuss:(BOOL)success {
     [self.navigationController.view addSubview:self.progress];
@@ -563,8 +586,7 @@
 
 //参数作为布尔对象传递，使用Bool会出问题
 - (void)dismissProgress:(Boolean)isSuccess {
-    if (self.progress)
-    {
+    if (self.progress) {
         [self.progress dismiss:YES];
     }
 }
@@ -632,6 +654,14 @@
     }
     
     return _dateSelectedPicker;
+}
+
+- (void)setSendTxtView:(UITextView *)sendTxtView {
+    _sendTxtView = sendTxtView;
+    
+    _sendTxtView.layer.borderWidth = 1.f;
+    _sendTxtView.layer.borderColor = [ColorHandler colorFromHexRGB:@"DDDDDD"].CGColor;
+    _sendTxtView.layer.cornerRadius = 5.f;
 }
 
 - (MRProgressOverlayView *)progress {

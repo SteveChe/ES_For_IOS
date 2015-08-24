@@ -13,8 +13,9 @@
 #import "ColorHandler.h"
 
 @interface MessageListTableViewCell ()
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewHeightConstraint;
 
-@property (weak, nonatomic) IBOutlet UITextView *contentTxtVIew;
+
 @property (weak, nonatomic) IBOutlet UIImageView *userImg;
 @property (weak, nonatomic) IBOutlet UILabel *nameAndEnterpriseLbl;
 @property (weak, nonatomic) IBOutlet UILabel *createDate;
@@ -46,6 +47,7 @@
     self.contentTxtVIew.text = taskComment.content;
     UIView *view = [self.contentTxtVIew subviews].lastObject;
     view.bounds = CGRectMake(0, 0, 240, 60);
+
 }
 
 - (void)setUserImg:(UIImageView *)userImg {

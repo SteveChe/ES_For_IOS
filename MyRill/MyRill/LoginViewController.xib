@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
@@ -62,17 +62,17 @@
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="go"/>
                         </textField>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="密码" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="jcz-B7-oGl" userLabel="Pwd TextField">
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="密码" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="jcz-B7-oGl" userLabel="Pwd TextField">
                             <rect key="frame" x="66" y="45" width="528" height="44"/>
                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="next" secureTextEntry="YES"/>
                         </textField>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="密码" translatesAutoresizingMaskIntoConstraints="NO" id="PdC-ah-ZoD">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="密码" translatesAutoresizingMaskIntoConstraints="NO" id="PdC-ah-ZoD">
                             <rect key="frame" x="20" y="58" width="16" height="18"/>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="账号" translatesAutoresizingMaskIntoConstraints="NO" id="Whw-eH-iGm">
-                            <rect key="frame" x="20" y="12.5" width="16" height="18"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="账号" translatesAutoresizingMaskIntoConstraints="NO" id="Whw-eH-iGm">
+                            <rect key="frame" x="20" y="12" width="16" height="18"/>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -95,14 +95,8 @@
                         <constraint firstItem="zbN-kf-mo2" firstAttribute="leading" secondItem="Whw-eH-iGm" secondAttribute="trailing" constant="30" id="zpb-43-FTo"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="齐天大圣" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z25-HL-Kfw">
-                    <rect key="frame" x="266" y="140" width="68" height="20"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="头像_100" translatesAutoresizingMaskIntoConstraints="NO" id="Euu-HU-Kmw">
-                    <rect key="frame" x="275" y="82" width="50" height="50"/>
+                    <rect key="frame" x="275" y="110" width="50" height="50"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Moj-IM-0T9">
                     <rect key="frame" x="524" y="287" width="56" height="29"/>
@@ -123,16 +117,14 @@
                 <constraint firstAttribute="centerY" secondItem="4LD-7i-Ot7" secondAttribute="centerY" constant="65" id="BJV-1c-lZ0"/>
                 <constraint firstAttribute="trailing" secondItem="4LD-7i-Ot7" secondAttribute="trailing" constant="-1" id="DO1-Xq-fPx"/>
                 <constraint firstAttribute="trailing" secondItem="pZG-8d-WGB" secondAttribute="trailing" constant="20" symbolic="YES" id="Ln4-Us-lSf"/>
-                <constraint firstAttribute="centerX" secondItem="z25-HL-Kfw" secondAttribute="centerX" id="NRp-mA-LKl"/>
                 <constraint firstAttribute="trailing" secondItem="Moj-IM-0T9" secondAttribute="trailing" constant="20" symbolic="YES" id="bDO-4e-Qgh"/>
                 <constraint firstItem="4LD-7i-Ot7" firstAttribute="leading" secondItem="sas-Dc-SEl" secondAttribute="leading" constant="-1" id="bwq-NJ-3l6"/>
-                <constraint firstItem="z25-HL-Kfw" firstAttribute="top" secondItem="Euu-HU-Kmw" secondAttribute="bottom" constant="8" symbolic="YES" id="lGb-b3-cQ6"/>
                 <constraint firstAttribute="centerX" secondItem="pZG-8d-WGB" secondAttribute="centerX" id="lyB-Lv-bz1"/>
                 <constraint firstItem="Moj-IM-0T9" firstAttribute="top" secondItem="4LD-7i-Ot7" secondAttribute="bottom" constant="8" id="oAk-d6-71y"/>
                 <constraint firstItem="pZG-8d-WGB" firstAttribute="leading" secondItem="sas-Dc-SEl" secondAttribute="leading" constant="20" symbolic="YES" id="qBT-aM-6Rb"/>
+                <constraint firstItem="4LD-7i-Ot7" firstAttribute="top" secondItem="Euu-HU-Kmw" secondAttribute="bottom" constant="30" id="uvJ-wC-D1R"/>
                 <constraint firstItem="pZG-8d-WGB" firstAttribute="top" secondItem="4LD-7i-Ot7" secondAttribute="bottom" constant="60" id="vSJ-xJ-Vx8"/>
                 <constraint firstAttribute="centerX" secondItem="TDs-KZ-Bn1" secondAttribute="centerX" id="vvH-Ff-P75"/>
-                <constraint firstItem="4LD-7i-Ot7" firstAttribute="top" secondItem="z25-HL-Kfw" secondAttribute="bottom" constant="30" id="w4y-wT-1ke"/>
             </constraints>
         </view>
     </objects>
