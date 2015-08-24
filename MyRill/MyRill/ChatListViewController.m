@@ -353,14 +353,20 @@ void(^completionHandler)(RCUserInfo* userInfo);
     {
         cell.lblName.text = @"ES系统消息";
         cell.lblDetail.text = model.conversationTitle;
-        cell.timeLabel.text = [DeviceInfo getShowTime:[NSDate dateWithTimeIntervalSince1970:model.sentTime]];
+        if (model.sentTime > 0)
+        {
+            cell.timeLabel.text = [DeviceInfo getShowTime:[NSDate dateWithTimeIntervalSince1970:model.sentTime]];
+        }
         [cell.ivAva setImage:[UIImage imageNamed:@"duihua_xitongxiaoxi"]];
     }
     else if ( indexPath.row == 1)
     {
         cell.lblName.text = @"企业消息";
         cell.lblDetail.text = model.conversationTitle;
-        cell.timeLabel.text = [DeviceInfo getShowTime:[NSDate dateWithTimeIntervalSince1970:model.sentTime]];
+        if (model.sentTime > 0)
+        {
+            cell.timeLabel.text = [DeviceInfo getShowTime:[NSDate dateWithTimeIntervalSince1970:model.sentTime]];
+        }
         [cell.ivAva setImage:[UIImage imageNamed:@"duihua_qiyexiaoxi"]];
         
     }

@@ -195,6 +195,7 @@
 		F23461DD1B5E8CBF00C88FAC /* ChatSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F23461DC1B5E8CBF00C88FAC /* ChatSettingViewController.m */; };
 		F23461E41B5FCFA900C88FAC /* ChatSettingCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F23461E21B5FCFA900C88FAC /* ChatSettingCollectionViewCell.m */; };
 		F23461E51B5FCFA900C88FAC /* ChatSettingCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F23461E31B5FCFA900C88FAC /* ChatSettingCollectionViewCell.xib */; };
+		F235C2341B85A7A60092520A /* DeleteContactDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F235C2331B85A7A60092520A /* DeleteContactDataParse.m */; };
 		F23630801B6663A100A12F63 /* MKNumberBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = F236307F1B6663A100A12F63 /* MKNumberBadgeView.m */; };
 		F23630841B66668900A12F63 /* RCDAddressBookDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F23630821B66668900A12F63 /* RCDAddressBookDetailViewController.m */; };
 		F23630851B66668900A12F63 /* RCDAddressBookDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F23630831B66668900A12F63 /* RCDAddressBookDetailViewController.xib */; };
@@ -639,6 +640,8 @@
 		F23461E11B5FCFA900C88FAC /* ChatSettingCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChatSettingCollectionViewCell.h; path = RCDChatList/SettingViewController/ChatSettingCollectionViewCell.h; sourceTree = "<group>"; };
 		F23461E21B5FCFA900C88FAC /* ChatSettingCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChatSettingCollectionViewCell.m; path = RCDChatList/SettingViewController/ChatSettingCollectionViewCell.m; sourceTree = "<group>"; };
 		F23461E31B5FCFA900C88FAC /* ChatSettingCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChatSettingCollectionViewCell.xib; path = RCDChatList/SettingViewController/ChatSettingCollectionViewCell.xib; sourceTree = "<group>"; };
+		F235C2321B85A7A60092520A /* DeleteContactDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeleteContactDataParse.h; sourceTree = "<group>"; };
+		F235C2331B85A7A60092520A /* DeleteContactDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeleteContactDataParse.m; sourceTree = "<group>"; };
 		F236307E1B6663A100A12F63 /* MKNumberBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKNumberBadgeView.h; path = Utilities/MKNumberBadgeView/MKNumberBadgeView.h; sourceTree = "<group>"; };
 		F236307F1B6663A100A12F63 /* MKNumberBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKNumberBadgeView.m; path = Utilities/MKNumberBadgeView/MKNumberBadgeView.m; sourceTree = "<group>"; };
 		F23630811B66668900A12F63 /* RCDAddressBookDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCDAddressBookDetailViewController.h; path = RCDChatList/AddressBook/RCDAddressBookDetailViewController.h; sourceTree = "<group>"; };
@@ -1009,6 +1012,8 @@
 				F22FE2F81B4042B700A1A997 /* SearchContactDataParse.m */,
 				F22FE2FD1B42DAF600A1A997 /* AddContactDataParse.h */,
 				F22FE2FE1B42DAF600A1A997 /* AddContactDataParse.m */,
+				F235C2321B85A7A60092520A /* DeleteContactDataParse.h */,
+				F235C2331B85A7A60092520A /* DeleteContactDataParse.m */,
 				F22FE3001B4576D100A1A997 /* GetContactListDataParse.h */,
 				F22FE3011B4576D100A1A997 /* GetContactListDataParse.m */,
 				F22FE3031B458A4100A1A997 /* GetRequestContactListDataParse.h */,
@@ -1955,6 +1960,7 @@
 				2B39C93B1B241212007BAC7A /* MASViewAttribute.m in Sources */,
 				F24787721B2D5CE700EC266B /* ChangePwdDataParse.m in Sources */,
 				F28B6C871B6F991600E0C267 /* GetEnterpriseDetailDataParse.m in Sources */,
+				F235C2341B85A7A60092520A /* DeleteContactDataParse.m in Sources */,
 				2BEBBD891B6661FD008BE7C4 /* ESTaskOriginatorInfo.m in Sources */,
 				F22FE2BD1B3FFBB200A1A997 /* RCDChatListCell.m in Sources */,
 				F23461701B5AA0FD00C88FAC /* FMDatabasePool.m in Sources */,
@@ -2121,8 +2127,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Xinshuai Che (6XH6L3AH29)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Xinshuai Che (6XH6L3AH29)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2144,7 +2150,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "a5c66360-4019-4ebe-9492-df3d30ba3a21";
+				PROVISIONING_PROFILE = "7454d704-57b3-4268-8c0e-4426064385b7";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -2166,8 +2172,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Xinshuai Che (6XH6L3AH29)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Xinshuai Che (6XH6L3AH29)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2182,7 +2188,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "a5c66360-4019-4ebe-9492-df3d30ba3a21";
+				PROVISIONING_PROFILE = "7454d704-57b3-4268-8c0e-4426064385b7";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -2193,8 +2199,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MyRill/RCloud",
@@ -2208,7 +2214,7 @@
 					"$(PROJECT_DIR)/MyRill/JPush",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "7454d704-57b3-4268-8c0e-4426064385b7";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Debug;
@@ -2218,8 +2224,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MyRill/RCloud",
@@ -2233,7 +2239,7 @@
 					"$(PROJECT_DIR)/MyRill/JPush",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "7454d704-57b3-4268-8c0e-4426064385b7";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Release;
