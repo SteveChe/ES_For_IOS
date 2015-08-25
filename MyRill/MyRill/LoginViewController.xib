@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController">
@@ -33,7 +34,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pZG-8d-WGB">
-                    <rect key="frame" x="20" y="339" width="560" height="44"/>
+                    <rect key="frame" x="20" y="289.5" width="560" height="44"/>
                     <color key="backgroundColor" red="0.023529411760000001" green="0.65490196079999996" blue="0.88235294119999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="YHd-Kq-KTx"/>
@@ -47,7 +48,7 @@
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4LD-7i-Ot7" userLabel="TextFieldHoldView">
-                    <rect key="frame" x="-1" y="190" width="602" height="89"/>
+                    <rect key="frame" x="-1" y="150.5" width="602" height="89"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="exu-hQ-O2v" userLabel="SplitLine">
                             <rect key="frame" x="15" y="44" width="572" height="1"/>
@@ -71,8 +72,8 @@
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="密码" translatesAutoresizingMaskIntoConstraints="NO" id="PdC-ah-ZoD">
                             <rect key="frame" x="20" y="58" width="16" height="18"/>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="账号" translatesAutoresizingMaskIntoConstraints="NO" id="Whw-eH-iGm">
-                            <rect key="frame" x="20" y="12" width="16" height="18"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="账号" translatesAutoresizingMaskIntoConstraints="NO" id="Whw-eH-iGm">
+                            <rect key="frame" x="20" y="13" width="16" height="18"/>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -95,11 +96,8 @@
                         <constraint firstItem="zbN-kf-mo2" firstAttribute="leading" secondItem="Whw-eH-iGm" secondAttribute="trailing" constant="30" id="zpb-43-FTo"/>
                     </constraints>
                 </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="头像_100" translatesAutoresizingMaskIntoConstraints="NO" id="Euu-HU-Kmw">
-                    <rect key="frame" x="275" y="110" width="50" height="50"/>
-                </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Moj-IM-0T9">
-                    <rect key="frame" x="524" y="287" width="56" height="29"/>
+                    <rect key="frame" x="524" y="247.5" width="56" height="29"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                     <state key="normal" title="忘记密码">
                         <color key="titleColor" red="0.023529411760000001" green="0.65490196079999996" blue="0.88235294119999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -113,8 +111,7 @@
             <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="TDs-KZ-Bn1" secondAttribute="bottom" constant="20" symbolic="YES" id="0Fb-2z-0uN"/>
-                <constraint firstAttribute="centerX" secondItem="Euu-HU-Kmw" secondAttribute="centerX" id="9Kj-e5-MMi"/>
-                <constraint firstAttribute="centerY" secondItem="4LD-7i-Ot7" secondAttribute="centerY" constant="65" id="BJV-1c-lZ0"/>
+                <constraint firstItem="4LD-7i-Ot7" firstAttribute="centerY" secondItem="sas-Dc-SEl" secondAttribute="centerY" multiplier="0.65" id="BJV-1c-lZ0"/>
                 <constraint firstAttribute="trailing" secondItem="4LD-7i-Ot7" secondAttribute="trailing" constant="-1" id="DO1-Xq-fPx"/>
                 <constraint firstAttribute="trailing" secondItem="pZG-8d-WGB" secondAttribute="trailing" constant="20" symbolic="YES" id="Ln4-Us-lSf"/>
                 <constraint firstAttribute="trailing" secondItem="Moj-IM-0T9" secondAttribute="trailing" constant="20" symbolic="YES" id="bDO-4e-Qgh"/>
@@ -122,14 +119,12 @@
                 <constraint firstAttribute="centerX" secondItem="pZG-8d-WGB" secondAttribute="centerX" id="lyB-Lv-bz1"/>
                 <constraint firstItem="Moj-IM-0T9" firstAttribute="top" secondItem="4LD-7i-Ot7" secondAttribute="bottom" constant="8" id="oAk-d6-71y"/>
                 <constraint firstItem="pZG-8d-WGB" firstAttribute="leading" secondItem="sas-Dc-SEl" secondAttribute="leading" constant="20" symbolic="YES" id="qBT-aM-6Rb"/>
-                <constraint firstItem="4LD-7i-Ot7" firstAttribute="top" secondItem="Euu-HU-Kmw" secondAttribute="bottom" constant="30" id="uvJ-wC-D1R"/>
-                <constraint firstItem="pZG-8d-WGB" firstAttribute="top" secondItem="4LD-7i-Ot7" secondAttribute="bottom" constant="60" id="vSJ-xJ-Vx8"/>
+                <constraint firstItem="pZG-8d-WGB" firstAttribute="top" secondItem="4LD-7i-Ot7" secondAttribute="bottom" constant="50" id="vSJ-xJ-Vx8"/>
                 <constraint firstAttribute="centerX" secondItem="TDs-KZ-Bn1" secondAttribute="centerX" id="vvH-Ff-P75"/>
             </constraints>
         </view>
     </objects>
     <resources>
-        <image name="头像_100" width="50" height="50"/>
         <image name="密码" width="16" height="18"/>
         <image name="账号" width="16" height="18"/>
     </resources>
