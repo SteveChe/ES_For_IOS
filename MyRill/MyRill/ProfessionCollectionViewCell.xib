@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
@@ -18,7 +18,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I4q-8a-mLk">
                         <rect key="frame" x="0.0" y="0.0" width="173" height="154"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon" translatesAutoresizingMaskIntoConstraints="NO" id="hgV-32-7AL">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hgV-32-7AL">
                                 <rect key="frame" x="65" y="51.5" width="43" height="43"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="hgV-32-7AL" secondAttribute="height" multiplier="1:1" id="Bux-JD-M77"/>
@@ -63,7 +63,4 @@
             <point key="canvasLocation" x="401.5" y="318"/>
         </collectionViewCell>
     </objects>
-    <resources>
-        <image name="icon" width="22" height="22"/>
-    </resources>
 </document>

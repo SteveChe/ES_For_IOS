@@ -29,9 +29,12 @@
 
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIImageView *userIcon;
-@property (weak, nonatomic) IBOutlet UIButton *logoutBtn;
+
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *btnCollection;
 @property (weak, nonatomic) IBOutlet UILabel *UserNameLbl;
 @property (weak, nonatomic) IBOutlet UILabel *UserEnterpriseLbl;
+@property (weak, nonatomic) IBOutlet UIImageView *userEnterpriseImg;
+
 @property (weak, nonatomic) IBOutlet UILabel *UserPositionLbl;
 @property (weak, nonatomic) IBOutlet UILabel *userDescriptionLbl;
 @property (nonatomic, strong) SignOutDataParse *signOutDP;
@@ -62,7 +65,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = NO;
-
+    
     NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
     self.userId = [userDefaultes stringForKey:@"UserId"];
     self.UserNameLbl.text = [userDefaultes stringForKey:@"UserName"];
@@ -72,6 +75,8 @@
 
     //更新头像缓存的url，若url有变化
     [self.userIcon sd_setImageWithURL:[NSURL URLWithString:[userDefaultes stringForKey:@"UserImageURL"]] placeholderImage:[UIImage imageNamed:@"头像_100"]];
+    
+    [self.getContactDetailDP getContactDetail:self.userId];
 }
 
 #pragma mark - ChangeUserImageDataDelegate methods
@@ -144,26 +149,29 @@
 }
 
 - (void)getContactDetail:(ESUserDetailInfo *)userDetailInfo {
-    ShowQRCodeViewController *showQRCodeVC = [[ShowQRCodeViewController alloc] init];
-    if (userDetailInfo == nil){
-        return;
-    }
-    if ([self.qrCodeType isEqualToString:@"个人"]) {
-        showQRCodeVC.qrCodeTitle = @"我的二维码";
-        if (userDetailInfo.qrcode==nil || [userDetailInfo.qrcode isEqual:[NSNull null]] ) {
-            return;
-        }
-        showQRCodeVC.imageUrl = userDetailInfo.qrcode;
-    } else {
-        showQRCodeVC.qrCodeTitle = @"企业二维码";
-        if (userDetailInfo.enterprise_qrcode == nil || [userDetailInfo.enterprise_qrcode isEqual:[NSNull null]] || [userDetailInfo.enterprise_qrcode length]<=0 ) {
-            return;
-        }
-        showQRCodeVC.imageUrl = userDetailInfo.enterprise_qrcode;
-//        showQRCodeVC.imageUrl = userDetailInfo.enterprise.enterpriseQRCode;
-    }
     
-    [self.navigationController pushViewController:showQRCodeVC animated:YES];
+    self.UserEnterpriseLbl.text = userDetailInfo.enterprise.enterpriseName;
+    [self.userEnterpriseImg sd_setImageWithURL:[NSURL URLWithString:userDetailInfo.enterprise.portraitUri] placeholderImage:nil];
+//    ShowQRCodeViewController *showQRCodeVC = [[ShowQRCodeViewController alloc] init];
+//    if (userDetailInfo == nil){
+//        return;
+//    }
+//    if ([self.qrCodeType isEqualToString:@"个人"]) {
+//        showQRCodeVC.qrCodeTitle = @"我的二维码";
+//        if (userDetailInfo.qrcode==nil || [userDetailInfo.qrcode isEqual:[NSNull null]] ) {
+//            return;
+//        }
+//        showQRCodeVC.imageUrl = userDetailInfo.qrcode;
+//    } else {
+//        showQRCodeVC.qrCodeTitle = @"企业二维码";
+//        if (userDetailInfo.enterprise_qrcode == nil || [userDetailInfo.enterprise_qrcode isEqual:[NSNull null]] || [userDetailInfo.enterprise_qrcode length]<=0 ) {
+//            return;
+//        }
+//        showQRCodeVC.imageUrl = userDetailInfo.enterprise_qrcode;
+////        showQRCodeVC.imageUrl = userDetailInfo.enterprise.enterpriseQRCode;
+//    }
+//    
+//    [self.navigationController pushViewController:showQRCodeVC animated:YES];
 }
 
 #pragma mark - response events
@@ -347,10 +355,12 @@
    
 }
 
-- (void)setLogoutBtn:(UIButton *)logoutBtn {
-    _logoutBtn = logoutBtn;
+- (void)setBtnCollection:(NSArray *)btnCollection {
+    _btnCollection = btnCollection;
     
-    _logoutBtn.layer.cornerRadius = 20.f;
+    for (UIButton *btn in _btnCollection) {
+        btn.layer.cornerRadius = 18.f;
+    }
 }
 
 - (SignOutDataParse *)signOutDP {

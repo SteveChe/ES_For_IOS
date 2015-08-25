@@ -66,6 +66,8 @@
                                              selector:@selector(didReceiveErrorMessage:)
                                                  name:@"NOTIFICATION_ERROR_MESSAGE"
                                                object:nil];
+    
+    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
     return YES;
 }
 
@@ -119,6 +121,12 @@
 
 //    self.window.rootViewController = sender;
     [self.window makeKeyAndVisible];
+}
+
+void uncaughtExceptionHandler(NSException *exception) {
+    NSLog(@"CRASH: %@", exception);
+    NSLog(@"Stack Trace: %@", [exception callStackSymbols]);
+    // Internal error reporting
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

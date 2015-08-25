@@ -151,7 +151,7 @@
 - (void)setSignUpBtn:(UIButton *)signUpBtn {
     _signUpBtn = signUpBtn;
     
-    _signUpBtn.layer.cornerRadius = 19.0;
+    _signUpBtn.layer.cornerRadius = 18.f;
 }
 
 @end

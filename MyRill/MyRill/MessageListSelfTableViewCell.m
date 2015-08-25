@@ -13,7 +13,8 @@
 #import "ColorHandler.h"
 
 @interface MessageListSelfTableViewCell ()
-@property (weak, nonatomic) IBOutlet UITextView *contentTxtVIew;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewHeightConstraint;
+
 @property (weak, nonatomic) IBOutlet UIImageView *userImg;
 @property (weak, nonatomic) IBOutlet UILabel *nameAndEnterpriseLbl;
 @property (weak, nonatomic) IBOutlet UILabel *createDate;
@@ -35,7 +36,6 @@
     //[self.contentTxtVIew addSubview:imageView];
     //[self.contentTxtVIew sendSubviewToBack:imageView];
     
-    self.activityView.hidden = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -59,9 +59,10 @@
 
     self.attrString = [[NSMutableAttributedString alloc] initWithString:taskComment.content];
     
-    CGRect bounds = [self.attrString boundingRectWithSize:CGSizeMake(150, 1000)
-                                                 options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
-                                                 context:nil];
+//    CGRect bounds = [self.attrString boundingRectWithSize:CGSizeMake(150, 1000)
+//                                                 options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
+//                                                 context:nil];
+
 }
 
 - (void)setUserImg:(UIImageView *)userImg {

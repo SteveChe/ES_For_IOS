@@ -12,6 +12,7 @@
 #import "ESTask.h"
 #import "ESUserInfo.h"
 #import "ESUserDetailInfo.h"
+#import "ColorHandler.h"
 
 #define DEV_SERVER_ADDRESS @"http://120.25.249.144/"
 #define ContentType @"text/json"
@@ -570,9 +571,9 @@
 + (void)changeUserMsgWithUserInfo:(ESUserDetailInfo *)userInfo
                           success:(void (^)(id))success
                           failure:(void (^)(NSError *))failure {
-    NSDictionary *param = @{@"name":userInfo.userName,
-                            @"position":userInfo.position,
-                            @"description":userInfo.contactDescription};
+    NSDictionary *param = @{@"name":[ColorHandler isNullOrEmptyString:userInfo.userName]?@"":userInfo.userName,
+                            @"position":[ColorHandler isNullOrEmptyString:userInfo.position]?@"":userInfo.position,
+                            @"description":[ColorHandler isNullOrEmptyString:userInfo.contactDescription]?@"":userInfo.contactDescription};
     
     [AFHttpTool requestWithMethod:RequestMethodTypePost protocolType:RequestProtocolTypeText
                               url:[NSString stringWithFormat:@"/api/accounts/users/%@/.json",userInfo.userId]

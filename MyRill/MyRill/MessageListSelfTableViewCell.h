@@ -10,9 +10,7 @@
 @class ESTaskComment;
 
 @interface MessageListSelfTableViewCell : UITableViewCell
-
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityView;
-
+@property (weak, nonatomic) IBOutlet UITextView *contentTxtVIew;
 - (void)updateMessage:(ESTaskComment *)taskComment;
 
 @end

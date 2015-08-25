@@ -65,7 +65,7 @@
 - (void)setConfirmBtn:(UIButton *)confirmBtn {
     _confirmBtn = confirmBtn;
     
-    _confirmBtn.layer.cornerRadius = 20.0;
+    _confirmBtn.layer.cornerRadius = 18.f;
 }
 
 @end
