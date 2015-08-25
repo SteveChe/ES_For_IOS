@@ -12,7 +12,9 @@
 
 - (void)awakeFromNib {
     // Initialization code
-
+    self.redBadgeLabel.clipsToBounds = YES;
+    self.redBadgeLabel.layer.cornerRadius = 5.f;
+    self.redBadgeLabel.hidden = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
