@@ -47,12 +47,13 @@
 
 #pragma mark - ChangeUserMsgDelegate methods
 - (void)changeUserMsgSuccess:(ESUserDetailInfo *)userInfo {
+    NSLog(@"%@",userInfo);
     [self showTips:@"修改成功!" mode:MRProgressOverlayViewModeCheckmark isDismiss:YES isSucceuss:YES];
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     if (self.type == ESUserMsgName) {
-        [userDefaults setObject:userInfo.userName forKey:@"UserName"];
+        [userDefaults setObject:[ColorHandler isNullOrEmptyString:userInfo.userName]?@"":userInfo.userName forKey:@"UserName"];
     } else if (self.type == ESUserMsgPosition) {
-        [userDefaults setObject:userInfo.position forKey:@"UserPosition"];
+        [userDefaults setObject:[ColorHandler isNullOrEmptyString:userInfo.position]?@"":userInfo.position forKey:@"UserPosition"];
     } else {
         //empty
     }
@@ -70,11 +71,21 @@
 
 - (void)confirmItemOnClicked {
     [self freeKeyboard];
+    
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     ESUserDetailInfo *userInfo = [[ESUserDetailInfo alloc] init];
     userInfo.userId = [userDefaults stringForKey:@"UserId"];
     
     if (self.type == ESUserMsgName) {
+        if ([ColorHandler isNullOrEmptyString:self.nameAndPositionTxtField.text]) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                            message:@"用户名不能为空"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"知道了!"
+                                                  otherButtonTitles:nil, nil];
+            [alert show];
+            return;
+        }
         userInfo.userName = self.nameAndPositionTxtField.text;
         userInfo.position = [userDefaults stringForKey:@"UserPosition"];
     } else {

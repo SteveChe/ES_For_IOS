@@ -47,7 +47,7 @@
 - (void)changeUserMsgSuccess:(ESUserDetailInfo *)userInfo {
     [self showTips:@"修改成功!" mode:MRProgressOverlayViewModeCheckmark isDismiss:YES isSucceuss:YES];
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setObject:userInfo.contactDescription forKey:@"UserDecription"];
+    [userDefaults setObject:[ColorHandler isNullOrEmptyString:userInfo.contactDescription]?@"":userInfo.contactDescription forKey:@"UserDecription"];
     [userDefaults synchronize];
 }
 
