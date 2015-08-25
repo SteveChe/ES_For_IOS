@@ -368,10 +368,10 @@
         [[CustomShowMessage getInstance] showNotificationMessage:@"缺少分配人!"];
         return;
     }
-    if ([self.followsDataSource count] <=0 ) {
-        [[CustomShowMessage getInstance] showNotificationMessage:@"缺少关注人!"];
-        return;
-    }
+//    if ([self.followsDataSource count] <=0 ) {
+//        [[CustomShowMessage getInstance] showNotificationMessage:@"缺少关注人!"];
+//        return;
+//    }
     //创建set过滤分配和关注中的重复联系人
     NSMutableSet *contactorSet = [[NSMutableSet alloc] initWithCapacity:self.assignerDataSource.count + self.followsDataSource.count];
     [contactorSet addObjectsFromArray:self.assignerDataSource];

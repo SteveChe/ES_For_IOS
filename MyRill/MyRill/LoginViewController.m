@@ -132,7 +132,7 @@
 - (void)setLoginBtn:(UIButton *)loginBtn {
     _loginBtn = loginBtn;
     
-    _loginBtn.layer.cornerRadius = 20.0;
+    _loginBtn.layer.cornerRadius = 18.f;
 }
 
 - (MRProgressOverlayView *)progress {

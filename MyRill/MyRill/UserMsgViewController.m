@@ -29,7 +29,8 @@
 
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIImageView *userIcon;
-@property (weak, nonatomic) IBOutlet UIButton *logoutBtn;
+
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *btnCollection;
 @property (weak, nonatomic) IBOutlet UILabel *UserNameLbl;
 @property (weak, nonatomic) IBOutlet UILabel *UserEnterpriseLbl;
 @property (weak, nonatomic) IBOutlet UIImageView *userEnterpriseImg;
@@ -354,10 +355,12 @@
    
 }
 
-- (void)setLogoutBtn:(UIButton *)logoutBtn {
-    _logoutBtn = logoutBtn;
+- (void)setBtnCollection:(NSArray *)btnCollection {
+    _btnCollection = btnCollection;
     
-    _logoutBtn.layer.cornerRadius = 20.f;
+    for (UIButton *btn in _btnCollection) {
+        btn.layer.cornerRadius = 18.f;
+    }
 }
 
 - (SignOutDataParse *)signOutDP {
