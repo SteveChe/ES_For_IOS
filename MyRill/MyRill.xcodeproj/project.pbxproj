@@ -203,6 +203,23 @@
 		F236308A1B6673B400A12F63 /* RCDAddressBookDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F23630881B6673B400A12F63 /* RCDAddressBookDetailTableViewCell.xib */; };
 		F236308D1B67A9AB00A12F63 /* ESTagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F236308C1B67A9AB00A12F63 /* ESTagViewController.m */; };
 		F23630BD1B68F61800A12F63 /* TagDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F23630BC1B68F61800A12F63 /* TagDataParse.m */; };
+		F2467EEE1B8DCF1F0055B78B /* RootCardBottomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2467ED51B8DCF1F0055B78B /* RootCardBottomCell.m */; };
+		F2467EF01B8DCF1F0055B78B /* RootCardMiddleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2467ED81B8DCF1F0055B78B /* RootCardMiddleCell.m */; };
+		F2467EF11B8DCF1F0055B78B /* RootCardMiddleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2467ED91B8DCF1F0055B78B /* RootCardMiddleCell.xib */; };
+		F2467EF21B8DCF1F0055B78B /* RootCardTopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2467EDB1B8DCF1F0055B78B /* RootCardTopCell.m */; };
+		F2467EF31B8DCF1F0055B78B /* RootCardTopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2467EDC1B8DCF1F0055B78B /* RootCardTopCell.xib */; };
+		F2467EF41B8DCF1F0055B78B /* RootFunctionView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2467EDE1B8DCF1F0055B78B /* RootFunctionView.m */; };
+		F2467EF51B8DCF1F0055B78B /* RootImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2467EE01B8DCF1F0055B78B /* RootImageCell.m */; };
+		F2467EF61B8DCF1F0055B78B /* RootImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2467EE11B8DCF1F0055B78B /* RootImageCell.xib */; };
+		F2467EF71B8DCF1F0055B78B /* RootIncomeChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2467EE31B8DCF1F0055B78B /* RootIncomeChatCell.m */; };
+		F2467EF81B8DCF1F0055B78B /* RootIncomeChatCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2467EE41B8DCF1F0055B78B /* RootIncomeChatCell.xib */; };
+		F2467EF91B8DCF1F0055B78B /* RootOutChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2467EE61B8DCF1F0055B78B /* RootOutChatCell.m */; };
+		F2467EFA1B8DCF1F0055B78B /* RootOutChatCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2467EE71B8DCF1F0055B78B /* RootOutChatCell.xib */; };
+		F2467EFB1B8DCF1F0055B78B /* RootTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2467EE91B8DCF1F0055B78B /* RootTimeCell.m */; };
+		F2467EFC1B8DCF1F0055B78B /* RootTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2467EEA1B8DCF1F0055B78B /* RootTimeCell.xib */; };
+		F2467EFD1B8DCF1F0055B78B /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2467EEC1B8DCF1F0055B78B /* RootViewController.m */; };
+		F2467EFE1B8DCF1F0055B78B /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2467EED1B8DCF1F0055B78B /* RootViewController.xib */; };
+		F2467F001B8DD9E10055B78B /* RootCardBottomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2467EFF1B8DD9E10055B78B /* RootCardBottomCell.xib */; };
 		F24787721B2D5CE700EC266B /* ChangePwdDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F24787711B2D5CE700EC266B /* ChangePwdDataParse.m */; };
 		F24787751B2D775E00EC266B /* SignUpDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F24787741B2D775E00EC266B /* SignUpDataParse.m */; };
 		F250F2EA1B2471CD000AD021 /* AFHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = F250F2E91B2471CD000AD021 /* AFHttpTool.m */; };
@@ -654,6 +671,32 @@
 		F236308C1B67A9AB00A12F63 /* ESTagViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ESTagViewController.m; path = RCDChatList/AddressBook/ESTagViewController.m; sourceTree = "<group>"; };
 		F23630BB1B68F61800A12F63 /* TagDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagDataParse.h; sourceTree = "<group>"; };
 		F23630BC1B68F61800A12F63 /* TagDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagDataParse.m; sourceTree = "<group>"; };
+		F2467ED41B8DCF1F0055B78B /* RootCardBottomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RootCardBottomCell.h; path = EnterpriseConversation/RootCardBottomCell.h; sourceTree = "<group>"; };
+		F2467ED51B8DCF1F0055B78B /* RootCardBottomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RootCardBottomCell.m; path = EnterpriseConversation/RootCardBottomCell.m; sourceTree = "<group>"; };
+		F2467ED71B8DCF1F0055B78B /* RootCardMiddleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RootCardMiddleCell.h; path = EnterpriseConversation/RootCardMiddleCell.h; sourceTree = "<group>"; };
+		F2467ED81B8DCF1F0055B78B /* RootCardMiddleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RootCardMiddleCell.m; path = EnterpriseConversation/RootCardMiddleCell.m; sourceTree = "<group>"; };
+		F2467ED91B8DCF1F0055B78B /* RootCardMiddleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RootCardMiddleCell.xib; path = EnterpriseConversation/RootCardMiddleCell.xib; sourceTree = "<group>"; };
+		F2467EDA1B8DCF1F0055B78B /* RootCardTopCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RootCardTopCell.h; path = EnterpriseConversation/RootCardTopCell.h; sourceTree = "<group>"; };
+		F2467EDB1B8DCF1F0055B78B /* RootCardTopCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RootCardTopCell.m; path = EnterpriseConversation/RootCardTopCell.m; sourceTree = "<group>"; };
+		F2467EDC1B8DCF1F0055B78B /* RootCardTopCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RootCardTopCell.xib; path = EnterpriseConversation/RootCardTopCell.xib; sourceTree = "<group>"; };
+		F2467EDD1B8DCF1F0055B78B /* RootFunctionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RootFunctionView.h; path = EnterpriseConversation/RootFunctionView.h; sourceTree = "<group>"; };
+		F2467EDE1B8DCF1F0055B78B /* RootFunctionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RootFunctionView.m; path = EnterpriseConversation/RootFunctionView.m; sourceTree = "<group>"; };
+		F2467EDF1B8DCF1F0055B78B /* RootImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RootImageCell.h; path = EnterpriseConversation/RootImageCell.h; sourceTree = "<group>"; };
+		F2467EE01B8DCF1F0055B78B /* RootImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RootImageCell.m; path = EnterpriseConversation/RootImageCell.m; sourceTree = "<group>"; };
+		F2467EE11B8DCF1F0055B78B /* RootImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RootImageCell.xib; path = EnterpriseConversation/RootImageCell.xib; sourceTree = "<group>"; };
+		F2467EE21B8DCF1F0055B78B /* RootIncomeChatCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RootIncomeChatCell.h; path = EnterpriseConversation/RootIncomeChatCell.h; sourceTree = "<group>"; };
+		F2467EE31B8DCF1F0055B78B /* RootIncomeChatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RootIncomeChatCell.m; path = EnterpriseConversation/RootIncomeChatCell.m; sourceTree = "<group>"; };
+		F2467EE41B8DCF1F0055B78B /* RootIncomeChatCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RootIncomeChatCell.xib; path = EnterpriseConversation/RootIncomeChatCell.xib; sourceTree = "<group>"; };
+		F2467EE51B8DCF1F0055B78B /* RootOutChatCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RootOutChatCell.h; path = EnterpriseConversation/RootOutChatCell.h; sourceTree = "<group>"; };
+		F2467EE61B8DCF1F0055B78B /* RootOutChatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RootOutChatCell.m; path = EnterpriseConversation/RootOutChatCell.m; sourceTree = "<group>"; };
+		F2467EE71B8DCF1F0055B78B /* RootOutChatCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RootOutChatCell.xib; path = EnterpriseConversation/RootOutChatCell.xib; sourceTree = "<group>"; };
+		F2467EE81B8DCF1F0055B78B /* RootTimeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RootTimeCell.h; path = EnterpriseConversation/RootTimeCell.h; sourceTree = "<group>"; };
+		F2467EE91B8DCF1F0055B78B /* RootTimeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RootTimeCell.m; path = EnterpriseConversation/RootTimeCell.m; sourceTree = "<group>"; };
+		F2467EEA1B8DCF1F0055B78B /* RootTimeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RootTimeCell.xib; path = EnterpriseConversation/RootTimeCell.xib; sourceTree = "<group>"; };
+		F2467EEB1B8DCF1F0055B78B /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RootViewController.h; path = EnterpriseConversation/RootViewController.h; sourceTree = "<group>"; };
+		F2467EEC1B8DCF1F0055B78B /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RootViewController.m; path = EnterpriseConversation/RootViewController.m; sourceTree = "<group>"; };
+		F2467EED1B8DCF1F0055B78B /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RootViewController.xib; path = EnterpriseConversation/RootViewController.xib; sourceTree = "<group>"; };
+		F2467EFF1B8DD9E10055B78B /* RootCardBottomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RootCardBottomCell.xib; path = EnterpriseConversation/RootCardBottomCell.xib; sourceTree = "<group>"; };
 		F247876C1B2BC3CE00EC266B /* DataParseDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataParseDefine.h; sourceTree = "<group>"; };
 		F24787701B2D5CE700EC266B /* ChangePwdDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePwdDataParse.h; sourceTree = "<group>"; };
 		F24787711B2D5CE700EC266B /* ChangePwdDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePwdDataParse.m; sourceTree = "<group>"; };
@@ -1172,6 +1215,7 @@
 		2B39C9641B272969007BAC7A /* Conversation */ = {
 			isa = PBXGroup;
 			children = (
+				F2467ED31B8DCF090055B78B /* EnterpriseConversation */,
 				F2F3977B1B78F205006FAE3B /* DiscussionChatListViewController.h */,
 				F2F3977C1B78F205006FAE3B /* DiscussionChatListViewController.m */,
 				F20C13031B73A2690073BFA9 /* EnterpriseChatListViewController.h */,
@@ -1599,6 +1643,39 @@
 			name = MKNumberBadgeView;
 			sourceTree = "<group>";
 		};
+		F2467ED31B8DCF090055B78B /* EnterpriseConversation */ = {
+			isa = PBXGroup;
+			children = (
+				F2467ED41B8DCF1F0055B78B /* RootCardBottomCell.h */,
+				F2467ED51B8DCF1F0055B78B /* RootCardBottomCell.m */,
+				F2467EFF1B8DD9E10055B78B /* RootCardBottomCell.xib */,
+				F2467ED71B8DCF1F0055B78B /* RootCardMiddleCell.h */,
+				F2467ED81B8DCF1F0055B78B /* RootCardMiddleCell.m */,
+				F2467ED91B8DCF1F0055B78B /* RootCardMiddleCell.xib */,
+				F2467EDA1B8DCF1F0055B78B /* RootCardTopCell.h */,
+				F2467EDB1B8DCF1F0055B78B /* RootCardTopCell.m */,
+				F2467EDC1B8DCF1F0055B78B /* RootCardTopCell.xib */,
+				F2467EDD1B8DCF1F0055B78B /* RootFunctionView.h */,
+				F2467EDE1B8DCF1F0055B78B /* RootFunctionView.m */,
+				F2467EDF1B8DCF1F0055B78B /* RootImageCell.h */,
+				F2467EE01B8DCF1F0055B78B /* RootImageCell.m */,
+				F2467EE11B8DCF1F0055B78B /* RootImageCell.xib */,
+				F2467EE21B8DCF1F0055B78B /* RootIncomeChatCell.h */,
+				F2467EE31B8DCF1F0055B78B /* RootIncomeChatCell.m */,
+				F2467EE41B8DCF1F0055B78B /* RootIncomeChatCell.xib */,
+				F2467EE51B8DCF1F0055B78B /* RootOutChatCell.h */,
+				F2467EE61B8DCF1F0055B78B /* RootOutChatCell.m */,
+				F2467EE71B8DCF1F0055B78B /* RootOutChatCell.xib */,
+				F2467EE81B8DCF1F0055B78B /* RootTimeCell.h */,
+				F2467EE91B8DCF1F0055B78B /* RootTimeCell.m */,
+				F2467EEA1B8DCF1F0055B78B /* RootTimeCell.xib */,
+				F2467EEB1B8DCF1F0055B78B /* RootViewController.h */,
+				F2467EEC1B8DCF1F0055B78B /* RootViewController.m */,
+				F2467EED1B8DCF1F0055B78B /* RootViewController.xib */,
+			);
+			name = EnterpriseConversation;
+			sourceTree = "<group>";
+		};
 		F250F2E71B247156000AD021 /* AFNetWorkInterface */ = {
 			isa = PBXGroup;
 			children = (
@@ -1803,6 +1880,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				2BEBBD931B6F5E1F008BE7C4 /* TaskListTableViewCell.xib in Resources */,
+				F2467EF61B8DCF1F0055B78B /* RootImageCell.xib in Resources */,
+				F2467F001B8DD9E10055B78B /* RootCardBottomCell.xib in Resources */,
 				2B6038871B79C6A4005B721F /* TaskContactorCollectionViewCell.xib in Resources */,
 				2BE8C22D1B4EB3A200858CEE /* AddProfessionViewController.xib in Resources */,
 				2B37E44D1B53967D00F671A1 /* ModifyProfessionViewController.xib in Resources */,
@@ -1811,6 +1890,8 @@
 				F23059BB1B52C141004599FA /* RCDAddressBookViewTableViewCell.xib in Resources */,
 				2B1B88E61B803CEA00FAF650 /* UserNameAndPositionViewController.xib in Resources */,
 				F256CB801B6E4247009478C2 /* RCDJoinEnterpriseViewController.xib in Resources */,
+				F2467EFC1B8DCF1F0055B78B /* RootTimeCell.xib in Resources */,
+				F2467EF31B8DCF1F0055B78B /* RootCardTopCell.xib in Resources */,
 				F2D2335E1B31B1F400F8C65D /* PushConfig.plist in Resources */,
 				2B39C98D1B37B2A4007BAC7A /* LoginViewController.xib in Resources */,
 				F256CB721B6BD565009478C2 /* RCDUpdateNameViewController.xib in Resources */,
@@ -1829,6 +1910,10 @@
 				2BEAD08E1B775FC900905E21 /* MessageListSelfTableViewCell.xib in Resources */,
 				F22FE2921B3B000400A1A997 /* ChangePwdViewController.xib in Resources */,
 				F2D2338F1B37DE6400F8C65D /* RongCloud.bundle in Resources */,
+				F2467EF11B8DCF1F0055B78B /* RootCardMiddleCell.xib in Resources */,
+				F2467EFE1B8DCF1F0055B78B /* RootViewController.xib in Resources */,
+				F2467EF81B8DCF1F0055B78B /* RootIncomeChatCell.xib in Resources */,
+				F2467EFA1B8DCF1F0055B78B /* RootOutChatCell.xib in Resources */,
 				2B31C3E01B11C3FD004C865A /* Images.xcassets in Resources */,
 				2BEAD0891B775C4500905E21 /* MessageListTableViewCell.xib in Resources */,
 				2BEAD0791B77195300905E21 /* RemindDateTableViewCell.xib in Resources */,
@@ -1914,6 +1999,7 @@
 				F20C13051B73A2690073BFA9 /* EnterpriseChatListViewController.m in Sources */,
 				2B5A59141B48DFBB000382D7 /* MRStopButton.m in Sources */,
 				2BE2FFF41B8212E80006EB99 /* CloseTaskDataParse.m in Sources */,
+				F2467EF21B8DCF1F0055B78B /* RootCardTopCell.m in Sources */,
 				F29F862B1B2410070058FC9F /* AFNetworkReachabilityManager.m in Sources */,
 				F23461E41B5FCFA900C88FAC /* ChatSettingCollectionViewCell.m in Sources */,
 				F22FE3021B4576D100A1A997 /* GetContactListDataParse.m in Sources */,
@@ -1932,11 +2018,14 @@
 				F29F862F1B2410070058FC9F /* AFURLResponseSerialization.m in Sources */,
 				F23630841B66668900A12F63 /* RCDAddressBookDetailViewController.m in Sources */,
 				F22FE2E41B4000ED00A1A997 /* MKAnnotationView+WebCache.m in Sources */,
+				F2467EF41B8DCF1F0055B78B /* RootFunctionView.m in Sources */,
 				2B1B88E11B803BA900FAF650 /* ChangeUserMsgDataParse.m in Sources */,
+				F2467EFD1B8DCF1F0055B78B /* RootViewController.m in Sources */,
 				F2F397741B77AC50006FAE3B /* ESEnterpriseMessage.m in Sources */,
 				2BEBBD8C1B67AFA7008BE7C4 /* GetTaskListDataParse.m in Sources */,
 				F29F862D1B2410070058FC9F /* AFURLConnectionOperation.m in Sources */,
 				2BC821361B5BE6B60090E2C1 /* ChangeUserImageDataParse.m in Sources */,
+				F2467EF01B8DCF1F0055B78B /* RootCardMiddleCell.m in Sources */,
 				F22FE3051B458A4100A1A997 /* GetRequestContactListDataParse.m in Sources */,
 				F20C13081B73A2920073BFA9 /* EnterpriseChatViewController.m in Sources */,
 				F22FE2731B3AD7BE00A1A997 /* ChatListViewController.m in Sources */,
@@ -1950,6 +2039,7 @@
 				F2F92ECD1B4D60910047D7BF /* RCDPhoneAddressBookViewController.m in Sources */,
 				F22FE2AD1B3FFAE600A1A997 /* RCDSelectPersonTableViewCell.m in Sources */,
 				F22FE2941B3B000400A1A997 /* UserSettingViewController.m in Sources */,
+				F2467EF91B8DCF1F0055B78B /* RootOutChatCell.m in Sources */,
 				2B1B88E51B803CEA00FAF650 /* UserNameAndPositionViewController.m in Sources */,
 				2B5A59221B494C2B000382D7 /* ChangePhoneNumDataParse.m in Sources */,
 				F234616F1B5AA0FD00C88FAC /* FMDatabaseAdditions.m in Sources */,
@@ -1957,6 +2047,7 @@
 				F22FE2F01B4000ED00A1A997 /* UIImage+WebP.m in Sources */,
 				F29F86461B2410320058FC9F /* UIButton+AFNetworking.m in Sources */,
 				F22FE2EB1B4000ED00A1A997 /* SDWebImageManager.m in Sources */,
+				F2467EEE1B8DCF1F0055B78B /* RootCardBottomCell.m in Sources */,
 				2B39C93B1B241212007BAC7A /* MASViewAttribute.m in Sources */,
 				F24787721B2D5CE700EC266B /* ChangePwdDataParse.m in Sources */,
 				F28B6C871B6F991600E0C267 /* GetEnterpriseDetailDataParse.m in Sources */,
@@ -1979,6 +2070,7 @@
 				F236308D1B67A9AB00A12F63 /* ESTagViewController.m in Sources */,
 				2B39C94C1B24501B007BAC7A /* ColorHandler.m in Sources */,
 				2BEAD06D1B76FF2400905E21 /* SWTableViewCell.m in Sources */,
+				F2467EF71B8DCF1F0055B78B /* RootIncomeChatCell.m in Sources */,
 				F29F86441B2410320058FC9F /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				2B9CBB661B3AEC74007D7A45 /* (null) in Sources */,
 				2BEAD06B1B76FF2400905E21 /* SWCellScrollView.m in Sources */,
@@ -2037,6 +2129,7 @@
 				F22FE27F1B3ADAB000A1A997 /* ESUserInfo.m in Sources */,
 				2BEAD0591B75D76A00905E21 /* AddTaskDataParse.m in Sources */,
 				F23461721B5AA0FD00C88FAC /* FMResultSet.m in Sources */,
+				F2467EFB1B8DCF1F0055B78B /* RootTimeCell.m in Sources */,
 				F23059B51B529FAE004599FA /* RCDPhoneAddressBookTableViewCell.m in Sources */,
 				2B39C9731B2D7AF0007BAC7A /* ContactsContainerViewController.m in Sources */,
 				F2F3977D1B78F205006FAE3B /* DiscussionChatListViewController.m in Sources */,
@@ -2059,6 +2152,7 @@
 				2BEAD0911B776C2E00905E21 /* GetTaskCommentListDataParse.m in Sources */,
 				2B31C3D51B11C3FD004C865A /* main.m in Sources */,
 				F22FE2ED1B4000ED00A1A997 /* UIButton+WebCache.m in Sources */,
+				F2467EF51B8DCF1F0055B78B /* RootImageCell.m in Sources */,
 				2B6038861B79C6A4005B721F /* TaskContactorCollectionViewCell.m in Sources */,
 				F22FE2F21B4000ED00A1A997 /* UIImageView+WebCache.m in Sources */,
 				2BEAD06F1B76FF2400905E21 /* SWUtilityButtonView.m in Sources */,

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="65" id="KGk-i7-Jjw" customClass="RootIncomeChatCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jbU-bD-ZHP">
+                        <rect key="frame" x="10" y="12" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="IEC-vX-3rY"/>
+                            <constraint firstAttribute="width" secondItem="jbU-bD-ZHP" secondAttribute="height" multiplier="1:1" id="IKN-6L-tZ2"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="ReceiverTextNodeBkg" translatesAutoresizingMaskIntoConstraints="NO" id="mgY-8H-r1Y">
+                        <rect key="frame" x="55" y="10" width="66" height="55"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="751" verticalHuggingPriority="751" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" misplaced="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="35.5" translatesAutoresizingMaskIntoConstraints="NO" id="HJK-2H-Bfn">
+                        <rect key="frame" x="70" y="22" width="36" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstItem="mgY-8H-r1Y" firstAttribute="bottom" secondItem="HJK-2H-Bfn" secondAttribute="bottom" constant="25" id="1Jk-er-IPc"/>
+                    <constraint firstItem="jbU-bD-ZHP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="3l0-1y-PBW"/>
+                    <constraint firstItem="HJK-2H-Bfn" firstAttribute="leading" secondItem="mgY-8H-r1Y" secondAttribute="leading" constant="15" id="4dP-Tt-8YK"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="HJK-2H-Bfn" secondAttribute="trailing" constant="50" id="8et-Le-WQb"/>
+                    <constraint firstItem="mgY-8H-r1Y" firstAttribute="trailing" secondItem="HJK-2H-Bfn" secondAttribute="trailing" constant="15" id="P3T-wv-Gdf"/>
+                    <constraint firstItem="jbU-bD-ZHP" firstAttribute="top" secondItem="mgY-8H-r1Y" secondAttribute="top" constant="2" id="PYI-Jn-Flg"/>
+                    <constraint firstAttribute="bottom" secondItem="mgY-8H-r1Y" secondAttribute="bottom" id="UWv-Bx-EIk"/>
+                    <constraint firstItem="HJK-2H-Bfn" firstAttribute="top" secondItem="mgY-8H-r1Y" secondAttribute="top" constant="12" id="abB-Ok-euh"/>
+                    <constraint firstItem="mgY-8H-r1Y" firstAttribute="leading" secondItem="jbU-bD-ZHP" secondAttribute="trailing" constant="5" id="lvc-Jq-tT4"/>
+                    <constraint firstItem="jbU-bD-ZHP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="qwd-uM-hRt"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <connections>
+                <outlet property="msgLabel" destination="HJK-2H-Bfn" id="wGy-lf-x4t"/>
+                <outlet property="photoImageView" destination="jbU-bD-ZHP" id="nM4-RU-ll0"/>
+            </connections>
+            <point key="canvasLocation" x="233" y="288.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="ReceiverTextNodeBkg" width="65" height="54"/>
+    </resources>
+</document>

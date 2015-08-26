@@ -12,7 +12,7 @@
 #import "DeviceInfo.h"
 #import "UIColor+RCColor.h"
 #import "UIImageView+WebCache.h"
-#import "EnterpriseChatViewController.h"
+#import "RootViewController.h"
 
 
 @interface EnterpriseChatListViewController ()<GetALLEnterpriseLastestMessageListDelegate>
@@ -124,7 +124,7 @@
                atIndexPath:(NSIndexPath *)indexPath
 {
     ESEnterpriseMessage* enterpriseMessage = [self.enterpriseMessageList objectAtIndex:indexPath.row];
-    EnterpriseChatViewController* enterpriseChatVC = [[EnterpriseChatViewController alloc] init];
+    RootViewController* enterpriseChatVC = [[RootViewController alloc] init];
     enterpriseChatVC.title = @"企业消息";
     if (enterpriseMessage.send_enterprise!=nil)
     {

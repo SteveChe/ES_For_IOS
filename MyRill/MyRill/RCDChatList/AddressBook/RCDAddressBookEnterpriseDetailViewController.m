@@ -13,7 +13,7 @@
 #import "ShowQRCodeViewController.h"
 #import "CustomShowMessage.h"
 #import "UIImageView+WebCache.h"
-#import "EnterpriseChatViewController.h"
+#import "RootViewController.h"
 #import "FollowEnterpriseDataParse.h"
 #import "CustomShowMessage.h"
 
@@ -245,7 +245,7 @@
     if (_enterpriseDetailInfo==nil)
         return;
 
-    EnterpriseChatViewController* enterpriseChatVC = [[EnterpriseChatViewController alloc] init];
+    RootViewController* enterpriseChatVC = [[RootViewController alloc] init];
     enterpriseChatVC.title = @"企业消息";
     enterpriseChatVC.title = _enterpriseDetailInfo.enterpriseName;
     enterpriseChatVC.enterpriseId = _enterpriseDetailInfo.enterpriseId;
