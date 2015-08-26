@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -24,21 +25,38 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WiC-QP-9LG">
                         <rect key="frame" x="66" y="11" width="42" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F6t-KR-3P9">
+                        <rect key="frame" x="38" y="12" width="10" height="10"/>
+                        <color key="backgroundColor" red="1" green="0.3294117647" blue="0.3294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="10" id="Vaz-M3-aIK"/>
+                            <constraint firstAttribute="height" constant="10" id="wnI-fH-HAh"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="8"/>
+                        <color key="textColor" red="1" green="0.3294117647" blue="0.3294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="WiC-QP-9LG" firstAttribute="leading" secondItem="2io-LZ-uSd" secondAttribute="trailing" constant="15" id="0qd-nW-rT6"/>
                     <constraint firstAttribute="centerY" secondItem="WiC-QP-9LG" secondAttribute="centerY" id="8dE-lr-aWG"/>
+                    <constraint firstItem="F6t-KR-3P9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="30" id="ILi-9F-StO"/>
                     <constraint firstItem="2io-LZ-uSd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="hrc-67-PJb"/>
+                    <constraint firstItem="F6t-KR-3P9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="ofM-ZT-gZH"/>
                     <constraint firstAttribute="centerY" secondItem="2io-LZ-uSd" secondAttribute="centerY" id="xCm-4t-ZoI"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="addressBookName" destination="WiC-QP-9LG" id="cDF-18-Glu"/>
                 <outlet property="ivAva" destination="2io-LZ-uSd" id="9Ps-uu-2Fd"/>
+                <outlet property="redBadgeLabel" destination="F6t-KR-3P9" id="JDm-Qi-aBl"/>
             </connections>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="icon" width="50" height="50"/>
+    </resources>
 </document>

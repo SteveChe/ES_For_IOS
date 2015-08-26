@@ -11,4 +11,5 @@
 @interface RCDAddressBookViewTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *ivAva;
 @property (weak, nonatomic) IBOutlet UILabel *addressBookName;
+@property (weak, nonatomic) IBOutlet UILabel *redBadgeLabel;
 @end
