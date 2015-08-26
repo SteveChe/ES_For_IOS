@@ -69,14 +69,13 @@
     
     NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
     self.userId = [userDefaultes stringForKey:DEFAULTS_USERID];
-    self.UserNameLbl.text = [userDefaultes stringForKey:DEFAULTS_USERNAME];
-    self.UserEnterpriseLbl.text = [userDefaultes stringForKey:DEFAULTS_USERENTERPRISE];
-    self.UserPositionLbl.text = [userDefaultes stringForKey:DEFAULTS_USERPOSITION];
-    self.userDescriptionLbl.text = [@"简介：" stringByAppendingString:[userDefaultes stringForKey:DEFAULTS_USERDESCRIPTION]?[userDefaultes stringForKey:DEFAULTS_USERDESCRIPTION]:@""];
-    self.UserEnterpriseLbl.text = [userDefaultes stringForKey:DEFAULTS_USERENTERPRISE];
-    [self.userEnterpriseImg sd_setImageWithURL:[NSURL URLWithString:[userDefaultes stringForKey:DEFAULTS_ENTERPRISEAVATAR]] placeholderImage:nil];
     //更新头像缓存的url，若url有变化
     [self.userIcon sd_setImageWithURL:[NSURL URLWithString:[userDefaultes stringForKey:DEFAULTS_USERAVATAR]] placeholderImage:[UIImage imageNamed:@"头像_100"]];
+    self.UserNameLbl.text = [userDefaultes stringForKey:DEFAULTS_USERNAME];
+    self.UserEnterpriseLbl.text = [userDefaultes stringForKey:DEFAULTS_USERENTERPRISE];
+    [self.userEnterpriseImg sd_setImageWithURL:[NSURL URLWithString:[userDefaultes stringForKey:DEFAULTS_ENTERPRISEAVATAR]] placeholderImage:nil];
+    self.UserPositionLbl.text = [userDefaultes stringForKey:DEFAULTS_USERPOSITION];
+    self.userDescriptionLbl.text = [@"简介：" stringByAppendingString:[userDefaultes stringForKey:DEFAULTS_USERDESCRIPTION]?[userDefaultes stringForKey:DEFAULTS_USERDESCRIPTION]:@""];
 }
 
 #pragma mark - ChangeUserImageDataDelegate methods
@@ -87,7 +86,8 @@
     
     //将新的url存储到NSUserDefaults本地中
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setObject:avatar forKey:DEFAULTS_USERAVATAR];
+    [userDefaults setObject:[ColorHandler isNullOrEmptyString:avatar]?@"":avatar
+                     forKey:DEFAULTS_USERAVATAR];
     [userDefaults synchronize];
     [self dismissProgress];
 }

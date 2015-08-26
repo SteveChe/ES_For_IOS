@@ -55,17 +55,28 @@
                withObject:nil
                afterDelay:.5];
     
+    //将登陆成功地返回信息存到本地，用于个人界面的各类信息展示
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setObject:userDetailInfo.userId forKey:DEFAULTS_USERID];
-    [userDefaults setObject:userDetailInfo.userName forKey:DEFAULTS_USERNAME];
-    [userDefaults setObject:userDetailInfo.phoneNumber forKey:DEFAULTS_USERPHONENUMBER];
-    [userDefaults setObject:userDetailInfo.enterprise forKey:DEFAULTS_USERENTERPRISE];
-    [userDefaults setObject:userDetailInfo.position forKey:DEFAULTS_USERPOSITION];
-    [userDefaults setObject:userDetailInfo.portraitUri forKey:DEFAULTS_USERAVATAR];
-    [userDefaults setObject:userDetailInfo.qrcode forKey:DEFAULTS_USERQRCODE];
-    [userDefaults setObject:userDetailInfo.enterprise_qrcode forKey:DEFAULTS_ENTERPRISEQRCODE];
-    [userDefaults setObject:userDetailInfo.enterprise.enterpriseName forKey:DEFAULTS_USERENTERPRISE];
-    [userDefaults setObject:userDetailInfo.enterprise.portraitUri forKey:DEFAULTS_ENTERPRISEAVATAR];
+    [userDefaults setObject:[ColorHandler isNullOrEmptyString:userDetailInfo.userId]?@"":userDetailInfo.userId
+                     forKey:DEFAULTS_USERID];
+    [userDefaults setObject:[ColorHandler isNullOrEmptyString:userDetailInfo.userName]?@"":userDetailInfo.userName
+                     forKey:DEFAULTS_USERNAME];
+    [userDefaults setObject:[ColorHandler isNullOrEmptyString:userDetailInfo.phoneNumber]?@"":userDetailInfo.phoneNumber
+                     forKey:DEFAULTS_USERPHONENUMBER];
+    [userDefaults setObject:[ColorHandler isNullOrEmptyString:userDetailInfo.position]?@"":userDetailInfo.position
+                     forKey:DEFAULTS_USERPOSITION];
+    [userDefaults setObject:[ColorHandler isNullOrEmptyString:userDetailInfo.portraitUri]?@"":userDetailInfo.portraitUri
+                     forKey:DEFAULTS_USERAVATAR];
+    
+    [userDefaults setObject:[ColorHandler isNullOrEmptyString:userDetailInfo.qrcode]?@"":userDetailInfo.qrcode
+                     forKey:DEFAULTS_USERQRCODE];
+    [userDefaults setObject:[ColorHandler isNullOrEmptyString:userDetailInfo.enterprise_qrcode]?@"":userDetailInfo.enterprise_qrcode
+                     forKey:DEFAULTS_ENTERPRISEQRCODE];
+    
+    [userDefaults setObject:[ColorHandler isNullOrEmptyString:userDetailInfo.enterprise.enterpriseName]?@"":userDetailInfo.enterprise.enterpriseName
+                     forKey:DEFAULTS_USERENTERPRISE];
+    [userDefaults setObject:[ColorHandler isNullOrEmptyString:userDetailInfo.enterprise.portraitUri]?@"":userDetailInfo.enterprise.portraitUri
+                     forKey:DEFAULTS_ENTERPRISEAVATAR];
     
     [userDefaults synchronize];
 }
