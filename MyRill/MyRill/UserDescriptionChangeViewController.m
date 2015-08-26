@@ -10,6 +10,7 @@
 #import "ColorHandler.h"
 #import "ESUserDetailInfo.h"
 #import "MRProgress.h"
+#import "UserDefaultsDefine.h"
 
 @interface UserDescriptionChangeViewController () <ChangeUserMsgDelegate>
 
@@ -47,7 +48,7 @@
 - (void)changeUserMsgSuccess:(ESUserDetailInfo *)userInfo {
     [self showTips:@"修改成功!" mode:MRProgressOverlayViewModeCheckmark isDismiss:YES isSucceuss:YES];
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setObject:[ColorHandler isNullOrEmptyString:userInfo.contactDescription]?@"":userInfo.contactDescription forKey:@"UserDecription"];
+    [userDefaults setObject:[ColorHandler isNullOrEmptyString:userInfo.contactDescription]?@"":userInfo.contactDescription forKey:DEFAULTS_USERDESCRIPTION];
     [userDefaults synchronize];
 }
 
@@ -64,9 +65,9 @@
     [self freeKeyboard];
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     ESUserDetailInfo *userInfo = [[ESUserDetailInfo alloc] init];
-    userInfo.userId = [userDefaults stringForKey:@"UserId"];
-    userInfo.userName = [userDefaults stringForKey:@"UserName"];
-    userInfo.position = [userDefaults stringForKey:@"UserPosition"];
+    userInfo.userId = [userDefaults stringForKey:DEFAULTS_USERID];
+    userInfo.userName = [userDefaults stringForKey:DEFAULTS_USERNAME];
+    userInfo.position = [userDefaults stringForKey:DEFAULTS_USERPOSITION];
     userInfo.contactDescription = self.textView.text;
     
     [self.changeUserMsgDP changeUserMsgWithUserInfo:userInfo];

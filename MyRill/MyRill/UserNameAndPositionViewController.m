@@ -10,6 +10,7 @@
 #import "ColorHandler.h"
 #import "ESUserDetailInfo.h"
 #import "MRProgress.h"
+#import "UserDefaultsDefine.h"
 
 @interface UserNameAndPositionViewController () <ChangeUserMsgDelegate>
 
@@ -51,9 +52,9 @@
     [self showTips:@"修改成功!" mode:MRProgressOverlayViewModeCheckmark isDismiss:YES isSucceuss:YES];
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     if (self.type == ESUserMsgName) {
-        [userDefaults setObject:[ColorHandler isNullOrEmptyString:userInfo.userName]?@"":userInfo.userName forKey:@"UserName"];
+        [userDefaults setObject:[ColorHandler isNullOrEmptyString:userInfo.userName]?@"":userInfo.userName forKey:DEFAULTS_USERNAME];
     } else if (self.type == ESUserMsgPosition) {
-        [userDefaults setObject:[ColorHandler isNullOrEmptyString:userInfo.position]?@"":userInfo.position forKey:@"UserPosition"];
+        [userDefaults setObject:[ColorHandler isNullOrEmptyString:userInfo.position]?@"":userInfo.position forKey:DEFAULTS_USERPOSITION];
     } else {
         //empty
     }
@@ -74,7 +75,7 @@
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     ESUserDetailInfo *userInfo = [[ESUserDetailInfo alloc] init];
-    userInfo.userId = [userDefaults stringForKey:@"UserId"];
+    userInfo.userId = [userDefaults stringForKey:DEFAULTS_USERID];
     
     if (self.type == ESUserMsgName) {
         if ([ColorHandler isNullOrEmptyString:self.nameAndPositionTxtField.text]) {
@@ -87,13 +88,13 @@
             return;
         }
         userInfo.userName = self.nameAndPositionTxtField.text;
-        userInfo.position = [userDefaults stringForKey:@"UserPosition"];
+        userInfo.position = [userDefaults stringForKey:DEFAULTS_USERPOSITION];
     } else {
-        userInfo.userName = [userDefaults stringForKey:@"UserName"];
+        userInfo.userName = [userDefaults stringForKey:DEFAULTS_USERNAME];
         userInfo.position = self.nameAndPositionTxtField.text;
     }
     
-    userInfo.contactDescription = [userDefaults stringForKey:@"UserDecription"];
+    userInfo.contactDescription = [userDefaults stringForKey:DEFAULTS_USERDESCRIPTION];
     
     [self.changeUserMsgDP changeUserMsgWithUserInfo:userInfo];
 }

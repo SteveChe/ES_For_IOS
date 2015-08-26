@@ -27,6 +27,7 @@
 #import "MRProgress.h"
 #import "GetTaskDetailDataParse.h"
 #import "ChatViewController.h"
+#import "UserDefaultsDefine.h"
 
 @interface TaskViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, GetTaskCommentListDelegate, SendTaskCommenDelegate, EditTaskDelegate, CloseTaskDelegate, GetTaskDetailDelegate>
 
@@ -112,7 +113,7 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"MessageListTableViewCell" bundle:nil] forCellReuseIdentifier:@"MessageListTableViewCell"];
     
     NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
-    self.userID = [userDefaultes stringForKey:@"UserId"];
+    self.userID = [userDefaultes stringForKey:DEFAULTS_USERID];
     //请求任务详情
     [self.getTaskDetailDP getTaskDetailWithTaskID:self.requestTaskID];
     //请求任务列表

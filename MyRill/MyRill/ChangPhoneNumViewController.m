@@ -11,6 +11,7 @@
 #import "SignUpDataParse.h"
 #import "ChangePhoneNumDataParse.h"
 #import "MRProgress.h"
+#import "UserDefaultsDefine.h"
 
 @interface ChangPhoneNumViewController () <ChangePhoneNumDelegate>
 
@@ -44,7 +45,7 @@
     [self.view addGestureRecognizer:tapGesture];
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    self.phoneNumLbl.text = [@"当前手机号:" stringByAppendingString:[userDefaults stringForKey:@"PhoneNumber"]];
+    self.phoneNumLbl.text = [@"当前手机号:" stringByAppendingString:[userDefaults stringForKey:DEFAULTS_USERPHONENUMBER]];
 }
 
 #pragma mark - ChangePhoneNumDelegate methods

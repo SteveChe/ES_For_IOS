@@ -49,7 +49,6 @@
             self.status = dic[@"status"];
         }
         
-        NSLog(@"%@",[dic[@"chat_id"] class]);
         if ([ColorHandler isNullOrEmptyString:dic[@"chat_id"]]) {
             self.chatID = @"";
         } else {

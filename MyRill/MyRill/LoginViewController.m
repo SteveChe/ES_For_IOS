@@ -14,8 +14,9 @@
 #import "CustomShowMessage.h"
 #import "ESMenuViewController.h"
 #import "ResetPwdViewController.h"
-#import "ESUserInfo.h"
+#import "ESUserDetailInfo.h"
 #import "MRProgress.h"
+#import "UserDefaultsDefine.h"
 
 @interface LoginViewController ()
 
@@ -46,7 +47,7 @@
 }
 
 #pragma mark - LoginDataDelegate
-- (void)loginSucceed:(ESUserInfo *)userInfo
+- (void)loginSucceed:(ESUserDetailInfo *)userDetailInfo
 {
     [[CustomShowMessage getInstance] showNotificationMessage:@"登录成功"];
     [_loginDataParse getRongCloudToken];
@@ -55,12 +56,17 @@
                afterDelay:.5];
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setObject:userInfo.userId forKey:@"UserId"];
-    [userDefaults setObject:userInfo.userName forKey:@"UserName"];
-    [userDefaults setObject:userInfo.phoneNumber forKey:@"PhoneNumber"];
-    [userDefaults setObject:userInfo.enterprise forKey:@"UserEnterprise"];
-    [userDefaults setObject:userInfo.position forKey:@"UserPosition"];
-    [userDefaults setObject:[@"http://120.25.249.144" stringByAppendingString:userInfo.portraitUri] forKey:@"UserImageURL"];
+    [userDefaults setObject:userDetailInfo.userId forKey:DEFAULTS_USERID];
+    [userDefaults setObject:userDetailInfo.userName forKey:DEFAULTS_USERNAME];
+    [userDefaults setObject:userDetailInfo.phoneNumber forKey:DEFAULTS_USERPHONENUMBER];
+    [userDefaults setObject:userDetailInfo.enterprise forKey:DEFAULTS_USERENTERPRISE];
+    [userDefaults setObject:userDetailInfo.position forKey:DEFAULTS_USERPOSITION];
+    [userDefaults setObject:userDetailInfo.portraitUri forKey:DEFAULTS_USERAVATAR];
+    [userDefaults setObject:userDetailInfo.qrcode forKey:DEFAULTS_USERQRCODE];
+    [userDefaults setObject:userDetailInfo.enterprise_qrcode forKey:DEFAULTS_ENTERPRISEQRCODE];
+    [userDefaults setObject:userDetailInfo.enterprise.enterpriseName forKey:DEFAULTS_USERENTERPRISE];
+    [userDefaults setObject:userDetailInfo.enterprise.portraitUri forKey:DEFAULTS_ENTERPRISEAVATAR];
+    
     [userDefaults synchronize];
 }
 -(void)changeToESMenuView

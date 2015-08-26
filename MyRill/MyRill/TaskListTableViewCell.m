@@ -12,6 +12,7 @@
 #import "ESUserInfo.h"
 #import "UIImageView+WebCache.h"
 #import "ESTaskComment.h"
+#import "UserDefaultsDefine.h"
 
 @interface TaskListTableViewCell ()
 
@@ -59,7 +60,7 @@
     self.leadLbl.text = leadStr;
     
     NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
-    NSString *userID = [userDefaultes stringForKey:@"UserId"];
+    NSString *userID = [userDefaultes stringForKey:DEFAULTS_USERID];
     if ([userID isEqualToString:task.comments.user.userId]) {
         self.replyUserLbl.text = @"我";
     } else {

@@ -11,7 +11,7 @@
 #import "DataParseDefine.h"
 #import "APService.h"
 #import "NSString+MD5Addition.h"
-#import "ESUserInfo.h"
+#import "ESUserDetailInfo.h"
 
 @interface LoginDataParse()
 
@@ -38,42 +38,10 @@
                                   {
                                       [self setJpushAlias];
                                       NSDictionary *temDic = reponseDic[NETWORK_OK_DATA];
-                                      ESUserInfo *userInfo = [[ESUserInfo alloc] init];
-                                      NSNumber *userId = [temDic valueForKey:@"id"];
-                                      if (userId != nil && ![userId isEqual:[NSNull null]])
-                                      {
-                                          userInfo.userId = [NSString stringWithFormat:@"%d",[userId intValue]];
-                                      }
-                                      
-                                      NSString* userName = [temDic valueForKey:@"name"];
-                                      if (userName != nil && ![userName isEqual:[NSNull null]])
-                                      {
-                                          userInfo.userName = userName;
-                                      }
-                                      NSString* userPhoneNum = [temDic valueForKey:@"phone_number"];
-                                      if (userPhoneNum != nil && ![userPhoneNum isEqual:[NSNull null]])
-                                      {
-                                          userInfo.phoneNumber = userPhoneNum;
-                                      }
-                                      NSString* userEnterprise = [temDic valueForKey:@"enterprise"];
-                                      if (userEnterprise != nil && ![userEnterprise isEqual:[NSNull null]])
-                                      {
-                                          userInfo.enterprise = userEnterprise;
-                                      }
-                                      NSString* userPosition = [temDic valueForKey:@"position"];
-                                      if (userPosition != nil && ![userPosition isEqual:[NSNull null]])
-                                      {
-                                          userInfo.position = userPosition;
-                                      }
-                                      NSString *userAtatar = [temDic valueForKey:@"avatar"];
-                                      if (userAtatar != nil && ![userAtatar isEqual:[NSNull null]])
-                                      {
-                                          userInfo.portraitUri = userAtatar;
-                                      }
-                                      
+                                      ESUserDetailInfo *userDetailInfo = [[ESUserDetailInfo alloc] initWithDic:temDic];
                                       if (self.delegate!= nil && [self.delegate respondsToSelector:@selector(loginSucceed:)])
                                       {
-                                          [self.delegate loginSucceed:userInfo];
+                                          [self.delegate loginSucceed:userDetailInfo];
                                       }
                                   }
                                       break;

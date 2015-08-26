@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "ESEnterpriseInfo.h"
+
 @interface ESUserDetailInfo : NSObject
 /** 用户ID */
 @property(nonatomic, strong) NSString* userId;
@@ -38,4 +39,6 @@
 /** 联系人 */
 @property(nonatomic, assign) BOOL bContact;
 
+//designed initilize (dic not have tagDataArray&bMember&bContact)
+- (instancetype)initWithDic:(NSDictionary *)dic;
 @end

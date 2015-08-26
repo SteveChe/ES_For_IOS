@@ -109,7 +109,7 @@
 }
 
 - (void)changeWindow:(UIViewController *)sender {
-//    ESMenuViewController *esVC = [[ESMenuViewController alloc] init];
+
     [UIView transitionFromView:self.window.rootViewController.view
                         toView:sender.view
                       duration:1
@@ -119,10 +119,10 @@
          self.window.rootViewController = sender;
      }];
 
-//    self.window.rootViewController = sender;
     [self.window makeKeyAndVisible];
 }
 
+//打印crash的栈信息
 void uncaughtExceptionHandler(NSException *exception) {
     NSLog(@"CRASH: %@", exception);
     NSLog(@"Stack Trace: %@", [exception callStackSymbols]);

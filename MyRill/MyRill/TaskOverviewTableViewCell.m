@@ -10,6 +10,7 @@
 #import "ESTaskOriginatorInfo.h"
 #import "UIImageView+WebCache.h"
 #import "ColorHandler.h"
+#import "UserDefaultsDefine.h"
 
 @interface TaskOverviewTableViewCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *initaiatorImg;
@@ -33,7 +34,7 @@
 
 - (void)updateTaskDashboardCell:(ESTaskOriginatorInfo *)taskOriginatorInfo {
     NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
-    if ([taskOriginatorInfo.initiatorId.stringValue isEqualToString:[userDefaultes stringForKey:@"UserId"]]) {
+    if ([taskOriginatorInfo.initiatorId.stringValue isEqualToString:[userDefaultes stringForKey:DEFAULTS_USERID]]) {
         self.initiatorNameLbl.text = @"我";
     } else {
         self.initiatorNameLbl.text = taskOriginatorInfo.initiatorName;
