@@ -432,6 +432,7 @@
 		2BC821371B5C9FF70090E2C1 /* ShowQRCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowQRCodeViewController.h; sourceTree = "<group>"; };
 		2BC821381B5C9FF70090E2C1 /* ShowQRCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowQRCodeViewController.m; sourceTree = "<group>"; };
 		2BC821391B5C9FF70090E2C1 /* ShowQRCodeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowQRCodeViewController.xib; sourceTree = "<group>"; };
+		2BDA1A441B8D948B00AD49B8 /* UserDefaultsDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserDefaultsDefine.h; sourceTree = "<group>"; };
 		2BE2FFF21B8212E80006EB99 /* CloseTaskDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CloseTaskDataParse.h; sourceTree = "<group>"; };
 		2BE2FFF31B8212E80006EB99 /* CloseTaskDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CloseTaskDataParse.m; sourceTree = "<group>"; };
 		2BE2FFFB1B837DEE0006EB99 /* GetTaskDetailDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetTaskDetailDataParse.h; sourceTree = "<group>"; };
@@ -990,6 +991,7 @@
 		2B39C9491B244FFF007BAC7A /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				2BDA1A431B8D944E00AD49B8 /* macro */,
 				2B39C94A1B24501B007BAC7A /* ColorHandler.h */,
 				2B39C94B1B24501B007BAC7A /* ColorHandler.m */,
 			);
@@ -1272,6 +1274,14 @@
 				2B5A590B1B48DFBB000382D7 /* MRWeakProxy.m */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		2BDA1A431B8D944E00AD49B8 /* macro */ = {
+			isa = PBXGroup;
+			children = (
+				2BDA1A441B8D948B00AD49B8 /* UserDefaultsDefine.h */,
+			);
+			name = macro;
 			sourceTree = "<group>";
 		};
 		2BE55A041B6472F5008CDB4B /* Task */ = {

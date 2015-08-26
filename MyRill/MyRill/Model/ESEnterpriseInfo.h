@@ -26,5 +26,7 @@
 /** 企业头像URL **/
 @property(nonatomic, strong) NSString* portraitUri;
 
+//designed initilize
+- (instancetype)initWithDic:(NSDictionary *)dic;
 
 @end

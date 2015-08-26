@@ -9,6 +9,7 @@
 #import "ChangePwdViewController.h"
 #import "ChangePwdDataParse.h"
 #import "MRProgress.h"
+#import "UserDefaultsDefine.h"
 
 @interface ChangePwdViewController () <ChangePwdDataDelegate>
 
@@ -41,7 +42,7 @@
     [self.view addGestureRecognizer:tapGesture];
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    self.titleLabel.text = [@"用户ID:" stringByAppendingString:[userDefaults stringForKey:@"UserName"]];
+    self.titleLabel.text = [@"用户ID:" stringByAppendingString:[userDefaults stringForKey:DEFAULTS_USERNAME]];
 }
 
 #pragma mark - ChangePwdDataDelegate methods

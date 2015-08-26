@@ -8,6 +8,7 @@
 
 #import "UserMsgViewController.h"
 #import "ColorHandler.h"
+#import "UserDefaultsDefine.h"
 #import "UserSettingViewController.h"
 #import "AppDelegate.h"
 #import "LoginViewController.h"
@@ -25,24 +26,23 @@
 #import "ESNavigationController.h"
 #import "UserDescriptionChangeViewController.h"
 
-@interface UserMsgViewController () <LogoutDataDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ContactDetailDataDelegate, ChangeUserImageDataDelegate>
-
-@property (weak, nonatomic) IBOutlet UIView *contentView;
-@property (weak, nonatomic) IBOutlet UIImageView *userIcon;
+@interface UserMsgViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, ChangeUserImageDataDelegate, LogoutDataDelegate>
 
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *btnCollection;
+@property (weak, nonatomic) IBOutlet UIView *contentView;
+@property (weak, nonatomic) IBOutlet UIImageView *userIcon;
 @property (weak, nonatomic) IBOutlet UILabel *UserNameLbl;
 @property (weak, nonatomic) IBOutlet UILabel *UserEnterpriseLbl;
 @property (weak, nonatomic) IBOutlet UIImageView *userEnterpriseImg;
-
 @property (weak, nonatomic) IBOutlet UILabel *UserPositionLbl;
 @property (weak, nonatomic) IBOutlet UILabel *userDescriptionLbl;
-@property (nonatomic, strong) SignOutDataParse *signOutDP;
 @property (nonatomic, strong) MRProgressOverlayView *progress;
-@property (nonatomic, strong) ChangeUserImageDataParse *changeUserImageDP;
-@property (nonatomic, strong) GetContactDetailDataParse *getContactDetailDP;
+
 @property (nonatomic, copy) NSString *userId;
-@property (nonatomic, copy) NSString *qrCodeType;
+@property (nonatomic, assign) CGRect oldframe;
+
+@property (nonatomic, strong) ChangeUserImageDataParse *changeUserImageDP;
+@property (nonatomic, strong) SignOutDataParse *signOutDP;
 
 @end
 
@@ -51,6 +51,7 @@
 #pragma mark - lifeCycle methods
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view.
     self.title = @"个人信息";
     self.view.backgroundColor = [ColorHandler colorFromHexRGB:@"DDDDDD"];
@@ -67,16 +68,15 @@
     self.tabBarController.tabBar.hidden = NO;
     
     NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
-    self.userId = [userDefaultes stringForKey:@"UserId"];
-    self.UserNameLbl.text = [userDefaultes stringForKey:@"UserName"];
-    self.UserEnterpriseLbl.text = [userDefaultes stringForKey:@"UserEnterprise"];
-    self.UserPositionLbl.text = [userDefaultes stringForKey:@"UserPosition"];
-    self.userDescriptionLbl.text = [@"简介：" stringByAppendingString:[userDefaultes stringForKey:@"UserDecription"]?[userDefaultes stringForKey:@"UserDecription"]:@""];
-
+    self.userId = [userDefaultes stringForKey:DEFAULTS_USERID];
+    self.UserNameLbl.text = [userDefaultes stringForKey:DEFAULTS_USERNAME];
+    self.UserEnterpriseLbl.text = [userDefaultes stringForKey:DEFAULTS_USERENTERPRISE];
+    self.UserPositionLbl.text = [userDefaultes stringForKey:DEFAULTS_USERPOSITION];
+    self.userDescriptionLbl.text = [@"简介：" stringByAppendingString:[userDefaultes stringForKey:DEFAULTS_USERDESCRIPTION]?[userDefaultes stringForKey:DEFAULTS_USERDESCRIPTION]:@""];
+    self.UserEnterpriseLbl.text = [userDefaultes stringForKey:DEFAULTS_USERENTERPRISE];
+    [self.userEnterpriseImg sd_setImageWithURL:[NSURL URLWithString:[userDefaultes stringForKey:DEFAULTS_ENTERPRISEAVATAR]] placeholderImage:nil];
     //更新头像缓存的url，若url有变化
-    [self.userIcon sd_setImageWithURL:[NSURL URLWithString:[userDefaultes stringForKey:@"UserImageURL"]] placeholderImage:[UIImage imageNamed:@"头像_100"]];
-    
-    [self.getContactDetailDP getContactDetail:self.userId];
+    [self.userIcon sd_setImageWithURL:[NSURL URLWithString:[userDefaultes stringForKey:DEFAULTS_USERAVATAR]] placeholderImage:[UIImage imageNamed:@"头像_100"]];
 }
 
 #pragma mark - ChangeUserImageDataDelegate methods
@@ -87,11 +87,24 @@
     
     //将新的url存储到NSUserDefaults本地中
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setObject:avatar forKey:@"UserImageURL"];
+    [userDefaults setObject:avatar forKey:DEFAULTS_USERAVATAR];
     [userDefaults synchronize];
-    //[self.tabBarController.tabBar.items makeObjectsPerformSelector:@selector(setEnabled:) withObject:@YES];
     [self dismissProgress];
+}
+
+#pragma mark - LogoutDataParse delegate
+- (void)logoutSuccess {
+    [self showTips:@"注销成功!" mode:MRProgressOverlayViewModeCheckmark isDismiss:YES];
+    [[UserInfoDataSource shareInstance] clearAllUserInfo];
     
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    LoginViewController *loginVC = [[LoginViewController alloc] init];
+    ESNavigationController *nav = [[ESNavigationController alloc] initWithRootViewController:loginVC];
+    [appDelegate changeWindow:nav];
+}
+
+- (void)logoutFail {
+    [self showTips:@"注销失败!" mode:MRProgressOverlayViewModeCross isDismiss:YES];
 }
 
 #pragma mark - UIImagePickerControllerDelegate methods
@@ -133,51 +146,14 @@
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark - LogoutDataParse delegate
-- (void)logoutSuccess {
-    [self showTips:@"注销成功!" mode:MRProgressOverlayViewModeCheckmark isDismiss:YES];
-    [[UserInfoDataSource shareInstance] clearAllUserInfo];
-    
-    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-    LoginViewController *loginVC = [[LoginViewController alloc] init];
-    ESNavigationController *nav = [[ESNavigationController alloc] initWithRootViewController:loginVC];
-    [appDelegate changeWindow:nav];
-}
-
-- (void)logoutFail {
-    [self showTips:@"注销失败!" mode:MRProgressOverlayViewModeCross isDismiss:YES];
-}
-
-- (void)getContactDetail:(ESUserDetailInfo *)userDetailInfo {
-    
-    self.UserEnterpriseLbl.text = userDetailInfo.enterprise.enterpriseName;
-    [self.userEnterpriseImg sd_setImageWithURL:[NSURL URLWithString:userDetailInfo.enterprise.portraitUri] placeholderImage:nil];
-//    ShowQRCodeViewController *showQRCodeVC = [[ShowQRCodeViewController alloc] init];
-//    if (userDetailInfo == nil){
-//        return;
-//    }
-//    if ([self.qrCodeType isEqualToString:@"个人"]) {
-//        showQRCodeVC.qrCodeTitle = @"我的二维码";
-//        if (userDetailInfo.qrcode==nil || [userDetailInfo.qrcode isEqual:[NSNull null]] ) {
-//            return;
-//        }
-//        showQRCodeVC.imageUrl = userDetailInfo.qrcode;
-//    } else {
-//        showQRCodeVC.qrCodeTitle = @"企业二维码";
-//        if (userDetailInfo.enterprise_qrcode == nil || [userDetailInfo.enterprise_qrcode isEqual:[NSNull null]] || [userDetailInfo.enterprise_qrcode length]<=0 ) {
-//            return;
-//        }
-//        showQRCodeVC.imageUrl = userDetailInfo.enterprise_qrcode;
-////        showQRCodeVC.imageUrl = userDetailInfo.enterprise.enterpriseQRCode;
-//    }
-//    
-//    [self.navigationController pushViewController:showQRCodeVC animated:YES];
-}
-
 #pragma mark - response events
 - (void)settingBtnItemOnClicked:(UIBarButtonItem *)sender {
     UserSettingViewController *settingVC = [[UserSettingViewController alloc] init];
     [self.navigationController pushViewController:settingVC animated:YES];
+}
+
+- (void)tapInUserIcon:(UIGestureRecognizer *)sender {
+    [self showImage:self.userIcon];
 }
 
 - (IBAction)buttonsOnClicked:(UIButton *)sender {
@@ -208,12 +184,28 @@
             }
             break;
         case 904:
-            self.qrCodeType = @"企业";
-            [self.getContactDetailDP getContactDetail:self.userId];
+            {
+                NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+                NSString *qrCodeStr = [userDefaults stringForKey:DEFAULTS_ENTERPRISEQRCODE];
+                if (![ColorHandler isNullOrEmptyString:qrCodeStr]) {
+                    ShowQRCodeViewController *showQRCodeVC = [[ShowQRCodeViewController alloc] init];
+                    showQRCodeVC.qrCodeTitle = @"企业二维码";
+                    showQRCodeVC.imageUrl = qrCodeStr;
+                    [self.navigationController pushViewController:showQRCodeVC animated:YES];
+                }
+            }
             break;
         case 905:
-            self.qrCodeType = @"个人";
-            [self.getContactDetailDP getContactDetail:self.userId];
+            {
+                NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+                NSString *qrCodeStr = [userDefaults stringForKey:DEFAULTS_USERQRCODE];
+                if (![ColorHandler isNullOrEmptyString:qrCodeStr]) {
+                    ShowQRCodeViewController *showQRCodeVC = [[ShowQRCodeViewController alloc] init];
+                    showQRCodeVC.qrCodeTitle = @"个人二维码";
+                    showQRCodeVC.imageUrl = [userDefaults stringForKey:DEFAULTS_USERQRCODE];
+                    [self.navigationController pushViewController:showQRCodeVC animated:YES];
+                }
+            }
             break;
         case 906:
             {
@@ -229,9 +221,7 @@
         default:
             break;
     }
-    
 }
-
 
 - (IBAction)userImg:(UIButton *)sender {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
@@ -291,6 +281,41 @@
                      completion:nil];
 }
 
+- (void)showImage:(UIImageView *)avatarImageView {
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
+//        [self.navigationController preferredStatusBarStyle];
+    [self setNeedsStatusBarAppearanceUpdate];
+    UIImage *image = avatarImageView.image;
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    UIView *backgroundView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
+    self.oldframe = [avatarImageView convertRect:avatarImageView.bounds toView:window];
+    backgroundView.backgroundColor = [UIColor blackColor];
+    backgroundView.alpha = 0;
+    UIImageView *imageView = [[UIImageView alloc]initWithFrame:self.oldframe];
+    imageView.image = image;
+    imageView.tag = 101;
+    [backgroundView addSubview:imageView];
+    [window addSubview:backgroundView];
+    
+    UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hideImage:)];
+    [backgroundView addGestureRecognizer: tap];
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        imageView.frame=CGRectMake(0,([UIScreen mainScreen].bounds.size.height-image.size.height*[UIScreen mainScreen].bounds.size.width/image.size.width)/2, [UIScreen mainScreen].bounds.size.width, image.size.height*[UIScreen mainScreen].bounds.size.width/image.size.width);
+        backgroundView.alpha=1;
+    } completion:nil];
+}
+
+- (void)hideImage:(UITapGestureRecognizer*)tap{
+    UIView *backgroundView = tap.view;
+    UIImageView *imageView = (UIImageView*)[tap.view viewWithTag:101];
+    [UIView animateWithDuration:0.3 animations:^{
+        imageView.frame = self.oldframe;
+        backgroundView.alpha = 0;
+    } completion:^(BOOL finished) {
+        [backgroundView removeFromSuperview];
+    }];
+}
 
 - (IBAction)joinEnterpriseBtnOnClicked:(UIButton *)sender {
     QRCodeViewController *qrCodeVC = [[QRCodeViewController alloc] init];
@@ -351,8 +376,8 @@
     
     _userIcon.clipsToBounds = YES;
     _userIcon.layer.cornerRadius = 33.f;
-    
-   
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapInUserIcon:)];
+    [_userIcon addGestureRecognizer:tap];
 }
 
 - (void)setBtnCollection:(NSArray *)btnCollection {
@@ -361,15 +386,6 @@
     for (UIButton *btn in _btnCollection) {
         btn.layer.cornerRadius = 18.f;
     }
-}
-
-- (SignOutDataParse *)signOutDP {
-    if (!_signOutDP) {
-        _signOutDP = [[SignOutDataParse alloc] init];
-        _signOutDP.delegate = self;
-    }
-    
-    return _signOutDP;
 }
 
 - (MRProgressOverlayView *)progress {
@@ -389,13 +405,13 @@
     return _changeUserImageDP;
 }
 
-- (GetContactDetailDataParse *)getContactDetailDP {
-    if (!_getContactDetailDP) {
-        _getContactDetailDP = [[GetContactDetailDataParse alloc] init];
-        _getContactDetailDP.delegate = self;
+- (SignOutDataParse *)signOutDP {
+    if (!_signOutDP) {
+        _signOutDP = [[SignOutDataParse alloc] init];
+        _signOutDP.delegate = self;
     }
     
-    return _getContactDetailDP;
+    return _signOutDP;
 }
 
 @end

@@ -8,6 +8,7 @@
 
 #import "RCDJoinEnterpriseViewController.h"
 #import "CustomShowMessage.h"
+#import "UserDefaultsDefine.h"
 
 @interface RCDJoinEnterpriseViewController ()
 
@@ -36,7 +37,7 @@
     self.navigationItem.rightBarButtonItem = settintBtnItem;
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString* myName = [userDefaults stringForKey:@"UserName"];
+    NSString* myName = [userDefaults stringForKey:DEFAULTS_USERNAME];
     
     NSString* joinEnterpriseText = [NSString stringWithFormat:@"我是%@，申请加入你的公司",myName];
     _joinEnterpriseTextField.text = joinEnterpriseText;

@@ -16,6 +16,7 @@
 #import "ESTaskDashboard.h"
 #import "ESTaskOriginatorInfo.h"
 #import "ESTaskMask.h"
+#import "UserDefaultsDefine.h"
 
 @interface TaskOverviewViewController () <UISearchBarDelegate, UISearchDisplayDelegate, UITableViewDataSource, UITableViewDelegate, TaskDashboardDelegate>
 
@@ -124,7 +125,7 @@
     taskListVC.identity = [task.initiatorId stringValue];
     
     NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
-    if ([task.initiatorId.stringValue isEqualToString:[userDefaultes stringForKey:@"UserId"]]) {
+    if ([task.initiatorId.stringValue isEqualToString:[userDefaultes stringForKey:DEFAULTS_USERID]]) {
         taskListVC.title = @"我发起的任务";
     } else {
         taskListVC.title = [task.initiatorName stringByAppendingString:@"发起的任务"];
@@ -176,7 +177,7 @@
     TaskListViewController *taskListVC = [[TaskListViewController alloc] init];
     taskListVC.title = @"分配给我的全部任务";
     taskListVC.type = ESTaskListWithPersonInChargeId;
-    taskListVC.identity = [userDefaultes stringForKey:@"UserId"];
+    taskListVC.identity = [userDefaultes stringForKey:DEFAULTS_USERID];
     [self.navigationController pushViewController:taskListVC animated:YES];
 }
 
@@ -186,7 +187,7 @@
     TaskListViewController *taskListVC = [[TaskListViewController alloc] init];
     taskListVC.title = @"分配给我的已超期任务";
     taskListVC.type = ESTaskOverdue;
-    taskListVC.identity = [userDefaultes stringForKey:@"UserId"];
+    taskListVC.identity = [userDefaultes stringForKey:DEFAULTS_USERID];
     [self.navigationController pushViewController:taskListVC animated:YES];
 }
 

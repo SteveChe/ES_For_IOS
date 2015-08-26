@@ -13,7 +13,7 @@
 @property(nonatomic, strong) NSString* enterpriseId;
 /** 企业名*/
 @property(nonatomic, strong) NSString* enterpriseName;
-/** 企业名*/
+/** 企业Category*/
 @property(nonatomic, strong) NSString* enterpriseCategory;
 /** 企业描述*/
 @property(nonatomic, strong) NSString* enterpriseDescription;

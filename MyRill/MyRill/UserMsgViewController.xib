@@ -35,12 +35,12 @@
                                     <rect key="frame" x="0.0" y="0.0" width="602" height="90"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b7l-ck-ghj">
-                                            <rect key="frame" x="0.0" y="0.0" width="482" height="90"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="602" height="90"/>
                                             <state key="normal">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <connections>
-                                                <action selector="userImg:" destination="-1" eventType="touchUpInside" id="jPC-aj-d8J"/>
+                                                <action selector="userImg:" destination="-1" eventType="touchUpInside" id="HnM-yd-fNM"/>
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="头像" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mMN-zP-lJd">
@@ -49,7 +49,7 @@
                                             <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="头像_100" translatesAutoresizingMaskIntoConstraints="NO" id="whv-3A-c9c">
+                                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="头像_100" translatesAutoresizingMaskIntoConstraints="NO" id="whv-3A-c9c">
                                             <rect key="frame" x="490" y="11" width="66" height="66"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="whv-3A-c9c" secondAttribute="height" multiplier="1:1" id="N1m-3B-jh4"/>
@@ -64,6 +64,7 @@
                                         <constraint firstAttribute="bottom" secondItem="b7l-ck-ghj" secondAttribute="bottom" id="CZA-bQ-JbP"/>
                                         <constraint firstItem="whv-3A-c9c" firstAttribute="height" secondItem="UBo-sB-1x5" secondAttribute="height" constant="-24" id="NRQ-fB-Z6i"/>
                                         <constraint firstItem="mMN-zP-lJd" firstAttribute="centerY" secondItem="whv-3A-c9c" secondAttribute="centerY" id="Ni5-Bn-Q2P"/>
+                                        <constraint firstAttribute="trailing" secondItem="b7l-ck-ghj" secondAttribute="trailing" id="O0j-yH-Fs2"/>
                                         <constraint firstAttribute="centerY" secondItem="mMN-zP-lJd" secondAttribute="centerY" id="R9b-9P-LSz"/>
                                         <constraint firstAttribute="height" constant="90" id="TU9-9N-Hro"/>
                                         <constraint firstItem="mMN-zP-lJd" firstAttribute="leading" secondItem="UBo-sB-1x5" secondAttribute="leading" constant="20" symbolic="YES" id="aGO-tS-D3r"/>
@@ -74,6 +75,11 @@
                                         <constraint firstItem="b7l-ck-ghj" firstAttribute="top" secondItem="UBo-sB-1x5" secondAttribute="top" id="vqC-Jp-xuI"/>
                                         <constraint firstItem="b7l-ck-ghj" firstAttribute="leading" secondItem="UBo-sB-1x5" secondAttribute="leading" id="zvB-gT-NNS"/>
                                     </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="gmF-kM-hBm"/>
+                                        </mask>
+                                    </variation>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Vk-Yx-teP" userLabel="Username Hold View">
                                     <rect key="frame" x="0.0" y="91" width="602" height="55"/>

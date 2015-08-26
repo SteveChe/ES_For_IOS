@@ -13,6 +13,7 @@
 #import "ESUserInfo.h"
 #import "ESUserDetailInfo.h"
 #import "ColorHandler.h"
+#import "UserDefaultsDefine.h"
 
 #define DEV_SERVER_ADDRESS @"http://120.25.249.144/"
 #define ContentType @"text/json"
@@ -590,13 +591,14 @@
 
     AFHTTPRequestOperationManager* manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:baseURL];
     manager.requestSerializer.HTTPShouldHandleCookies = YES;
-    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary *parameters = @{@"name": [userDefaults stringForKey:DEFAULTS_USERNAME]};
     NSData *cookiesdata = [[NSUserDefaults standardUserDefaults] objectForKey:@"sessionCookies"];
     if([cookiesdata length]) {
         NSArray *cookies = [NSKeyedUnarchiver unarchiveObjectWithData:cookiesdata];
         NSHTTPCookie *cookie;
         for (cookie in cookies) {
-            if ([cookie.name  isEqual:@"csrftoken"] )
+            if ([cookie.name isEqual:@"csrftoken"])
             {
                 [manager.requestSerializer setValue:cookie.value forHTTPHeaderField:@"X-Csrftoken"];
             }
@@ -607,13 +609,16 @@
     NSData *imageData = data;
     
     [manager POST:[NSString stringWithFormat:@"/api/accounts/users/%@/.json",userId]
-       parameters:nil
+       parameters:parameters
 constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         NSDateFormatter *format = [[NSDateFormatter alloc] init];
         [format setDateFormat:@"yyyyMMddHHmmss"];
         NSString *timeStamp = [format stringFromDate:[NSDate date]];
         NSString *picName = [timeStamp stringByAppendingString:@".png"];
-        [formData appendPartWithFileData:imageData name:@"avatar" fileName:picName mimeType:@"image/png"];
+        [formData appendPartWithFileData:imageData
+                                    name:@"avatar"
+                                fileName:picName
+                                mimeType:@"image/png"];
     }
           success:success
           failure:failure];

@@ -17,6 +17,7 @@
 #import "ChatViewController.h"
 #import "RCDDiscussSettingCell.h"
 #import "RCDUpdateNameViewController.h"
+#import "UserDefaultsDefine.h"
 
 @interface ChatSettingViewController ()<UIActionSheetDelegate>
 //@property (nonatomic, strong) UICollectionView *collectionView;
@@ -201,9 +202,9 @@
                     dispatch_async(dispatch_get_main_queue(), ^{
                         RCUserInfo *myself = [[RCUserInfo alloc] init];
                         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-                        myself.userId =  [userDefaults stringForKey:@"UserId"];
-                        myself.name =  [userDefaults stringForKey:@"UserName"];
-                        myself.portraitUri =  [userDefaults stringForKey:@"UserImageURL"];
+                        myself.userId =  [userDefaults stringForKey:DEFAULTS_USERID];
+                        myself.name =  [userDefaults stringForKey:DEFAULTS_USERNAME];
+                        myself.portraitUri =  [userDefaults stringForKey:DEFAULTS_USERAVATAR];
                         [allUsers insertObject:myself atIndex:0];
                         [weakSelf addUsers:(NSArray *)allUsers];
                         [weakSelf.tableViewHeader reloadData];

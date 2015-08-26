@@ -10,6 +10,8 @@
 #import "AFHttpTool.h"
 #import "UIImageView+WebCache.h"
 #import "CustomShowMessage.h"
+#import "UserDefaultsDefine.h"
+
 @interface RCDAddFriendViewController ()
 //@property (weak, nonatomic)  UILabel *lblName;
 //@property (weak, nonatomic)  UIImageView *ivAva;
@@ -42,7 +44,7 @@
     self.navigationItem.rightBarButtonItem = settintBtnItem;
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString* myName = [userDefaults stringForKey:@"UserName"];
+    NSString* myName = [userDefaults stringForKey:DEFAULTS_USERNAME];
     
     NSString* addFriendText = [NSString stringWithFormat:@"我是%@",myName];
     _addFriendTextField.text = addFriendText;
