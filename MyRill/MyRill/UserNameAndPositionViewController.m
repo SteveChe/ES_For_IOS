@@ -48,7 +48,6 @@
 
 #pragma mark - ChangeUserMsgDelegate methods
 - (void)changeUserMsgSuccess:(ESUserDetailInfo *)userInfo {
-    NSLog(@"%@",userInfo);
     [self showTips:@"修改成功!" mode:MRProgressOverlayViewModeCheckmark isDismiss:YES isSucceuss:YES];
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     if (self.type == ESUserMsgName) {

@@ -1037,6 +1037,28 @@
 				2BDA1A431B8D944E00AD49B8 /* macro */,
 				2B39C94A1B24501B007BAC7A /* ColorHandler.h */,
 				2B39C94B1B24501B007BAC7A /* ColorHandler.m */,
+				F22FE2F41B40037100A1A997 /* pinyin.c */,
+				F22FE2F51B40037100A1A997 /* pinyin.h */,
+				F22FE2791B3AD94200A1A997 /* UIColor+RCColor.h */,
+				F22FE27A1B3AD94200A1A997 /* UIColor+RCColor.m */,
+				F22FE2831B3ADC5700A1A997 /* UIImage+RCImage.h */,
+				F22FE2841B3ADC5700A1A997 /* UIImage+RCImage.m */,
+				F277ADF91B2DBE97006E42CB /* CustomShowMessage.h */,
+				F277ADFA1B2DBE97006E42CB /* CustomShowMessage.m */,
+				F2D233891B36B0DD00F8C65D /* NSString+MD5Addition.h */,
+				F2D2338A1B36B0DD00F8C65D /* NSString+MD5Addition.m */,
+				F277ADFC1B2DC046006E42CB /* CustomMessageBox.h */,
+				F277ADFD1B2DC046006E42CB /* CustomMessageBox.m */,
+				F277ADFF1B2DC146006E42CB /* DeviceInfo.h */,
+				F277AE001B2DC146006E42CB /* DeviceInfo.m */,
+				F277AE021B2DC34E006E42CB /* UIDevice+screenType.h */,
+				F277AE031B2DC34E006E42CB /* UIDevice+screenType.m */,
+				F277AE051B2DC72A006E42CB /* BMBase.h */,
+				F277AE061B2DC72A006E42CB /* BMBase.m */,
+				F277AE081B2DCF39006E42CB /* StretchImageUtil.h */,
+				F277AE091B2DCF39006E42CB /* StretchImageUtil.m */,
+				F277AE0B1B2DD066006E42CB /* UIPageNavigator.h */,
+				F277AE0C1B2DD066006E42CB /* UIPageNavigator.m */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -1698,28 +1720,6 @@
 		F277ADF81B2DBE52006E42CB /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				F22FE2F41B40037100A1A997 /* pinyin.c */,
-				F22FE2F51B40037100A1A997 /* pinyin.h */,
-				F22FE2791B3AD94200A1A997 /* UIColor+RCColor.h */,
-				F22FE27A1B3AD94200A1A997 /* UIColor+RCColor.m */,
-				F22FE2831B3ADC5700A1A997 /* UIImage+RCImage.h */,
-				F22FE2841B3ADC5700A1A997 /* UIImage+RCImage.m */,
-				F277ADF91B2DBE97006E42CB /* CustomShowMessage.h */,
-				F277ADFA1B2DBE97006E42CB /* CustomShowMessage.m */,
-				F2D233891B36B0DD00F8C65D /* NSString+MD5Addition.h */,
-				F2D2338A1B36B0DD00F8C65D /* NSString+MD5Addition.m */,
-				F277ADFC1B2DC046006E42CB /* CustomMessageBox.h */,
-				F277ADFD1B2DC046006E42CB /* CustomMessageBox.m */,
-				F277ADFF1B2DC146006E42CB /* DeviceInfo.h */,
-				F277AE001B2DC146006E42CB /* DeviceInfo.m */,
-				F277AE021B2DC34E006E42CB /* UIDevice+screenType.h */,
-				F277AE031B2DC34E006E42CB /* UIDevice+screenType.m */,
-				F277AE051B2DC72A006E42CB /* BMBase.h */,
-				F277AE061B2DC72A006E42CB /* BMBase.m */,
-				F277AE081B2DCF39006E42CB /* StretchImageUtil.h */,
-				F277AE091B2DCF39006E42CB /* StretchImageUtil.m */,
-				F277AE0B1B2DD066006E42CB /* UIPageNavigator.h */,
-				F277AE0C1B2DD066006E42CB /* UIPageNavigator.m */,
 			);
 			name = Common;
 			sourceTree = "<group>";
