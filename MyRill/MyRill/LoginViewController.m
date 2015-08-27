@@ -67,6 +67,8 @@
                      forKey:DEFAULTS_USERPOSITION];
     [userDefaults setObject:[ColorHandler isNullOrEmptyString:userDetailInfo.portraitUri]?@"":userDetailInfo.portraitUri
                      forKey:DEFAULTS_USERAVATAR];
+    [userDefaults setObject:[ColorHandler isNullOrEmptyString:userDetailInfo.contactDescription]?@"":userDetailInfo.contactDescription
+                     forKey:DEFAULTS_USERDESCRIPTION];
     
     [userDefaults setObject:[ColorHandler isNullOrEmptyString:userDetailInfo.qrcode]?@"":userDetailInfo.qrcode
                      forKey:DEFAULTS_USERQRCODE];

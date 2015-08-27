@@ -108,6 +108,7 @@
 }
 
 - (void)logoutFail {
+    
     [self showTips:@"注销失败!" mode:MRProgressOverlayViewModeCross isDismiss:YES];
 }
 
