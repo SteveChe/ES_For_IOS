@@ -71,11 +71,4 @@
     _userImg.layer.cornerRadius = 18.5f;
 }
 
-- (void)setContentTxtVIew:(UITextView *)contentTxtVIew {
-    _contentTxtVIew = contentTxtVIew;
-    
-    _contentTxtVIew.layer.borderColor = [ColorHandler colorFromHexRGB:@"EEEEEE"].CGColor;
-    _contentTxtVIew.layer.borderWidth = 1.f;
-}
-
 @end

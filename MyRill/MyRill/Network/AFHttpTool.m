@@ -514,7 +514,7 @@
                             @"chat_id":task.chatID,
                             @"person_in_charge":task.personInCharge.userId,
                             @"observers":observerArray};
-    NSLog(@"%@",param);
+
     [AFHttpTool requestWithMethod:RequestMethodTypePost
                      protocolType:RequestProtocolTypeJson
                               url:[NSString stringWithFormat:@"/api/assignments/%@/.json",task.taskID]

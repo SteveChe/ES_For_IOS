@@ -12,6 +12,10 @@
                 <outlet property="UserNameLbl" destination="Xhj-LH-Scl" id="tn8-G8-K0i"/>
                 <outlet property="UserPositionLbl" destination="aeB-FY-ozp" id="rEd-DU-91C"/>
                 <outlet property="contentView" destination="uRq-6W-p4u" id="nXI-eJ-eGD"/>
+                <outlet property="enterpriseQRCodeArrow" destination="uKC-P1-caB" id="dEr-ly-afc"/>
+                <outlet property="enterpriseQRCodeImg" destination="9Xg-pX-8Ba" id="Ol3-VP-yxr"/>
+                <outlet property="personQRCodeArrow" destination="sTY-oT-5TR" id="oaD-cA-3pe"/>
+                <outlet property="personQRCodeImg" destination="pv6-MJ-yqc" id="cMk-33-gav"/>
                 <outlet property="userDescriptionLbl" destination="LIF-y7-wDx" id="C16-g2-aRp"/>
                 <outlet property="userEnterpriseImg" destination="W5B-NL-wBl" id="ZTT-2Z-R5Y"/>
                 <outlet property="userIcon" destination="whv-3A-c9c" id="jpc-Pj-zAS"/>
