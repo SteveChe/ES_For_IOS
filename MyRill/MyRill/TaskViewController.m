@@ -480,10 +480,7 @@
     task.taskID = self.taskModel.taskID;
     task.title = self.taskTitleTxtField.text;
     
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
-    NSDate *date = self.dateSelectedPicker.date;
-    task.endDate = [dateFormatter stringFromDate:date];
+    task.endDate = self.taskModel.endDate;
     task.chatID = self.taskModel.chatID;
     task.taskDescription = self.taskDescriptioinTextView.text;
     
@@ -501,10 +498,11 @@
 
 - (void)dateChanged:(UIDatePicker *)sender {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    dateFormatter.dateFormat = @"yyyy/MM/dd HH:mm";
+    dateFormatter.dateFormat = @"yyyy/MM/dd HH:mm:ss";
     
     NSDate *date = self.dateSelectedPicker.date;
-    self.endDateLbl.text = [dateFormatter stringFromDate:date];
+    self.taskModel.endDate = [dateFormatter stringFromDate:date];
+    self.endDateLbl.text = [self.taskModel.endDate substringToIndex:16];
 }
 
 - (IBAction)dateBtnOnClicked:(UIButton *)sender {

@@ -510,13 +510,13 @@
     NSDictionary *param = @{@"title":task.title,
                             @"description":task.taskDescription,
                             @"due_date":task.endDate,
-                            @"status":@"1",
-//                            @"chat_id":task.chatID,
+                            @"status":task.status,
+                            @"chat_id":task.chatID,
                             @"person_in_charge":task.personInCharge.userId,
                             @"observers":observerArray};
-    
+    NSLog(@"%@",param);
     [AFHttpTool requestWithMethod:RequestMethodTypePost
-                     protocolType:RequestProtocolTypeText
+                     protocolType:RequestProtocolTypeJson
                               url:[NSString stringWithFormat:@"/api/assignments/%@/.json",task.taskID]
                            params:param
                           success:success
