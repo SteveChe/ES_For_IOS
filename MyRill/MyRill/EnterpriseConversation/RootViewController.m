@@ -400,6 +400,13 @@
 
 
 #pragma mark - UITextFieldDelegate
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.conversationDataRepository.count * 2 -1 inSection:0];
+    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    return YES;
+}
+
 - (BOOL)textFieldShouldClear:(UITextField *)textField
 {
     textField.text = @"";
