@@ -306,6 +306,7 @@
                                         <constraint firstAttribute="trailing" secondItem="b3w-dF-M6H" secondAttribute="trailing" id="I6l-jK-1sO"/>
                                         <constraint firstAttribute="trailing" secondItem="WML-Jf-0XC" secondAttribute="trailing" constant="20" symbolic="YES" id="IWH-On-gg3"/>
                                         <constraint firstItem="LIF-y7-wDx" firstAttribute="leading" secondItem="OnB-ZJ-r8f" secondAttribute="leading" constant="20" symbolic="YES" id="Uy7-vz-aXw"/>
+                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="55" id="alh-55-soR"/>
                                         <constraint firstItem="b3w-dF-M6H" firstAttribute="top" secondItem="OnB-ZJ-r8f" secondAttribute="top" id="dxE-Vf-zZG"/>
                                         <constraint firstItem="WML-Jf-0XC" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="LIF-y7-wDx" secondAttribute="trailing" constant="16" id="jKo-it-VNS"/>
                                         <constraint firstAttribute="centerY" secondItem="LIF-y7-wDx" secondAttribute="centerY" id="lWH-Jv-kAH"/>

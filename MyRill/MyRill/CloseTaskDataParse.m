@@ -15,6 +15,7 @@
     [AFHttpTool closeTaskWithTaskID:taskID
                             success:^(id response) {
                                 NSDictionary *responseDic = (NSDictionary *)response;
+                                NSLog(@"****%@",responseDic);
                                 [self.delegate closeTaskSuccess];
                             } failure:^(NSError *error) {
                                 NSLog(@"%@",[error debugDescription]);

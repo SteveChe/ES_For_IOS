@@ -37,7 +37,7 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *sendViewBottomConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *sendViewHeightConstraint;
-@property (weak, nonatomic) IBOutlet UILabel *startDateLbl;
+@property (weak, nonatomic) IBOutlet UILabel *startPersonAndDateLbl;
 @property (weak, nonatomic) IBOutlet UITextField *taskTitleTxtField;
 @property (weak, nonatomic) IBOutlet UITextView *taskDescriptioinTextView;
 @property (weak, nonatomic) IBOutlet UILabel *endDateLbl;
@@ -137,8 +137,8 @@
 - (void)getTaskDetailSuccess:(ESTask *)task {
     self.taskModel = task;
     
-    NSString *startDateStr = [self.taskModel.startDate substringToIndex:10];
-    self.startDateLbl.text = [@"发起时间：" stringByAppendingString:[startDateStr stringByReplacingOccurrencesOfString:@"-" withString:@"/"]];
+    NSString *startDateStr = [self.taskModel.startDate substringToIndex:16];
+    self.startPersonAndDateLbl.text = [NSString stringWithFormat:@"由%@发起于:%@",self.taskModel.initiator.userName,[startDateStr stringByReplacingOccurrencesOfString:@"-" withString:@"/"]];
     
     self.taskTitleTxtField.text = self.taskModel.title;
     self.taskDescriptioinTextView.text = self.taskModel.taskDescription;
@@ -173,16 +173,15 @@
 }
 
 - (void)getTaskCommentListSuccess:(NSArray *)taskCommentList {
-    self.dataSource = [NSMutableArray arrayWithArray:taskCommentList];
+    self.dataSource = [NSMutableArray arrayWithArray:[[taskCommentList reverseObjectEnumerator] allObjects]];
     [self.tableView reloadData];
 }
 
 - (void)SendTaskCommentSuccess:(ESTaskComment *)taskComment {
-    [self.dataSource addObject:taskComment];
+    [self.dataSource insertObject:taskComment atIndex:0];
     [self.tableView reloadData];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.dataSource.count - 1
-                                                inSection:0];
-    [self.tableView scrollToRowAtIndexPath:indexPath
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0
+                                                              inSection:0]
                           atScrollPosition:UITableViewScrollPositionBottom
                                   animated:YES];
 }
@@ -366,13 +365,10 @@
 - (void)startConversationEvent {
     //发起会话功能
     if ([self.assignerDataSource count] <=0 ) {
-        [[CustomShowMessage getInstance] showNotificationMessage:@"缺少分配人!"];
+        [[CustomShowMessage getInstance] showNotificationMessage:@"没有分配人不能发起会话!"];
         return;
     }
-//    if ([self.followsDataSource count] <=0 ) {
-//        [[CustomShowMessage getInstance] showNotificationMessage:@"缺少关注人!"];
-//        return;
-//    }
+
     //创建set过滤分配和关注中的重复联系人
     NSMutableSet *contactorSet = [[NSMutableSet alloc] initWithCapacity:self.assignerDataSource.count + self.followsDataSource.count];
     [contactorSet addObjectsFromArray:self.assignerDataSource];
@@ -530,9 +526,9 @@
 
 
 - (IBAction)switchOnClicked:(UISwitch *)sender {
-    if (sender.on == YES) {
-        [self.closeTaskDP closeTaskWithTaskID:[self.taskModel.taskID stringValue]];
-    }
+//    if (sender.on == YES) {
+//        [self.closeTaskDP closeTaskWithTaskID:[self.taskModel.taskID stringValue]];
+//    }
 }
 
 //当键盘出现或改变时调用
@@ -551,9 +547,8 @@
                          self.sendViewBottomConstraint.constant = height;
                          [self.view layoutIfNeeded];
                          
-                         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.dataSource.count - 1
-                                                                     inSection:0];
-                         [self.tableView scrollToRowAtIndexPath:indexPath
+                         [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0
+                                                                                   inSection:0]
                                                atScrollPosition:UITableViewScrollPositionBottom
                                                        animated:YES];
                      }

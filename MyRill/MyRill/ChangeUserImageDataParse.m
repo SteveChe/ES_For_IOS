@@ -27,6 +27,17 @@
                                   NSDictionary *dataDic = reponseDic[NETWORK_OK_DATA];
                                   NSString *avatar = dataDic[@"avatar"];
                                   [self.delegate changeUserImageSuccess:avatar];
+                                  
+                                  NSString* errorMessage = [reponseDic valueForKey:NETWORK_ERROR_MESSAGE];
+                                  if(errorMessage==nil)
+                                      return;
+                                  
+//                                  errorMessage= [errorMessage stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//                                  NSLog(@"%@",errorMessage);
+//                                  if (self.delegate!= nil &&[self.delegate respondsToSelector:@selector(getContactDetailFailed:)])
+//                                  {
+//                                      [self.delegate getContactDetailFailed:errorMessage];
+//                                  }
                               } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
                                   
                                   NSLog(@"Error: %@", error);
