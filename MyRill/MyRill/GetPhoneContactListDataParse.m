@@ -16,13 +16,13 @@
 -(void) getPhoneContactList:(NSMutableArray*)phoneContactList
 {
     NSArray* phoneContactListFromDB = [[PhoneContactListDataSource shareInstance] getPhoneContactListFromDB];
-    if (phoneContactListFromDB!=nil && ! [phoneContactListFromDB isEqual:[NSNull null]]&& [phoneContactListFromDB count]>0)
-    {
-        if (self.delegate!= nil && [self.delegate respondsToSelector:@selector(getPhoneContactList:)])
-        {
-            [self.delegate getPhoneContactList:phoneContactListFromDB];
-        }
-    }
+//    if (phoneContactListFromDB!=nil && ! [phoneContactListFromDB isEqual:[NSNull null]]&& [phoneContactListFromDB count]>0)
+//    {
+//        if (self.delegate!= nil && [self.delegate respondsToSelector:@selector(getPhoneContactList:)])
+//        {
+//            [self.delegate getPhoneContactList:phoneContactListFromDB];
+//        }
+//    }
     
     [AFHttpTool getPhoneContactList:phoneContactList success:^(id response)
      {

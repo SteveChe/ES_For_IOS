@@ -23,13 +23,13 @@
 -(void) getContactList
 {
     NSArray* enterpriseContactListFromDB = [[AddressBookContactListDataSource shareInstance] getContactListFromDB];
-    if (enterpriseContactListFromDB!=nil && ! [enterpriseContactListFromDB isEqual:[NSNull null]]&& [enterpriseContactListFromDB count]>0)
-    {
-        if (self.delegate!= nil && [self.delegate respondsToSelector:@selector(getContactList:)])
-        {
-            [self.delegate getContactList:enterpriseContactListFromDB];
-        }
-    }
+//    if (enterpriseContactListFromDB!=nil && ! [enterpriseContactListFromDB isEqual:[NSNull null]]&& [enterpriseContactListFromDB count]>0)
+//    {
+//        if (self.delegate!= nil && [self.delegate respondsToSelector:@selector(getContactList:)])
+//        {
+//            [self.delegate getContactList:enterpriseContactListFromDB];
+//        }
+//    }
     [AFHttpTool getContactListSuccess:^(id response)
      {
          NSDictionary* reponseDic = (NSDictionary*)response;
