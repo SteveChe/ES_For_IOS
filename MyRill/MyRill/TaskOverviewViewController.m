@@ -16,9 +16,12 @@
 #import "ESTaskDashboard.h"
 #import "ESTaskOriginatorInfo.h"
 #import "ESTaskMask.h"
+#import "TaskListTableViewCell.h"
 #import "UserDefaultsDefine.h"
+#import "TaskViewController.h"
+#import "ESTask.h"
 
-@interface TaskOverviewViewController () <UISearchBarDelegate, UISearchDisplayDelegate, UITableViewDataSource, UITableViewDelegate, TaskDashboardDelegate>
+@interface TaskOverviewViewController () <UISearchBarDelegate, UISearchDisplayDelegate, UITableViewDataSource, UITableViewDelegate, TaskDashboardDelegate, TaskListDelegate>
 
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *holdViews;
 @property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *redBadgeLbls;
@@ -29,7 +32,9 @@
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSArray *dataSource;
+@property (nonatomic, strong) NSMutableArray *searchResultDataSource;
 @property (nonatomic, strong) GetTaskDashboardDataParse *getTaskDashboardDP;
+@property (nonatomic, strong) GetTaskListDataParse *getTaskListDP;
 
 @property (weak, nonatomic) IBOutlet UILabel *totalTaskLbl;
 @property (weak, nonatomic) IBOutlet UILabel *closedTaskLbl;
@@ -55,8 +60,8 @@
     
     [self.view addSubview:self.tableView];
     
-    [self setAutomaticallyAdjustsScrollViewInsets:YES];
-    [self setExtendedLayoutIncludesOpaqueBars:YES];
+//    [self setAutomaticallyAdjustsScrollViewInsets:YES];
+//    [self setExtendedLayoutIncludesOpaqueBars:YES];
     
     self.searchDisplayVC = [[UISearchDisplayController alloc] initWithSearchBar:self.searchBar
                                                              contentsController:self];
@@ -64,6 +69,8 @@
     self.searchDisplayVC.searchResultsDataSource = self;
     self.searchDisplayVC.searchResultsDelegate = self;
     self.searchDisplayVC.delegate = self;
+    self.searchDisplayVC.searchResultsTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.searchDisplayVC.searchResultsTableView registerNib:[UINib nibWithNibName:@"TaskListTableViewCell" bundle:nil] forCellReuseIdentifier:@"TaskListTableViewCell"];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -102,23 +109,59 @@
     [self.tableView reloadData];
 }
 
+- (void)getTaskListSuccess:(NSArray *)taskList {
+    NSLog(@"%@",taskList);
+    [self.searchResultDataSource addObjectsFromArray:taskList];
+    [self.searchDisplayController.searchResultsTableView reloadData];
+}
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString{
+    [self.getTaskListDP getTaskListWithIdentify:searchString type:ESTaskListQ];
+//    NSPredicate *preicate = [NSPredicate predicateWithFormat:@"SELF.description CONTAINS[c] %@",searchString];
+//    
+//    if (self.searchResultDataSource!= nil) {
+//        [self.searchResultDataSource removeAllObjects];
+//    }
+//    //过滤数据
+//    self.searchResultDataSource = [NSMutableArray arrayWithArray:[self.dataSource filteredArrayUsingPredicate:preicate]];
+//    //刷新表格
+    return YES;
+}
+
 #pragma mark - UITableViewDataSource&UITableViewDelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    TaskOverviewTableViewCell *cell = (TaskOverviewTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"TaskOverviewTableViewCell" forIndexPath:indexPath];
-    [cell updateTaskDashboardCell:self.dataSource[indexPath.row]];
-    CALayer *layer = [CALayer layer];
-    layer.frame = CGRectMake(0, cell.bounds.size.height - 1, cell.bounds.size.width, 1);
-    layer.backgroundColor = [ColorHandler colorFromHexRGB:@"DDDDDD"].CGColor;
-    [cell.layer addSublayer:layer];
-    
-    return cell;
+//    UITableViewCell *cell = nil;
+    if ([tableView isEqual:self.searchDisplayController.searchResultsTableView]) {
+        TaskListTableViewCell *cell = (TaskListTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"TaskListTableViewCell" forIndexPath:indexPath];
+        [cell updateTackCell:self.searchResultDataSource[indexPath.row]];
+        CALayer *layer = [CALayer layer];
+        layer.frame = CGRectMake(0, cell.bounds.size.height - 1, cell.bounds.size.width, 1);
+        layer.backgroundColor = [ColorHandler colorFromHexRGB:@"DDDDDD"].CGColor;
+        [cell.layer addSublayer:layer];
+        return cell;
+    } else {
+        TaskOverviewTableViewCell *cell = (TaskOverviewTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"TaskOverviewTableViewCell" forIndexPath:indexPath];
+        [cell updateTaskDashboardCell:self.dataSource[indexPath.row]];
+        CALayer *layer = [CALayer layer];
+        layer.frame = CGRectMake(0, cell.bounds.size.height - 1, cell.bounds.size.width, 1);
+        layer.backgroundColor = [ColorHandler colorFromHexRGB:@"DDDDDD"].CGColor;
+        [cell.layer addSublayer:layer];
+        return cell;
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([tableView isEqual:self.searchDisplayController.searchResultsTableView]) {
+        TaskViewController *taskVC = [[TaskViewController alloc] init];
+        ESTask *task = (ESTask *)self.searchResultDataSource[indexPath.row];
+        taskVC.requestTaskID = [task.taskID stringValue];
+        [self.navigationController pushViewController:taskVC animated:YES];
+        return;
+    }
     TaskListViewController *taskListVC = [[TaskListViewController alloc] init];
     taskListVC.type = ESTaskListWithInitiatorId;
     ESTaskOriginatorInfo *task = (ESTaskOriginatorInfo *)self.dataSource[indexPath.row];
@@ -136,11 +179,19 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 65.f;
+    if ([tableView isEqual:self.searchDisplayController.searchResultsTableView]) {
+        return 150.f;
+    } else {
+        return 65.f;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.dataSource.count;
+    if ([tableView isEqual:self.searchDisplayController.searchResultsTableView]) {
+        return self.searchResultDataSource.count;
+    } else {
+        return self.dataSource.count;
+    }
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -227,6 +278,23 @@
     }
     
     return _getTaskDashboardDP;
+}
+
+- (GetTaskListDataParse *)getTaskListDP {
+    if (!_getTaskListDP) {
+        _getTaskListDP = [[GetTaskListDataParse alloc] init];
+        _getTaskListDP.delegate = self;
+    }
+    
+    return _getTaskListDP;
+}
+
+- (NSMutableArray *)searchResultDataSource {
+    if (!_searchResultDataSource) {
+        _searchResultDataSource = [[NSMutableArray alloc] init];
+    }
+    
+    return _searchResultDataSource;
 }
 
 - (NSArray *)dataSource {

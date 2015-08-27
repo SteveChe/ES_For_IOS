@@ -11,6 +11,7 @@
 @protocol ChangeUserImageDataDelegate <NSObject>
 
 - (void)changeUserImageSuccess:(NSString *)avatar;
+- (void)changeUserImageFailed:(NSString *)errorMsg;
 
 @end
 

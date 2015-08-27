@@ -92,6 +92,10 @@
     [self dismissProgress];
 }
 
+- (void)changeUserImageFailed:(NSString *)errorMsg {
+    
+}
+
 #pragma mark - LogoutDataParse delegate
 - (void)logoutSuccess {
     [self showTips:@"注销成功!" mode:MRProgressOverlayViewModeCheckmark isDismiss:YES];
@@ -104,6 +108,7 @@
 }
 
 - (void)logoutFail {
+    
     [self showTips:@"注销失败!" mode:MRProgressOverlayViewModeCross isDismiss:YES];
 }
 
