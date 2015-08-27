@@ -38,6 +38,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *userDescriptionLbl;
 @property (nonatomic, strong) MRProgressOverlayView *progress;
 
+@property (weak, nonatomic) IBOutlet UIImageView *enterpriseQRCodeImg;
+@property (weak, nonatomic) IBOutlet UIImageView *enterpriseQRCodeArrow;
+@property (weak, nonatomic) IBOutlet UIImageView *personQRCodeImg;
+@property (weak, nonatomic) IBOutlet UIImageView *personQRCodeArrow;
+
 @property (nonatomic, copy) NSString *userId;
 @property (nonatomic, assign) CGRect oldframe;
 
@@ -76,6 +81,15 @@
     [self.userEnterpriseImg sd_setImageWithURL:[NSURL URLWithString:[userDefaultes stringForKey:DEFAULTS_ENTERPRISEAVATAR]] placeholderImage:nil];
     self.UserPositionLbl.text = [userDefaultes stringForKey:DEFAULTS_USERPOSITION];
     self.userDescriptionLbl.text = [@"简介：" stringByAppendingString:[userDefaultes stringForKey:DEFAULTS_USERDESCRIPTION]?[userDefaultes stringForKey:DEFAULTS_USERDESCRIPTION]:@""];
+    if ([ColorHandler isNullOrEmptyString:[userDefaultes stringForKey:DEFAULTS_ENTERPRISEQRCODE]]) {
+        self.enterpriseQRCodeImg.hidden = YES;
+        self.enterpriseQRCodeArrow.hidden = YES;
+    }
+    
+    if ([ColorHandler isNullOrEmptyString:[userDefaultes stringForKey:DEFAULTS_USERQRCODE]]) {
+        self.personQRCodeImg.hidden = YES;
+        self.personQRCodeArrow.hidden = YES;
+    }
 }
 
 #pragma mark - ChangeUserImageDataDelegate methods
