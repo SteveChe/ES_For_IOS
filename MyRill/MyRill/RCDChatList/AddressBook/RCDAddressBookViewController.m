@@ -43,8 +43,21 @@
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationItem.title = @"联系人";
 
-
+    // Add searchbar
+    UISearchBar* searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.bounds.size.width, 40)];
+    searchBar.placeholder = @"搜索";
+    searchBar.delegate = self;
+    self.tableView.tableHeaderView = searchBar;
+    searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
+    searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    _searchDisplayController1 = [[UISearchDisplayController alloc] initWithSearchBar:searchBar contentsController:self];
+    
+    _searchDisplayController1.searchResultsDataSource = self;
+    _searchDisplayController1.searchResultsDelegate = self;
+    _searchDisplayController1.delegate = self;
+    //    self.searchDisplayController.searchBar = searchBar;
     UINib *rcdCellNib = [UINib nibWithNibName:@"RCDAddressBookViewTableViewCell" bundle:nil];
+    [_searchDisplayController1.searchResultsTableView registerNib:rcdCellNib forCellReuseIdentifier:@"RCDAddressBookViewTableViewCell"];
     [self.tableView registerNib:rcdCellNib forCellReuseIdentifier:@"RCDAddressBookViewTableViewCell"];
 
 }
@@ -59,22 +72,6 @@
     _getEnterpriseListDataParse.getFollowedEnterPriseListDelegate = self;
 
     [self getAllData];
-    
-    // Add searchbar
-    UISearchBar* searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.bounds.size.width, 40)];
-    searchBar.placeholder = @"搜索";
-    searchBar.delegate = self;
-    self.tableView.tableHeaderView = searchBar;
-    searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
-    searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
-    _searchDisplayController1 = [[UISearchDisplayController alloc] initWithSearchBar:searchBar contentsController:self];
-    
-    _searchDisplayController1.searchResultsDataSource = self;
-    _searchDisplayController1.searchResultsDelegate = self;
-    _searchDisplayController1.delegate = self;
-    UINib *rcdCellNib = [UINib nibWithNibName:@"RCDAddressBookViewTableViewCell" bundle:nil];
-    [_searchDisplayController1.searchResultsTableView registerNib:rcdCellNib forCellReuseIdentifier:@"RCDAddressBookViewTableViewCell"];
-
     
     UIBarButtonItem *settintBtnItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self                      action:@selector(addButtonOnClicked:)];
     self.navigationItem.rightBarButtonItem = settintBtnItem;
@@ -155,7 +152,9 @@
     static NSString *cellReuseIdentifier = @"RCDAddressBookViewTableViewCell";
     RCDAddressBookViewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellReuseIdentifier forIndexPath:indexPath];
     
-    if(tableView == self.searchDisplayController.searchResultsTableView)
+    if(tableView == self.searchDisplayController1.searchResultsTableView)
+//    if(tableView == _searchDisplayController1.searchResultsTableView)
+
     {
         cell.accessoryType = UITableViewCellAccessoryNone;
         ESUserInfo *user = _searchResult[indexPath.row];
@@ -262,7 +261,8 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if(tableView == self.searchDisplayController.searchResultsTableView)
+    if(tableView == self.searchDisplayController1.searchResultsTableView)
+//    if(tableView == _searchDisplayController1.searchResultsTableView)
     {
         return [_searchResult count];
     }
@@ -300,7 +300,8 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if(tableView == self.searchDisplayController.searchResultsTableView)
+    if(tableView == self.searchDisplayController1.searchResultsTableView)
+//    if(tableView == _searchDisplayController1.searchResultsTableView)
     {
         return 1;
     }
@@ -319,7 +320,8 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    if(tableView == self.searchDisplayController.searchResultsTableView)
+    if(tableView == self.searchDisplayController1.searchResultsTableView)
+//    if(tableView == _searchDisplayController1.searchResultsTableView)
     {
         return @"联系人";
     }
@@ -360,9 +362,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(tableView == self.searchDisplayController.searchResultsTableView)
+    if(tableView == self.searchDisplayController1.searchResultsTableView)
+//    if(tableView == _searchDisplayController1.searchResultsTableView)
     {
-        
+        ESUserInfo *user = _searchResult[indexPath.row];
+
+        RCDAddressBookDetailViewController* addressBookDetailVC = [[RCDAddressBookDetailViewController alloc] init];
+//        ESUserInfo *user = contactList.contactList[indexPath.row];
+        addressBookDetailVC.userId = user.userId;
+        [self.navigationController pushViewController:addressBookDetailVC animated:YES];
     }
     else
     {
@@ -505,8 +513,8 @@
         }
     }
     
-    [self.searchDisplayController.searchResultsTableView reloadData];
-
+//    [self.searchDisplayController.searchResultsTableView reloadData];
+    [self.searchDisplayController1.searchResultsTableView reloadData];
 }
 
 
