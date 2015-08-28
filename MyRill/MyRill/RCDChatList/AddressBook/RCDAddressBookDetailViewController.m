@@ -143,7 +143,8 @@
 #pragma mark - DeleteContactDelegate
 -(void)deleteContactSucceed
 {
-    [self initContactDetail];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+//    [self initContactDetail];
 }
 -(void)deleteContactFailed:(NSString*)errorMessage
 {

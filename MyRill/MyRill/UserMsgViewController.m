@@ -113,7 +113,7 @@
 #pragma mark - LogoutDataParse delegate
 - (void)logoutSuccess {
     [self showTips:@"注销成功!" mode:MRProgressOverlayViewModeCheckmark isDismiss:YES];
-    [[UserInfoDataSource shareInstance] clearAllUserInfo];
+//    [[UserInfoDataSource shareInstance] clearAllUserInfo];
     
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     LoginViewController *loginVC = [[LoginViewController alloc] init];

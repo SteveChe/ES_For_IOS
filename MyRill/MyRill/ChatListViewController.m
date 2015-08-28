@@ -24,6 +24,7 @@
 #import "ESEnterpriseMessageContent.h"
 #import "DeviceInfo.h"
 #import "EnterpriseChatListViewController.h"
+#import "RootViewController.h"
 
 void(^completionHandler)(RCUserInfo* userInfo);
 
@@ -179,7 +180,7 @@ void(^completionHandler)(RCUserInfo* userInfo);
     {
         if (indexPath.row == 0)
         {
-            EnterpriseChatViewController* enterpriseChatVC = [[EnterpriseChatViewController alloc] init];
+            RootViewController* enterpriseChatVC = [[RootViewController alloc] init];
             enterpriseChatVC.title = @"ES系统消息";//ES系统消息
             enterpriseChatVC.chatType = e_Enterprise_Chat_Riil;
             [self.navigationController pushViewController:enterpriseChatVC animated:YES];

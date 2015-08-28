@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="190" id="KGk-i7-Jjw" customClass="RootCardTopCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="190"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="WhiteBigBtnTop" translatesAutoresizingMaskIntoConstraints="NO" id="EZk-Wx-VRT">
+                        <rect key="frame" x="20" y="15" width="280" height="174"/>
+                    </imageView>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="751" verticalHuggingPriority="751" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZnM-xt-Zt0">
+                        <rect key="frame" x="30" y="30" width="260" height="144"/>
+                    </imageView>
+                    <view alpha="0.80000000000000004" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cso-Br-WfU">
+                        <rect key="frame" x="30" y="145" width="260" height="30"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="751" verticalCompressionResistancePriority="751" misplaced="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="250" translatesAutoresizingMaskIntoConstraints="NO" id="9Rz-kr-oZl">
+                        <rect key="frame" x="35" y="150" width="40" height="20"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="45w-RY-bIa">
+                        <rect key="frame" x="20" y="189" width="280" height="1"/>
+                        <color key="backgroundColor" red="0.84428452725787284" green="0.84428452725787284" blue="0.84428452725787284" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="001-7f-KW4"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstItem="Cso-Br-WfU" firstAttribute="trailing" secondItem="ZnM-xt-Zt0" secondAttribute="trailing" id="7Ov-Po-yoD"/>
+                    <constraint firstItem="45w-RY-bIa" firstAttribute="trailing" secondItem="EZk-Wx-VRT" secondAttribute="trailing" id="83P-Dk-lKS"/>
+                    <constraint firstAttribute="trailing" secondItem="EZk-Wx-VRT" secondAttribute="trailing" constant="20" id="8Jc-wR-0jK"/>
+                    <constraint firstItem="45w-RY-bIa" firstAttribute="leading" secondItem="EZk-Wx-VRT" secondAttribute="leading" id="C4o-8K-NL6"/>
+                    <constraint firstItem="ZnM-xt-Zt0" firstAttribute="leading" secondItem="EZk-Wx-VRT" secondAttribute="leading" constant="10" id="Cfs-6I-lWg"/>
+                    <constraint firstItem="EZk-Wx-VRT" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="FiQ-Gk-V9j"/>
+                    <constraint firstItem="Cso-Br-WfU" firstAttribute="bottom" secondItem="EZk-Wx-VRT" secondAttribute="bottom" id="G4s-af-I58"/>
+                    <constraint firstItem="Cso-Br-WfU" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="9Rz-kr-oZl" secondAttribute="trailing" constant="5" id="MNp-LS-y14"/>
+                    <constraint firstItem="Cso-Br-WfU" firstAttribute="bottom" secondItem="9Rz-kr-oZl" secondAttribute="bottom" constant="5" id="Pps-Gr-GGp"/>
+                    <constraint firstItem="EZk-Wx-VRT" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="SzQ-T6-Wzp"/>
+                    <constraint firstItem="9Rz-kr-oZl" firstAttribute="top" secondItem="Cso-Br-WfU" secondAttribute="top" constant="5" id="VcX-ZJ-Pue"/>
+                    <constraint firstItem="45w-RY-bIa" firstAttribute="top" secondItem="EZk-Wx-VRT" secondAttribute="bottom" id="XYp-MF-0sG"/>
+                    <constraint firstItem="ZnM-xt-Zt0" firstAttribute="top" secondItem="EZk-Wx-VRT" secondAttribute="top" constant="15" id="a9Z-1E-t4w"/>
+                    <constraint firstItem="EZk-Wx-VRT" firstAttribute="trailing" secondItem="ZnM-xt-Zt0" secondAttribute="trailing" constant="10" id="cc4-yS-GFf"/>
+                    <constraint firstItem="Cso-Br-WfU" firstAttribute="leading" secondItem="ZnM-xt-Zt0" secondAttribute="leading" id="gQ9-SS-hIf"/>
+                    <constraint firstAttribute="bottom" secondItem="EZk-Wx-VRT" secondAttribute="bottom" id="jKW-BE-JxP"/>
+                    <constraint firstItem="9Rz-kr-oZl" firstAttribute="leading" secondItem="Cso-Br-WfU" secondAttribute="leading" constant="5" id="mJf-0V-IEW"/>
+                    <constraint firstItem="Cso-Br-WfU" firstAttribute="bottom" secondItem="ZnM-xt-Zt0" secondAttribute="bottom" id="oK8-Ti-AwM"/>
+                    <constraint firstItem="Cso-Br-WfU" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ZnM-xt-Zt0" secondAttribute="top" constant="80" id="rjJ-mH-N4j"/>
+                    <constraint firstItem="EZk-Wx-VRT" firstAttribute="bottom" secondItem="ZnM-xt-Zt0" secondAttribute="bottom" constant="15" id="vrh-DG-0oT"/>
+                    <constraint firstAttribute="bottom" secondItem="45w-RY-bIa" secondAttribute="bottom" id="xcU-L9-M0a"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="jKW-BE-JxP"/>
+                        <exclude reference="G4s-af-I58"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <connections>
+                <outlet property="instructionLabel" destination="9Rz-kr-oZl" id="H0k-Ty-uxE"/>
+                <outlet property="photoImageView" destination="ZnM-xt-Zt0" id="Gmt-dj-CH9"/>
+            </connections>
+            <point key="canvasLocation" x="237" y="284"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="WhiteBigBtnTop" width="25" height="9"/>
+    </resources>
+</document>

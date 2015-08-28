@@ -13,7 +13,7 @@
 #import "ShowQRCodeViewController.h"
 #import "CustomShowMessage.h"
 #import "UIImageView+WebCache.h"
-#import "EnterpriseChatViewController.h"
+#import "RootViewController.h"
 #import "FollowEnterpriseDataParse.h"
 #import "CustomShowMessage.h"
 
@@ -92,8 +92,8 @@
     {
         _smsButton.titleLabel.text = @"进入企业号";
         _deleteButton.hidden = NO;
-        [_smsButton removeTarget:self action:@selector(clickStartChatButton:)  forControlEvents:UIControlEventTouchUpInside];
-        [_smsButton addTarget:self action:@selector(followEnterpriseButton:) forControlEvents:UIControlEventTouchUpInside];
+        [_smsButton removeTarget:self action:@selector(followEnterpriseButton:)  forControlEvents:UIControlEventTouchUpInside];
+        [_smsButton addTarget:self action:@selector(clickStartChatButton:) forControlEvents:UIControlEventTouchUpInside];
 
     }
     else
@@ -213,7 +213,8 @@
 #pragma mark - FollowEnterpriseDelegate
 -(void)followEnterpriseSucceed
 {
-    [self refreshEnterpriseDetailButton];
+//    [self refreshEnterpriseDetailButton];
+    [self initEnterpriseDetail];
     [[CustomShowMessage getInstance] showNotificationMessage:@"关注企业成功！"];
     [[CustomShowMessage getInstance] hideWaitingIndicator];
 
@@ -228,9 +229,11 @@
 #pragma mark - UnFollowEnterpriseDelegate
 -(void)unFollowEnterpriseSucceed
 {
-    [self refreshEnterpriseDetailButton];
+//    [self refreshEnterpriseDetailButton];
+//    [self initEnterpriseDetail];
     [[CustomShowMessage getInstance] showNotificationMessage:@"取消关注企业成功！"];
     [[CustomShowMessage getInstance] hideWaitingIndicator];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 -(void)unFollowEnterpriseFailed:(NSString*)errorMessage
 {
@@ -245,7 +248,7 @@
     if (_enterpriseDetailInfo==nil)
         return;
 
-    EnterpriseChatViewController* enterpriseChatVC = [[EnterpriseChatViewController alloc] init];
+    RootViewController* enterpriseChatVC = [[RootViewController alloc] init];
     enterpriseChatVC.title = @"企业消息";
     enterpriseChatVC.title = _enterpriseDetailInfo.enterpriseName;
     enterpriseChatVC.enterpriseId = _enterpriseDetailInfo.enterpriseId;

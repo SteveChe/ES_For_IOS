@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="60" id="KGk-i7-Jjw" customClass="RootCardMiddleCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="WhiteBigBtnMiddle" translatesAutoresizingMaskIntoConstraints="NO" id="7ap-kA-iVc">
+                        <rect key="frame" x="20" y="0.0" width="280" height="60"/>
+                    </imageView>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nKv-2G-Cab">
+                        <rect key="frame" x="245" y="10" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="WjZ-01-tPJ"/>
+                            <constraint firstAttribute="width" constant="40" id="aZF-ng-7bm"/>
+                        </constraints>
+                    </imageView>
+                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D53-hL-55K">
+                        <rect key="frame" x="20" y="59" width="280" height="1"/>
+                        <color key="backgroundColor" red="0.84428452730000003" green="0.84428452730000003" blue="0.84428452730000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="leX-wD-cAz"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DnV-XX-Spf">
+                        <rect key="frame" x="35" y="10" width="36" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="D53-hL-55K" secondAttribute="trailing" id="1hJ-CT-iXN"/>
+                    <constraint firstItem="7ap-kA-iVc" firstAttribute="leading" secondItem="D53-hL-55K" secondAttribute="leading" id="3TO-PT-Xox"/>
+                    <constraint firstItem="7ap-kA-iVc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="CRk-BR-uaH"/>
+                    <constraint firstItem="7ap-kA-iVc" firstAttribute="trailing" secondItem="D53-hL-55K" secondAttribute="trailing" id="JaT-4h-p02"/>
+                    <constraint firstItem="nKv-2G-Cab" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="Khs-oG-h7g"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="nKv-2G-Cab" secondAttribute="bottom" constant="10" id="TgD-4h-FIp"/>
+                    <constraint firstItem="7ap-kA-iVc" firstAttribute="trailing" secondItem="nKv-2G-Cab" secondAttribute="trailing" constant="15" id="Vvq-d7-tDx"/>
+                    <constraint firstItem="D53-hL-55K" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="YRL-sA-BGg"/>
+                    <constraint firstAttribute="bottom" secondItem="D53-hL-55K" secondAttribute="bottom" id="ZCF-Wx-svX"/>
+                    <constraint firstItem="nKv-2G-Cab" firstAttribute="top" secondItem="DnV-XX-Spf" secondAttribute="top" id="dit-DW-fjB"/>
+                    <constraint firstAttribute="trailing" secondItem="7ap-kA-iVc" secondAttribute="trailing" constant="20" id="eRK-4a-eQq"/>
+                    <constraint firstAttribute="bottom" secondItem="D53-hL-55K" secondAttribute="bottom" id="ggK-pe-kfW"/>
+                    <constraint firstItem="DnV-XX-Spf" firstAttribute="leading" secondItem="7ap-kA-iVc" secondAttribute="leading" constant="15" id="gyv-na-bqA"/>
+                    <constraint firstAttribute="bottom" secondItem="7ap-kA-iVc" secondAttribute="bottom" id="kJg-be-y61"/>
+                    <constraint firstItem="7ap-kA-iVc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="pcW-Ka-JZS"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="DnV-XX-Spf" secondAttribute="bottom" constant="10" id="phP-Yx-sLY"/>
+                    <constraint firstItem="nKv-2G-Cab" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="DnV-XX-Spf" secondAttribute="trailing" constant="10" id="uqS-9r-WeS"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="1hJ-CT-iXN"/>
+                        <exclude reference="YRL-sA-BGg"/>
+                        <exclude reference="ZCF-Wx-svX"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <connections>
+                <outlet property="instructionLabel" destination="DnV-XX-Spf" id="iSd-rb-ZaH"/>
+                <outlet property="photoImageView" destination="nKv-2G-Cab" id="fQr-yR-yhk"/>
+            </connections>
+            <point key="canvasLocation" x="305" y="382"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="WhiteBigBtnMiddle" width="25" height="11"/>
+    </resources>
+</document>
