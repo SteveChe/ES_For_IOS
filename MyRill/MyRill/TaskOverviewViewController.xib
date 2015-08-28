@@ -15,7 +15,6 @@
                 <outlet property="redEndLbl" destination="Fgu-f5-hzP" id="mD1-FI-35h"/>
                 <outlet property="redMeAllLbl" destination="BdY-5p-hdD" id="76l-C0-mqO"/>
                 <outlet property="redMeOverLbl" destination="qRb-KT-DXO" id="wKN-qf-pet"/>
-                <outlet property="searchBar" destination="UUH-0P-OgM" id="neg-Zr-qTi"/>
                 <outlet property="tableView" destination="oPp-uI-SBA" id="fFz-Hm-J7z"/>
                 <outlet property="totalTaskInSelfLbl" destination="WUI-Gz-v0t" id="MRZ-s9-AjD"/>
                 <outlet property="totalTaskLbl" destination="LDE-fi-30T" id="71Y-Tm-zFI"/>
@@ -33,34 +32,15 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <searchBar contentMode="redraw" placeholder="搜索" translatesAutoresizingMaskIntoConstraints="NO" id="UUH-0P-OgM">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="44" id="caf-wA-C39"/>
-                    </constraints>
-                    <textInputTraits key="textInputTraits"/>
-                    <scopeButtonTitles>
-                        <string>First</string>
-                        <string>Last</string>
-                    </scopeButtonTitles>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="caf-wA-C39"/>
-                        </mask>
-                    </variation>
-                    <connections>
-                        <outlet property="delegate" destination="-1" id="aEx-Ha-5OL"/>
-                    </connections>
-                </searchBar>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="oPp-uI-SBA">
-                    <rect key="frame" x="0.0" y="44" width="600" height="556"/>
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <view key="tableHeaderView" contentMode="scaleToFill" id="Zbq-Oe-fTA" userLabel="Header View">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="195"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="239"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zFg-5H-MrC" userLabel="Hold View1">
-                                <rect key="frame" x="-1" y="0.0" width="602" height="110"/>
+                                <rect key="frame" x="-1" y="44" width="602" height="110"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ze1-Wn-CAb" userLabel="SplitLine">
                                         <rect key="frame" x="0.0" y="54" width="602" height="1"/>
@@ -160,13 +140,13 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="分配给我的任务" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2L9-ZX-aq6">
-                                <rect key="frame" x="20" y="114" width="105" height="22"/>
+                                <rect key="frame" x="20" y="158" width="105" height="22"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zFm-Y2-BkR" userLabel="Hold View2">
-                                <rect key="frame" x="-1" y="140" width="602" height="55"/>
+                                <rect key="frame" x="-1" y="184" width="602" height="55"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="——超期" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wgB-Nr-smr">
                                         <rect key="frame" x="403" y="13" width="96" height="28"/>
@@ -259,7 +239,7 @@
                             <constraint firstAttribute="bottom" secondItem="zFm-Y2-BkR" secondAttribute="bottom" id="fPc-Ut-WJ1"/>
                             <constraint firstItem="2L9-ZX-aq6" firstAttribute="top" secondItem="zFg-5H-MrC" secondAttribute="bottom" constant="4" id="fjb-rY-Pdf"/>
                             <constraint firstAttribute="trailing" secondItem="zFg-5H-MrC" secondAttribute="trailing" constant="-1" id="jU7-ua-vls"/>
-                            <constraint firstItem="zFg-5H-MrC" firstAttribute="top" secondItem="Zbq-Oe-fTA" secondAttribute="top" id="tz2-kt-MeK"/>
+                            <constraint firstItem="zFg-5H-MrC" firstAttribute="top" secondItem="Zbq-Oe-fTA" secondAttribute="top" constant="44" id="tz2-kt-MeK"/>
                             <constraint firstItem="2L9-ZX-aq6" firstAttribute="leading" secondItem="Zbq-Oe-fTA" secondAttribute="leading" constant="20" symbolic="YES" id="vY5-9R-iiW"/>
                             <constraint firstItem="zFg-5H-MrC" firstAttribute="leading" secondItem="Zbq-Oe-fTA" secondAttribute="leading" constant="-1" id="wBO-vX-jgs"/>
                         </constraints>
@@ -272,19 +252,14 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="oPp-uI-SBA" firstAttribute="leading" secondItem="UUH-0P-OgM" secondAttribute="trailing" constant="-600" id="2GG-2U-XNu"/>
-                <constraint firstItem="UUH-0P-OgM" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="9Mg-jM-q8H"/>
-                <constraint firstItem="oPp-uI-SBA" firstAttribute="top" secondItem="UUH-0P-OgM" secondAttribute="bottom" id="HCD-x1-UVd"/>
+                <constraint firstItem="oPp-uI-SBA" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="0gR-Vl-iep"/>
                 <constraint firstItem="oPp-uI-SBA" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="K0b-Om-PzR"/>
-                <constraint firstItem="UUH-0P-OgM" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="LWk-J8-PaE"/>
-                <constraint firstAttribute="trailing" secondItem="UUH-0P-OgM" secondAttribute="trailing" id="PX8-EZ-HTa"/>
                 <constraint firstAttribute="bottom" secondItem="oPp-uI-SBA" secondAttribute="bottom" id="ame-je-9Dc"/>
                 <constraint firstAttribute="trailing" secondItem="oPp-uI-SBA" secondAttribute="trailing" id="hIl-IS-12a"/>
                 <constraint firstItem="oPp-uI-SBA" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="zdq-Jw-0FZ"/>
             </constraints>
             <variation key="default">
                 <mask key="constraints">
-                    <exclude reference="2GG-2U-XNu"/>
                     <exclude reference="zdq-Jw-0FZ"/>
                 </mask>
             </variation>

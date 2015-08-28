@@ -12,6 +12,7 @@
                 <outlet property="endDateLbl" destination="u89-OX-g9g" id="DiI-Hp-5am"/>
                 <outlet property="followsCollectionView" destination="UXc-Co-idq" id="jqD-FH-VvO"/>
                 <outlet property="headerView" destination="tIf-Qc-aKA" id="ek2-Ij-fsM"/>
+                <outlet property="personInChargeArrow" destination="6nv-my-Ghb" id="tlN-vw-bs8"/>
                 <outlet property="sendTxtView" destination="NRN-7E-iRY" id="MEZ-1w-wvv"/>
                 <outlet property="sendView" destination="M3z-J2-Kdw" id="fBP-Hc-2bL"/>
                 <outlet property="sendViewBottomConstraint" destination="6FY-qM-tmh" id="iiJ-EK-bS9"/>

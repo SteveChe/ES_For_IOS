@@ -49,6 +49,7 @@
 @property (weak, nonatomic) IBOutlet UIView *sendView;
 @property (weak, nonatomic) IBOutlet UITextView *sendTxtView;
 @property (nonatomic, strong) MRProgressOverlayView *progress;
+@property (weak, nonatomic) IBOutlet UIImageView *personInChargeArrow;
 
 @property (nonatomic, strong) NSMutableArray *assignerDataSource; //负责人列表,ESUserInfo
 @property (nonatomic, strong) NSMutableArray *followsDataSource; //关注人列表,ESUserInfo
@@ -121,12 +122,6 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
 }
 
-
-- (void)setTableView:(UITableView *)tableView {
-    _tableView = tableView;
-    _tableView.tableFooterView = nil;
-    _tableView.sectionFooterHeight = 0;
-}
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     
@@ -153,6 +148,10 @@
         self.taskStatusSwitch.on = YES;
     }
     
+    if (![task.initiator.userId isEqualToString:self.userID] && ![self.userID isEqualToString:task.personInCharge.userId]) {
+        self.personInChargeArrow.hidden = YES;
+    }
+    
     [self.assignerDataSource removeAllObjects];
     [self.assignerDataSource addObject:self.taskModel.personInCharge];
     
@@ -175,6 +174,7 @@
 - (void)getTaskCommentListSuccess:(NSArray *)taskCommentList {
     self.dataSource = [NSMutableArray arrayWithArray:[[taskCommentList reverseObjectEnumerator] allObjects]];
     [self.tableView reloadData];
+    [self.tableView layoutIfNeeded];
 }
 
 - (void)SendTaskCommentSuccess:(ESTaskComment *)taskComment {
@@ -201,8 +201,9 @@
     cell.contentTxtVIew.text = taskComment.content;
     CGSize size = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
     CGSize textViewSize = [cell.contentTxtVIew sizeThatFits:CGSizeMake(cell.contentTxtVIew.frame.size.width, FLT_MAX)];
+//    cell.bounds = CGRectMake(0, 0, textViewSize.width, textViewSize.height);
     CGFloat h = size.height + textViewSize.height;
-    h = h > 89 ? h : 89;  //89是图片显示的最低高度， 见xib
+    h = h > 94 ? h : 94;  //94是图片显示的最低高度， 见xib
     NSLog(@"h=%f", h);
     return 1 + h;
 }
@@ -238,6 +239,7 @@
     layer.frame = CGRectMake(0, self.prototypeCell.bounds.size.height - 1, self.prototypeCell.bounds.size.width, 1);
     layer.backgroundColor = [ColorHandler colorFromHexRGB:@"F5F5F5"].CGColor;
     [self.prototypeCell.layer addSublayer:layer];
+    [self.prototypeCell layoutIfNeeded];
     
     return self.prototypeCell;
 }
@@ -438,6 +440,10 @@
 - (IBAction)chooseContactorBtnOnClicked:(UIButton *)sender {
 //    负责人btn的tag是1001，关注人是1002
     if (sender.tag == 1001) {
+        if (![self.taskModel.initiator.userId isEqualToString:self.userID] && ![self.userID isEqualToString:self.taskModel.personInCharge.userId]) {
+            return;
+        }
+        
         __weak typeof(&*self)  weakSelf = self;
         RCDSelectPersonViewController* selectPersonVC = [[RCDSelectPersonViewController alloc] init];
         [selectPersonVC setSeletedUsers:self.assignerDataSource];
@@ -545,10 +551,12 @@
                          self.sendViewBottomConstraint.constant = height;
                          [self.view layoutIfNeeded];
                          
-                         [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0
-                                                                                   inSection:0]
-                                               atScrollPosition:UITableViewScrollPositionBottom
-                                                       animated:YES];
+                         if (self.dataSource.count > 0) {
+                             [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0
+                                                                                       inSection:0]
+                                                   atScrollPosition:UITableViewScrollPositionBottom
+                                                           animated:YES];
+                         }
                      }
                      completion:nil];
 }
@@ -594,6 +602,12 @@
         view.layer.borderColor = [ColorHandler colorFromHexRGB:@"eeeeee"].CGColor;
     }
 }
+
+//- (void)setTableView:(UITableView *)tableView {
+//    _tableView = tableView;
+//    
+//    _tableView.rowHeight = UITableViewAutomaticDimension;
+//}
 
 - (void)setTxtHoldViews:(NSArray *)txtHoldViews {
     _txtHoldViews = txtHoldViews;

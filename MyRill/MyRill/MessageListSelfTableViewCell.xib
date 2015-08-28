@@ -8,20 +8,20 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MessageListSelfTableViewCell" rowHeight="125" id="KGk-i7-Jjw" customClass="MessageListSelfTableViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="410" height="125"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MessageListSelfTableViewCell" rowHeight="94" id="KGk-i7-Jjw" customClass="MessageListSelfTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="410" height="94"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" misplaced="YES" text="----/--/-- --/--" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AEk-SF-Taq">
-                        <rect key="frame" x="167" y="25" width="77.5" height="15.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="----/--/-- --/--" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AEk-SF-Taq">
+                        <rect key="frame" x="20" y="25" width="77.5" height="15.5"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="——/——" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cDw-sZ-0lP">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="1000" text="——/——" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cDw-sZ-0lP">
                         <rect key="frame" x="272" y="20" width="74.5" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -34,13 +34,10 @@
                             <constraint firstAttribute="height" constant="35" id="dlE-8U-psN"/>
                         </constraints>
                     </imageView>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XNl-l5-DrX">
-                        <rect key="frame" x="20" y="48" width="327" height="45"/>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" editable="NO" text="似的" textAlignment="right" translatesAutoresizingMaskIntoConstraints="NO" id="XNl-l5-DrX">
+                        <rect key="frame" x="20" y="48" width="327" height="25"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="45" id="IWR-Ej-GV3"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
                 </subviews>
@@ -55,16 +52,16 @@
                     <constraint firstItem="cDw-sZ-0lP" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="AEk-SF-Taq" secondAttribute="trailing" constant="8" symbolic="YES" id="Z9Z-5A-odz"/>
                     <constraint firstItem="cDw-sZ-0lP" firstAttribute="bottom" secondItem="AEk-SF-Taq" secondAttribute="bottom" id="fAO-Uy-wUQ"/>
                     <constraint firstItem="XNl-l5-DrX" firstAttribute="top" secondItem="cDw-sZ-0lP" secondAttribute="bottom" constant="8" symbolic="YES" id="ghX-zu-4Cf"/>
+                    <constraint firstAttribute="bottom" secondItem="XNl-l5-DrX" secondAttribute="bottom" constant="20" symbolic="YES" id="vAd-Hb-lG5"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="contentTxtVIew" destination="XNl-l5-DrX" id="168-HY-jmf"/>
                 <outlet property="createDate" destination="AEk-SF-Taq" id="6yZ-LQ-GZf"/>
                 <outlet property="nameAndEnterpriseLbl" destination="cDw-sZ-0lP" id="Y3a-Ol-Kqp"/>
-                <outlet property="textViewHeightConstraint" destination="IWR-Ej-GV3" id="zPB-7O-KLg"/>
                 <outlet property="userImg" destination="Hb5-T0-5NV" id="xJY-wn-Niq"/>
             </connections>
-            <point key="canvasLocation" x="357" y="282.5"/>
+            <point key="canvasLocation" x="357" y="270"/>
         </tableViewCell>
     </objects>
     <resources>

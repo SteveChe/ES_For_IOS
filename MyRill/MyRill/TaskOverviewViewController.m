@@ -40,7 +40,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *closedTaskLbl;
 @property (weak, nonatomic) IBOutlet UILabel *totalTaskInSelfLbl;
 @property (weak, nonatomic) IBOutlet UILabel *overdueTaskInSelfLbl;
-@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (nonatomic, strong) UISearchDisplayController *searchDisplayVC;
 
 @end
@@ -60,10 +59,14 @@
     
     [self.view addSubview:self.tableView];
     
-//    [self setAutomaticallyAdjustsScrollViewInsets:YES];
-//    [self setExtendedLayoutIncludesOpaqueBars:YES];
+    [self setAutomaticallyAdjustsScrollViewInsets:YES];
+    [self setExtendedLayoutIncludesOpaqueBars:YES];
     
-    self.searchDisplayVC = [[UISearchDisplayController alloc] initWithSearchBar:self.searchBar
+    UISearchBar *searchBar = [[UISearchBar alloc] init];
+    searchBar.delegate = self;
+    searchBar.placeholder = @"搜索";
+    [self.tableView.tableHeaderView addSubview:searchBar];
+    self.searchDisplayVC = [[UISearchDisplayController alloc] initWithSearchBar:searchBar
                                                              contentsController:self];
     
     self.searchDisplayVC.searchResultsDataSource = self;
@@ -71,6 +74,16 @@
     self.searchDisplayVC.delegate = self;
     self.searchDisplayVC.searchResultsTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.searchDisplayVC.searchResultsTableView registerNib:[UINib nibWithNibName:@"TaskListTableViewCell" bundle:nil] forCellReuseIdentifier:@"TaskListTableViewCell"];
+}
+
+//- (void)searchDisplayControllerDidEndSearch:(UISearchDisplayController *)controller {
+//    controller.searchBar.frame = CGRectMake(0, 0, self.view.bounds.size.width, 44);
+//}
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    
+    self.searchDisplayVC.searchBar.frame = CGRectMake(0, 0, self.tableView.bounds.size.width, 44);
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -110,7 +123,7 @@
 }
 
 - (void)getTaskListSuccess:(NSArray *)taskList {
-    NSLog(@"%@",taskList);
+    [self.searchResultDataSource removeAllObjects];
     [self.searchResultDataSource addObjectsFromArray:taskList];
     [self.searchDisplayController.searchResultsTableView reloadData];
 }
@@ -195,6 +208,9 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if ([tableView isEqual:self.searchDisplayVC.searchResultsTableView]) {
+        return nil;
+    }
     return @"按发起人归属";
 }
 
