@@ -20,16 +20,14 @@
 #import "GetTaskCommentListDataParse.h"
 #import "SendTaskCommentDataParse.h"
 #import "TaskContactorCollectionViewCell.h"
-#import "MessageListSelfTableViewCell.h"
 #import "MessageListTableViewCell.h"
 #import "ESTaskComment.h"
-#import "CloseTaskDataParse.h"
 #import "MRProgress.h"
 #import "GetTaskDetailDataParse.h"
 #import "ChatViewController.h"
 #import "UserDefaultsDefine.h"
 
-@interface TaskViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, GetTaskCommentListDelegate, SendTaskCommenDelegate, EditTaskDelegate, CloseTaskDelegate, GetTaskDetailDelegate>
+@interface TaskViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, GetTaskCommentListDelegate, SendTaskCommenDelegate, EditTaskDelegate, GetTaskDetailDelegate>
 
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *holdViews;
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *txtHoldViews;
@@ -40,6 +38,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *startPersonAndDateLbl;
 @property (weak, nonatomic) IBOutlet UITextField *taskTitleTxtField;
 @property (weak, nonatomic) IBOutlet UITextView *taskDescriptioinTextView;
+@property (weak, nonatomic) IBOutlet UISwitch *taskSwitch;
 @property (weak, nonatomic) IBOutlet UILabel *endDateLbl;
 @property (nonatomic, strong) UIDatePicker *dateSelectedPicker;
 @property (weak, nonatomic) IBOutlet UISwitch *taskStatusSwitch;
@@ -50,6 +49,7 @@
 @property (weak, nonatomic) IBOutlet UITextView *sendTxtView;
 @property (nonatomic, strong) MRProgressOverlayView *progress;
 @property (weak, nonatomic) IBOutlet UIImageView *personInChargeArrow;
+@property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *arrowImages;
 
 @property (nonatomic, strong) NSMutableArray *assignerDataSource; //负责人列表,ESUserInfo
 @property (nonatomic, strong) NSMutableArray *followsDataSource; //关注人列表,ESUserInfo
@@ -59,11 +59,12 @@
 @property (nonatomic, strong) GetTaskCommentListDataParse *getTaskCommentListDP;
 @property (nonatomic, strong) EditTaskDataParse *editTaskDP;
 @property (nonatomic, strong) SendTaskCommentDataParse *sendTaskCommentDP;
-@property (nonatomic, strong) CloseTaskDataParse *closeTaskDP;
 
 @property (nonatomic, strong) ESTask *taskModel;
 @property (nonatomic, copy) NSString *userID;
 @property (nonatomic, strong) UITableViewCell *prototypeCell;
+
+@property (nonatomic, strong) NSMutableArray *test;
 @end
 
 @implementation TaskViewController
@@ -85,16 +86,6 @@
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
     
-    UIBarButtonItem *startConversationItem = [[UIBarButtonItem alloc] initWithTitle:@"会话"
-                                                                              style:UIBarButtonItemStyleDone
-                                                                             target:self
-                                                                             action:@selector(startConversationEvent)];
-    UIBarButtonItem *saveItem = [[UIBarButtonItem alloc] initWithTitle:@"保存"
-                                                                 style:UIBarButtonItemStyleDone
-                                                                target:self
-                                                                action:@selector(saveBarItemOnClicked)];
-    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:saveItem, startConversationItem, nil];
-    
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     [self.view addGestureRecognizer:tap];
     //[self.sendTxtView addTarget:self action:@selector(send) forControlEvents:UIControlEventEditingDidEndOnExit];
@@ -110,7 +101,6 @@
     [self.view layoutIfNeeded];
 
     self.tableView.tableFooterView = nil;
-    [self.tableView registerNib:[UINib nibWithNibName:@"MessageListSelfTableViewCell" bundle:nil] forCellReuseIdentifier:@"MessageListSelfTableViewCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"MessageListTableViewCell" bundle:nil] forCellReuseIdentifier:@"MessageListTableViewCell"];
     
     NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
@@ -132,6 +122,28 @@
 - (void)getTaskDetailSuccess:(ESTask *)task {
     self.taskModel = task;
     
+    //如果是发起人进入任务详情，则提供修改接口
+    if ([self.userID isEqualToString:self.taskModel.initiator.userId]) {
+        UIBarButtonItem *startConversationItem = [[UIBarButtonItem alloc] initWithTitle:@"会话"
+                                                                                  style:UIBarButtonItemStyleDone
+                                                                                 target:self
+                                                                                 action:@selector(startConversationEvent)];
+        UIBarButtonItem *saveItem = [[UIBarButtonItem alloc] initWithTitle:@"保存"
+                                                                     style:UIBarButtonItemStyleDone
+                                                                    target:self
+                                                                    action:@selector(saveBarItemOnClicked)];
+        self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:saveItem, startConversationItem, nil];
+        
+        self.taskTitleTxtField.enabled = YES;
+        self.taskDescriptioinTextView.editable = YES;
+        self.taskSwitch.enabled = YES;
+        
+        [self.arrowImages enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            UIImageView *arrow = (UIImageView *)obj;
+            arrow.hidden = NO;
+        }];
+    }
+    
     NSString *startDateStr = [self.taskModel.startDate substringToIndex:16];
     self.startPersonAndDateLbl.text = [NSString stringWithFormat:@"由%@发起于:%@",self.taskModel.initiator.userName,[startDateStr stringByReplacingOccurrencesOfString:@"-" withString:@"/"]];
     
@@ -146,10 +158,6 @@
     } else {
         //任务状态为已关闭status=1
         self.taskStatusSwitch.on = YES;
-    }
-    
-    if (![task.initiator.userId isEqualToString:self.userID] && ![self.userID isEqualToString:task.personInCharge.userId]) {
-        self.personInChargeArrow.hidden = YES;
     }
     
     [self.assignerDataSource removeAllObjects];
@@ -186,30 +194,19 @@
                                   animated:YES];
 }
 
-- (void)closeTaskSuccess {
-    
-}
-
 #pragma mark - UITableViewDataSource&UITableViewDelegate methods
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    MessageListSelfTableViewCell *cell = (MessageListSelfTableViewCell *)self.prototypeCell;
-    ESTaskComment *taskComment = (ESTaskComment *)[self.dataSource objectAtIndex:indexPath.row];
-    cell.contentTxtVIew.text = taskComment.content;
-    CGSize size = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
-    CGSize textViewSize = [cell.contentTxtVIew sizeThatFits:CGSizeMake(cell.contentTxtVIew.frame.size.width, FLT_MAX)];
-//    cell.bounds = CGRectMake(0, 0, textViewSize.width, textViewSize.height);
-    CGFloat h = size.height + textViewSize.height;
-    h = h > 94 ? h : 94;  //94是图片显示的最低高度， 见xib
-    NSLog(@"h=%f", h);
-    return 1 + h;
-}
-
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 120;
+    if ([self.prototypeCell isKindOfClass:[MessageListTableViewCell class]]) {
+        MessageListTableViewCell *cell = (MessageListTableViewCell *)self.prototypeCell;
+        cell.contentLbl.text = self.dataSource[indexPath.row];
+        return [cell.contentLbl systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height + 1;
+    } else {
+        return 0;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -221,22 +218,13 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    ESTaskComment *taskComment = (ESTaskComment *)self.dataSource[indexPath.row];
-    
     self.prototypeCell  = nil;
-    if ([taskComment.user.userId isEqualToString:self.userID]) {
-        MessageListSelfTableViewCell *selfCell = (MessageListSelfTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"MessageListSelfTableViewCell" forIndexPath:indexPath];
-        [selfCell updateMessage:self.dataSource[indexPath.row]];
-        self.prototypeCell = selfCell;
-    } else {
-        MessageListTableViewCell *normalCell = (MessageListTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"MessageListTableViewCell" forIndexPath:indexPath];
-        [normalCell updateMessage:self.dataSource[indexPath.row]];
-        self.prototypeCell = normalCell;
-    }
+    MessageListTableViewCell *normalCell = (MessageListTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"MessageListTableViewCell" forIndexPath:indexPath];
+    [normalCell updateMessage:self.dataSource[indexPath.row]];
+    self.prototypeCell = normalCell;
     
     CALayer *layer = [CALayer layer];
-    layer.frame = CGRectMake(0, self.prototypeCell.bounds.size.height - 1, self.prototypeCell.bounds.size.width, 1);
+    layer.frame = CGRectMake(0, 0, self.prototypeCell.bounds.size.width, 1);
     layer.backgroundColor = [ColorHandler colorFromHexRGB:@"F5F5F5"].CGColor;
     [self.prototypeCell.layer addSublayer:layer];
     [self.prototypeCell layoutIfNeeded];
@@ -372,21 +360,26 @@
     }
 
     //创建set过滤分配和关注中的重复联系人
-    NSMutableSet *contactorSet = [[NSMutableSet alloc] initWithCapacity:self.assignerDataSource.count + self.followsDataSource.count];
-    [contactorSet addObjectsFromArray:self.assignerDataSource];
-    [contactorSet addObjectsFromArray:self.followsDataSource];
+
+    [self.assignerDataSource addObjectsFromArray:self.followsDataSource];
+//    NSSet *set = [NSSet setWithArray:self.assignerDataSource];
     
     NSMutableString *discussionTitle = [NSMutableString string];
     NSMutableArray *userIdList = [NSMutableArray new];
-    for (ESUserInfo *contactor in contactorSet) {
+    for (ESUserInfo *contactor in self.assignerDataSource) {
         [discussionTitle appendString:[NSString stringWithFormat:@"%@%@", contactor.userName,@","]];
         [userIdList addObject:contactor.userId];
     }
+    NSSet *set = [NSSet setWithArray:userIdList];
+    NSMutableArray *tempArr = [NSMutableArray new];
+    [set enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
+        [tempArr addObject:obj];
+    }];
     [discussionTitle deleteCharactersInRange:NSMakeRange(discussionTitle.length - 1, 1)];
     __weak typeof(&*self)  weakSelf = self;
 
     if ([self.taskModel.chatID isKindOfClass:[NSNull class]] || self.taskModel.chatID == nil || [self.taskModel.chatID isEqualToString:@""]) {
-        [[RCIMClient sharedRCIMClient] createDiscussion:discussionTitle userIdList:userIdList success:^(RCDiscussion *discussion) {
+        [[RCIMClient sharedRCIMClient] createDiscussion:discussionTitle userIdList:tempArr success:^(RCDiscussion *discussion) {
             NSLog(@"create discussion ssucceed!");
             dispatch_async(dispatch_get_main_queue(), ^{
                 ChatViewController *chat =[[ChatViewController alloc]init];
@@ -394,7 +387,7 @@
                 chat.userName                    = discussion.discussionName;
                 chat.conversationType              = ConversationType_DISCUSSION;
                 chat.title                         = @"讨论组";
-                chat.userIDList = userIdList;
+                chat.userIDList = tempArr;
                 
                 //保存chat_id请求
                 weakSelf.taskModel.chatID = chat.targetId;
@@ -486,7 +479,7 @@
     task.taskID = self.taskModel.taskID;
     task.title = self.taskTitleTxtField.text;
     
-    task.endDate = self.taskModel.endDate;
+    task.endDate = [self.taskModel.endDate stringByReplacingOccurrencesOfString:@"/" withString:@"-"];
     task.chatID = self.taskModel.chatID;
     task.taskDescription = self.taskDescriptioinTextView.text;
     
@@ -728,14 +721,6 @@
     }
     
     return _sendTaskCommentDP;
-}
-
-- (CloseTaskDataParse *)closeTaskDP {
-    if (!_closeTaskDP) {
-        _closeTaskDP = [[CloseTaskDataParse alloc] init];
-        _closeTaskDP.delegate = self;
-    }
-    return _closeTaskDP;
 }
 
 - (GetTaskDetailDataParse *)getTaskDetailDP {

@@ -130,14 +130,7 @@
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString{
     [self.getTaskListDP getTaskListWithIdentify:searchString type:ESTaskListQ];
-//    NSPredicate *preicate = [NSPredicate predicateWithFormat:@"SELF.description CONTAINS[c] %@",searchString];
-//    
-//    if (self.searchResultDataSource!= nil) {
-//        [self.searchResultDataSource removeAllObjects];
-//    }
-//    //过滤数据
-//    self.searchResultDataSource = [NSMutableArray arrayWithArray:[self.dataSource filteredArrayUsingPredicate:preicate]];
-//    //刷新表格
+
     return YES;
 }
 
