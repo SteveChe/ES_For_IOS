@@ -7,51 +7,134 @@
 //
 
 #import "ESPushManager.h"
-#import "PushDefine.h"
+#import "AppDelegate.h"
+#import "RCDAddressBookViewController.h"
+#import "ChatListViewController.h"
+#import "TaskOverviewViewController.h"
+#import "ProfessionViewController.h"
+#import "ESMenuViewController.h"
 
 @implementation ESPushManager
 
-+(void)parsePushJsonDic:(NSDictionary*)pushDic
++(void)parsePushJsonDic:(NSDictionary*)pushDic applicationState:(UIApplicationState) applicationState
 {
     NSString* category = [pushDic objectForKey:PUSH_CATEGORY];
     if (category == nil || [category isEqual:[NSNull null]] || [category length] <=0 )
     {
         return;
     }
+    NSString* notificationMessage = nil;
+    E_PUSH_CATEGORY_TYPE categoryType = e_Push_Category_Contact_None ;
     
     if ([category isEqualToString:PUSH_CATEGORY_CONTACT_REQUEST])
     {
-        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_PUSH_CONTACT_REQUEST object:nil];
+        notificationMessage = NOTIFICATION_PUSH_CONTACT_REQUEST;
+        categoryType = e_Push_Category_Contact_Request;
     }
     
     if([category isEqualToString:PUSH_CATEGORY_CONTACT_ACCEPT])
     {
-        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_PUSH_CONTACT_ACCEPT object:nil];
+        notificationMessage = NOTIFICATION_PUSH_CONTACT_ACCEPT;
+        categoryType = e_Push_Category_Contact_Accept;
     }
     
     if([category isEqualToString:PUSH_CATEGORY_ENTERPRISE_REQUEST])
     {
-        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_PUSH_ENTERPRISE_REQUEST object:nil];
+        notificationMessage = NOTIFICATION_PUSH_ENTERPRISE_REQUEST;
+        categoryType = e_Push_Category_Enterprise_Request;
     }
     
     if ([category isEqualToString:PUSH_CATEGORY_ENTERPRISE_ACCEPT])
     {
-        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_PUSH_ENTERPRISE_ACCEPT object:nil];
+        notificationMessage = NOTIFICATION_PUSH_ENTERPRISE_ACCEPT;
+        categoryType = e_Push_Category_Enterprise_Accept;
     }
     
     if ([category isEqualToString:PUSH_CATEGORY_ASSIGNMENT])
     {
-        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_PUSH_ASSIGNMENT object:nil];
+        notificationMessage = NOTIFICATION_PUSH_ASSIGNMENT;
+        categoryType = e_Push_Category_Assignment;
+    }
+    if ([category isEqualToString:PUSH_CATEGORY_ENTERPRISE_MESSAGE])
+    {
+        notificationMessage = NOTIFICATION_PUSH_ENTERPRISE_MESSAGE;
+        categoryType = e_Push_Category_Enterprise_Message;
     }
     
+    if ([category isEqualToString:PUSH_CATEGORY_RIIL_MESSAGE])
+    {
+        notificationMessage = NOTIFIACATION_PUSH_RIIL_MESSAGE;
+        categoryType = e_Push_Category_Riil_Message;
+    }
+
     if ([category isEqualToString:PUSH_CATEGOTY_PROFESSION])
     {
-        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_PUSH_PROFESSION object:nil];
+        notificationMessage = NOTIFICATION_PUSH_PROFESSION;
+        categoryType = e_Push_Category_Profession;
     }
     
     if ([category isEqualToString:PUSH_CATEGORY_PROFESSION_APPLY])
     {
-        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_PUSH_PROFESSION_APPLY object:nil];
+        notificationMessage = NOTIFICATION_PUSH_PROFESSION_APPLY;
+        categoryType = e_Push_Category_Profession_Apply;
     }
+    
+    if (applicationState == UIApplicationStateInactive)
+    {
+        [ESPushManager changeToPageWithType:categoryType];
+    }
+    
+    [ESPushManager postNotificationMessage:notificationMessage];
 }
++(void)postNotificationMessage:(NSString*)notificationMessage
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:notificationMessage object:nil];
+}
+
++(void)changeToPageWithType:(E_PUSH_CATEGORY_TYPE)categoryType
+{
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+//    UIViewController* targetVC = nil;
+    NSUInteger selectIndex = 0;
+    switch (categoryType)
+    {
+        case e_Push_Category_Contact_Request:
+        case e_Push_Category_Contact_Accept:
+        case e_Push_Category_Enterprise_Request:
+        case e_Push_Category_Enterprise_Accept:
+        {
+            selectIndex = 2;
+//            targetVC = [[RCDAddressBookViewController alloc] init];
+        }
+            break;
+        case e_Push_Category_Enterprise_Message:
+        case e_Push_Category_Riil_Message:
+        {
+//            targetVC = [[ChatListViewController alloc] init];
+            selectIndex = 1;
+        }
+            break;
+        case e_Push_Category_Assignment:
+        {
+//            targetVC = [[TaskOverviewViewController alloc]init];
+            selectIndex = 3;
+        }
+            break;
+        
+        case e_Push_Category_Profession:
+        case e_Push_Category_Profession_Apply:
+        {
+//            targetVC = [[ProfessionViewController alloc] init];
+            selectIndex = 0;
+        }
+            break;
+            
+        default:
+            break;
+    }
+    ESMenuViewController* rootViewCtrl = (ESMenuViewController*)appDelegate.window.rootViewController;
+    [rootViewCtrl.navigationController popToRootViewControllerAnimated:NO];
+    [rootViewCtrl setSelectedIndex:selectIndex];
+}
+
 @end

@@ -69,7 +69,7 @@
              } failure:^(AFHTTPRequestOperation* operation, NSError* error) {
                  if (failure) {
                      failure(error);
-                     [AFHttpTool parseErrorType:error];
+                     [AFHttpTool parseErrorType:error operation:operation];
                  }
              }];
             
@@ -99,7 +99,7 @@
               } failure:^(AFHTTPRequestOperation* operation, NSError* error) {
                   if (failure) {
                       failure(error);
-                      [AFHttpTool parseErrorType:error];
+                      [AFHttpTool parseErrorType:error operation:operation];
                   }
               }];
         }
@@ -630,7 +630,7 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
           failure:failure];
 }
 
-+ (void)parseErrorType:(NSError*) error
++ (void)parseErrorType:(NSError*) error operation:(AFHTTPRequestOperation*)operation
 {
     if (error == nil || [error isEqual:[NSNull null]])
     {
@@ -648,7 +648,15 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
     NSUInteger length = range.length;
     if (length > 0)
     {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"NOTIFICATION_ERROR_MESSAGE" object:@"403"];
+        if (operation.responseObject!=nil)
+        {
+            NSDictionary* dic = operation.responseObject;
+            NSString* errorDetail = [dic objectForKey:@"detail"];
+            if ([errorDetail isEqualToString:@"Authentication credentials were not provided."])
+            {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"NOTIFICATION_ERROR_MESSAGE" object:@"403"];
+            }
+        }
     }
 }
 

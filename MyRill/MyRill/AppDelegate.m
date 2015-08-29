@@ -11,6 +11,7 @@
 #import "ESMenuViewController.h"
 #import "ESNavigationController.h"
 #import "APService.h"
+#import "ESPushManager.h"
 
 #define RONGCLOUD_IM_APPKEY @"x18ywvqf8hzqc" //online key
 
@@ -55,6 +56,7 @@
 #endif
     // Required
     [APService setupWithOption:launchOptions];
+    
     [self initRootWindow];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -68,24 +70,17 @@
                                                object:nil];
     
     //----------push-------------
-    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
-    
-    if (launchOptions != nil) {
-        NSDictionary* userInfo = [launchOptions valueForKey:@"UIApplicationLaunchOptionsRemoteNotificationKey"];
-        if (userInfo != nil)
-        {
-            if ([self respondsToSelector:@selector(application:didReceiveRemoteNotification:)])
-            {
-                [self application:application didReceiveRemoteNotification:userInfo];
-            }
-            
-        }
-        
-        userInfo = [launchOptions valueForKey:@"UIApplicationLaunchOptionsURLKey"];
-        if (userInfo != nil)
-        {
-            //            _bOpenURLFirstLaunch = YES;
-        }
+    float sysVersion=[[UIDevice currentDevice]systemVersion].floatValue;
+    if (sysVersion>=8.0)
+    {
+        UIUserNotificationType type=UIUserNotificationTypeBadge | UIUserNotificationTypeAlert | UIUserNotificationTypeSound;
+        UIUserNotificationSettings *setting=[UIUserNotificationSettings settingsForTypes:type categories:nil];
+        [[UIApplication sharedApplication]registerUserNotificationSettings:setting];
+    }
+    else
+    {
+        UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound;
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:myTypes];
     }
     
     NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
@@ -131,14 +126,21 @@
 
 - (void)changeWindow:(UIViewController *)sender {
 
-    [UIView transitionFromView:self.window.rootViewController.view
-                        toView:sender.view
-                      duration:1
-                       options:UIViewAnimationOptionTransitionCurlUp
-                    completion:^(BOOL finished)
-     {
-         self.window.rootViewController = sender;
-     }];
+    if ([sender isKindOfClass:[LoginViewController class]])
+    {
+        [UIView transitionFromView:self.window.rootViewController.view
+                            toView:sender.view
+                          duration:1
+                           options:UIViewAnimationOptionTransitionCurlUp
+                        completion:^(BOOL finished)
+         {
+             self.window.rootViewController = sender;
+         }];
+    }
+    else
+    {
+        self.window.rootViewController = sender;
+    }
 
     [self.window makeKeyAndVisible];
 }
@@ -201,6 +203,8 @@ void uncaughtExceptionHandler(NSException *exception) {
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
     NSLog(@"userInfo= %@",userInfo);
+    [ESPushManager parsePushJsonDic:userInfo applicationState:application.applicationState];
+
     [APService handleRemoteNotification:userInfo];
     completionHandler(UIBackgroundFetchResultNewData);
 }

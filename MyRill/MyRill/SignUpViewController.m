@@ -13,6 +13,7 @@
 #import "CustomShowMessage.h"
 #import "AppDelegate.h"
 #import "LoginViewController.h"
+#import "ESNavigationController.h"
 
 @interface SignUpViewController () <UITextFieldDelegate>
 
@@ -110,7 +111,9 @@
 {
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     LoginViewController *loginVC = [[LoginViewController alloc] init];
-    [appDelegate changeWindow:loginVC];
+    ESNavigationController *nav = [[ESNavigationController alloc] initWithRootViewController:loginVC];
+
+    [appDelegate changeWindow:nav];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
