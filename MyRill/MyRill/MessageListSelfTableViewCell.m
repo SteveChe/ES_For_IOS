@@ -11,6 +11,7 @@
 #import "UIImageView+WebCache.h"
 #import "ESUserInfo.h"
 #import "ColorHandler.h"
+#import "ESEnterpriseInfo.h"
 
 @interface MessageListSelfTableViewCell ()
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewHeightConstraint;
@@ -47,10 +48,10 @@
 - (void)updateMessage:(ESTaskComment *)taskComment {
     [self.userImg sd_setImageWithURL:[NSURL URLWithString:taskComment.user.portraitUri]
                     placeholderImage:[UIImage imageNamed:@"头像_100"]];
-    if ([ColorHandler isNullOrEmptyString:taskComment.user.enterprise]) {
+    if ([ColorHandler isNullOrEmptyString:taskComment.user.enterprise.enterpriseName]) {
         self.nameAndEnterpriseLbl.text = @"我";
     } else {
-        self.nameAndEnterpriseLbl.text = [NSString stringWithFormat:@"%@/%@", taskComment.user.enterprise, @"我"];
+        self.nameAndEnterpriseLbl.text = [NSString stringWithFormat:@"%@/%@", taskComment.user.enterprise.enterpriseName, @"我"];
     }
     
     NSString *createDateStr = [taskComment.createDate substringToIndex:16];
@@ -58,10 +59,6 @@
     self.contentTxtVIew.text = taskComment.content;
 
     self.attrString = [[NSMutableAttributedString alloc] initWithString:taskComment.content];
-    
-//    CGRect bounds = [self.attrString boundingRectWithSize:CGSizeMake(150, 1000)
-//                                                 options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
-//                                                 context:nil];
 
 }
 

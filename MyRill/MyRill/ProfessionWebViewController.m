@@ -7,6 +7,7 @@
 //
 
 #import "ProfessionWebViewController.h"
+#import "Masonry.h"
 
 @interface ProfessionWebViewController () <UIWebViewDelegate>
 
@@ -22,22 +23,33 @@
     // Do any additional setup after loading the view.
     
     [self.view addSubview:self.professionWeb];
-    self.navigationController.toolbar.hidden = NO;
-    self.navigationController.toolbar.barStyle = UIBarStyleDefault;
+   
+    UIImage *reloadImg = [UIImage imageNamed:@"刷新-可点"];
+    reloadImg = [reloadImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIBarButtonItem *backItem   = [[UIBarButtonItem alloc] initWithImage:reloadImg
+                                                                   style:UIBarButtonItemStylePlain
+                                                                  target:self
+                                                                  action:@selector(backToPre:)];
+    backItem.tag = 301;
+    UIBarButtonItem *forwardItem = [[UIBarButtonItem alloc] initWithImage:reloadImg
+                                                                    style:UIBarButtonItemStylePlain
+                                                                   target:self
+                                                                   action:@selector(forwardToNext:)];
+    forwardItem.tag = 302;
 
-    UIBarButtonItem *btn1=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemRewind target:self action:nil];
-    UIBarButtonItem *btn2=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFastForward target:self action:nil];
-    UIBarButtonItem *btn3=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"刷新.png"]
-                                                           style:UIBarButtonItemStylePlain
-                                                          target:self
-                                                          action:nil];
-    UIBarButtonItem *btn4=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
-    NSArray *arr1=[[NSArray alloc]initWithObjects:btn4,btn1,btn4,btn2,btn4,btn3,btn4, nil];
-    self.toolbarItems=arr1;
+    UIBarButtonItem *reloadItem = [[UIBarButtonItem alloc] initWithImage:reloadImg
+                                                                   style:UIBarButtonItemStylePlain
+                                                                  target:self
+                                                                  action:@selector(reloadPage:)];
+    reloadItem.tag = 303;
+    UIBarButtonItem *placeHolderItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                                     target:self
+                                                                                     action:nil];
+    NSArray *itemArray = [[NSArray alloc] initWithObjects:placeHolderItem,backItem,placeHolderItem,forwardItem,placeHolderItem,reloadItem,placeHolderItem, nil];
+    self.toolbarItems = itemArray;
     
     [self.navigationController.toolbar setBackgroundColor:[UIColor whiteColor]];
-    //可以设置位置，但貌似无效果
-    self.navigationController.toolbar.frame = CGRectMake(0, self.view.bounds.size.height - 44, self.view.bounds.size.width, 44);
+    self.navigationController.toolbar.barStyle = UIBarStyleDefault;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -47,20 +59,49 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [self.professionWeb loadRequest:request];
     self.tabBarController.tabBar.hidden = YES;
+    [self.navigationController setToolbarHidden:NO animated:YES];
+
+    UIBarButtonItem *back = (UIBarButtonItem *)[self.navigationController.toolbar viewWithTag:301];
+    back.enabled = self.professionWeb.canGoBack ? YES : NO;
+    UIBarButtonItem *forward = (UIBarButtonItem *)[self.navigationController.toolbar viewWithTag:302];
+    forward.enabled = self.professionWeb.canGoForward ? YES : NO;
+}
+
+//需要每次重置toolbar的位置
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    
+    self.navigationController.toolbar.frame = CGRectMake(0, self.view.frame.size.height - 44 + 64, self.view.frame.size.width, 44);
 }
 
 #pragma mark - UIWebViewDelegate methods
 //以下方法会在加载一个URL中多次调用(加载图片,加载js file,加载css,都有可能调用)
 - (void)webViewDidStartLoad:(UIWebView *)webView {
-    NSLog(@"webViewDidStartLoad");
+//    NSLog(@"webViewDidStartLoad");
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
-    NSLog(@"webViewDidFinishLoad");
+//    NSLog(@"webViewDidFinishLoad");
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    NSLog(@"didFailLoadWithError:%@", error);
+//    NSLog(@"didFailLoadWithError:%@", error);
+}
+
+#pragma mark - response events
+//后退-->页面
+- (void)backToPre:(UIBarButtonItem *)sender {
+    [self.professionWeb goBack];
+}
+
+//前进-->页面
+- (void)forwardToNext:(UIBarButtonItem *)sender {
+    [self.professionWeb goForward];
+}
+
+//刷新-->页面
+- (void)reloadPage:(UIBarButtonItem *)sender {
+    [self.professionWeb reload];
 }
 
 #pragma mark - setters&getters

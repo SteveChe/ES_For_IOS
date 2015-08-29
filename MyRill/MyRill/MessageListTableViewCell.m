@@ -11,6 +11,7 @@
 #import "ESUserInfo.h"
 #import "UIImageView+WebCache.h"
 #import "ColorHandler.h"
+#import "ESEnterpriseInfo.h"
 
 @interface MessageListTableViewCell ()
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewHeightConstraint;
@@ -37,10 +38,10 @@
 - (void)updateMessage:(ESTaskComment *)taskComment {
     [self.userImg sd_setImageWithURL:[NSURL URLWithString:taskComment.user.portraitUri] placeholderImage:[UIImage imageNamed:@"头像_100"]];
     
-    if ([ColorHandler isNullOrEmptyString:taskComment.user.enterprise]) {
+    if ([ColorHandler isNullOrEmptyString:taskComment.user.enterprise.enterpriseName]) {
         self.nameAndEnterpriseLbl.text = taskComment.user.userName;
     } else {
-        self.nameAndEnterpriseLbl.text = [NSString stringWithFormat:@"%@/%@",taskComment.user.userName,taskComment.user.enterprise];
+        self.nameAndEnterpriseLbl.text = [NSString stringWithFormat:@"%@/%@",taskComment.user.userName,taskComment.user.enterprise.enterpriseName];
     }
     NSString *createDateStr = [taskComment.createDate substringToIndex:16];
     self.createDate.text = [createDateStr stringByReplacingOccurrencesOfString:@"-" withString:@"/"];
