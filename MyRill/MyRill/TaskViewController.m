@@ -63,6 +63,8 @@
 @property (nonatomic, strong) ESTask *taskModel;
 @property (nonatomic, copy) NSString *userID;
 @property (nonatomic, strong) UITableViewCell *prototypeCell;
+
+@property (nonatomic, strong) NSMutableArray *test;
 @end
 
 @implementation TaskViewController
@@ -358,21 +360,26 @@
     }
 
     //创建set过滤分配和关注中的重复联系人
-    NSMutableSet *contactorSet = [[NSMutableSet alloc] initWithCapacity:self.assignerDataSource.count + self.followsDataSource.count];
-    [contactorSet addObjectsFromArray:self.assignerDataSource];
-    [contactorSet addObjectsFromArray:self.followsDataSource];
+
+    [self.assignerDataSource addObjectsFromArray:self.followsDataSource];
+//    NSSet *set = [NSSet setWithArray:self.assignerDataSource];
     
     NSMutableString *discussionTitle = [NSMutableString string];
     NSMutableArray *userIdList = [NSMutableArray new];
-    for (ESUserInfo *contactor in contactorSet) {
+    for (ESUserInfo *contactor in self.assignerDataSource) {
         [discussionTitle appendString:[NSString stringWithFormat:@"%@%@", contactor.userName,@","]];
         [userIdList addObject:contactor.userId];
     }
+    NSSet *set = [NSSet setWithArray:userIdList];
+    NSMutableArray *tempArr = [NSMutableArray new];
+    [set enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
+        [tempArr addObject:obj];
+    }];
     [discussionTitle deleteCharactersInRange:NSMakeRange(discussionTitle.length - 1, 1)];
     __weak typeof(&*self)  weakSelf = self;
 
     if ([self.taskModel.chatID isKindOfClass:[NSNull class]] || self.taskModel.chatID == nil || [self.taskModel.chatID isEqualToString:@""]) {
-        [[RCIMClient sharedRCIMClient] createDiscussion:discussionTitle userIdList:userIdList success:^(RCDiscussion *discussion) {
+        [[RCIMClient sharedRCIMClient] createDiscussion:discussionTitle userIdList:tempArr success:^(RCDiscussion *discussion) {
             NSLog(@"create discussion ssucceed!");
             dispatch_async(dispatch_get_main_queue(), ^{
                 ChatViewController *chat =[[ChatViewController alloc]init];
@@ -380,7 +387,7 @@
                 chat.userName                    = discussion.discussionName;
                 chat.conversationType              = ConversationType_DISCUSSION;
                 chat.title                         = @"讨论组";
-                chat.userIDList = userIdList;
+                chat.userIDList = tempArr;
                 
                 //保存chat_id请求
                 weakSelf.taskModel.chatID = chat.targetId;
