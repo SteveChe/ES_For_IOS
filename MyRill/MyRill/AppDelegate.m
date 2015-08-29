@@ -67,6 +67,27 @@
                                                  name:@"NOTIFICATION_ERROR_MESSAGE"
                                                object:nil];
     
+    //----------push-------------
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+    
+    if (launchOptions != nil) {
+        NSDictionary* userInfo = [launchOptions valueForKey:@"UIApplicationLaunchOptionsRemoteNotificationKey"];
+        if (userInfo != nil)
+        {
+            if ([self respondsToSelector:@selector(application:didReceiveRemoteNotification:)])
+            {
+                [self application:application didReceiveRemoteNotification:userInfo];
+            }
+            
+        }
+        
+        userInfo = [launchOptions valueForKey:@"UIApplicationLaunchOptionsURLKey"];
+        if (userInfo != nil)
+        {
+            //            _bOpenURLFirstLaunch = YES;
+        }
+    }
+    
     NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
     return YES;
 }
@@ -187,8 +208,7 @@ void uncaughtExceptionHandler(NSException *exception) {
 #pragma mark - 收到消息监听
 -(void)didReceiveMessageNotification:(NSNotification *)notification
 {
-//    [UIApplication sharedApplication].applicationIconBadgeNumber = [UIApplication sharedApplication].applicationIconBadgeNumber+1;
-
+    [UIApplication sharedApplication].applicationIconBadgeNumber = [UIApplication sharedApplication].applicationIconBadgeNumber+1;
 }
 
 -(void)didReceiveErrorMessage:(id)notification

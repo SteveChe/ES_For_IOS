@@ -299,6 +299,7 @@
 		F2F92ECD1B4D60910047D7BF /* RCDPhoneAddressBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2F92ECC1B4D60910047D7BF /* RCDPhoneAddressBookViewController.m */; };
 		F2F92EFC1B4EC3310047D7BF /* RCDSelectPersonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2F92EFB1B4EC3310047D7BF /* RCDSelectPersonTableViewCell.xib */; };
 		F2F92EFF1B5020CC0047D7BF /* GetPhoneContactListDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F2F92EFE1B5020CC0047D7BF /* GetPhoneContactListDataParse.m */; };
+		F2FE51721B91687800DD68BD /* ESPushManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F2FE51711B91687800DD68BD /* ESPushManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -832,6 +833,9 @@
 		F2F92EFB1B4EC3310047D7BF /* RCDSelectPersonTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RCDSelectPersonTableViewCell.xib; path = RCDChatList/SelectPerson/RCDSelectPersonTableViewCell.xib; sourceTree = "<group>"; };
 		F2F92EFD1B5020CC0047D7BF /* GetPhoneContactListDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetPhoneContactListDataParse.h; sourceTree = "<group>"; };
 		F2F92EFE1B5020CC0047D7BF /* GetPhoneContactListDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetPhoneContactListDataParse.m; sourceTree = "<group>"; };
+		F2FE51701B91687800DD68BD /* ESPushManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ESPushManager.h; path = Push/ESPushManager.h; sourceTree = "<group>"; };
+		F2FE51711B91687800DD68BD /* ESPushManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ESPushManager.m; path = Push/ESPushManager.m; sourceTree = "<group>"; };
+		F2FE51731B9175E300DD68BD /* PushDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PushDefine.h; path = Push/PushDefine.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -917,9 +921,9 @@
 		2B31C3D11B11C3FD004C865A /* MyRill */ = {
 			isa = PBXGroup;
 			children = (
+				F2FE516F1B91683600DD68BD /* Push */,
 				F23461731B5AA60700C88FAC /* DBInterface */,
 				F22FE27C1B3ADA8200A1A997 /* Model */,
-				F2D233571B31AA2600F8C65D /* JPush */,
 				2B39C94D1B247A4E007BAC7A /* DataDrive */,
 				F250F2E71B247156000AD021 /* AFNetWorkInterface */,
 				2B31C3D61B11C3FD004C865A /* AppDelegate.h */,
@@ -1802,6 +1806,17 @@
 			name = JPush;
 			sourceTree = "<group>";
 		};
+		F2FE516F1B91683600DD68BD /* Push */ = {
+			isa = PBXGroup;
+			children = (
+				F2D233571B31AA2600F8C65D /* JPush */,
+				F2FE51701B91687800DD68BD /* ESPushManager.h */,
+				F2FE51711B91687800DD68BD /* ESPushManager.m */,
+				F2FE51731B9175E300DD68BD /* PushDefine.h */,
+			);
+			name = Push;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2105,6 +2120,7 @@
 				2B5A59111B48DFBB000382D7 /* MRNavigationBarProgressView.m in Sources */,
 				2B5A590C1B48DFBB000382D7 /* MRBlurView.m in Sources */,
 				2BEAD06C1B76FF2400905E21 /* SWLongPressGestureRecognizer.m in Sources */,
+				F2FE51721B91687800DD68BD /* ESPushManager.m in Sources */,
 				F22FE3081B45989200A1A997 /* ESContactList.m in Sources */,
 				2BEAD07F1B77369F00905E21 /* ZCActionOnCalendar.m in Sources */,
 				F22FE2A81B3FFAC200A1A997 /* RCDPersonDetailViewController.m in Sources */,
