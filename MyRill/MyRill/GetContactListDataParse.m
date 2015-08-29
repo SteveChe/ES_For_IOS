@@ -12,6 +12,7 @@
 #import "ESUserInfo.h"
 #import "ESContactList.h"
 #import "AddressBookContactListDataSource.h"
+#import "ESEnterpriseInfo.h"
 
 @implementation GetContactListDataParse
 
@@ -22,7 +23,7 @@
  **/
 -(void) getContactList
 {
-    NSArray* enterpriseContactListFromDB = [[AddressBookContactListDataSource shareInstance] getContactListFromDB];
+//  NSArray* enterpriseContactListFromDB = [[AddressBookContactListDataSource shareInstance] getContactListFromDB];
 //    if (enterpriseContactListFromDB!=nil && ! [enterpriseContactListFromDB isEqual:[NSNull null]]&& [enterpriseContactListFromDB count]>0)
 //    {
 //        if (self.delegate!= nil && [self.delegate respondsToSelector:@selector(getContactList:)])
@@ -95,14 +96,15 @@
                          {
                              userInfo.phoneNumber = userPhoneNum;
                          }
-                         NSString* userEnterprise = [temDic valueForKey:@"enterprise"];
-                         if (userEnterprise != nil && ![userEnterprise isEqual:[NSNull null]])
+                         NSDictionary* userEnterpriseDic = [temDic valueForKey:@"enterprise"];
+                         if (userEnterpriseDic != nil && ![userEnterpriseDic isEqual:[NSNull null]])
                          {
-                             if ([userEnterprise length ]<=0)
-                             {
-                                 userEnterprise = @"默认";
-                             }
-                             userInfo.enterprise = userEnterprise;
+                             ESEnterpriseInfo* enterpriseInfo = [[ESEnterpriseInfo alloc] initWithDic:userEnterpriseDic];
+//                             if ([enterpriseInfo.enterpriseName length ]<=0)
+//                             {
+//                                 userEnterprise = @"默认";
+//                             }
+                             userInfo.enterprise = enterpriseInfo;
                          }
                          
                          NSString* userPortraitUri = [temDic valueForKey:@"avatar"];
@@ -121,14 +123,14 @@
                  }
                  if (enterpriseList != nil && ![enterpriseList isEqual:[NSNull null]] && [enterpriseList count]>0)
                  {
-                     if (![enterpriseList isEqualToArray:enterpriseContactListFromDB])
-                     {
+//                     if (![enterpriseList isEqualToArray:enterpriseContactListFromDB])
+//                     {
                          [[AddressBookContactListDataSource shareInstance] updateContactList:enterpriseList];
                          if (self.delegate!= nil && [self.delegate respondsToSelector:@selector(getContactList:)])
                          {
                              [self.delegate getContactList:enterpriseList];
                          }
-                     }
+//                     }
 
                  }
 

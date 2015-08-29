@@ -13,6 +13,7 @@
 #import "ESEnterpriseInfo.h"
 #import "FollowEnterpriseDataParse.h"
 #import "RCDAddressBookEnterpriseDetailViewController.h"
+#import "UIImageView+WebCache.h"
 
 @interface RCDSearchEnterpriseViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,UISearchControllerDelegate,UISearchDisplayDelegate,GetSearchEnterpriseListDelegate,RCDPhoneAddressBookTableViewCellDelegate,FollowEnterpriseDelegate,UnFollowEnterpriseDelegate>
 @property (nonatomic,strong)GetEnterpriseListDataParse* getEnterpriseListDataParse;
@@ -58,7 +59,7 @@
     _searchDisplayController1.searchResultsDelegate = self;
     _searchDisplayController1.delegate = self;
     
-    [self initEnterpriseData];
+//    [self initEnterpriseData];
     
     UINib *rcdCellNib = [UINib nibWithNibName:@"RCDPhoneAddressBookTableViewCell" bundle:nil];
     [self.tableView registerNib:rcdCellNib forCellReuseIdentifier:@"RCDPhoneAddressBookTableViewCell"];
@@ -99,17 +100,17 @@
 #pragma mark - GetSearchEnterpriseListDelegate
 -(void)getSearchEnterpriseListSucceed:(NSArray*)enterpriseList
 {
-    if(_bFristRequest)
-    {
-        _bFristRequest = NO;
-        [_allEnterpriseList removeAllObjects];
-        [_allEnterpriseList addObjectsFromArray:enterpriseList];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView reloadData];
-        });
-        return;
-    }
+//    if(_bFristRequest)
+//    {
+//        _bFristRequest = NO;
+//        [_allEnterpriseList removeAllObjects];
+//        [_allEnterpriseList addObjectsFromArray:enterpriseList];
+//        
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [self.tableView reloadData];
+//        });
+//        return;
+//    }
     [_searchResult addObjectsFromArray:enterpriseList];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.searchDisplayController1.searchResultsTableView reloadData];
@@ -134,16 +135,19 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    if(tableView == self.searchDisplayController.searchResultsTableView)
+    if(tableView == self.searchDisplayController1.searchResultsTableView)
         return _searchResult.count;
+    else
+        return 0;
 
-    return [_allEnterpriseList count];
+//    return [_allEnterpriseList count];
 }
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    if(tableView == self.searchDisplayController.searchResultsTableView)
-        return nil;
-    return @"企业号联系人";
+//    if(tableView == self.searchDisplayController.searchResultsTableView)
+//        return nil;
+//    return @"企业号联系人";
+    return nil;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -151,7 +155,7 @@
     RCDPhoneAddressBookTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RCDPhoneAddressBookTableViewCell" ];
     ESEnterpriseInfo* enterpriseInfo = nil;
     
-    if(tableView == self.searchDisplayController.searchResultsTableView)
+    if(tableView == self.searchDisplayController1.searchResultsTableView)
     {
         enterpriseInfo = [_searchResult objectAtIndex:indexPath.row];
         cell.tag = 0;
@@ -165,7 +169,8 @@
     {
         cell.title.text = enterpriseInfo.enterpriseName;
         cell.subtitle.text = enterpriseInfo.enterpriseDescription;
-        [cell.ivAva setImage: [UIImage imageNamed:@"头像_100"]];
+        [cell.ivAva sd_setImageWithURL:[NSURL URLWithString:enterpriseInfo.portraitUri] placeholderImage:[UIImage imageNamed:@"头像_100"]];
+
         if(enterpriseInfo.bIsFollowed)
         {
             [cell.addButton setBackgroundImage:[UIImage imageNamed:@"ren_tianjia_chenggong"] forState:UIControlStateNormal];
@@ -185,7 +190,7 @@
 {
     ESEnterpriseInfo* enterpriseInfo = nil;
 
-    if(tableView == self.searchDisplayController.searchResultsTableView)
+    if(tableView == self.searchDisplayController1.searchResultsTableView)
     {
         enterpriseInfo = [_searchResult objectAtIndex:indexPath.row];
     }
@@ -203,7 +208,7 @@
 {
     RCDPhoneAddressBookTableViewCell* cell = (RCDPhoneAddressBookTableViewCell*) sender;
     NSInteger rowIndex = cell.addButton.tag;
-//
+
     ESEnterpriseInfo* enterpriseInfo = nil;
     if (cell.tag == 0)
     {
@@ -231,10 +236,10 @@
     _followingEnterpriseInfo.bIsFollowed = YES;
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         dispatch_async(dispatch_get_main_queue(), ^{
-            if(self.searchDisplayController.searchResultsTableView.hidden == NO )
+//            if(self.searchDisplayController.searchResultsTableView.hidden == NO )
                 [self.searchDisplayController.searchResultsTableView reloadData];
-            else
-                [self.tableView reloadData];
+//            else
+//                [self.tableView reloadData];
         });
     });
 }
@@ -252,10 +257,10 @@
     _followingEnterpriseInfo.bIsFollowed = NO;
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         dispatch_async(dispatch_get_main_queue(), ^{
-            if(self.searchDisplayController.searchResultsTableView.hidden == NO )
+//            if(self.searchDisplayController.searchResultsTableView.hidden == NO )
                 [self.searchDisplayController.searchResultsTableView reloadData];
-            else
-                [self.tableView reloadData];
+//            else
+//                [self.tableView reloadData];
 
         });
     });

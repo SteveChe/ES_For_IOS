@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+@class ESEnterpriseInfo;
 @interface ESUserInfo : NSObject
 /** 用户ID */
 @property(nonatomic, strong) NSString *userId;
@@ -18,7 +19,7 @@
 /** 电话号码 */
 @property(nonatomic, strong) NSString *phoneNumber;
 /** 公司 */
-@property(nonatomic, strong) NSString *enterprise;
+@property(nonatomic, strong) ESEnterpriseInfo *enterprise;
 /** 公司 职位*/
 @property(nonatomic, strong) NSString *position;
 /** type */

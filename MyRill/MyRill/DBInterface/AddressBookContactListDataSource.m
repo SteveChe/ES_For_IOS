@@ -10,6 +10,7 @@
 #import "ESUserInfo.h"
 #import "ESContactList.h"
 #import "UserInfoDataSource.h"
+#import "ESEnterpriseInfo.h"
 
 
 @interface AddressBookContactListDataSource ()
@@ -58,7 +59,7 @@
         BOOL bFindEnterprise = FALSE;
         for (ESContactList* temContactList in enterpriseContactList)
         {
-            if ([userInfo.enterprise isEqual:temContactList.enterpriseName])
+            if ([userInfo.enterprise.enterpriseName isEqual:temContactList.enterpriseName])
             {
                 bFindEnterprise = true;
                 [temContactList.contactList addObject:userInfo ];
@@ -70,7 +71,7 @@
             ESContactList* newContactList = [[ESContactList alloc] init];
             NSMutableArray* temContactList = [[NSMutableArray alloc] init];
             [temContactList addObject:userInfo];
-            newContactList.enterpriseName = userInfo.enterprise;
+            newContactList.enterpriseName = userInfo.enterprise.enterpriseName;
             newContactList.contactList = temContactList;
             
             [enterpriseContactList addObject:newContactList];

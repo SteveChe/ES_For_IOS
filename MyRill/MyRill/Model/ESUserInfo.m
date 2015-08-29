@@ -8,6 +8,7 @@
 
 #import "ESUserInfo.h"
 #import "ColorHandler.h"
+#import "ESEnterpriseInfo.h"
 
 @implementation ESUserInfo
 @synthesize userName;
@@ -41,10 +42,15 @@
             self.phoneNumber = dic[@"phoneNumber"];
         }
         
-        if ([ColorHandler isNullOrEmptyString:dic[@"enterprise"]]) {
-            self.enterprise = @"";
-        } else {
-            self.enterprise = dic[@"enterprise"];
+//        if ([ColorHandler isNullOrEmptyString:dic[@"enterprise"]]) {
+//            self.enterprise = @"";
+//        } else {
+//            self.enterprise = dic[@"enterprise"];
+//        }
+        NSDictionary* enterpriseDic = dic[@"enterprise"];
+        if (enterpriseDic != nil )
+        {
+            self.enterprise = [[ESEnterpriseInfo alloc] initWithDic:enterpriseDic];
         }
         
         if ([ColorHandler isNullOrEmptyString:dic[@"position"]]) {

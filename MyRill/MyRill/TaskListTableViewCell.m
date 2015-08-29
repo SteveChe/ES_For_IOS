@@ -13,6 +13,7 @@
 #import "UIImageView+WebCache.h"
 #import "ESTaskComment.h"
 #import "UserDefaultsDefine.h"
+#import "ESEnterpriseInfo.h"
 
 @interface TaskListTableViewCell ()
 
@@ -53,9 +54,9 @@
     self.titleLbl.text = [@"任务名称:" stringByAppendingString:task.title];
     
     NSString *leadStr = [NSString stringWithFormat:@"负责人:%@",task.personInCharge.userName];
-    if (![task.personInCharge.enterprise isEqualToString:@""]) {
+    if (![task.personInCharge.enterprise.enterpriseName isEqualToString:@""]) {
         leadStr = [leadStr stringByAppendingString:@"/"];
-        leadStr = [leadStr stringByAppendingString:task.personInCharge.enterprise];
+        leadStr = [leadStr stringByAppendingString:task.personInCharge.enterprise.enterpriseName];
     }
     self.leadLbl.text = leadStr;
     

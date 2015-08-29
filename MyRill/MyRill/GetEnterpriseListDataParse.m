@@ -43,6 +43,10 @@
                  if (listArray == nil || [listArray isEqual:[NSNull null]]
                      || [listArray count] <= 0)
                  {
+                     if (self.getFollowedEnterPriseListDelegate!= nil && [self.getFollowedEnterPriseListDelegate respondsToSelector:@selector(getFollowedEnterpriseListSucceed:)])
+                     {
+                         [self.getFollowedEnterPriseListDelegate getFollowedEnterpriseListSucceed:listArray];
+                     }
                      break;
                  }
                  NSMutableArray* enterpriseInfoArray = [NSMutableArray array];
