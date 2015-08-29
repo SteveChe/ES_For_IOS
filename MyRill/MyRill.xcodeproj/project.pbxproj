@@ -117,8 +117,6 @@
 		2BEAD07F1B77369F00905E21 /* ZCActionOnCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEAD07E1B77369F00905E21 /* ZCActionOnCalendar.m */; };
 		2BEAD0881B775C4500905E21 /* MessageListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEAD0861B775C4500905E21 /* MessageListTableViewCell.m */; };
 		2BEAD0891B775C4500905E21 /* MessageListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BEAD0871B775C4500905E21 /* MessageListTableViewCell.xib */; };
-		2BEAD08D1B775FC900905E21 /* MessageListSelfTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEAD08B1B775FC900905E21 /* MessageListSelfTableViewCell.m */; };
-		2BEAD08E1B775FC900905E21 /* MessageListSelfTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BEAD08C1B775FC900905E21 /* MessageListSelfTableViewCell.xib */; };
 		2BEAD0911B776C2E00905E21 /* GetTaskCommentListDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEAD0901B776C2E00905E21 /* GetTaskCommentListDataParse.m */; };
 		2BEAD0941B779A8E00905E21 /* SendTaskCommentDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEAD0931B779A8E00905E21 /* SendTaskCommentDataParse.m */; };
 		2BEAD0971B779C4900905E21 /* ESTaskComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEAD0961B779C4900905E21 /* ESTaskComment.m */; };
@@ -510,9 +508,6 @@
 		2BEAD0851B775C4500905E21 /* MessageListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageListTableViewCell.h; sourceTree = "<group>"; };
 		2BEAD0861B775C4500905E21 /* MessageListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageListTableViewCell.m; sourceTree = "<group>"; };
 		2BEAD0871B775C4500905E21 /* MessageListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageListTableViewCell.xib; sourceTree = "<group>"; };
-		2BEAD08A1B775FC900905E21 /* MessageListSelfTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageListSelfTableViewCell.h; sourceTree = "<group>"; };
-		2BEAD08B1B775FC900905E21 /* MessageListSelfTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageListSelfTableViewCell.m; sourceTree = "<group>"; };
-		2BEAD08C1B775FC900905E21 /* MessageListSelfTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageListSelfTableViewCell.xib; sourceTree = "<group>"; };
 		2BEAD08F1B776C2E00905E21 /* GetTaskCommentListDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetTaskCommentListDataParse.h; sourceTree = "<group>"; };
 		2BEAD0901B776C2E00905E21 /* GetTaskCommentListDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetTaskCommentListDataParse.m; sourceTree = "<group>"; };
 		2BEAD0921B779A8E00905E21 /* SendTaskCommentDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendTaskCommentDataParse.h; sourceTree = "<group>"; };
@@ -1367,9 +1362,6 @@
 				2BEAD0851B775C4500905E21 /* MessageListTableViewCell.h */,
 				2BEAD0861B775C4500905E21 /* MessageListTableViewCell.m */,
 				2BEAD0871B775C4500905E21 /* MessageListTableViewCell.xib */,
-				2BEAD08A1B775FC900905E21 /* MessageListSelfTableViewCell.h */,
-				2BEAD08B1B775FC900905E21 /* MessageListSelfTableViewCell.m */,
-				2BEAD08C1B775FC900905E21 /* MessageListSelfTableViewCell.xib */,
 				2B6038831B79C6A4005B721F /* TaskContactorCollectionViewCell.h */,
 				2B6038841B79C6A4005B721F /* TaskContactorCollectionViewCell.m */,
 				2B6038851B79C6A4005B721F /* TaskContactorCollectionViewCell.xib */,
@@ -1917,7 +1909,6 @@
 				F23059B61B529FAE004599FA /* RCDPhoneAddressBookTableViewCell.xib in Resources */,
 				2BEAD0741B770B2A00905E21 /* RemindDateViewController.xib in Resources */,
 				F23461E51B5FCFA900C88FAC /* ChatSettingCollectionViewCell.xib in Resources */,
-				2BEAD08E1B775FC900905E21 /* MessageListSelfTableViewCell.xib in Resources */,
 				F22FE2921B3B000400A1A997 /* ChangePwdViewController.xib in Resources */,
 				F2D2338F1B37DE6400F8C65D /* RongCloud.bundle in Resources */,
 				F2467EF11B8DCF1F0055B78B /* RootCardMiddleCell.xib in Resources */,
@@ -2120,7 +2111,6 @@
 				F22FE2EE1B4000ED00A1A997 /* UIImage+GIF.m in Sources */,
 				F23059BA1B52C141004599FA /* RCDAddressBookViewTableViewCell.m in Sources */,
 				F277ADFE1B2DC046006E42CB /* CustomMessageBox.m in Sources */,
-				2BEAD08D1B775FC900905E21 /* MessageListSelfTableViewCell.m in Sources */,
 				F29F864A1B2410320058FC9F /* UIWebView+AFNetworking.m in Sources */,
 				F28442B81B80D0BD004F94E2 /* ComplexMessageCell.m in Sources */,
 				2B5A59151B48DFBB000382D7 /* MRActivityIndicatorView+AFNetworking.m in Sources */,

@@ -45,10 +45,7 @@
     }
     NSString *createDateStr = [taskComment.createDate substringToIndex:16];
     self.createDate.text = [createDateStr stringByReplacingOccurrencesOfString:@"-" withString:@"/"];
-    self.contentTxtVIew.text = taskComment.content;
-    UIView *view = [self.contentTxtVIew subviews].lastObject;
-    view.bounds = CGRectMake(0, 0, 240, 60);
-
+    self.contentLbl.text = taskComment.content;
 }
 
 - (void)setUserImg:(UIImageView *)userImg {
