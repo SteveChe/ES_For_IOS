@@ -11,6 +11,7 @@
 #import "ESUserInfo.h"
 #import "DataParseDefine.h"
 #import "PhoneContactListDataSource.h"
+#import "ESEnterpriseInfo.h"
 @implementation GetPhoneContactListDataParse
 //获取手机通讯录中的ES联系人
 -(void) getPhoneContactList:(NSMutableArray*)phoneContactList
@@ -74,17 +75,11 @@
                      {
                          userInfo.phoneNumber = userPhoneNum;
                      }
-                     NSString* userEnterprise = [temDic valueForKey:@"enterprise"];
-                     if (userEnterprise != nil && ![userEnterprise isEqual:[NSNull null]])
+                     NSDictionary* userEnterpriseDic = [temDic valueForKey:@"enterprise"];
+                     if (userEnterpriseDic != nil && [userEnterpriseDic isKindOfClass:[NSDictionary class]])
                      {
-                         if ([userEnterprise length] <= 0)
-                         {
-                             userInfo.enterprise = @"默认";
-                         }
-                         else
-                         {
-                             userInfo.enterprise = userEnterprise;
-                         }
+                         ESEnterpriseInfo* enterpriseInfo = [[ESEnterpriseInfo alloc] initWithDic:userEnterpriseDic];
+                         userInfo.enterprise = enterpriseInfo;
                      }
                      
                      NSString* userPortraitUri = [temDic valueForKey:@"avatar"];

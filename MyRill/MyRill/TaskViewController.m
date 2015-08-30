@@ -15,7 +15,7 @@
 #import "ESTagViewController.h"
 #import "CustomShowMessage.h"
 #import "ESUserInfo.h"
-#import "RCDSelectPersonViewController.h"
+//#import "RCDSelectPersonViewController.h"
 #import "ChatViewController.h"
 #import "GetTaskCommentListDataParse.h"
 #import "SendTaskCommentDataParse.h"
@@ -26,6 +26,7 @@
 #import "GetTaskDetailDataParse.h"
 #import "ChatViewController.h"
 #import "UserDefaultsDefine.h"
+#import "RCDRadioSelectPersonViewController.h"
 
 @interface TaskViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, GetTaskCommentListDelegate, SendTaskCommenDelegate, EditTaskDelegate, GetTaskDetailDelegate>
 
@@ -438,10 +439,11 @@
         }
         
         __weak typeof(&*self)  weakSelf = self;
-        RCDSelectPersonViewController* selectPersonVC = [[RCDSelectPersonViewController alloc] init];
+        RCDRadioSelectPersonViewController* selectPersonVC = [[RCDRadioSelectPersonViewController alloc] init];
+        selectPersonVC.type = e_Selected_Person_Radio;
         [selectPersonVC setSeletedUsers:self.assignerDataSource];
         //设置回调
-        selectPersonVC.clickDoneCompletion = ^(RCDSelectPersonViewController* selectPersonViewController, NSArray* selectedUsers) {
+        selectPersonVC.clickDoneCompletion = ^(RCDRadioSelectPersonViewController* selectPersonViewController, NSArray* selectedUsers) {
             
             if (selectedUsers && selectedUsers.count) {
                 [weakSelf.assignerDataSource removeAllObjects];
@@ -454,12 +456,13 @@
         [self.navigationController pushViewController:selectPersonVC animated:YES];
     }
     else if (sender.tag == 1002){
-        RCDSelectPersonViewController* selectPersonVC = [[RCDSelectPersonViewController alloc] init];
+        RCDRadioSelectPersonViewController* selectPersonVC = [[RCDRadioSelectPersonViewController alloc] init];
+        selectPersonVC.type = e_Selected_Check_Box;
         [selectPersonVC setSeletedUsers:self.followsDataSource];
         __weak typeof(&*self)  weakSelf = self;
 
         //设置回调
-        selectPersonVC.clickDoneCompletion = ^(RCDSelectPersonViewController* selectPersonViewController, NSArray* selectedUsers) {
+        selectPersonVC.clickDoneCompletion = ^(RCDRadioSelectPersonViewController* selectPersonViewController, NSArray* selectedUsers) {
             
             if (selectedUsers && selectedUsers.count)
             {
