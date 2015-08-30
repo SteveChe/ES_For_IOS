@@ -208,7 +208,7 @@ typedef enum : NSUInteger {
                       success:(void (^)(AFHTTPRequestOperation *,id))success
                       failure:(void (^)(AFHTTPRequestOperation *,NSError *))failure;
 
-+ (void)parseErrorType:(NSError*) error;
++ (void)parseErrorType:(NSError*) error operation:(AFHTTPRequestOperation*)operation;
 
 //获取人的标签
 + (void)getTagByUserid:(NSString*)userId success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;

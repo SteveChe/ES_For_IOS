@@ -15,5 +15,6 @@
 @property (nonatomic,strong) UILabel *lblDetail;
 @property (nonatomic,strong) UILabel *timeLabel;
 @property (nonatomic, copy) NSString *userName;
+@property (nonatomic,strong) UILabel* lblRedBadage;
 
 @end

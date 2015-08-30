@@ -25,6 +25,7 @@
 #import "ESEnterpriseInfo.h"
 #import "RCDAddressBookEnterpriseDetailViewController.h"
 #import "DiscussionChatListViewController.h"
+#import "PushDefine.h"
 
 @interface RCDAddressBookViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,UISearchControllerDelegate,UISearchDisplayDelegate,GetFollowedEnterpriseListDelegate>
 
@@ -42,6 +43,7 @@
     // Do any additional setup after loading the view.
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationItem.title = @"联系人";
+    self.tabBarController.tabBar.hidden = NO;
 
     // Add searchbar
     UISearchBar* searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.bounds.size.width, 40)];
