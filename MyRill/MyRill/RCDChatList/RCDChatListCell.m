@@ -48,11 +48,21 @@
         [_timeLabel setTextColor:HEXCOLOR(0x8c8c8c)];
         _timeLabel.text = [NSString stringWithFormat:@""];
 
+        _lblRedBadage = [UILabel new];
+        _lblRedBadage.text = @"11";
+        [_lblRedBadage setFont:[UIFont systemFontOfSize:12.f]];
+        [_lblRedBadage setTextColor:[UIColor redColor]];
+        _lblRedBadage.hidden = YES;
+        _lblRedBadage.backgroundColor = [UIColor redColor];
+        self.lblRedBadage.clipsToBounds = YES;
+        self.lblRedBadage.layer.cornerRadius = 7.f;
+
         
         [self addSubview:_ivAva];
         [self addSubview:_lblDetail];
         [self addSubview:_lblName];
         [self addSubview:_timeLabel];
+        [self addSubview:_lblRedBadage];
         
         _ivAva.translatesAutoresizingMaskIntoConstraints = NO;
         _lblName.translatesAutoresizingMaskIntoConstraints = NO;
@@ -79,6 +89,16 @@
             make.top.equalTo(ws.mas_top).with.offset(12);
             make.trailing.equalTo(ws.mas_trailing).with.offset(-8);
         }];
+
+//        __weak UIView *ws = self;
+        [_lblRedBadage mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(ws.mas_top).with.offset(8);
+            make.trailing.equalTo(ws.mas_left).with.offset(65);
+
+//            make.width.equalTo(ws.mas_width).width;
+//            make.width.equalTo(ws.mas_height).with.offset(10);
+        }];
+        
         
     }
     return self;

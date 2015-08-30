@@ -532,9 +532,7 @@
     NSNumber* bReadNum = [messageDic objectForKey:@"is_read"];
     if (bReadNum != nil && ![bReadNum isEqual:[NSNull null]])
     {
-        enterpriseMessage.bRead = NO;
-
-//        enterpriseMessage.bRead = [bReadNum boolValue];
+        enterpriseMessage.bRead = [bReadNum boolValue];
     }
     
     NSNumber* bSuggestion = [messageDic objectForKey:@"is_suggestion"];

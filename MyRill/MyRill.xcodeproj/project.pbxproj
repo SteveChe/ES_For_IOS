@@ -222,6 +222,7 @@
 		F24787721B2D5CE700EC266B /* ChangePwdDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F24787711B2D5CE700EC266B /* ChangePwdDataParse.m */; };
 		F24787751B2D775E00EC266B /* SignUpDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F24787741B2D775E00EC266B /* SignUpDataParse.m */; };
 		F250F2EA1B2471CD000AD021 /* AFHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = F250F2E91B2471CD000AD021 /* AFHttpTool.m */; };
+		F252333D1B931B3900A4E5AF /* RCDRadioSelectPersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F252333C1B931B3900A4E5AF /* RCDRadioSelectPersonViewController.m */; };
 		F256CB6D1B6BBCC4009478C2 /* RCDDiscussSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F256CB6C1B6BBCC4009478C2 /* RCDDiscussSettingCell.m */; };
 		F256CB701B6BC397009478C2 /* RCDUpdateNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F256CB6F1B6BC397009478C2 /* RCDUpdateNameViewController.m */; };
 		F256CB721B6BD565009478C2 /* RCDUpdateNameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F256CB711B6BD565009478C2 /* RCDUpdateNameViewController.xib */; };
@@ -704,6 +705,8 @@
 		F24787741B2D775E00EC266B /* SignUpDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpDataParse.m; sourceTree = "<group>"; };
 		F250F2E81B2471CD000AD021 /* AFHttpTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHttpTool.h; path = Network/AFHttpTool.h; sourceTree = "<group>"; };
 		F250F2E91B2471CD000AD021 /* AFHttpTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFHttpTool.m; path = Network/AFHttpTool.m; sourceTree = "<group>"; };
+		F252333B1B931B3900A4E5AF /* RCDRadioSelectPersonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCDRadioSelectPersonViewController.h; path = RCDChatList/SelectPerson/RCDRadioSelectPersonViewController.h; sourceTree = "<group>"; };
+		F252333C1B931B3900A4E5AF /* RCDRadioSelectPersonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RCDRadioSelectPersonViewController.m; path = RCDChatList/SelectPerson/RCDRadioSelectPersonViewController.m; sourceTree = "<group>"; };
 		F256CB6B1B6BBCC4009478C2 /* RCDDiscussSettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCDDiscussSettingCell.h; path = RCDChatList/SettingViewController/RCDDiscussSettingCell.h; sourceTree = "<group>"; };
 		F256CB6C1B6BBCC4009478C2 /* RCDDiscussSettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RCDDiscussSettingCell.m; path = RCDChatList/SettingViewController/RCDDiscussSettingCell.m; sourceTree = "<group>"; };
 		F256CB6E1B6BC397009478C2 /* RCDUpdateNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCDUpdateNameViewController.h; path = RCDChatList/SettingViewController/RCDUpdateNameViewController.h; sourceTree = "<group>"; };
@@ -1505,6 +1508,8 @@
 				F2F92EFB1B4EC3310047D7BF /* RCDSelectPersonTableViewCell.xib */,
 				F22FE2AB1B3FFAE600A1A997 /* RCDSelectPersonViewController.h */,
 				F22FE2AC1B3FFAE600A1A997 /* RCDSelectPersonViewController.m */,
+				F252333B1B931B3900A4E5AF /* RCDRadioSelectPersonViewController.h */,
+				F252333C1B931B3900A4E5AF /* RCDRadioSelectPersonViewController.m */,
 			);
 			name = SelectPerson;
 			sourceTree = "<group>";
@@ -2157,6 +2162,7 @@
 				F2F3977D1B78F205006FAE3B /* DiscussionChatListViewController.m in Sources */,
 				F29F862E1B2410070058FC9F /* AFURLRequestSerialization.m in Sources */,
 				F29F86431B2410320058FC9F /* AFNetworkActivityIndicatorManager.m in Sources */,
+				F252333D1B931B3900A4E5AF /* RCDRadioSelectPersonViewController.m in Sources */,
 				F22FE2F61B40037100A1A997 /* pinyin.c in Sources */,
 				2B39C93E1B241212007BAC7A /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				F2F92EC51B4AB58F0047D7BF /* RCDAcceptContactViewController.m in Sources */,
@@ -2330,7 +2336,7 @@
 					"$(PROJECT_DIR)/MyRill/JPush",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "46caef10-069d-4e94-8a4d-fbd9bc55ceda";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Debug;
@@ -2355,7 +2361,7 @@
 					"$(PROJECT_DIR)/MyRill/JPush",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "46caef10-069d-4e94-8a4d-fbd9bc55ceda";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Release;

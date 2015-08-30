@@ -14,9 +14,10 @@
 #import "Masonry.h"
 #import "TaskContactorCollectionViewCell.h"
 #import "ESUserInfo.h"
-#import "RCDSelectPersonViewController.h"
+//#import "RCDSelectPersonViewController.h"
 #import "ChatViewController.h"
 #import "MRProgress.h"
+#import "RCDRadioSelectPersonViewController.h"
 
 @interface AddTaskViewController () <AddTaskDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UITextFieldDelegate, UITextViewDelegate>
 
@@ -216,10 +217,11 @@
     
     if (sender.tag == 1003) {
         __weak typeof(&*self)  weakSelf = self;
-        RCDSelectPersonViewController* selectPersonVC = [[RCDSelectPersonViewController alloc] init];
+        RCDRadioSelectPersonViewController* selectPersonVC = [[RCDRadioSelectPersonViewController alloc] init];
+        selectPersonVC.type = e_Selected_Person_Radio;
         [selectPersonVC setSeletedUsers:self.assignerDataSource];
         //设置回调
-        selectPersonVC.clickDoneCompletion = ^(RCDSelectPersonViewController* selectPersonViewController, NSArray* selectedUsers) {
+        selectPersonVC.clickDoneCompletion = ^(RCDRadioSelectPersonViewController* selectPersonViewController, NSArray* selectedUsers) {
             
             if (selectedUsers && selectedUsers.count)
             {
@@ -233,12 +235,13 @@
         [self.navigationController pushViewController:selectPersonVC animated:YES];
     }
     else if (sender.tag == 1004){
-        RCDSelectPersonViewController* selectPersonVC = [[RCDSelectPersonViewController alloc] init];
+        RCDRadioSelectPersonViewController* selectPersonVC = [[RCDRadioSelectPersonViewController alloc] init];
+                selectPersonVC.type = e_Selected_Check_Box;
         [selectPersonVC setSeletedUsers:self.followsDataSource];
         __weak typeof(&*self)  weakSelf = self;
         
         //设置回调
-        selectPersonVC.clickDoneCompletion = ^(RCDSelectPersonViewController* selectPersonViewController, NSArray* selectedUsers) {
+        selectPersonVC.clickDoneCompletion = ^(RCDRadioSelectPersonViewController* selectPersonViewController, NSArray* selectedUsers) {
             
             if (selectedUsers && selectedUsers.count)
             {
