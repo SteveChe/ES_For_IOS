@@ -358,6 +358,11 @@ void(^completionHandler)(RCUserInfo* userInfo);
         {
             cell.timeLabel.text = [DeviceInfo getShowTime:[NSDate dateWithTimeIntervalSince1970:model.sentTime]];
         }
+        if (model.unreadMessageCount > 0)
+        {
+            cell.lblRedBadage.hidden = NO;
+        }
+        
         [cell.ivAva setImage:[UIImage imageNamed:@"duihua_xitongxiaoxi"]];
     }
     else if ( indexPath.row == 1)
@@ -368,6 +373,11 @@ void(^completionHandler)(RCUserInfo* userInfo);
         {
             cell.timeLabel.text = [DeviceInfo getShowTime:[NSDate dateWithTimeIntervalSince1970:model.sentTime]];
         }
+        if (model.unreadMessageCount > 0)
+        {
+            cell.lblRedBadage.hidden = NO;
+        }
+
         [cell.ivAva setImage:[UIImage imageNamed:@"duihua_qiyexiaoxi"]];
         
     }
