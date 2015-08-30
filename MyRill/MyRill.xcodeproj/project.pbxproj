@@ -2336,7 +2336,7 @@
 					"$(PROJECT_DIR)/MyRill/JPush",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "46caef10-069d-4e94-8a4d-fbd9bc55ceda";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Debug;
@@ -2361,7 +2361,7 @@
 					"$(PROJECT_DIR)/MyRill/JPush",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "46caef10-069d-4e94-8a4d-fbd9bc55ceda";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Release;

@@ -77,6 +77,10 @@
     
     [userDefaults setObject:[ColorHandler isNullOrEmptyString:userDetailInfo.enterprise.enterpriseName]?@"":userDetailInfo.enterprise.enterpriseName
                      forKey:DEFAULTS_USERENTERPRISE];
+
+    [userDefaults setObject:[ColorHandler isNullOrEmptyString:userDetailInfo.enterprise.enterpriseName]?@"":userDetailInfo.enterprise.enterpriseId
+                     forKey:DEFAULTS_USERENTERPRISE_ID];
+
     [userDefaults setObject:[ColorHandler isNullOrEmptyString:userDetailInfo.enterprise.portraitUri]?@"":userDetailInfo.enterprise.portraitUri
                      forKey:DEFAULTS_ENTERPRISEAVATAR];
     

@@ -27,6 +27,7 @@
 #import "GetEnterpriseMessageDataParse.h"
 #import "DeviceInfo.h"
 #import "ProfessionWebViewController.h"
+#import "PushDefine.h"
 
 @interface RootViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate,GetRILLMessageListDelegate,ReplyToRILLMessageDelegate,GetOneEnterpriseMessageListDelegate,ReplyToOneEnterpriseMessageDelegate,UITextFieldDelegate>
 
@@ -53,6 +54,7 @@
 
 - (void)keyboardWillShow:(NSNotification *)notif;
 - (void)keyboardWillHide:(NSNotification *)notif;
+- (void)refreshData:(NSNotification *)notif;
 
 - (IBAction)onClickOnShowFunctionPanel:(UIButton *)sender;
 - (IBAction)onClickOnShowKeyboardPanel:(UIButton *)sender;
@@ -67,6 +69,8 @@
 {
     [[NSNotificationCenter defaultCenter]removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:NOTIFICATION_PUSH_ENTERPRISE_MESSAGE object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:NOTIFIACATION_PUSH_RIIL_MESSAGE object:nil];
 }
 
 - (void)viewDidLoad
@@ -80,6 +84,9 @@
     }];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData:) name:NOTIFICATION_PUSH_ENTERPRISE_MESSAGE object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData:) name:NOTIFIACATION_PUSH_RIIL_MESSAGE object:nil];
+
     
     [_tableView registerNib:[UINib nibWithNibName:NSStringFromClass([RootImageCell class]) bundle:[NSBundle mainBundle]] forCellReuseIdentifier:NSStringFromClass([RootImageCell class])];
     [_tableView registerNib:[UINib nibWithNibName:NSStringFromClass([RootOutChatCell class]) bundle:[NSBundle mainBundle]] forCellReuseIdentifier:NSStringFromClass([RootOutChatCell class])];
@@ -117,6 +124,7 @@
 
     [self updateEnterpriseChatInfoList];
 }
+
 
 -(void)updateEnterpriseChatInfoList
 {
@@ -261,6 +269,12 @@
     [self.view setNeedsLayout];
     [self.view layoutIfNeeded];
 }
+
+- (void)refreshData:(NSNotification *)notif
+{
+    [self updateEnterpriseChatInfoList];
+}
+
 
 - (IBAction)onClickOnShowFunctionPanel:(id)sender
 {

@@ -18,6 +18,7 @@
 #import "ESTagViewController.h"
 #import "RCDAddFriendViewController.h"
 #import "DeleteContactDataParse.h"
+#import "UserDefaultsDefine.h"
 
 @interface RCDAddressBookDetailViewController ()<DeleteContactDelegate>
 @property (nonatomic,strong) GetContactDetailDataParse* getContactDetailDataParse;
@@ -143,6 +144,8 @@
 #pragma mark - DeleteContactDelegate
 -(void)deleteContactSucceed
 {
+    [[CustomShowMessage getInstance] hideWaitingIndicator];
+    [[CustomShowMessage getInstance] showNotificationMessage:@"联系人删除成功！"];
     [self.navigationController popToRootViewControllerAnimated:YES];
 //    [self initContactDetail];
 }
@@ -279,6 +282,14 @@
 }
 -(IBAction)clickDeleteButton:(id)sender
 {
+    NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
+    NSString* enterpriseId = [userDefaultes stringForKey:DEFAULTS_USERENTERPRISE_ID];
+    if ([enterpriseId isEqualToString:_userDetailInfo.enterprise.enterpriseId])
+    {
+        [[CustomShowMessage getInstance] showNotificationMessage:@"同公司联系人，不能删除！"];
+        return;
+    }
+
     if(_deleteContactDataParse!=nil)
     {
         [_deleteContactDataParse deleteContact:_userId];

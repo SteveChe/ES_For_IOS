@@ -59,10 +59,12 @@
 -(void)judgeJoinedEnterprise
 {
     NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
-    NSString* enterpriseName = [userDefaultes stringForKey:DEFAULTS_USERENTERPRISE];
+//    NSString* enterpriseName = [userDefaultes stringForKey:DEFAULTS_USERENTERPRISE];
+    NSString* enterpriseId = [userDefaultes stringForKey:DEFAULTS_USERENTERPRISE_ID];
+
     _bJoinedEnterprise = YES;
-    if (enterpriseName == nil || [enterpriseName length] <= 0
-        || [enterpriseName isEqual:[NSNull null]])
+    if (enterpriseId == nil || [enterpriseId length] <= 0
+        || [enterpriseId isEqual:[NSNull null]])
     {
         _bJoinedEnterprise = NO;
     }

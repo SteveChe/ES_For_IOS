@@ -20,4 +20,7 @@
 #define DEFAULTS_ENTERPRISEQRCODE   @"EnterpriseQRCode"
 #define DEFAULTS_ENTERPRISEAVATAR   @"EnterpriseAvatar"
 
+#define DEFAULTS_USERENTERPRISE_ID     @"UserEnterpriseId"
+
+
 #endif

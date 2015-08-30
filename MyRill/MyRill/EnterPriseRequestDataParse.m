@@ -11,6 +11,7 @@
 #import "DataParseDefine.h"
 #import "ESUserInfo.h"
 #import "ESEnterPriseRequestInfo.h"
+#import "ESEnterpriseInfo.h"
 
 @implementation EnterPriseRequestDataParse
 -(void)requestJoinEnterPriseWithUserId:(NSString*)userId
@@ -130,10 +131,14 @@
                          senderUserInfo.phoneNumber = senderPhoneNumber;
                      }
                      
-                     NSString* senderEnterPrise = [senderDic objectForKey:@"enterprise"];
-                     if (senderEnterPrise!=nil && ![senderEnterPrise isEqual:[NSNull null]] && [senderEnterPrise length]>0) {
-                         senderUserInfo.enterprise = senderEnterPrise;
+                     
+                     NSDictionary* senderEnterPriseDic = [temDic valueForKey:@"enterprise"];
+                     if (senderEnterPriseDic != nil && [senderEnterPriseDic isKindOfClass:[NSDictionary class]])
+                     {
+                         ESEnterpriseInfo* enterpriseInfo = [[ESEnterpriseInfo alloc] initWithDic:senderEnterPriseDic];
+                         senderUserInfo.enterprise = enterpriseInfo;
                      }
+                     
                      
                      NSString* senderPosition = [senderDic objectForKey:@"position"];
                      if (senderPosition!=nil && ![senderPosition isEqual:[NSNull null]] && [senderPosition length]>0) {

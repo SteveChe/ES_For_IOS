@@ -107,7 +107,7 @@
     {
         cell.timeLabel.text = [DeviceInfo getShowTime:enterpriseMessage.message_time];
     }
-    if (!enterpriseMessage.bRead)
+    if (!enterpriseMessage.bRead && !enterpriseMessage.bSuggestion)
     {
         cell.lblRedBadage.hidden = NO;
     }
