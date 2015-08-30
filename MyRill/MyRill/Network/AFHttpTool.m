@@ -14,6 +14,7 @@
 #import "ESUserDetailInfo.h"
 #import "ColorHandler.h"
 #import "UserDefaultsDefine.h"
+#import "ESTaskComment.h"
 
 #define DEV_SERVER_ADDRESS @"http://120.25.249.144/"
 #define ContentType @"text/json"
@@ -523,28 +524,28 @@
                           failure:failure];
 }
 
-+ (void)closeTaskWithTaskID:(NSString *)taskID
-                    success:(void (^)(id))success
-                    failure:(void (^)(NSError *))failure {
-    
-//    NSError* error;
-//    NSString *cartJSON = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:@{@"status":@"1"}
-//                                                                                        options:NSJSONWritingPrettyPrinted
-//                                                                                          error:&error]
-//                                               encoding:NSUTF8StringEncoding];
-    NSError *error = nil;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:@{@"status":@"1"} options:NSJSONWritingPrettyPrinted error:&error];
-    NSString* strJson = [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
-    NSDictionary *param = @{@"_method":@"PATCH",
-                            @"_content_type":@"application/json",
-                            @"_content":@{@"status":@"1"}};
-    [AFHttpTool requestWithMethod:RequestMethodTypeGet
-                     protocolType:RequestProtocolTypeText
-                              url:[NSString stringWithFormat:@"/api/assignments/%@/.json",taskID]
-                           params:param
-                          success:success
-                          failure:failure];
-}
+//+ (void)closeTaskWithTaskID:(NSString *)taskID
+//                    success:(void (^)(id))success
+//                    failure:(void (^)(NSError *))failure {
+//    
+////    NSError* error;
+////    NSString *cartJSON = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:@{@"status":@"1"}
+////                                                                                        options:NSJSONWritingPrettyPrinted
+////                                                                                          error:&error]
+////                                               encoding:NSUTF8StringEncoding];
+//    NSError *error = nil;
+//    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:@{@"status":@"1"} options:NSJSONWritingPrettyPrinted error:&error];
+//    NSString* strJson = [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
+//    NSDictionary *param = @{@"_method":@"PATCH",
+//                            @"_content_type":@"application/json",
+//                            @"_content":@{@"status":@"1"}};
+//    [AFHttpTool requestWithMethod:RequestMethodTypeGet
+//                     protocolType:RequestProtocolTypeText
+//                              url:[NSString stringWithFormat:@"/api/assignments/%@/.json",taskID]
+//                           params:param
+//                          success:success
+//                          failure:failure];
+//}
 
 + (void)getTaskCommentListWithTaskID:(NSString *)taskID
                             listSize:(NSString *)size
@@ -563,10 +564,10 @@
 }
 
 + (void)sendTaskCommentWithTaskID:(NSString *)taskID
-                          comment:(NSString *)comment
+                          comment:(NSString *)content
                           success:(void (^)(id))success
                           failure:(void (^)(NSError *))failure {
-    NSDictionary *param = @{@"content":comment};
+    NSDictionary *param = @{@"content":content};
     
     [AFHttpTool requestWithMethod:RequestMethodTypePost protocolType:RequestProtocolTypeText
                               url:[NSString stringWithFormat:@"/api/assignments/%@/comments/.json",taskID]
