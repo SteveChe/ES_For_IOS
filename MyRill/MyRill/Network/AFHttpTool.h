@@ -180,6 +180,13 @@ typedef enum : NSUInteger {
                           success:(void (^)(id response))success
                           failure:(void (^)(NSError *error))failure;
 
+/****** 提交任务图片 ****/
++ (void)sendTaskImageWithTaskId:(NSString *)taskID
+                        comment:(ESTaskComment *)comment
+                         images:(NSArray *)images
+                        success:(void (^)(AFHTTPRequestOperation *,id))success
+                        failure:(void (^)(AFHTTPRequestOperation *,NSError *))failure;
+
 #pragma mark - 个人设置模块
 /****** 修改密码 ****/
 + (void)changePassword:(NSString *)oldPassword

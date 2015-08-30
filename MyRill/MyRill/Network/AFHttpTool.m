@@ -576,6 +576,47 @@
                           failure:failure];
 }
 
++ (void)sendTaskImageWithTaskId:(NSString *)taskID
+                        comment:(ESTaskComment *)comment
+                         images:(NSArray *)images
+                        success:(void (^)(AFHTTPRequestOperation *, id))success
+                        failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure {
+    NSURL* baseURL = [NSURL URLWithString:DEV_SERVER_ADDRESS];
+    
+    AFHTTPRequestOperationManager* manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:baseURL];
+    manager.requestSerializer.HTTPShouldHandleCookies = YES;
+
+    NSData *cookiesdata = [[NSUserDefaults standardUserDefaults] objectForKey:@"sessionCookies"];
+    if([cookiesdata length]) {
+        NSArray *cookies = [NSKeyedUnarchiver unarchiveObjectWithData:cookiesdata];
+        NSHTTPCookie *cookie;
+        for (cookie in cookies) {
+            if ([cookie.name isEqual:@"csrftoken"])
+            {
+                [manager.requestSerializer setValue:cookie.value forHTTPHeaderField:@"X-Csrftoken"];
+            }
+            [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
+        }
+    }
+    
+    NSData *imageData = [images firstObject];
+    
+            [manager POST:[NSString stringWithFormat:@"/api/assignments/%@/comments/%@/images/.json",taskID,[comment.commentID stringValue]]
+               parameters:nil
+constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+            NSDateFormatter *format = [[NSDateFormatter alloc] init];
+            [format setDateFormat:@"yyyyMMddHHmmss"];
+            NSString *timeStamp = [format stringFromDate:[NSDate date]];
+            NSString *picName = [timeStamp stringByAppendingString:@".png"];
+            [formData appendPartWithFileData:imageData
+                                        name:timeStamp
+                                    fileName:picName
+                                    mimeType:@"image/png"];
+                }
+                  success:success
+                  failure:failure];
+}
+
 + (void)changeUserMsgWithUserInfo:(ESUserDetailInfo *)userInfo
                           success:(void (^)(id))success
                           failure:(void (^)(NSError *))failure {
