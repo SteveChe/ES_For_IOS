@@ -26,8 +26,9 @@
 #import "GetTaskDetailDataParse.h"
 #import "ChatViewController.h"
 #import "UserDefaultsDefine.h"
+#import "ESNavigationController.h"
 
-@interface TaskViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, GetTaskCommentListDelegate, SendTaskCommenDelegate, EditTaskDelegate, GetTaskDetailDelegate>
+@interface TaskViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GetTaskCommentListDelegate, SendTaskCommenDelegate, EditTaskDelegate, GetTaskDetailDelegate>
 
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *holdViews;
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *txtHoldViews;
@@ -38,7 +39,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *startPersonAndDateLbl;
 @property (weak, nonatomic) IBOutlet UITextField *taskTitleTxtField;
 @property (weak, nonatomic) IBOutlet UITextView *taskDescriptioinTextView;
-@property (weak, nonatomic) IBOutlet UISwitch *taskSwitch;
 @property (weak, nonatomic) IBOutlet UILabel *endDateLbl;
 @property (nonatomic, strong) UIDatePicker *dateSelectedPicker;
 @property (weak, nonatomic) IBOutlet UISwitch *taskStatusSwitch;
@@ -136,7 +136,7 @@
         
         self.taskTitleTxtField.enabled = YES;
         self.taskDescriptioinTextView.editable = YES;
-        self.taskSwitch.enabled = YES;
+        self.taskStatusSwitch.enabled = YES;
         
         [self.arrowImages enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             UIImageView *arrow = (UIImageView *)obj;
@@ -267,13 +267,11 @@
     }
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     return CGSizeMake(54,54);
 }
 
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
-{
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
     return 0;
 }
 
@@ -291,11 +289,10 @@
 }
 
 #pragma mark - UITextViewDelegate methods
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
-{
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     //textView的发送事件
-    if ([text isEqualToString:@"\n"])
-    {
+    if ([text isEqualToString:@"\n"]) {
+
         [self.sendTaskCommentDP sendTaskCommentWithTaskID:[self.taskModel.taskID stringValue]
                                                   comment:self.sendTxtView.text];
         self.sendTxtView.text = nil;
@@ -327,6 +324,48 @@
                          }
                          completion:nil];
     }
+}
+
+#pragma mark - UIImagePickerControllerDelegate methods
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    
+    //    self.tabBarController.tabBarItem.enabled = NO;
+    //    [self.tabBarController.tabBar.items makeObjectsPerformSelector:@selector(setEnabled:) withObject:@NO];
+    
+    NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
+    
+    //当选择的类型是图片
+    if ([type isEqualToString:@"public.image"])
+    {
+        //获取编辑框内部的图片，作为上传对象(上传图片不歪了也就)
+        UIImage *image = [info objectForKey:@"UIImagePickerControllerEditedImage"];
+        //先把图片转成NSData
+//        UIImage *img = [self scaleToSize:image size:CGSizeMake(300, 300)];
+        NSData *data;
+        if (UIImagePNGRepresentation(image) == nil)
+        {
+            data = UIImageJPEGRepresentation(image, 1.0);
+        }
+        else
+        {
+            data = UIImagePNGRepresentation(image);
+        }
+        
+        ESTaskComment *taskComment = [[ESTaskComment alloc] init];
+        taskComment.commentID = [NSNumber numberWithInteger:(self.dataSource.count +1)];
+//        [self.sendTaskCommentDP sendTaskCommentWithTaskID:[self.taskModel.taskID stringValue]
+//                                                  comment:taskComment
+//                                                   images:[NSArray arrayWithObject:data]];
+        //关闭相册界面
+        [picker dismissViewControllerAnimated:YES completion:nil];
+    }
+    //    MRActivityIndicatorView
+    [self showTips:@"正在上传..." mode:MRProgressOverlayViewModeIndeterminateSmallDefault isDismiss:NO isSucceuss:NO];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - response events methods
@@ -521,11 +560,70 @@
     }
 }
 
-
-- (IBAction)switchOnClicked:(UISwitch *)sender {
-//    if (sender.on == YES) {
-//        [self.closeTaskDP closeTaskWithTaskID:[self.taskModel.taskID stringValue]];
-//    }
+- (IBAction)sendImg:(UIButton *)sender {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
+                                                                             message:nil
+                                                                      preferredStyle:UIAlertControllerStyleActionSheet];
+    //添加Button
+    [alertController addAction:[UIAlertAction actionWithTitle:@"拍照"
+                                                        style:UIAlertActionStyleDefault
+                                                      handler:^(UIAlertAction *action) {
+                                                          //处理点击拍照
+                                                          UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
+                                                          //    if (![UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]) {
+                                                          //        sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                                                          //    }
+                                                          //sourceType = UIImagePickerControllerSourceTypeCamera; //照相机
+                                                          //sourceType = UIImagePickerControllerSourceTypePhotoLibrary; //图片库
+                                                          //sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum; //保存的相片
+                                                          UIImagePickerController *picker = [[UIImagePickerController alloc] init];//初始化
+                                                          picker.delegate = self;
+                                                          picker.allowsEditing = YES;//设置可编辑
+                                                          picker.sourceType = sourceType;
+                                                          if([[[UIDevice
+                                                                currentDevice] systemVersion] floatValue]>=8.0) {
+                                                              
+                                                              self.modalPresentationStyle=UIModalPresentationOverCurrentContext;
+                                                              
+                                                          }
+                                                          [self presentViewController:picker animated:YES completion:nil];//进入照相界面
+                                                      }]];
+    [alertController addAction:[UIAlertAction actionWithTitle:@"从相册选取"
+                                                        style:UIAlertActionStyleDefault
+                                                      handler:^(UIAlertAction *action){
+                                                          //处理点击从相册选取
+                                                          UIImagePickerController *pickerImage = [[UIImagePickerController alloc] init];
+                                                          if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+                                                              pickerImage.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                                                              //pickerImage.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+                                                              pickerImage.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:pickerImage.sourceType];
+                                                              
+                                                          }
+                                                          pickerImage.delegate = self;
+                                                          pickerImage.allowsEditing = YES;
+                                                          if([[[UIDevice
+                                                                currentDevice] systemVersion] floatValue]>=8.0) {
+                                                              
+                                                              self.modalPresentationStyle=UIModalPresentationOverCurrentContext;
+                                                              
+                                                          }
+                                                          
+                                                          pickerImage.navigationBar.barTintColor = [ColorHandler colorFromHexRGB:@"FF5454"];
+                                                          //item颜色
+                                                          pickerImage.navigationBar.tintColor = [UIColor whiteColor];
+                                                          //设定title颜色
+                                                          [pickerImage.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+                                                          //取消translucent效果
+                                                          pickerImage.navigationBar.translucent = NO;
+                                                          [self presentViewController:pickerImage animated:YES completion:nil];//进入照相界面
+                                                      }]];
+    [alertController addAction:[UIAlertAction actionWithTitle:@"取消"
+                                                        style:UIAlertActionStyleCancel
+                                                      handler:nil]];
+    
+    [self presentViewController:alertController
+                       animated:YES
+                     completion:nil];
 }
 
 //当键盘出现或改变时调用

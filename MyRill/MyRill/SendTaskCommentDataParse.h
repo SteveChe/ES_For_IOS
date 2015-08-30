@@ -20,6 +20,6 @@
 @property (nonatomic, weak) id<SendTaskCommenDelegate> delegate;
 
 - (void)sendTaskCommentWithTaskID:(NSString *)taskID
-                          comment:(NSString *)comment;
+                          comment:(NSString *)content;
 
 @end

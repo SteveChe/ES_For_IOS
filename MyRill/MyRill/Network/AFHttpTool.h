@@ -10,6 +10,7 @@
 @class AFHTTPRequestOperation;
 @class ESTask;
 @class ESUserDetailInfo;
+@class ESTaskComment;
 
 typedef NS_ENUM(NSInteger, RequestMethodType){
     RequestMethodTypePost = 1,
@@ -175,7 +176,7 @@ typedef enum : NSUInteger {
 
 /****** 提交任务评论 ****/
 + (void)sendTaskCommentWithTaskID:(NSString *)taskID
-                          comment:(NSString *)comment
+                          comment:(NSString *)content
                           success:(void (^)(id response))success
                           failure:(void (^)(NSError *error))failure;
 

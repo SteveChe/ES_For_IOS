@@ -289,6 +289,13 @@
                                                               self.modalPresentationStyle=UIModalPresentationOverCurrentContext;
                                                               
                                                           }
+                                                          pickerImage.navigationBar.barTintColor = [ColorHandler colorFromHexRGB:@"FF5454"];
+                                                          //item颜色
+                                                          pickerImage.navigationBar.tintColor = [UIColor whiteColor];
+                                                          //设定title颜色
+                                                          [pickerImage.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+                                                          //取消translucent效果
+                                                          pickerImage.navigationBar.translucent = NO;
                                                           [self presentViewController:pickerImage animated:YES completion:nil];//进入照相界面
                                                       }]];
     [alertController addAction:[UIAlertAction actionWithTitle:@"取消"

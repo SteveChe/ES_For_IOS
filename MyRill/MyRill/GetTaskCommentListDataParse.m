@@ -19,7 +19,7 @@
                                     listSize:size
                                      success:^(id response) {
                                          NSDictionary *responseDic = (NSDictionary *)response;
-                                         NSLog(@"===== %@",response);
+//                                         NSLog(@"===== %@",response);
                                          NSNumber* errorCodeNum = [responseDic valueForKey:NETWORK_ERROR_CODE];
                                          if (errorCodeNum == nil || [errorCodeNum isEqual:[NSNull null]] )
                                          {
