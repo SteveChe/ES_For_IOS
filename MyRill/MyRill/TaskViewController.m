@@ -29,7 +29,7 @@
 #import "ESNavigationController.h"
 #import "RCDRadioSelectPersonViewController.h"
 
-@interface TaskViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GetTaskCommentListDelegate, SendTaskCommenDelegate, EditTaskDelegate, GetTaskDetailDelegate>
+@interface TaskViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GetTaskCommentListDelegate, SendTaskCommenDelegate, EditTaskDelegate, GetTaskDetailDelegate, SendTaskImageDelegate>
 
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *holdViews;
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *txtHoldViews;
@@ -60,8 +60,10 @@
 @property (nonatomic, strong) GetTaskCommentListDataParse *getTaskCommentListDP;
 @property (nonatomic, strong) EditTaskDataParse *editTaskDP;
 @property (nonatomic, strong) SendTaskCommentDataParse *sendTaskCommentDP;
+@property (nonatomic, strong) SendTaskImageDataParse *sendTaskImageDP;
 
 @property (nonatomic, strong) ESTask *taskModel;
+@property (nonatomic, strong) NSMutableArray *images;
 @property (nonatomic, copy) NSString *userID;
 @property (nonatomic, strong) UITableViewCell *prototypeCell;
 
@@ -187,12 +189,16 @@
 }
 
 - (void)SendTaskCommentSuccess:(ESTaskComment *)taskComment {
-    [self.dataSource insertObject:taskComment atIndex:0];
-    [self.tableView reloadData];
-    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0
-                                                              inSection:0]
-                          atScrollPosition:UITableViewScrollPositionBottom
-                                  animated:YES];
+
+    [self.sendTaskImageDP sendTaskCommentWithTaskID:[self.taskModel.taskID stringValue]
+                                            comment:taskComment
+                                             images:self.images];
+//    [self.dataSource insertObject:taskComment atIndex:0];
+//    [self.tableView reloadData];
+//    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0
+//                                                              inSection:0]
+//                          atScrollPosition:UITableViewScrollPositionBottom
+//                                  animated:YES];
 }
 
 #pragma mark - UITableViewDataSource&UITableViewDelegate methods
@@ -352,16 +358,14 @@
             data = UIImagePNGRepresentation(image);
         }
         
-        ESTaskComment *taskComment = [[ESTaskComment alloc] init];
-        taskComment.commentID = [NSNumber numberWithInteger:(self.dataSource.count +1)];
-//        [self.sendTaskCommentDP sendTaskCommentWithTaskID:[self.taskModel.taskID stringValue]
-//                                                  comment:taskComment
-//                                                   images:[NSArray arrayWithObject:data]];
+        [self.images removeAllObjects];
+        [self.images addObject:data];
+        
         //关闭相册界面
         [picker dismissViewControllerAnimated:YES completion:nil];
     }
     //    MRActivityIndicatorView
-    [self showTips:@"正在上传..." mode:MRProgressOverlayViewModeIndeterminateSmallDefault isDismiss:NO isSucceuss:NO];
+   // [self showTips:@"正在上传..." mode:MRProgressOverlayViewModeIndeterminateSmallDefault isDismiss:NO isSucceuss:NO];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
@@ -824,6 +828,14 @@
     return _sendTaskCommentDP;
 }
 
+- (SendTaskImageDataParse *)sendTaskImageDP {
+    if (!_sendTaskImageDP) {
+        _sendTaskImageDP = [[SendTaskImageDataParse alloc] init];
+        _sendTaskImageDP.delegate = self;
+    }
+    return _sendTaskImageDP;
+}
+
 - (GetTaskDetailDataParse *)getTaskDetailDP {
     if (!_getTaskDetailDP) {
         _getTaskDetailDP = [[GetTaskDetailDataParse alloc] init];
@@ -831,6 +843,13 @@
     }
     
     return _getTaskDetailDP;
+}
+
+- (NSMutableArray *)images {
+    if (!_images) {
+        _images = [[NSMutableArray alloc] init];
+    }
+    return _images;
 }
 
 @end

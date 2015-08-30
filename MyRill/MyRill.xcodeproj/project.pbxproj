@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B14CC9E1B93346000CBD524 /* SendTaskImageDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B14CC9D1B93346000CBD524 /* SendTaskImageDataParse.m */; };
 		2B1B88E11B803BA900FAF650 /* ChangeUserMsgDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B1B88E01B803BA900FAF650 /* ChangeUserMsgDataParse.m */; };
 		2B1B88E51B803CEA00FAF650 /* UserNameAndPositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B1B88E31B803CEA00FAF650 /* UserNameAndPositionViewController.m */; };
 		2B1B88E61B803CEA00FAF650 /* UserNameAndPositionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B1B88E41B803CEA00FAF650 /* UserNameAndPositionViewController.xib */; };
@@ -312,6 +313,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2B14CC9C1B93346000CBD524 /* SendTaskImageDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendTaskImageDataParse.h; sourceTree = "<group>"; };
+		2B14CC9D1B93346000CBD524 /* SendTaskImageDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendTaskImageDataParse.m; sourceTree = "<group>"; };
 		2B1B88DF1B803BA900FAF650 /* ChangeUserMsgDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeUserMsgDataParse.h; sourceTree = "<group>"; };
 		2B1B88E01B803BA900FAF650 /* ChangeUserMsgDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeUserMsgDataParse.m; sourceTree = "<group>"; };
 		2B1B88E21B803CEA00FAF650 /* UserNameAndPositionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserNameAndPositionViewController.h; sourceTree = "<group>"; };
@@ -1408,6 +1411,8 @@
 				2BEAD0901B776C2E00905E21 /* GetTaskCommentListDataParse.m */,
 				2BEAD0921B779A8E00905E21 /* SendTaskCommentDataParse.h */,
 				2BEAD0931B779A8E00905E21 /* SendTaskCommentDataParse.m */,
+				2B14CC9C1B93346000CBD524 /* SendTaskImageDataParse.h */,
+				2B14CC9D1B93346000CBD524 /* SendTaskImageDataParse.m */,
 			);
 			name = Task;
 			sourceTree = "<group>";
@@ -2119,6 +2124,7 @@
 				F2FE51721B91687800DD68BD /* ESPushManager.m in Sources */,
 				F22FE3081B45989200A1A997 /* ESContactList.m in Sources */,
 				2BEAD07F1B77369F00905E21 /* ZCActionOnCalendar.m in Sources */,
+				2B14CC9E1B93346000CBD524 /* SendTaskImageDataParse.m in Sources */,
 				F22FE2A81B3FFAC200A1A997 /* RCDPersonDetailViewController.m in Sources */,
 				2BE55A081B647324008CDB4B /* TaskOverviewTableViewCell.m in Sources */,
 				F234616E1B5AA0FD00C88FAC /* FMDatabase.m in Sources */,
