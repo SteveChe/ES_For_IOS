@@ -27,6 +27,7 @@
 #import "ChatViewController.h"
 #import "UserDefaultsDefine.h"
 #import "SendTaskImageDataParse.h"
+#import "RCDRadioSelectPersonViewController.h"
 
 @interface TaskViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GetTaskCommentListDelegate, SendTaskCommenDelegate, EditTaskDelegate, GetTaskDetailDelegate, SendTaskImageDelegate>
 
@@ -208,7 +209,8 @@
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([self.prototypeCell isKindOfClass:[MessageListTableViewCell class]]) {
         MessageListTableViewCell *cell = (MessageListTableViewCell *)self.prototypeCell;
-        cell.contentLbl.text = self.dataSource[indexPath.row];
+        ESTaskComment *taskComment = (ESTaskComment *)self.dataSource[indexPath.row];
+        cell.contentLbl.text = taskComment.content;
         return [cell.contentLbl systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height + 1;
     } else {
         return 0;
