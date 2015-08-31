@@ -20,6 +20,7 @@
 #import "UserDefaultsDefine.h"
 #import "TaskViewController.h"
 #import "ESTask.h"
+#import "PushDefine.h"
 
 @interface TaskOverviewViewController () <UISearchBarDelegate, UISearchDisplayDelegate, UITableViewDataSource, UITableViewDelegate, TaskDashboardDelegate, TaskListDelegate>
 
@@ -74,6 +75,11 @@
     self.searchDisplayVC.delegate = self;
     self.searchDisplayVC.searchResultsTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.searchDisplayVC.searchResultsTableView registerNib:[UINib nibWithNibName:@"TaskListTableViewCell" bundle:nil] forCellReuseIdentifier:@"TaskListTableViewCell"];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updatePushTask)
+                                                 name:NOTIFICATION_PUSH_ASSIGNMENT
+                                               object:nil];
 }
 
 //- (void)searchDisplayControllerDidEndSearch:(UISearchDisplayController *)controller {
@@ -91,6 +97,14 @@
     
     self.tabBarController.tabBar.hidden = NO;
     [self.getTaskDashboardDP getTaskDashboard];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:NOTIFICATION_PUSH_ASSIGNMENT
+                                                  object:nil];
 }
 
 - (void)getTaskDashboardSuccess:(ESTaskDashboard *)taskDashboard {
@@ -208,6 +222,10 @@
 }
 
 #pragma mark - response events
+- (void)updatePushTask {
+    [self.getTaskDashboardDP getTaskDashboard];
+}
+
 - (void)addTask {
     AddTaskViewController *addTaskVC = [[AddTaskViewController alloc] init];
     addTaskVC.modalPresentationStyle = UIModalPresentationCurrentContext;

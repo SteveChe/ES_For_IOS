@@ -14,6 +14,7 @@
 #import "AddProfessionViewController.h"
 #import "EditProfessionViewController.h"
 #import "ProfessionWebViewController.h"
+#import "PushDefine.h"
 
 @interface ProfessionViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, ProfessionDataDelegate>
 
@@ -37,6 +38,11 @@
     self.navigationItem.rightBarButtonItem = sortBtnItem;
 
     [self.view addSubview:self.collectionView];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updatePushProfession)
+                                                 name:NOTIFICATION_PUSH_PROFESSION
+                                               object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -44,6 +50,12 @@
     
     self.tabBarController.tabBar.hidden = NO;
     [self.professionDP getProfessionList];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFICATION_PUSH_PROFESSION object:nil];
 }
 
 #pragma mark - ProfessionDataDelegate methods
@@ -121,6 +133,11 @@
     EditProfessionViewController *editProfessionVC = [[EditProfessionViewController alloc] init];
     [editProfessionVC loadProfessionContent:self.dataSource];
     [self.navigationController pushViewController:editProfessionVC animated:YES];
+}
+
+//更新push到客户端的业务
+- (void)updatePushProfession {
+    [self.professionDP getProfessionList];
 }
 
 #pragma mark - setters&getters

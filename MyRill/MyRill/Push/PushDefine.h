@@ -69,5 +69,4 @@ typedef enum E_PUSH_CATEGORY_TYPE
 #define NOTIFICATION_PUSH_PROFESSION @"notification_profession"
 #define NOTIFICATION_PUSH_PROFESSION_APPLY @"notification_profession_apply"
 
-
 #endif

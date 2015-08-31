@@ -14,6 +14,7 @@
 #import "Masonry.h"
 #import "AddProfessionViewController.h"
 #import "ModifyProfessionViewController.h"
+#import "PushDefine.h"
 
 @interface EditProfessionViewController () <UITableViewDataSource, UITableViewDelegate, ProfessionDataDelegate,  AddProfessionDelegate, ModifyProfessionDelegate>
 
@@ -42,6 +43,11 @@
     
     [self.view addSubview:self.tableView];
     self.tableView.tableFooterView = self.footerView;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updatePushProfession)
+                                                 name:NOTIFICATION_PUSH_PROFESSION
+                                               object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -50,8 +56,32 @@
     self.tabBarController.tabBar.hidden = YES;
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:NOTIFICATION_PUSH_PROFESSION
+                                                  object:nil];
+}
+
 #pragma mark - ProfessionDataDelegate methods
 - (void)professionOperationSuccess:(id)context {
+    //更新业务列表
+    if ([context isKindOfClass:[NSArray class]]) {
+        self.dataSource = nil;
+        [self.dataSource addObjectsFromArray:context];
+        ESProfession *profession = [[ESProfession alloc] init];
+        profession.icon_url = @"add";
+        [self.dataSource addObject:profession];
+        [self.cacheDataSource removeAllObjects];
+        [self.cacheDataSource addObjectsFromArray:self.dataSource];
+        
+        [self.tableView reloadData];
+        
+        return;
+    }
+    
+    //删除业务列表项
     [self.dataSource removeObjectAtIndex:self.deleteIndexPath.row];
     [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:self.deleteIndexPath] withRowAnimation:UITableViewRowAnimationFade];
 }
@@ -171,6 +201,10 @@
     AddProfessionViewController *addProfessionVC = [[AddProfessionViewController alloc] init];
     addProfessionVC.delegate = self;
     [self.navigationController pushViewController:addProfessionVC animated:YES];
+}
+
+- (void)updatePushProfession {
+    [self.professionDP getProfessionList];
 }
 
 #pragma mark - private methods

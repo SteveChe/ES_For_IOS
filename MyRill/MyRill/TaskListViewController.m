@@ -16,6 +16,7 @@
 #import "RemindDateViewController.h"
 #import "ESTask.h"
 #import "Masonry.h"
+#import "PushDefine.h"
 
 @interface TaskListViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate, TaskListDelegate, SWTableViewCellDelegate>
 
@@ -52,6 +53,11 @@
     
     [self setAutomaticallyAdjustsScrollViewInsets:YES];
     [self setExtendedLayoutIncludesOpaqueBars:YES];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updatePushTask)
+                                                 name:NOTIFICATION_PUSH_ASSIGNMENT
+                                               object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -63,6 +69,14 @@
     self.tableView.hidden = YES;
     
     [self.getTaskListDP getTaskListWithIdentify:self.identity type:self.type];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:NOTIFICATION_PUSH_ASSIGNMENT
+                                                  object:nil];
 }
 
 - (void)getTaskListSuccess:(NSArray *)taskList {
@@ -154,6 +168,10 @@
 }
 
 #pragma mark - response events
+- (void)updatePushTask {
+    [self.getTaskListDP getTaskListWithIdentify:self.identity type:self.type];
+}
+
 - (void)addTask {
     AddTaskViewController *addTaskVC = [[AddTaskViewController alloc] init];
     if (self.type == ESTaskListWithChatId) {

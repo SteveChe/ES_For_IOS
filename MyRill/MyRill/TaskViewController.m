@@ -28,6 +28,7 @@
 #import "UserDefaultsDefine.h"
 #import "SendTaskImageDataParse.h"
 #import "RCDRadioSelectPersonViewController.h"
+#import "PushDefine.h"
 
 @interface TaskViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GetTaskCommentListDelegate, SendTaskCommenDelegate, EditTaskDelegate, GetTaskDetailDelegate, SendTaskImageDelegate>
 
@@ -89,6 +90,11 @@
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updatePushTask)
+                                                 name:NOTIFICATION_PUSH_ASSIGNMENT
+                                               object:nil];
+    
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     [self.view addGestureRecognizer:tap];
     //[self.sendTxtView addTarget:self action:@selector(send) forControlEvents:UIControlEventEditingDidEndOnExit];
@@ -120,6 +126,7 @@
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFICATION_PUSH_ASSIGNMENT object:nil];
 }
 
 - (void)getTaskDetailSuccess:(ESTask *)task {
@@ -671,6 +678,13 @@
                      } completion:^(BOOL finished) {
                          
                      }];
+}
+
+- (void)updatePushTask {
+    //请求任务详情
+    [self.getTaskDetailDP getTaskDetailWithTaskID:self.requestTaskID];
+    //请求任务列表
+    [self.getTaskCommentListDP getTaskCommentListWithTaskID:self.requestTaskID listSize:nil];
 }
 
 #pragma mark - private methods
