@@ -25,6 +25,7 @@
 #import "DeviceInfo.h"
 #import "EnterpriseChatListViewController.h"
 #import "RootViewController.h"
+#import "PushDefine.h"
 
 void(^completionHandler)(RCUserInfo* userInfo);
 
@@ -37,9 +38,17 @@ void(^completionHandler)(RCUserInfo* userInfo);
 
 //-(void)initEnterpriseMessage;
 -(void)updateEnterpriseMessage;
+- (void)refreshData:(NSNotification *)notif;
+
 @end
 
 @implementation ChatListViewController
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:NOTIFICATION_PUSH_ENTERPRISE_MESSAGE object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:NOTIFIACATION_PUSH_RIIL_MESSAGE object:nil];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -65,6 +74,9 @@ void(^completionHandler)(RCUserInfo* userInfo);
     _getEnterpriseMessageDataParse = [[GetEnterpriseMessageDataParse alloc] init];
     _getEnterpriseMessageDataParse.getLastestMessageDelegate = self;
 //    [self initEnterpriseMessage];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData:) name:NOTIFICATION_PUSH_ENTERPRISE_MESSAGE object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData:) name:NOTIFIACATION_PUSH_RIIL_MESSAGE object:nil];
+
 }
 
 
@@ -128,6 +140,11 @@ void(^completionHandler)(RCUserInfo* userInfo);
 //    [self refreshConversationTableViewIfNeeded];
 //    [self updateBadgeValueForTabBarItem];
 }
+- (void)refreshData:(NSNotification *)notif
+{
+    [self updateEnterpriseMessage];
+}
+
 
 - (void)updateBadgeValueForTabBarItem
 {
@@ -361,7 +378,14 @@ void(^completionHandler)(RCUserInfo* userInfo);
         if (model.unreadMessageCount > 0)
         {
             cell.lblRedBadage.hidden = NO;
+            self.tabBarItem.badgeValue = @"1";
         }
+        else
+        {
+            cell.lblRedBadage.hidden = YES;
+            self.tabBarItem.badgeValue = nil;
+        }
+        
         
         [cell.ivAva setImage:[UIImage imageNamed:@"duihua_xitongxiaoxi"]];
     }
@@ -376,8 +400,13 @@ void(^completionHandler)(RCUserInfo* userInfo);
         if (model.unreadMessageCount > 0)
         {
             cell.lblRedBadage.hidden = NO;
+            self.tabBarItem.badgeValue = @"1";
         }
-
+        else
+        {
+            cell.lblRedBadage.hidden = YES;
+            self.tabBarItem.badgeValue = nil;
+        }
         [cell.ivAva setImage:[UIImage imageNamed:@"duihua_qiyexiaoxi"]];
         
     }

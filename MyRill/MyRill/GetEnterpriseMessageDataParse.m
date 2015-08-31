@@ -530,6 +530,7 @@
     }
     
     NSNumber* bReadNum = [messageDic objectForKey:@"is_read"];
+    enterpriseMessage.bRead = YES;
     if (bReadNum != nil && ![bReadNum isEqual:[NSNull null]])
     {
         enterpriseMessage.bRead = [bReadNum boolValue];

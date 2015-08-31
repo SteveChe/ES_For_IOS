@@ -10,6 +10,7 @@
 #import "AFHttpTool.h"
 #import "DataParseDefine.h"
 #import "ESUserInfo.h"
+#import "ESEnterpriseInfo.h"
 
 @implementation GetRequestContactListDataParse
 //获取已经请求添加自己的联系人列表
@@ -73,11 +74,14 @@
                      {
                          userInfo.phoneNumber = userPhoneNum;
                      }
-                     NSString* userEnterprise = [userDic valueForKey:@"enterprise"];
-                     if (userEnterprise != nil && ![userEnterprise isEqual:[NSNull null]])
+
+                     NSDictionary* userEnterpriseDic = [temDic valueForKey:@"enterprise"];
+                     if (userEnterpriseDic != nil && [userEnterpriseDic isKindOfClass:[NSDictionary class]])
                      {
-                         userInfo.enterprise = userEnterprise;
+                         ESEnterpriseInfo* enterpriseInfo = [[ESEnterpriseInfo alloc] initWithDic:userEnterpriseDic];
+                         userInfo.enterprise = enterpriseInfo;
                      }
+
                      
                      NSString* userPortraitUri = [userDic valueForKey:@"avatar"];
                      if (userPortraitUri != nil && ![userPortraitUri isEqual:[NSNull null]])

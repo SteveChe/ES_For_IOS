@@ -26,13 +26,20 @@
 #import "RCDAddressBookEnterpriseDetailViewController.h"
 #import "DiscussionChatListViewController.h"
 #import "PushDefine.h"
+#import "GetRequestContactListDataParse.h"
+#import "EnterPriseRequestDataParse.h"
 
-@interface RCDAddressBookViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,UISearchControllerDelegate,UISearchDisplayDelegate,GetFollowedEnterpriseListDelegate>
+@interface RCDAddressBookViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,UISearchControllerDelegate,UISearchDisplayDelegate,GetFollowedEnterpriseListDelegate,GetRequestContactListDelegate,GetEnterPriseRequestListDelegate>
 
 //#字符索引对应的user object
 @property (nonatomic,strong) NSMutableArray *tempOtherArr;
 @property (nonatomic,strong) GetContactListDataParse* getContactListDataParse;
 @property (nonatomic,strong) GetEnterpriseListDataParse* getEnterpriseListDataParse;
+@property (nonatomic,strong)GetRequestContactListDataParse* getRequestContactListDataParse;
+@property (nonatomic,strong)EnterPriseRequestDataParse* enterpriseRequestDataParse;
+@property (nonatomic,strong) NSMutableArray *requestContactList;
+@property (nonatomic,strong) NSMutableArray *enterpriseRequestContactList;
+
 
 @end
 
@@ -43,8 +50,19 @@
     // Do any additional setup after loading the view.
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationItem.title = @"联系人";
-    self.tabBarController.tabBar.hidden = NO;
+    
+    _getContactListDataParse = [[GetContactListDataParse alloc] init];
+    _getContactListDataParse.delegate = self;
+    
+    _getEnterpriseListDataParse = [[GetEnterpriseListDataParse alloc] init];
+    _getEnterpriseListDataParse.getFollowedEnterPriseListDelegate = self;
+    
+    _getRequestContactListDataParse = [[GetRequestContactListDataParse alloc] init];
+    _getRequestContactListDataParse.delegate = self;
 
+    _enterpriseRequestDataParse = [EnterPriseRequestDataParse alloc];
+    _enterpriseRequestDataParse.getEnterPriseRequestListDelegate = self;
+    
     // Add searchbar
     UISearchBar* searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.bounds.size.width, 40)];
     searchBar.placeholder = @"搜索";
@@ -67,11 +85,6 @@
 {
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = NO;
-    _getContactListDataParse = [[GetContactListDataParse alloc] init];
-    _getContactListDataParse.delegate = self;
-    
-    _getEnterpriseListDataParse = [[GetEnterpriseListDataParse alloc] init];
-    _getEnterpriseListDataParse.getFollowedEnterPriseListDelegate = self;
 
     [self getAllData];
     
@@ -110,12 +123,17 @@
 {
     [_getContactListDataParse getContactList];
     [_getEnterpriseListDataParse getFollowedEnterpriseList];
+    [_getRequestContactListDataParse getRequestedContactList];
+    [_enterpriseRequestDataParse getEnterPriseRequestList];
 }
 
 #pragma mark - GetFollowedEnterpriseListDelegate
 -(void)getFollowedEnterpriseListSucceed:(NSArray*)enterpriseList
 {
     _enterprises = [NSMutableArray arrayWithArray:enterpriseList];
+    if (_enterprises==nil || [_enterprises count]<=0) {
+        return;
+    }
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
@@ -132,6 +150,10 @@
 -(void)getContactList:(NSArray*)contactList
 {
     _friends = [NSMutableArray arrayWithArray:contactList];
+    if (_friends==nil || [_friends count]<=0)
+    {
+        return;
+    }
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -145,6 +167,52 @@
 
 }
 
+#pragma mark -- GetRequestContactListDelegate
+-(void)getRequestedContactList:(NSArray*)contactList
+{
+    _requestContactList = [NSMutableArray arrayWithArray:contactList];
+    if (_requestContactList==nil || [_requestContactList count]<=0)
+    {
+        return;
+    }
+    if (contactList!=nil && [contactList count]>0)
+    {
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.tableView reloadData];
+            });
+        });
+    }
+}
+
+-(void)getRequestedContactListFailed:(NSString*)errorMessage
+{
+    
+}
+
+#pragma mark - GetEnterPriseRequestListDelegate
+
+-(void)getEnterPriseRequestListSucceed:(NSArray*)requestList
+{
+    _enterpriseRequestContactList = [NSMutableArray arrayWithArray:requestList];
+    if (_enterpriseRequestContactList==nil || [_enterpriseRequestContactList count]<=0)
+    {
+        return;
+    }
+    if (requestList!=nil && [requestList count]>0)
+    {
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.tableView reloadData];
+            });
+        });
+    }
+    
+}
+-(void)getEnterPriseRequestListFailed:(NSString*)errorMessage
+{
+    
+}
 
 
 #pragma mark - UITableViewDataSource
@@ -181,12 +249,33 @@
                 {
                     cell.addressBookName.text = @"新的联系人";
                     cell.ivAva.image = [UIImage imageNamed:@"lianxiren_xindelianxiren"];
+                    if (_requestContactList!=nil && [_requestContactList count]>0)
+                    {
+                        cell.redBadgeLabel.hidden = NO;
+//                        self.tabBarItem.badgeValue = @"1";
+                    }
+                    else
+                    {
+                        cell.redBadgeLabel.hidden = YES;
+//                        self.tabBarItem.badgeValue = nil;
+                    }
                 }
                     break;
                 case 1:
                 {
                     cell.addressBookName.text = @"加入企业请求";
                     cell.ivAva.image = [UIImage imageNamed:@"lianxiren_xindelianxiren"];
+                    //_enterpriseRequestContactList
+                    if (_enterpriseRequestContactList!=nil && [_enterpriseRequestContactList count]>0)
+                    {
+                        cell.redBadgeLabel.hidden = NO;
+                        //                        self.tabBarItem.badgeValue = @"1";
+                    }
+                    else
+                    {
+                        cell.redBadgeLabel.hidden = YES;
+                        //                        self.tabBarItem.badgeValue = nil;
+                    }
                 }
                     break;
 
