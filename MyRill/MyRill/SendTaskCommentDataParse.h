@@ -11,7 +11,7 @@
 
 @protocol SendTaskCommenDelegate <NSObject>
 
-- (void)SendTaskCommentSuccess:(ESTaskComment *)taskComment;
+- (void)sendTaskCommentSuccess:(ESTaskComment *)taskComment;
 
 @end
 

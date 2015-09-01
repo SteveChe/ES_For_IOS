@@ -340,7 +340,6 @@ void(^completionHandler)(RCUserInfo* userInfo);
 //左滑删除
 -(void)rcConversationListTableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     //RCConversationModel *model = self.conversationListDataSource[indexPath.row];
     //[_myDataSource removeObject:model];
     [self.conversationListDataSource removeObjectAtIndex:indexPath.row];

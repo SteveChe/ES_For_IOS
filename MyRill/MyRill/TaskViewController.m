@@ -15,7 +15,6 @@
 #import "ESTagViewController.h"
 #import "CustomShowMessage.h"
 #import "ESUserInfo.h"
-//#import "RCDSelectPersonViewController.h"
 #import "ChatViewController.h"
 #import "GetTaskCommentListDataParse.h"
 #import "SendTaskCommentDataParse.h"
@@ -29,8 +28,12 @@
 #import "SendTaskImageDataParse.h"
 #import "RCDRadioSelectPersonViewController.h"
 #import "PushDefine.h"
+#import "ELCImagePickerController.h"
+#import "ELCAlbumPickerController.h"
+#import "ImageTableViewCell.h"
+#import "UIImageView+WebCache.h"
 
-@interface TaskViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GetTaskCommentListDelegate, SendTaskCommenDelegate, EditTaskDelegate, GetTaskDetailDelegate, SendTaskImageDelegate>
+@interface TaskViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GetTaskCommentListDelegate, SendTaskCommenDelegate, EditTaskDelegate, GetTaskDetailDelegate, SendTaskImageDelegate ,ELCImagePickerControllerDelegate>
 
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *holdViews;
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *txtHoldViews;
@@ -68,7 +71,10 @@
 @property (nonatomic, copy) NSString *userID;
 @property (nonatomic, strong) UITableViewCell *prototypeCell;
 
-@property (nonatomic, strong) NSMutableArray *test;
+@property (nonatomic, strong) ImageTableViewCell *onClickedCell;
+@property (nonatomic, strong) ESTaskComment *cacheTaskComment;
+@property (nonatomic, assign) CGRect oldframe;
+@property (nonatomic, strong) NSMutableArray *imagesOld;
 @end
 
 @implementation TaskViewController
@@ -77,6 +83,48 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title = @"任务详情";
+    
+    
+    
+    UIBarButtonItem *startConversationItem = [[UIBarButtonItem alloc] initWithTitle:@"会话"
+                                                                              style:UIBarButtonItemStyleDone
+                                                                             target:self
+                                                                             action:@selector(startConversationEvent)];
+    UIBarButtonItem *saveItem = [[UIBarButtonItem alloc] initWithTitle:@"保存"
+                                                                 style:UIBarButtonItemStyleDone
+                                                                target:self
+                                                                action:@selector(saveBarItemOnClicked)];
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:saveItem, startConversationItem, nil];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+    [self.tableView.tableHeaderView addGestureRecognizer:tap];
+    //[self.sendTxtView addTarget:self action:@selector(send) forControlEvents:UIControlEventEditingDidEndOnExit];
+
+    [self.view addSubview:self.dateSelectedPicker];
+    __weak UIView *ws = self.view;
+    [self.dateSelectedPicker mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(ws.mas_leading);
+        make.trailing.equalTo(ws.mas_trailing);
+        make.bottom.equalTo(ws.mas_bottom).with.offset(216);
+        make.height.equalTo(@216);
+    }];
+    [self.view layoutIfNeeded];
+
+    self.tableView.tableFooterView = nil;
+    [self.tableView registerNib:[UINib nibWithNibName:@"MessageListTableViewCell" bundle:nil] forCellReuseIdentifier:@"MessageListTableViewCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"ImageTableViewCell" bundle:nil] forCellReuseIdentifier:@"ImageTableViewCell"];
+    
+    NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
+    self.userID = [userDefaultes stringForKey:DEFAULTS_USERID];
+    //请求任务详情
+    [self.getTaskDetailDP getTaskDetailWithTaskID:self.requestTaskID];
+    //请求任务列表
+    [self.getTaskCommentListDP getTaskCommentListWithTaskID:self.requestTaskID listSize:nil];
+    self.automaticallyAdjustsScrollViewInsets = NO;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
     //增加监听，当键盘出现或改变时收出消息
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -94,31 +142,6 @@
                                              selector:@selector(updatePushTask)
                                                  name:NOTIFICATION_PUSH_ASSIGNMENT
                                                object:nil];
-    
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
-    [self.view addGestureRecognizer:tap];
-    //[self.sendTxtView addTarget:self action:@selector(send) forControlEvents:UIControlEventEditingDidEndOnExit];
-
-    [self.view addSubview:self.dateSelectedPicker];
-    __weak UIView *ws = self.view;
-    [self.dateSelectedPicker mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(ws.mas_leading);
-        make.trailing.equalTo(ws.mas_trailing);
-        make.bottom.equalTo(ws.mas_bottom).with.offset(216);
-        make.height.equalTo(@216);
-    }];
-    [self.view layoutIfNeeded];
-
-    self.tableView.tableFooterView = nil;
-    [self.tableView registerNib:[UINib nibWithNibName:@"MessageListTableViewCell" bundle:nil] forCellReuseIdentifier:@"MessageListTableViewCell"];
-    
-    NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
-    self.userID = [userDefaultes stringForKey:DEFAULTS_USERID];
-    //请求任务详情
-    [self.getTaskDetailDP getTaskDetailWithTaskID:self.requestTaskID];
-    //请求任务列表
-    [self.getTaskCommentListDP getTaskCommentListWithTaskID:self.requestTaskID listSize:nil];
-    self.automaticallyAdjustsScrollViewInsets = NO;
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -134,15 +157,6 @@
     
     //如果是发起人进入任务详情，则提供修改接口
     if ([self.userID isEqualToString:self.taskModel.initiator.userId]) {
-        UIBarButtonItem *startConversationItem = [[UIBarButtonItem alloc] initWithTitle:@"会话"
-                                                                                  style:UIBarButtonItemStyleDone
-                                                                                 target:self
-                                                                                 action:@selector(startConversationEvent)];
-        UIBarButtonItem *saveItem = [[UIBarButtonItem alloc] initWithTitle:@"保存"
-                                                                     style:UIBarButtonItemStyleDone
-                                                                    target:self
-                                                                    action:@selector(saveBarItemOnClicked)];
-        self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:saveItem, startConversationItem, nil];
         
         self.taskTitleTxtField.enabled = YES;
         self.taskDescriptioinTextView.editable = YES;
@@ -195,17 +209,44 @@
     [self.tableView layoutIfNeeded];
 }
 
-- (void)SendTaskCommentSuccess:(ESTaskComment *)taskComment {
+- (void)sendTaskImageSuccess:(NSString *)imageURL {
+    [self.imagesOld addObject:imageURL];
+    [self.images removeObject:[self.images firstObject]];
+    if (self.images.count > 0) {
+        [self.sendTaskImageDP sendTaskCommentWithTaskID:[self.taskModel.taskID stringValue]
+                                                comment:self.cacheTaskComment
+                                              imageData:[self.images firstObject]];
+    }
+    
+    if (self.images.count == 0) {
+        self.cacheTaskComment.images = self.imagesOld;
+        [self dismissProgress:YES];
+        [self.dataSource insertObject:self.cacheTaskComment atIndex:0];
 
-    [self.sendTaskImageDP sendTaskCommentWithTaskID:[self.taskModel.taskID stringValue]
-                                            comment:taskComment
-                                             images:self.images];
-//    [self.dataSource insertObject:taskComment atIndex:0];
-//    [self.tableView reloadData];
-//    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0
-//                                                              inSection:0]
-//                          atScrollPosition:UITableViewScrollPositionBottom
-//                                  animated:YES];
+        [self.tableView reloadData];
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0
+                                                                  inSection:0]
+                              atScrollPosition:UITableViewScrollPositionBottom
+                                      animated:YES];
+    }
+}
+
+- (void)sendTaskCommentSuccess:(ESTaskComment *)taskComment {
+    self.cacheTaskComment = taskComment;
+    
+    if ([taskComment.content isEqualToString:@""]) {
+        [self.sendTaskImageDP sendTaskCommentWithTaskID:[self.taskModel.taskID stringValue]
+                                                comment:taskComment
+                                              imageData:[self.images firstObject]];
+        return;
+    }
+    
+    [self.dataSource insertObject:taskComment atIndex:0];
+    [self.tableView reloadData];
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0
+                                                              inSection:0]
+                          atScrollPosition:UITableViewScrollPositionBottom
+                                  animated:YES];
 }
 
 #pragma mark - UITableViewDataSource&UITableViewDelegate methods
@@ -214,13 +255,21 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([self.prototypeCell isKindOfClass:[MessageListTableViewCell class]]) {
+    if ([self.prototypeCell  isKindOfClass:[MessageListTableViewCell class]]) {
+
         MessageListTableViewCell *cell = (MessageListTableViewCell *)self.prototypeCell;
         ESTaskComment *taskComment = (ESTaskComment *)self.dataSource[indexPath.row];
         cell.contentLbl.text = taskComment.content;
-        return [cell.contentLbl systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height + 1;
+        if ([cell.contentLbl systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height > 0) {
+            return [cell.contentLbl systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height + 1;
+        } else {
+            return 108;
+        }
+        
+    } else if ([self.prototypeCell isKindOfClass:[ImageTableViewCell class]]){
+        return 108;
     } else {
-        return 0;
+        return 108;
     }
 }
 
@@ -234,17 +283,78 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     self.prototypeCell  = nil;
-    MessageListTableViewCell *normalCell = (MessageListTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"MessageListTableViewCell" forIndexPath:indexPath];
-    [normalCell updateMessage:self.dataSource[indexPath.row]];
-    self.prototypeCell = normalCell;
-    
-    CALayer *layer = [CALayer layer];
-    layer.frame = CGRectMake(0, 0, self.prototypeCell.bounds.size.width, 1);
-    layer.backgroundColor = [ColorHandler colorFromHexRGB:@"F5F5F5"].CGColor;
-    [self.prototypeCell.layer addSublayer:layer];
-    [self.prototypeCell layoutIfNeeded];
+    ESTaskComment *taskComment = (ESTaskComment *)self.dataSource[indexPath.row];
+    if (taskComment.images == nil) {
+        MessageListTableViewCell *normalCell = (MessageListTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"MessageListTableViewCell" forIndexPath:indexPath];
+        [normalCell updateMessage:self.dataSource[indexPath.row]];
+        self.prototypeCell = normalCell;
+        
+        CALayer *layer = [CALayer layer];
+        layer.frame = CGRectMake(0, 0, self.prototypeCell.bounds.size.width, 1);
+        layer.backgroundColor = [ColorHandler colorFromHexRGB:@"F5F5F5"].CGColor;
+        [self.prototypeCell.layer addSublayer:layer];
+        [self.prototypeCell layoutIfNeeded];
+    } else {
+        ImageTableViewCell *imgCell = (ImageTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"ImageTableViewCell" forIndexPath:indexPath];
+        [imgCell updateMessage:self.dataSource[indexPath.row]];
+        self.prototypeCell = imgCell;
+        
+        CALayer *layer = [CALayer layer];
+        layer.frame = CGRectMake(0, 0, self.prototypeCell.bounds.size.width, 1);
+        layer.backgroundColor = [ColorHandler colorFromHexRGB:@"F5F5F5"].CGColor;
+        [self.prototypeCell.layer addSublayer:layer];
+        [self.prototypeCell layoutIfNeeded];
+    }
     
     return self.prototypeCell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self hideKeyboard];
+    ESTaskComment *taskComment = (ESTaskComment *)self.dataSource[indexPath.row];
+    if (taskComment.images != nil) {
+        if (taskComment.images.count > 0) {
+            self.onClickedCell = (ImageTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+            //[self showImage:taskComment.images];
+        }
+    }
+}
+
+
+- (void)showImage:(NSArray *)images {
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
+    //        [self.navigationController preferredStatusBarStyle];
+    [self setNeedsStatusBarAppearanceUpdate];
+    NSString *imageURL = [images firstObject];
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    UIView *backgroundView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
+    self.oldframe = [self.onClickedCell.placeholderImg convertRect:self.onClickedCell.placeholderImg.bounds toView:window];
+    backgroundView.backgroundColor = [UIColor blackColor];
+    backgroundView.alpha = 0;
+    UIImageView *imageView = [[UIImageView alloc]initWithFrame:self.oldframe];
+    [imageView sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:nil];
+    imageView.tag = 101;
+    [backgroundView addSubview:imageView];
+    [window addSubview:backgroundView];
+    
+    UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hideImage:)];
+    [backgroundView addGestureRecognizer: tap];
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        imageView.frame=CGRectMake(0,([UIScreen mainScreen].bounds.size.height-imageView.image.size.height*[UIScreen mainScreen].bounds.size.width/imageView.image.size.width)/2, [UIScreen mainScreen].bounds.size.width, imageView.image.size.height*[UIScreen mainScreen].bounds.size.width/imageView.image.size.width);
+        backgroundView.alpha=1;
+    } completion:nil];
+}
+
+- (void)hideImage:(UITapGestureRecognizer*)tap{
+    UIView *backgroundView = tap.view;
+    UIImageView *imageView = (UIImageView*)[tap.view viewWithTag:101];
+    [UIView animateWithDuration:0.3 animations:^{
+        imageView.frame = self.oldframe;
+        backgroundView.alpha = 0;
+    } completion:^(BOOL finished) {
+        [backgroundView removeFromSuperview];
+    }];
 }
 
 #pragma mark - UICollectionViewDataSource&UICollectionViewDelegateFlowLayout
@@ -412,14 +522,17 @@
     }
 
     //创建set过滤分配和关注中的重复联系人
-
-    [self.assignerDataSource addObjectsFromArray:self.followsDataSource];
-//    NSSet *set = [NSSet setWithArray:self.assignerDataSource];
+    
+    NSMutableArray *totolContractorArr = [[NSMutableArray alloc] initWithCapacity:self.assignerDataSource.count + self.followsDataSource.count];
+    [totolContractorArr addObjectsFromArray:self.assignerDataSource];
+    [totolContractorArr addObjectsFromArray:self.followsDataSource];
     
     NSMutableString *discussionTitle = [NSMutableString string];
     NSMutableArray *userIdList = [NSMutableArray new];
-    for (ESUserInfo *contactor in self.assignerDataSource) {
-        [discussionTitle appendString:[NSString stringWithFormat:@"%@%@", contactor.userName,@","]];
+    for (ESUserInfo *contactor in totolContractorArr) {
+        if (![discussionTitle containsString:contactor.userName]) {
+            [discussionTitle appendString:[NSString stringWithFormat:@"%@%@", contactor.userName,@","]];
+        }
         [userIdList addObject:contactor.userId];
     }
     NSSet *set = [NSSet setWithArray:userIdList];
@@ -454,7 +567,7 @@
         }];
     } else {
         //如果有chat_id直接进入会话界面
-        NSString* chat_id =self.taskModel.chatID;
+        NSString* chat_id = self.taskModel.chatID;
         
         [[RCIMClient sharedRCIMClient] getDiscussion:chat_id success:^(RCDiscussion* discussion) {
             if (discussion) {
@@ -529,6 +642,19 @@
 }
 
 - (void)saveBarItemOnClicked {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"yyyy/MM/dd HH:mm:ss";
+    
+    NSDate *commitDate = [dateFormatter dateFromString:self.taskModel.endDate];
+    if ([commitDate compare:[NSDate date]] == NSOrderedAscending) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                        message:@"结束日期需要晚于当前日期!"
+                                                       delegate:self
+                                              cancelButtonTitle:@"知道了"
+                                              otherButtonTitles:nil, nil];
+        [alert show];
+        return;
+    }
     ESTask *task = [[ESTask alloc] init];
     task.taskID = self.taskModel.taskID;
     task.title = self.taskTitleTxtField.text;
@@ -607,30 +733,54 @@
                                                         style:UIAlertActionStyleDefault
                                                       handler:^(UIAlertAction *action){
                                                           //处理点击从相册选取
-                                                          UIImagePickerController *pickerImage = [[UIImagePickerController alloc] init];
-                                                          if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
-                                                              pickerImage.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-                                                              //pickerImage.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-                                                              pickerImage.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:pickerImage.sourceType];
-                                                              
-                                                          }
-                                                          pickerImage.delegate = self;
-                                                          pickerImage.allowsEditing = YES;
-                                                          if([[[UIDevice
-                                                                currentDevice] systemVersion] floatValue]>=8.0) {
-                                                              
-                                                              self.modalPresentationStyle=UIModalPresentationOverCurrentContext;
-                                                              
+//                                                          UIImagePickerController *pickerImage = [[UIImagePickerController alloc] init];
+//                                                          if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+//                                                              pickerImage.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+//                                                              //pickerImage.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+//                                                              pickerImage.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:pickerImage.sourceType];
+//                                                              
+//                                                          }
+//                                                          pickerImage.delegate = self;
+//                                                          pickerImage.allowsEditing = YES;
+//                                                          if([[[UIDevice
+//                                                                currentDevice] systemVersion] floatValue]>=8.0) {
+//                                                              
+//                                                              self.modalPresentationStyle=UIModalPresentationOverCurrentContext;
+//                                                              
+//                                                          }
+//                                                          
+//                                                          pickerImage.navigationBar.barTintColor = [ColorHandler colorFromHexRGB:@"FF5454"];
+//                                                          //item颜色
+//                                                          pickerImage.navigationBar.tintColor = [UIColor whiteColor];
+//                                                          //设定title颜色
+//                                                          [pickerImage.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+//                                                          //取消translucent效果
+//                                                          pickerImage.navigationBar.translucent = NO;
+//                                                          [self presentViewController:pickerImage animated:YES completion:nil];//进入照相界面
+                                                          ELCAlbumPickerController *albumController = [[ELCAlbumPickerController alloc] initWithNibName:@"ELCAlbumPickerController" bundle:[NSBundle mainBundle]];
+                                                          ELCImagePickerController *pickImage = [[ELCImagePickerController alloc] initWithRootViewController:albumController];
+                                                          [albumController setParent:pickImage];
+                                                          [pickImage setDelegate:self];
+                                                          
+//                                                          ELCImagePickerController *pickImage= [[ELCImagePickerController alloc] init];
+                                                          pickImage.maximumImagesCount = 9; //Set the maximum number of images to select, defaults to 4
+                                                          pickImage.returnsOriginalImage = NO; //Only return the fullScreenImage, not the fullResolutionImage
+                                                          pickImage.returnsImage = YES; //Return UIimage if YES. If NO, only return asset location information
+                                                          pickImage.onOrder = YES; //For multiple image selection, display and return selected order of images
+                                                          pickImage.imagePickerDelegate = self;
+                                                          if([[[UIDevice currentDevice] systemVersion] floatValue]>=8.0) {
+                                                           self.modalPresentationStyle = UIModalPresentationOverCurrentContext;
                                                           }
                                                           
-                                                          pickerImage.navigationBar.barTintColor = [ColorHandler colorFromHexRGB:@"FF5454"];
+                                                          pickImage.navigationBar.barTintColor = [ColorHandler colorFromHexRGB:@"FF5454"];
                                                           //item颜色
-                                                          pickerImage.navigationBar.tintColor = [UIColor whiteColor];
+                                                          pickImage.navigationBar.tintColor = [UIColor whiteColor];
                                                           //设定title颜色
-                                                          [pickerImage.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+                                                          [pickImage.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
                                                           //取消translucent效果
-                                                          pickerImage.navigationBar.translucent = NO;
-                                                          [self presentViewController:pickerImage animated:YES completion:nil];//进入照相界面
+                                                          pickImage.navigationBar.translucent = NO;
+                                                          //Present modally
+                                                          [self presentViewController:pickImage animated:YES completion:nil];
                                                       }]];
     [alertController addAction:[UIAlertAction actionWithTitle:@"取消"
                                                         style:UIAlertActionStyleCancel
@@ -639,6 +789,55 @@
     [self presentViewController:alertController
                        animated:YES
                      completion:nil];
+}
+
+- (void)elcImagePickerController:(ELCImagePickerController *)picker didFinishPickingMediaWithInfo:(NSArray *)info {
+   [self.images removeAllObjects];
+    [info enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSDictionary *dic = (NSDictionary *)obj;
+        UIImage *image = dic[@"UIImagePickerControllerOriginalImage"];
+        NSData *data;
+        if (UIImagePNGRepresentation(image) == nil) {
+            data = UIImageJPEGRepresentation(image, 1.0);
+        } else {
+            data = UIImagePNGRepresentation(image);
+        }
+        
+        [self.images addObject:data];
+    }];
+    
+    [self.sendTaskCommentDP sendTaskCommentWithTaskID:[self.taskModel.taskID stringValue] comment:@" "];
+    [self showTips:@"正在上传..." mode:MRProgressOverlayViewModeIndeterminateSmallDefault isDismiss:NO isSucceuss:NO];
+    [picker dismissViewControllerAnimated:YES completion:nil];
+//    NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
+//    
+//    //当选择的类型是图片
+//    if ([type isEqualToString:@"public.image"])
+//    {
+//        //获取编辑框内部的图片，作为上传对象(上传图片不歪了也就)
+//        UIImage *image = [info objectForKey:@"UIImagePickerControllerEditedImage"];
+//        //先把图片转成NSData
+//        //        UIImage *img = [self scaleToSize:image size:CGSizeMake(300, 300)];
+//        NSData *data;
+//        if (UIImagePNGRepresentation(image) == nil)
+//        {
+//            data = UIImageJPEGRepresentation(image, 1.0);
+//        }
+//        else
+//        {
+//            data = UIImagePNGRepresentation(image);
+//        }
+//        
+//        [self.images removeAllObjects];
+//        [self.images addObject:data];
+//        
+//        //关闭相册界面
+//        [picker dismissViewControllerAnimated:YES completion:nil];
+//    }
+}
+
+- (void)elcImagePickerControllerDidCancel:(ELCImagePickerController *)picker {
+    [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
 //当键盘出现或改变时调用
@@ -865,6 +1064,13 @@
         _images = [[NSMutableArray alloc] init];
     }
     return _images;
+}
+
+- (NSMutableArray *)imagesOld {
+    if (!_imagesOld) {
+        _imagesOld = [[NSMutableArray alloc] init];
+    }
+    return _imagesOld;
 }
 
 @end

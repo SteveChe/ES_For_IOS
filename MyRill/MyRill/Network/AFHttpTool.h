@@ -183,7 +183,7 @@ typedef enum : NSUInteger {
 /****** 提交任务图片 ****/
 + (void)sendTaskImageWithTaskId:(NSString *)taskID
                         comment:(ESTaskComment *)comment
-                         images:(NSArray *)images
+                      imageData:(NSData *)imageData
                         success:(void (^)(AFHTTPRequestOperation *,id))success
                         failure:(void (^)(AFHTTPRequestOperation *,NSError *))failure;
 

@@ -24,19 +24,24 @@
     
     [self.view addSubview:self.professionWeb];
    
-    UIImage *reloadImg = [UIImage imageNamed:@"刷新-可点"];
-    reloadImg = [reloadImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    UIBarButtonItem *backItem   = [[UIBarButtonItem alloc] initWithImage:reloadImg
+    UIImage *backImg = [UIImage imageNamed:@"后退-可点"];
+    backImg = [backImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIBarButtonItem *backItem   = [[UIBarButtonItem alloc] initWithImage:backImg
                                                                    style:UIBarButtonItemStylePlain
                                                                   target:self
                                                                   action:@selector(backToPre:)];
     backItem.tag = 301;
-    UIBarButtonItem *forwardItem = [[UIBarButtonItem alloc] initWithImage:reloadImg
+    
+    UIImage *forwardImg = [UIImage imageNamed:@"前进-可点"];
+    forwardImg = [forwardImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIBarButtonItem *forwardItem = [[UIBarButtonItem alloc] initWithImage:forwardImg
                                                                     style:UIBarButtonItemStylePlain
                                                                    target:self
                                                                    action:@selector(forwardToNext:)];
     forwardItem.tag = 302;
 
+    UIImage *reloadImg = [UIImage imageNamed:@"刷新-可点"];
+    reloadImg = [reloadImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     UIBarButtonItem *reloadItem = [[UIBarButtonItem alloc] initWithImage:reloadImg
                                                                    style:UIBarButtonItemStylePlain
                                                                   target:self

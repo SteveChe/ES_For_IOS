@@ -29,7 +29,7 @@
                                       NSDictionary *dataDic = responseDic[NETWORK_OK_DATA];
                                       ESTaskComment *taskComment = [[ESTaskComment alloc] initWithDic:dataDic];
                                       
-                                      [self.delegate SendTaskCommentSuccess:taskComment];
+                                      [self.delegate sendTaskCommentSuccess:taskComment];
                                       
                                   } failure:^(NSError *error) {
                                       NSLog(@"%@",[error debugDescription]);

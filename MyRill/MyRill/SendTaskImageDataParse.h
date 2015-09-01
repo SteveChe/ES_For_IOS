@@ -11,7 +11,7 @@
 
 @protocol SendTaskImageDelegate <NSObject>
 
-- (void)SendTaskCommentSuccess:(ESTaskComment *)taskComment;
+- (void)sendTaskImageSuccess:(NSString *)imageURL;
 
 @end
 
@@ -21,6 +21,6 @@
 
 - (void)sendTaskCommentWithTaskID:(NSString *)taskID
                           comment:(ESTaskComment *)taskComment
-                           images:(NSArray *)images;
+                        imageData:(NSData *)imageData;
 
 @end

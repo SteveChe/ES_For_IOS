@@ -79,6 +79,24 @@
 		2B9CBB671B3AEC74007D7A45 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		2B9CBB691B42D897007D7A45 /* UserMsgViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B9CBB681B42D897007D7A45 /* UserMsgViewController.xib */; };
 		2B9CBB6C1B4571D0007D7A45 /* SignOutDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B9CBB6B1B4571D0007D7A45 /* SignOutDataParse.m */; };
+		2BC2276C1B942A3600E3163A /* ELCAlbumPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC227521B942A3600E3163A /* ELCAlbumPickerController.m */; };
+		2BC2276D1B942A3600E3163A /* ELCAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC227541B942A3600E3163A /* ELCAsset.m */; };
+		2BC2276E1B942A3600E3163A /* ELCAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC227561B942A3600E3163A /* ELCAssetCell.m */; };
+		2BC2276F1B942A3600E3163A /* ELCAssetTablePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC2275A1B942A3600E3163A /* ELCAssetTablePicker.m */; };
+		2BC227701B942A3600E3163A /* ELCConsole.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC2275C1B942A3600E3163A /* ELCConsole.m */; };
+		2BC227711B942A3600E3163A /* ELCImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC2275E1B942A3600E3163A /* ELCImagePickerController.m */; };
+		2BC227721B942A3600E3163A /* ELCOverlayImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC227611B942A3600E3163A /* ELCOverlayImageView.m */; };
+		2BC227731B942A3600E3163A /* ELCAlbumPickerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BC227631B942A3600E3163A /* ELCAlbumPickerController.xib */; };
+		2BC227741B942A3600E3163A /* ELCAssetPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BC227641B942A3600E3163A /* ELCAssetPicker.xib */; };
+		2BC227751B942A3600E3163A /* ELCAssetTablePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BC227651B942A3600E3163A /* ELCAssetTablePicker.xib */; };
+		2BC227761B942A3600E3163A /* Overlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BC227661B942A3600E3163A /* Overlay.png */; };
+		2BC227771B942A3600E3163A /* Overlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BC227671B942A3600E3163A /* Overlay@2x.png */; };
+		2BC227781B942A3600E3163A /* ELCImagePickerDemoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC227691B942A3600E3163A /* ELCImagePickerDemoAppDelegate.m */; };
+		2BC227791B942A3600E3163A /* ELCImagePickerDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC2276B1B942A3600E3163A /* ELCImagePickerDemoViewController.m */; };
+		2BC227801B94578600E3163A /* ImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC2277E1B94578600E3163A /* ImageTableViewCell.m */; };
+		2BC227811B94578600E3163A /* ImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BC2277F1B94578600E3163A /* ImageTableViewCell.xib */; };
+		2BC227831B9582D100E3163A /* TaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC227821B9582D100E3163A /* TaskViewController.m */; };
+		2BC227861B95951C00E3163A /* ESImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC227851B95951C00E3163A /* ESImage.m */; };
 		2BC8212F1B57FFDC0090E2C1 /* ProfessionWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC8212E1B57FFDC0090E2C1 /* ProfessionWebViewController.m */; };
 		2BC821331B5B839F0090E2C1 /* QRCodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BC821321B5B839F0090E2C1 /* QRCodeViewController.xib */; };
 		2BC821361B5BE6B60090E2C1 /* ChangeUserImageDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC821351B5BE6B60090E2C1 /* ChangeUserImageDataParse.m */; };
@@ -97,7 +115,6 @@
 		2BE8C22D1B4EB3A200858CEE /* AddProfessionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE8C22B1B4EB3A100858CEE /* AddProfessionViewController.xib */; };
 		2BE8C2301B4EC58500858CEE /* ESViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE8C22F1B4EC58500858CEE /* ESViewController.m */; };
 		2BE8C2331B52506600858CEE /* EditProfessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE8C2321B52506600858CEE /* EditProfessionViewController.m */; };
-		2BEAD04C1B738E3100905E21 /* TaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEAD04A1B738E3100905E21 /* TaskViewController.m */; };
 		2BEAD04D1B738E3100905E21 /* TaskViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BEAD04B1B738E3100905E21 /* TaskViewController.xib */; };
 		2BEAD0511B74F37C00905E21 /* AddTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEAD04F1B74F37C00905E21 /* AddTaskViewController.m */; };
 		2BEAD0521B74F37C00905E21 /* AddTaskViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BEAD0501B74F37C00905E21 /* AddTaskViewController.xib */; };
@@ -442,6 +459,38 @@
 		2B9CBB681B42D897007D7A45 /* UserMsgViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserMsgViewController.xib; sourceTree = "<group>"; };
 		2B9CBB6A1B4571D0007D7A45 /* SignOutDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignOutDataParse.h; sourceTree = "<group>"; };
 		2B9CBB6B1B4571D0007D7A45 /* SignOutDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignOutDataParse.m; sourceTree = "<group>"; };
+		2BC227511B942A3600E3163A /* ELCAlbumPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAlbumPickerController.h; sourceTree = "<group>"; };
+		2BC227521B942A3600E3163A /* ELCAlbumPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCAlbumPickerController.m; sourceTree = "<group>"; };
+		2BC227531B942A3600E3163A /* ELCAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAsset.h; sourceTree = "<group>"; };
+		2BC227541B942A3600E3163A /* ELCAsset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCAsset.m; sourceTree = "<group>"; };
+		2BC227551B942A3600E3163A /* ELCAssetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAssetCell.h; sourceTree = "<group>"; };
+		2BC227561B942A3600E3163A /* ELCAssetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCAssetCell.m; sourceTree = "<group>"; };
+		2BC227571B942A3600E3163A /* ELCAssetPickerFilterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAssetPickerFilterDelegate.h; sourceTree = "<group>"; };
+		2BC227581B942A3600E3163A /* ELCAssetSelectionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAssetSelectionDelegate.h; sourceTree = "<group>"; };
+		2BC227591B942A3600E3163A /* ELCAssetTablePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAssetTablePicker.h; sourceTree = "<group>"; };
+		2BC2275A1B942A3600E3163A /* ELCAssetTablePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCAssetTablePicker.m; sourceTree = "<group>"; };
+		2BC2275B1B942A3600E3163A /* ELCConsole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCConsole.h; sourceTree = "<group>"; };
+		2BC2275C1B942A3600E3163A /* ELCConsole.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCConsole.m; sourceTree = "<group>"; };
+		2BC2275D1B942A3600E3163A /* ELCImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCImagePickerController.h; sourceTree = "<group>"; };
+		2BC2275E1B942A3600E3163A /* ELCImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCImagePickerController.m; sourceTree = "<group>"; };
+		2BC2275F1B942A3600E3163A /* ELCImagePickerHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCImagePickerHeader.h; sourceTree = "<group>"; };
+		2BC227601B942A3600E3163A /* ELCOverlayImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCOverlayImageView.h; sourceTree = "<group>"; };
+		2BC227611B942A3600E3163A /* ELCOverlayImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCOverlayImageView.m; sourceTree = "<group>"; };
+		2BC227631B942A3600E3163A /* ELCAlbumPickerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ELCAlbumPickerController.xib; sourceTree = "<group>"; };
+		2BC227641B942A3600E3163A /* ELCAssetPicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ELCAssetPicker.xib; sourceTree = "<group>"; };
+		2BC227651B942A3600E3163A /* ELCAssetTablePicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ELCAssetTablePicker.xib; sourceTree = "<group>"; };
+		2BC227661B942A3600E3163A /* Overlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Overlay.png; sourceTree = "<group>"; };
+		2BC227671B942A3600E3163A /* Overlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Overlay@2x.png"; sourceTree = "<group>"; };
+		2BC227681B942A3600E3163A /* ELCImagePickerDemoAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCImagePickerDemoAppDelegate.h; sourceTree = "<group>"; };
+		2BC227691B942A3600E3163A /* ELCImagePickerDemoAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCImagePickerDemoAppDelegate.m; sourceTree = "<group>"; };
+		2BC2276A1B942A3600E3163A /* ELCImagePickerDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCImagePickerDemoViewController.h; sourceTree = "<group>"; };
+		2BC2276B1B942A3600E3163A /* ELCImagePickerDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCImagePickerDemoViewController.m; sourceTree = "<group>"; };
+		2BC2277D1B94578600E3163A /* ImageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageTableViewCell.h; sourceTree = "<group>"; };
+		2BC2277E1B94578600E3163A /* ImageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageTableViewCell.m; sourceTree = "<group>"; };
+		2BC2277F1B94578600E3163A /* ImageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageTableViewCell.xib; sourceTree = "<group>"; };
+		2BC227821B9582D100E3163A /* TaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskViewController.m; sourceTree = "<group>"; };
+		2BC227841B95951C00E3163A /* ESImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESImage.h; sourceTree = "<group>"; };
+		2BC227851B95951C00E3163A /* ESImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESImage.m; sourceTree = "<group>"; };
 		2BC8212D1B57FFDC0090E2C1 /* ProfessionWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfessionWebViewController.h; sourceTree = "<group>"; };
 		2BC8212E1B57FFDC0090E2C1 /* ProfessionWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfessionWebViewController.m; sourceTree = "<group>"; };
 		2BC821301B5B649B0090E2C1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/RongCloudKit.strings"; sourceTree = "<group>"; };
@@ -477,7 +526,6 @@
 		2BE8C2311B52506600858CEE /* EditProfessionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfessionViewController.h; sourceTree = "<group>"; };
 		2BE8C2321B52506600858CEE /* EditProfessionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProfessionViewController.m; sourceTree = "<group>"; };
 		2BEAD0491B738E3100905E21 /* TaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskViewController.h; sourceTree = "<group>"; };
-		2BEAD04A1B738E3100905E21 /* TaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskViewController.m; sourceTree = "<group>"; };
 		2BEAD04B1B738E3100905E21 /* TaskViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskViewController.xib; sourceTree = "<group>"; };
 		2BEAD04E1B74F37C00905E21 /* AddTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddTaskViewController.h; sourceTree = "<group>"; };
 		2BEAD04F1B74F37C00905E21 /* AddTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddTaskViewController.m; sourceTree = "<group>"; };
@@ -1198,7 +1246,7 @@
 				2BE55A0C1B6483D2008CDB4B /* TaskListViewController.h */,
 				2BE55A0D1B6483D2008CDB4B /* TaskListViewController.m */,
 				2BEAD0491B738E3100905E21 /* TaskViewController.h */,
-				2BEAD04A1B738E3100905E21 /* TaskViewController.m */,
+				2BC227821B9582D100E3163A /* TaskViewController.m */,
 				2BEAD04B1B738E3100905E21 /* TaskViewController.xib */,
 				2BEAD04E1B74F37C00905E21 /* AddTaskViewController.h */,
 				2BEAD04F1B74F37C00905E21 /* AddTaskViewController.m */,
@@ -1347,6 +1395,56 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		2BC2274F1B942A3600E3163A /* ELCImagePickerViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2BC227501B942A3600E3163A /* ELCImagePicker */,
+				2BC227681B942A3600E3163A /* ELCImagePickerDemoAppDelegate.h */,
+				2BC227691B942A3600E3163A /* ELCImagePickerDemoAppDelegate.m */,
+				2BC2276A1B942A3600E3163A /* ELCImagePickerDemoViewController.h */,
+				2BC2276B1B942A3600E3163A /* ELCImagePickerDemoViewController.m */,
+			);
+			name = ELCImagePickerViewController;
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		2BC227501B942A3600E3163A /* ELCImagePicker */ = {
+			isa = PBXGroup;
+			children = (
+				2BC227511B942A3600E3163A /* ELCAlbumPickerController.h */,
+				2BC227521B942A3600E3163A /* ELCAlbumPickerController.m */,
+				2BC227531B942A3600E3163A /* ELCAsset.h */,
+				2BC227541B942A3600E3163A /* ELCAsset.m */,
+				2BC227551B942A3600E3163A /* ELCAssetCell.h */,
+				2BC227561B942A3600E3163A /* ELCAssetCell.m */,
+				2BC227571B942A3600E3163A /* ELCAssetPickerFilterDelegate.h */,
+				2BC227581B942A3600E3163A /* ELCAssetSelectionDelegate.h */,
+				2BC227591B942A3600E3163A /* ELCAssetTablePicker.h */,
+				2BC2275A1B942A3600E3163A /* ELCAssetTablePicker.m */,
+				2BC2275B1B942A3600E3163A /* ELCConsole.h */,
+				2BC2275C1B942A3600E3163A /* ELCConsole.m */,
+				2BC2275D1B942A3600E3163A /* ELCImagePickerController.h */,
+				2BC2275E1B942A3600E3163A /* ELCImagePickerController.m */,
+				2BC2275F1B942A3600E3163A /* ELCImagePickerHeader.h */,
+				2BC227601B942A3600E3163A /* ELCOverlayImageView.h */,
+				2BC227611B942A3600E3163A /* ELCOverlayImageView.m */,
+				2BC227621B942A3600E3163A /* Resources */,
+			);
+			path = ELCImagePicker;
+			sourceTree = "<group>";
+		};
+		2BC227621B942A3600E3163A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2BC227631B942A3600E3163A /* ELCAlbumPickerController.xib */,
+				2BC227641B942A3600E3163A /* ELCAssetPicker.xib */,
+				2BC227651B942A3600E3163A /* ELCAssetTablePicker.xib */,
+				2BC227661B942A3600E3163A /* Overlay.png */,
+				2BC227671B942A3600E3163A /* Overlay@2x.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		2BDA1A431B8D944E00AD49B8 /* macro */ = {
 			isa = PBXGroup;
 			children = (
@@ -1372,6 +1470,9 @@
 				2BEAD0851B775C4500905E21 /* MessageListTableViewCell.h */,
 				2BEAD0861B775C4500905E21 /* MessageListTableViewCell.m */,
 				2BEAD0871B775C4500905E21 /* MessageListTableViewCell.xib */,
+				2BC2277D1B94578600E3163A /* ImageTableViewCell.h */,
+				2BC2277E1B94578600E3163A /* ImageTableViewCell.m */,
+				2BC2277F1B94578600E3163A /* ImageTableViewCell.xib */,
 				2B6038831B79C6A4005B721F /* TaskContactorCollectionViewCell.h */,
 				2B6038841B79C6A4005B721F /* TaskContactorCollectionViewCell.m */,
 				2B6038851B79C6A4005B721F /* TaskContactorCollectionViewCell.xib */,
@@ -1496,6 +1597,8 @@
 				2BEAD05B1B76294500905E21 /* ESTaskMask.m */,
 				2BEAD0951B779C4900905E21 /* ESTaskComment.h */,
 				2BEAD0961B779C4900905E21 /* ESTaskComment.m */,
+				2BC227841B95951C00E3163A /* ESImage.h */,
+				2BC227851B95951C00E3163A /* ESImage.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1733,6 +1836,7 @@
 		F29F86131B240FC30058FC9F /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				2BC2274F1B942A3600E3163A /* ELCImagePickerViewController */,
 				2BEAD07D1B77369F00905E21 /* ZCActionOnCalendar.h */,
 				2BEAD07E1B77369F00905E21 /* ZCActionOnCalendar.m */,
 				2BEAD05D1B76FEFE00905E21 /* SWTableViewCell */,
@@ -1913,6 +2017,7 @@
 				2BE8C22D1B4EB3A200858CEE /* AddProfessionViewController.xib in Resources */,
 				2B37E44D1B53967D00F671A1 /* ModifyProfessionViewController.xib in Resources */,
 				2BC8213B1B5C9FF70090E2C1 /* ShowQRCodeViewController.xib in Resources */,
+				2BC227761B942A3600E3163A /* Overlay.png in Resources */,
 				F22FE2881B3AF0CB00A1A997 /* RongCloudKit.strings in Resources */,
 				F23059BB1B52C141004599FA /* RCDAddressBookViewTableViewCell.xib in Resources */,
 				2B1B88E61B803CEA00FAF650 /* UserNameAndPositionViewController.xib in Resources */,
@@ -1920,12 +2025,15 @@
 				F2467EFC1B8DCF1F0055B78B /* RootTimeCell.xib in Resources */,
 				F2467EF31B8DCF1F0055B78B /* RootCardTopCell.xib in Resources */,
 				F2D2335E1B31B1F400F8C65D /* PushConfig.plist in Resources */,
+				2BC227811B94578600E3163A /* ImageTableViewCell.xib in Resources */,
+				2BC227751B942A3600E3163A /* ELCAssetTablePicker.xib in Resources */,
 				2B39C98D1B37B2A4007BAC7A /* LoginViewController.xib in Resources */,
 				F256CB721B6BD565009478C2 /* RCDUpdateNameViewController.xib in Resources */,
 				2B9CBB691B42D897007D7A45 /* UserMsgViewController.xib in Resources */,
 				F22FE2951B3B000400A1A997 /* UserSettingViewController.xib in Resources */,
 				2BE55A221B64EE0C008CDB4B /* TaskOverviewViewController.xib in Resources */,
 				2B9CBB671B3AEC74007D7A45 /* (null) in Resources */,
+				2BC227731B942A3600E3163A /* ELCAlbumPickerController.xib in Resources */,
 				F2F3977A1B78E06B006FAE3B /* RCDAddressBookEnterpriseDetailViewController.xib in Resources */,
 				2B5A591F1B48F921000382D7 /* ChangPhoneNumViewController.xib in Resources */,
 				2B39C9971B37E634007BAC7A /* SignUpViewController.xib in Resources */,
@@ -1935,6 +2043,7 @@
 				2BEAD0741B770B2A00905E21 /* RemindDateViewController.xib in Resources */,
 				F23461E51B5FCFA900C88FAC /* ChatSettingCollectionViewCell.xib in Resources */,
 				F22FE2921B3B000400A1A997 /* ChangePwdViewController.xib in Resources */,
+				2BC227741B942A3600E3163A /* ELCAssetPicker.xib in Resources */,
 				F2D2338F1B37DE6400F8C65D /* RongCloud.bundle in Resources */,
 				F2467EF11B8DCF1F0055B78B /* RootCardMiddleCell.xib in Resources */,
 				F2467EFE1B8DCF1F0055B78B /* RootViewController.xib in Resources */,
@@ -1949,6 +2058,7 @@
 				2BEAD0521B74F37C00905E21 /* AddTaskViewController.xib in Resources */,
 				F22FE30A1B4A9F1A00A1A997 /* RCDAddFriendViewController.xib in Resources */,
 				F2F92EFC1B4EC3310047D7BF /* RCDSelectPersonTableViewCell.xib in Resources */,
+				2BC227771B942A3600E3163A /* Overlay@2x.png in Resources */,
 				2BEAD04D1B738E3100905E21 /* TaskViewController.xib in Resources */,
 				2B9CBB621B3ADEC4007D7A45 /* (null) in Resources */,
 				F23630851B66668900A12F63 /* RCDAddressBookDetailViewController.xib in Resources */,
@@ -1987,7 +2097,9 @@
 				2BE55A121B64843A008CDB4B /* TaskListTableViewCell.m in Sources */,
 				F29F86281B2410070058FC9F /* AFHTTPRequestOperation.m in Sources */,
 				F277AE071B2DC72A006E42CB /* BMBase.m in Sources */,
+				2BC227801B94578600E3163A /* ImageTableViewCell.m in Sources */,
 				F22FE2E71B4000ED00A1A997 /* SDWebImageCompat.m in Sources */,
+				2BC227791B942A3600E3163A /* ELCImagePickerDemoViewController.m in Sources */,
 				F23059C31B56AD65004599FA /* GetContactDetailDataParse.m in Sources */,
 				2B9CBB6C1B4571D0007D7A45 /* SignOutDataParse.m in Sources */,
 				F22FE2851B3ADC5700A1A997 /* UIImage+RCImage.m in Sources */,
@@ -2002,12 +2114,15 @@
 				F23461821B5B958E00C88FAC /* PhoneContactListDataSource.m in Sources */,
 				F29F86291B2410070058FC9F /* AFHTTPRequestOperationManager.m in Sources */,
 				2B26E1041B4AA379000FE4D3 /* ESProfession.m in Sources */,
+				2BC227781B942A3600E3163A /* ELCImagePickerDemoAppDelegate.m in Sources */,
 				2B5A59131B48DFBB000382D7 /* MRProgressView.m in Sources */,
+				2BC227831B9582D100E3163A /* TaskViewController.m in Sources */,
 				2B39C93A1B241212007BAC7A /* MASLayoutConstraint.m in Sources */,
 				F2F397791B78E06B006FAE3B /* RCDAddressBookEnterpriseDetailViewController.m in Sources */,
 				F22FE2E51B4000ED00A1A997 /* NSData+ImageContentType.m in Sources */,
 				2BEAD0731B770B2A00905E21 /* RemindDateViewController.m in Sources */,
 				2B9CBB5B1B39AA43007D7A45 /* (null) in Sources */,
+				2BC227721B942A3600E3163A /* ELCOverlayImageView.m in Sources */,
 				F29F86481B2410320058FC9F /* UIProgressView+AFNetworking.m in Sources */,
 				2B5A59181B48DFBB000382D7 /* MRMessageInterceptor.m in Sources */,
 				F22FE2781B3AD87800A1A997 /* KxMenu.m in Sources */,
@@ -2034,6 +2149,7 @@
 				F23630BD1B68F61800A12F63 /* TagDataParse.m in Sources */,
 				F23461DD1B5E8CBF00C88FAC /* ChatSettingViewController.m in Sources */,
 				F23461711B5AA0FD00C88FAC /* FMDatabaseQueue.m in Sources */,
+				2BC227861B95951C00E3163A /* ESImage.m in Sources */,
 				F277AE0A1B2DCF39006E42CB /* StretchImageUtil.m in Sources */,
 				F28B6C811B6F8E3D00E0C267 /* FollowEnterpriseDataParse.m in Sources */,
 				2B39C9761B2D7B05007BAC7A /* TaskOverviewViewController.m in Sources */,
@@ -2051,6 +2167,7 @@
 				2BEBBD8C1B67AFA7008BE7C4 /* GetTaskListDataParse.m in Sources */,
 				F29F862D1B2410070058FC9F /* AFURLConnectionOperation.m in Sources */,
 				2BC821361B5BE6B60090E2C1 /* ChangeUserImageDataParse.m in Sources */,
+				2BC2276F1B942A3600E3163A /* ELCAssetTablePicker.m in Sources */,
 				F2467EF01B8DCF1F0055B78B /* RootCardMiddleCell.m in Sources */,
 				F22FE3051B458A4100A1A997 /* GetRequestContactListDataParse.m in Sources */,
 				F20C13081B73A2920073BFA9 /* EnterpriseChatViewController.m in Sources */,
@@ -2063,11 +2180,13 @@
 				F23630891B6673B400A12F63 /* RCDAddressBookDetailTableViewCell.m in Sources */,
 				F29BC4921B75119900803183 /* SimpleMessageCell.m in Sources */,
 				F2F92ECD1B4D60910047D7BF /* RCDPhoneAddressBookViewController.m in Sources */,
+				2BC2276D1B942A3600E3163A /* ELCAsset.m in Sources */,
 				F22FE2AD1B3FFAE600A1A997 /* RCDSelectPersonTableViewCell.m in Sources */,
 				F22FE2941B3B000400A1A997 /* UserSettingViewController.m in Sources */,
 				F2467EF91B8DCF1F0055B78B /* RootOutChatCell.m in Sources */,
 				2B1B88E51B803CEA00FAF650 /* UserNameAndPositionViewController.m in Sources */,
 				2B5A59221B494C2B000382D7 /* ChangePhoneNumDataParse.m in Sources */,
+				2BC227701B942A3600E3163A /* ELCConsole.m in Sources */,
 				F234616F1B5AA0FD00C88FAC /* FMDatabaseAdditions.m in Sources */,
 				F22FE2BC1B3FFBB200A1A997 /* RCDAddFriendTableViewController.m in Sources */,
 				F22FE2F01B4000ED00A1A997 /* UIImage+WebP.m in Sources */,
@@ -2076,6 +2195,7 @@
 				F2467EEE1B8DCF1F0055B78B /* RootCardBottomCell.m in Sources */,
 				2B39C93B1B241212007BAC7A /* MASViewAttribute.m in Sources */,
 				F24787721B2D5CE700EC266B /* ChangePwdDataParse.m in Sources */,
+				2BC2276E1B942A3600E3163A /* ELCAssetCell.m in Sources */,
 				F28B6C871B6F991600E0C267 /* GetEnterpriseDetailDataParse.m in Sources */,
 				F235C2341B85A7A60092520A /* DeleteContactDataParse.m in Sources */,
 				2BEBBD891B6661FD008BE7C4 /* ESTaskOriginatorInfo.m in Sources */,
@@ -2096,6 +2216,7 @@
 				F236308D1B67A9AB00A12F63 /* ESTagViewController.m in Sources */,
 				2B39C94C1B24501B007BAC7A /* ColorHandler.m in Sources */,
 				2BEAD06D1B76FF2400905E21 /* SWTableViewCell.m in Sources */,
+				2BC227711B942A3600E3163A /* ELCImagePickerController.m in Sources */,
 				F2467EF71B8DCF1F0055B78B /* RootIncomeChatCell.m in Sources */,
 				F29F86441B2410320058FC9F /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				2B9CBB661B3AEC74007D7A45 /* (null) in Sources */,
@@ -2106,7 +2227,6 @@
 				F22FE2EF1B4000ED00A1A997 /* UIImage+MultiFormat.m in Sources */,
 				2B39C93F1B241212007BAC7A /* View+MASAdditions.m in Sources */,
 				F277AE011B2DC146006E42CB /* DeviceInfo.m in Sources */,
-				2BEAD04C1B738E3100905E21 /* TaskViewController.m in Sources */,
 				F22FE2C11B3FFCAF00A1A997 /* MBProgressHUD.m in Sources */,
 				2B5A59161B48DFBB000382D7 /* MRProgressOverlayView+AFNetworking.m in Sources */,
 				2BC8212F1B57FFDC0090E2C1 /* ProfessionWebViewController.m in Sources */,
@@ -2118,6 +2238,7 @@
 				2B5A590F1B48DFBB000382D7 /* MRCircularProgressView.m in Sources */,
 				2BEBBD861B665BCB008BE7C4 /* ESTaskDashboard.m in Sources */,
 				2B39C95F1B272221007BAC7A /* QRCodeViewController.m in Sources */,
+				2BC2276C1B942A3600E3163A /* ELCAlbumPickerController.m in Sources */,
 				2B5A59111B48DFBB000382D7 /* MRNavigationBarProgressView.m in Sources */,
 				2B5A590C1B48DFBB000382D7 /* MRBlurView.m in Sources */,
 				2BEAD06C1B76FF2400905E21 /* SWLongPressGestureRecognizer.m in Sources */,
@@ -2336,7 +2457,7 @@
 					"$(PROJECT_DIR)/MyRill/JPush",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "46caef10-069d-4e94-8a4d-fbd9bc55ceda";
+				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Debug;
@@ -2361,7 +2482,7 @@
 					"$(PROJECT_DIR)/MyRill/JPush",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "46caef10-069d-4e94-8a4d-fbd9bc55ceda";
+				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Release;

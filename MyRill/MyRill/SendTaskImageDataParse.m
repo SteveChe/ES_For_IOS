@@ -14,10 +14,10 @@
 
 - (void)sendTaskCommentWithTaskID:(NSString *)taskID
                           comment:(ESTaskComment *)taskComment
-                           images:(NSArray *)images {
+                        imageData:(NSData *)imageData {
     [AFHttpTool sendTaskImageWithTaskId:taskID
                                 comment:taskComment
-                                 images:images
+                                imageData:imageData
                                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                     NSDictionary *reponseDic = (NSDictionary *)responseObject;
                                     NSNumber* errorCodeNum = [reponseDic valueForKey:NETWORK_ERROR_CODE];
@@ -27,9 +27,7 @@
                                     }
                                     
                                     NSDictionary *dataDic = reponseDic[NETWORK_OK_DATA];
-                                    NSString *avatar = dataDic[@"avatar"];
-//                                    [self.delegate changeUserImageSuccess:avatar];
-                                    
+                                    [self.delegate sendTaskImageSuccess:dataDic[@"image"]];
                                     NSString* errorMessage = [reponseDic valueForKey:NETWORK_ERROR_MESSAGE];
                                     if(errorMessage==nil)
                                         return;

@@ -9,6 +9,7 @@
 #import "ESTaskComment.h"
 #import "ColorHandler.h"
 #import "ESUserInfo.h"
+#import "ESImage.h"
 
 @implementation ESTaskComment
 
@@ -40,6 +41,19 @@
             self.user = [[ESUserInfo alloc] initWithDic:dic[@"user"]];
         } else {
             self.user = nil;
+        }
+        
+        NSArray *imageArr = (NSArray *)dic[@"images"];
+        if (imageArr != nil && ![imageArr isKindOfClass:[NSNull class]] && imageArr.count != 0) {
+            NSMutableArray *temp = [[NSMutableArray alloc] initWithCapacity:imageArr.count];
+            
+            for (NSDictionary *dic in imageArr) {
+                ESImage *image = [[ESImage alloc] initWithDic:dic];
+                [temp addObject:image];
+            }
+            self.images = [NSArray arrayWithArray:temp];
+        } else {
+            self.images = nil;
         }
     }
     

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 @class ESUserInfo;
+@class ESImage;
 
 @interface ESTaskComment : NSObject
 
@@ -15,6 +16,7 @@
 @property (nonatomic, copy) NSString *createDate;
 @property (nonatomic, copy) NSString *content;
 @property (nonatomic, strong) ESUserInfo *user;
+@property (nonatomic, strong) NSMutableArray *images;
 
 //designed initilize
 - (instancetype)initWithDic:(NSDictionary *)dic;

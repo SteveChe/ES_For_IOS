@@ -448,7 +448,7 @@
     NSDictionary *param = nil;
     switch (taskListType) {
         case ESTaskListWithChatId:
-            param = @{@"chat_id":identify,@"status":@"0"};
+            param = @{@"chat_id":identify};
             break;
         case ESTaskListWithInitiatorId:
             param = @{@"initiator_id":identify,@"status":@"0"};
@@ -578,7 +578,7 @@
 
 + (void)sendTaskImageWithTaskId:(NSString *)taskID
                         comment:(ESTaskComment *)comment
-                         images:(NSArray *)images
+                      imageData:(NSData *)imageData
                         success:(void (^)(AFHTTPRequestOperation *, id))success
                         failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure {
     NSURL* baseURL = [NSURL URLWithString:DEV_SERVER_ADDRESS];
@@ -599,22 +599,71 @@
         }
     }
     
-    NSData *imageData = [images firstObject];
-    
-            [manager POST:[NSString stringWithFormat:@"/api/assignments/%@/comments/%@/images/.json",taskID,[comment.commentID stringValue]]
-               parameters:nil
+    [manager POST:[NSString stringWithFormat:@"/api/assignments/%@/comments/%@/images/.json",taskID,[comment.commentID stringValue]]
+       parameters:nil
 constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-            NSDateFormatter *format = [[NSDateFormatter alloc] init];
+        NSDateFormatter *format = [[NSDateFormatter alloc] init];
             [format setDateFormat:@"yyyyMMddHHmmss"];
-            NSString *timeStamp = [format stringFromDate:[NSDate date]];
-            NSString *picName = [timeStamp stringByAppendingString:@".png"];
-            [formData appendPartWithFileData:imageData
-                                        name:timeStamp
-                                    fileName:picName
-                                    mimeType:@"image/png"];
+                             NSString *timeStamp = [format stringFromDate:[NSDate date]];
+                             NSString *picName = [timeStamp stringByAppendingString:@".png"];
+                             [formData appendPartWithFileData:imageData
+                                                         name:@"image"
+                                                     fileName:picName
+                                                   mimeType:@"image/png"];
                 }
                   success:success
                   failure:failure];
+    
+
+//    AFHTTPRequestSerializer *serializer = [[AFHTTPRequestSerializer alloc] init];
+//    
+//    // 2. Create an `NSMutableURLRequest`.
+//    NSMutableURLRequest *request =
+//    [serializer multipartFormRequestWithMethod:@"POST"
+//                                     URLString:[NSString stringWithFormat:@"http://120.25.249.144/api/assignments/%@/comments/%@/images/.json",taskID,[comment.commentID stringValue]]
+//                                    parameters:nil
+//                     constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+//                         NSDateFormatter *format = [[NSDateFormatter alloc] init];
+//                         [format setDateFormat:@"yyyyMMddHHmmss"];
+//                         NSString *timeStamp = [format stringFromDate:[NSDate date]];
+//                         NSString *picName = [timeStamp stringByAppendingString:@".png"];
+//                         [formData appendPartWithFileData:[images firstObject]
+//                                                     name:@"image"
+//                                                 fileName:picName
+//                                                 mimeType:@"image/png"];
+//                     }
+//                                         error:nil];
+//    
+//    // 3. Create and use `AFHTTPRequestOperationManager` to create an `AFHTTPRequestOperation` from the `NSMutableURLRequest` that we just created.
+//    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
+//    manager.requestSerializer.HTTPShouldHandleCookies = YES;
+//
+//    NSData *cookiesdata = [[NSUserDefaults standardUserDefaults] objectForKey:@"sessionCookies"];
+//    if([cookiesdata length]) {
+//        NSArray *cookies = [NSKeyedUnarchiver unarchiveObjectWithData:cookiesdata];
+//        NSHTTPCookie *cookie;
+//        for (cookie in cookies) {
+//            if ([cookie.name isEqual:@"csrftoken"])
+//            {
+//                [manager.requestSerializer setValue:cookie.value forHTTPHeaderField:@"X-Csrftoken"];
+//            }
+//            [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
+//        }
+//    }
+//    AFHTTPRequestOperation *operation =
+//    [manager HTTPRequestOperationWithRequest:request
+//                                     success:success
+//                                     failure:failure];
+//
+//    // 4. Set the progress block of the operation.
+//    [operation setUploadProgressBlock:^(NSUInteger __unused bytesWritten,
+//                                        long long totalBytesWritten,
+//                                        long long totalBytesExpectedToWrite) {
+//        NSLog(@"Wrote %lld/%lld", totalBytesWritten, totalBytesExpectedToWrite);
+//    }];
+//    
+//    // 5. Begin!
+//    [operation start];
 }
 
 + (void)changeUserMsgWithUserInfo:(ESUserDetailInfo *)userInfo
