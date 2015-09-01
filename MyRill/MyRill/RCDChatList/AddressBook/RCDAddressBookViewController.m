@@ -302,6 +302,7 @@
 //                    [cell.ivAva setImage:[UIImage imageNamed:@"头像_100"]];
                     cell.ivAva.clipsToBounds = YES;
                     cell.ivAva.layer.cornerRadius = 18.f;
+                    cell.redBadgeLabel.hidden = YES;
                     
                 }
                 return cell;
@@ -318,6 +319,7 @@
                     [cell.ivAva sd_setImageWithURL:[NSURL URLWithString:user.portraitUri] placeholderImage:[UIImage imageNamed:@"头像_100"]];
                     cell.ivAva.clipsToBounds = YES;
                     cell.ivAva.layer.cornerRadius = 18.f;
+                    cell.redBadgeLabel.hidden = YES;
                 }
                 
                 return cell;
@@ -343,6 +345,7 @@
                 [cell.ivAva sd_setImageWithURL:[NSURL URLWithString:user.portraitUri] placeholderImage:[UIImage imageNamed:@"头像_100"]];
                 cell.ivAva.clipsToBounds = YES;
                 cell.ivAva.layer.cornerRadius = 18.f;
+                cell.redBadgeLabel.hidden = YES;
             }
             
             return cell;

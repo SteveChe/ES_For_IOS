@@ -49,6 +49,13 @@
                      {
                          userDetailInfo.userName = userName;
                      }
+
+                     NSString* userDescription = [temDic valueForKey:@"description"];
+                     if (userDescription != nil && ![userDescription isEqual:[NSNull null]])
+                     {
+                         userDetailInfo.contactDescription = userDescription;
+                     }
+                     
                      NSString* userPhoneNum = [temDic valueForKey:@"phone_number"];
                      if (userPhoneNum != nil && ![userPhoneNum isEqual:[NSNull null]])
                      {
