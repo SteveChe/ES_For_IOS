@@ -108,7 +108,7 @@
 }
 
 - (void)getTaskDashboardSuccess:(ESTaskDashboard *)taskDashboard {
-    self.totalTaskLbl.text = [taskDashboard.totalTask.num stringValue];
+    self.totalTaskLbl.text = [taskDashboard.openTask.num stringValue];
     self.closedTaskLbl.text = [taskDashboard.closedTask.num stringValue];
     
     self.totalTaskInSelfLbl.text = [[taskDashboard.totalTaskInSelf.num stringValue] stringByAppendingString:@" 全部"];

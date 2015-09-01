@@ -459,7 +459,7 @@
         case ESTaskListStatus:
             {
                 if ([identify isEqualToString:@"0"]) {
-                    param = nil;
+                    param = @{@"status":@"0"};
                 } else {
                     param = @{@"status":identify};
                 }

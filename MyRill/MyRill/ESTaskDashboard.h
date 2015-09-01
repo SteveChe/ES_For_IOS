@@ -12,6 +12,7 @@
 @interface ESTaskDashboard : NSObject
 
 @property (nonatomic, strong) ESTaskMask *totalTask;
+@property (nonatomic, strong) ESTaskMask *openTask;
 @property (nonatomic, strong) ESTaskMask *closedTask;
 @property (nonatomic, strong) ESTaskMask *totalTaskInSelf;
 @property (nonatomic, strong) ESTaskMask *overdueTaskInSelf;

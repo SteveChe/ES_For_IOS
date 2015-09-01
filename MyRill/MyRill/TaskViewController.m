@@ -874,6 +874,13 @@
                      animations:^{
                          self.sendViewBottomConstraint.constant = 0.f;
                          [self.view layoutIfNeeded];
+                         
+                         if (self.dataSource.count > 0) {
+                             [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0
+                                                                                       inSection:0]
+                                                   atScrollPosition:UITableViewScrollPositionBottom
+                                                           animated:YES];
+                         }
                      } completion:^(BOOL finished) {
                          
                      }];

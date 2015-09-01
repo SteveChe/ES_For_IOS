@@ -23,6 +23,11 @@
         } else {
             self.totalTask = [[ESTaskMask alloc] initWithDic:dic[@"total"]];
         }
+        if (dic[@"open"] == nil || [dic[@"open"] isKindOfClass:[NSNull class]]) {
+            self.openTask = nil;
+        } else {
+            self.openTask = [[ESTaskMask alloc] initWithDic:dic[@"open"]];
+        }
         if (dic[@"closed"] == nil || [dic[@"closed"] isKindOfClass:[NSNull class]]) {
             self.closedTask = nil;
         } else {

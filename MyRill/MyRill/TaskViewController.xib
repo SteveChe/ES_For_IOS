@@ -72,7 +72,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rdu-nS-zah" userLabel="TxtField Hold View">
                                         <rect key="frame" x="101" y="10" width="481" height="40.5"/>
                                         <subviews>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KTJ-Di-qaj">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="阿斯顿f" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KTJ-Di-qaj">
                                                 <rect key="frame" x="8" y="0.0" width="473" height="40.5"/>
                                                 <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
@@ -90,9 +90,10 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="omN-iO-86X" userLabel="TxtView Hold View">
                                         <rect key="frame" x="101" y="56" width="481" height="76"/>
                                         <subviews>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AbA-ts-l62">
-                                                <rect key="frame" x="8" y="0.0" width="473" height="76"/>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="阿斯顿f" translatesAutoresizingMaskIntoConstraints="NO" id="AbA-ts-l62">
+                                                <rect key="frame" x="3" y="0.0" width="478" height="76"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
@@ -102,7 +103,7 @@
                                             <constraint firstAttribute="trailing" secondItem="AbA-ts-l62" secondAttribute="trailing" id="Brq-IM-SSs"/>
                                             <constraint firstItem="AbA-ts-l62" firstAttribute="top" secondItem="omN-iO-86X" secondAttribute="top" id="M89-xs-486"/>
                                             <constraint firstAttribute="bottom" secondItem="AbA-ts-l62" secondAttribute="bottom" id="UCy-8Q-iwW"/>
-                                            <constraint firstItem="AbA-ts-l62" firstAttribute="leading" secondItem="omN-iO-86X" secondAttribute="leading" constant="8" id="tx5-bk-6Ql"/>
+                                            <constraint firstItem="AbA-ts-l62" firstAttribute="leading" secondItem="omN-iO-86X" secondAttribute="leading" constant="3" id="tx5-bk-6Ql"/>
                                         </constraints>
                                     </view>
                                 </subviews>
