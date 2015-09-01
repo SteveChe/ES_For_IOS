@@ -37,7 +37,7 @@
 @property (nonatomic, strong) GetTaskDashboardDataParse *getTaskDashboardDP;
 @property (nonatomic, strong) GetTaskListDataParse *getTaskListDP;
 
-@property (weak, nonatomic) IBOutlet UILabel *totalTaskLbl;
+@property (weak, nonatomic) IBOutlet UILabel *openTaskLbl;
 @property (weak, nonatomic) IBOutlet UILabel *closedTaskLbl;
 @property (weak, nonatomic) IBOutlet UILabel *totalTaskInSelfLbl;
 @property (weak, nonatomic) IBOutlet UILabel *overdueTaskInSelfLbl;
@@ -108,7 +108,7 @@
 }
 
 - (void)getTaskDashboardSuccess:(ESTaskDashboard *)taskDashboard {
-    self.totalTaskLbl.text = [taskDashboard.openTask.num stringValue];
+    self.openTaskLbl.text = [taskDashboard.openTask.num stringValue];
     self.closedTaskLbl.text = [taskDashboard.closedTask.num stringValue];
     
     self.totalTaskInSelfLbl.text = [[taskDashboard.totalTaskInSelf.num stringValue] stringByAppendingString:@" 全部"];
