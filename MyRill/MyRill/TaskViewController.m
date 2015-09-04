@@ -579,7 +579,8 @@
                 [self.navigationController pushViewController:chatViewController animated:YES];
             }
         } error:^(RCErrorCode status){
-            
+            NSLog(@"直接进入会话界面失败");
+            NSLog(@"%ld",(long)status);
         }];
     }
 }
@@ -642,35 +643,35 @@
 }
 
 - (void)saveBarItemOnClicked {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    dateFormatter.dateFormat = @"yyyy/MM/dd HH:mm:ss";
-    
-    NSDate *commitDate = [dateFormatter dateFromString:self.taskModel.endDate];
-    if ([commitDate compare:[NSDate date]] == NSOrderedAscending) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
-                                                        message:@"结束日期需要晚于当前日期!"
-                                                       delegate:self
-                                              cancelButtonTitle:@"知道了"
-                                              otherButtonTitles:nil, nil];
-        [alert show];
-        return;
-    }
+//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//    dateFormatter.dateFormat = @"yyyy/MM/dd HH:mm:ss";
+//    
+//    NSDate *commitDate = [dateFormatter dateFromString:self.taskModel.endDate];
+//    if ([commitDate compare:[NSDate date]] == NSOrderedAscending) {
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+//                                                        message:@"结束日期需要晚于当前日期!"
+//                                                       delegate:self
+//                                              cancelButtonTitle:@"知道了"
+//                                              otherButtonTitles:nil, nil];
+//        [alert show];
+//        return;
+//    }
     ESTask *task = [[ESTask alloc] init];
     task.taskID = self.taskModel.taskID;
-    task.title = self.taskTitleTxtField.text;
-    
-    task.endDate = [self.taskModel.endDate stringByReplacingOccurrencesOfString:@"/" withString:@"-"];
+//    task.title = self.taskTitleTxtField.text;
+//    
+//    task.endDate = [self.taskModel.endDate stringByReplacingOccurrencesOfString:@"/" withString:@"-"];
     task.chatID = self.taskModel.chatID;
-    task.taskDescription = self.taskDescriptioinTextView.text;
-    
-    if (self.taskStatusSwitch.on == NO) {
-        task.status = [NSNumber numberWithInt:0];
-    } else {
-        task.status = [NSNumber numberWithInt:1];
-    }
-    
-    task.personInCharge = [self.assignerDataSource firstObject];
-    task.observers = self.followsDataSource;
+//    task.taskDescription = self.taskDescriptioinTextView.text;
+//    
+//    if (self.taskStatusSwitch.on == NO) {
+//        task.status = [NSNumber numberWithInt:0];
+//    } else {
+//        task.status = [NSNumber numberWithInt:1];
+//    }
+//    
+//    task.personInCharge = [self.assignerDataSource firstObject];
+//    task.observers = self.followsDataSource;
     
     [self.editTaskDP EditTaskWithTaskModel:task];
 }

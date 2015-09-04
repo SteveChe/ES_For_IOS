@@ -14,6 +14,7 @@
 #import "AppDelegate.h"
 #import "LoginViewController.h"
 #import "ESNavigationController.h"
+#import "UserDefaultsDefine.h"
 
 @interface SignUpViewController () <UITextFieldDelegate>
 
@@ -57,6 +58,30 @@
 
 - (IBAction)signUpBtnOnClicked:(UIButton *)sender {
     [self hideKeyboard];
+    
+    NSString *errorMsg = nil;
+    if ([ColorHandler isNullOrEmptyString:self.phoneNumTxtField.text]) {
+        errorMsg = @"手机号不能为空!";
+    } else if ([ColorHandler isNullOrEmptyString:self.captchasTxtField.text]) {
+        errorMsg = @"验证码不能为空!";
+    } else if ([ColorHandler isNullOrEmptyString:self.usernameTxtField.text]) {
+        errorMsg = @"用户名不能为空!";
+    } else if ([ColorHandler isNullOrEmptyString:self.pwdTxtField.text] || [ColorHandler isNullOrEmptyString:self.confirmPwdTxtField.text]) {
+        errorMsg = @"请输入密码!";
+    } else if (![self.pwdTxtField.text isEqualToString:self.confirmPwdTxtField.text]) {
+        errorMsg = @"两次密码输入不一致!";
+    }
+    
+    if (errorMsg != nil) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                        message:errorMsg
+                                                       delegate:self
+                                              cancelButtonTitle:@"知道了!"
+                                              otherButtonTitles:nil, nil];
+        [alert show];
+        return;
+    }
+    
     [_signUpDataParse signUpWithPhoneNum:self.phoneNumTxtField.text name:self.usernameTxtField.text password:self.pwdTxtField.text
                         verificationCode:self.captchasTxtField.text];
 }
@@ -95,6 +120,9 @@
 #pragma mark SignUpDataDelegate - method
 -(void)signUpSucceed{
     [[CustomShowMessage getInstance] showNotificationMessage:@"注册成功"];
+    
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    [userDefault setObject:self.usernameTxtField.text forKey:DEFAULTS_USERNAME];
     
     [self performSelector:@selector(changeToLoginView)
                withObject:nil

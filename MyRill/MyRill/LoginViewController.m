@@ -44,6 +44,12 @@
     
     _loginDataParse = [[LoginDataParse alloc] init];
     _loginDataParse.delegate = self;
+    
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    NSString *userName = [userDefault stringForKey:DEFAULTS_USERNAME];
+    if (![ColorHandler isNullOrEmptyString:userName]) {
+        self.userNameTxtField.text = userName;
+    }
 }
 
 #pragma mark - LoginDataDelegate
