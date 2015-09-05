@@ -12,5 +12,6 @@
 @interface ChatSettingViewController : RCSettingViewController<ContactDetailDataDelegate>
 @property (nonatomic, strong) NSMutableArray *userIdList;
 @property (nonatomic, copy) NSString *conversationTitle;
+@property (nonatomic, weak) NSMutableArray *conversationDataRepository;
 
 @end

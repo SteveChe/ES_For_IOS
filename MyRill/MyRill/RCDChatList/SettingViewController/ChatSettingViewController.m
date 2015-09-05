@@ -39,7 +39,7 @@
     _getContactDetailDataParse.delegate = self;
     
     [self initUsersInfo];
-    if (self.conversationType == ConversationType_DISCUSSION)
+    if(self.conversationType == ConversationType_PRIVATE)
     {
         UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 200)];
         view.backgroundColor = [UIColor clearColor];
@@ -52,11 +52,61 @@
         rect.size.height = 44;
         button.frame = rect;
         
-        [button setTitle:@"退出聊天" forState:UIControlStateNormal];
+        [button setTitle:@"清除聊天记录" forState:UIControlStateNormal];
         button.tintColor = [UIColor whiteColor];
         button.titleLabel.font = [UIFont systemFontOfSize:18];
         [button setCenter:CGPointMake(view.bounds.size.width/2, view.bounds.size.height/2)];
-        [button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
+        [button addTarget:self action:@selector(buttonAction2:) forControlEvents:UIControlEventTouchUpInside];
+        button.layer.cornerRadius = 20.0;
+        [view addSubview:button];
+        
+        
+        self.tableView.tableFooterView = view;
+    }
+    else if (self.conversationType == ConversationType_DISCUSSION)
+    {
+        UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 200)];
+        view.backgroundColor = [UIColor clearColor];
+        
+        UIButton* button1 = [UIButton buttonWithType:UIButtonTypeSystem];
+        button1.backgroundColor = [ColorHandler colorFromHexRGB:@"FF5454"];
+        CGRect rect1 = button1.frame;
+        rect1.origin.x = 0;
+        rect1.origin.y = 60;
+        rect1.size.width = self.view.frame.size.width - 40;
+        rect1.size.height = 44;
+        button1.frame = rect1;
+        
+        [button1 setTitle:@"清除聊天记录" forState:UIControlStateNormal];
+        button1.tintColor = [UIColor whiteColor];
+        button1.titleLabel.font = [UIFont systemFontOfSize:18];
+//        [button1 setCenter:CGPointMake(view.bounds.size.width/2, view.bounds.size.height/2)];
+        CGPoint centerPt1 = button1.center;
+        centerPt1.x = view.bounds.size.width/2;
+        [button1 setCenter:centerPt1];
+        
+        [button1 addTarget:self action:@selector(buttonAction2:) forControlEvents:UIControlEventTouchUpInside];
+        button1.layer.cornerRadius = 20.0;
+        [view addSubview:button1];
+
+        
+        UIButton* button = [UIButton buttonWithType:UIButtonTypeSystem];
+        button.backgroundColor = [ColorHandler colorFromHexRGB:@"FF5454"];
+        CGRect rect = button.frame;
+        rect.origin.x = 0;
+        rect.origin.y = 130;
+        rect.size.width = self.view.frame.size.width - 40;
+        rect.size.height = 44;
+        button.frame = rect;
+        
+        [button setTitle:@"退出聊天" forState:UIControlStateNormal];
+        button.tintColor = [UIColor whiteColor];
+        button.titleLabel.font = [UIFont systemFontOfSize:18];
+        CGPoint centerPt = button.center;
+        centerPt.x = view.bounds.size.width/2;
+        [button setCenter:centerPt];
+//        [button setCenter:CGPointMake(view.bounds.size.width/2, view.bounds.size.height/2)];
+        [button addTarget:self action:@selector(buttonAction1:) forControlEvents:UIControlEventTouchUpInside];
         button.layer.cornerRadius = 20.0;
         [view addSubview:button];
         self.tableView.tableFooterView = view;
@@ -257,36 +307,56 @@
 
 
 #pragma mark - button event
--(void)buttonAction:(UIButton*)sender{
+-(void)buttonAction1:(UIButton*)sender{
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"退出讨论组" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"确定" otherButtonTitles:nil];
+    [actionSheet setTag:0];
     [actionSheet showInView:self.view];
     
 }
+
+-(void)buttonAction2:(UIButton*)sender{
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"清除聊天记录" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"确定" otherButtonTitles:nil];
+    [actionSheet setTag:1];
+    [actionSheet showInView:self.view];
+}
+
 #pragma mark-UIActionSheetDelegate
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if ([actionSheet isEqual:self.clearMsgHistoryActionSheet]) {
         [self clearHistoryMessage];
     }else{
-        if (0 == buttonIndex) {
-            __weak typeof(&*self)  weakSelf = self;
-            [[RCIMClient sharedRCIMClient] quitDiscussion:self.targetId success:^(RCDiscussion *discussion) {
-                NSLog(@"退出讨论组成功");
-                UIViewController *temp = nil;
-                NSArray *viewControllers = weakSelf.navigationController.viewControllers;
-                temp = viewControllers[viewControllers.count -1 -2];
-                if (temp) {
-                    //切换主线程
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [weakSelf.navigationController popToViewController:temp animated:YES];
-                    });
-                }
-            } error:^(RCErrorCode status) {
-                NSLog(@"quit discussion status is %ld",(long)status);
+        if (actionSheet.tag == 0)
+        {
+            if (0 == buttonIndex) {
+                __weak typeof(&*self)  weakSelf = self;
+                [[RCIMClient sharedRCIMClient] quitDiscussion:self.targetId success:^(RCDiscussion *discussion) {
+                    NSLog(@"退出讨论组成功");
+                    UIViewController *temp = nil;
+                    NSArray *viewControllers = weakSelf.navigationController.viewControllers;
+                    temp = viewControllers[viewControllers.count -1 -2];
+                    if (temp) {
+                        //切换主线程
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [weakSelf.navigationController popToViewController:temp animated:YES];
+                        });
+                    }
+                } error:^(RCErrorCode status) {
+                    NSLog(@"quit discussion status is %ld",(long)status);
+                    
+                }];
                 
-            }];
-            
+            }
         }
+        else if (actionSheet.tag == 1)
+        {
+            if (0 == buttonIndex)
+            {
+                [self clearHistoryMessage];
+                [self.conversationDataRepository removeAllObjects];
+            }
+        }
+        
     }
 }
 
