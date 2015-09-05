@@ -15,7 +15,9 @@
     [AFHttpTool updateObserverAndChatidWith:task
                                     success:^(id response) {
                                         NSDictionary *reponseDic = (NSDictionary *)response;
+                                        [self.delegate updateObserverAndChatidSuccess];
                                     } failure:^(NSError *error) {
+                                        [self.delegate updateObserverAndChatidFailed:nil];
                                         NSLog(@"%@",[error debugDescription]);
                                     }];
 }

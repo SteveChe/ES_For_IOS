@@ -11,7 +11,8 @@
 
 @protocol UpdateObserverAndChatidDelegate <NSObject>
 
-- (void)updateObserverAndChatidSucces;
+- (void)updateObserverAndChatidSuccess;
+- (void)updateObserverAndChatidFailed:(NSString *)errorMessage;
 
 @end
 

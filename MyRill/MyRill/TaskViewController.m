@@ -206,6 +206,14 @@
     [self showTips:@"修改失败!" mode:MRProgressOverlayViewModeCross isDismiss:YES isSucceuss:NO];
 }
 
+- (void)updateObserverAndChatidSuccess {
+    [self showTips:@"修改成功!" mode:MRProgressOverlayViewModeCheckmark isDismiss:YES isSucceuss:YES];
+}
+
+- (void)updateObserverAndChatidFailed:(NSString *)errorMessage {
+    [self showTips:@"修改失败!" mode:MRProgressOverlayViewModeCross isDismiss:YES isSucceuss:NO];
+}
+
 - (void)getTaskCommentListSuccess:(NSArray *)taskCommentList {
     self.dataSource = [NSMutableArray arrayWithArray:[[taskCommentList reverseObjectEnumerator] allObjects]];
     [self.tableView reloadData];
@@ -244,6 +252,7 @@
         return;
     }
     
+    [self.sendTxtView resignFirstResponder];
     [self.dataSource insertObject:taskComment atIndex:0];
     [self.tableView reloadData];
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0
