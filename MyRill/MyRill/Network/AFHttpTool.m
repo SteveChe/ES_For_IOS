@@ -493,6 +493,26 @@
                           failure:failure];
 }
 
++ (void)updateObserverAndChatidWith:(ESTask *)task
+                            success:(void (^)(id response))success
+                            failure:(void (^)(NSError *error))failure {
+    NSMutableArray *observerArray = [[NSMutableArray alloc] initWithCapacity:task.observers.count];
+    [task.observers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        ESUserInfo *userInfo = (ESUserInfo *)obj;
+        [observerArray addObject:userInfo.userId];
+    }];
+    
+    NSDictionary *param = @{@"observers":observerArray,
+                            @"chat_id":task.chatID};
+
+    [AFHttpTool requestWithMethod:RequestMethodTypePost
+                     protocolType:RequestProtocolTypeJson
+                              url:[NSString stringWithFormat:@"/api/assignments/%@/update-observer/.json",task.taskID]
+                           params:param
+                          success:success
+                          failure:failure];
+}
+
 + (void)EditTaskWithTaskModel:(ESTask *)task
                success:(void (^)(id response))success
                failure:(void (^)(NSError *error))failure {
@@ -523,29 +543,6 @@
                           success:success
                           failure:failure];
 }
-
-//+ (void)closeTaskWithTaskID:(NSString *)taskID
-//                    success:(void (^)(id))success
-//                    failure:(void (^)(NSError *))failure {
-//    
-////    NSError* error;
-////    NSString *cartJSON = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:@{@"status":@"1"}
-////                                                                                        options:NSJSONWritingPrettyPrinted
-////                                                                                          error:&error]
-////                                               encoding:NSUTF8StringEncoding];
-//    NSError *error = nil;
-//    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:@{@"status":@"1"} options:NSJSONWritingPrettyPrinted error:&error];
-//    NSString* strJson = [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
-//    NSDictionary *param = @{@"_method":@"PATCH",
-//                            @"_content_type":@"application/json",
-//                            @"_content":@{@"status":@"1"}};
-//    [AFHttpTool requestWithMethod:RequestMethodTypeGet
-//                     protocolType:RequestProtocolTypeText
-//                              url:[NSString stringWithFormat:@"/api/assignments/%@/.json",taskID]
-//                           params:param
-//                          success:success
-//                          failure:failure];
-//}
 
 + (void)getTaskCommentListWithTaskID:(NSString *)taskID
                             listSize:(NSString *)size

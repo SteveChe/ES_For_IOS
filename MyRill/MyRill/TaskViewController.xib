@@ -33,7 +33,7 @@
                 <outletCollection property="holdViews" destination="HDG-MG-yWC" id="7Rx-lh-RW3"/>
                 <outletCollection property="arrowImages" destination="i8i-wV-QyP" id="now-iY-bUd"/>
                 <outletCollection property="arrowImages" destination="6nv-my-Ghb" id="6aw-v0-XIS"/>
-                <outletCollection property="arrowImages" destination="1FS-et-JXj" id="Ho8-hr-AW9"/>
+                <outletCollection property="arrowImages" destination="CFH-zx-WIc" id="5sc-sU-kjK"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -198,7 +198,7 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="右箭头" translatesAutoresizingMaskIntoConstraints="NO" id="CFH-zx-WIc">
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="右箭头" translatesAutoresizingMaskIntoConstraints="NO" id="CFH-zx-WIc">
                                         <rect key="frame" x="572" y="14" width="10" height="17"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="brd-0V-wWy">
@@ -266,7 +266,7 @@
                                     <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="右箭头" translatesAutoresizingMaskIntoConstraints="NO" id="6nv-my-Ghb">
                                         <rect key="frame" x="572" y="18" width="10" height="17"/>
                                     </imageView>
-                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" image="右箭头" translatesAutoresizingMaskIntoConstraints="NO" id="1FS-et-JXj">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" image="右箭头" translatesAutoresizingMaskIntoConstraints="NO" id="1FS-et-JXj">
                                         <rect key="frame" x="572" y="74" width="10" height="17"/>
                                     </imageView>
                                     <button opaque="NO" tag="1002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iDd-i0-la5">

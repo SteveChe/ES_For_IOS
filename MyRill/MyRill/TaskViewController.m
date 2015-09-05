@@ -32,8 +32,9 @@
 #import "ELCAlbumPickerController.h"
 #import "ImageTableViewCell.h"
 #import "UIImageView+WebCache.h"
+#import "UpdateObserverAndChatidDataParse.h"
 
-@interface TaskViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GetTaskCommentListDelegate, SendTaskCommenDelegate, EditTaskDelegate, GetTaskDetailDelegate, SendTaskImageDelegate ,ELCImagePickerControllerDelegate>
+@interface TaskViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GetTaskCommentListDelegate, SendTaskCommenDelegate, EditTaskDelegate, GetTaskDetailDelegate, SendTaskImageDelegate ,ELCImagePickerControllerDelegate, UpdateObserverAndChatidDelegate>
 
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *holdViews;
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *txtHoldViews;
@@ -63,6 +64,7 @@
 @property (nonatomic, strong) GetTaskDetailDataParse *getTaskDetailDP;
 @property (nonatomic, strong) GetTaskCommentListDataParse *getTaskCommentListDP;
 @property (nonatomic, strong) EditTaskDataParse *editTaskDP;
+@property (nonatomic, strong) UpdateObserverAndChatidDataParse *updateObserverAndChatidDP;
 @property (nonatomic, strong) SendTaskCommentDataParse *sendTaskCommentDP;
 @property (nonatomic, strong) SendTaskImageDataParse *sendTaskImageDP;
 
@@ -75,6 +77,7 @@
 @property (nonatomic, strong) ESTaskComment *cacheTaskComment;
 @property (nonatomic, assign) CGRect oldframe;
 @property (nonatomic, strong) NSMutableArray *imagesOld;
+
 @end
 
 @implementation TaskViewController
@@ -587,6 +590,10 @@
 
 - (IBAction)chooseTagBtnOnClicked:(UIButton *)sender {
     //标签选择
+    if (![self.taskModel.initiator.userId isEqualToString:self.userID] && ![self.userID isEqualToString:self.taskModel.personInCharge.userId]) {
+        return;
+    }
+    
     if (_taskModel == nil) {
         return;
     }
@@ -643,37 +650,46 @@
 }
 
 - (void)saveBarItemOnClicked {
-//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-//    dateFormatter.dateFormat = @"yyyy/MM/dd HH:mm:ss";
-//    
-//    NSDate *commitDate = [dateFormatter dateFromString:self.taskModel.endDate];
-//    if ([commitDate compare:[NSDate date]] == NSOrderedAscending) {
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
-//                                                        message:@"结束日期需要晚于当前日期!"
-//                                                       delegate:self
-//                                              cancelButtonTitle:@"知道了"
-//                                              otherButtonTitles:nil, nil];
-//        [alert show];
-//        return;
-//    }
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"yyyy/MM/dd HH:mm:ss";
+    
+    NSDate *commitDate = [dateFormatter dateFromString:self.taskModel.endDate];
+    if ([commitDate compare:[NSDate date]] == NSOrderedAscending) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                        message:@"结束日期需要晚于当前日期!"
+                                                       delegate:self
+                                              cancelButtonTitle:@"知道了"
+                                              otherButtonTitles:nil, nil];
+        [alert show];
+        return;
+    }
     ESTask *task = [[ESTask alloc] init];
     task.taskID = self.taskModel.taskID;
-//    task.title = self.taskTitleTxtField.text;
-//    
-//    task.endDate = [self.taskModel.endDate stringByReplacingOccurrencesOfString:@"/" withString:@"-"];
-    task.chatID = self.taskModel.chatID;
-//    task.taskDescription = self.taskDescriptioinTextView.text;
-//    
-//    if (self.taskStatusSwitch.on == NO) {
-//        task.status = [NSNumber numberWithInt:0];
-//    } else {
-//        task.status = [NSNumber numberWithInt:1];
-//    }
-//    
-//    task.personInCharge = [self.assignerDataSource firstObject];
-//    task.observers = self.followsDataSource;
+    task.title = self.taskTitleTxtField.text;
     
-    [self.editTaskDP EditTaskWithTaskModel:task];
+    task.endDate = [self.taskModel.endDate stringByReplacingOccurrencesOfString:@"/" withString:@"-"];
+    task.chatID = self.taskModel.chatID;
+    task.taskDescription = self.taskDescriptioinTextView.text;
+    
+    if (self.taskStatusSwitch.on == NO) {
+        task.status = [NSNumber numberWithInt:0];
+    } else {
+        task.status = [NSNumber numberWithInt:1];
+    }
+    
+    task.personInCharge = [self.assignerDataSource firstObject];
+    task.observers = self.followsDataSource;
+    
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    NSString *userID = [userDefault stringForKey:DEFAULTS_USERID];
+    
+    if ([userID isEqualToString:self.taskModel.initiator.userId]) {
+        [self.editTaskDP EditTaskWithTaskModel:task];
+    } else if ([userID isEqualToString:self.taskModel.personInCharge.userId]) {
+        
+    } else {
+        [self.updateObserverAndChatidDP updateObserverAndChatidWith:task];
+    }
 }
 
 - (void)dateChanged:(UIDatePicker *)sender {
@@ -686,6 +702,10 @@
 }
 
 - (IBAction)dateBtnOnClicked:(UIButton *)sender {
+    if (![self.taskModel.initiator.userId isEqualToString:self.userID] && ![self.userID isEqualToString:self.taskModel.personInCharge.userId]) {
+        return;
+    }
+    
     if (self.dateSelectedPicker.hidden == YES) {
         self.dateSelectedPicker.hidden = NO;
         [UIView animateWithDuration:.3f
@@ -1039,6 +1059,15 @@
     }
     
     return _editTaskDP;
+}
+
+- (UpdateObserverAndChatidDataParse *)updateObserverAndChatidDP {
+    if (!_updateObserverAndChatidDP) {
+        _updateObserverAndChatidDP = [[UpdateObserverAndChatidDataParse alloc] init];
+        _updateObserverAndChatidDP.delegate = self;
+    }
+    
+    return _updateObserverAndChatidDP;
 }
 
 - (SendTaskCommentDataParse *)sendTaskCommentDP {
