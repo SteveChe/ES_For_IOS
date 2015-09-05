@@ -91,7 +91,7 @@
     }
     if (_userDetailInfo.bContact || _userDetailInfo.bMember)
     {
-        _smsButton.titleLabel.text = @"发消息";
+        _smsButton.titleLabel.text = @"  发消息  ";
         _deleteButton.hidden = NO;
         _callButton.hidden = NO;
         [_smsButton removeTarget:self action:@selector(clickAddContractButton:)  forControlEvents:UIControlEventTouchUpInside];

@@ -14,6 +14,11 @@
 //#import "RCDRCIMDataSource.h"
 //#import "ChatViewController.h"
 
+@interface RCDSelectPersonViewController()
+
+@property(nonatomic,assign)BOOL bSearchDisplay;
+@end
+
 @implementation RCDSelectPersonViewController
 
 
@@ -24,19 +29,21 @@
     
     //控制多选
     self.tableView.allowsMultipleSelection = YES;
-    
+    self.searchDisplayController1.searchResultsTableView.allowsMultipleSelection = YES;
+    self.bSearchDisplay = NO;
     
     UINib *rcdCellNib = [UINib nibWithNibName:@"RCDSelectPersonTableViewCell" bundle:nil];
     [self.tableView registerNib:rcdCellNib forCellReuseIdentifier:@"RCDSelectPersonTableViewCell"];
     [self.searchDisplayController1.searchResultsTableView registerNib:rcdCellNib forCellReuseIdentifier:@"RCDSelectPersonTableViewCell"];
+    
+    UIBarButtonItem *settintBtnItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self                      action:@selector(clickedDone:)];
+    self.navigationItem.rightBarButtonItem = settintBtnItem;
+
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    UIBarButtonItem *settintBtnItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self                      action:@selector(clickedDone:)];
-    self.navigationItem.rightBarButtonItem = settintBtnItem;
     
     self.tabBarController.tabBar.hidden = YES;
 
@@ -47,7 +54,17 @@
 //clicked done
 -(void) clickedDone:(id) sender
 {
-    NSArray *indexPaths = [self.tableView indexPathsForSelectedRows];
+    NSArray *indexPaths = nil;
+
+    if (self.bSearchDisplay)
+    {
+        indexPaths = [self.searchDisplayController1.searchResultsTableView indexPathsForSelectedRows];
+    }
+    else
+    {
+        indexPaths = [self.tableView indexPathsForSelectedRows];
+    }
+//    NSArray *indexPaths = [self.tableView indexPathsForSelectedRows];
     if (!indexPaths||indexPaths.count == 0){
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"请选择联系人!" message:nil preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *enterAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil];
@@ -85,7 +102,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    if(tableView == self.searchDisplayController.searchResultsTableView)
+    if(tableView == self.searchDisplayController1.searchResultsTableView)
     {
         return @"联系人";
     }
@@ -97,7 +114,7 @@
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if(tableView == self.searchDisplayController.searchResultsTableView)
+    if(tableView == self.searchDisplayController1.searchResultsTableView)
     {
         return 1;
     }
@@ -106,7 +123,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if(tableView == self.searchDisplayController.searchResultsTableView)
+    if(tableView == self.searchDisplayController1.searchResultsTableView)
     {
         return [self.searchResult count];
     }
@@ -123,13 +140,12 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellReuseIdentifier = @"RCDSelectPersonTableViewCell";
-    UINib *rcdCellNib = [UINib nibWithNibName:@"RCDSelectPersonTableViewCell" bundle:nil];
-    [tableView registerNib:rcdCellNib forCellReuseIdentifier:@"RCDSelectPersonTableViewCell"];
+
     RCDSelectPersonTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellReuseIdentifier forIndexPath:indexPath];
     
     [cell setUserInteractionEnabled:YES];
 
-    if(tableView == self.searchDisplayController.searchResultsTableView)
+    if(tableView == self.searchDisplayController1.searchResultsTableView)
     {
         ESUserInfo *user = self.searchResult[indexPath.row];
         
@@ -175,12 +191,33 @@
 {
     RCDSelectPersonTableViewCell *cell = (RCDSelectPersonTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
     [cell setSelected:YES];
+
 }
 
 -(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     RCDSelectPersonTableViewCell *cell = (RCDSelectPersonTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
     [cell setSelected:NO];
+}
+
+
+#pragma mark - UISearchBarDelegate
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
+{
+    self.bSearchDisplay = YES;
+//    NSLog(@"searchBarShouldBeginEditing");
+    return YES;
+}
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    [self clickedDone:nil];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    self.bSearchDisplay = NO;
+
+//    NSLog(@"searchBarCancelButtonClicked");
 }
 
 @end
