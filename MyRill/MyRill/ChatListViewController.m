@@ -622,6 +622,10 @@ void(^completionHandler)(RCUserInfo* userInfo);
 // 获取用户信息的方法。
 -(void)getUserInfoWithUserId:(NSString *)userId completion:(void(^)(RCUserInfo* userInfo))completion
 {
+    if (userId == nil || [userId isEqual:[NSNull null]] || [userId length]<=0)
+    {
+        return;
+    }
     // 此处最终代码逻辑实现需要您从本地缓存或服务器端获取用户信息。
     ESUserInfo* userInfo = [[UserInfoDataSource shareInstance] getUserByUserId:userId];
     if(userInfo == nil || [userInfo isEqual:[NSNull null]])

@@ -20,6 +20,7 @@
 
 @property (nonatomic,strong)RCDSelectPersonTableViewCell* selectedCell;
 @property (nonatomic,assign)BOOL bJoinedEnterprise;
+@property(nonatomic,assign)BOOL bSearchDisplay;
 
 @end
 
@@ -38,6 +39,8 @@
     {
         self.tableView.allowsMultipleSelection = YES; //控制多选
     }
+    self.searchDisplayController1.searchResultsTableView.allowsMultipleSelection = YES;
+    self.bSearchDisplay = NO;
     
     [self judgeJoinedEnterprise];
     UINib *rcdCellNib = [UINib nibWithNibName:@"RCDSelectPersonTableViewCell" bundle:nil];
@@ -75,7 +78,18 @@
 //clicked done
 -(void) clickedDone:(id) sender
 {
-    NSArray *indexPaths = [self.tableView indexPathsForSelectedRows];
+    NSArray *indexPaths = nil;
+
+    if (self.bSearchDisplay)
+    {
+        indexPaths = [self.searchDisplayController1.searchResultsTableView indexPathsForSelectedRows];
+    }
+    else
+    {
+        indexPaths = [self.tableView indexPathsForSelectedRows];
+    }
+
+//    NSArray *indexPaths = [self.tableView indexPathsForSelectedRows];
     if (!indexPaths||indexPaths.count == 0){
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"请选择联系人!" message:nil preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *enterAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil];
@@ -151,8 +165,6 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellReuseIdentifier = @"RCDSelectPersonTableViewCell";
-    UINib *rcdCellNib = [UINib nibWithNibName:@"RCDSelectPersonTableViewCell" bundle:nil];
-    [tableView registerNib:rcdCellNib forCellReuseIdentifier:@"RCDSelectPersonTableViewCell"];
     RCDSelectPersonTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellReuseIdentifier forIndexPath:indexPath];
     
     [cell setUserInteractionEnabled:YES];
@@ -171,7 +183,10 @@
         for (ESUserInfo *userInfo in self.seletedUsers) {
             if ([user.userId isEqualToString:userInfo.userId]) {
                 [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionBottom];
-//                [cell setUserInteractionEnabled:NO];
+                if (_type == e_Selected_Check_Box_UnDeselect)
+                {
+                    [cell setUserInteractionEnabled:NO];
+                }
             }
         }
         return cell;
@@ -190,7 +205,10 @@
         for (ESUserInfo *userInfo in self.seletedUsers) {
             if ([user.userId isEqualToString:userInfo.userId]) {
                 [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionBottom];
-//                [cell setUserInteractionEnabled:NO];
+                if (_type == e_Selected_Check_Box_UnDeselect)
+                {
+                    [cell setUserInteractionEnabled:NO];
+                }
             }
         }
         
@@ -274,4 +292,23 @@
 {
     
 }
+#pragma mark - UISearchBarDelegate
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
+{
+    self.bSearchDisplay = YES;
+    //    NSLog(@"searchBarShouldBeginEditing");
+    return YES;
+}
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    [self clickedDone:nil];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    self.bSearchDisplay = NO;
+    
+    //    NSLog(@"searchBarCancelButtonClicked");
+}
+
 @end

@@ -638,7 +638,7 @@
     }
     else if (sender.tag == 1002){
         RCDRadioSelectPersonViewController* selectPersonVC = [[RCDRadioSelectPersonViewController alloc] init];
-        selectPersonVC.type = e_Selected_Check_Box;
+        selectPersonVC.type = e_Selected_Check_Box_Deselect;
         [selectPersonVC setSeletedUsers:self.followsDataSource];
         __weak typeof(&*self)  weakSelf = self;
 

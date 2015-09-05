@@ -30,7 +30,7 @@
 @property (nonatomic,strong) IBOutlet UILabel* enterpriseDes;
 @property (nonatomic,weak) IBOutlet UIButton* smsButton;
 @property (nonatomic,weak) IBOutlet UIButton* deleteButton;
-
+@property (nonatomic,weak) IBOutlet UIView* tableHeaderView;
 
 -(IBAction)clickStartChatButton:(id)sender;
 -(IBAction)clickDeleteButton:(id)sender;
@@ -123,8 +123,14 @@
     _portraitImageView.layer.cornerRadius = 18.f;
     
     [_portraitImageView sd_setImageWithURL:[NSURL URLWithString:enterpriseDetailInfo.portraitUri] placeholderImage:[UIImage imageNamed:@"头像_100"]];
-    [self.tableView reloadData];
+    
+//    CGRect rect = _tableHeaderView.frame;
+//    rect.size.height = [_tableHeaderView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+//    _tableHeaderView.frame = rect;
+//    self.tableView.tableHeaderView = _tableHeaderView;
+    
     [self refreshEnterpriseDetailButton];
+    [self.tableView reloadData];
     [[CustomShowMessage getInstance] hideWaitingIndicator];
     
     

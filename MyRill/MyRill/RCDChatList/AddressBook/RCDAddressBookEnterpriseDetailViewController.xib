@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RCDAddressBookEnterpriseDetailViewController">
@@ -12,6 +12,7 @@
                 <outlet property="enterpriseName" destination="wtf-Yc-JoB" id="e3v-6d-w4h"/>
                 <outlet property="portraitImageView" destination="HmU-NG-o4E" id="ZeS-XV-leM"/>
                 <outlet property="smsButton" destination="P9K-x7-aTk" id="945-vJ-Md9"/>
+                <outlet property="tableHeaderView" destination="Et5-wR-GBK" id="DHK-FI-nPE"/>
                 <outlet property="tableView" destination="5qg-fQ-Zgm" id="Vf7-gT-GUU"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -25,7 +26,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <view key="tableHeaderView" contentMode="scaleToFill" id="Et5-wR-GBK">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="150"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="95"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="头像_100" translatesAutoresizingMaskIntoConstraints="NO" id="HmU-NG-o4E">
@@ -42,7 +43,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="企业简介：" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dZd-G8-uX0">
-                                <rect key="frame" x="90" y="51" width="490" height="17"/>
+                                <rect key="frame" x="90" y="58" width="490" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -53,11 +54,18 @@
                             <constraint firstAttribute="trailing" secondItem="dZd-G8-uX0" secondAttribute="trailing" constant="20" id="4yb-lN-eOL"/>
                             <constraint firstItem="HmU-NG-o4E" firstAttribute="top" secondItem="Et5-wR-GBK" secondAttribute="top" constant="20" id="6UB-gD-UqF"/>
                             <constraint firstItem="dZd-G8-uX0" firstAttribute="leading" secondItem="HmU-NG-o4E" secondAttribute="trailing" constant="20" id="8Ah-5o-bjB"/>
+                            <constraint firstAttribute="bottom" secondItem="dZd-G8-uX0" secondAttribute="bottom" constant="20" id="J1f-hV-moL"/>
                             <constraint firstItem="dZd-G8-uX0" firstAttribute="top" secondItem="wtf-Yc-JoB" secondAttribute="bottom" constant="10" id="MRe-Qe-C0I"/>
                             <constraint firstItem="HmU-NG-o4E" firstAttribute="leading" secondItem="Et5-wR-GBK" secondAttribute="leading" constant="10" id="bUQ-kl-ecI"/>
                             <constraint firstItem="wtf-Yc-JoB" firstAttribute="leading" secondItem="HmU-NG-o4E" secondAttribute="trailing" constant="20" id="hdQ-Vc-2Mn"/>
+                            <constraint firstItem="dZd-G8-uX0" firstAttribute="top" secondItem="Et5-wR-GBK" secondAttribute="top" constant="58" id="qod-bC-W2e"/>
                             <constraint firstItem="wtf-Yc-JoB" firstAttribute="top" secondItem="Et5-wR-GBK" secondAttribute="top" constant="20" id="v7E-2U-fAo"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="MRe-Qe-C0I"/>
+                            </mask>
+                        </variation>
                     </view>
                     <view key="tableFooterView" contentMode="scaleToFill" id="oQ7-TE-RaF">
                         <rect key="frame" x="0.0" y="194" width="600" height="200"/>
