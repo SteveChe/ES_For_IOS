@@ -12,7 +12,7 @@
 #import "RCDAddFriendViewController.h"
 #import "RCDJoinEnterpriseViewController.h"
 
-@interface QRCodeViewController ()<AVCaptureMetadataOutputObjectsDelegate>
+@interface QRCodeViewController ()<AVCaptureMetadataOutputObjectsDelegate, UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *qrView;
 @property ( strong , nonatomic ) AVCaptureDevice *device;
@@ -42,41 +42,100 @@
                                                               action:@selector(photoAction:)];
     self.navigationItem.leftBarButtonItem = cancel;
     self.navigationItem.rightBarButtonItem = photo;
-    
+
+    AVAuthorizationStatus authorizationStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+    switch (authorizationStatus) {
+        case AVAuthorizationStatusNotDetermined:
+        {
+            [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo
+                                     completionHandler:^(BOOL granted) {
+                                         if (granted) {
+                                             //继续
+                                             [self configQRCode];
+                                         } else {
+                                             //用户拒绝，无法继续
+                                             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"您拒绝了使用相机的授权"
+                                                                                             message:@"请在设备的'设置-隐私-相机'中允许应用访问相机。"
+                                                                                            delegate:self
+                                                                                   cancelButtonTitle:@"确定"
+                                                                                   otherButtonTitles:nil];
+                                             [alert show];
+                                         }
+                                     }];
+        }
+            break;
+        case AVAuthorizationStatusAuthorized:
+            // 继续
+            [self configQRCode];
+            break;
+        case AVAuthorizationStatusDenied:
+            //用户明确地拒绝授权
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"未授权使用相机"
+                                                                message:@"请在设备的'设置-隐私-相机'中允许应用访问相机。"
+                                                               delegate:self
+                                                      cancelButtonTitle:@"确定"
+                                                      otherButtonTitles:nil];
+                [alert show];
+            }
+            break;
+        case AVAuthorizationStatusRestricted:
+            //相机设备无法访问
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"相机设备无法访问"
+                                                                message:@"请在设备的'设置-隐私-相机'中允许应用访问相机。"
+                                                               delegate:self
+                                                      cancelButtonTitle:@"确定"
+                                                      otherButtonTitles:nil];
+                [alert show];
+            }
+        default:
+            break;
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
+- (void)configQRCode {
     _device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     // Input
     _input = [AVCaptureDeviceInput deviceInputWithDevice:self.device error:nil];
     // Output
     _output = [[AVCaptureMetadataOutput alloc] init];
     [_output setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
-
     // Session
     _session = [[AVCaptureSession alloc] init];
     
     [_session setSessionPreset:AVCaptureSessionPresetHigh];
     
-    if ([_session canAddInput:self.input])
-    {
+    if ([_session canAddInput:self.input]) {
         [_session addInput:self.input];
     }
     
-    if ([_session canAddOutput:self.output])
-    {
+    if ([_session canAddOutput:self.output]) {
         [_session addOutput:self.output];
     }
-
-#pragma mark--奔溃
-    // 条码类型 AVMetadataObjectTypeQRCode
-    _output.metadataObjectTypes = @[AVMetadataObjectTypeQRCode];
     
-    // Preview
-    _preview =[AVCaptureVideoPreviewLayer layerWithSession:_session];
-    _preview.videoGravity = AVLayerVideoGravityResizeAspectFill;
-    _preview.frame = self.view.layer.bounds;
-    [self.view.layer insertSublayer:_preview atIndex:0];
-    
-    //Start
-    [_session startRunning];
+    if ([_output.availableMetadataObjectTypes containsObject:AVMetadataObjectTypeQRCode]) {
+        // 条码类型 AVMetadataObjectTypeQRCode
+        _output.metadataObjectTypes = @[AVMetadataObjectTypeQRCode];
+        
+        // Preview
+        _preview =[AVCaptureVideoPreviewLayer layerWithSession:_session];
+        _preview.videoGravity = AVLayerVideoGravityResizeAspectFill;
+        _preview.frame = self.view.layer.bounds;
+        [self.view.layer insertSublayer:_preview atIndex:0];
+        
+        //Start
+        [_session startRunning];
+    } else {
+        NSLog(@"扫描类型错误!");
+        return;
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
