@@ -36,8 +36,7 @@
     [self.tableView registerNib:rcdCellNib forCellReuseIdentifier:@"RCDSelectPersonTableViewCell"];
     [self.searchDisplayController1.searchResultsTableView registerNib:rcdCellNib forCellReuseIdentifier:@"RCDSelectPersonTableViewCell"];
     
-    UIBarButtonItem *settintBtnItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self                      action:@selector(clickedDone:)];
-    self.navigationItem.rightBarButtonItem = settintBtnItem;
+
 
 }
 
@@ -46,7 +45,8 @@
     [super viewWillAppear:animated];
     
     self.tabBarController.tabBar.hidden = YES;
-
+    UIBarButtonItem *settintBtnItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self                      action:@selector(clickedDone:)];
+    self.navigationItem.rightBarButtonItem = settintBtnItem;
 }
 
 
