@@ -53,11 +53,6 @@
     
     [self setAutomaticallyAdjustsScrollViewInsets:YES];
     [self setExtendedLayoutIncludesOpaqueBars:YES];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(updatePushTask)
-                                                 name:NOTIFICATION_PUSH_ASSIGNMENT
-                                               object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -67,6 +62,11 @@
     //每次先隐藏tableView和msgLbl,待请求完成后决定那个显示
     self.msgLbl.hidden = YES;
     self.tableView.hidden = YES;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updatePushTask)
+                                                 name:NOTIFICATION_PUSH_ASSIGNMENT
+                                               object:nil];
     
     [self.getTaskListDP getTaskListWithIdentify:self.identity type:self.type];
 }

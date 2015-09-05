@@ -75,11 +75,6 @@
     self.searchDisplayVC.delegate = self;
     self.searchDisplayVC.searchResultsTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.searchDisplayVC.searchResultsTableView registerNib:[UINib nibWithNibName:@"TaskListTableViewCell" bundle:nil] forCellReuseIdentifier:@"TaskListTableViewCell"];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(updatePushTask)
-                                                 name:NOTIFICATION_PUSH_ASSIGNMENT
-                                               object:nil];
 }
 
 //- (void)searchDisplayControllerDidEndSearch:(UISearchDisplayController *)controller {
@@ -94,6 +89,11 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updatePushTask)
+                                                 name:NOTIFICATION_PUSH_ASSIGNMENT
+                                               object:nil];
     
     self.tabBarController.tabBar.hidden = NO;
     [self.getTaskDashboardDP getTaskDashboard];

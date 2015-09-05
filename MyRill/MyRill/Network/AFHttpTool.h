@@ -169,10 +169,10 @@ typedef enum : NSUInteger {
                       success:(void (^)(id response))success
                       failure:(void (^)(NSError *error))failure;
 
-/****** 关闭任务 ****/
-+ (void)closeTaskWithTaskID:(NSString *)taskID
-                    success:(void (^)(id response))success
-                    failure:(void (^)(NSError *error))failure;
+/****** 更新任务关注人和chat_id ****/
++ (void)updateObserverAndChatidWith:(ESTask *)task
+                            success:(void (^)(id response))success
+                            failure:(void (^)(NSError *error))failure;
 
 /****** 提交任务评论 ****/
 + (void)sendTaskCommentWithTaskID:(NSString *)taskID
