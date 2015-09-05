@@ -396,7 +396,7 @@
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.defaultCells.count + 1;
+    return self.defaultCells.count;
 }
 
 - (CGFloat)tableView:(UITableView*)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath
@@ -424,10 +424,10 @@
             cell = self.defaultCells[1];
             
         } break;
-        case 3: {
-            cell = self.defaultCells[2];
-            
-        } break;
+//        case 3: {
+//            cell = self.defaultCells[2];
+//            
+//        } break;
     }
     
     return cell;
