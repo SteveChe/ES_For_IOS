@@ -76,7 +76,7 @@
         NSString *alarmInteral = self.dataSource[self.lastIndexPath.row];
         NSDate *date = [NSDate date];
         
-        //设置事件之前多长时候开始提醒
+        //设置事件时间
         double alarm = 0;
         if ([alarmInteral isEqualToString:@"15分钟"]) {
             alarm = 15 * 60;
@@ -88,7 +88,7 @@
             alarm = 24 * 60 * 60;
         } else if ([alarmInteral isEqualToString:@"1周"]) {
             alarm = 7 * 24 * 60 * 60;
-        } else if ([alarmInteral isEqualToString:@"1天"]) {
+        } else if ([alarmInteral isEqualToString:@"1月"]) {
             alarm = 30 * 24 * 60 * 60;
         } else {
             

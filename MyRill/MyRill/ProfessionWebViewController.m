@@ -79,6 +79,12 @@
     self.navigationController.toolbar.frame = CGRectMake(0, self.view.frame.size.height - 44 + 64, self.view.frame.size.width, 44);
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [self.navigationController setToolbarHidden:YES animated:YES];
+}
+
 #pragma mark - UIWebViewDelegate methods
 //以下方法会在加载一个URL中多次调用(加载图片,加载js file,加载css,都有可能调用)
 - (void)webViewDidStartLoad:(UIWebView *)webView {
