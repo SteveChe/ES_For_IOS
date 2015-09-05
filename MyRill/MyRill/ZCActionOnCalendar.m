@@ -8,6 +8,7 @@
 
 #import "ZCActionOnCalendar.h"
 #import <EventKit/EventKit.h>
+#import <UIKit/UIKit.h>
 @implementation ZCActionOnCalendar
 + (void)saveEventStartDate:(NSDate*)startData endDate:(NSDate*)endDate alarm:(float)alarm eventTitle:(NSString*)eventTitle location:(NSString*)location isReminder:(BOOL)isReminder{
     //事件市场
@@ -19,12 +20,16 @@
         [eventStore requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) {
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                if (error)
-                {
-                }else if (!granted)
-                {
+                if (error) {
+                
+                }else if (!granted) {
                     //被⽤用户拒绝,不允许访问⽇日历
-                    
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"未授权使用日历"
+                                                                    message:@"请在设备的'设置-隐私-日历'中允许应用访问相机。"
+                                                                   delegate:self
+                                                          cancelButtonTitle:@"确定"
+                                                          otherButtonTitles:nil, nil];
+                    [alert show];
                 }else{
                     //事件保存到⽇日历
                     //创建事件
