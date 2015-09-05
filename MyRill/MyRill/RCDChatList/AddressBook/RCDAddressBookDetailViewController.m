@@ -28,6 +28,7 @@
 @property (nonatomic,strong) IBOutlet UILabel* titleLabel;
 @property (nonatomic,strong) IBOutlet UILabel* phoneNumberLabel;
 @property (nonatomic,strong) IBOutlet UILabel* descriptionDetailLabel;
+@property (nonatomic,strong) IBOutlet UIView* tableHeaderView;
 //@property (nonatomic,strong) IBOutlet UIImageView* qrCodeImageView;
 //@property (nonatomic,strong) IBOutlet UIImageView* enterpriseQRImageView;
 @property (nonatomic,strong) ESUserDetailInfo* userDetailInfo;
@@ -128,6 +129,14 @@
     _portraitImageView.layer.cornerRadius = 18.f;
 
     [_portraitImageView sd_setImageWithURL:[NSURL URLWithString:userDetailInfo.portraitUri] placeholderImage:[UIImage imageNamed:@"头像_100"]];
+    
+    
+//    return [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height + 1;
+
+    CGRect rect = _tableHeaderView.frame;
+    rect.size.height = [_tableHeaderView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+    _tableHeaderView.frame = rect;
+    self.tableView.tableHeaderView = _tableHeaderView;
     
     [self refreshUserDetailButton];
     [[CustomShowMessage getInstance] hideWaitingIndicator];
