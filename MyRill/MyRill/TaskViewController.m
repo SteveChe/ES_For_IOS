@@ -637,8 +637,22 @@
         [self.navigationController pushViewController:selectPersonVC animated:YES];
     }
     else if (sender.tag == 1002){
+        //如果是关注人浏览任务则开启勿删模式
+        __block BOOL isOberser = NO;
+        [self.taskModel.observers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            ESUserInfo *userInfo = (ESUserInfo *)obj;
+            if ([userInfo.userId isEqualToString:self.userID]) {
+                isOberser = YES;
+                *stop = YES;
+            }
+        }];
+        
         RCDRadioSelectPersonViewController* selectPersonVC = [[RCDRadioSelectPersonViewController alloc] init];
-        selectPersonVC.type = e_Selected_Check_Box_Deselect;
+        if (isOberser) {
+            selectPersonVC.type = e_Selected_Check_Box_UnDeselect;
+        } else {
+            selectPersonVC.type = e_Selected_Check_Box_Deselect;
+        }
         [selectPersonVC setSeletedUsers:self.followsDataSource];
         __weak typeof(&*self)  weakSelf = self;
 
