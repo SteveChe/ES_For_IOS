@@ -43,8 +43,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    UINib *rcdCellNib = [UINib nibWithNibName:@"RCDPhoneAddressBookTableViewCell" bundle:nil];
-    [self.tableView registerNib:rcdCellNib forCellReuseIdentifier:@"RCDPhoneAddressBookTableViewCell"];
+    UINib *rcdCellNib = [UINib nibWithNibName:@"RCDAcceptAddressBookTableViewCell" bundle:nil];
+    [self.tableView registerNib:rcdCellNib forCellReuseIdentifier:@"RCDAcceptAddressBookTableViewCell"];
     self.tabBarController.tabBar.hidden = YES;
 }
 
@@ -73,7 +73,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    RCDPhoneAddressBookTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RCDPhoneAddressBookTableViewCell" ];
+    RCDAcceptAddressBookTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RCDAcceptAddressBookTableViewCell" ];
     ESUserInfo* userInfo = [_requestContactList objectAtIndex:indexPath.row];
     if (userInfo != nil)
     {
@@ -82,7 +82,10 @@
         [cell.ivAva sd_setImageWithURL:[NSURL URLWithString:userInfo.portraitUri] placeholderImage:[UIImage imageNamed:@"头像_100"]];
         if([userInfo.type isEqualToString:@"contact"])
         {
-            [cell.addButton setBackgroundImage:[UIImage imageNamed:@"ren_tianjia_chenggong"] forState:UIControlStateNormal];
+//            [cell.addButton setBackgroundImage:[UIImage imageNamed:@"ren_tianjia_chenggong"] forState:UIControlStateNormal];
+            cell.addButton.titleLabel.text = @"已添加";
+            cell.addButton.titleLabel.textColor = [UIColor blackColor];
+            cell.addButton.backgroundColor = [UIColor clearColor];
         }
         [cell setTag:indexPath.row];
         cell.delegate = self;
@@ -128,6 +131,16 @@
     [[CustomShowMessage getInstance] hideWaitingIndicator];
     [[CustomShowMessage getInstance] showNotificationMessage:@"接受好友成功"];
     _acceptingUser.type = @"contact";
+    for (int index = 0; index < [_requestContactList count]; index ++)
+    {
+        ESUserInfo* userInfo = [_requestContactList objectAtIndex:index];
+        if ([userInfo.userId isEqual:_acceptingUser.userId])
+        {
+            [_requestContactList removeObjectAtIndex:index];
+            break;
+        }
+    }
+    
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
@@ -144,7 +157,7 @@
 #pragma mark-- RCDPhoneAddressBookTableViewCellDelegate
 -(void)addButtonClick:(id)sender
 {
-    RCDPhoneAddressBookTableViewCell* cell = (RCDPhoneAddressBookTableViewCell*) sender;
+    RCDAcceptAddressBookTableViewCell* cell = (RCDAcceptAddressBookTableViewCell*) sender;
     NSInteger rowIndex = cell.tag;
     if (rowIndex < [_requestContactList count])
     {

@@ -141,7 +141,7 @@
 /**
  *  响应点击事件
  *  @param label The label whose link was selected.
- *  @param url The URL for the selected link.
+ *  @param content content.
  */
 - (void)attributedLabel:(RCAttributedLabel *)label didTapLabel:(NSString *)content;
 

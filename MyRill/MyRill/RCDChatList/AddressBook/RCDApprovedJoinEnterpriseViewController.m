@@ -38,8 +38,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    UINib *rcdCellNib = [UINib nibWithNibName:@"RCDPhoneAddressBookTableViewCell" bundle:nil];
-    [self.tableView registerNib:rcdCellNib forCellReuseIdentifier:@"RCDPhoneAddressBookTableViewCell"];
+    UINib *rcdCellNib = [UINib nibWithNibName:@"RCDAcceptAddressBookTableViewCell" bundle:nil];
+    [self.tableView registerNib:rcdCellNib forCellReuseIdentifier:@"RCDAcceptAddressBookTableViewCell"];
     self.tabBarController.tabBar.hidden = YES;
 }
 
@@ -73,7 +73,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    RCDPhoneAddressBookTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RCDPhoneAddressBookTableViewCell" ];
+    RCDAcceptAddressBookTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RCDAcceptAddressBookTableViewCell" ];
     ESEnterPriseRequestInfo* enterpriseRequestInfo = [_enterpriseRequestInfoList objectAtIndex:indexPath.row];
     if (enterpriseRequestInfo != nil && enterpriseRequestInfo.sender != nil)
     {
@@ -82,7 +82,11 @@
         [cell.ivAva sd_setImageWithURL:[NSURL URLWithString:enterpriseRequestInfo.sender.portraitUri] placeholderImage:[UIImage imageNamed:@"头像_100"]];
         if(enterpriseRequestInfo.bApproved)
         {
-            [cell.addButton setBackgroundImage:[UIImage imageNamed:@"ren_tianjia_chenggong"] forState:UIControlStateNormal];
+//            [cell.addButton setBackgroundImage:[UIImage imageNamed:@"ren_tianjia_chenggong"] forState:UIControlStateNormal];
+            cell.addButton.titleLabel.text = @"已添加";
+            cell.addButton.titleLabel.textColor = [UIColor blackColor];
+            cell.addButton.backgroundColor = [UIColor clearColor];
+
         }
         [cell setTag:indexPath.row];
         cell.delegate = self;
@@ -130,6 +134,16 @@
     [[CustomShowMessage getInstance] showNotificationMessage:@"同意对方加入企业"];
     _requestIngEnterPriseRequestInfo.bApproved = YES;
 
+    for (int index = 0; index < [_enterpriseRequestInfoList count]; index ++)
+    {
+        ESEnterPriseRequestInfo* enterpriseInfo = [_enterpriseRequestInfoList objectAtIndex:index];
+        if ([enterpriseInfo.enterPriseId isEqual:_requestIngEnterPriseRequestInfo.enterPriseId])
+        {
+            [_enterpriseRequestInfoList removeObjectAtIndex:index];
+            break;
+        }
+    }
+
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
@@ -146,7 +160,7 @@
 #pragma mark-- RCDPhoneAddressBookTableViewCellDelegate
 -(void)addButtonClick:(id)sender
 {
-    RCDPhoneAddressBookTableViewCell* cell = (RCDPhoneAddressBookTableViewCell*) sender;
+    RCDAcceptAddressBookTableViewCell* cell = (RCDAcceptAddressBookTableViewCell*) sender;
     NSInteger rowIndex = cell.tag;
     if (rowIndex < [_enterpriseRequestInfoList count])
     {

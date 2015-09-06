@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RCDPhoneAddressBookTableViewCell.h"
+#import "RCDAcceptAddressBookTableViewCell.h"
 #import "EnterPriseRequestDataParse.h"
-@interface RCDApprovedJoinEnterpriseViewController : UITableViewController<RCDPhoneAddressBookTableViewCellDelegate,GetEnterPriseRequestListDelegate,ApprovedEnterPriseRequestDelegate>
+@interface RCDApprovedJoinEnterpriseViewController : UITableViewController<RCDAcceptAddressBookTableViewCellDelegate,GetEnterPriseRequestListDelegate,ApprovedEnterPriseRequestDelegate>
 
 @end

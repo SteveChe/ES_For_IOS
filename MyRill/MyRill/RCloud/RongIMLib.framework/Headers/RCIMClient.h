@@ -21,6 +21,7 @@
 #import "RCPublicServiceProfile.h"
 #import "RCUserData.h"
 #import "RCWatchKitStatusDelegate.h"
+#import "RCUploadImageStatusListener.h"
 
 @class RCConversation;
 @class RCDiscussion;
@@ -158,8 +159,7 @@ typedef NS_ENUM(NSUInteger, RCNetworkStatus) {
  *  @param token                 从服务端获取的用户身份令牌（Token）。
  *  @param successBlock          调用完成的处理。
  *  @param errorBlock            调用返回的错误信息。
- *  @param tokenIncorrectBlock
- *Token错误，可能是因为过期导致，需要重新换取token重新连接，但要注意避免因为token错误导致无限循环。
+ *  @param tokenIncorrectBlock   Token错误，可能是因为过期导致，需要重新换取token重新连接，但要注意避免因为token错误导致无限循环。
  */
 - (void)connectWithToken:(NSString *)token
                  success:(void (^)(NSString *userId))successBlock
@@ -218,8 +218,7 @@ typedef NS_ENUM(NSUInteger, RCNetworkStatus) {
  *  发送状态消息。可以发送任何类型的消息。但建议您发送自定义的消息类型
  *  注：如果通过该接口发送图片消息，需要自己实现上传图片，把imageUrl传入content（注意它将是一个RCImageMessage）。
  *  @param conversationType 会话类型。
- *  @param targetId         目标 Id。根据不同的 conversationType，可能是聊天
- *Id、讨论组 Id、群组 Id 或聊天室 Id。
+ *  @param targetId         目标 Id。根据不同的 conversationType，可能是聊天 Id、讨论组 Id、群组 Id 或聊天室 Id。
  *  @param content          消息内容。
  *  @param successBlock     调用完成的处理。
  *  @param errorBlock       调用返回的错误信息。
@@ -236,8 +235,7 @@ typedef NS_ENUM(NSUInteger, RCNetworkStatus) {
  *  发送消息。可以发送任何类型的消息。
  *  注：如果通过该接口发送图片消息，需要自己实现上传图片，把imageUrl传入content（注意它将是一个RCImageMessage）。
  *  @param conversationType 会话类型。
- *  @param targetId         目标 Id。根据不同的 conversationType，可能是聊天
- *Id、讨论组 Id、群组 Id 或聊天室 Id。
+ *  @param targetId         目标 Id。根据不同的 conversationType，可能是聊天 Id、讨论组 Id、群组 Id 或聊天室 Id。
  *  @param content          消息内容。
  *  @param pushContent      推送消息内容
  *  @param successBlock     调用完成的处理。
@@ -257,8 +255,7 @@ typedef NS_ENUM(NSUInteger, RCNetworkStatus) {
  *  发送消息。可以发送任何类型的消息。
  *  注：如果通过该接口发送图片消息，需要自己实现上传图片，把imageUrl传入content（注意它将是一个RCImageMessage）。
  *  @param conversationType 会话类型。
- *  @param targetId         目标 Id。根据不同的 conversationType，可能是聊天
- *Id、讨论组 Id、群组 Id 或聊天室 Id。
+ *  @param targetId         目标 Id。根据不同的 conversationType，可能是聊天 Id、讨论组 Id、群组 Id 或聊天室 Id。
  *  @param content          消息内容。
  *  @param pushContent      推送消息内容
  *  @param pushData         推送消息附加信息
@@ -280,8 +277,7 @@ typedef NS_ENUM(NSUInteger, RCNetworkStatus) {
  *  需要自己实现上传图片，并且添加ImageMessage的URL之后发送
  *
  *  @param conversationType 会话类型。
- *  @param targetId         目标 Id。根据不同的 conversationType，可能是聊天
- *Id、讨论组 Id、群组 Id 或聊天室 Id。
+ *  @param targetId         目标 Id。根据不同的 conversationType，可能是聊天 Id、讨论组 Id、群组 Id 或聊天室 Id。
  *  @param content          消息内容
  *  @param pushContent      推送消息内容
  *  @param progressBlock    进度块
@@ -304,8 +300,7 @@ sendImageMessage:(RCConversationType)conversationType
  *  需要自己实现上传图片，并且添加ImageMessage的URL之后发送
  *
  *  @param conversationType 会话类型。
- *  @param targetId         目标 Id。根据不同的 conversationType，可能是聊天
- *Id、讨论组 Id、群组 Id 或聊天室 Id。
+ *  @param targetId         目标 Id。根据不同的 conversationType，可能是聊天 Id、讨论组 Id、群组 Id 或聊天室 Id。
  *  @param content          消息内容
  *  @param pushContent      推送消息内容
  *  @param pushData         推送消息附加信息
@@ -324,12 +319,36 @@ sendImageMessage:(RCConversationType)conversationType
         progress:(void (^)(int progress, long messageId))progressBlock
          success:(void (^)(long messageId))successBlock
            error:(void (^)(RCErrorCode errorCode, long messageId))errorBlock;
+
+/**
+ *  发送图片消息，由APP实现上传图片。请在uploadPrepareBlock中上传图片，并通知融云上传进度和结果。使用lib的客户可以忽略此方法
+ *
+ *  @param conversationType   会话类型。
+ *  @param targetId           目标 Id。根据不同的 conversationType，可能是聊天 Id、讨论组 Id、群组 Id 或聊天室 Id。
+ *  @param content            消息内容
+ *  @param pushContent        推送消息内容
+ *  @param pushData         推送消息附加信息
+ *  @param uploadPrepareBlock 应用上传图片Block
+ *  @param progressBlock      进度块
+ *  @param successBlock       成功处理块
+ *  @param errorBlock         失败处理块
+ *
+ *  @return 发送的消息实体。
+ */
+- (RCMessage *)sendImageMessage:(RCConversationType)conversationType
+                       targetId:(NSString *)targetId
+                        content:(RCMessageContent *)content
+                    pushContent:(NSString *)pushContent
+                       pushData:(NSString *)pushData
+                  uploadPrepare:(void (^)(RCUploadImageStatusListener *uploadListener))uploadPrepareBlock
+                       progress:(void (^)(int progress, long messageId))progressBlock
+                        success:(void (^)(long messageId))successBlock
+                          error:(void (^)(RCErrorCode errorCode, long messageId))errorBlock;
 /**
  *  下载图片
  *
  *  @param conversationType 会话类型
- *  @param targetId         标 Id。根据不同的 conversationType，可能是聊天
- *Id、讨论组 Id、群组 Id 或聊天室 Id。
+ *  @param targetId         标 Id。根据不同的 conversationType，可能是聊天 Id、讨论组 Id、群组 Id 或聊天室 Id。
  *  @param mediaType        媒体类型，目前支持图片
  *  @param mediaUrl         媒体URL
  *  @param progressBlock    回调进度
@@ -363,8 +382,7 @@ sendImageMessage:(RCConversationType)conversationType
  *
  *  会话列表按照时间从前往后排列，如果有置顶会话，则置顶会话在前。
  *
- *  @param conversationTypeList 会话类型数组，存储对象为NSNumber类型
- *type类型为int
+ *  @param conversationTypeList 会话类型数组，存储对象为NSNumber类型 type类型为int
  *  @return 会话列表。
  */
 - (NSArray *)getConversationList:(NSArray *)conversationTypeList;
@@ -386,8 +404,7 @@ sendImageMessage:(RCConversationType)conversationType
  *  如果此会话中有新的消息，该会话将重新在会话列表中显示，并显示最近的历史消息。
  *
  *  @param conversationType 会话类型。
- *  @param targetId         目标 Id。根据不同的 conversationType，可能是聊天
- *Id、讨论组 Id、群组 Id 或聊天室 Id。
+ *  @param targetId         目标 Id。根据不同的 conversationType，可能是聊天 Id、讨论组 Id、群组 Id 或聊天室 Id。
  *
  *  @return 是否移除成功。
  */
@@ -398,8 +415,7 @@ sendImageMessage:(RCConversationType)conversationType
  *  设置某一会话为置顶或者取消置顶。
  *
  *  @param conversationType 会话类型。
- *  @param targetId         目标 Id。根据不同的 conversationType，可能是聊天
- *Id、讨论组 Id、群组 Id 或聊天室 Id。
+ *  @param targetId         目标 Id。根据不同的 conversationType，可能是聊天 Id、讨论组 Id、群组 Id 或聊天室 Id。
  *  @param isTop            是否置顶。
  *
  *  @return 是否设置成功。
@@ -419,8 +435,7 @@ sendImageMessage:(RCConversationType)conversationType
  *  获取来自某用户（某会话）的未读消息数。
  *
  *  @param conversationType 会话类型。
- *  @param targetId         目标 Id。根据不同的 conversationType，可能是聊天
- *Id、讨论组 Id、群组 Id。
+ *  @param targetId         目标 Id。根据不同的 conversationType，可能是聊天 Id、讨论组 Id、群组 Id。
  *
  *  @return 未读消息数。
  */
@@ -453,8 +468,7 @@ sendImageMessage:(RCConversationType)conversationType
  *  获取历史消息记录。
  *
  *  @param conversationType 会话类型。不支持传入 RCConversationType.CHATROOM。
- *  @param targetId         目标 Id。根据不同的 conversationType，可能是聊天
- *Id、讨论组 Id、群组 Id。
+ *  @param targetId         目标 Id。根据不同的 conversationType，可能是聊天 Id、讨论组 Id、群组 Id。
  *  @param oldestMessageId  最后一条消息的 Id，获取此消息之前的 count 条消息。
  *  @param count            要获取的消息数量。
  *
@@ -469,8 +483,7 @@ sendImageMessage:(RCConversationType)conversationType
  *  插入一条消息。
  *
  *  @param conversationType 会话类型。不支持传入 RCConversationType.CHATROOM。
- *  @param targetId         目标 Id。根据不同的 conversationType，可能是聊天
- *Id、讨论组 Id、群组 Id。
+ *  @param targetId         目标 Id。根据不同的 conversationType，可能是聊天 Id、讨论组 Id、群组 Id。
  *  @param senderUserId     消息的发送者，如果为空则为当前用户。
  *  @param sendStatus       要插入的消息状态。
  *  @param content          消息内容
@@ -496,8 +509,7 @@ sendImageMessage:(RCConversationType)conversationType
  *  清空某一会话的所有聊天消息记录。
  *
  *  @param conversationType 会话类型。不支持传入 RCConversationType.CHATROOM。
- *  @param targetId         目标 Id。根据不同的 conversationType，可能是聊天
- *Id、讨论组 Id、群组 Id。
+ *  @param targetId         目标 Id。根据不同的 conversationType，可能是聊天 Id、讨论组 Id、群组 Id。
  *
  *  @return 是否清空成功。
  */
@@ -508,8 +520,7 @@ sendImageMessage:(RCConversationType)conversationType
  *  清除消息未读状态。
  *
  *  @param conversationType 会话类型。不支持传入 RCConversationType.CHATROOM。
- *  @param targetId         目标 Id。根据不同的 conversationType，可能是聊天
- *Id、讨论组 Id、群组 Id。
+ *  @param targetId         目标 Id。根据不同的 conversationType，可能是聊天 Id、讨论组 Id、群组 Id。
  *
  *  @return 是否清空成功。
  */
@@ -548,8 +559,7 @@ sendImageMessage:(RCConversationType)conversationType
  *  获取某一会话的文字消息草稿。
  *
  *  @param conversationType 会话类型。
- *  @param targetId         目标 Id。根据不同的 conversationType，可能是聊天
- *Id、讨论组 Id、群组 Id 或聊天室 Id。
+ *  @param targetId         目标 Id。根据不同的 conversationType，可能是聊天 Id、讨论组 Id、群组 Id 或聊天室 Id。
  *
  *  @return 草稿的文字内容。
  */
@@ -560,8 +570,7 @@ sendImageMessage:(RCConversationType)conversationType
  *  保存文字消息草稿。
  *
  *  @param conversationType 会话类型。
- *  @param targetId         目标 Id。根据不同的 conversationType，可能是聊天
- *Id、讨论组 Id、群组 Id 或聊天室 Id。
+ *  @param targetId         目标 Id。根据不同的 conversationType，可能是聊天 Id、讨论组 Id、群组 Id 或聊天室 Id。
  *  @param content          草稿的文字内容。
  *
  *  @return 是否保存成功。
@@ -574,8 +583,7 @@ sendImageMessage:(RCConversationType)conversationType
  *  清除某一会话的文字消息草稿。
  *
  *  @param conversationType 会话类型。
- *  @param targetId         目标 Id。根据不同的 conversationType，可能是聊天
- *Id、讨论组 Id、群组 Id 或聊天室 Id。
+ *  @param targetId         目标 Id。根据不同的 conversationType，可能是聊天 Id、讨论组 Id、群组 Id 或聊天室 Id。
  *
  *  @return 是否清除成功。
  */
@@ -663,8 +671,7 @@ sendImageMessage:(RCConversationType)conversationType
  *  获取会话消息提醒状态。
  *
  *  @param conversationType 会话类型。
- *  @param targetId         目标 Id。根据不同的 conversationType，可能是聊天
- *Id、讨论组 Id、群组 Id。
+ *  @param targetId         目标 Id。根据不同的 conversationType，可能是聊天Id、讨论组 Id、群组 Id。
  *  @param successBlock     调用完成的处理。
  *  @param errorBlock       调用返回的错误信息。
  */
@@ -679,8 +686,7 @@ getConversationNotificationStatus:(RCConversationType)conversationType
  *  设置会话消息提醒状态。
  *
  *  @param conversationType 会话类型。
- *  @param targetId         目标 Id。根据不同的 conversationType，可能是聊天
- *Id、讨论组 Id、群组 Id。
+ *  @param targetId         目标 Id。根据不同的 conversationType，可能是聊天 Id、讨论组 Id、群组 Id。
  *  @param isBlocked        是否屏蔽。
  *  @param successBlock     调用完成的处理。
  *  @param errorBlock       调用返回的错误信息。
@@ -696,8 +702,7 @@ setConversationNotificationStatus:(RCConversationType)conversationType
 /**
  *  设置讨论组成员邀请权限。
  *
- *  @param targetId         目标 Id。根据不同的 conversationType，可能是聊天
- *Id、讨论组 Id、群组 Id。
+ *  @param targetId         目标 Id。根据不同的 conversationType，可能是聊天 Id、讨论组 Id、群组 Id。
  *  @param isOpen           开放状态，默认开放。
  *  @param successBlock     调用完成的处理。
  *  @param errorBlock       调用返回的错误信息。
@@ -746,8 +751,7 @@ setConversationNotificationStatus:(RCConversationType)conversationType
  *  加入聊天室。
  *
  *  @param targetId         聊天室ID。
- *  @param messageCount     进入聊天室获取获取多少条历史信息，
- *-1表示不获取，0表示系统默认数目(现在默认值为10条)，正数表示获取的具体数目，最大值为50
+ *  @param messageCount     进入聊天室获取获取多少条历史信息，-1表示不获取，0表示系统默认数目(现在默认值为10条)，正数表示获取的具体数目，最大值为50
  *  @param successBlock     调用完成的处理。
  *  @param errorBlock       调用返回的错误信息。
  */
@@ -801,8 +805,7 @@ setConversationNotificationStatus:(RCConversationType)conversationType
  *  获取用户黑名单状态
  *
  *  @param userId     用户id
- *  @param successBlock
- *获取用户黑名单状态成功。bizStatus：0-在黑名单，101-不在黑名单
+ *  @param successBlock 获取用户黑名单状态成功。bizStatus：0-在黑名单，101-不在黑名单
  *  @param errorBlock      获取用户黑名单状态失败。
  */
 - (void)getBlacklistStatus:(NSString *)userId
@@ -926,6 +929,16 @@ setConversationNotificationStatus:(RCConversationType)conversationType
 - (NSArray *)getPublicServiceList;
 
 /**
+ *  获取公众号WebView Controller。
+ *  公众号相关的所有网页都应该由此WebView打开。
+ *
+ *  @param URLString  待打开的链接地址
+ *
+ *  @return WebView controller
+ */
+- (UIViewController *)getPublicServiceWebViewController:(NSString *)URLString;
+
+/**
  *  同步用户信息
  *
  *  @param userData          用户信息
@@ -958,6 +971,31 @@ setConversationNotificationStatus:(RCConversationType)conversationType
                 recordTime:(long)recordTime
                      count:(int)count
                    success:(void (^)(NSArray *messages))successBlock;
+
+/**
+ *  发起客服会话（kit中会话页面已经有客服会话的判断，不用调用此消息，如果用使用Lib 在发起客服会话时调用，这里会发送握手消息）
+ *
+ *  @param customerServiceId    客服id
+ *  @param successBlock 成功回调
+ *  @param errorBlock   失败回调
+ */
+- (void)joinCustomerServiceChat:(NSString *)customerServiceId
+                        success:(void (^)())successBlock
+                          error:(void (^)(RCErrorCode status))errorBlock;
+
+/**
+ *  结束客服会话（kit中会话页面已经有客服会话的判断，不用调用此消息，如果用使用Lib 在发起客服会话时调用，这里会发送结束消息）
+ *
+ *  @param customerServiceId    客服id
+ *  @param successBlock 成功回调
+ *  @param errorBlock   失败回调
+ */
+- (void)quitCustomerServiceChat:(NSString *)customerServiceId
+                        success:(void (^)())successBlock
+                          error:(void (^)(RCErrorCode status))errorBlock;
+
+
+
 
 @end
 #endif

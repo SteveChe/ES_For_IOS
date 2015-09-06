@@ -114,7 +114,7 @@
 /**
  *  长按头像事件
  *
- *  @param userId 用户的ID
+ *  @param model 会话的model
  */
 - (void)didLongPressCellPortrait:(RCConversationModel *)model;
 
