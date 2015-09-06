@@ -34,12 +34,14 @@
     if (_type == e_Selected_Person_Radio)
     {
         self.tableView.allowsMultipleSelection = NO; //控制单选
+        self.searchDisplayController1.searchResultsTableView.allowsMultipleSelection = NO;
+
     }
     else
     {
         self.tableView.allowsMultipleSelection = YES; //控制多选
+        self.searchDisplayController1.searchResultsTableView.allowsMultipleSelection = YES;
     }
-    self.searchDisplayController1.searchResultsTableView.allowsMultipleSelection = YES;
     self.bSearchDisplay = NO;
     
     [self judgeJoinedEnterprise];
