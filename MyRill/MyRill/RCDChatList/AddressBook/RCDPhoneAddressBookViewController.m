@@ -240,7 +240,7 @@
             cell.title.text = phoneName;
         }
         [cell.ivAva sd_setImageWithURL:[NSURL URLWithString:user.portraitUri] placeholderImage:[UIImage imageNamed:@"头像_100"]];
-        if([user.type isEqualToString:@"contact"])
+        if([user.type isEqualToString:@"contact"] || [user.type isEqualToString:@"member"])
         {
             [cell.addButton setBackgroundImage:[UIImage imageNamed:@"ren_tianjia_chenggong"] forState:UIControlStateNormal];
         }
@@ -292,6 +292,11 @@
     }
     if (userInfo != nil)
     {
+        if ([userInfo.type isEqualToString:@"contact"] || [userInfo.type isEqualToString:@"member"])
+        {
+            [[CustomShowMessage getInstance] showNotificationMessage:@"已经是联系人!"];
+            return;
+        }
         [_addContactDataParse addContact:userInfo.userId];
     }
 //    [cell.addButton setBackgroundImage:[UIImage imageNamed:@"ren_tianjia_chenggong"] forState:UIControlStateNormal];
