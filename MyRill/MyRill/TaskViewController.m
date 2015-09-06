@@ -34,7 +34,7 @@
 #import "UIImageView+WebCache.h"
 #import "UpdateObserverAndChatidDataParse.h"
 
-@interface TaskViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GetTaskCommentListDelegate, SendTaskCommenDelegate, EditTaskDelegate, GetTaskDetailDelegate, SendTaskImageDelegate ,ELCImagePickerControllerDelegate, UpdateObserverAndChatidDelegate>
+@interface TaskViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ELCImagePickerControllerDelegate, GetTaskCommentListDelegate, SendTaskCommenDelegate, EditTaskDelegate, GetTaskDetailDelegate, SendTaskImageDelegate, UpdateObserverAndChatidDelegate, UIScrollViewDelegate>
 
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *holdViews;
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *txtHoldViews;
@@ -77,6 +77,7 @@
 @property (nonatomic, strong) ESTaskComment *cacheTaskComment;
 @property (nonatomic, assign) CGRect oldframe;
 @property (nonatomic, strong) NSMutableArray *imagesOld;
+@property (nonatomic, strong) UIPageControl *pageControl;
 
 @end
 
@@ -327,46 +328,9 @@
     if (taskComment.images != nil) {
         if (taskComment.images.count > 0) {
             self.onClickedCell = (ImageTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
-            //[self showImage:taskComment.images];
+            [self showImage:taskComment.images];
         }
     }
-}
-
-
-- (void)showImage:(NSArray *)images {
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
-    //        [self.navigationController preferredStatusBarStyle];
-    [self setNeedsStatusBarAppearanceUpdate];
-    NSString *imageURL = [images firstObject];
-    UIWindow *window = [UIApplication sharedApplication].keyWindow;
-    UIView *backgroundView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
-    self.oldframe = [self.onClickedCell.placeholderImg convertRect:self.onClickedCell.placeholderImg.bounds toView:window];
-    backgroundView.backgroundColor = [UIColor blackColor];
-    backgroundView.alpha = 0;
-    UIImageView *imageView = [[UIImageView alloc]initWithFrame:self.oldframe];
-    [imageView sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:nil];
-    imageView.tag = 101;
-    [backgroundView addSubview:imageView];
-    [window addSubview:backgroundView];
-    
-    UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hideImage:)];
-    [backgroundView addGestureRecognizer: tap];
-    
-    [UIView animateWithDuration:0.3 animations:^{
-        imageView.frame=CGRectMake(0,([UIScreen mainScreen].bounds.size.height-imageView.image.size.height*[UIScreen mainScreen].bounds.size.width/imageView.image.size.width)/2, [UIScreen mainScreen].bounds.size.width, imageView.image.size.height*[UIScreen mainScreen].bounds.size.width/imageView.image.size.width);
-        backgroundView.alpha=1;
-    } completion:nil];
-}
-
-- (void)hideImage:(UITapGestureRecognizer*)tap{
-    UIView *backgroundView = tap.view;
-    UIImageView *imageView = (UIImageView*)[tap.view viewWithTag:101];
-    [UIView animateWithDuration:0.3 animations:^{
-        imageView.frame = self.oldframe;
-        backgroundView.alpha = 0;
-    } completion:^(BOOL finished) {
-        [backgroundView removeFromSuperview];
-    }];
 }
 
 #pragma mark - UICollectionViewDataSource&UICollectionViewDelegateFlowLayout
@@ -427,6 +391,10 @@
 
 #pragma mark - UITextViewDelegate methods
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if ([text isEqualToString:@""]) {
+        return YES;
+    }
+    
     //textView的发送事件
     if ([text isEqualToString:@"\n"]) {
 
@@ -500,6 +468,55 @@
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)elcImagePickerController:(ELCImagePickerController *)picker didFinishPickingMediaWithInfo:(NSArray *)info {
+    [self.images removeAllObjects];
+    [info enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSDictionary *dic = (NSDictionary *)obj;
+        UIImage *image = dic[@"UIImagePickerControllerOriginalImage"];
+        NSData *data;
+        if (UIImagePNGRepresentation(image) == nil) {
+            data = UIImageJPEGRepresentation(image, 1.0);
+        } else {
+            data = UIImagePNGRepresentation(image);
+        }
+        
+        [self.images addObject:data];
+    }];
+    
+    [self.sendTaskCommentDP sendTaskCommentWithTaskID:[self.taskModel.taskID stringValue] comment:@" "];
+    [self showTips:@"正在上传..." mode:MRProgressOverlayViewModeIndeterminateSmallDefault isDismiss:NO isSucceuss:NO];
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    //    NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
+    //
+    //    //当选择的类型是图片
+    //    if ([type isEqualToString:@"public.image"])
+    //    {
+    //        //获取编辑框内部的图片，作为上传对象(上传图片不歪了也就)
+    //        UIImage *image = [info objectForKey:@"UIImagePickerControllerEditedImage"];
+    //        //先把图片转成NSData
+    //        //        UIImage *img = [self scaleToSize:image size:CGSizeMake(300, 300)];
+    //        NSData *data;
+    //        if (UIImagePNGRepresentation(image) == nil)
+    //        {
+    //            data = UIImageJPEGRepresentation(image, 1.0);
+    //        }
+    //        else
+    //        {
+    //            data = UIImagePNGRepresentation(image);
+    //        }
+    //
+    //        [self.images removeAllObjects];
+    //        [self.images addObject:data];
+    //
+    //        //关闭相册界面
+    //        [picker dismissViewControllerAnimated:YES completion:nil];
+    //    }
+}
+
+- (void)elcImagePickerControllerDidCancel:(ELCImagePickerController *)picker {
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -835,55 +852,6 @@
                      completion:nil];
 }
 
-- (void)elcImagePickerController:(ELCImagePickerController *)picker didFinishPickingMediaWithInfo:(NSArray *)info {
-   [self.images removeAllObjects];
-    [info enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        NSDictionary *dic = (NSDictionary *)obj;
-        UIImage *image = dic[@"UIImagePickerControllerOriginalImage"];
-        NSData *data;
-        if (UIImagePNGRepresentation(image) == nil) {
-            data = UIImageJPEGRepresentation(image, 1.0);
-        } else {
-            data = UIImagePNGRepresentation(image);
-        }
-        
-        [self.images addObject:data];
-    }];
-    
-    [self.sendTaskCommentDP sendTaskCommentWithTaskID:[self.taskModel.taskID stringValue] comment:@" "];
-    [self showTips:@"正在上传..." mode:MRProgressOverlayViewModeIndeterminateSmallDefault isDismiss:NO isSucceuss:NO];
-    [picker dismissViewControllerAnimated:YES completion:nil];
-//    NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
-//    
-//    //当选择的类型是图片
-//    if ([type isEqualToString:@"public.image"])
-//    {
-//        //获取编辑框内部的图片，作为上传对象(上传图片不歪了也就)
-//        UIImage *image = [info objectForKey:@"UIImagePickerControllerEditedImage"];
-//        //先把图片转成NSData
-//        //        UIImage *img = [self scaleToSize:image size:CGSizeMake(300, 300)];
-//        NSData *data;
-//        if (UIImagePNGRepresentation(image) == nil)
-//        {
-//            data = UIImageJPEGRepresentation(image, 1.0);
-//        }
-//        else
-//        {
-//            data = UIImagePNGRepresentation(image);
-//        }
-//        
-//        [self.images removeAllObjects];
-//        [self.images addObject:data];
-//        
-//        //关闭相册界面
-//        [picker dismissViewControllerAnimated:YES completion:nil];
-//    }
-}
-
-- (void)elcImagePickerControllerDidCancel:(ELCImagePickerController *)picker {
-    [picker dismissViewControllerAnimated:YES completion:nil];
-}
-
 //当键盘出现或改变时调用
 - (void)keyboardWillShow:(NSNotification *)aNotification
 {
@@ -937,6 +905,60 @@
     [self.getTaskCommentListDP getTaskCommentListWithTaskID:self.requestTaskID listSize:nil];
 }
 
+- (void)showImage:(NSArray *)images {
+//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
+//    [self setNeedsStatusBarAppearanceUpdate];
+//    NSString *imageURL = [images firstObject];
+//    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+//    UIScrollView *backScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 37)];
+//    backScrollView.contentSize = CGSizeMake(backScrollView.bounds.size.width * images.count, backScrollView.bounds.size.height);
+//    
+//    UIPageControl *pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, backScrollView.bounds.size.height, backScrollView.bounds.size.width, 37)];
+//    pageControl.backgroundColor = [UIColor blackColor];
+//    [pageControl setCurrentPageIndicatorTintColor:[UIColor whiteColor]];
+//    [pageControl setPageIndicatorTintColor:[ColorHandler colorFromHexRGB:@"D1D1D1"]];
+//    pageControl.currentPage = 0;
+//    pageControl.numberOfPages = images.count;
+//    self.oldframe = [self.onClickedCell.placeholderImg convertRect:self.onClickedCell.placeholderImg.bounds toView:window];
+//    backScrollView.backgroundColor = [UIColor blackColor];
+//    backScrollView.alpha = 1;
+//
+//    NSInteger count = 0;
+//    while (count < images.count) {
+//        UIImageView *imageView = [[UIImageView alloc]initWithFrame:self.oldframe];
+//        //[imageView sd_setImageWithURL:[NSURL URLWithString:images[count]] placeholderImage:[UIImage imageNamed:@"单张图片"]];
+//         imageView.tag = 101 + count;
+//        [backScrollView addSubview:imageView];
+//        count ++;
+//    }
+//    [window addSubview:backScrollView];
+//    [window addSubview:pageControl];
+//    
+//    UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hideImage:)];
+//    [backScrollView addGestureRecognizer: tap];
+//    
+//    [UIView animateWithDuration:0.3 animations:^{
+////        imageView.frame = CGRectMake(0,([UIScreen mainScreen].bounds.size.height-imageView.image.size.height*[UIScreen mainScreen].bounds.size.width/imageView.image.size.width)/2, [UIScreen mainScreen].bounds.size.width, imageView.image.size.height*[UIScreen mainScreen].bounds.size.width/imageView.image.size.width);
+////        backScrollView.alpha=1;
+//    } completion:nil];
+}
+
+- (void)hideImage:(UITapGestureRecognizer*)tap {
+    UIView *backgroundView = tap.view;
+    UIImageView *imageView = (UIImageView*)[tap.view viewWithTag:101];
+    [UIView animateWithDuration:0.3 animations:^{
+        imageView.frame = self.oldframe;
+        backgroundView.alpha = 0;
+    } completion:^(BOOL finished) {
+        [backgroundView removeFromSuperview];
+    }];
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    self.pageControl.currentPage = scrollView.contentOffset.x/scrollView.bounds.size.width;
+    
+}
+
 #pragma mark - private methods
 - (void)showTips:(NSString *)tip mode:(MRProgressOverlayViewMode)mode isDismiss:(BOOL)isDismiss isSucceuss:(BOOL)success {
     [self.navigationController.view addSubview:self.progress];
@@ -962,7 +984,7 @@
     
     for (UIView *view in _holdViews) {
         view.layer.borderWidth = 1.f;
-        view.layer.borderColor = [ColorHandler colorFromHexRGB:@"eeeeee"].CGColor;
+        view.layer.borderColor = [ColorHandler colorFromHexRGB:@"EEEEEE"].CGColor;
     }
 }
 

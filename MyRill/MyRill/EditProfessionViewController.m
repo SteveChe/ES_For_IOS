@@ -149,6 +149,15 @@
     {
         self.deleteIndexPath = [indexPath copy];
         ESProfession *profession = (ESProfession *)self.dataSource[self.deleteIndexPath.row];
+        if (profession.isSystem == YES) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                            message:@"后台下发业务，无法删除!"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"知道了!"
+                                                  otherButtonTitles:nil, nil];
+            [alert show];
+            return;
+        }
         [self.professionDP deleteProfessionWithId:[profession.professionId stringValue]];
     }
 }

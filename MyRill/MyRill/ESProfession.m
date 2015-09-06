@@ -33,10 +33,7 @@
             self.order = dic[@"order"];
         }
         
-//        if ([ColorHandler isNullOrNilNumber:dic[@""]]) {
-//            <#statements#>
-//        }
-        self.isSystem = dic[@"is_system"];
+        self.isSystem = [dic[@"is_system"] boolValue];
         
         if ([ColorHandler isNullOrEmptyString:dic[@"name"]]) {
             self.name = @"";
