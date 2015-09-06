@@ -259,6 +259,9 @@
 		F28B6C811B6F8E3D00E0C267 /* FollowEnterpriseDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F28B6C801B6F8E3D00E0C267 /* FollowEnterpriseDataParse.m */; };
 		F28B6C871B6F991600E0C267 /* GetEnterpriseDetailDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F28B6C861B6F991600E0C267 /* GetEnterpriseDetailDataParse.m */; };
 		F28B6C8A1B6FAB5D00E0C267 /* GetEnterpriseListDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F28B6C891B6FAB5D00E0C267 /* GetEnterpriseListDataParse.m */; };
+		F29591101B9B35F300ED0B99 /* Emoji.plist in Resources */ = {isa = PBXBuildFile; fileRef = F295910E1B9B35F300ED0B99 /* Emoji.plist */; };
+		F29591141B9B3A0600ED0B99 /* RCDAcceptAddressBookTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F29591121B9B3A0600ED0B99 /* RCDAcceptAddressBookTableViewCell.m */; };
+		F29591151B9B3A0600ED0B99 /* RCDAcceptAddressBookTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F29591131B9B3A0600ED0B99 /* RCDAcceptAddressBookTableViewCell.xib */; };
 		F29BC4921B75119900803183 /* SimpleMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F29BC4911B75119900803183 /* SimpleMessageCell.m */; };
 		F29F86281B2410070058FC9F /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F29F86161B2410070058FC9F /* AFHTTPRequestOperation.m */; };
 		F29F86291B2410070058FC9F /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F29F86181B2410070058FC9F /* AFHTTPRequestOperationManager.m */; };
@@ -792,6 +795,10 @@
 		F28B6C861B6F991600E0C267 /* GetEnterpriseDetailDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetEnterpriseDetailDataParse.m; sourceTree = "<group>"; };
 		F28B6C881B6FAB5D00E0C267 /* GetEnterpriseListDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetEnterpriseListDataParse.h; sourceTree = "<group>"; };
 		F28B6C891B6FAB5D00E0C267 /* GetEnterpriseListDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetEnterpriseListDataParse.m; sourceTree = "<group>"; };
+		F295910F1B9B35F300ED0B99 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Base; path = Base.lproj/Emoji.plist; sourceTree = "<group>"; };
+		F29591111B9B3A0600ED0B99 /* RCDAcceptAddressBookTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCDAcceptAddressBookTableViewCell.h; path = RCDChatList/AddressBook/RCDAcceptAddressBookTableViewCell.h; sourceTree = "<group>"; };
+		F29591121B9B3A0600ED0B99 /* RCDAcceptAddressBookTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RCDAcceptAddressBookTableViewCell.m; path = RCDChatList/AddressBook/RCDAcceptAddressBookTableViewCell.m; sourceTree = "<group>"; };
+		F29591131B9B3A0600ED0B99 /* RCDAcceptAddressBookTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RCDAcceptAddressBookTableViewCell.xib; path = RCDChatList/AddressBook/RCDAcceptAddressBookTableViewCell.xib; sourceTree = "<group>"; };
 		F29BC4901B75119900803183 /* SimpleMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimpleMessageCell.h; path = RCDChatList/SimpleMessageCell.h; sourceTree = "<group>"; };
 		F29BC4911B75119900803183 /* SimpleMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SimpleMessageCell.m; path = RCDChatList/SimpleMessageCell.m; sourceTree = "<group>"; };
 		F29BC4961B75EBDC00803183 /* ESTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESTag.h; sourceTree = "<group>"; };
@@ -992,6 +999,7 @@
 		2B31C3D21B11C3FD004C865A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F295910E1B9B35F300ED0B99 /* Emoji.plist */,
 				F22FE2861B3AF0CB00A1A997 /* RongCloudKit.strings */,
 				2B31C3D31B11C3FD004C865A /* Info.plist */,
 				2B31C3D41B11C3FD004C865A /* main.m */,
@@ -1653,6 +1661,9 @@
 		F22FE29F1B3FF9C500A1A997 /* AddressBook */ = {
 			isa = PBXGroup;
 			children = (
+				F29591111B9B3A0600ED0B99 /* RCDAcceptAddressBookTableViewCell.h */,
+				F29591121B9B3A0600ED0B99 /* RCDAcceptAddressBookTableViewCell.m */,
+				F29591131B9B3A0600ED0B99 /* RCDAcceptAddressBookTableViewCell.xib */,
 				F256CB811B6E5921009478C2 /* RCDApprovedJoinEnterpriseViewController.h */,
 				F256CB821B6E5921009478C2 /* RCDApprovedJoinEnterpriseViewController.m */,
 				F22FE2A21B3FFAC200A1A997 /* RCDAddressBookViewController.h */,
@@ -2035,12 +2046,14 @@
 				2B9CBB671B3AEC74007D7A45 /* (null) in Resources */,
 				2BC227731B942A3600E3163A /* ELCAlbumPickerController.xib in Resources */,
 				F2F3977A1B78E06B006FAE3B /* RCDAddressBookEnterpriseDetailViewController.xib in Resources */,
+				F29591101B9B35F300ED0B99 /* Emoji.plist in Resources */,
 				2B5A591F1B48F921000382D7 /* ChangPhoneNumViewController.xib in Resources */,
 				2B39C9971B37E634007BAC7A /* SignUpViewController.xib in Resources */,
 				2B31C3E31B11C3FD004C865A /* LaunchScreen.xib in Resources */,
 				2B39C9951B37E5F2007BAC7A /* ResetPwdViewController.xib in Resources */,
 				F23059B61B529FAE004599FA /* RCDPhoneAddressBookTableViewCell.xib in Resources */,
 				2BEAD0741B770B2A00905E21 /* RemindDateViewController.xib in Resources */,
+				F29591151B9B3A0600ED0B99 /* RCDAcceptAddressBookTableViewCell.xib in Resources */,
 				F23461E51B5FCFA900C88FAC /* ChatSettingCollectionViewCell.xib in Resources */,
 				F22FE2921B3B000400A1A997 /* ChangePwdViewController.xib in Resources */,
 				2BC227741B942A3600E3163A /* ELCAssetPicker.xib in Resources */,
@@ -2183,6 +2196,7 @@
 				2BC2276D1B942A3600E3163A /* ELCAsset.m in Sources */,
 				F22FE2AD1B3FFAE600A1A997 /* RCDSelectPersonTableViewCell.m in Sources */,
 				F22FE2941B3B000400A1A997 /* UserSettingViewController.m in Sources */,
+				F29591141B9B3A0600ED0B99 /* RCDAcceptAddressBookTableViewCell.m in Sources */,
 				F2467EF91B8DCF1F0055B78B /* RootOutChatCell.m in Sources */,
 				2B1B88E51B803CEA00FAF650 /* UserNameAndPositionViewController.m in Sources */,
 				2B5A59221B494C2B000382D7 /* ChangePhoneNumDataParse.m in Sources */,
@@ -2350,6 +2364,14 @@
 			name = RongCloudKit.strings;
 			sourceTree = "<group>";
 		};
+		F295910E1B9B35F300ED0B99 /* Emoji.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F295910F1B9B35F300ED0B99 /* Base */,
+			);
+			name = Emoji.plist;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -2393,7 +2415,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "46caef10-069d-4e94-8a4d-fbd9bc55ceda";
+				PROVISIONING_PROFILE = "a5c66360-4019-4ebe-9492-df3d30ba3a21";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -2431,7 +2453,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "46caef10-069d-4e94-8a4d-fbd9bc55ceda";
+				PROVISIONING_PROFILE = "a5c66360-4019-4ebe-9492-df3d30ba3a21";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
