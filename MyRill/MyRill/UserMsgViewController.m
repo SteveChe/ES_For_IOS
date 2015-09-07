@@ -25,6 +25,7 @@
 #import "UserNameAndPositionViewController.h"
 #import "ESNavigationController.h"
 #import "UserDescriptionChangeViewController.h"
+#import "RCDAddressBookEnterpriseDetailViewController.h"
 
 @interface UserMsgViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, ChangeUserImageDataDelegate, LogoutDataDelegate>
 
@@ -200,6 +201,12 @@
                 return;
             }
             //企业详情
+            RCDAddressBookEnterpriseDetailViewController* rcdAddressBookEnterpriseDetailVC = [[RCDAddressBookEnterpriseDetailViewController alloc] init];
+            NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
+            NSString* enterpriseId = [userDefaultes stringForKey:DEFAULTS_USERENTERPRISE_ID];
+            rcdAddressBookEnterpriseDetailVC.enterpriseId = enterpriseId;
+            [self.navigationController pushViewController:rcdAddressBookEnterpriseDetailVC animated:YES];
+
             
         }
             break;
