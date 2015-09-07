@@ -30,8 +30,8 @@
         
         _ivAva = [UIImageView new];
         _ivAva.clipsToBounds = YES;
-        _ivAva.layer.cornerRadius = 6.0f;
-        [_ivAva setBackgroundColor:[UIColor blackColor]];
+        _ivAva.layer.cornerRadius = 23.0f;
+        [_ivAva setBackgroundColor:[UIColor clearColor]];
         
         _lblDetail = [UILabel new];
         [_lblDetail setFont:[UIFont systemFontOfSize:14.f]];

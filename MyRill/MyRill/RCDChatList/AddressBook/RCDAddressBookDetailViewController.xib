@@ -10,6 +10,7 @@
                 <outlet property="callButton" destination="BkQ-dX-lsZ" id="Odu-rg-H04"/>
                 <outlet property="deleteButton" destination="8ED-3z-ikW" id="dJp-EX-e78"/>
                 <outlet property="descriptionDetailLabel" destination="dWg-Bf-lhC" id="KNG-Kw-3eJ"/>
+                <outlet property="ipCallButton" destination="6PF-Mq-aLX" id="K60-YG-rd7"/>
                 <outlet property="phoneNumberLabel" destination="mIb-rd-Lpg" id="nnd-L0-gUz"/>
                 <outlet property="portraitImageView" destination="248-YQ-TYu" id="o2a-iC-f58"/>
                 <outlet property="smsButton" destination="gux-iE-AIf" id="Fg8-1e-GJ1"/>
@@ -127,7 +128,7 @@
                         </variation>
                     </view>
                     <view key="tableFooterView" contentMode="scaleToFill" id="3gE-ld-s9q">
-                        <rect key="frame" x="0.0" y="194" width="600" height="200"/>
+                        <rect key="frame" x="0.0" y="400" width="600" height="300"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BkQ-dX-lsZ">
@@ -159,7 +160,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ED-3z-ikW">
-                                <rect key="frame" x="20" y="137" width="560" height="44"/>
+                                <rect key="frame" x="20" y="196" width="560" height="44"/>
                                 <color key="backgroundColor" red="1" green="0.32941176470588235" blue="0.32941176470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="x4b-Yu-dfS"/>
@@ -171,19 +172,37 @@
                                     <action selector="clickDeleteButton:" destination="-1" eventType="touchUpInside" id="OrE-ax-5BA"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6PF-Mq-aLX">
+                                <rect key="frame" x="20" y="137" width="560" height="44"/>
+                                <color key="backgroundColor" red="0.023529411760000001" green="0.65490196079999996" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="PMQ-Sc-nwz"/>
+                                </constraints>
+                                <state key="normal" title="IP电话">
+                                    <color key="titleColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="clickCallButton:" destination="-1" eventType="touchUpInside" id="Iv5-sq-NMD"/>
+                                    <action selector="clickIPCallButton:" destination="-1" eventType="touchUpInside" id="FSA-H6-bfi"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="6PF-Mq-aLX" firstAttribute="top" secondItem="BkQ-dX-lsZ" secondAttribute="bottom" constant="15" id="06k-d8-ZLH"/>
+                            <constraint firstItem="6PF-Mq-aLX" firstAttribute="leading" secondItem="3gE-ld-s9q" secondAttribute="leading" constant="20" id="4zP-3d-2fo"/>
                             <constraint firstAttribute="centerX" secondItem="8ED-3z-ikW" secondAttribute="centerX" id="8v0-Wb-czR"/>
                             <constraint firstAttribute="trailing" secondItem="gux-iE-AIf" secondAttribute="trailing" constant="20" id="FUP-Lm-ftt"/>
                             <constraint firstItem="gux-iE-AIf" firstAttribute="leading" secondItem="3gE-ld-s9q" secondAttribute="leading" constant="20" id="SuK-zB-ckk"/>
                             <constraint firstItem="BkQ-dX-lsZ" firstAttribute="top" secondItem="gux-iE-AIf" secondAttribute="bottom" constant="12" id="U7Z-Wn-5Ku"/>
                             <constraint firstAttribute="centerX" secondItem="gux-iE-AIf" secondAttribute="centerX" id="Wr8-CD-CTs"/>
+                            <constraint firstItem="8ED-3z-ikW" firstAttribute="top" secondItem="6PF-Mq-aLX" secondAttribute="bottom" constant="15" id="azx-WL-fdf"/>
+                            <constraint firstAttribute="trailing" secondItem="6PF-Mq-aLX" secondAttribute="trailing" constant="20" id="dem-e2-uUZ"/>
                             <constraint firstAttribute="trailing" secondItem="8ED-3z-ikW" secondAttribute="trailing" constant="20" id="dgP-Cc-3yK"/>
                             <constraint firstAttribute="centerX" secondItem="BkQ-dX-lsZ" secondAttribute="centerX" id="k2G-mE-HTd"/>
                             <constraint firstItem="gux-iE-AIf" firstAttribute="top" secondItem="3gE-ld-s9q" secondAttribute="top" constant="22" id="rHQ-Q7-e5d"/>
                             <constraint firstItem="BkQ-dX-lsZ" firstAttribute="leading" secondItem="3gE-ld-s9q" secondAttribute="leading" constant="20" id="v0H-9z-ZNc"/>
-                            <constraint firstItem="8ED-3z-ikW" firstAttribute="top" secondItem="BkQ-dX-lsZ" secondAttribute="bottom" constant="15" id="v93-bF-aBM"/>
                             <constraint firstItem="8ED-3z-ikW" firstAttribute="leading" secondItem="3gE-ld-s9q" secondAttribute="leading" constant="20" id="xdK-Ye-gQg"/>
                             <constraint firstAttribute="trailing" secondItem="BkQ-dX-lsZ" secondAttribute="trailing" constant="20" id="xmi-M0-VZj"/>
                         </constraints>

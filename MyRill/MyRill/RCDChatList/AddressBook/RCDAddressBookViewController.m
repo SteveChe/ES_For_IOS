@@ -242,7 +242,9 @@
         if (indexPath.section == 0)
         {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            
+            cell.ivAva.clipsToBounds = YES;
+            cell.ivAva.layer.cornerRadius = 18.f;
+
             switch (indexPath.row)
             {
                 case 0:
