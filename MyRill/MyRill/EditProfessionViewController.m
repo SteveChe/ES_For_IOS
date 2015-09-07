@@ -149,15 +149,6 @@
     {
         self.deleteIndexPath = [indexPath copy];
         ESProfession *profession = (ESProfession *)self.dataSource[self.deleteIndexPath.row];
-        if (profession.isSystem == YES) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
-                                                            message:@"后台下发业务，无法删除!"
-                                                           delegate:self
-                                                  cancelButtonTitle:@"知道了!"
-                                                  otherButtonTitles:nil, nil];
-            [alert show];
-            return;
-        }
         [self.professionDP deleteProfessionWithId:[profession.professionId stringValue]];
     }
 }
@@ -167,6 +158,10 @@
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    ESProfession *profession = (ESProfession *)self.dataSource[self.deleteIndexPath.row];
+    if (profession.isSystem == YES) {
+        return UITableViewCellEditingStyleNone;
+    }
     return UITableViewCellEditingStyleDelete;
 }
 
@@ -184,6 +179,16 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    ESProfession *profession = (ESProfession *)self.dataSource[self.deleteIndexPath.row];
+    if (profession.isSystem == YES) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                        message:@"后台派发业务，不可修改!"
+                                                       delegate:self
+                                              cancelButtonTitle:@"知道了!"
+                                              otherButtonTitles:nil, nil];
+        [alert show];
+        return;
+    }
     ModifyProfessionViewController *modifyProfessionVC = [[ModifyProfessionViewController alloc] init];
     modifyProfessionVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     modifyProfessionVC.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
