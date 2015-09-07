@@ -42,6 +42,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *enterpriseQRCodeArrow;
 @property (weak, nonatomic) IBOutlet UIImageView *personQRCodeImg;
 @property (weak, nonatomic) IBOutlet UIImageView *personQRCodeArrow;
+@property (weak, nonatomic) IBOutlet UIImageView *enterpriseArrow;
 
 @property (nonatomic, copy) NSString *userId;
 @property (nonatomic, assign) CGRect oldframe;
@@ -89,6 +90,10 @@
     if ([ColorHandler isNullOrEmptyString:[userDefaultes stringForKey:DEFAULTS_USERQRCODE]]) {
         self.personQRCodeImg.hidden = YES;
         self.personQRCodeArrow.hidden = YES;
+    }
+    
+    if ([ColorHandler isNullOrEmptyString:self.UserEnterpriseLbl.text]) {
+        self.enterpriseArrow.hidden = YES;
     }
 }
 
@@ -189,8 +194,16 @@
                                                       completion:nil];
             }
             break;
-            
         case 903:
+        {
+            if ([ColorHandler isNullOrEmptyString:self.UserEnterpriseLbl.text]) {
+                return;
+            }
+            //企业详情
+            
+        }
+            break;
+        case 904:
             {
                 UserNameAndPositionViewController *nameAndPositionVC = [[UserNameAndPositionViewController alloc] init];
                 nameAndPositionVC.title = @"职位修改";
@@ -202,7 +215,7 @@
                                                       completion:nil];
             }
             break;
-        case 904:
+        case 905:
             {
                 NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
                 NSString *qrCodeStr = [userDefaults stringForKey:DEFAULTS_ENTERPRISEQRCODE];
@@ -214,7 +227,7 @@
                 }
             }
             break;
-        case 905:
+        case 906:
             {
                 NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
                 NSString *qrCodeStr = [userDefaults stringForKey:DEFAULTS_USERQRCODE];
@@ -226,7 +239,7 @@
                 }
             }
             break;
-        case 906:
+        case 907:
             {
                 UserDescriptionChangeViewController *userDescriptionVC = [[UserDescriptionChangeViewController alloc] init];
                 userDescriptionVC.title = @"个人简介修改";

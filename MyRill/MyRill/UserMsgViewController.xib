@@ -12,6 +12,7 @@
                 <outlet property="UserNameLbl" destination="Xhj-LH-Scl" id="tn8-G8-K0i"/>
                 <outlet property="UserPositionLbl" destination="aeB-FY-ozp" id="rEd-DU-91C"/>
                 <outlet property="contentView" destination="uRq-6W-p4u" id="nXI-eJ-eGD"/>
+                <outlet property="enterpriseArrow" destination="MjY-wl-fne" id="ZGY-1o-XgO"/>
                 <outlet property="enterpriseQRCodeArrow" destination="uKC-P1-caB" id="dEr-ly-afc"/>
                 <outlet property="enterpriseQRCodeImg" destination="9Xg-pX-8Ba" id="Ol3-VP-yxr"/>
                 <outlet property="personQRCodeArrow" destination="sTY-oT-5TR" id="oaD-cA-3pe"/>
@@ -138,27 +139,45 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="W5B-NL-wBl">
-                                            <rect key="frame" x="547" y="10" width="35" height="35"/>
+                                            <rect key="frame" x="521" y="10" width="35" height="35"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="35" id="PwZ-Xg-j4M"/>
                                                 <constraint firstAttribute="width" secondItem="W5B-NL-wBl" secondAttribute="height" multiplier="1:1" id="oUj-UA-NFm"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="——" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MAw-KF-Xzg">
-                                            <rect key="frame" x="503" y="17" width="36" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="——" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MAw-KF-Xzg">
+                                            <rect key="frame" x="480" y="16" width="36" height="21"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" tag="903" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FCb-4o-nte">
+                                            <rect key="frame" x="0.0" y="0.0" width="602" height="55"/>
+                                            <state key="normal">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="buttonsOnClicked:" destination="-1" eventType="touchUpInside" id="bFw-51-krY"/>
+                                            </connections>
+                                        </button>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="右箭头" translatesAutoresizingMaskIntoConstraints="NO" id="MjY-wl-fne">
+                                            <rect key="frame" x="572" y="19" width="10" height="17"/>
+                                        </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstItem="Teq-QH-SwI" firstAttribute="centerY" secondItem="MAw-KF-Xzg" secondAttribute="centerY" id="0Lw-GL-8c5"/>
+                                        <constraint firstAttribute="trailing" secondItem="FCb-4o-nte" secondAttribute="trailing" id="0wW-Jr-T07"/>
                                         <constraint firstItem="Teq-QH-SwI" firstAttribute="leading" secondItem="JyD-Ud-cdf" secondAttribute="leading" constant="20" symbolic="YES" id="10s-HM-NQp"/>
-                                        <constraint firstAttribute="trailing" secondItem="W5B-NL-wBl" secondAttribute="trailing" constant="20" symbolic="YES" id="3m9-Gg-8dP"/>
                                         <constraint firstAttribute="centerY" secondItem="Teq-QH-SwI" secondAttribute="centerY" id="Ad9-TF-Qnw"/>
+                                        <constraint firstItem="MjY-wl-fne" firstAttribute="centerY" secondItem="Teq-QH-SwI" secondAttribute="centerY" id="C9o-uE-Hqk"/>
+                                        <constraint firstItem="FCb-4o-nte" firstAttribute="top" secondItem="JyD-Ud-cdf" secondAttribute="top" id="G6P-JA-gwK"/>
+                                        <constraint firstItem="FCb-4o-nte" firstAttribute="leading" secondItem="JyD-Ud-cdf" secondAttribute="leading" id="P8v-bG-DiG"/>
+                                        <constraint firstAttribute="trailing" secondItem="MjY-wl-fne" secondAttribute="trailing" constant="20" symbolic="YES" id="P9K-2k-s7O"/>
                                         <constraint firstItem="W5B-NL-wBl" firstAttribute="leading" secondItem="MAw-KF-Xzg" secondAttribute="trailing" constant="8" symbolic="YES" id="To9-FI-Jmr"/>
+                                        <constraint firstItem="MjY-wl-fne" firstAttribute="leading" secondItem="W5B-NL-wBl" secondAttribute="trailing" constant="16" id="Tvn-Jg-5dT"/>
                                         <constraint firstItem="Teq-QH-SwI" firstAttribute="centerY" secondItem="W5B-NL-wBl" secondAttribute="centerY" id="doj-z7-mCx"/>
+                                        <constraint firstAttribute="bottom" secondItem="FCb-4o-nte" secondAttribute="bottom" id="p1d-Z1-FIC"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2hp-DA-wyf" userLabel="Job Hold View">
@@ -170,7 +189,7 @@
                                             <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="——" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aeB-FY-ozp">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aeB-FY-ozp">
                                             <rect key="frame" x="520" y="17" width="36" height="21"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -179,7 +198,7 @@
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="右箭头" translatesAutoresizingMaskIntoConstraints="NO" id="OFw-Nj-aaf">
                                             <rect key="frame" x="572" y="19" width="10" height="17"/>
                                         </imageView>
-                                        <button opaque="NO" tag="903" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RZr-eh-t0x">
+                                        <button opaque="NO" tag="904" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RZr-eh-t0x">
                                             <rect key="frame" x="0.0" y="0.0" width="602" height="55"/>
                                             <state key="normal">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -218,7 +237,7 @@
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="右箭头" translatesAutoresizingMaskIntoConstraints="NO" id="uKC-P1-caB">
                                             <rect key="frame" x="572" y="19" width="10" height="17"/>
                                         </imageView>
-                                        <button opaque="NO" tag="904" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wIy-AD-713">
+                                        <button opaque="NO" tag="905" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wIy-AD-713">
                                             <rect key="frame" x="0.0" y="0.0" width="602" height="55"/>
                                             <state key="normal">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -257,7 +276,7 @@
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="右箭头" translatesAutoresizingMaskIntoConstraints="NO" id="sTY-oT-5TR">
                                             <rect key="frame" x="572" y="19" width="10" height="17"/>
                                         </imageView>
-                                        <button opaque="NO" tag="905" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yFj-SP-trP">
+                                        <button opaque="NO" tag="906" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yFj-SP-trP">
                                             <rect key="frame" x="0.0" y="0.0" width="602" height="55"/>
                                             <state key="normal">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -293,7 +312,7 @@
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="右箭头" translatesAutoresizingMaskIntoConstraints="NO" id="WML-Jf-0XC">
                                             <rect key="frame" x="572" y="22" width="10" height="17"/>
                                         </imageView>
-                                        <button opaque="NO" tag="906" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b3w-dF-M6H">
+                                        <button opaque="NO" tag="907" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b3w-dF-M6H">
                                             <rect key="frame" x="0.0" y="0.0" width="602" height="62"/>
                                             <state key="normal">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
