@@ -43,8 +43,8 @@
             self.taskDescription = dic[@"description"];
         }
         
-        if ([ColorHandler isNullOrNilNumber:dic[@"status"]]) {
-            self.status = [NSNumber numberWithInt:-1];
+        if ([ColorHandler isNullOrEmptyString:dic[@"status"]]) {
+            self.status = @"";
         } else {
             self.status = dic[@"status"];
         }

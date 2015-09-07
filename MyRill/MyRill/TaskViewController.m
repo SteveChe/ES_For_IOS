@@ -90,18 +90,6 @@
     // Do any additional setup after loading the view from its nib.
     self.title = @"任务详情";
     
-    
-    
-    UIBarButtonItem *startConversationItem = [[UIBarButtonItem alloc] initWithTitle:@"会话"
-                                                                              style:UIBarButtonItemStyleDone
-                                                                             target:self
-                                                                             action:@selector(startConversationEvent)];
-    UIBarButtonItem *saveItem = [[UIBarButtonItem alloc] initWithTitle:@"保存"
-                                                                 style:UIBarButtonItemStyleDone
-                                                                target:self
-                                                                action:@selector(saveBarItemOnClicked)];
-    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:saveItem, startConversationItem, nil];
-    
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     [self.tableView.tableHeaderView addGestureRecognizer:tap];
     //[self.sendTxtView addTarget:self action:@selector(send) forControlEvents:UIControlEventEditingDidEndOnExit];
@@ -161,17 +149,45 @@
 - (void)getTaskDetailSuccess:(ESTask *)task {
     self.taskModel = task;
     
-    //如果是发起人进入任务详情，则提供修改接口
-    if ([self.userID isEqualToString:self.taskModel.initiator.userId]) {
+    //任务关闭状态
+    if ([self.taskModel.status isEqualToString:@"1"]) {
+        //如果是发起人和分配人，提供关闭打开任务，和保存接口；其他角色不提供任何接口
+        if ([self.userID isEqualToString:self.taskModel.initiator.userId] || [self.userID isEqualToString:self.taskModel.personInCharge.userId]) {
+            self.taskStatusSwitch.enabled = YES;
+
+            UIBarButtonItem *saveItem = [[UIBarButtonItem alloc] initWithTitle:@"保存"
+                                                                         style:UIBarButtonItemStyleDone
+                                                                        target:self
+                                                                        action:@selector(saveBarItemOnClicked)];
+            self.navigationItem.rightBarButtonItem = saveItem;
+        }
+    } else {
+        //任务开启状态
+        //会话和保存接口都开放
+        UIBarButtonItem *startConversationItem = [[UIBarButtonItem alloc] initWithTitle:@"会话"
+                                                                                  style:UIBarButtonItemStyleDone
+                                                                                 target:self
+                                                                                 action:@selector(startConversationEvent)];
+        UIBarButtonItem *saveItem = [[UIBarButtonItem alloc] initWithTitle:@"保存"
+                                                                     style:UIBarButtonItemStyleDone
+                                                                    target:self
+                                                                    action:@selector(saveBarItemOnClicked)];
+        self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:saveItem, startConversationItem, nil];
         
-        self.taskTitleTxtField.enabled = YES;
-        self.taskDescriptioinTextView.editable = YES;
-        self.taskStatusSwitch.enabled = YES;
-        
-        [self.arrowImages enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            UIImageView *arrow = (UIImageView *)obj;
-            arrow.hidden = NO;
-        }];
+        //如果是发起人和分配人，则提供修改接口
+        if ([self.userID isEqualToString:self.taskModel.initiator.userId] || [self.userID isEqualToString:self.taskModel.personInCharge.userId]) {
+            self.taskTitleTxtField.enabled = YES;
+            self.taskDescriptioinTextView.editable = YES;
+            self.taskStatusSwitch.enabled = YES;
+            
+            [self.arrowImages enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                UIImageView *arrow = (UIImageView *)obj;
+                arrow.hidden = NO;
+            }];
+        } else {
+            UIImageView *imageView = [self.arrowImages lastObject];
+            imageView.hidden = NO;
+        }
     }
     
     NSString *startDateStr = [self.taskModel.startDate substringToIndex:16];
@@ -182,7 +198,7 @@
     NSString *endDateStr = [self.taskModel.endDate substringToIndex:16];
     self.endDateLbl.text = [endDateStr stringByReplacingOccurrencesOfString:@"-" withString:@"/"];
     
-    if (self.taskModel.status.integerValue == 0) {
+    if ([self.taskModel.status isEqualToString:@"0"]) {
         //任务状态为新
         self.taskStatusSwitch.on = NO;
     } else {
@@ -399,7 +415,7 @@
     
     //textView的发送事件
     if ([text isEqualToString:@"\n"]) {
-
+        
         [self.sendTaskCommentDP sendTaskCommentWithTaskID:[self.taskModel.taskID stringValue]
                                                   comment:self.sendTxtView.text];
         self.sendTxtView.text = nil;
@@ -415,6 +431,13 @@
                              completion:nil];
         }
         
+        return NO;
+    }
+    return YES;
+}
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
+    if ([textView isEqual:self.sendTxtView] && [self.taskModel.status isEqualToString:@"1"]) {
         return NO;
     }
     return YES;
@@ -618,7 +641,8 @@
 
 - (IBAction)chooseTagBtnOnClicked:(UIButton *)sender {
     //标签选择
-    if (![self.taskModel.initiator.userId isEqualToString:self.userID] && ![self.userID isEqualToString:self.taskModel.personInCharge.userId]) {
+    //既不是发起人也不是分配人的时候直接返回 || 任务关闭的时候直接返回
+    if ((![self.taskModel.initiator.userId isEqualToString:self.userID] && ![self.userID isEqualToString:self.taskModel.personInCharge.userId]) || [self.taskModel.status isEqualToString:@"1"]) {
         return;
     }
     
@@ -634,7 +658,8 @@
 - (IBAction)chooseContactorBtnOnClicked:(UIButton *)sender {
 //    负责人btn的tag是1001，关注人是1002
     if (sender.tag == 1001) {
-        if (![self.taskModel.initiator.userId isEqualToString:self.userID] && ![self.userID isEqualToString:self.taskModel.personInCharge.userId]) {
+        //既不是发起人也不是分配人的时候直接返回 || 任务关闭的时候直接返回
+        if ((![self.taskModel.initiator.userId isEqualToString:self.userID] && ![self.userID isEqualToString:self.taskModel.personInCharge.userId]) || [self.taskModel.status isEqualToString:@"1"]) {
             return;
         }
         
@@ -656,6 +681,10 @@
         [self.navigationController pushViewController:selectPersonVC animated:YES];
     }
     else if (sender.tag == 1002){
+        //任务关闭的时候直接返回
+        if ([self.taskModel.status isEqualToString:@"1"]) {
+            return;
+        }
         //如果是关注人浏览任务则开启勿删模式
         __block BOOL isOberser = NO;
         [self.taskModel.observers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -714,9 +743,9 @@
     task.taskDescription = self.taskDescriptioinTextView.text;
     
     if (self.taskStatusSwitch.on == NO) {
-        task.status = [NSNumber numberWithInt:0];
+        task.status = @"0";
     } else {
-        task.status = [NSNumber numberWithInt:1];
+        task.status = @"1";
     }
     
     task.personInCharge = [self.assignerDataSource firstObject];
@@ -744,7 +773,8 @@
 }
 
 - (IBAction)dateBtnOnClicked:(UIButton *)sender {
-    if (![self.taskModel.initiator.userId isEqualToString:self.userID] && ![self.userID isEqualToString:self.taskModel.personInCharge.userId]) {
+    //既不是发起人也不是分配人的时候直接返回 || 任务关闭的时候直接返回
+    if ((![self.taskModel.initiator.userId isEqualToString:self.userID] && ![self.userID isEqualToString:self.taskModel.personInCharge.userId]) || [self.taskModel.status isEqualToString:@"1"]) {
         return;
     }
     
@@ -765,6 +795,10 @@
 }
 
 - (IBAction)sendImg:(UIButton *)sender {
+    if ([self.taskModel.status isEqualToString:@"1"]) {
+        return;
+    }
+    
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
                                                                              message:nil
                                                                       preferredStyle:UIAlertControllerStyleActionSheet];
