@@ -33,6 +33,7 @@
 #import "ImageTableViewCell.h"
 #import "UIImageView+WebCache.h"
 #import "UpdateObserverAndChatidDataParse.h"
+#import "ESImage.h"
 
 @interface TaskViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ELCImagePickerControllerDelegate, GetTaskCommentListDelegate, SendTaskCommenDelegate, EditTaskDelegate, GetTaskDetailDelegate, SendTaskImageDelegate, UpdateObserverAndChatidDelegate, UIScrollViewDelegate>
 
@@ -78,6 +79,7 @@
 @property (nonatomic, assign) CGRect oldframe;
 @property (nonatomic, strong) NSMutableArray *imagesOld;
 @property (nonatomic, strong) UIPageControl *pageControl;
+@property (nonatomic, strong) UIScrollView *scrollView;
 
 @end
 
@@ -906,56 +908,81 @@
 }
 
 - (void)showImage:(NSArray *)images {
-//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
-//    [self setNeedsStatusBarAppearanceUpdate];
-//    NSString *imageURL = [images firstObject];
-//    UIWindow *window = [UIApplication sharedApplication].keyWindow;
-//    UIScrollView *backScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 37)];
-//    backScrollView.contentSize = CGSizeMake(backScrollView.bounds.size.width * images.count, backScrollView.bounds.size.height);
-//    
-//    UIPageControl *pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, backScrollView.bounds.size.height, backScrollView.bounds.size.width, 37)];
-//    pageControl.backgroundColor = [UIColor blackColor];
-//    [pageControl setCurrentPageIndicatorTintColor:[UIColor whiteColor]];
-//    [pageControl setPageIndicatorTintColor:[ColorHandler colorFromHexRGB:@"D1D1D1"]];
-//    pageControl.currentPage = 0;
-//    pageControl.numberOfPages = images.count;
-//    self.oldframe = [self.onClickedCell.placeholderImg convertRect:self.onClickedCell.placeholderImg.bounds toView:window];
-//    backScrollView.backgroundColor = [UIColor blackColor];
-//    backScrollView.alpha = 1;
-//
-//    NSInteger count = 0;
-//    while (count < images.count) {
-//        UIImageView *imageView = [[UIImageView alloc]initWithFrame:self.oldframe];
-//        //[imageView sd_setImageWithURL:[NSURL URLWithString:images[count]] placeholderImage:[UIImage imageNamed:@"单张图片"]];
-//         imageView.tag = 101 + count;
-//        [backScrollView addSubview:imageView];
-//        count ++;
-//    }
-//    [window addSubview:backScrollView];
-//    [window addSubview:pageControl];
-//    
-//    UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hideImage:)];
-//    [backScrollView addGestureRecognizer: tap];
-//    
-//    [UIView animateWithDuration:0.3 animations:^{
-////        imageView.frame = CGRectMake(0,([UIScreen mainScreen].bounds.size.height-imageView.image.size.height*[UIScreen mainScreen].bounds.size.width/imageView.image.size.width)/2, [UIScreen mainScreen].bounds.size.width, imageView.image.size.height*[UIScreen mainScreen].bounds.size.width/imageView.image.size.width);
-////        backScrollView.alpha=1;
-//    } completion:nil];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+    
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    UIView *containerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
+    containerView.backgroundColor = [UIColor blackColor];
+    
+    self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 37)];
+    self.scrollView.delegate = self;
+//    self.scrollView.maximumZoomScale = 2.f;
+//    self.scrollView.minimumZoomScale = .5f;
+    self.scrollView.pagingEnabled = YES;
+    self.scrollView.showsHorizontalScrollIndicator = NO;
+    self.scrollView.contentSize = CGSizeMake(self.scrollView.bounds.size.width * images.count, self.scrollView.bounds.size.height);
+    
+    [containerView addSubview:self.scrollView];
+    
+    self.pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, containerView.bounds.size.height - 37, containerView.bounds.size.width, 37)];
+    [self.pageControl setCurrentPageIndicatorTintColor:[UIColor whiteColor]];
+    [self.pageControl setPageIndicatorTintColor:[UIColor grayColor]];
+    self.pageControl.currentPage = 0;
+    self.pageControl.numberOfPages = images.count;
+    [self.pageControl addTarget:self action:@selector(changeImageViewPage:) forControlEvents:UIControlEventValueChanged];
+    [containerView addSubview:self.pageControl];
+    [window addSubview:containerView];
+    
+    self.oldframe = [self.onClickedCell.placeholderImg convertRect:self.onClickedCell.placeholderImg.bounds toView:window];
+
+    NSInteger count = 0;
+    while (count < images.count) {
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, (self.scrollView.bounds.size.height - self.oldframe.size.height * self.scrollView.bounds.size.width / self.oldframe.size.width) / 2, self.scrollView.bounds.size.width, self.oldframe.size.height * self.scrollView.bounds.size.width / self.oldframe.size.width)];
+        ESImage *image = images[count];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:image.imgURL]
+                     placeholderImage:[UIImage imageNamed:@"单张图片"]
+                            completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                CGSize size = [image size];
+                                if (size.height * self.scrollView.bounds.size.width / size.width >= (self.scrollView.bounds.size.height - 37 * 2)) {
+                                    imageView.frame = CGRectMake(self.scrollView.bounds.size.width * count, 0, self.scrollView.bounds.size.width, size.height * self.scrollView.bounds.size.width / size.width - 37);
+                                } else {
+                                    imageView.frame = CGRectMake(self.scrollView.bounds.size.width * count, (self.scrollView.bounds.size.height - size.height * self.scrollView.bounds.size.width / size.width) / 2, self.scrollView.bounds.size.width, size.height * self.scrollView.bounds.size.width / size.width);
+                                }
+                            }];
+         imageView.tag = 101 + count;
+        [self.scrollView addSubview:imageView];
+        count ++;
+    }
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hideImage:)];
+    [containerView addGestureRecognizer: tap];
+}
+
+
+- (void)changeImageViewPage:(UIPageControl *)sender {
+    UIPageControl *pageControl = (UIPageControl *)sender;
+    [self.scrollView scrollRectToVisible:CGRectMake(pageControl.currentPage * self.scrollView.bounds.size.width, self.scrollView.bounds.origin.y, self.scrollView.bounds.size.width, self.scrollView.bounds.size.height) animated:YES];
+}
+
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
+    NSInteger index = scrollView.contentOffset.x / scrollView.bounds.size.width;
+    return [scrollView viewWithTag:101 + index];
 }
 
 - (void)hideImage:(UITapGestureRecognizer*)tap {
-    UIView *backgroundView = tap.view;
-    UIImageView *imageView = (UIImageView*)[tap.view viewWithTag:101];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    UIView *contanerView = tap.view;
+    //UIImageView *imageView = (UIImageView*)[tap.view viewWithTag:101];
     [UIView animateWithDuration:0.3 animations:^{
-        imageView.frame = self.oldframe;
-        backgroundView.alpha = 0;
+        //imageView.frame = self.oldframe;
+        contanerView.alpha = 0;
     } completion:^(BOOL finished) {
-        [backgroundView removeFromSuperview];
+        [contanerView removeFromSuperview];
     }];
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    self.pageControl.currentPage = scrollView.contentOffset.x/scrollView.bounds.size.width;
+    self.pageControl.currentPage = scrollView.contentOffset.x /scrollView.bounds.size.width;
     
 }
 
