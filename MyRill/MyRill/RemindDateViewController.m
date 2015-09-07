@@ -106,7 +106,6 @@
     }];
 }
 
-
 #pragma mark - setters&getters
 -(void)setPopOverView:(UIView *)popOverView {
     _popOverView = popOverView;

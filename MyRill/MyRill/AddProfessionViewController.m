@@ -55,14 +55,15 @@
 
 #pragma mark - response events
 - (IBAction)saveBtnOnClicked:(UIButton *)sender {
-    if (self.nameTxtField.text != nil && self.urlTxtField.text != nil) {
+    if (![ColorHandler isNullOrEmptyString:self.nameTxtField.text] && ![ColorHandler isNullOrEmptyString:self.urlTxtField.text]) {
         [self.professionDP addProfessionWithName:self.nameTxtField.text url:self.urlTxtField.text];
     } else {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示"
-                                                                                 message:@"名称和URL不能为空!"
-                                                                          preferredStyle:UIAlertControllerStyleAlert];
-        
-        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                        message:@"名称和URL不能为空!"
+                                                       delegate:self
+                                              cancelButtonTitle:@"知道了!"
+                                              otherButtonTitles:nil, nil];
+        [alert show];
     }
 }
 

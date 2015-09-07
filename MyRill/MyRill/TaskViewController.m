@@ -33,8 +33,9 @@
 #import "ImageTableViewCell.h"
 #import "UIImageView+WebCache.h"
 #import "UpdateObserverAndChatidDataParse.h"
+#import "ESImage.h"
 
-@interface TaskViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GetTaskCommentListDelegate, SendTaskCommenDelegate, EditTaskDelegate, GetTaskDetailDelegate, SendTaskImageDelegate ,ELCImagePickerControllerDelegate, UpdateObserverAndChatidDelegate>
+@interface TaskViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ELCImagePickerControllerDelegate, GetTaskCommentListDelegate, SendTaskCommenDelegate, EditTaskDelegate, GetTaskDetailDelegate, SendTaskImageDelegate, UpdateObserverAndChatidDelegate, UIScrollViewDelegate>
 
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *holdViews;
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *txtHoldViews;
@@ -77,6 +78,8 @@
 @property (nonatomic, strong) ESTaskComment *cacheTaskComment;
 @property (nonatomic, assign) CGRect oldframe;
 @property (nonatomic, strong) NSMutableArray *imagesOld;
+@property (nonatomic, strong) UIPageControl *pageControl;
+@property (nonatomic, strong) UIScrollView *scrollView;
 
 @end
 
@@ -86,18 +89,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title = @"任务详情";
-    
-    
-    
-    UIBarButtonItem *startConversationItem = [[UIBarButtonItem alloc] initWithTitle:@"会话"
-                                                                              style:UIBarButtonItemStyleDone
-                                                                             target:self
-                                                                             action:@selector(startConversationEvent)];
-    UIBarButtonItem *saveItem = [[UIBarButtonItem alloc] initWithTitle:@"保存"
-                                                                 style:UIBarButtonItemStyleDone
-                                                                target:self
-                                                                action:@selector(saveBarItemOnClicked)];
-    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:saveItem, startConversationItem, nil];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     [self.tableView.tableHeaderView addGestureRecognizer:tap];
@@ -158,17 +149,45 @@
 - (void)getTaskDetailSuccess:(ESTask *)task {
     self.taskModel = task;
     
-    //如果是发起人进入任务详情，则提供修改接口
-    if ([self.userID isEqualToString:self.taskModel.initiator.userId]) {
+    //任务关闭状态
+    if ([self.taskModel.status isEqualToString:@"1"]) {
+        //如果是发起人和分配人，提供关闭打开任务，和保存接口；其他角色不提供任何接口
+        if ([self.userID isEqualToString:self.taskModel.initiator.userId] || [self.userID isEqualToString:self.taskModel.personInCharge.userId]) {
+            self.taskStatusSwitch.enabled = YES;
+
+            UIBarButtonItem *saveItem = [[UIBarButtonItem alloc] initWithTitle:@"保存"
+                                                                         style:UIBarButtonItemStyleDone
+                                                                        target:self
+                                                                        action:@selector(saveBarItemOnClicked)];
+            self.navigationItem.rightBarButtonItem = saveItem;
+        }
+    } else {
+        //任务开启状态
+        //会话和保存接口都开放
+        UIBarButtonItem *startConversationItem = [[UIBarButtonItem alloc] initWithTitle:@"会话"
+                                                                                  style:UIBarButtonItemStyleDone
+                                                                                 target:self
+                                                                                 action:@selector(startConversationEvent)];
+        UIBarButtonItem *saveItem = [[UIBarButtonItem alloc] initWithTitle:@"保存"
+                                                                     style:UIBarButtonItemStyleDone
+                                                                    target:self
+                                                                    action:@selector(saveBarItemOnClicked)];
+        self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:saveItem, startConversationItem, nil];
         
-        self.taskTitleTxtField.enabled = YES;
-        self.taskDescriptioinTextView.editable = YES;
-        self.taskStatusSwitch.enabled = YES;
-        
-        [self.arrowImages enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            UIImageView *arrow = (UIImageView *)obj;
-            arrow.hidden = NO;
-        }];
+        //如果是发起人和分配人，则提供修改接口
+        if ([self.userID isEqualToString:self.taskModel.initiator.userId] || [self.userID isEqualToString:self.taskModel.personInCharge.userId]) {
+            self.taskTitleTxtField.enabled = YES;
+            self.taskDescriptioinTextView.editable = YES;
+            self.taskStatusSwitch.enabled = YES;
+            
+            [self.arrowImages enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                UIImageView *arrow = (UIImageView *)obj;
+                arrow.hidden = NO;
+            }];
+        } else {
+            UIImageView *imageView = [self.arrowImages lastObject];
+            imageView.hidden = NO;
+        }
     }
     
     NSString *startDateStr = [self.taskModel.startDate substringToIndex:16];
@@ -179,7 +198,7 @@
     NSString *endDateStr = [self.taskModel.endDate substringToIndex:16];
     self.endDateLbl.text = [endDateStr stringByReplacingOccurrencesOfString:@"-" withString:@"/"];
     
-    if (self.taskModel.status.integerValue == 0) {
+    if ([self.taskModel.status isEqualToString:@"0"]) {
         //任务状态为新
         self.taskStatusSwitch.on = NO;
     } else {
@@ -327,46 +346,9 @@
     if (taskComment.images != nil) {
         if (taskComment.images.count > 0) {
             self.onClickedCell = (ImageTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
-            //[self showImage:taskComment.images];
+            [self showImage:taskComment.images];
         }
     }
-}
-
-
-- (void)showImage:(NSArray *)images {
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
-    //        [self.navigationController preferredStatusBarStyle];
-    [self setNeedsStatusBarAppearanceUpdate];
-    NSString *imageURL = [images firstObject];
-    UIWindow *window = [UIApplication sharedApplication].keyWindow;
-    UIView *backgroundView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
-    self.oldframe = [self.onClickedCell.placeholderImg convertRect:self.onClickedCell.placeholderImg.bounds toView:window];
-    backgroundView.backgroundColor = [UIColor blackColor];
-    backgroundView.alpha = 0;
-    UIImageView *imageView = [[UIImageView alloc]initWithFrame:self.oldframe];
-    [imageView sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:nil];
-    imageView.tag = 101;
-    [backgroundView addSubview:imageView];
-    [window addSubview:backgroundView];
-    
-    UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hideImage:)];
-    [backgroundView addGestureRecognizer: tap];
-    
-    [UIView animateWithDuration:0.3 animations:^{
-        imageView.frame=CGRectMake(0,([UIScreen mainScreen].bounds.size.height-imageView.image.size.height*[UIScreen mainScreen].bounds.size.width/imageView.image.size.width)/2, [UIScreen mainScreen].bounds.size.width, imageView.image.size.height*[UIScreen mainScreen].bounds.size.width/imageView.image.size.width);
-        backgroundView.alpha=1;
-    } completion:nil];
-}
-
-- (void)hideImage:(UITapGestureRecognizer*)tap{
-    UIView *backgroundView = tap.view;
-    UIImageView *imageView = (UIImageView*)[tap.view viewWithTag:101];
-    [UIView animateWithDuration:0.3 animations:^{
-        imageView.frame = self.oldframe;
-        backgroundView.alpha = 0;
-    } completion:^(BOOL finished) {
-        [backgroundView removeFromSuperview];
-    }];
 }
 
 #pragma mark - UICollectionViewDataSource&UICollectionViewDelegateFlowLayout
@@ -427,9 +409,13 @@
 
 #pragma mark - UITextViewDelegate methods
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if ([text isEqualToString:@""]) {
+        return YES;
+    }
+    
     //textView的发送事件
     if ([text isEqualToString:@"\n"]) {
-
+        
         [self.sendTaskCommentDP sendTaskCommentWithTaskID:[self.taskModel.taskID stringValue]
                                                   comment:self.sendTxtView.text];
         self.sendTxtView.text = nil;
@@ -445,6 +431,13 @@
                              completion:nil];
         }
         
+        return NO;
+    }
+    return YES;
+}
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
+    if ([textView isEqual:self.sendTxtView] && [self.taskModel.status isEqualToString:@"1"]) {
         return NO;
     }
     return YES;
@@ -500,6 +493,55 @@
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)elcImagePickerController:(ELCImagePickerController *)picker didFinishPickingMediaWithInfo:(NSArray *)info {
+    [self.images removeAllObjects];
+    [info enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSDictionary *dic = (NSDictionary *)obj;
+        UIImage *image = dic[@"UIImagePickerControllerOriginalImage"];
+        NSData *data;
+        if (UIImagePNGRepresentation(image) == nil) {
+            data = UIImageJPEGRepresentation(image, 1.0);
+        } else {
+            data = UIImagePNGRepresentation(image);
+        }
+        
+        [self.images addObject:data];
+    }];
+    
+    [self.sendTaskCommentDP sendTaskCommentWithTaskID:[self.taskModel.taskID stringValue] comment:@" "];
+    [self showTips:@"正在上传..." mode:MRProgressOverlayViewModeIndeterminateSmallDefault isDismiss:NO isSucceuss:NO];
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    //    NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
+    //
+    //    //当选择的类型是图片
+    //    if ([type isEqualToString:@"public.image"])
+    //    {
+    //        //获取编辑框内部的图片，作为上传对象(上传图片不歪了也就)
+    //        UIImage *image = [info objectForKey:@"UIImagePickerControllerEditedImage"];
+    //        //先把图片转成NSData
+    //        //        UIImage *img = [self scaleToSize:image size:CGSizeMake(300, 300)];
+    //        NSData *data;
+    //        if (UIImagePNGRepresentation(image) == nil)
+    //        {
+    //            data = UIImageJPEGRepresentation(image, 1.0);
+    //        }
+    //        else
+    //        {
+    //            data = UIImagePNGRepresentation(image);
+    //        }
+    //
+    //        [self.images removeAllObjects];
+    //        [self.images addObject:data];
+    //
+    //        //关闭相册界面
+    //        [picker dismissViewControllerAnimated:YES completion:nil];
+    //    }
+}
+
+- (void)elcImagePickerControllerDidCancel:(ELCImagePickerController *)picker {
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -599,7 +641,8 @@
 
 - (IBAction)chooseTagBtnOnClicked:(UIButton *)sender {
     //标签选择
-    if (![self.taskModel.initiator.userId isEqualToString:self.userID] && ![self.userID isEqualToString:self.taskModel.personInCharge.userId]) {
+    //既不是发起人也不是分配人的时候直接返回 || 任务关闭的时候直接返回
+    if ((![self.taskModel.initiator.userId isEqualToString:self.userID] && ![self.userID isEqualToString:self.taskModel.personInCharge.userId]) || [self.taskModel.status isEqualToString:@"1"]) {
         return;
     }
     
@@ -615,7 +658,8 @@
 - (IBAction)chooseContactorBtnOnClicked:(UIButton *)sender {
 //    负责人btn的tag是1001，关注人是1002
     if (sender.tag == 1001) {
-        if (![self.taskModel.initiator.userId isEqualToString:self.userID] && ![self.userID isEqualToString:self.taskModel.personInCharge.userId]) {
+        //既不是发起人也不是分配人的时候直接返回 || 任务关闭的时候直接返回
+        if ((![self.taskModel.initiator.userId isEqualToString:self.userID] && ![self.userID isEqualToString:self.taskModel.personInCharge.userId]) || [self.taskModel.status isEqualToString:@"1"]) {
             return;
         }
         
@@ -637,6 +681,10 @@
         [self.navigationController pushViewController:selectPersonVC animated:YES];
     }
     else if (sender.tag == 1002){
+        //任务关闭的时候直接返回
+        if ([self.taskModel.status isEqualToString:@"1"]) {
+            return;
+        }
         //如果是关注人浏览任务则开启勿删模式
         __block BOOL isOberser = NO;
         [self.taskModel.observers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -695,9 +743,9 @@
     task.taskDescription = self.taskDescriptioinTextView.text;
     
     if (self.taskStatusSwitch.on == NO) {
-        task.status = [NSNumber numberWithInt:0];
+        task.status = @"0";
     } else {
-        task.status = [NSNumber numberWithInt:1];
+        task.status = @"1";
     }
     
     task.personInCharge = [self.assignerDataSource firstObject];
@@ -725,7 +773,8 @@
 }
 
 - (IBAction)dateBtnOnClicked:(UIButton *)sender {
-    if (![self.taskModel.initiator.userId isEqualToString:self.userID] && ![self.userID isEqualToString:self.taskModel.personInCharge.userId]) {
+    //既不是发起人也不是分配人的时候直接返回 || 任务关闭的时候直接返回
+    if ((![self.taskModel.initiator.userId isEqualToString:self.userID] && ![self.userID isEqualToString:self.taskModel.personInCharge.userId]) || [self.taskModel.status isEqualToString:@"1"]) {
         return;
     }
     
@@ -746,6 +795,10 @@
 }
 
 - (IBAction)sendImg:(UIButton *)sender {
+    if ([self.taskModel.status isEqualToString:@"1"]) {
+        return;
+    }
+    
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
                                                                              message:nil
                                                                       preferredStyle:UIAlertControllerStyleActionSheet];
@@ -835,55 +888,6 @@
                      completion:nil];
 }
 
-- (void)elcImagePickerController:(ELCImagePickerController *)picker didFinishPickingMediaWithInfo:(NSArray *)info {
-   [self.images removeAllObjects];
-    [info enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        NSDictionary *dic = (NSDictionary *)obj;
-        UIImage *image = dic[@"UIImagePickerControllerOriginalImage"];
-        NSData *data;
-        if (UIImagePNGRepresentation(image) == nil) {
-            data = UIImageJPEGRepresentation(image, 1.0);
-        } else {
-            data = UIImagePNGRepresentation(image);
-        }
-        
-        [self.images addObject:data];
-    }];
-    
-    [self.sendTaskCommentDP sendTaskCommentWithTaskID:[self.taskModel.taskID stringValue] comment:@" "];
-    [self showTips:@"正在上传..." mode:MRProgressOverlayViewModeIndeterminateSmallDefault isDismiss:NO isSucceuss:NO];
-    [picker dismissViewControllerAnimated:YES completion:nil];
-//    NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
-//    
-//    //当选择的类型是图片
-//    if ([type isEqualToString:@"public.image"])
-//    {
-//        //获取编辑框内部的图片，作为上传对象(上传图片不歪了也就)
-//        UIImage *image = [info objectForKey:@"UIImagePickerControllerEditedImage"];
-//        //先把图片转成NSData
-//        //        UIImage *img = [self scaleToSize:image size:CGSizeMake(300, 300)];
-//        NSData *data;
-//        if (UIImagePNGRepresentation(image) == nil)
-//        {
-//            data = UIImageJPEGRepresentation(image, 1.0);
-//        }
-//        else
-//        {
-//            data = UIImagePNGRepresentation(image);
-//        }
-//        
-//        [self.images removeAllObjects];
-//        [self.images addObject:data];
-//        
-//        //关闭相册界面
-//        [picker dismissViewControllerAnimated:YES completion:nil];
-//    }
-}
-
-- (void)elcImagePickerControllerDidCancel:(ELCImagePickerController *)picker {
-    [picker dismissViewControllerAnimated:YES completion:nil];
-}
-
 //当键盘出现或改变时调用
 - (void)keyboardWillShow:(NSNotification *)aNotification
 {
@@ -937,6 +941,85 @@
     [self.getTaskCommentListDP getTaskCommentListWithTaskID:self.requestTaskID listSize:nil];
 }
 
+- (void)showImage:(NSArray *)images {
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+    
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    UIView *containerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
+    containerView.backgroundColor = [UIColor blackColor];
+    
+    self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 37)];
+    self.scrollView.delegate = self;
+//    self.scrollView.maximumZoomScale = 2.f;
+//    self.scrollView.minimumZoomScale = .5f;
+    self.scrollView.pagingEnabled = YES;
+    self.scrollView.showsHorizontalScrollIndicator = NO;
+    self.scrollView.contentSize = CGSizeMake(self.scrollView.bounds.size.width * images.count, self.scrollView.bounds.size.height);
+    
+    [containerView addSubview:self.scrollView];
+    
+    self.pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, containerView.bounds.size.height - 37, containerView.bounds.size.width, 37)];
+    [self.pageControl setCurrentPageIndicatorTintColor:[UIColor whiteColor]];
+    [self.pageControl setPageIndicatorTintColor:[UIColor grayColor]];
+    self.pageControl.currentPage = 0;
+    self.pageControl.numberOfPages = images.count;
+    [self.pageControl addTarget:self action:@selector(changeImageViewPage:) forControlEvents:UIControlEventValueChanged];
+    [containerView addSubview:self.pageControl];
+    [window addSubview:containerView];
+    
+    self.oldframe = [self.onClickedCell.placeholderImg convertRect:self.onClickedCell.placeholderImg.bounds toView:window];
+
+    NSInteger count = 0;
+    while (count < images.count) {
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, (self.scrollView.bounds.size.height - self.oldframe.size.height * self.scrollView.bounds.size.width / self.oldframe.size.width) / 2, self.scrollView.bounds.size.width, self.oldframe.size.height * self.scrollView.bounds.size.width / self.oldframe.size.width)];
+        ESImage *image = images[count];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:image.imgURL]
+                     placeholderImage:[UIImage imageNamed:@"单张图片"]
+                            completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                CGSize size = [image size];
+                                if (size.height * self.scrollView.bounds.size.width / size.width >= (self.scrollView.bounds.size.height - 37 * 2)) {
+                                    imageView.frame = CGRectMake(self.scrollView.bounds.size.width * count, 0, self.scrollView.bounds.size.width, size.height * self.scrollView.bounds.size.width / size.width - 37);
+                                } else {
+                                    imageView.frame = CGRectMake(self.scrollView.bounds.size.width * count, (self.scrollView.bounds.size.height - size.height * self.scrollView.bounds.size.width / size.width) / 2, self.scrollView.bounds.size.width, size.height * self.scrollView.bounds.size.width / size.width);
+                                }
+                            }];
+         imageView.tag = 101 + count;
+        [self.scrollView addSubview:imageView];
+        count ++;
+    }
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hideImage:)];
+    [containerView addGestureRecognizer: tap];
+}
+
+
+- (void)changeImageViewPage:(UIPageControl *)sender {
+    UIPageControl *pageControl = (UIPageControl *)sender;
+    [self.scrollView scrollRectToVisible:CGRectMake(pageControl.currentPage * self.scrollView.bounds.size.width, self.scrollView.bounds.origin.y, self.scrollView.bounds.size.width, self.scrollView.bounds.size.height) animated:YES];
+}
+
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
+    NSInteger index = scrollView.contentOffset.x / scrollView.bounds.size.width;
+    return [scrollView viewWithTag:101 + index];
+}
+
+- (void)hideImage:(UITapGestureRecognizer*)tap {
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    UIView *contanerView = tap.view;
+    //UIImageView *imageView = (UIImageView*)[tap.view viewWithTag:101];
+    [UIView animateWithDuration:0.3 animations:^{
+        //imageView.frame = self.oldframe;
+        contanerView.alpha = 0;
+    } completion:^(BOOL finished) {
+        [contanerView removeFromSuperview];
+    }];
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    self.pageControl.currentPage = scrollView.contentOffset.x /scrollView.bounds.size.width;
+    
+}
+
 #pragma mark - private methods
 - (void)showTips:(NSString *)tip mode:(MRProgressOverlayViewMode)mode isDismiss:(BOOL)isDismiss isSucceuss:(BOOL)success {
     [self.navigationController.view addSubview:self.progress];
@@ -962,7 +1045,7 @@
     
     for (UIView *view in _holdViews) {
         view.layer.borderWidth = 1.f;
-        view.layer.borderColor = [ColorHandler colorFromHexRGB:@"eeeeee"].CGColor;
+        view.layer.borderColor = [ColorHandler colorFromHexRGB:@"EEEEEE"].CGColor;
     }
 }
 
