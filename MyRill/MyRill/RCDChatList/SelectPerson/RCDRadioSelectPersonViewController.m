@@ -92,7 +92,7 @@
     }
 
 //    NSArray *indexPaths = [self.tableView indexPathsForSelectedRows];
-    if (!indexPaths||indexPaths.count == 0){
+    if ((!indexPaths||indexPaths.count == 0) && self.seletedUsers.count == 0){
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"请选择联系人!" message:nil preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *enterAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil];
         [alertController addAction:enterAction];

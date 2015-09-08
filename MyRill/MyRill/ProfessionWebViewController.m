@@ -12,6 +12,7 @@
 @interface ProfessionWebViewController () <UIWebViewDelegate>
 
 @property (nonatomic, strong) UIWebView *professionWeb;
+@property (nonatomic, strong) UIToolbar *toolbar;
 
 @end
 
@@ -23,38 +24,24 @@
     // Do any additional setup after loading the view.
     
     [self.view addSubview:self.professionWeb];
-   
-    UIImage *backImg = [UIImage imageNamed:@"后退-可点"];
-    backImg = [backImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    UIBarButtonItem *backItem   = [[UIBarButtonItem alloc] initWithImage:backImg
-                                                                   style:UIBarButtonItemStylePlain
-                                                                  target:self
-                                                                  action:@selector(backToPre:)];
-    backItem.tag = 301;
+    [self.view addSubview:self.toolbar];
     
-    UIImage *forwardImg = [UIImage imageNamed:@"前进-可点"];
-    forwardImg = [forwardImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    UIBarButtonItem *forwardItem = [[UIBarButtonItem alloc] initWithImage:forwardImg
-                                                                    style:UIBarButtonItemStylePlain
-                                                                   target:self
-                                                                   action:@selector(forwardToNext:)];
-    forwardItem.tag = 302;
-
-    UIImage *reloadImg = [UIImage imageNamed:@"刷新-可点"];
-    reloadImg = [reloadImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    UIBarButtonItem *reloadItem = [[UIBarButtonItem alloc] initWithImage:reloadImg
-                                                                   style:UIBarButtonItemStylePlain
-                                                                  target:self
-                                                                  action:@selector(reloadPage:)];
-    reloadItem.tag = 303;
-    UIBarButtonItem *placeHolderItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
-                                                                                     target:self
-                                                                                     action:nil];
-    NSArray *itemArray = [[NSArray alloc] initWithObjects:placeHolderItem,backItem,placeHolderItem,forwardItem,placeHolderItem,reloadItem,placeHolderItem, nil];
-    self.toolbarItems = itemArray;
+    __weak UIView *ws = self.view;
+    __weak UIView *wToolbar = self.toolbar;
+    [self.professionWeb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(ws.mas_top);
+        make.leading.equalTo(ws.mas_leading);
+        make.trailing.equalTo(ws.mas_trailing);
+        make.bottom.equalTo(wToolbar.mas_top).with.offset(49);
+    }];
     
-    [self.navigationController.toolbar setBackgroundColor:[UIColor whiteColor]];
-    self.navigationController.toolbar.barStyle = UIBarStyleDefault;
+    [self.toolbar mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(ws.mas_leading);
+        make.trailing.equalTo(ws.mas_trailing);
+        make.bottom.equalTo(ws.mas_bottom);
+    }];
+    
+    [self.view layoutIfNeeded];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -64,25 +51,11 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [self.professionWeb loadRequest:request];
     self.tabBarController.tabBar.hidden = YES;
-    [self.navigationController setToolbarHidden:NO animated:YES];
 
     UIBarButtonItem *back = (UIBarButtonItem *)[self.navigationController.toolbar viewWithTag:301];
     back.enabled = self.professionWeb.canGoBack ? YES : NO;
     UIBarButtonItem *forward = (UIBarButtonItem *)[self.navigationController.toolbar viewWithTag:302];
     forward.enabled = self.professionWeb.canGoForward ? YES : NO;
-}
-
-//需要每次重置toolbar的位置
-- (void)viewDidLayoutSubviews {
-    [super viewDidLayoutSubviews];
-    
-    self.navigationController.toolbar.frame = CGRectMake(0, self.view.frame.size.height - 44 + 64, self.view.frame.size.width, 44);
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    
-    [self.navigationController setToolbarHidden:YES animated:YES];
 }
 
 #pragma mark - UIWebViewDelegate methods
@@ -118,11 +91,50 @@
 #pragma mark - setters&getters
 - (UIWebView *)professionWeb {
     if (!_professionWeb) {
-        _professionWeb = [[UIWebView alloc] initWithFrame:self.view.bounds];
+        _professionWeb = [[UIWebView alloc] init];
         _professionWeb.delegate = self;
     }
     
     return _professionWeb;
+}
+
+- (UIToolbar *)toolbar {
+    if (!_toolbar) {
+        UIImage *backImg = [UIImage imageNamed:@"后退-可点"];
+        backImg = [backImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        UIBarButtonItem *backItem   = [[UIBarButtonItem alloc] initWithImage:backImg
+                                                                       style:UIBarButtonItemStylePlain
+                                                                      target:self
+                                                                      action:@selector(backToPre:)];
+        backItem.tag = 301;
+        
+        UIImage *forwardImg = [UIImage imageNamed:@"前进-可点"];
+        forwardImg = [forwardImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        UIBarButtonItem *forwardItem = [[UIBarButtonItem alloc] initWithImage:forwardImg
+                                                                        style:UIBarButtonItemStylePlain
+                                                                       target:self
+                                                                       action:@selector(forwardToNext:)];
+        forwardItem.tag = 302;
+        
+        UIImage *reloadImg = [UIImage imageNamed:@"刷新-可点"];
+        reloadImg = [reloadImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        UIBarButtonItem *reloadItem = [[UIBarButtonItem alloc] initWithImage:reloadImg
+                                                                       style:UIBarButtonItemStylePlain
+                                                                      target:self
+                                                                      action:@selector(reloadPage:)];
+        reloadItem.tag = 303;
+        UIBarButtonItem *placeHolderItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                                         target:self
+                                                                                         action:nil];
+        NSArray *itemArray = [[NSArray alloc] initWithObjects:placeHolderItem,backItem,placeHolderItem,forwardItem,placeHolderItem,reloadItem,placeHolderItem, nil];
+        
+        _toolbar = [[UIToolbar alloc] init];
+        _toolbar.backgroundColor = [UIColor whiteColor];
+        _toolbar.barStyle = UIBarStyleDefault;
+        _toolbar.items = itemArray;
+    }
+    
+    return _toolbar;
 }
 
 @end

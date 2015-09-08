@@ -195,8 +195,12 @@
     
     self.taskTitleTxtField.text = self.taskModel.title;
     self.taskDescriptioinTextView.text = self.taskModel.taskDescription;
-    NSString *endDateStr = [self.taskModel.endDate substringToIndex:16];
-    self.endDateLbl.text = [endDateStr stringByReplacingOccurrencesOfString:@"-" withString:@"/"];
+    if ([ColorHandler isNullOrEmptyString:self.taskModel.endDate]) {
+        self.endDateLbl.text = @"";
+    } else {
+        NSString *endDateStr = [self.taskModel.endDate substringToIndex:16];
+        self.endDateLbl.text = [endDateStr stringByReplacingOccurrencesOfString:@"-" withString:@"/"];
+    }
     
     if ([self.taskModel.status isEqualToString:@"0"]) {
         //任务状态为新
