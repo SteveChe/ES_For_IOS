@@ -13,6 +13,8 @@
 #import "TaskOverviewViewController.h"
 #import "ProfessionViewController.h"
 #import "ESMenuViewController.h"
+#import "RCDAcceptContactViewController.h"
+#import "RCDApprovedJoinEnterpriseViewController.h"
 
 @implementation ESPushManager
 
@@ -94,14 +96,24 @@
 +(void)changeToPageWithType:(E_PUSH_CATEGORY_TYPE)categoryType
 {
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-//    UIViewController* targetVC = nil;
+    UIViewController* targetVC = nil;
     NSUInteger selectIndex = 0;
     switch (categoryType)
     {
         case e_Push_Category_Contact_Request:
-        case e_Push_Category_Contact_Accept:
+        {
+            selectIndex = 2;
+            targetVC = [[RCDAcceptContactViewController alloc] init];
+        }
+            break;
         case e_Push_Category_Enterprise_Request:
+        {
+            selectIndex = 2;
+            targetVC = [[RCDApprovedJoinEnterpriseViewController alloc] init ];
+        }
+            break;
         case e_Push_Category_Enterprise_Accept:
+        case e_Push_Category_Contact_Accept:
         {
             selectIndex = 2;
 //            targetVC = [[RCDAddressBookViewController alloc] init];
