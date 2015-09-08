@@ -116,6 +116,26 @@
         userInfo.portraitUri = user.portraitUri;
         [seletedUsers addObject:userInfo];
     }
+
+    for (ESUserInfo* user in self.seletedUsers )
+    {
+        BOOL bFind = NO;
+        for (ESUserInfo* userInSelected in seletedUsers)
+        {
+            if (userInSelected.userId == nil || user.userId == nil)
+            {
+                continue;
+            }
+            if ([userInSelected.userId isEqualToString:user.userId])
+            {
+                bFind = YES;
+            }
+        }
+        
+        if (!bFind) {
+            [seletedUsers addObject:user];
+        }
+    }
     
     //excute the clickDoneCompletion
     if (self.clickDoneCompletion) {
@@ -361,9 +381,7 @@
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
-    self.bSearchDisplay = NO;
-    
-    //    NSLog(@"searchBarCancelButtonClicked");
+    self.bSearchDisplay = NO;    
 }
 
 @end
