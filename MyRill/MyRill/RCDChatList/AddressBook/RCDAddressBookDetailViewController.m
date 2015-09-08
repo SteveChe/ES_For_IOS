@@ -19,6 +19,7 @@
 #import "RCDAddFriendViewController.h"
 #import "DeleteContactDataParse.h"
 #import "UserDefaultsDefine.h"
+#import <RongIMLib/RongIMLib.h>
 
 @interface RCDAddressBookDetailViewController ()<DeleteContactDelegate>
 @property (nonatomic,strong) GetContactDetailDataParse* getContactDetailDataParse;
@@ -34,10 +35,12 @@
 @property (nonatomic,strong) ESUserDetailInfo* userDetailInfo;
 @property (nonatomic,weak) IBOutlet UIButton* smsButton;
 @property (nonatomic,weak) IBOutlet UIButton* callButton;
+@property (nonatomic,weak) IBOutlet UIButton* ipCallButton;
 @property (nonatomic,weak) IBOutlet UIButton* deleteButton;
 
 -(IBAction)clickStartChatButton:(id)sender;
 -(IBAction)clickCallButton:(id)sender;
+-(IBAction)clickIPCallButton:(id)sender;
 -(IBAction)clickDeleteButton:(id)sender;
 -(IBAction)clickAddContractButton:(id)sender;
 
@@ -94,6 +97,7 @@
         _smsButton.titleLabel.text = @"  发消息  ";
         _deleteButton.hidden = NO;
         _callButton.hidden = NO;
+        _ipCallButton.hidden = NO;
         [_smsButton removeTarget:self action:@selector(clickAddContractButton:)  forControlEvents:UIControlEventTouchUpInside];
         [_smsButton addTarget:self action:@selector(clickStartChatButton:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -102,6 +106,7 @@
         _smsButton.titleLabel.text = @"加联系人";
         _deleteButton.hidden = YES;
         _callButton.hidden = YES;
+        _ipCallButton.hidden = YES;
         [_smsButton removeTarget:self action:@selector(clickStartChatButton:)  forControlEvents:UIControlEventTouchUpInside];
         [_smsButton addTarget:self action:@selector(clickAddContractButton:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -289,6 +294,18 @@
     [[UIApplication sharedApplication] openURL:phoneCallURL];
     
 }
+
+-(IBAction)clickIPCallButton:(id)sender
+{
+    if (_userDetailInfo.userId == nil || [_userDetailInfo.userId isEqual:[NSNull null]] || [_userDetailInfo.userId length] <= 0)
+    {
+        [[CustomShowMessage getInstance] showNotificationMessage:@"抱歉，该用户不支持IP电话功能"];
+        return;
+    }
+    
+    [[RCIM sharedRCIM] startVoIPCallWithTargetId:_userDetailInfo.userId];
+}
+
 -(IBAction)clickDeleteButton:(id)sender
 {
     NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
@@ -324,6 +341,11 @@
 {
     _callButton = callButton;
     _callButton.layer.cornerRadius = 20.0f;
+}
+-(void)setIpCallButton:(UIButton *)callButton
+{
+    _ipCallButton = callButton;
+    _ipCallButton.layer.cornerRadius = 20.0f;
 }
 -(void)setDeleteButton:(UIButton *)deleteButton
 {

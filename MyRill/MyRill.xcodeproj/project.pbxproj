@@ -153,7 +153,6 @@
 		F22FE27F1B3ADAB000A1A997 /* ESUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE27E1B3ADAB000A1A997 /* ESUserInfo.m */; };
 		F22FE2821B3ADB6000A1A997 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE2811B3ADB6000A1A997 /* ChatViewController.m */; };
 		F22FE2851B3ADC5700A1A997 /* UIImage+RCImage.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE2841B3ADC5700A1A997 /* UIImage+RCImage.m */; };
-		F22FE2881B3AF0CB00A1A997 /* RongCloudKit.strings in Resources */ = {isa = PBXBuildFile; fileRef = F22FE2861B3AF0CB00A1A997 /* RongCloudKit.strings */; };
 		F22FE2911B3B000400A1A997 /* ChangePwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE28A1B3B000400A1A997 /* ChangePwdViewController.m */; };
 		F22FE2921B3B000400A1A997 /* ChangePwdViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F22FE28B1B3B000400A1A997 /* ChangePwdViewController.xib */; };
 		F22FE2941B3B000400A1A997 /* UserSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FE28F1B3B000400A1A997 /* UserSettingViewController.m */; };
@@ -280,6 +279,7 @@
 		F29F86491B2410320058FC9F /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = F29F86401B2410320058FC9F /* UIRefreshControl+AFNetworking.m */; };
 		F29F864A1B2410320058FC9F /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = F29F86421B2410320058FC9F /* UIWebView+AFNetworking.m */; };
 		F2C26EA01B9C884D00DAACE7 /* Emoji.plist in Resources */ = {isa = PBXBuildFile; fileRef = F2C26E9F1B9C884D00DAACE7 /* Emoji.plist */; };
+		F2C26EA31B9DB93D00DAACE7 /* RongCloudKit.strings in Resources */ = {isa = PBXBuildFile; fileRef = F2C26EA11B9DB93D00DAACE7 /* RongCloudKit.strings */; };
 		F2D233561B31AA1200F8C65D /* libPushSDK-1.8.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2D233551B31AA1200F8C65D /* libPushSDK-1.8.3.a */; };
 		F2D2335A1B31AE2800F8C65D /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F2D233591B31AE2800F8C65D /* libz.dylib */; };
 		F2D2335C1B31AE4D00F8C65D /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2D2335B1B31AE4D00F8C65D /* CoreTelephony.framework */; };
@@ -498,7 +498,6 @@
 		2BC227851B95951C00E3163A /* ESImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESImage.m; sourceTree = "<group>"; };
 		2BC8212D1B57FFDC0090E2C1 /* ProfessionWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfessionWebViewController.h; sourceTree = "<group>"; };
 		2BC8212E1B57FFDC0090E2C1 /* ProfessionWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfessionWebViewController.m; sourceTree = "<group>"; };
-		2BC821301B5B649B0090E2C1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/RongCloudKit.strings"; sourceTree = "<group>"; };
 		2BC821311B5B649B0090E2C1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		2BC821321B5B839F0090E2C1 /* QRCodeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QRCodeViewController.xib; sourceTree = "<group>"; };
 		2BC821341B5BE6B60090E2C1 /* ChangeUserImageDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeUserImageDataParse.h; sourceTree = "<group>"; };
@@ -598,7 +597,6 @@
 		F22FE2811B3ADB6000A1A997 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
 		F22FE2831B3ADC5700A1A997 /* UIImage+RCImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+RCImage.h"; path = "Utilities/common/UIImage+RCImage.h"; sourceTree = "<group>"; };
 		F22FE2841B3ADC5700A1A997 /* UIImage+RCImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+RCImage.m"; path = "Utilities/common/UIImage+RCImage.m"; sourceTree = "<group>"; };
-		F22FE2871B3AF0CB00A1A997 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/RongCloudKit.strings; sourceTree = "<group>"; };
 		F22FE2891B3B000400A1A997 /* ChangePwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePwdViewController.h; sourceTree = "<group>"; };
 		F22FE28A1B3B000400A1A997 /* ChangePwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePwdViewController.m; sourceTree = "<group>"; };
 		F22FE28B1B3B000400A1A997 /* ChangePwdViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChangePwdViewController.xib; sourceTree = "<group>"; };
@@ -838,6 +836,7 @@
 		F29F86411B2410320058FC9F /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIWebView+AFNetworking.h"; path = "Utilities/AFNetworking/UIKit+AFNetworking/UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
 		F29F86421B2410320058FC9F /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIWebView+AFNetworking.m"; path = "Utilities/AFNetworking/UIKit+AFNetworking/UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
 		F2C26E9F1B9C884D00DAACE7 /* Emoji.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Emoji.plist; sourceTree = "<group>"; };
+		F2C26EA21B9DB93D00DAACE7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/RongCloudKit.strings; sourceTree = "<group>"; };
 		F2D233551B31AA1200F8C65D /* libPushSDK-1.8.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPushSDK-1.8.3.a"; path = "MyRill/JPush/libPushSDK-1.8.3.a"; sourceTree = "<group>"; };
 		F2D233581B31AA3A00F8C65D /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APService.h; path = JPush/APService.h; sourceTree = "<group>"; };
 		F2D233591B31AE2800F8C65D /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -999,8 +998,8 @@
 		2B31C3D21B11C3FD004C865A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F2C26EA11B9DB93D00DAACE7 /* RongCloudKit.strings */,
 				F2C26E9F1B9C884D00DAACE7 /* Emoji.plist */,
-				F22FE2861B3AF0CB00A1A997 /* RongCloudKit.strings */,
 				2B31C3D31B11C3FD004C865A /* Info.plist */,
 				2B31C3D41B11C3FD004C865A /* main.m */,
 				F2D2335D1B31B1F400F8C65D /* PushConfig.plist */,
@@ -2029,7 +2028,6 @@
 				2B37E44D1B53967D00F671A1 /* ModifyProfessionViewController.xib in Resources */,
 				2BC8213B1B5C9FF70090E2C1 /* ShowQRCodeViewController.xib in Resources */,
 				2BC227761B942A3600E3163A /* Overlay.png in Resources */,
-				F22FE2881B3AF0CB00A1A997 /* RongCloudKit.strings in Resources */,
 				F23059BB1B52C141004599FA /* RCDAddressBookViewTableViewCell.xib in Resources */,
 				2B1B88E61B803CEA00FAF650 /* UserNameAndPositionViewController.xib in Resources */,
 				F256CB801B6E4247009478C2 /* RCDJoinEnterpriseViewController.xib in Resources */,
@@ -2037,6 +2035,7 @@
 				F2467EF31B8DCF1F0055B78B /* RootCardTopCell.xib in Resources */,
 				F2D2335E1B31B1F400F8C65D /* PushConfig.plist in Resources */,
 				2BC227811B94578600E3163A /* ImageTableViewCell.xib in Resources */,
+				F2C26EA31B9DB93D00DAACE7 /* RongCloudKit.strings in Resources */,
 				2BC227751B942A3600E3163A /* ELCAssetTablePicker.xib in Resources */,
 				2B39C98D1B37B2A4007BAC7A /* LoginViewController.xib in Resources */,
 				F256CB721B6BD565009478C2 /* RCDUpdateNameViewController.xib in Resources */,
@@ -2355,11 +2354,10 @@
 			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
-		F22FE2861B3AF0CB00A1A997 /* RongCloudKit.strings */ = {
+		F2C26EA11B9DB93D00DAACE7 /* RongCloudKit.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				F22FE2871B3AF0CB00A1A997 /* Base */,
-				2BC821301B5B649B0090E2C1 /* zh-Hans */,
+				F2C26EA21B9DB93D00DAACE7 /* Base */,
 			);
 			name = RongCloudKit.strings;
 			sourceTree = "<group>";
@@ -2407,7 +2405,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "a5c66360-4019-4ebe-9492-df3d30ba3a21";
+				PROVISIONING_PROFILE = "46caef10-069d-4e94-8a4d-fbd9bc55ceda";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -2445,7 +2443,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "a5c66360-4019-4ebe-9492-df3d30ba3a21";
+				PROVISIONING_PROFILE = "46caef10-069d-4e94-8a4d-fbd9bc55ceda";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -2471,7 +2469,7 @@
 					"$(PROJECT_DIR)/MyRill/JPush",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "46caef10-069d-4e94-8a4d-fbd9bc55ceda";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
@@ -2497,7 +2495,7 @@
 					"$(PROJECT_DIR)/MyRill/JPush",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "46caef10-069d-4e94-8a4d-fbd9bc55ceda";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};

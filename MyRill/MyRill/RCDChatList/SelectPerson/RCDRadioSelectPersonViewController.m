@@ -21,6 +21,7 @@
 @property (nonatomic,strong)RCDSelectPersonTableViewCell* selectedCell;
 @property (nonatomic,assign)BOOL bJoinedEnterprise;
 @property(nonatomic,assign)BOOL bSearchDisplay;
+@property(nonatomic,strong)NSMutableArray* selectUsersInSearch;
 
 @end
 
@@ -46,6 +47,7 @@
     UINib *rcdCellNib = [UINib nibWithNibName:@"RCDSelectPersonTableViewCell" bundle:nil];
     [self.tableView registerNib:rcdCellNib forCellReuseIdentifier:@"RCDSelectPersonTableViewCell"];
     [self.searchDisplayController1.searchResultsTableView registerNib:rcdCellNib forCellReuseIdentifier:@"RCDSelectPersonTableViewCell"];
+    _selectUsersInSearch = [NSMutableArray array];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -189,6 +191,14 @@
                 }
             }
         }
+        
+        //设置选中状态
+        for (ESUserInfo *userInfo in self.selectUsersInSearch) {
+            if ([user.userId isEqualToString:userInfo.userId]) {
+                [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionBottom];
+            }
+        }
+        
         return cell;
     }
     else
@@ -212,6 +222,13 @@
             }
         }
         
+        //设置选中状态
+        for (ESUserInfo *userInfo in self.selectUsersInSearch) {
+            if ([user.userId isEqualToString:userInfo.userId]) {
+                [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionBottom];
+            }
+        }
+        
         return cell;
     }
     
@@ -221,17 +238,55 @@
 {
     RCDSelectPersonTableViewCell *cell = (RCDSelectPersonTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
     [cell setSelected:YES];
-//    if (_selectedCell!=nil)
-//    {
-//        [_selectedCell setSelected:NO];
-//    }
-//    _selectedCell = cell;
+    
+    if(tableView == self.searchDisplayController1.searchResultsTableView)
+    {
+        [self.searchDisplayController1 setActive:NO animated:NO];
+        ESUserInfo *user = self.searchResult[indexPath.row];
+        if(user)
+        {
+            [self.selectUsersInSearch addObject:user];
+            [self.tableView reloadData];
+        }
+        
+    }
+    else
+    {
+        ESContactList* contactList = self.friends[indexPath.section];
+        ESUserInfo *user = contactList.contactList[indexPath.row];
+        
+        if(user){
+            [self.selectUsersInSearch addObject:user];
+        }
+        
+    }
 }
 
 -(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     RCDSelectPersonTableViewCell *cell = (RCDSelectPersonTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
     [cell setSelected:NO];
+    if(tableView == self.searchDisplayController1.searchResultsTableView)
+    {
+        [self.searchDisplayController1 setActive:NO animated:NO];
+        ESUserInfo *user = self.searchResult[indexPath.row];
+        if(user)
+        {
+            [self.selectUsersInSearch removeObject:user];
+            [self.tableView reloadData];
+        }
+        
+    }
+    else
+    {
+        ESContactList* contactList = self.friends[indexPath.section];
+        ESUserInfo *user = contactList.contactList[indexPath.row];
+        
+        if(user){
+            [self.selectUsersInSearch removeObject:user];
+        }
+        
+    }
 }
 
 

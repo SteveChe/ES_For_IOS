@@ -99,6 +99,7 @@
      {
          //设置用户信息提供者,页面展现的用户头像及昵称都会从此代理取
          [[RCIM sharedRCIM] setUserInfoDataSource:self];
+         [[RCIM sharedRCIM] setGlobalConversationAvatarStyle:RC_USER_AVATAR_CYCLE];
          NSLog(@"Login successfully with userId: %@.", userId);
          //         dispatch_async(dispatch_get_main_queue(), ^{
          //             RCConversationListViewController *chatListViewController = [[RCConversationListViewController alloc]init];
