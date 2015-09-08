@@ -41,15 +41,15 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(freeKeyboard)];
     [self.view addGestureRecognizer:tap];
     
-    self.textView.text = self.descriptionStr;
+    self.textView.text = self.userDetailInfo.contactDescription;
 }
 
 #pragma mark - ChangeUserMsgDelegate methods
 - (void)changeUserMsgSuccess:(ESUserDetailInfo *)userInfo {
     [self showTips:@"修改成功!" mode:MRProgressOverlayViewModeCheckmark isDismiss:YES isSucceuss:YES];
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setObject:[ColorHandler isNullOrEmptyString:userInfo.contactDescription]?@"":userInfo.contactDescription forKey:DEFAULTS_USERDESCRIPTION];
-    [userDefaults synchronize];
+//    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+//    [userDefaults setObject:[ColorHandler isNullOrEmptyString:userInfo.contactDescription]?@"":userInfo.contactDescription forKey:DEFAULTS_USERDESCRIPTION];
+//    [userDefaults synchronize];
 }
 
 - (void)changeUserMsgFailed:(NSString *)error {
@@ -63,11 +63,10 @@
 
 - (void)confirmItemOnClicked {
     [self freeKeyboard];
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     ESUserDetailInfo *userInfo = [[ESUserDetailInfo alloc] init];
-    userInfo.userId = [userDefaults stringForKey:DEFAULTS_USERID];
-    userInfo.userName = [userDefaults stringForKey:DEFAULTS_USERNAME];
-    userInfo.position = [userDefaults stringForKey:DEFAULTS_USERPOSITION];
+    userInfo.userId = self.userDetailInfo.userId;
+    userInfo.userName = self.userDetailInfo.userName;
+    userInfo.position = self.userDetailInfo.position;
     userInfo.contactDescription = self.textView.text;
     
     [self.changeUserMsgDP changeUserMsgWithUserInfo:userInfo];

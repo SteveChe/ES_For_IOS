@@ -43,21 +43,26 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(freeKeyboard)];
     [self.view addGestureRecognizer:tap];
     
-    self.nameAndPositionTxtField.text = self.nameAndPositionStr;
+    if (self.type == ESUserMsgName) {
+        self.nameAndPositionTxtField.text = self.userDetailInfo.userName;
+    } else {
+        self.nameAndPositionTxtField.text = self.userDetailInfo.position;
+    }
+    
 }
 
 #pragma mark - ChangeUserMsgDelegate methods
 - (void)changeUserMsgSuccess:(ESUserDetailInfo *)userInfo {
     [self showTips:@"修改成功!" mode:MRProgressOverlayViewModeCheckmark isDismiss:YES isSucceuss:YES];
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    if (self.type == ESUserMsgName) {
-        [userDefaults setObject:[ColorHandler isNullOrEmptyString:userInfo.userName]?@"":userInfo.userName forKey:DEFAULTS_USERNAME];
-    } else if (self.type == ESUserMsgPosition) {
-        [userDefaults setObject:[ColorHandler isNullOrEmptyString:userInfo.position]?@"":userInfo.position forKey:DEFAULTS_USERPOSITION];
-    } else {
-        //empty
-    }
-    [userDefaults synchronize];
+//    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+//    if (self.type == ESUserMsgName) {
+//        [userDefaults setObject:[ColorHandler isNullOrEmptyString:userInfo.userName]?@"":userInfo.userName forKey:DEFAULTS_USERNAME];
+//    } else if (self.type == ESUserMsgPosition) {
+//        [userDefaults setObject:[ColorHandler isNullOrEmptyString:userInfo.position]?@"":userInfo.position forKey:DEFAULTS_USERPOSITION];
+//    } else {
+//        //empty
+//    }
+//    [userDefaults synchronize];
 }
 
 - (void)changeUserMsgFailed:(NSString *)error {
@@ -72,9 +77,8 @@
 - (void)confirmItemOnClicked {
     [self freeKeyboard];
     
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     ESUserDetailInfo *userInfo = [[ESUserDetailInfo alloc] init];
-    userInfo.userId = [userDefaults stringForKey:DEFAULTS_USERID];
+    userInfo.userId = self.userDetailInfo.userId;
     
     if (self.type == ESUserMsgName) {
         if ([ColorHandler isNullOrEmptyString:self.nameAndPositionTxtField.text]) {
@@ -87,13 +91,13 @@
             return;
         }
         userInfo.userName = self.nameAndPositionTxtField.text;
-        userInfo.position = [userDefaults stringForKey:DEFAULTS_USERPOSITION];
+        userInfo.position = self.userDetailInfo.position;
     } else {
-        userInfo.userName = [userDefaults stringForKey:DEFAULTS_USERNAME];
+        userInfo.userName = self.userDetailInfo.userName;
         userInfo.position = self.nameAndPositionTxtField.text;
     }
     
-    userInfo.contactDescription = [userDefaults stringForKey:DEFAULTS_USERDESCRIPTION];
+    userInfo.contactDescription = self.userDetailInfo.contactDescription;
     
     [self.changeUserMsgDP changeUserMsgWithUserInfo:userInfo];
 }

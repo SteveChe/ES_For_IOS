@@ -425,13 +425,23 @@
         [observerArray addObject:user.userId];
     }
     
-    NSDictionary *param = @{@"title":task.title,
-                            @"description":task.taskDescription,
-                            @"due_date":task.endDate,
-                            @"person_in_charge":task.personInCharge.userId,
-                            @"observers":observerArray,
-                            @"chat_id":task.chatID
-                            };
+    NSDictionary *param = nil;
+    if ([task.endDate isEqualToString:@""]) {
+        param = @{@"title":task.title,
+                  @"description":task.taskDescription,
+                  @"person_in_charge":task.personInCharge.userId,
+                  @"observers":observerArray,
+                  @"chat_id":task.chatID
+                  };
+    } else {
+        param = @{@"title":task.title,
+                  @"description":task.taskDescription,
+                  @"due_date":task.endDate,
+                  @"person_in_charge":task.personInCharge.userId,
+                  @"observers":observerArray,
+                  @"chat_id":task.chatID
+                  };
+    }
     
     [AFHttpTool requestWithMethod:RequestMethodTypePost protocolType:RequestProtocolTypeJson
                               url:@"/api/assignments/.json"

@@ -71,11 +71,7 @@
     
     [self.view layoutIfNeeded];
     
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    dateFormatter.dateFormat = @"yyyy/MM/dd HH:mm";
-    NSDate *date = self.dateSelectedPicker.date;
-    date = [date dateByAddingTimeInterval:24 *3600];
-    self.endDateLbl.text = [dateFormatter stringFromDate:date];
+    self.endDateLbl.text = @"";
 }
 
 #pragma mark - AddTaskDelegate method
@@ -289,10 +285,14 @@
         task.title = self.taskTitleTxtField.text;
         task.taskDescription = self.taskDescriptionTxtView.text;
         
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
-        NSDate *date = self.dateSelectedPicker.date;
-        task.endDate = [dateFormatter stringFromDate:date];
+        if ([self.endDateLbl.text isEqualToString:@""]) {
+            task.endDate = @"";
+        } else {
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+            NSDate *date = self.dateSelectedPicker.date;
+            task.endDate = [dateFormatter stringFromDate:date];
+        }
         
         if ([self.chatID isKindOfClass:[NSNull class]] || self.chatID == nil || [self.chatID isEqualToString:@""]) {
             task.chatID = @"";
@@ -320,17 +320,22 @@
     self.progress.titleLabelText = tip;
     if (isDismiss)
     {
-        [self performSelector:@selector(dismissProgress:) withObject:@(success) afterDelay:1.8];
+        if (success) {
+            [self performSelector:@selector(dismissProgress:) withObject:@"YES" afterDelay:1.8];
+        } else {
+            [self performSelector:@selector(dismissProgress:) withObject:@"NO" afterDelay:1.8];
+        }
+        
     }
 }
 
 //参数作为布尔对象传递，使用Bool会出问题
-- (void)dismissProgress:(Boolean)isSuccess
+- (void)dismissProgress:(NSString *)isSuccess
 {
     if (self.progress)
     {
         [self.progress dismiss:YES];
-        if (isSuccess) {
+        if ([isSuccess isEqualToString:@"YES"]) {
             [self cancelItemOnClicked];
         }
     }

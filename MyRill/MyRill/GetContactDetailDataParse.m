@@ -95,6 +95,12 @@
                          if (enterPriseVerified!=nil && ![enterPriseVerified isEqual:[NSNull null]]) {
                              userEnterprise.bVerified = [enterPriseVerified boolValue];
                          }
+                         
+                         NSString* enterPriseImg = [userEnterpriseDic valueForKey:@"avatar"];
+                         if(enterPriseDes!=nil && ![enterPriseDes isEqual:[NSNull null] ] && [enterPriseDes length] >0 )
+                         {
+                             userEnterprise.portraitUri = enterPriseImg;
+                         }
                                                   
                          userDetailInfo.enterprise = userEnterprise;
                      }
