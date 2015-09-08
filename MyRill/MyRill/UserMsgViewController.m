@@ -28,6 +28,7 @@
 #import "GetContactDetailDataParse.h"
 #import "RCDAddressBookEnterpriseDetailViewController.h"
 #import "PushDefine.h"
+#import "CustomShowMessage.h"
 
 @interface UserMsgViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, ContactDetailDataDelegate,ChangeUserImageDataDelegate, LogoutDataDelegate>
 
@@ -239,9 +240,7 @@
             NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
             NSString* enterpriseId = [userDefaultes stringForKey:DEFAULTS_USERENTERPRISE_ID];
             rcdAddressBookEnterpriseDetailVC.enterpriseId = enterpriseId;
-            [self.navigationController pushViewController:rcdAddressBookEnterpriseDetailVC animated:YES];
-
-            
+            [self.navigationController pushViewController:rcdAddressBookEnterpriseDetailVC animated:YES];            
         }
             break;
         case 904:
@@ -394,6 +393,12 @@
 }
 
 - (IBAction)joinEnterpriseBtnOnClicked:(UIButton *)sender {
+    if (_userDetailInfo.enterprise!=nil && _userDetailInfo.enterprise.enterpriseId != nil && [_userDetailInfo.enterprise.enterpriseId length] > 0)
+    {
+        [[CustomShowMessage getInstance] showNotificationMessage:@"用户已加入一个企业"];
+        return;
+    }
+    
     QRCodeViewController *qrCodeVC = [[QRCodeViewController alloc] init];
     [self.navigationController pushViewController:qrCodeVC animated:YES];
 }

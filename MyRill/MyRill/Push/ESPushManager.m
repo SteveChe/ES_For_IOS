@@ -146,7 +146,13 @@
     }
     ESMenuViewController* rootViewCtrl = (ESMenuViewController*)appDelegate.window.rootViewController;
     [rootViewCtrl.navigationController popToRootViewControllerAnimated:NO];
-    [rootViewCtrl setSelectedIndex:selectIndex];
+//    [rootViewCtrl setSelectedIndex:selectIndex];
+    RCDAcceptContactViewController* targetVC1 = [[RCDAcceptContactViewController alloc] init];
+
+//    if (targetVC != nil)
+//    {
+        [rootViewCtrl.navigationController pushViewController:targetVC1 animated:NO];
+//    }
 }
 
 @end
