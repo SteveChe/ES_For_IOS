@@ -699,6 +699,13 @@
             }
         }];
         
+        if (isOberser) {
+            //如果该用户在关注人中，同时也是发起人或分配人的话，那么取消该关注人的误删模式
+            if ([self.taskModel.personInCharge.userId isEqualToString:self.userID] || [self.taskModel.initiator.userId isEqualToString:self.userID]) {
+                isOberser = NO;
+            }
+        }
+        
         RCDRadioSelectPersonViewController* selectPersonVC = [[RCDRadioSelectPersonViewController alloc] init];
         if (isOberser) {
             selectPersonVC.type = e_Selected_Check_Box_UnDeselect;
