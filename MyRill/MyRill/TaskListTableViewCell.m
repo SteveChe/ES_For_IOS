@@ -80,38 +80,43 @@
         self.tagImg.image = [UIImage imageNamed:@"关注人.png"];
     }
     
-    //创建日期格式化对象
-    NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
-    
-    //创建了两个日期对象
-    NSDate *date1=[NSDate date];
-    NSString *curdate = [dateFormatter stringFromDate:date1];
-    NSDate *dateNow = [dateFormatter dateFromString:curdate];
-    NSDate *dateEnd = [dateFormatter dateFromString:[task.endDate substringToIndex:16]];
-    
-    //取两个日期对象的时间间隔：
-    NSTimeInterval time=[dateEnd timeIntervalSinceDate:dateNow];
-    //这里的NSTimeInterval 并不是对象，是基本型，其实是double类型，是由c定义的:typedef double NSTimeInterval;
-    
-    if (time <= 0) {
-        self.endDateLbl.text = @"超期";
-        return;
-    }
-    
-    //到期天数:足一天显示天数，否则化整为时，否则化整为分，否则无
-    int days=((int)time)/(3600*24);
-    if (days >= 1) {
-        self.endDateLbl.text = [NSString stringWithFormat:@"%d天",days];
+    if ([ColorHandler isNullOrEmptyString:task.endDate]) {
+        //对于没有截止日期的任务，显示空
+        self.endDateLbl.text = @"";
     } else {
-        int hours=((int)time)/3600;
-        if (hours >= 1) {
-            self.endDateLbl.text = [NSString stringWithFormat:@"%d时",hours];
+        //创建日期格式化对象
+        NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+        
+        //创建了两个日期对象
+        NSDate *date1=[NSDate date];
+        NSString *curdate = [dateFormatter stringFromDate:date1];
+        NSDate *dateNow = [dateFormatter dateFromString:curdate];
+        NSDate *dateEnd = [dateFormatter dateFromString:[task.endDate substringToIndex:16]];
+        
+        //取两个日期对象的时间间隔：
+        NSTimeInterval time=[dateEnd timeIntervalSinceDate:dateNow];
+        //这里的NSTimeInterval 并不是对象，是基本型，其实是double类型，是由c定义的:typedef double NSTimeInterval;
+        
+        if (time <= 0) {
+            self.endDateLbl.text = @"超期";
+            return;
+        }
+        
+        //到期天数:足一天显示天数，否则化整为时，否则化整为分，否则无
+        int days=((int)time)/(3600*24);
+        if (days >= 1) {
+            self.endDateLbl.text = [NSString stringWithFormat:@"%d天",days];
         } else {
-            int munites = ((int)time)/60;
-            self.endDateLbl.text = [NSString stringWithFormat:@"%d分",munites];
-            if (munites == 0) {
-                self.endDateLbl.text = @"";
+            int hours=((int)time)/3600;
+            if (hours >= 1) {
+                self.endDateLbl.text = [NSString stringWithFormat:@"%d时",hours];
+            } else {
+                int munites = ((int)time)/60;
+                self.endDateLbl.text = [NSString stringWithFormat:@"%d分",munites];
+                if (munites == 0) {
+                    self.endDateLbl.text = @"";
+                }
             }
         }
     }

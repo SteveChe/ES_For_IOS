@@ -25,8 +25,9 @@
 #import "UserNameAndPositionViewController.h"
 #import "ESNavigationController.h"
 #import "UserDescriptionChangeViewController.h"
+#import "GetContactDetailDataParse.h"
 
-@interface UserMsgViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, ChangeUserImageDataDelegate, LogoutDataDelegate>
+@interface UserMsgViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, ContactDetailDataDelegate,ChangeUserImageDataDelegate, LogoutDataDelegate>
 
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *btnCollection;
 @property (weak, nonatomic) IBOutlet UIView *contentView;
@@ -45,8 +46,10 @@
 @property (weak, nonatomic) IBOutlet UIImageView *enterpriseArrow;
 
 @property (nonatomic, copy) NSString *userId;
+@property (nonatomic, strong) ESUserDetailInfo *userDetailInfo;
 @property (nonatomic, assign) CGRect oldframe;
 
+@property (nonatomic, strong) GetContactDetailDataParse *getContactDetailDP;
 @property (nonatomic, strong) ChangeUserImageDataParse *changeUserImageDP;
 @property (nonatomic, strong) SignOutDataParse *signOutDP;
 
@@ -74,27 +77,40 @@
     self.tabBarController.tabBar.hidden = NO;
     
     NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
-    self.userId = [userDefaultes stringForKey:DEFAULTS_USERID];
+    [self.getContactDetailDP getContactDetail:[userDefaultes stringForKey:DEFAULTS_USERID]];
+}
+
+#pragma mark - ContactDetailDataDelegate methods
+- (void)getContactDetail:(ESUserDetailInfo *)userDetailInfo {
+    self.userDetailInfo = userDetailInfo;
     //更新头像缓存的url，若url有变化
-    [self.userIcon sd_setImageWithURL:[NSURL URLWithString:[userDefaultes stringForKey:DEFAULTS_USERAVATAR]] placeholderImage:[UIImage imageNamed:@"头像_100"]];
-    self.UserNameLbl.text = [userDefaultes stringForKey:DEFAULTS_USERNAME];
-    self.UserEnterpriseLbl.text = [userDefaultes stringForKey:DEFAULTS_USERENTERPRISE];
-    [self.userEnterpriseImg sd_setImageWithURL:[NSURL URLWithString:[userDefaultes stringForKey:DEFAULTS_ENTERPRISEAVATAR]] placeholderImage:nil];
-    self.UserPositionLbl.text = [userDefaultes stringForKey:DEFAULTS_USERPOSITION];
-    self.userDescriptionLbl.text = [@"简介：" stringByAppendingString:[userDefaultes stringForKey:DEFAULTS_USERDESCRIPTION]?[userDefaultes stringForKey:DEFAULTS_USERDESCRIPTION]:@""];
-    if ([ColorHandler isNullOrEmptyString:[userDefaultes stringForKey:DEFAULTS_ENTERPRISEQRCODE]]) {
+    [self.userIcon sd_setImageWithURL:[NSURL URLWithString:userDetailInfo.portraitUri] placeholderImage:[UIImage imageNamed:@"头像_100"]];
+    self.UserNameLbl.text = userDetailInfo.userName;
+    self.UserEnterpriseLbl.text = userDetailInfo.enterprise.enterpriseName;
+    [self.userEnterpriseImg sd_setImageWithURL:[NSURL URLWithString:userDetailInfo.enterprise.portraitUri]
+                              placeholderImage:nil];
+    self.UserPositionLbl.text = userDetailInfo.position;
+    self.userDescriptionLbl.text = [@"简介：" stringByAppendingString:userDetailInfo.contactDescription?userDetailInfo.contactDescription:@""];
+    
+    //若没有企业二维码信息，则不显示企业二维码占位图标和箭头
+    if ([ColorHandler isNullOrEmptyString:userDetailInfo.enterprise_qrcode]) {
         self.enterpriseQRCodeImg.hidden = YES;
         self.enterpriseQRCodeArrow.hidden = YES;
     }
     
-    if ([ColorHandler isNullOrEmptyString:[userDefaultes stringForKey:DEFAULTS_USERQRCODE]]) {
+    //若没有个人二维码信息，则不显示个人二维码占位图标和箭头
+    if ([ColorHandler isNullOrEmptyString:userDetailInfo.qrcode]) {
         self.personQRCodeImg.hidden = YES;
         self.personQRCodeArrow.hidden = YES;
     }
     
-    if ([ColorHandler isNullOrEmptyString:self.UserEnterpriseLbl.text]) {
+    if ([ColorHandler isNullOrEmptyString:userDetailInfo.enterprise.enterpriseName]) {
         self.enterpriseArrow.hidden = YES;
     }
+}
+
+- (void)getContactDetailFailed:(NSString *)errorMessage {
+    NSLog(@"%@",errorMessage);
 }
 
 #pragma mark - ChangeUserImageDataDelegate methods
@@ -103,11 +119,11 @@
     NSURL *url = [NSURL URLWithString:avatar];
     [self.userIcon sd_setImageWithURL:url placeholderImage:nil];
     
-    //将新的url存储到NSUserDefaults本地中
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setObject:[ColorHandler isNullOrEmptyString:avatar]?@"":avatar
-                     forKey:DEFAULTS_USERAVATAR];
-    [userDefaults synchronize];
+//    //将新的url存储到NSUserDefaults本地中
+//    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+//    [userDefaults setObject:[ColorHandler isNullOrEmptyString:avatar]?@"":avatar
+//                     forKey:DEFAULTS_USERAVATAR];
+//    [userDefaults synchronize];
     [self dismissProgress];
 }
 
@@ -127,7 +143,6 @@
 }
 
 - (void)logoutFail {
-    
     [self showTips:@"注销失败!" mode:MRProgressOverlayViewModeCross isDismiss:YES];
 }
 
@@ -156,7 +171,7 @@
             data = UIImagePNGRepresentation(img);
         }
         
-        [self.changeUserImageDP changeUseImageWithId:self.userId
+        [self.changeUserImageDP changeUseImageWithId:self.userDetailInfo.userId
                                                 data:data];
         //关闭相册界面
         [picker dismissViewControllerAnimated:YES completion:nil];
@@ -187,7 +202,7 @@
                 UserNameAndPositionViewController *nameAndPositionVC = [[UserNameAndPositionViewController alloc] init];
                 nameAndPositionVC.title = @"用户名修改";
                 nameAndPositionVC.type = ESUserMsgName;
-                nameAndPositionVC.nameAndPositionStr = self.UserNameLbl.text;
+                nameAndPositionVC.userDetailInfo = self.userDetailInfo;
                 ESNavigationController *nav = [[ESNavigationController alloc] initWithRootViewController:nameAndPositionVC];
                 [self.navigationController presentViewController:nav
                                                         animated:YES
@@ -208,7 +223,7 @@
                 UserNameAndPositionViewController *nameAndPositionVC = [[UserNameAndPositionViewController alloc] init];
                 nameAndPositionVC.title = @"职位修改";
                 nameAndPositionVC.type = ESUserMsgPosition;
-                nameAndPositionVC.nameAndPositionStr = self.UserPositionLbl.text;
+                nameAndPositionVC.userDetailInfo = self.userDetailInfo;
                 ESNavigationController *nav = [[ESNavigationController alloc] initWithRootViewController:nameAndPositionVC];
                 [self.navigationController presentViewController:nav
                                                         animated:YES
@@ -217,24 +232,20 @@
             break;
         case 905:
             {
-                NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-                NSString *qrCodeStr = [userDefaults stringForKey:DEFAULTS_ENTERPRISEQRCODE];
-                if (![ColorHandler isNullOrEmptyString:qrCodeStr]) {
+                if (![ColorHandler isNullOrEmptyString:self.userDetailInfo.enterprise_qrcode]) {
                     ShowQRCodeViewController *showQRCodeVC = [[ShowQRCodeViewController alloc] init];
                     showQRCodeVC.qrCodeTitle = @"企业二维码";
-                    showQRCodeVC.imageUrl = qrCodeStr;
+                    showQRCodeVC.imageUrl = self.userDetailInfo.enterprise_qrcode;
                     [self.navigationController pushViewController:showQRCodeVC animated:YES];
                 }
             }
             break;
         case 906:
             {
-                NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-                NSString *qrCodeStr = [userDefaults stringForKey:DEFAULTS_USERQRCODE];
-                if (![ColorHandler isNullOrEmptyString:qrCodeStr]) {
+                if (![ColorHandler isNullOrEmptyString:self.userDetailInfo.qrcode]) {
                     ShowQRCodeViewController *showQRCodeVC = [[ShowQRCodeViewController alloc] init];
                     showQRCodeVC.qrCodeTitle = @"个人二维码";
-                    showQRCodeVC.imageUrl = [userDefaults stringForKey:DEFAULTS_USERQRCODE];
+                    showQRCodeVC.imageUrl = self.userDetailInfo.qrcode;
                     [self.navigationController pushViewController:showQRCodeVC animated:YES];
                 }
             }
@@ -243,7 +254,7 @@
             {
                 UserDescriptionChangeViewController *userDescriptionVC = [[UserDescriptionChangeViewController alloc] init];
                 userDescriptionVC.title = @"个人简介修改";
-                userDescriptionVC.descriptionStr = [self.userDescriptionLbl.text substringFromIndex:3];
+                userDescriptionVC.userDetailInfo = self.userDetailInfo;
                 ESNavigationController *nav = [[ESNavigationController alloc] initWithRootViewController:userDescriptionVC];
                 [self.navigationController presentViewController:nav
                                                         animated:YES
@@ -433,6 +444,15 @@
     }
     
     return _progress;
+}
+
+- (GetContactDetailDataParse *)getContactDetailDP {
+    if (!_getContactDetailDP) {
+        _getContactDetailDP = [[GetContactDetailDataParse alloc] init];
+        _getContactDetailDP.delegate = self;
+    }
+    
+    return _getContactDetailDP;
 }
 
 - (ChangeUserImageDataParse *)changeUserImageDP {

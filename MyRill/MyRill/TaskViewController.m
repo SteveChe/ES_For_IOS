@@ -754,10 +754,8 @@
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     NSString *userID = [userDefault stringForKey:DEFAULTS_USERID];
     
-    if ([userID isEqualToString:self.taskModel.initiator.userId]) {
+    if ([userID isEqualToString:self.taskModel.initiator.userId] || [userID isEqualToString:self.taskModel.personInCharge.userId]) {
         [self.editTaskDP EditTaskWithTaskModel:task];
-    } else if ([userID isEqualToString:self.taskModel.personInCharge.userId]) {
-        
     } else {
         [self.updateObserverAndChatidDP updateObserverAndChatidWith:task];
     }

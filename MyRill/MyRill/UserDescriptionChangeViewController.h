@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "ChangeUserMsgDataParse.h"
+@class ESUserDetailInfo;
 
 @interface UserDescriptionChangeViewController : UIViewController
 
-@property (nonatomic, copy) NSString *descriptionStr;
+@property (nonatomic, strong) ESUserDetailInfo *userDetailInfo;
 
 @end
