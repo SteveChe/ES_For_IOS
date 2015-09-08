@@ -26,6 +26,8 @@
 #import "ESNavigationController.h"
 #import "UserDescriptionChangeViewController.h"
 #import "GetContactDetailDataParse.h"
+#import "RCDAddressBookEnterpriseDetailViewController.h"
+#import "PushDefine.h"
 
 @interface UserMsgViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, ContactDetailDataDelegate,ChangeUserImageDataDelegate, LogoutDataDelegate>
 
@@ -76,8 +78,21 @@
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = NO;
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updatePushEnterprise)
+                                                 name:NOTIFICATION_PUSH_ENTERPRISE_ACCEPT
+                                               object:nil];
+    
     NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
     [self.getContactDetailDP getContactDetail:[userDefaultes stringForKey:DEFAULTS_USERID]];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:NOTIFICATION_PUSH_ENTERPRISE_ACCEPT
+                                                  object:nil];
 }
 
 #pragma mark - ContactDetailDataDelegate methods
@@ -189,6 +204,11 @@
 - (void)settingBtnItemOnClicked:(UIBarButtonItem *)sender {
     UserSettingViewController *settingVC = [[UserSettingViewController alloc] init];
     [self.navigationController pushViewController:settingVC animated:YES];
+}
+
+- (void)updatePushEnterprise {
+    NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
+    [self.getContactDetailDP getContactDetail:[userDefaultes stringForKey:DEFAULTS_USERID]];
 }
 
 - (void)tapInUserIcon:(UIGestureRecognizer *)sender {
