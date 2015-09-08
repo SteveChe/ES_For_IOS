@@ -229,7 +229,14 @@
         cell.accessoryType = UITableViewCellAccessoryNone;
         ESUserInfo *user = _searchResult[indexPath.row];
         if(user){
-            cell.addressBookName.text = user.userName;
+            if (user.position == nil || [user.position isEqual:[NSNull null]]||[user.position length] <= 0)
+            {
+                cell.addressBookName.text = user.userName;
+            }
+            else
+            {
+                cell.addressBookName.text = [NSString stringWithFormat:@"%@/%@",user.userName,user.position];
+            }
             [cell.ivAva sd_setImageWithURL:[NSURL URLWithString:user.portraitUri] placeholderImage:[UIImage imageNamed:@"头像_100"]];
             cell.ivAva.clipsToBounds = YES;
             cell.ivAva.layer.cornerRadius = 18.f;
@@ -343,7 +350,14 @@
             
             ESUserInfo *user = contactList.contactList[indexPath.row];
             if(user){
-                cell.addressBookName.text = user.userName;
+                if (user.position == nil || [user.position isEqual:[NSNull null]]||[user.position length] <= 0)
+                {
+                    cell.addressBookName.text = user.userName;
+                }
+                else
+                {
+                    cell.addressBookName.text = [NSString stringWithFormat:@"%@/%@",user.userName,user.position];
+                }
                 [cell.ivAva sd_setImageWithURL:[NSURL URLWithString:user.portraitUri] placeholderImage:[UIImage imageNamed:@"头像_100"]];
                 cell.ivAva.clipsToBounds = YES;
                 cell.ivAva.layer.cornerRadius = 18.f;

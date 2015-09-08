@@ -94,7 +94,6 @@
 +(void)changeToPageWithType:(E_PUSH_CATEGORY_TYPE)categoryType
 {
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-//    UIViewController* targetVC = nil;
     NSUInteger selectIndex = 0;
     switch (categoryType)
     {
@@ -135,6 +134,7 @@
     ESMenuViewController* rootViewCtrl = (ESMenuViewController*)appDelegate.window.rootViewController;
     [rootViewCtrl.navigationController popToRootViewControllerAnimated:NO];
     [rootViewCtrl setSelectedIndex:selectIndex];
+    
 }
 
 @end
