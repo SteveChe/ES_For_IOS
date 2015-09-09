@@ -959,4 +959,146 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
 
     [AFHttpTool requestWithMethod:RequestMethodTypePost protocolType:RequestProtocolTypeText                             url:strURL  params:params success:success failure:failure];
 }
+
++ (void)requestWithMethod:(RequestMethodType)methodType
+                      url:(NSString*)url
+                   params:(NSDictionary*)params
+                  success:(void (^)(id response))success
+                  failure:(void (^)(NSError* err))failure
+{
+    NSURL* baseURL = [NSURL URLWithString:@"http://111.204.215.174:8090/adapter/"];
+    //获得请求管理者
+    AFHTTPRequestOperationManager *mgr = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:baseURL];
+//    mgr.requestSerializer = [AFJSONRequestSerializer serializer];
+    mgr.requestSerializer.HTTPShouldHandleCookies = YES;
+    mgr.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html", nil];
+    
+    
+    NSData *cookiesdata = [[NSUserDefaults standardUserDefaults] objectForKey:@"sessionCookies"];
+    if([cookiesdata length]) {
+        NSArray *cookies = [NSKeyedUnarchiver unarchiveObjectWithData:cookiesdata];
+        NSHTTPCookie *cookie;
+        for (cookie in cookies) {
+            if ([cookie.name  isEqual: @"JSESSIONID"] )
+            {
+                [mgr.requestSerializer setValue:cookie.value forHTTPHeaderField:@"JSESSIONID"];
+                //                NSLog(@"csrftoken = %@",cookie.value);
+            }
+            [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
+        }
+    }
+    
+    NSString *JSESSIONID = [[NSUserDefaults standardUserDefaults] objectForKey:@"JSESSIONID"];
+    NSString *SSOToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"SSOToken"];
+    
+    if(![ColorHandler isNullOrEmptyString:JSESSIONID] && ![ColorHandler isNullOrEmptyString:SSOToken]) {
+        [mgr.requestSerializer setValue:[NSString stringWithFormat:@"%@;%@",JSESSIONID,SSOToken] forHTTPHeaderField:@"Cookie"];
+//        [mgr.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"accept"];
+        [mgr.requestSerializer setValue:@"application/json; charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
+    }
+    
+    switch (methodType) {
+        case RequestMethodTypeGet:
+        {
+            //GET请求
+            [mgr GET:url
+          parameters:params
+             success:^(AFHTTPRequestOperation* operation, NSDictionary* responseObj) {
+                 if (success) {
+                     success(responseObj);
+                     NSData *cookiesData = [NSKeyedArchiver archivedDataWithRootObject:[[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]];
+                     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                     [defaults setObject: cookiesData forKey: @"sessionCookies"];
+                     [defaults synchronize];
+                 }
+             }
+             failure:^(AFHTTPRequestOperation* operation, NSError* error) {
+                 if (failure) {
+                     failure(error);
+                     [AFHttpTool parseErrorType:error operation:operation];
+                 }
+             }];
+        }
+            break;
+        case RequestMethodTypePost:
+        {
+            //POST请求
+            [mgr POST:url
+           parameters:params
+              success:^(AFHTTPRequestOperation* operation, NSDictionary* responseObj) {
+                  if (success) {
+                      
+                      NSDictionary *headers = [operation.response allHeaderFields];
+                      NSString *cookieString = headers[@"Set-Cookie"];
+                      NSLog(@"!!!!!! %@",headers[@"Set-Cookie"]);
+                      NSArray *arr = [cookieString componentsSeparatedByString:@","];
+                      
+//                      NSString *JSESSIONID = [[[[arr[1] componentsSeparatedByString:@";"] firstObject] stringByTrimmingCharactersInSet:
+//                                               [NSCharacterSet whitespaceAndNewlineCharacterSet]] substringFromIndex:11];
+//                      NSString *SSOToken = [[[[arr[2] componentsSeparatedByString:@";"] firstObject] stringByTrimmingCharactersInSet:
+//                                            [NSCharacterSet whitespaceAndNewlineCharacterSet]] substringFromIndex:10];
+                      NSString *JSESSIONID = [[[arr[1] componentsSeparatedByString:@";"] firstObject] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+                      NSString *SSOToken = [[[arr[2] componentsSeparatedByString:@";"] firstObject] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+                      
+                      NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                      [defaults setObject:JSESSIONID forKey:@"JSESSIONID"];
+                      [defaults setObject:SSOToken forKey:@"SSOToken"];
+                      [defaults synchronize];
+                      
+                      success(responseObj);
+                      
+                      //                      NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
+                      //                      for (NSHTTPCookie *cookie in cookies) {
+                      //                          // Here I see the correct rails session cookie
+                      //                          NSLog(@"cookie: %@", cookie);
+                      //                      }
+                      
+                  }
+              } failure:^(AFHTTPRequestOperation* operation, NSError* error) {
+                  if (failure) {
+                      failure(error);
+                      [AFHttpTool parseErrorType:error operation:operation];
+                  }
+              }];
+        }
+            break;
+        default:
+            break;
+    }
+}
+
++ (void)loginBMCWithUserName:(NSString *)userName
+                    password:(NSString *)password
+                      sucess:(void (^)(id response))success
+                     failure:(void (^)(NSError* err))failure {
+    NSDictionary *param = @{@"username":userName,
+                            @"password":password,
+                            @"_openCLIENT":@"RIIL"};
+    [AFHttpTool requestWithMethod:RequestMethodTypePost
+                              url:@"login"
+                           params:param
+                          success:success
+                          failure:failure];
+}
+
++ (void)getMainResourceListWithTreeNodeId:(NSString *)treeNodeId
+                                pageIndex:(NSString *)pageIndex
+                                    state:(NSString *)state
+                               sortColumn:(NSString *)sortColumn
+                                 sortType:(NSString *)sortType
+                                   sucess:(void (^)(id response))success
+                                  failure:(void (^)(NSError* err))failure {
+    NSDictionary *param = @{@"treeNodeId":treeNodeId,
+                            @"pageIndex":pageIndex,
+                            @"state":state,
+                            @"sortColumn":sortColumn,
+                            @"sortType":sortType};
+    
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet
+                              url:@"res/list.json"
+                           params:param
+                          success:success
+                          failure:failure];
+}
+
 @end

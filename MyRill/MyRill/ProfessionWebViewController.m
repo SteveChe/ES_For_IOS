@@ -52,10 +52,7 @@
     [self.professionWeb loadRequest:request];
     self.tabBarController.tabBar.hidden = YES;
 
-    UIBarButtonItem *back = (UIBarButtonItem *)[self.navigationController.toolbar viewWithTag:301];
-    back.enabled = self.professionWeb.canGoBack ? YES : NO;
-    UIBarButtonItem *forward = (UIBarButtonItem *)[self.navigationController.toolbar viewWithTag:302];
-    forward.enabled = self.professionWeb.canGoForward ? YES : NO;
+    
 }
 
 #pragma mark - UIWebViewDelegate methods
@@ -66,6 +63,12 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
 //    NSLog(@"webViewDidFinishLoad");
+    UIBarButtonItem *back = (UIBarButtonItem *)[self.navigationController.toolbar viewWithTag:301];
+    back.enabled = self.professionWeb.canGoBack ? YES : NO;
+    back.image = self.professionWeb.canGoBack ? [[UIImage imageNamed:@"后退-可点"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]:[[UIImage imageNamed:@"后退-不可点"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIBarButtonItem *forward = (UIBarButtonItem *)[self.navigationController.toolbar viewWithTag:302];
+    forward.enabled = self.professionWeb.canGoForward ? YES : NO;
+    forward.image = self.professionWeb.canGoForward ? [[UIImage imageNamed:@"前进-可点"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] :[[UIImage imageNamed:@"前进-不可点"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
@@ -126,7 +129,7 @@
         UIBarButtonItem *placeHolderItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                                          target:self
                                                                                          action:nil];
-        NSArray *itemArray = [[NSArray alloc] initWithObjects:placeHolderItem,backItem,placeHolderItem,forwardItem,placeHolderItem,reloadItem,placeHolderItem, nil];
+        NSArray *itemArray = [[NSArray alloc] initWithObjects:placeHolderItem, backItem,placeHolderItem, forwardItem, placeHolderItem,placeHolderItem, placeHolderItem, placeHolderItem, reloadItem, placeHolderItem, nil];
         
         _toolbar = [[UIToolbar alloc] init];
         _toolbar.backgroundColor = [UIColor whiteColor];

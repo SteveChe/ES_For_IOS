@@ -16,6 +16,11 @@
 		2B26E1041B4AA379000FE4D3 /* ESProfession.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B26E1031B4AA379000FE4D3 /* ESProfession.m */; };
 		2B2B84A21B9A933E0043EFD4 /* UpdateObserverAndChatidDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2B84A11B9A933E0043EFD4 /* UpdateObserverAndChatidDataParse.m */; };
 		2B2B84A41B9A99940043EFD4 /* TaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2B84A31B9A99940043EFD4 /* TaskViewController.m */; };
+		2B2B84A91BA013700043EFD4 /* BMCLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2B84A71BA013700043EFD4 /* BMCLoginViewController.m */; };
+		2B2B84AA1BA013700043EFD4 /* BMCLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B2B84A81BA013700043EFD4 /* BMCLoginViewController.xib */; };
+		2B2B84AE1BA016E60043EFD4 /* BMCLoginDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2B84AD1BA016E60043EFD4 /* BMCLoginDataParse.m */; };
+		2B2B84B11BA044370043EFD4 /* BMCGetMainResourceListDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2B84B01BA044370043EFD4 /* BMCGetMainResourceListDataParse.m */; };
+		2B2B84B41BA06FC60043EFD4 /* AddProfessionDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2B84B31BA06FC60043EFD4 /* AddProfessionDataParse.m */; };
 		2B31C3D51B11C3FD004C865A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B31C3D41B11C3FD004C865A /* main.m */; };
 		2B31C3D81B11C3FD004C865A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B31C3D71B11C3FD004C865A /* AppDelegate.m */; };
 		2B31C3E01B11C3FD004C865A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B31C3DF1B11C3FD004C865A /* Images.xcassets */; };
@@ -348,6 +353,15 @@
 		2B2B84A01B9A933E0043EFD4 /* UpdateObserverAndChatidDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateObserverAndChatidDataParse.h; sourceTree = "<group>"; };
 		2B2B84A11B9A933E0043EFD4 /* UpdateObserverAndChatidDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateObserverAndChatidDataParse.m; sourceTree = "<group>"; };
 		2B2B84A31B9A99940043EFD4 /* TaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskViewController.m; sourceTree = "<group>"; };
+		2B2B84A61BA013700043EFD4 /* BMCLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMCLoginViewController.h; sourceTree = "<group>"; };
+		2B2B84A71BA013700043EFD4 /* BMCLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMCLoginViewController.m; sourceTree = "<group>"; };
+		2B2B84A81BA013700043EFD4 /* BMCLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BMCLoginViewController.xib; sourceTree = "<group>"; };
+		2B2B84AC1BA016E60043EFD4 /* BMCLoginDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMCLoginDataParse.h; sourceTree = "<group>"; };
+		2B2B84AD1BA016E60043EFD4 /* BMCLoginDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMCLoginDataParse.m; sourceTree = "<group>"; };
+		2B2B84AF1BA044370043EFD4 /* BMCGetMainResourceListDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMCGetMainResourceListDataParse.h; sourceTree = "<group>"; };
+		2B2B84B01BA044370043EFD4 /* BMCGetMainResourceListDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMCGetMainResourceListDataParse.m; sourceTree = "<group>"; };
+		2B2B84B21BA06FC60043EFD4 /* AddProfessionDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddProfessionDataParse.h; sourceTree = "<group>"; };
+		2B2B84B31BA06FC60043EFD4 /* AddProfessionDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddProfessionDataParse.m; sourceTree = "<group>"; };
 		2B31C3CF1B11C3FD004C865A /* MyRill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyRill.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B31C3D31B11C3FD004C865A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2B31C3D41B11C3FD004C865A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -954,6 +968,31 @@
 			name = User;
 			sourceTree = "<group>";
 		};
+		2B2B84A51BA013550043EFD4 /* BMC */ = {
+			isa = PBXGroup;
+			children = (
+				2B2B84A61BA013700043EFD4 /* BMCLoginViewController.h */,
+				2B2B84A71BA013700043EFD4 /* BMCLoginViewController.m */,
+				2B2B84A81BA013700043EFD4 /* BMCLoginViewController.xib */,
+			);
+			name = BMC;
+			sourceTree = "<group>";
+		};
+		2B2B84AB1BA016BA0043EFD4 /* Profession */ = {
+			isa = PBXGroup;
+			children = (
+				2B37E45D1B53E9D800F671A1 /* ProfessionDataParse.h */,
+				2B37E45E1B53E9D800F671A1 /* ProfessionDataParse.m */,
+				2B2B84B21BA06FC60043EFD4 /* AddProfessionDataParse.h */,
+				2B2B84B31BA06FC60043EFD4 /* AddProfessionDataParse.m */,
+				2B2B84AC1BA016E60043EFD4 /* BMCLoginDataParse.h */,
+				2B2B84AD1BA016E60043EFD4 /* BMCLoginDataParse.m */,
+				2B2B84AF1BA044370043EFD4 /* BMCGetMainResourceListDataParse.h */,
+				2B2B84B01BA044370043EFD4 /* BMCGetMainResourceListDataParse.m */,
+			);
+			name = Profession;
+			sourceTree = "<group>";
+		};
 		2B31C3C61B11C3FD004C865A = {
 			isa = PBXGroup;
 			children = (
@@ -1131,8 +1170,7 @@
 				2B39C94F1B248063007BAC7A /* LoginDataParse.m */,
 				F24787731B2D775E00EC266B /* SignUpDataParse.h */,
 				F24787741B2D775E00EC266B /* SignUpDataParse.m */,
-				2B37E45D1B53E9D800F671A1 /* ProfessionDataParse.h */,
-				2B37E45E1B53E9D800F671A1 /* ProfessionDataParse.m */,
+				2B2B84AB1BA016BA0043EFD4 /* Profession */,
 				2BEAD0561B75D70500905E21 /* Task */,
 				2B1B88DE1B803B2200FAF650 /* User */,
 				F22FE2F71B4042B700A1A997 /* SearchContactDataParse.h */,
@@ -1219,6 +1257,7 @@
 		2B39C9601B2728C5007BAC7A /* Profession */ = {
 			isa = PBXGroup;
 			children = (
+				2B2B84A51BA013550043EFD4 /* BMC */,
 				2B39C96B1B2D79DB007BAC7A /* ProfessionViewController.h */,
 				2B39C96C1B2D79DB007BAC7A /* ProfessionViewController.m */,
 				2BC8212D1B57FFDC0090E2C1 /* ProfessionWebViewController.h */,
@@ -2031,6 +2070,7 @@
 				F23059BB1B52C141004599FA /* RCDAddressBookViewTableViewCell.xib in Resources */,
 				2B1B88E61B803CEA00FAF650 /* UserNameAndPositionViewController.xib in Resources */,
 				F256CB801B6E4247009478C2 /* RCDJoinEnterpriseViewController.xib in Resources */,
+				2B2B84AA1BA013700043EFD4 /* BMCLoginViewController.xib in Resources */,
 				F2467EFC1B8DCF1F0055B78B /* RootTimeCell.xib in Resources */,
 				F2467EF31B8DCF1F0055B78B /* RootCardTopCell.xib in Resources */,
 				F2D2335E1B31B1F400F8C65D /* PushConfig.plist in Resources */,
@@ -2101,7 +2141,9 @@
 				F234617F1B5AB63C00C88FAC /* EnterpriseInfoDataSource.m in Sources */,
 				2BEAD06A1B76FF2400905E21 /* NSMutableArray+SWUtilityButtons.m in Sources */,
 				F22FE2E81B4000ED00A1A997 /* SDWebImageDecoder.m in Sources */,
+				2B2B84A91BA013700043EFD4 /* BMCLoginViewController.m in Sources */,
 				2B39C96D1B2D79DB007BAC7A /* ProfessionViewController.m in Sources */,
+				2B2B84AE1BA016E60043EFD4 /* BMCLoginDataParse.m in Sources */,
 				F256CB701B6BC397009478C2 /* RCDUpdateNameViewController.m in Sources */,
 				2B5A590D1B48DFBB000382D7 /* UIImage+MRImageEffects.m in Sources */,
 				2B39C9441B24128F007BAC7A /* LoginViewController.m in Sources */,
@@ -2224,6 +2266,7 @@
 				F22FE2E61B4000ED00A1A997 /* SDImageCache.m in Sources */,
 				2BEAD0881B775C4500905E21 /* MessageListTableViewCell.m in Sources */,
 				F250F2EA1B2471CD000AD021 /* AFHttpTool.m in Sources */,
+				2B2B84B11BA044370043EFD4 /* BMCGetMainResourceListDataParse.m in Sources */,
 				2B39C9791B2D7B14007BAC7A /* UserMsgViewController.m in Sources */,
 				2B9CBB611B3ADEC4007D7A45 /* (null) in Sources */,
 				F236308D1B67A9AB00A12F63 /* ESTagViewController.m in Sources */,
@@ -2280,6 +2323,7 @@
 				2B37E44C1B53967D00F671A1 /* ModifyProfessionViewController.m in Sources */,
 				F29F862A1B2410070058FC9F /* AFHTTPSessionManager.m in Sources */,
 				F29F86451B2410320058FC9F /* UIAlertView+AFNetworking.m in Sources */,
+				2B2B84B41BA06FC60043EFD4 /* AddProfessionDataParse.m in Sources */,
 				2B39C9941B37E5F2007BAC7A /* ResetPwdViewController.m in Sources */,
 				2B5A590E1B48DFBB000382D7 /* MRActivityIndicatorView.m in Sources */,
 				2BC8213A1B5C9FF70090E2C1 /* ShowQRCodeViewController.m in Sources */,
@@ -2469,7 +2513,7 @@
 					"$(PROJECT_DIR)/MyRill/JPush",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a5c66360-4019-4ebe-9492-df3d30ba3a21";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
@@ -2495,7 +2539,7 @@
 					"$(PROJECT_DIR)/MyRill/JPush",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a5c66360-4019-4ebe-9492-df3d30ba3a21";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};

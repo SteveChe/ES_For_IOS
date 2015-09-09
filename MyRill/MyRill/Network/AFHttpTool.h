@@ -87,6 +87,19 @@ typedef enum : NSUInteger {
                                success:(void (^)(id response))success
                                failure:(void (^)(NSError *err))failure;
 
++ (void)loginBMCWithUserName:(NSString *)userName
+                    password:(NSString *)password
+                      sucess:(void (^)(id response))success
+                     failure:(void (^)(NSError* err))failure;
+
++ (void)getMainResourceListWithTreeNodeId:(NSString *)treeNodeId
+                                pageIndex:(NSString *)pageIndex
+                                    state:(NSString *)state
+                               sortColumn:(NSString *)sortColumn
+                                 sortType:(NSString *)sortType
+                                   sucess:(void (^)(id response))success
+                                  failure:(void (^)(NSError* err))failure;
+
 //get RongCloud Token
 +(void)getRongTokenSuccess:(void (^)(id response))success
                    failure:(void (^)(NSError* err))failure;
@@ -285,5 +298,7 @@ failure:(void (^)(NSError *error))failure;
 
 //向企业发送消息
 +(void)replyToOneEnterpriseMessage:(NSString*)enterpriseId content:(NSString*)content sucess:(void (^)(id response))success failure:(void (^)(NSError* err))failure;
+
+
 
 @end

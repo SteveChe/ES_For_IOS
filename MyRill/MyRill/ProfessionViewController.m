@@ -15,6 +15,7 @@
 #import "EditProfessionViewController.h"
 #import "ProfessionWebViewController.h"
 #import "PushDefine.h"
+#import "BMCLoginViewController.h"
 
 @interface ProfessionViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, ProfessionDataDelegate>
 
@@ -117,8 +118,10 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == self.dataSource.count - 1) {
-        AddProfessionViewController *addProfessionVC = [[AddProfessionViewController alloc] init];
-        [self.navigationController pushViewController:addProfessionVC animated:YES];
+//        AddProfessionViewController *addProfessionVC = [[AddProfessionViewController alloc] init];
+//        [self.navigationController pushViewController:addProfessionVC animated:YES];
+        BMCLoginViewController *bmcLoginVC = [[BMCLoginViewController alloc] init];
+        [self.navigationController pushViewController:bmcLoginVC animated:YES];
     } else {
         ProfessionWebViewController *webVC = [[ProfessionWebViewController alloc] init];
         ESProfession *profession = self.dataSource[indexPath.row];
@@ -146,7 +149,7 @@
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         layout.minimumInteritemSpacing = 0;
         [layout setScrollDirection:UICollectionViewScrollDirectionVertical];
-        _collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height - self.tabBarController.tabBar.bounds.size.height) collectionViewLayout:layout];
         UINib *professionCell = [UINib nibWithNibName:@"ProfessionCollectionViewCell" bundle:nil];
         [_collectionView registerNib:professionCell forCellWithReuseIdentifier:@"Profession CollectionCell"];
         _collectionView.backgroundColor = [ColorHandler colorFromHexRGB:@"DDDDDD"];

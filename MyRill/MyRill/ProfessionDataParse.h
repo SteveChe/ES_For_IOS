@@ -24,8 +24,7 @@
 
 //获取业务列表
 - (void)getProfessionList;
-//添加业务
-- (void)addProfessionWithName:(NSString *)name url:(NSString *)url;
+
 //删除业务
 - (void)deleteProfessionWithId:(NSString *)professionId;
 //更新业务

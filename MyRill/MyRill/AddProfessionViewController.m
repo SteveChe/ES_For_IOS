@@ -8,17 +8,17 @@
 
 #import "AddProfessionViewController.h"
 #import "ColorHandler.h"
-#import "ProfessionDataParse.h"
+#import "AddProfessionDataParse.h"
 #import "ESProfession.h"
 
-@interface AddProfessionViewController () <ProfessionDataDelegate>
+@interface AddProfessionViewController () <AddProfessionDataDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *holdViews;
 @property (weak, nonatomic) IBOutlet UITextField *nameTxtField;
 @property (weak, nonatomic) IBOutlet UITextField *urlTxtField;
 @property (weak, nonatomic) IBOutlet UIButton *saveBtn;
-@property (nonatomic, strong) ProfessionDataParse *professionDP;
+@property (nonatomic, strong) AddProfessionDataParse *addProfessionDP;
 
 @end
 
@@ -37,26 +37,32 @@
 }
 
 #pragma mark - ProfessionDataDelegate methods
-- (void)professionOperationSuccess:(id)context {
-    if ([context isKindOfClass:[ESProfession class]]) {
-        ESProfession *profession = (ESProfession *)context;
-        [self.delegate addProfessionSuccess:profession];
-        [self.navigationController popViewControllerAnimated:YES];
-    } else if (YES) {
-        
-    } else {
-        
-    }
+- (void)addProfessionOperationSuccess:(ESProfession *)profession {
+    ESProfession *newProfession = (ESProfession *)profession;
+    [self.delegate addProfessionSuccess:newProfession];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)professionOperationFailure:(NSString *)errorMsg {
+- (void)addProfessionOperationFailure:(NSString *)errorMsg {
     NSLog(@"添加业务失败,请检查网络");
+    NSString *msg = @"";
+    if ([errorMsg isEqualToString:@"添加失败"]) {
+        msg = @"请输入一个有效的URL!";
+    } else {
+        msg = @"添加业务失败,请检查网络";
+    }
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                    message:@"请输入一个有效的URL!"
+                                                   delegate:self
+                                          cancelButtonTitle:@"知道了!"
+                                          otherButtonTitles:nil, nil];
+    [alert show];
 }
 
 #pragma mark - response events
 - (IBAction)saveBtnOnClicked:(UIButton *)sender {
     if (![ColorHandler isNullOrEmptyString:self.nameTxtField.text] && ![ColorHandler isNullOrEmptyString:self.urlTxtField.text]) {
-        [self.professionDP addProfessionWithName:self.nameTxtField.text url:self.urlTxtField.text];
+        [self.addProfessionDP addProfessionWithName:self.nameTxtField.text url:self.urlTxtField.text];
     } else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
                                                         message:@"名称和URL不能为空!"
@@ -91,13 +97,13 @@
     _saveBtn.layer.cornerRadius = 20.f;
 }
 
-- (ProfessionDataParse *)professionDP {
-    if (!_professionDP) {
-        _professionDP = [[ProfessionDataParse alloc] init];
-        _professionDP.delegate = self;
+- (AddProfessionDataParse *)addProfessionDP {
+    if (!_addProfessionDP) {
+        _addProfessionDP = [[AddProfessionDataParse alloc] init];
+        _addProfessionDP.delegate = self;
     }
     
-    return _professionDP;
+    return _addProfessionDP;
 }
 
 @end
