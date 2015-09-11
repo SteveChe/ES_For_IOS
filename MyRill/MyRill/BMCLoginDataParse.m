@@ -16,8 +16,10 @@
                             password:password
                               sucess:^(id response) {
                                   NSDictionary *responseDic = (NSDictionary *)response;
+                                  [self.delegate loginSucceed:nil];
                               } failure:^(NSError *err) {
                                   NSLog(@"%@",[err debugDescription]);
+                                  [self.delegate loginFailed:nil];
                               }];
 }
 

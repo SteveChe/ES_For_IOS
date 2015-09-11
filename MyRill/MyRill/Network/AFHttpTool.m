@@ -978,24 +978,41 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
     if([cookiesdata length]) {
         NSArray *cookies = [NSKeyedUnarchiver unarchiveObjectWithData:cookiesdata];
         NSHTTPCookie *cookie;
+        NSString *JSESSIONID = nil;
+        NSString *SSOToken = nil;
+
         for (cookie in cookies) {
             if ([cookie.name  isEqual: @"JSESSIONID"] )
             {
-                [mgr.requestSerializer setValue:cookie.value forHTTPHeaderField:@"JSESSIONID"];
+//                [mgr.requestSerializer setValue:cookie.value forHTTPHeaderField:@"JSESSIONID"];
+                JSESSIONID = cookie.value;
                 //                NSLog(@"csrftoken = %@",cookie.value);
             }
-            [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
+            if ([cookie.name  isEqual: @"SSOToken"] )
+            {
+//                [mgr.requestSerializer setValue:cookie.value forHTTPHeaderField:@"SSOToken"];
+                //                NSLog(@"csrftoken = %@",cookie.value);
+                SSOToken = cookie.value;
+            }
+            
         }
+        
+        if (JSESSIONID != nil && SSOToken != nil)
+        {
+            [mgr.requestSerializer setValue:[NSString stringWithFormat:@"JSESSIONID=%@,SSOToken=%@",JSESSIONID,SSOToken] forHTTPHeaderField:@"Cookie"];
+        }
+        
+        [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
     }
     
-    NSString *JSESSIONID = [[NSUserDefaults standardUserDefaults] objectForKey:@"JSESSIONID"];
-    NSString *SSOToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"SSOToken"];
+//    NSString *JSESSIONID = [[NSUserDefaults standardUserDefaults] objectForKey:@"JSESSIONID"];
+//    NSString *SSOToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"SSOToken"];
     
-    if(![ColorHandler isNullOrEmptyString:JSESSIONID] && ![ColorHandler isNullOrEmptyString:SSOToken]) {
-        [mgr.requestSerializer setValue:[NSString stringWithFormat:@"%@;%@",JSESSIONID,SSOToken] forHTTPHeaderField:@"Cookie"];
-//        [mgr.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"accept"];
-        [mgr.requestSerializer setValue:@"application/json; charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
-    }
+//    if(![ColorHandler isNullOrEmptyString:JSESSIONID] && ![ColorHandler isNullOrEmptyString:SSOToken]) {
+//        [mgr.requestSerializer setValue:[NSString stringWithFormat:@"%@;%@",JSESSIONID,SSOToken] forHTTPHeaderField:@"Cookie"];
+////        [mgr.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"accept"];
+//        [mgr.requestSerializer setValue:@"application/json; charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
+//    }
     
     switch (methodType) {
         case RequestMethodTypeGet:
@@ -1028,25 +1045,32 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
               success:^(AFHTTPRequestOperation* operation, NSDictionary* responseObj) {
                   if (success) {
                       
-                      NSDictionary *headers = [operation.response allHeaderFields];
-                      NSString *cookieString = headers[@"Set-Cookie"];
-                      NSLog(@"!!!!!! %@",headers[@"Set-Cookie"]);
-                      NSArray *arr = [cookieString componentsSeparatedByString:@","];
+//                      NSDictionary *headers = [operation.response allHeaderFields];
+//                      NSString *cookieString = headers[@"Set-Cookie"];
+//                      NSLog(@"!!!!!! %@",headers[@"Set-Cookie"]);
+//                      NSArray *arr = [cookieString componentsSeparatedByString:@","];
                       
 //                      NSString *JSESSIONID = [[[[arr[1] componentsSeparatedByString:@";"] firstObject] stringByTrimmingCharactersInSet:
 //                                               [NSCharacterSet whitespaceAndNewlineCharacterSet]] substringFromIndex:11];
 //                      NSString *SSOToken = [[[[arr[2] componentsSeparatedByString:@";"] firstObject] stringByTrimmingCharactersInSet:
 //                                            [NSCharacterSet whitespaceAndNewlineCharacterSet]] substringFromIndex:10];
-                      NSString *JSESSIONID = [[[arr[1] componentsSeparatedByString:@";"] firstObject] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-                      NSString *SSOToken = [[[arr[2] componentsSeparatedByString:@";"] firstObject] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-                      
+//                      NSString *JSESSIONID = [[[arr[1] componentsSeparatedByString:@";"] firstObject] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+//                      NSString *SSOToken = [[[arr[2] componentsSeparatedByString:@";"] firstObject] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+//                      
+//                      NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//                      [defaults setObject:JSESSIONID forKey:@"JSESSIONID"];
+//                      [defaults setObject:SSOToken forKey:@"SSOToken"];
+//                      [defaults synchronize];
+//                      
+                      success(responseObj);
+                      NSData *cookiesData = [NSKeyedArchiver archivedDataWithRootObject:[[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]];
                       NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-                      [defaults setObject:JSESSIONID forKey:@"JSESSIONID"];
-                      [defaults setObject:SSOToken forKey:@"SSOToken"];
+                      [defaults setObject: cookiesData forKey: @"sessionCookies"];
                       [defaults synchronize];
                       
-                      success(responseObj);
-                      
+//                      NSString* cookieString = [[NSString alloc] initWithData:cookiesData encoding:NSUTF8StringEncoding];
+//                      NSLog(@"%@",cookieString);
+
                       //                      NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
                       //                      for (NSHTTPCookie *cookie in cookies) {
                       //                          // Here I see the correct rails session cookie

@@ -621,6 +621,8 @@
                 [tabbarVC.navigationController  pushViewController:chat animated:YES];
             });
         } error:^(RCErrorCode status) {
+            
+            //没有错误信息提示!
             NSLog(@"create discussion Failed > %ld!", (long)status);
         }];
     } else {

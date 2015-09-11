@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B04436C1BA1A12500BC7BF4 /* GetProfessionListDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B04436B1BA1A12500BC7BF4 /* GetProfessionListDataParse.m */; };
+		2B04436F1BA1AC5F00BC7BF4 /* DeleteProfessionDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B04436E1BA1AC5F00BC7BF4 /* DeleteProfessionDataParse.m */; };
+		2B0443721BA1AD3E00BC7BF4 /* UpdateProfessionDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B0443711BA1AD3E00BC7BF4 /* UpdateProfessionDataParse.m */; };
+		2B0443751BA1AE4B00BC7BF4 /* UpdateProfessionListOrderDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B0443741BA1AE4B00BC7BF4 /* UpdateProfessionListOrderDataParse.m */; };
 		2B14CC9E1B93346000CBD524 /* SendTaskImageDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B14CC9D1B93346000CBD524 /* SendTaskImageDataParse.m */; };
 		2B1B88E11B803BA900FAF650 /* ChangeUserMsgDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B1B88E01B803BA900FAF650 /* ChangeUserMsgDataParse.m */; };
 		2B1B88E51B803CEA00FAF650 /* UserNameAndPositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B1B88E31B803CEA00FAF650 /* UserNameAndPositionViewController.m */; };
@@ -21,6 +25,9 @@
 		2B2B84AE1BA016E60043EFD4 /* BMCLoginDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2B84AD1BA016E60043EFD4 /* BMCLoginDataParse.m */; };
 		2B2B84B11BA044370043EFD4 /* BMCGetMainResourceListDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2B84B01BA044370043EFD4 /* BMCGetMainResourceListDataParse.m */; };
 		2B2B84B41BA06FC60043EFD4 /* AddProfessionDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2B84B31BA06FC60043EFD4 /* AddProfessionDataParse.m */; };
+		2B2B84B81BA1536C0043EFD4 /* BMCMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2B84B61BA1536C0043EFD4 /* BMCMainViewController.m */; };
+		2B2B84B91BA1536C0043EFD4 /* BMCMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B2B84B71BA1536C0043EFD4 /* BMCMainViewController.xib */; };
+		2B2B84BD1BA1692B0043EFD4 /* ResVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2B84BC1BA1692B0043EFD4 /* ResVO.m */; };
 		2B31C3D51B11C3FD004C865A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B31C3D41B11C3FD004C865A /* main.m */; };
 		2B31C3D81B11C3FD004C865A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B31C3D71B11C3FD004C865A /* AppDelegate.m */; };
 		2B31C3E01B11C3FD004C865A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B31C3DF1B11C3FD004C865A /* Images.xcassets */; };
@@ -28,8 +35,6 @@
 		2B31C3EF1B11C3FD004C865A /* MyRillTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B31C3EE1B11C3FD004C865A /* MyRillTests.m */; };
 		2B37E44C1B53967D00F671A1 /* ModifyProfessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B37E44A1B53967D00F671A1 /* ModifyProfessionViewController.m */; };
 		2B37E44D1B53967D00F671A1 /* ModifyProfessionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B37E44B1B53967D00F671A1 /* ModifyProfessionViewController.xib */; };
-		2B37E45F1B53E9D800F671A1 /* ProfessionDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B37E45E1B53E9D800F671A1 /* ProfessionDataParse.m */; };
-		2B37E4601B53E9E000F671A1 /* ProfessionDataParse.h in Sources */ = {isa = PBXBuildFile; fileRef = 2B37E45D1B53E9D800F671A1 /* ProfessionDataParse.h */; };
 		2B39C9371B241212007BAC7A /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9201B241212007BAC7A /* MASCompositeConstraint.m */; };
 		2B39C9381B241212007BAC7A /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9231B241212007BAC7A /* MASConstraint.m */; };
 		2B39C9391B241212007BAC7A /* MASConstraintMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9251B241212007BAC7A /* MASConstraintMaker.m */; };
@@ -338,6 +343,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2B04436A1BA1A12500BC7BF4 /* GetProfessionListDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetProfessionListDataParse.h; sourceTree = "<group>"; };
+		2B04436B1BA1A12500BC7BF4 /* GetProfessionListDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetProfessionListDataParse.m; sourceTree = "<group>"; };
+		2B04436D1BA1AC5F00BC7BF4 /* DeleteProfessionDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeleteProfessionDataParse.h; sourceTree = "<group>"; };
+		2B04436E1BA1AC5F00BC7BF4 /* DeleteProfessionDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeleteProfessionDataParse.m; sourceTree = "<group>"; };
+		2B0443701BA1AD3E00BC7BF4 /* UpdateProfessionDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateProfessionDataParse.h; sourceTree = "<group>"; };
+		2B0443711BA1AD3E00BC7BF4 /* UpdateProfessionDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateProfessionDataParse.m; sourceTree = "<group>"; };
+		2B0443731BA1AE4B00BC7BF4 /* UpdateProfessionListOrderDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateProfessionListOrderDataParse.h; sourceTree = "<group>"; };
+		2B0443741BA1AE4B00BC7BF4 /* UpdateProfessionListOrderDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateProfessionListOrderDataParse.m; sourceTree = "<group>"; };
 		2B14CC9C1B93346000CBD524 /* SendTaskImageDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendTaskImageDataParse.h; sourceTree = "<group>"; };
 		2B14CC9D1B93346000CBD524 /* SendTaskImageDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendTaskImageDataParse.m; sourceTree = "<group>"; };
 		2B1B88DF1B803BA900FAF650 /* ChangeUserMsgDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeUserMsgDataParse.h; sourceTree = "<group>"; };
@@ -362,6 +375,11 @@
 		2B2B84B01BA044370043EFD4 /* BMCGetMainResourceListDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMCGetMainResourceListDataParse.m; sourceTree = "<group>"; };
 		2B2B84B21BA06FC60043EFD4 /* AddProfessionDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddProfessionDataParse.h; sourceTree = "<group>"; };
 		2B2B84B31BA06FC60043EFD4 /* AddProfessionDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddProfessionDataParse.m; sourceTree = "<group>"; };
+		2B2B84B51BA1536C0043EFD4 /* BMCMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMCMainViewController.h; sourceTree = "<group>"; };
+		2B2B84B61BA1536C0043EFD4 /* BMCMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMCMainViewController.m; sourceTree = "<group>"; };
+		2B2B84B71BA1536C0043EFD4 /* BMCMainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BMCMainViewController.xib; sourceTree = "<group>"; };
+		2B2B84BB1BA1692B0043EFD4 /* ResVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResVO.h; sourceTree = "<group>"; };
+		2B2B84BC1BA1692B0043EFD4 /* ResVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResVO.m; sourceTree = "<group>"; };
 		2B31C3CF1B11C3FD004C865A /* MyRill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyRill.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B31C3D31B11C3FD004C865A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2B31C3D41B11C3FD004C865A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -375,8 +393,6 @@
 		2B37E4491B53967D00F671A1 /* ModifyProfessionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModifyProfessionViewController.h; sourceTree = "<group>"; };
 		2B37E44A1B53967D00F671A1 /* ModifyProfessionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModifyProfessionViewController.m; sourceTree = "<group>"; };
 		2B37E44B1B53967D00F671A1 /* ModifyProfessionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ModifyProfessionViewController.xib; sourceTree = "<group>"; };
-		2B37E45D1B53E9D800F671A1 /* ProfessionDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfessionDataParse.h; sourceTree = "<group>"; };
-		2B37E45E1B53E9D800F671A1 /* ProfessionDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfessionDataParse.m; sourceTree = "<group>"; };
 		2B39C91F1B241212007BAC7A /* MASCompositeConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASCompositeConstraint.h; sourceTree = "<group>"; };
 		2B39C9201B241212007BAC7A /* MASCompositeConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASCompositeConstraint.m; sourceTree = "<group>"; };
 		2B39C9211B241212007BAC7A /* MASConstraint+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MASConstraint+Private.h"; sourceTree = "<group>"; };
@@ -951,6 +967,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B0443761BA271E800BC7BF4 /* BMC */ = {
+			isa = PBXGroup;
+			children = (
+				2B2B84AC1BA016E60043EFD4 /* BMCLoginDataParse.h */,
+				2B2B84AD1BA016E60043EFD4 /* BMCLoginDataParse.m */,
+				2B2B84AF1BA044370043EFD4 /* BMCGetMainResourceListDataParse.h */,
+				2B2B84B01BA044370043EFD4 /* BMCGetMainResourceListDataParse.m */,
+			);
+			name = BMC;
+			sourceTree = "<group>";
+		};
 		2B1B88DE1B803B2200FAF650 /* User */ = {
 			isa = PBXGroup;
 			children = (
@@ -974,6 +1001,9 @@
 				2B2B84A61BA013700043EFD4 /* BMCLoginViewController.h */,
 				2B2B84A71BA013700043EFD4 /* BMCLoginViewController.m */,
 				2B2B84A81BA013700043EFD4 /* BMCLoginViewController.xib */,
+				2B2B84B51BA1536C0043EFD4 /* BMCMainViewController.h */,
+				2B2B84B61BA1536C0043EFD4 /* BMCMainViewController.m */,
+				2B2B84B71BA1536C0043EFD4 /* BMCMainViewController.xib */,
 			);
 			name = BMC;
 			sourceTree = "<group>";
@@ -981,16 +1011,28 @@
 		2B2B84AB1BA016BA0043EFD4 /* Profession */ = {
 			isa = PBXGroup;
 			children = (
-				2B37E45D1B53E9D800F671A1 /* ProfessionDataParse.h */,
-				2B37E45E1B53E9D800F671A1 /* ProfessionDataParse.m */,
+				2B0443761BA271E800BC7BF4 /* BMC */,
+				2B04436A1BA1A12500BC7BF4 /* GetProfessionListDataParse.h */,
+				2B04436B1BA1A12500BC7BF4 /* GetProfessionListDataParse.m */,
 				2B2B84B21BA06FC60043EFD4 /* AddProfessionDataParse.h */,
 				2B2B84B31BA06FC60043EFD4 /* AddProfessionDataParse.m */,
-				2B2B84AC1BA016E60043EFD4 /* BMCLoginDataParse.h */,
-				2B2B84AD1BA016E60043EFD4 /* BMCLoginDataParse.m */,
-				2B2B84AF1BA044370043EFD4 /* BMCGetMainResourceListDataParse.h */,
-				2B2B84B01BA044370043EFD4 /* BMCGetMainResourceListDataParse.m */,
+				2B04436D1BA1AC5F00BC7BF4 /* DeleteProfessionDataParse.h */,
+				2B04436E1BA1AC5F00BC7BF4 /* DeleteProfessionDataParse.m */,
+				2B0443701BA1AD3E00BC7BF4 /* UpdateProfessionDataParse.h */,
+				2B0443711BA1AD3E00BC7BF4 /* UpdateProfessionDataParse.m */,
+				2B0443731BA1AE4B00BC7BF4 /* UpdateProfessionListOrderDataParse.h */,
+				2B0443741BA1AE4B00BC7BF4 /* UpdateProfessionListOrderDataParse.m */,
 			);
 			name = Profession;
+			sourceTree = "<group>";
+		};
+		2B2B84BA1BA168DE0043EFD4 /* BMC */ = {
+			isa = PBXGroup;
+			children = (
+				2B2B84BB1BA1692B0043EFD4 /* ResVO.h */,
+				2B2B84BC1BA1692B0043EFD4 /* ResVO.m */,
+			);
+			name = BMC;
 			sourceTree = "<group>";
 		};
 		2B31C3C61B11C3FD004C865A = {
@@ -1613,6 +1655,7 @@
 		F22FE27C1B3ADA8200A1A997 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2B2B84BA1BA168DE0043EFD4 /* BMC */,
 				F2F397701B77AC50006FAE3B /* ESEnterpriseMessage.h */,
 				F2F397711B77AC50006FAE3B /* ESEnterpriseMessage.m */,
 				F2F397721B77AC50006FAE3B /* ESEnterpriseMessageContent.h */,
@@ -2065,6 +2108,7 @@
 				2B6038871B79C6A4005B721F /* TaskContactorCollectionViewCell.xib in Resources */,
 				2BE8C22D1B4EB3A200858CEE /* AddProfessionViewController.xib in Resources */,
 				2B37E44D1B53967D00F671A1 /* ModifyProfessionViewController.xib in Resources */,
+				2B2B84B91BA1536C0043EFD4 /* BMCMainViewController.xib in Resources */,
 				2BC8213B1B5C9FF70090E2C1 /* ShowQRCodeViewController.xib in Resources */,
 				2BC227761B942A3600E3163A /* Overlay.png in Resources */,
 				F23059BB1B52C141004599FA /* RCDAddressBookViewTableViewCell.xib in Resources */,
@@ -2137,7 +2181,6 @@
 				F2D99C5F1B75EF0400759D33 /* ESEnterpriseDetailInfo.m in Sources */,
 				F2D99C601B75EF0400759D33 /* ESEnterPriseRequestInfo.m in Sources */,
 				F2D99C5C1B75EEE600759D33 /* ESTag.m in Sources */,
-				2B37E4601B53E9E000F671A1 /* ProfessionDataParse.h in Sources */,
 				F234617F1B5AB63C00C88FAC /* EnterpriseInfoDataSource.m in Sources */,
 				2BEAD06A1B76FF2400905E21 /* NSMutableArray+SWUtilityButtons.m in Sources */,
 				F22FE2E81B4000ED00A1A997 /* SDWebImageDecoder.m in Sources */,
@@ -2148,6 +2191,7 @@
 				2B5A590D1B48DFBB000382D7 /* UIImage+MRImageEffects.m in Sources */,
 				2B39C9441B24128F007BAC7A /* LoginViewController.m in Sources */,
 				F23461761B5AA6E400C88FAC /* AddressBookContactListDataSource.m in Sources */,
+				2B04436F1BA1AC5F00BC7BF4 /* DeleteProfessionDataParse.m in Sources */,
 				2BE55A121B64843A008CDB4B /* TaskListTableViewCell.m in Sources */,
 				F29F86281B2410070058FC9F /* AFHTTPRequestOperation.m in Sources */,
 				F277AE071B2DC72A006E42CB /* BMBase.m in Sources */,
@@ -2210,6 +2254,7 @@
 				2B39C9481B241972007BAC7A /* LoginService.m in Sources */,
 				F22FE2E91B4000ED00A1A997 /* SDWebImageDownloader.m in Sources */,
 				2B2B84A41B9A99940043EFD4 /* TaskViewController.m in Sources */,
+				2B04436C1BA1A12500BC7BF4 /* GetProfessionListDataParse.m in Sources */,
 				F29F862F1B2410070058FC9F /* AFURLResponseSerialization.m in Sources */,
 				F23630841B66668900A12F63 /* RCDAddressBookDetailViewController.m in Sources */,
 				F22FE2E41B4000ED00A1A997 /* MKAnnotationView+WebCache.m in Sources */,
@@ -2234,6 +2279,7 @@
 				F23630891B6673B400A12F63 /* RCDAddressBookDetailTableViewCell.m in Sources */,
 				F29BC4921B75119900803183 /* SimpleMessageCell.m in Sources */,
 				F2F92ECD1B4D60910047D7BF /* RCDPhoneAddressBookViewController.m in Sources */,
+				2B2B84BD1BA1692B0043EFD4 /* ResVO.m in Sources */,
 				2BC2276D1B942A3600E3163A /* ELCAsset.m in Sources */,
 				F22FE2AD1B3FFAE600A1A997 /* RCDSelectPersonTableViewCell.m in Sources */,
 				F22FE2941B3B000400A1A997 /* UserSettingViewController.m in Sources */,
@@ -2250,6 +2296,7 @@
 				F2467EEE1B8DCF1F0055B78B /* RootCardBottomCell.m in Sources */,
 				2B39C93B1B241212007BAC7A /* MASViewAttribute.m in Sources */,
 				F24787721B2D5CE700EC266B /* ChangePwdDataParse.m in Sources */,
+				2B0443751BA1AE4B00BC7BF4 /* UpdateProfessionListOrderDataParse.m in Sources */,
 				2BC2276E1B942A3600E3163A /* ELCAssetCell.m in Sources */,
 				F28B6C871B6F991600E0C267 /* GetEnterpriseDetailDataParse.m in Sources */,
 				F235C2341B85A7A60092520A /* DeleteContactDataParse.m in Sources */,
@@ -2288,7 +2335,6 @@
 				2BC8212F1B57FFDC0090E2C1 /* ProfessionWebViewController.m in Sources */,
 				2B1B88EA1B803D0C00FAF650 /* UserDescriptionChangeViewController.m in Sources */,
 				F256CB831B6E5921009478C2 /* RCDApprovedJoinEnterpriseViewController.m in Sources */,
-				2B37E45F1B53E9D800F671A1 /* ProfessionDataParse.m in Sources */,
 				2B39C93C1B241212007BAC7A /* MASViewConstraint.m in Sources */,
 				F2F92EFF1B5020CC0047D7BF /* GetPhoneContactListDataParse.m in Sources */,
 				2B5A590F1B48DFBB000382D7 /* MRCircularProgressView.m in Sources */,
@@ -2302,6 +2348,7 @@
 				F22FE3081B45989200A1A997 /* ESContactList.m in Sources */,
 				2BEAD07F1B77369F00905E21 /* ZCActionOnCalendar.m in Sources */,
 				2B14CC9E1B93346000CBD524 /* SendTaskImageDataParse.m in Sources */,
+				2B2B84B81BA1536C0043EFD4 /* BMCMainViewController.m in Sources */,
 				F22FE2A81B3FFAC200A1A997 /* RCDPersonDetailViewController.m in Sources */,
 				2BE55A081B647324008CDB4B /* TaskOverviewTableViewCell.m in Sources */,
 				F234616E1B5AA0FD00C88FAC /* FMDatabase.m in Sources */,
@@ -2354,6 +2401,7 @@
 				F24787751B2D775E00EC266B /* SignUpDataParse.m in Sources */,
 				F277AE0D1B2DD066006E42CB /* UIPageNavigator.m in Sources */,
 				F22FE2FF1B42DAF600A1A997 /* AddContactDataParse.m in Sources */,
+				2B0443721BA1AD3E00BC7BF4 /* UpdateProfessionDataParse.m in Sources */,
 				2BE55A0E1B6483D2008CDB4B /* TaskListViewController.m in Sources */,
 				2BEAD0911B776C2E00905E21 /* GetTaskCommentListDataParse.m in Sources */,
 				2B31C3D51B11C3FD004C865A /* main.m in Sources */,

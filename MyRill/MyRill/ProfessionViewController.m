@@ -7,26 +7,28 @@
 //
 
 #import "ProfessionViewController.h"
-#import "ColorHandler.h"
-#import "ProfessionDataParse.h"
-#import "ESProfession.h"
 #import "ProfessionCollectionViewCell.h"
 #import "AddProfessionViewController.h"
 #import "EditProfessionViewController.h"
-#import "ProfessionWebViewController.h"
-#import "PushDefine.h"
 #import "BMCLoginViewController.h"
+#import "ProfessionWebViewController.h"
+#import "ColorHandler.h"
+#import "ESProfession.h"
+#import "PushDefine.h"
+#import "GetProfessionListDataParse.h"
+#import "CustomShowMessage.h"
 
-@interface ProfessionViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, ProfessionDataDelegate>
+@interface ProfessionViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, GetProfessionListDelegate>
 
 @property (nonatomic, strong) UICollectionView *collectionView;
+
 @property (nonatomic, strong) NSMutableArray *dataSource;
-@property (nonatomic, strong) ProfessionDataParse *professionDP;
+@property (nonatomic, strong) GetProfessionListDataParse *getProfessionListDP;
 
 @end
 
 @implementation ProfessionViewController
-
+#pragma mark - lifeCycle methods
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -39,18 +41,19 @@
     self.navigationItem.rightBarButtonItem = sortBtnItem;
 
     [self.view addSubview:self.collectionView];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(updatePushProfession)
-                                                 name:NOTIFICATION_PUSH_PROFESSION
-                                               object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     self.tabBarController.tabBar.hidden = NO;
-    [self.professionDP getProfessionList];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updatePushProfession)
+                                                 name:NOTIFICATION_PUSH_PROFESSION
+                                               object:nil];
+    
+    [self.getProfessionListDP getProfessionList];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -60,16 +63,18 @@
 }
 
 #pragma mark - ProfessionDataDelegate methods
-- (void)professionOperationSuccess:(NSArray *)list {
-    if ([list isKindOfClass:[NSArray class]]) {
-        self.dataSource = nil;
-        [self.dataSource addObjectsFromArray:list];
-        ESProfession *profession = [[ESProfession alloc] init];
-        profession.icon_url = @"add";
-        [self.dataSource addObject:profession];
-        
-        [self.collectionView reloadData];
-    }
+- (void)getProfessionListSuccess:(NSArray *)list {
+    [self.dataSource removeAllObjects];
+    [self.dataSource addObjectsFromArray:list];
+    ESProfession *profession = [[ESProfession alloc] init];
+    profession.icon_url = @"add";
+    [self.dataSource addObject:profession];
+    
+    [self.collectionView reloadData];
+}
+
+- (void)getProfessionListFailure:(NSString *)errorMsg {
+    [[CustomShowMessage getInstance] showNotificationMessage:errorMsg];
 }
 
 #pragma mark - UICollectionViewDataSource&UICollectionViewDelegateFlowLayout
@@ -118,10 +123,10 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == self.dataSource.count - 1) {
-//        AddProfessionViewController *addProfessionVC = [[AddProfessionViewController alloc] init];
-//        [self.navigationController pushViewController:addProfessionVC animated:YES];
-        BMCLoginViewController *bmcLoginVC = [[BMCLoginViewController alloc] init];
-        [self.navigationController pushViewController:bmcLoginVC animated:YES];
+        AddProfessionViewController *addProfessionVC = [[AddProfessionViewController alloc] init];
+        [self.navigationController pushViewController:addProfessionVC animated:YES];
+//        BMCLoginViewController *bmcLoginVC = [[BMCLoginViewController alloc] init];
+//        [self.navigationController pushViewController:bmcLoginVC animated:YES];
     } else {
         ProfessionWebViewController *webVC = [[ProfessionWebViewController alloc] init];
         ESProfession *profession = self.dataSource[indexPath.row];
@@ -134,13 +139,12 @@
 #pragma mark - response events
 - (void)onSortBtnItemClicked:(UIBarButtonItem *)sender {
     EditProfessionViewController *editProfessionVC = [[EditProfessionViewController alloc] init];
-    [editProfessionVC loadProfessionContent:self.dataSource];
     [self.navigationController pushViewController:editProfessionVC animated:YES];
 }
 
 //更新push到客户端的业务
 - (void)updatePushProfession {
-    [self.professionDP getProfessionList];
+    [self.getProfessionListDP getProfessionList];
 }
 
 #pragma mark - setters&getters
@@ -168,13 +172,13 @@
     return _dataSource;
 }
 
-- (ProfessionDataParse *)professionDP {
-    if (!_professionDP) {
-        _professionDP = [[ProfessionDataParse alloc] init];
-        _professionDP.delegate = self;
+- (GetProfessionListDataParse *)getProfessionListDP {
+    if (!_getProfessionListDP) {
+        _getProfessionListDP = [[GetProfessionListDataParse alloc] init];
+        _getProfessionListDP.delegate = self;
     }
     
-    return _professionDP;
+    return _getProfessionListDP;
 }
 
 @end

@@ -47,12 +47,30 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    self.tabBarController.tabBar.hidden = YES;
+    
     NSURL *url = [NSURL URLWithString:self.urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [self.professionWeb loadRequest:request];
-    self.tabBarController.tabBar.hidden = YES;
+}
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     
+    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+}
+
+//放到Did里面不好使
+//- (void)viewDidDisappear:(BOOL)animated {
+//    [super viewDidDisappear:animated];
+//    
+//    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+//}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
 }
 
 #pragma mark - UIWebViewDelegate methods

@@ -44,7 +44,7 @@
 }
 
 - (void)addProfessionOperationFailure:(NSString *)errorMsg {
-    NSLog(@"添加业务失败,请检查网络");
+
     NSString *msg = @"";
     if ([errorMsg isEqualToString:@"添加失败"]) {
         msg = @"请输入一个有效的URL!";

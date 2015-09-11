@@ -90,12 +90,13 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    self.tabBarController.tabBar.hidden = NO;
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(updatePushTask)
                                                  name:NOTIFICATION_PUSH_ASSIGNMENT
                                                object:nil];
     
-    self.tabBarController.tabBar.hidden = NO;
     [self.getTaskDashboardDP getTaskDashboard];
 }
 

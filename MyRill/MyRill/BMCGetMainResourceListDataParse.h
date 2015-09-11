@@ -8,7 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol BMCGetMainResourceListDelegate <NSObject>
+
+- (void)getMainResourceListSucceed:(NSArray *)resultList;
+- (void)getMainResourceListFailed:(NSString *)errorMessage;
+
+@end
+
 @interface BMCGetMainResourceListDataParse : NSObject
+
+@property (nonatomic, weak) id<BMCGetMainResourceListDelegate> delegate;
 
 - (void)getMainResourceListWithTreeNodeId:(NSString *)treeNodeId
                                 pageIndex:(NSString *)pageIndex

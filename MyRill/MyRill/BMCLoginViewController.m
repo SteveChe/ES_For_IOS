@@ -8,15 +8,15 @@
 
 #import "BMCLoginViewController.h"
 #import "BMCLoginDataParse.h"
-#import "BMCGetMainResourceListDataParse.h"
 #import "ColorHandler.h"
+#import "BMCMainViewController.h"
 
-@interface BMCLoginViewController ()
+@interface BMCLoginViewController () <BMCLoginDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *holdView;
 
 @property (nonatomic, strong) BMCLoginDataParse *bmcLoginDP;
-@property (nonatomic, strong) BMCGetMainResourceListDataParse *getMainResourceListDP;
+
 
 @end
 
@@ -29,9 +29,16 @@
     self.title = @"RIIL-BMC";
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    self.tabBarController.tabBar.hidden = YES;
+}
+
+#pragma mark - BMCLoginDelegate methods
+- (void)loginSucceed:(NSDictionary *)loginDic {
+    BMCMainViewController *bmcMainVC = [[BMCMainViewController alloc] init];
+    [self.navigationController pushViewController:bmcMainVC animated:YES];
 }
 
 - (IBAction)loginBtnOnClicked:(UIButton *)sender {
@@ -39,29 +46,14 @@
                                  password:@"riiladmin"];
 }
 
-- (IBAction)second:(UIButton *)sender {
-    [self.getMainResourceListDP getMainResourceListWithTreeNodeId:@"00"
-                                                        pageIndex:@"1"
-                                                            state:@"all"
-                                                       sortColumn:@"venderName"
-                                                         sortType:@"asc"];
-}
-
 #pragma mark - setter&getter
 - (BMCLoginDataParse *)bmcLoginDP {
     if (!_bmcLoginDP) {
         _bmcLoginDP = [[BMCLoginDataParse alloc] init];
+        _bmcLoginDP.delegate = self;
     }
     
     return _bmcLoginDP;
-}
-
-- (BMCGetMainResourceListDataParse *)getMainResourceListDP {
-    if (!_getMainResourceListDP) {
-        _getMainResourceListDP = [[BMCGetMainResourceListDataParse alloc] init];
-        
-    }
-    return _getMainResourceListDP;
 }
 
 - (void)setHoldView:(UIView *)holdView {
