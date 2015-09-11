@@ -9,15 +9,17 @@
 #import "ModifyProfessionViewController.h"
 #import "ColorHandler.h"
 #import "ESProfession.h"
-#import "ProfessionDataParse.h"
+#import "UpdateProfessionDataParse.h"
+#import "CustomShowMessage.h"
 
-@interface ModifyProfessionViewController () <ProfessionDataDelegate>
+@interface ModifyProfessionViewController () <UpdateProfessionDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *popOverView;
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *holdViews;
 @property (weak, nonatomic) IBOutlet UITextField *nameTxtField;
 @property (weak, nonatomic) IBOutlet UITextField *urlTxtField;
-@property (nonatomic, strong) ProfessionDataParse *professionDP;
+
+@property (nonatomic, strong) UpdateProfessionDataParse *updateProfessionDP;
 @property (nonatomic, strong) ESProfession *profession;
 
 @end
@@ -33,11 +35,13 @@
     [self.view addGestureRecognizer:tapGesture];
 }
 
-#pragma mark - ProfessionDataDelegate methods
-- (void)professionOperationSuccess:(id)context {
-    [self.delegate modifyProfessionSuccess:(ESProfession *)context];
+#pragma mark - UpdateProfessionDelegate methods
+- (void)updateProfessionSuccess:(ESProfession *)profession {
     [self dismissBtn:nil];
-    
+}
+
+- (void)updateProfessionFailure:(NSString *)errorMsg {
+    [[CustomShowMessage getInstance] showNotificationMessage:errorMsg];
 }
 
 #pragma mark - response events
@@ -46,9 +50,9 @@
 }
 
 - (IBAction)saveBtn:(UIButton *)sender {
-    [self.professionDP updateProfessionWithId:[self.profession.professionId stringValue]
-                                         name:self.nameTxtField.text
-                                          url:self.urlTxtField.text];
+    [self.updateProfessionDP updateProfessionWithId:[self.profession.professionId stringValue]
+                                               name:self.nameTxtField.text
+                                                url:self.urlTxtField.text];
 }
 
 - (void)hideKeyboard {
@@ -81,12 +85,13 @@
     }
 }
 
-- (ProfessionDataParse *)professionDP {
-    if (!_professionDP) {
-        _professionDP = [[ProfessionDataParse alloc] init];
-        _professionDP.delegate = self;
+- (UpdateProfessionDataParse *)updateProfessionDP {
+    if (!_updateProfessionDP) {
+        _updateProfessionDP = [[UpdateProfessionDataParse alloc] init];
+        _updateProfessionDP.delegate = self;
     }
-    return _professionDP;
+    
+    return _updateProfessionDP;
 }
 
 @end

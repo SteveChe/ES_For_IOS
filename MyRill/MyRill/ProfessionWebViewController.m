@@ -47,15 +47,30 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    self.tabBarController.tabBar.hidden = YES;
+    
     NSURL *url = [NSURL URLWithString:self.urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [self.professionWeb loadRequest:request];
-    self.tabBarController.tabBar.hidden = YES;
+}
 
-    UIBarButtonItem *back = (UIBarButtonItem *)[self.navigationController.toolbar viewWithTag:301];
-    back.enabled = self.professionWeb.canGoBack ? YES : NO;
-    UIBarButtonItem *forward = (UIBarButtonItem *)[self.navigationController.toolbar viewWithTag:302];
-    forward.enabled = self.professionWeb.canGoForward ? YES : NO;
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+}
+
+//放到Did里面不好使
+//- (void)viewDidDisappear:(BOOL)animated {
+//    [super viewDidDisappear:animated];
+//    
+//    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+//}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
 }
 
 #pragma mark - UIWebViewDelegate methods
@@ -66,6 +81,12 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
 //    NSLog(@"webViewDidFinishLoad");
+    UIBarButtonItem *back = (UIBarButtonItem *)[self.navigationController.toolbar viewWithTag:301];
+    back.enabled = self.professionWeb.canGoBack ? YES : NO;
+    back.image = self.professionWeb.canGoBack ? [[UIImage imageNamed:@"后退-可点"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]:[[UIImage imageNamed:@"后退-不可点"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIBarButtonItem *forward = (UIBarButtonItem *)[self.navigationController.toolbar viewWithTag:302];
+    forward.enabled = self.professionWeb.canGoForward ? YES : NO;
+    forward.image = self.professionWeb.canGoForward ? [[UIImage imageNamed:@"前进-可点"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] :[[UIImage imageNamed:@"前进-不可点"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
@@ -126,7 +147,7 @@
         UIBarButtonItem *placeHolderItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                                          target:self
                                                                                          action:nil];
-        NSArray *itemArray = [[NSArray alloc] initWithObjects:placeHolderItem,backItem,placeHolderItem,forwardItem,placeHolderItem,reloadItem,placeHolderItem, nil];
+        NSArray *itemArray = [[NSArray alloc] initWithObjects:placeHolderItem, backItem,placeHolderItem, forwardItem, placeHolderItem,placeHolderItem, placeHolderItem, placeHolderItem, reloadItem, placeHolderItem, nil];
         
         _toolbar = [[UIToolbar alloc] init];
         _toolbar.backgroundColor = [UIColor whiteColor];

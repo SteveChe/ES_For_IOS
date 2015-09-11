@@ -10,6 +10,4 @@
 
 @interface EditProfessionViewController : UIViewController
 
-- (void)loadProfessionContent:(NSArray *)array;
-
 @end

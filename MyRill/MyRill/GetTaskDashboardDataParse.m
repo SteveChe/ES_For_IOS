@@ -26,7 +26,8 @@
         ESTaskDashboard *taskDashboard = [[ESTaskDashboard alloc] initWithDic:dataDic];
         [self.delegate getTaskDashboardSuccess:taskDashboard];
     } failure:^(NSError *error) {
-        ;
+        NSLog(@"%@",[error debugDescription]);
+
     }];
 }
 

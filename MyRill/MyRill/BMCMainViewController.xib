@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BMCMainViewController">
+            <connections>
+                <outlet property="favoriteTableView" destination="EkG-9X-Coq" id="TKd-IE-wAB"/>
+                <outlet property="toolbar" destination="IQC-08-aPU" id="TjN-Iw-mZs"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="warningTableView" destination="Pvl-ib-DmF" id="1Yk-0J-XJL"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IQC-08-aPU">
+                    <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                    <items/>
+                </toolbar>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="guo-cE-MkU" userLabel="Container Scroll View">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
+                    <subviews>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="EkG-9X-Coq" userLabel="Favorite Table View">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="yQo-is-0Jd"/>
+                                <outlet property="delegate" destination="-1" id="iY8-CY-aDH"/>
+                            </connections>
+                        </tableView>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Pvl-ib-DmF" userLabel="Warning Table View">
+                            <rect key="frame" x="600" y="0.0" width="600" height="556"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="R2p-9g-zRn"/>
+                                <outlet property="delegate" destination="-1" id="7oR-4B-MOm"/>
+                            </connections>
+                        </tableView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="Pvl-ib-DmF" firstAttribute="leading" secondItem="EkG-9X-Coq" secondAttribute="trailing" id="1J9-WU-7MC"/>
+                        <constraint firstItem="EkG-9X-Coq" firstAttribute="width" secondItem="guo-cE-MkU" secondAttribute="width" id="B65-3w-E7I"/>
+                        <constraint firstItem="Pvl-ib-DmF" firstAttribute="top" secondItem="guo-cE-MkU" secondAttribute="top" id="F6m-94-Tgw"/>
+                        <constraint firstAttribute="bottom" secondItem="Pvl-ib-DmF" secondAttribute="bottom" id="MPC-Ln-yza"/>
+                        <constraint firstItem="Pvl-ib-DmF" firstAttribute="width" secondItem="guo-cE-MkU" secondAttribute="width" id="T1N-md-8kW"/>
+                        <constraint firstItem="EkG-9X-Coq" firstAttribute="top" secondItem="guo-cE-MkU" secondAttribute="top" id="Uq7-TX-jqm"/>
+                        <constraint firstItem="EkG-9X-Coq" firstAttribute="height" secondItem="guo-cE-MkU" secondAttribute="height" id="Xp4-H1-bTG"/>
+                        <constraint firstAttribute="bottom" secondItem="EkG-9X-Coq" secondAttribute="bottom" id="dqS-MP-DHS"/>
+                        <constraint firstItem="EkG-9X-Coq" firstAttribute="leading" secondItem="guo-cE-MkU" secondAttribute="leading" id="faX-Sj-He3"/>
+                        <constraint firstAttribute="trailing" secondItem="Pvl-ib-DmF" secondAttribute="trailing" id="k4i-CK-B0A"/>
+                        <constraint firstItem="Pvl-ib-DmF" firstAttribute="height" secondItem="guo-cE-MkU" secondAttribute="height" id="xar-Nq-Xn7"/>
+                    </constraints>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="guo-cE-MkU" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="3l9-pH-uPe"/>
+                <constraint firstItem="IQC-08-aPU" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="6TM-Zt-f9S"/>
+                <constraint firstAttribute="trailing" secondItem="IQC-08-aPU" secondAttribute="trailing" id="A2o-mh-0kc"/>
+                <constraint firstAttribute="bottom" secondItem="IQC-08-aPU" secondAttribute="bottom" id="LTe-fc-TiU"/>
+                <constraint firstItem="guo-cE-MkU" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="SEl-d5-eF3"/>
+                <constraint firstItem="IQC-08-aPU" firstAttribute="top" secondItem="guo-cE-MkU" secondAttribute="bottom" id="cf6-xv-Hsj"/>
+                <constraint firstAttribute="trailing" secondItem="guo-cE-MkU" secondAttribute="trailing" id="hWD-Nm-flk"/>
+            </constraints>
+        </view>
+        <barButtonItem title="Item" id="0zt-n6-WIW"/>
+    </objects>
+</document>

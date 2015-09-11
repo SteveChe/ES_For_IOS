@@ -92,6 +92,10 @@
 
 #pragma mark - UITableViewDataSource&UITableViewDelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+//    if (self.type == ESTaskListWithChatId) {
+//        return 2;
+//    }
+    
     return 1;
 }
 

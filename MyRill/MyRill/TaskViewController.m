@@ -61,6 +61,8 @@
 @property (nonatomic, strong) NSMutableArray *assignerDataSource; //负责人列表,ESUserInfo
 @property (nonatomic, strong) NSMutableArray *followsDataSource; //关注人列表,ESUserInfo
 @property (nonatomic, strong) NSMutableArray *dataSource;
+@property (nonatomic, strong) NSMutableArray *raiseObserverList; //新增关注人列表,userId
+@property (nonatomic, strong) NSMutableArray *raiseChargeList; //新增分配人列表,userId
 
 @property (nonatomic, strong) GetTaskDetailDataParse *getTaskDetailDP;
 @property (nonatomic, strong) GetTaskCommentListDataParse *getTaskCommentListDP;
@@ -223,6 +225,8 @@
 #pragma mark - EditTaskDelegate methods
 - (void)editTaskSuccess {
     [self showTips:@"修改成功!" mode:MRProgressOverlayViewModeCheckmark isDismiss:YES isSucceuss:YES];
+    NSLog(@"%@",self.raiseObserverList);
+    NSLog(@"%@",self.raiseChargeList);
 }
 
 - (void)editTaskFailed:(NSString *)errorMessage {
@@ -231,6 +235,7 @@
 
 - (void)updateObserverAndChatidSuccess {
     [self showTips:@"修改成功!" mode:MRProgressOverlayViewModeCheckmark isDismiss:YES isSucceuss:YES];
+    NSLog(@"%@",self.raiseObserverList);
 }
 
 - (void)updateObserverAndChatidFailed:(NSString *)errorMessage {
@@ -621,6 +626,8 @@
                 [tabbarVC.navigationController  pushViewController:chat animated:YES];
             });
         } error:^(RCErrorCode status) {
+            
+            //没有错误信息提示!
             NSLog(@"create discussion Failed > %ld!", (long)status);
         }];
     } else {
@@ -675,6 +682,24 @@
         selectPersonVC.clickDoneCompletion = ^(RCDRadioSelectPersonViewController* selectPersonViewController, NSArray* selectedUsers) {
             
             if (selectedUsers && selectedUsers.count) {
+                NSMutableArray *oldArr = [[NSMutableArray alloc] init];
+                NSMutableArray *newArr = [[NSMutableArray alloc] init];
+                
+                [weakSelf.assignerDataSource enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                    ESUserInfo *user = (ESUserInfo *)obj;
+                    [oldArr addObject:user.userId];
+                }];
+                
+                [selectedUsers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                    ESUserInfo *user = (ESUserInfo *)obj;
+                    [newArr addObject:user.userId];
+                }];
+                [newArr removeObjectsInArray:oldArr];
+                
+                [weakSelf.raiseChargeList removeAllObjects];
+                [weakSelf.raiseChargeList addObjectsFromArray:newArr];
+                
+                NSLog(@"%@",selectedUsers);
                 [weakSelf.assignerDataSource removeAllObjects];
                 [weakSelf.assignerDataSource addObjectsFromArray:selectedUsers];
             }
@@ -720,6 +745,23 @@
             
             if (selectedUsers && selectedUsers.count)
             {
+                NSMutableArray *oldArr = [[NSMutableArray alloc] init];
+                NSMutableArray *newArr = [[NSMutableArray alloc] init];
+                
+                [weakSelf.followsDataSource enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                    ESUserInfo *user = (ESUserInfo *)obj;
+                    [oldArr addObject:user.userId];
+                }];
+                
+                [selectedUsers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                    ESUserInfo *user = (ESUserInfo *)obj;
+                    [newArr addObject:user.userId];
+                }];
+                [newArr removeObjectsInArray:oldArr];
+                
+                [weakSelf.raiseObserverList removeAllObjects];
+                [weakSelf.raiseObserverList addObjectsFromArray:newArr];
+                
                 [weakSelf.followsDataSource removeAllObjects];
                 [weakSelf.followsDataSource addObjectsFromArray:selectedUsers];
             }
@@ -1157,6 +1199,22 @@
     }
     
     return _dataSource;
+}
+
+- (NSMutableArray *)raiseChargeList {
+    if (!_raiseChargeList) {
+        _raiseChargeList = [[NSMutableArray alloc] init];
+    }
+    
+    return _raiseChargeList;
+}
+
+- (NSMutableArray *)raiseObserverList {
+    if (!_raiseObserverList) {
+        _raiseObserverList = [[NSMutableArray alloc] init];
+    }
+    
+    return _raiseObserverList;
 }
 
 - (GetTaskCommentListDataParse *)getTaskCommentListDP {
