@@ -586,9 +586,10 @@
 
     //创建set过滤分配和关注中的重复联系人
     
-    NSMutableArray *totolContractorArr = [[NSMutableArray alloc] initWithCapacity:self.assignerDataSource.count + self.followsDataSource.count];
+    NSMutableArray *totolContractorArr = [[NSMutableArray alloc] initWithCapacity:self.assignerDataSource.count + self.followsDataSource.count + 1];
     [totolContractorArr addObjectsFromArray:self.assignerDataSource];
     [totolContractorArr addObjectsFromArray:self.followsDataSource];
+    [totolContractorArr addObject:self.taskModel.initiator];
     
     NSMutableString *discussionTitle = [NSMutableString string];
     NSMutableArray *userIdList = [NSMutableArray new];
@@ -603,6 +604,16 @@
     [set enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
         [tempArr addObject:obj];
     }];
+    
+    if (tempArr.count <= 1) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                        message:@"少于两人不能发起会话!"
+                                                       delegate:self
+                                              cancelButtonTitle:@"知道了!"
+                                              otherButtonTitles:nil, nil];
+        [alert show];
+    }
+    
     [discussionTitle deleteCharactersInRange:NSMakeRange(discussionTitle.length - 1, 1)];
     __weak typeof(&*self)  weakSelf = self;
 
@@ -641,7 +652,9 @@
                 chatViewController.targetId = chat_id;
                 chatViewController.title = discussion.discussionName;
                 
-                [self.navigationController pushViewController:chatViewController animated:YES];
+                UITabBarController *tabbarVC = weakSelf.navigationController.viewControllers[0];
+                [weakSelf.navigationController popToViewController:tabbarVC animated:YES];
+                [tabbarVC.navigationController  pushViewController:chatViewController animated:YES];
             }
         } error:^(RCErrorCode status){
             NSLog(@"直接进入会话界面失败");
