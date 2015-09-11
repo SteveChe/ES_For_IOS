@@ -62,7 +62,7 @@
 @property (nonatomic, strong) NSMutableArray *followsDataSource; //关注人列表,ESUserInfo
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) NSMutableArray *raiseObserverList; //新增关注人列表,userId
-@property (nonatomic, strong) NSMutableArray *raiseChargeList;
+@property (nonatomic, strong) NSMutableArray *raiseChargeList; //新增分配人列表,userId
 
 @property (nonatomic, strong) GetTaskDetailDataParse *getTaskDetailDP;
 @property (nonatomic, strong) GetTaskCommentListDataParse *getTaskCommentListDP;
@@ -682,6 +682,23 @@
         selectPersonVC.clickDoneCompletion = ^(RCDRadioSelectPersonViewController* selectPersonViewController, NSArray* selectedUsers) {
             
             if (selectedUsers && selectedUsers.count) {
+                NSMutableArray *oldArr = [[NSMutableArray alloc] init];
+                NSMutableArray *newArr = [[NSMutableArray alloc] init];
+                
+                [weakSelf.assignerDataSource enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                    ESUserInfo *user = (ESUserInfo *)obj;
+                    [oldArr addObject:user.userId];
+                }];
+                
+                [selectedUsers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                    ESUserInfo *user = (ESUserInfo *)obj;
+                    [newArr addObject:user.userId];
+                }];
+                [newArr removeObjectsInArray:oldArr];
+                
+                [weakSelf.raiseChargeList removeAllObjects];
+                [weakSelf.raiseChargeList addObjectsFromArray:newArr];
+                
                 NSLog(@"%@",selectedUsers);
                 [weakSelf.assignerDataSource removeAllObjects];
                 [weakSelf.assignerDataSource addObjectsFromArray:selectedUsers];
