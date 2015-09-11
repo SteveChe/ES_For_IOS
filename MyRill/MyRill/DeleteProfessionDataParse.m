@@ -19,6 +19,7 @@
                                    NSNumber *errorCodeNum = responseDic[NETWORK_ERROR_CODE];
                                    
                                    if (errorCodeNum == nil || [errorCodeNum isEqual:[NSNull null]]) {
+                                       [self.delegate deleteProfessionFailure:@"请求有误!"];
                                        NSLog(@"请求有误！");
                                        return;
                                    }
@@ -29,7 +30,7 @@
                                    }
                                }
                                failure:^(NSError *error) {
-                                   [self.delegate deleteProfessionFailure:nil];
+                                   [self.delegate deleteProfessionFailure:@"请求失败!"];
                                    NSLog(@"%@",[error debugDescription]);
                                }];
 }

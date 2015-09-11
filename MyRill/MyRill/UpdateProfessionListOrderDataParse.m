@@ -20,6 +20,7 @@
                                            
                                            if (errorCodeNum == nil || [errorCodeNum isEqual:[NSNull null]]) {
                                                NSLog(@"请求有误！");
+                                               [self.delegate orderProfessionListFailure:@"请求有误!"];
                                                return;
                                            }
                                            
@@ -28,8 +29,8 @@
                                                [self.delegate orderProfessionListSuccess:@YES];
                                            }
                                        } failure:^(NSError *err) {
-                                           [self.delegate orderProfessionListFailure:nil];
-                                           //NSLog(@"%@",[err debugDescription]);
+                                           [self.delegate orderProfessionListFailure:@"请求失败!"];
+                                           NSLog(@"%@",[err debugDescription]);
                                        }];
 }
 

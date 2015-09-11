@@ -30,6 +30,8 @@
                                       NSDictionary *modelDic = (NSDictionary *)responseDic[NETWORK_OK_DATA];
                                       ESProfession *profession = [[ESProfession alloc] initWithDic:modelDic];
                                       [self.delegate addProfessionOperationSuccess:profession];
+                                  } else if (errorCode == 20) {
+                                      [self.delegate addProfessionOperationFailure:responseDic[NETWORK_ERROR_MESSAGE]];
                                   }
                               }
                               failure:^(NSError *error) {

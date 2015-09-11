@@ -34,6 +34,10 @@
                                         NSDictionary *modelDic = (NSDictionary *)responseDic[NETWORK_OK_DATA];
                                         ESProfession *profession = [[ESProfession alloc] initWithDic:modelDic];
                                         [self.delegate updateProfessionSuccess:profession];
+                                    } else if (errorCode == 20) {
+                                        [self.delegate updateProfessionFailure:responseDic[NETWORK_ERROR_MESSAGE]];
+                                    } else {
+                                        //empty
                                     }
                                 } failure:^(NSError *err) {
                                     [self.delegate updateProfessionFailure:@"请求失败!"];

@@ -18,8 +18,9 @@
 #import "AddProfessionDataParse.h"
 #import "DeleteProfessionDataParse.h"
 #import "UpdateProfessionListOrderDataParse.h"
+#import "CustomShowMessage.h"
 
-@interface EditProfessionViewController () <UITableViewDataSource, UITableViewDelegate, GetProfessionListDelegate, AddProfessionDelegate, DeleteProfessionDelegate, UpdateProfessionListOrderDelegate>
+@interface EditProfessionViewController () <UITableViewDataSource, UITableViewDelegate, GetProfessionListDelegate, DeleteProfessionDelegate, UpdateProfessionListOrderDelegate>
 
 @property (nonatomic, strong) UIView *footerView;
 @property (nonatomic, strong) UITableView *tableView;
@@ -28,7 +29,6 @@
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) NSMutableArray *cacheDataSource;
 @property (nonatomic, strong) GetProfessionListDataParse *getProfessionListDP;
-@property (nonatomic, strong) AddProfessionDataParse *addProfessionDP;
 @property (nonatomic, strong) DeleteProfessionDataParse *deleteProfessionDP;
 @property (nonatomic, strong) UpdateProfessionListOrderDataParse *updateProfessionListOrderDP;
 
@@ -74,42 +74,9 @@
 }
 
 #pragma mark - ProfessionDataDelegate methods
-- (void)professionOperationSuccess:(id)context {
-    //更新业务列表
-    if ([context isKindOfClass:[NSArray class]]) {
-        self.dataSource = nil;
-        [self.dataSource addObjectsFromArray:context];
-        ESProfession *profession = [[ESProfession alloc] init];
-        profession.icon_url = @"add";
-        [self.dataSource addObject:profession];
-        [self.cacheDataSource removeAllObjects];
-        [self.cacheDataSource addObjectsFromArray:self.dataSource];
-        
-        [self.tableView reloadData];
-        
-        return;
-    }
-    
-    //删除业务列表项
-    [self.dataSource removeObjectAtIndex:self.deleteIndexPath.row];
-    [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:self.deleteIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-}
-
-- (void)professionOperationFailure:(NSString *)errorMsg {
-    self.dataSource = nil;
-    self.dataSource = [NSMutableArray arrayWithArray:self.cacheDataSource];
-    
-    [self.tableView reloadData];
-    
-    NSLog(@"删除业务失败,请检查网络");
-}
-
 - (void)getProfessionListSuccess:(NSArray *)list {
     [self.dataSource removeAllObjects];
     [self.dataSource addObjectsFromArray:list];
-    ESProfession *profession = [[ESProfession alloc] init];
-    profession.icon_url = @"add";
-    [self.dataSource addObject:profession];
     [self.cacheDataSource removeAllObjects];
     [self.cacheDataSource addObjectsFromArray:self.dataSource];
     
@@ -117,33 +84,48 @@
 }
 
 - (void)getProfessionListFailure:(NSString *)errorMsg {
-    
+    [[CustomShowMessage getInstance] showNotificationMessage:errorMsg];
 }
 
-- (void)orderProfessionListResult:(id)context {
-    if (context == nil) {
-        NSLog(@"排序失败!");
-    } else {
-        
-    }
-}
-
-- (void)addProfessionSuccess:(ESProfession *)profession {
-    [self.dataSource addObject:profession];
-    [self.tableView reloadData];
-}
-
-- (void)modifyProfessionSuccess:(ESProfession *)profession {
-    for (int i = 0; i < self.dataSource.count; i ++) {
-        ESProfession *temp = (ESProfession *)self.dataSource[i];
-        if ([profession.professionId isEqualToNumber:temp.professionId]) {
-            [self.dataSource removeObjectAtIndex:i];
-            [self.dataSource insertObject:profession atIndex:i];
-        }
-    }
+- (void)orderProfessionListSuccess:(NSArray *)orderList {
+    [self.dataSource removeAllObjects];
+    [self.dataSource addObjectsFromArray:orderList];
+    [self.cacheDataSource removeAllObjects];
+    [self.cacheDataSource addObjectsFromArray:self.dataSource];
     
     [self.tableView reloadData];
 }
+
+- (void)orderProfessionListFailure:(NSString *)errorMsg {
+    [self.dataSource removeAllObjects];
+    [self.dataSource addObjectsFromArray:self.cacheDataSource];
+    
+    [self.tableView reloadData];
+    
+    [[CustomShowMessage getInstance] showNotificationMessage:errorMsg];
+}
+
+- (void)deleteProfessionSuccess {
+    [self.dataSource removeObjectAtIndex:self.deleteIndexPath.row];
+    [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:self.deleteIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+}
+
+- (void)deleteProfessionFailure:(NSString *)errorMsg {
+    
+    [[CustomShowMessage getInstance] showNotificationMessage:errorMsg];
+}
+
+//- (void)modifyProfessionSuccess:(ESProfession *)profession {
+//    for (int i = 0; i < self.dataSource.count; i ++) {
+//        ESProfession *temp = (ESProfession *)self.dataSource[i];
+//        if ([profession.professionId isEqualToNumber:temp.professionId]) {
+//            [self.dataSource removeObjectAtIndex:i];
+//            [self.dataSource insertObject:profession atIndex:i];
+//        }
+//    }
+//    
+//    [self.tableView reloadData];
+//}
 
 #pragma mark - UITableViewDataSource&UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -238,7 +220,6 @@
 
 - (void)onAddBtnClicked:(UIButton *)sender {
     AddProfessionViewController *addProfessionVC = [[AddProfessionViewController alloc] init];
-    addProfessionVC.delegate = self;
     [self.navigationController pushViewController:addProfessionVC animated:YES];
 }
 
@@ -261,7 +242,6 @@
     
     return _tableView;
 }
-
 
 - (UIView *)footerView {
     if (!_footerView) {
@@ -307,6 +287,24 @@
     }
     
     return _getProfessionListDP;
+}
+
+- (DeleteProfessionDataParse *)deleteProfessionDP {
+    if (!_deleteProfessionDP) {
+        _deleteProfessionDP = [[DeleteProfessionDataParse alloc] init];
+        _deleteProfessionDP.delegate = self;
+    }
+    
+    return _deleteProfessionDP;
+}
+
+- (UpdateProfessionListOrderDataParse *)updateProfessionListOrderDP {
+    if (!_updateProfessionListOrderDP) {
+        _updateProfessionListOrderDP = [[UpdateProfessionListOrderDataParse alloc ] init];
+        _updateProfessionListOrderDP.delegate = self;
+    }
+    
+    return _updateProfessionListOrderDP;
 }
 
 @end

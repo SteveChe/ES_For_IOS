@@ -10,7 +10,7 @@
 
 @protocol UpdateProfessionListOrderDelegate <NSObject>
 
-- (void)orderProfessionListSuccess:(id)context;
+- (void)orderProfessionListSuccess:(NSArray *)orderList;
 - (void)orderProfessionListFailure:(NSString *)errorMsg;
 
 @end

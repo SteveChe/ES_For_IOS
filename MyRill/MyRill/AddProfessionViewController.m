@@ -10,6 +10,7 @@
 #import "ColorHandler.h"
 #import "AddProfessionDataParse.h"
 #import "ESProfession.h"
+#import "CustomShowMessage.h"
 
 @interface AddProfessionViewController () <AddProfessionDataDelegate>
 
@@ -38,25 +39,13 @@
 
 #pragma mark - ProfessionDataDelegate methods
 - (void)addProfessionOperationSuccess:(ESProfession *)profession {
-    ESProfession *newProfession = (ESProfession *)profession;
-    [self.delegate addProfessionSuccess:newProfession];
+//    ESProfession *newProfession = (ESProfession *)profession;
+    [[CustomShowMessage getInstance] showNotificationMessage:@"添加业务成功!"];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)addProfessionOperationFailure:(NSString *)errorMsg {
-
-    NSString *msg = @"";
-    if ([errorMsg isEqualToString:@"添加失败"]) {
-        msg = @"请输入一个有效的URL!";
-    } else {
-        msg = @"添加业务失败,请检查网络";
-    }
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
-                                                    message:@"请输入一个有效的URL!"
-                                                   delegate:self
-                                          cancelButtonTitle:@"知道了!"
-                                          otherButtonTitles:nil, nil];
-    [alert show];
+    [[CustomShowMessage getInstance] showNotificationMessage:errorMsg];
 }
 
 #pragma mark - response events
