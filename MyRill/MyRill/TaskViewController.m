@@ -678,16 +678,19 @@
         NSString* chat_id = self.taskModel.chatID;
         
         [[RCIMClient sharedRCIMClient] getDiscussion:chat_id success:^(RCDiscussion* discussion) {
-            if (discussion) {
-                ChatViewController *chatViewController = [[ChatViewController alloc] init];
-                chatViewController.conversationType = ConversationType_DISCUSSION;
-                chatViewController.targetId = chat_id;
-                chatViewController.title = discussion.discussionName;
-                
-                UITabBarController *tabbarVC = weakSelf.navigationController.viewControllers[0];
-                [weakSelf.navigationController popToViewController:tabbarVC animated:YES];
-                [tabbarVC.navigationController  pushViewController:chatViewController animated:YES];
-            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (discussion) {
+                    ChatViewController *chatViewController = [[ChatViewController alloc] init];
+                    chatViewController.conversationType = ConversationType_DISCUSSION;
+                    chatViewController.targetId = chat_id;
+                    chatViewController.title = discussion.discussionName;
+                    
+                    UITabBarController *tabbarVC = weakSelf.navigationController.viewControllers[0];
+                    [weakSelf.navigationController popToViewController:tabbarVC animated:YES];
+                    [tabbarVC.navigationController  pushViewController:chatViewController animated:YES];
+                }
+            });
+
         } error:^(RCErrorCode status){
             NSLog(@"直接进入会话界面失败");
             NSLog(@"%ld",(long)status);
