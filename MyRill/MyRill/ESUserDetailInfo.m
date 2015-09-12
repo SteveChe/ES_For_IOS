@@ -45,6 +45,12 @@
             self.position = dic[@"position"];
         }
         
+        if ([ColorHandler isNullOrEmptyString:dic[@"department"]]) {
+            self.position = @"";
+        } else {
+            self.position = dic[@"department"];
+        }
+        
         if ([ColorHandler isNullOrEmptyString:dic[@"gender"]]) {
             self.gender = @"";
         } else {
