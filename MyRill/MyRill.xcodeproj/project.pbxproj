@@ -13,8 +13,8 @@
 		2B0443751BA1AE4B00BC7BF4 /* UpdateProfessionListOrderDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B0443741BA1AE4B00BC7BF4 /* UpdateProfessionListOrderDataParse.m */; };
 		2B14CC9E1B93346000CBD524 /* SendTaskImageDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B14CC9D1B93346000CBD524 /* SendTaskImageDataParse.m */; };
 		2B1B88E11B803BA900FAF650 /* ChangeUserMsgDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B1B88E01B803BA900FAF650 /* ChangeUserMsgDataParse.m */; };
-		2B1B88E51B803CEA00FAF650 /* UserNameAndPositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B1B88E31B803CEA00FAF650 /* UserNameAndPositionViewController.m */; };
-		2B1B88E61B803CEA00FAF650 /* UserNameAndPositionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B1B88E41B803CEA00FAF650 /* UserNameAndPositionViewController.xib */; };
+		2B1B88E51B803CEA00FAF650 /* NameMailDepartmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B1B88E31B803CEA00FAF650 /* NameMailDepartmentViewController.m */; };
+		2B1B88E61B803CEA00FAF650 /* NameMailDepartmentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B1B88E41B803CEA00FAF650 /* NameMailDepartmentViewController.xib */; };
 		2B1B88EA1B803D0C00FAF650 /* UserDescriptionChangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B1B88E81B803D0C00FAF650 /* UserDescriptionChangeViewController.m */; };
 		2B1B88EB1B803D0C00FAF650 /* UserDescriptionChangeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B1B88E91B803D0C00FAF650 /* UserDescriptionChangeViewController.xib */; };
 		2B26E1041B4AA379000FE4D3 /* ESProfession.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B26E1031B4AA379000FE4D3 /* ESProfession.m */; };
@@ -355,9 +355,9 @@
 		2B14CC9D1B93346000CBD524 /* SendTaskImageDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendTaskImageDataParse.m; sourceTree = "<group>"; };
 		2B1B88DF1B803BA900FAF650 /* ChangeUserMsgDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeUserMsgDataParse.h; sourceTree = "<group>"; };
 		2B1B88E01B803BA900FAF650 /* ChangeUserMsgDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeUserMsgDataParse.m; sourceTree = "<group>"; };
-		2B1B88E21B803CEA00FAF650 /* UserNameAndPositionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserNameAndPositionViewController.h; sourceTree = "<group>"; };
-		2B1B88E31B803CEA00FAF650 /* UserNameAndPositionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserNameAndPositionViewController.m; sourceTree = "<group>"; };
-		2B1B88E41B803CEA00FAF650 /* UserNameAndPositionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserNameAndPositionViewController.xib; sourceTree = "<group>"; };
+		2B1B88E21B803CEA00FAF650 /* NameMailDepartmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameMailDepartmentViewController.h; sourceTree = "<group>"; };
+		2B1B88E31B803CEA00FAF650 /* NameMailDepartmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameMailDepartmentViewController.m; sourceTree = "<group>"; };
+		2B1B88E41B803CEA00FAF650 /* NameMailDepartmentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NameMailDepartmentViewController.xib; sourceTree = "<group>"; };
 		2B1B88E71B803D0C00FAF650 /* UserDescriptionChangeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDescriptionChangeViewController.h; sourceTree = "<group>"; };
 		2B1B88E81B803D0C00FAF650 /* UserDescriptionChangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDescriptionChangeViewController.m; sourceTree = "<group>"; };
 		2B1B88E91B803D0C00FAF650 /* UserDescriptionChangeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserDescriptionChangeViewController.xib; sourceTree = "<group>"; };
@@ -1367,9 +1367,9 @@
 				2B39C95D1B272221007BAC7A /* QRCodeViewController.h */,
 				2B39C95E1B272221007BAC7A /* QRCodeViewController.m */,
 				2BC821321B5B839F0090E2C1 /* QRCodeViewController.xib */,
-				2B1B88E21B803CEA00FAF650 /* UserNameAndPositionViewController.h */,
-				2B1B88E31B803CEA00FAF650 /* UserNameAndPositionViewController.m */,
-				2B1B88E41B803CEA00FAF650 /* UserNameAndPositionViewController.xib */,
+				2B1B88E21B803CEA00FAF650 /* NameMailDepartmentViewController.h */,
+				2B1B88E31B803CEA00FAF650 /* NameMailDepartmentViewController.m */,
+				2B1B88E41B803CEA00FAF650 /* NameMailDepartmentViewController.xib */,
 				2B1B88E71B803D0C00FAF650 /* UserDescriptionChangeViewController.h */,
 				2B1B88E81B803D0C00FAF650 /* UserDescriptionChangeViewController.m */,
 				2B1B88E91B803D0C00FAF650 /* UserDescriptionChangeViewController.xib */,
@@ -2112,7 +2112,7 @@
 				2BC8213B1B5C9FF70090E2C1 /* ShowQRCodeViewController.xib in Resources */,
 				2BC227761B942A3600E3163A /* Overlay.png in Resources */,
 				F23059BB1B52C141004599FA /* RCDAddressBookViewTableViewCell.xib in Resources */,
-				2B1B88E61B803CEA00FAF650 /* UserNameAndPositionViewController.xib in Resources */,
+				2B1B88E61B803CEA00FAF650 /* NameMailDepartmentViewController.xib in Resources */,
 				F256CB801B6E4247009478C2 /* RCDJoinEnterpriseViewController.xib in Resources */,
 				2B2B84AA1BA013700043EFD4 /* BMCLoginViewController.xib in Resources */,
 				F2467EFC1B8DCF1F0055B78B /* RootTimeCell.xib in Resources */,
@@ -2285,7 +2285,7 @@
 				F22FE2941B3B000400A1A997 /* UserSettingViewController.m in Sources */,
 				F29591141B9B3A0600ED0B99 /* RCDAcceptAddressBookTableViewCell.m in Sources */,
 				F2467EF91B8DCF1F0055B78B /* RootOutChatCell.m in Sources */,
-				2B1B88E51B803CEA00FAF650 /* UserNameAndPositionViewController.m in Sources */,
+				2B1B88E51B803CEA00FAF650 /* NameMailDepartmentViewController.m in Sources */,
 				2B5A59221B494C2B000382D7 /* ChangePhoneNumDataParse.m in Sources */,
 				2BC227701B942A3600E3163A /* ELCConsole.m in Sources */,
 				F234616F1B5AA0FD00C88FAC /* FMDatabaseAdditions.m in Sources */,

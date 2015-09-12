@@ -22,7 +22,7 @@
 #import "ShowQRCodeViewController.h"
 #import "UIImageView+WebCache.h"
 #import "UserInfoDataSource.h"
-#import "UserNameAndPositionViewController.h"
+#import "NameMailDepartmentViewController.h"
 #import "ESNavigationController.h"
 #import "UserDescriptionChangeViewController.h"
 #import "GetContactDetailDataParse.h"
@@ -36,6 +36,7 @@
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIImageView *userIcon;
 @property (weak, nonatomic) IBOutlet UILabel *UserNameLbl;
+@property (weak, nonatomic) IBOutlet UILabel *mailLbl;
 @property (weak, nonatomic) IBOutlet UILabel *UserEnterpriseLbl;
 @property (weak, nonatomic) IBOutlet UIImageView *userEnterpriseImg;
 @property (weak, nonatomic) IBOutlet UILabel *UserPositionLbl;
@@ -102,6 +103,7 @@
     //更新头像缓存的url，若url有变化
     [self.userIcon sd_setImageWithURL:[NSURL URLWithString:userDetailInfo.portraitUri] placeholderImage:[UIImage imageNamed:@"头像_100"]];
     self.UserNameLbl.text = userDetailInfo.userName;
+    self.mailLbl.text = userDetailInfo.email;
     self.UserEnterpriseLbl.text = userDetailInfo.enterprise.enterpriseName;
     [self.userEnterpriseImg sd_setImageWithURL:[NSURL URLWithString:userDetailInfo.enterprise.portraitUri]
                               placeholderImage:nil];
@@ -220,7 +222,7 @@
     switch (sender.tag) {
         case 902:
             {
-                UserNameAndPositionViewController *nameAndPositionVC = [[UserNameAndPositionViewController alloc] init];
+                NameMailDepartmentViewController *nameAndPositionVC = [[NameMailDepartmentViewController alloc] init];
                 nameAndPositionVC.title = @"用户名修改";
                 nameAndPositionVC.type = ESUserMsgName;
                 nameAndPositionVC.userDetailInfo = self.userDetailInfo;
@@ -231,6 +233,18 @@
             }
             break;
         case 903:
+        {
+            NameMailDepartmentViewController *nameAndPositionVC = [[NameMailDepartmentViewController alloc] init];
+            nameAndPositionVC.title = @"邮箱修改";
+            nameAndPositionVC.type = ESUserMail;
+            nameAndPositionVC.userDetailInfo = self.userDetailInfo;
+            ESNavigationController *nav = [[ESNavigationController alloc] initWithRootViewController:nameAndPositionVC];
+            [self.navigationController presentViewController:nav
+                                                    animated:YES
+                                                  completion:nil];
+        }
+            break;
+        case 904:
         {
             if ([ColorHandler isNullOrEmptyString:self.UserEnterpriseLbl.text]) {
                 return;
@@ -243,11 +257,11 @@
             [self.navigationController pushViewController:rcdAddressBookEnterpriseDetailVC animated:YES];            
         }
             break;
-        case 904:
+        case 905:
             {
-                UserNameAndPositionViewController *nameAndPositionVC = [[UserNameAndPositionViewController alloc] init];
-                nameAndPositionVC.title = @"职位修改";
-                nameAndPositionVC.type = ESUserMsgPosition;
+                NameMailDepartmentViewController *nameAndPositionVC = [[NameMailDepartmentViewController alloc] init];
+                nameAndPositionVC.title = @"部门修改";
+                nameAndPositionVC.type = ESUserMsgDepartment;
                 nameAndPositionVC.userDetailInfo = self.userDetailInfo;
                 ESNavigationController *nav = [[ESNavigationController alloc] initWithRootViewController:nameAndPositionVC];
                 [self.navigationController presentViewController:nav
@@ -255,7 +269,7 @@
                                                       completion:nil];
             }
             break;
-        case 905:
+        case 906:
             {
                 if (![ColorHandler isNullOrEmptyString:self.userDetailInfo.enterprise_qrcode]) {
                     ShowQRCodeViewController *showQRCodeVC = [[ShowQRCodeViewController alloc] init];
@@ -265,7 +279,7 @@
                 }
             }
             break;
-        case 906:
+        case 907:
             {
                 if (![ColorHandler isNullOrEmptyString:self.userDetailInfo.qrcode]) {
                     ShowQRCodeViewController *showQRCodeVC = [[ShowQRCodeViewController alloc] init];
@@ -275,7 +289,7 @@
                 }
             }
             break;
-        case 907:
+        case 908:
             {
                 UserDescriptionChangeViewController *userDescriptionVC = [[UserDescriptionChangeViewController alloc] init];
                 userDescriptionVC.title = @"个人简介修改";
