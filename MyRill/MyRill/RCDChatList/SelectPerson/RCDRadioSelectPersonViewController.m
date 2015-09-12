@@ -47,7 +47,7 @@
     UINib *rcdCellNib = [UINib nibWithNibName:@"RCDSelectPersonTableViewCell" bundle:nil];
     [self.tableView registerNib:rcdCellNib forCellReuseIdentifier:@"RCDSelectPersonTableViewCell"];
     [self.searchDisplayController1.searchResultsTableView registerNib:rcdCellNib forCellReuseIdentifier:@"RCDSelectPersonTableViewCell"];
-    _selectUsersInSearch = [NSMutableArray array];
+    _selectUsersInSearch = [NSMutableArray arrayWithArray:self.seletedUsers];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -80,20 +80,21 @@
 //clicked done
 -(void) clickedDone:(id) sender
 {
-    NSArray *indexPaths = nil;
-
-    if (self.bSearchDisplay)
-    {
-        indexPaths = [self.searchDisplayController1.searchResultsTableView indexPathsForSelectedRows];
-    }
-    else
-    {
-        indexPaths = [self.tableView indexPathsForSelectedRows];
-    }
+//    NSArray *indexPaths = nil;
+//    if (self.bSearchDisplay)
+//    {
+//        indexPaths = [self.searchDisplayController1.searchResultsTableView indexPathsForSelectedRows];
+//    }
+//    else
+//    {
+//        indexPaths = [self.tableView indexPathsForSelectedRows];
+//    }
 
 //    NSArray *indexPaths = [self.tableView indexPathsForSelectedRows];
-    if ((!indexPaths||indexPaths.count == 0) && self.seletedUsers.count == 0){
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"请选择联系人!" message:nil preferredStyle:UIAlertControllerStyleAlert];
+//    if (self.selectUsersInSearch.count == 0 && self.seletedUsers.count == 0){
+    if (self.selectUsersInSearch.count == 0 ){
+
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"请选择联系人!" message:nil preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *enterAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil];
         [alertController addAction:enterAction];
         [self showDetailViewController:alertController sender:self];
@@ -102,40 +103,44 @@
     
     //get seleted users
     NSMutableArray *seletedUsers = [NSMutableArray new];
-    for (NSIndexPath *indexPath in indexPaths) {
-        //        NSString *key = [self.allKeys objectAtIndex:indexPath.section];
-        //        NSArray *arrayForKey = [self.allFriends objectForKey:key];
-        ESContactList* contactList = self.friends[indexPath.section];
-        
-        ESUserInfo *user = contactList.contactList[indexPath.row];
-        
-        //转成RCDUserInfo
-        ESUserInfo *userInfo = [ESUserInfo new];
-        userInfo.userId = user.userId;
-        userInfo.userName = user.userName;
-        userInfo.portraitUri = user.portraitUri;
-        [seletedUsers addObject:userInfo];
+//    for (NSIndexPath *indexPath in indexPaths) {
+//        //        NSString *key = [self.allKeys objectAtIndex:indexPath.section];
+//        //        NSArray *arrayForKey = [self.allFriends objectForKey:key];
+//        ESContactList* contactList = self.friends[indexPath.section];
+//        
+//        ESUserInfo *user = contactList.contactList[indexPath.row];
+//        
+//        //转成RCDUserInfo
+//        ESUserInfo *userInfo = [ESUserInfo new];
+//        userInfo.userId = user.userId;
+//        userInfo.userName = user.userName;
+//        userInfo.portraitUri = user.portraitUri;
+//        [seletedUsers addObject:userInfo];
+//    }
+    
+    for (ESUserInfo* user in self.selectUsersInSearch )
+    {
+        [seletedUsers addObject:user];
     }
 
-    for (ESUserInfo* user in self.seletedUsers )
-    {
-        BOOL bFind = NO;
-        for (ESUserInfo* userInSelected in seletedUsers)
-        {
-            if (userInSelected.userId == nil || user.userId == nil)
-            {
-                continue;
-            }
-            if ([userInSelected.userId isEqualToString:user.userId])
-            {
-                bFind = YES;
-            }
-        }
-        
-        if (!bFind) {
-            [seletedUsers addObject:user];
-        }
-    }
+//    for (ESUserInfo* user in self.seletedUsers )
+//    {
+//        BOOL bFind = NO;
+//        for (ESUserInfo* userInSelected in seletedUsers)
+//        {
+//            if (userInSelected.userId == nil || user.userId == nil)
+//            {
+//                continue;
+//            }
+//            if ([userInSelected.userId isEqualToString:user.userId])
+//            {
+//                bFind = YES;
+//            }
+//        }
+//        if (!bFind) {
+//            [seletedUsers addObject:user];
+//        }
+//    }
     
     //excute the clickDoneCompletion
     if (self.clickDoneCompletion) {
@@ -202,20 +207,24 @@
         
         
         //设置选中状态
-        for (ESUserInfo *userInfo in self.seletedUsers) {
+//        for (ESUserInfo *userInfo in self.seletedUsers) {
+//            if ([user.userId isEqualToString:userInfo.userId]) {
+//                [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionBottom];
+//                if (_type == e_Selected_Check_Box_UnDeselect)
+//                {
+//                    [cell setUserInteractionEnabled:NO];
+//                }
+//            }
+//        }
+        
+        //设置选中状态
+        for (ESUserInfo *userInfo in self.selectUsersInSearch) {
             if ([user.userId isEqualToString:userInfo.userId]) {
                 [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionBottom];
                 if (_type == e_Selected_Check_Box_UnDeselect)
                 {
                     [cell setUserInteractionEnabled:NO];
                 }
-            }
-        }
-        
-        //设置选中状态
-        for (ESUserInfo *userInfo in self.selectUsersInSearch) {
-            if ([user.userId isEqualToString:userInfo.userId]) {
-                [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionBottom];
             }
         }
         
@@ -232,20 +241,24 @@
         }
         
         //设置选中状态
-        for (ESUserInfo *userInfo in self.seletedUsers) {
+//        for (ESUserInfo *userInfo in self.seletedUsers) {
+//            if ([user.userId isEqualToString:userInfo.userId]) {
+//                [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionBottom];
+//                if (_type == e_Selected_Check_Box_UnDeselect)
+//                {
+//                    [cell setUserInteractionEnabled:NO];
+//                }
+//            }
+//        }
+        
+        //设置选中状态
+        for (ESUserInfo *userInfo in self.selectUsersInSearch) {
             if ([user.userId isEqualToString:userInfo.userId]) {
                 [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionBottom];
                 if (_type == e_Selected_Check_Box_UnDeselect)
                 {
                     [cell setUserInteractionEnabled:NO];
                 }
-            }
-        }
-        
-        //设置选中状态
-        for (ESUserInfo *userInfo in self.selectUsersInSearch) {
-            if ([user.userId isEqualToString:userInfo.userId]) {
-                [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionBottom];
             }
         }
         
@@ -265,8 +278,13 @@
         ESUserInfo *user = self.searchResult[indexPath.row];
         if(user)
         {
+            if (_type == e_Selected_Person_Radio)
+            {
+                [self.selectUsersInSearch removeAllObjects];
+            }
             [self.selectUsersInSearch addObject:user];
             [self.tableView reloadData];
+
         }
         
     }
@@ -275,10 +293,14 @@
         ESContactList* contactList = self.friends[indexPath.section];
         ESUserInfo *user = contactList.contactList[indexPath.row];
         
-        if(user){
+        if(user)
+        {
+            if (_type == e_Selected_Person_Radio)
+            {
+                [self.selectUsersInSearch removeAllObjects];
+            }
             [self.selectUsersInSearch addObject:user];
         }
-        
     }
 }
 
@@ -290,11 +312,26 @@
     {
         [self.searchDisplayController1 setActive:NO animated:NO];
         ESUserInfo *user = self.searchResult[indexPath.row];
-        if(user)
-        {
-            [self.selectUsersInSearch removeObject:user];
-            [self.tableView reloadData];
+        if(user){
+            for(ESUserInfo* userTemp in self.selectUsersInSearch)
+            {
+                if ([userTemp.userId isEqualToString:user.userId])
+                {
+                    [self.selectUsersInSearch removeObject:userTemp];
+                    break;
+                }
+            }
+//            for (ESUserInfo* userTemp in self.seletedUsers)
+//            {
+//                if ([userTemp.userId isEqualToString:user.userId])
+//                {
+//                    [self.seletedUsers removeObject:userTemp];
+//                    break;
+//                }
+//                
+//            }
         }
+        [self.tableView reloadData];
         
     }
     else
@@ -303,7 +340,23 @@
         ESUserInfo *user = contactList.contactList[indexPath.row];
         
         if(user){
-            [self.selectUsersInSearch removeObject:user];
+            for(ESUserInfo* userTemp in self.selectUsersInSearch)
+            {
+                if ([userTemp.userId isEqualToString:user.userId])
+                {
+                    [self.selectUsersInSearch removeObject:userTemp];
+                    break;
+                }
+            }
+//            for (ESUserInfo* userTemp in self.seletedUsers)
+//            {
+//                if ([userTemp.userId isEqualToString:user.userId])
+//                {
+//                    [self.seletedUsers removeObject:userTemp];
+//                    break;
+//                }
+//
+//            }
         }
         
     }
