@@ -227,6 +227,25 @@
     [self showTips:@"修改成功!" mode:MRProgressOverlayViewModeCheckmark isDismiss:YES isSucceuss:YES];
     NSLog(@"%@",self.raiseObserverList);
     NSLog(@"%@",self.raiseChargeList);
+    
+    NSMutableArray *userIdList = [NSMutableArray new];
+    for (ESUserInfo *contactor in self.raiseObserverList) {
+        [userIdList addObject:contactor.userId];
+    }
+    for (ESUserInfo *contactor in self.raiseChargeList) {
+        [userIdList addObject:contactor.userId];
+    }
+    if (![self.taskModel.chatID isKindOfClass:[NSNull class]] && self.taskModel.chatID != nil && ![self.taskModel.chatID isEqualToString:@""])
+    {
+        [[RCIMClient sharedRCIMClient] addMemberToDiscussion:self.taskModel.chatID userIdList:userIdList success:^(RCDiscussion* discussion) {
+            
+        }error:^(RCErrorCode status){
+            NSLog(@"修改联系人失败");
+            NSLog(@"%ld",(long)status);
+        }];
+    }
+
+
 }
 
 - (void)editTaskFailed:(NSString *)errorMessage {
@@ -236,6 +255,20 @@
 - (void)updateObserverAndChatidSuccess {
     [self showTips:@"修改成功!" mode:MRProgressOverlayViewModeCheckmark isDismiss:YES isSucceuss:YES];
     NSLog(@"%@",self.raiseObserverList);
+    NSMutableArray *userIdList = [NSMutableArray new];
+    for (ESUserInfo *contactor in self.raiseObserverList) {
+        [userIdList addObject:contactor.userId];
+    }
+    if (![self.taskModel.chatID isKindOfClass:[NSNull class]] && self.taskModel.chatID != nil && ![self.taskModel.chatID isEqualToString:@""])
+    {
+        [[RCIMClient sharedRCIMClient] addMemberToDiscussion:self.taskModel.chatID userIdList:userIdList success:^(RCDiscussion* discussion) {
+            
+        }error:^(RCErrorCode status){
+            NSLog(@"修改联系人失败");
+            NSLog(@"%ld",(long)status);
+        }];
+    }
+
 }
 
 - (void)updateObserverAndChatidFailed:(NSString *)errorMessage {
