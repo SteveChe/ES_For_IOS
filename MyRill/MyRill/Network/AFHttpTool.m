@@ -677,7 +677,7 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
                           success:(void (^)(id))success
                           failure:(void (^)(NSError *))failure {
     NSDictionary *param = @{@"name":[ColorHandler isNullOrEmptyString:userInfo.userName]?@"":userInfo.userName,
-                            @"position":[ColorHandler isNullOrEmptyString:userInfo.position]?@"":userInfo.position,
+                            @"department":[ColorHandler isNullOrEmptyString:userInfo.position]?@"":userInfo.position,
                             @"description":[ColorHandler isNullOrEmptyString:userInfo.contactDescription]?@"":userInfo.contactDescription};
     
     [AFHttpTool requestWithMethod:RequestMethodTypePost protocolType:RequestProtocolTypeText

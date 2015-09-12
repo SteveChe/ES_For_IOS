@@ -70,6 +70,10 @@
         errorMsg = @"请输入密码!";
     } else if (![self.pwdTxtField.text isEqualToString:self.confirmPwdTxtField.text]) {
         errorMsg = @"两次密码输入不一致!";
+    } else if (self.pwdTxtField.text.length < 6 || self.confirmPwdTxtField.text.length > 16 ){
+        errorMsg = @"密码长度由6-16位数字或字母组成!";
+    }else {
+        //empty
     }
     
     if (errorMsg != nil) {

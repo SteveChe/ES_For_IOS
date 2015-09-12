@@ -127,6 +127,12 @@
                      {
                          userDetailInfo.email = email;
                      }
+                 
+                     NSString* department = [temDic valueForKey:@"department"];
+                     if (department != nil && ![department isEqual:[NSNull null]])
+                     {
+                         userDetailInfo.department = department;
+                     }
 
                      NSString* qrcode = [temDic valueForKey:@"qrcode"];
                      if (qrcode != nil && ![qrcode isEqual:[NSNull null]])

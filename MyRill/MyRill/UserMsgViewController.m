@@ -107,7 +107,7 @@
     self.UserEnterpriseLbl.text = userDetailInfo.enterprise.enterpriseName;
     [self.userEnterpriseImg sd_setImageWithURL:[NSURL URLWithString:userDetailInfo.enterprise.portraitUri]
                               placeholderImage:nil];
-    self.UserPositionLbl.text = userDetailInfo.position;
+    self.UserPositionLbl.text = userDetailInfo.department;
     self.userDescriptionLbl.text = [@"简介：" stringByAppendingString:userDetailInfo.contactDescription?userDetailInfo.contactDescription:@""];
     
     //若没有企业二维码信息，则不显示企业二维码占位图标和箭头

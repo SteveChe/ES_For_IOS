@@ -510,6 +510,7 @@
     [info enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         NSDictionary *dic = (NSDictionary *)obj;
         UIImage *image = dic[@"UIImagePickerControllerOriginalImage"];
+        image = [self scaleToSize:image];
         NSData *data;
         if (UIImagePNGRepresentation(image) == nil) {
             data = UIImageJPEGRepresentation(image, 1.0);
@@ -586,10 +587,13 @@
 
     //创建set过滤分配和关注中的重复联系人
     
-    NSMutableArray *totolContractorArr = [[NSMutableArray alloc] initWithCapacity:self.assignerDataSource.count + self.followsDataSource.count + 1];
+    NSMutableArray *totolContractorArr = [[NSMutableArray alloc] initWithCapacity:self.assignerDataSource.count + self.followsDataSource.count];
     [totolContractorArr addObjectsFromArray:self.assignerDataSource];
     [totolContractorArr addObjectsFromArray:self.followsDataSource];
-    [totolContractorArr addObject:self.taskModel.initiator];
+    
+    if (![self.userID isEqualToString:self.taskModel.initiator.userId]) {
+        [totolContractorArr addObject:self.taskModel.initiator];
+    }
     
     NSMutableString *discussionTitle = [NSMutableString string];
     NSMutableArray *userIdList = [NSMutableArray new];
@@ -1101,6 +1105,22 @@
     if (self.progress) {
         [self.progress dismiss:YES];
     }
+}
+
+//缩小上传图片4x倍的尺寸
+- (UIImage *)scaleToSize:(UIImage *)img{
+    // 创建一个bitmap的context
+    CGSize size = img.size;
+    // 并把它设置成为当前正在使用的context
+    UIGraphicsBeginImageContext(size);
+    // 绘制改变大小的图片
+    [img drawInRect:CGRectMake(0, 0, size.width / 2, size.height / 2)];
+    // 从当前context中创建一个改变大小后的图片
+    UIImage* scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+    // 使当前的context出堆栈
+    UIGraphicsEndImageContext();
+    // 返回新的改变大小后的图片
+    return scaledImage;
 }
 
 #pragma mark - setters&getters
