@@ -623,12 +623,13 @@
         [totolContractorArr addObject:self.taskModel.initiator];
     }
     
-    NSMutableString *discussionTitle = [NSMutableString string];
+//    NSMutableString *discussionTitle = [NSMutableString string];
+    NSString *discussionTitle = [self.taskModel.title stringByAppendingString:@"讨论组"];
     NSMutableArray *userIdList = [NSMutableArray new];
     for (ESUserInfo *contactor in totolContractorArr) {
-        if (![discussionTitle containsString:contactor.userName]) {
-            [discussionTitle appendString:[NSString stringWithFormat:@"%@%@", contactor.userName,@","]];
-        }
+//        if (![discussionTitle containsString:contactor.userName]) {
+//            [discussionTitle appendString:[NSString stringWithFormat:@"%@%@", contactor.userName,@","]];
+//        }
         [userIdList addObject:contactor.userId];
     }
     NSSet *set = [NSSet setWithArray:userIdList];
@@ -644,9 +645,10 @@
                                               cancelButtonTitle:@"知道了!"
                                               otherButtonTitles:nil, nil];
         [alert show];
+        return;
     }
     
-    [discussionTitle deleteCharactersInRange:NSMakeRange(discussionTitle.length - 1, 1)];
+    //[discussionTitle deleteCharactersInRange:NSMakeRange(discussionTitle.length - 1, 1)];
     __weak typeof(&*self)  weakSelf = self;
 
     if ([self.taskModel.chatID isKindOfClass:[NSNull class]] || self.taskModel.chatID == nil || [self.taskModel.chatID isEqualToString:@""]) {
@@ -669,7 +671,22 @@
                 [tabbarVC.navigationController  pushViewController:chat animated:YES];
             });
         } error:^(RCErrorCode status) {
-            
+            if ([[UIDevice currentDevice].systemVersion floatValue] < 8.0) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                                message:@"发起会话失败!"
+                                                               delegate:self
+                                                      cancelButtonTitle:@"知道了!"
+                                                      otherButtonTitles:nil, nil];
+                [alert show];
+            } else {
+                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示"
+                                                                                         message:@"发起会话失败!"
+                                                                                  preferredStyle:UIAlertControllerStyleAlert];
+                [alertController addAction:[UIAlertAction actionWithTitle:@"知道了!" style:UIAlertActionStyleDefault handler:nil]];
+                [self presentViewController:alertController
+                                   animated:YES
+                                 completion:nil];
+            }
             //没有错误信息提示!
             NSLog(@"create discussion Failed > %ld!", (long)status);
         }];
@@ -693,6 +710,24 @@
 
         } error:^(RCErrorCode status){
             NSLog(@"直接进入会话界面失败");
+            if (status == NOT_IN_DISCUSSION) {
+                if ([[UIDevice currentDevice].systemVersion floatValue] < 8.0) {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                                    message:@"您不在讨论组中!"
+                                                                   delegate:self
+                                                          cancelButtonTitle:@"知道了!"
+                                                          otherButtonTitles:nil, nil];
+                    [alert show];
+                } else {
+                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示"
+                                                                                             message:@"您不在讨论组中!"
+                                                                                      preferredStyle:UIAlertControllerStyleAlert];
+                    [alertController addAction:[UIAlertAction actionWithTitle:@"知道了!" style:UIAlertActionStyleDefault handler:nil]];
+                    [self presentViewController:alertController
+                                       animated:YES
+                                     completion:nil];
+                }
+            }
             NSLog(@"%ld",(long)status);
         }];
     }
