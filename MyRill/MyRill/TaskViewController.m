@@ -662,6 +662,14 @@
             }
         } error:^(RCErrorCode status){
             NSLog(@"直接进入会话界面失败");
+            if (status == 21406) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                                message:@"您不在讨论组中!"
+                                                               delegate:self
+                                                      cancelButtonTitle:@"知道了!"
+                                                      otherButtonTitles:nil, nil];
+                [alert show];
+            }
             NSLog(@"%ld",(long)status);
         }];
     }
