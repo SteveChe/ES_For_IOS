@@ -229,12 +229,9 @@
     NSLog(@"%@",self.raiseChargeList);
     
     NSMutableArray *userIdList = [NSMutableArray new];
-    for (ESUserInfo *contactor in self.raiseObserverList) {
-        [userIdList addObject:contactor.userId];
-    }
-    for (ESUserInfo *contactor in self.raiseChargeList) {
-        [userIdList addObject:contactor.userId];
-    }
+    [userIdList addObjectsFromArray:self.raiseObserverList];
+    [userIdList addObjectsFromArray:self.raiseChargeList];
+
     if (![self.taskModel.chatID isKindOfClass:[NSNull class]] && self.taskModel.chatID != nil && ![self.taskModel.chatID isEqualToString:@""])
     {
         [[RCIMClient sharedRCIMClient] addMemberToDiscussion:self.taskModel.chatID userIdList:userIdList success:^(RCDiscussion* discussion) {
@@ -256,9 +253,7 @@
     [self showTips:@"修改成功!" mode:MRProgressOverlayViewModeCheckmark isDismiss:YES isSucceuss:YES];
     NSLog(@"%@",self.raiseObserverList);
     NSMutableArray *userIdList = [NSMutableArray new];
-    for (ESUserInfo *contactor in self.raiseObserverList) {
-        [userIdList addObject:contactor.userId];
-    }
+    [userIdList addObjectsFromArray:self.raiseObserverList];
     if (![self.taskModel.chatID isKindOfClass:[NSNull class]] && self.taskModel.chatID != nil && ![self.taskModel.chatID isEqualToString:@""])
     {
         [[RCIMClient sharedRCIMClient] addMemberToDiscussion:self.taskModel.chatID userIdList:userIdList success:^(RCDiscussion* discussion) {
