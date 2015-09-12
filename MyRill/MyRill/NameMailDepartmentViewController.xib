@@ -5,10 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NameMailPositionViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NameMailDepartmentViewController">
             <connections>
                 <outlet property="holdView" destination="a5S-gs-5al" id="zPw-Aj-s2R"/>
-                <outlet property="nameMailPositionTxtField" destination="nuO-na-rw8" id="pBu-oo-juZ"/>
+                <outlet property="nameMailDepartmentTxtField" destination="nuO-na-rw8" id="dVw-9v-4W5"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

@@ -1,28 +1,28 @@
 //
-//  NameMailPositionViewController.m
+//  NameMailDepartmentViewController.m
 //  MyRill
 //
 //  Created by Siyuan Wang on 15/8/16.
 //
 //
 
-#import "NameMailPositionViewController.h"
+#import "NameMailDepartmentViewController.h"
 #import "ColorHandler.h"
 #import "ESUserDetailInfo.h"
 #import "MRProgress.h"
 #import "UserDefaultsDefine.h"
 
-@interface NameMailPositionViewController () <ChangeUserMsgDelegate>
+@interface NameMailDepartmentViewController () <ChangeUserMsgDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *holdView;
-@property (weak, nonatomic) IBOutlet UITextField *nameMailPositionTxtField;
+@property (weak, nonatomic) IBOutlet UITextField *nameMailDepartmentTxtField;
 
 @property (nonatomic, strong) ChangeUserMsgDataParse *changeUserMsgDP;
 @property (nonatomic, strong) MRProgressOverlayView *progress;
 
 @end
 
-@implementation NameMailPositionViewController
+@implementation NameMailDepartmentViewController
 
 #pragma mark - lifeCycle methods
 - (void)viewDidLoad {
@@ -44,11 +44,11 @@
     [self.view addGestureRecognizer:tap];
     
     if (self.type == ESUserMsgName) {
-        self.nameMailPositionTxtField.text = self.userDetailInfo.userName;
+        self.nameMailDepartmentTxtField.text = self.userDetailInfo.userName;
     } else if (self.type == ESUserMail) {
-        self.nameMailPositionTxtField.text = self.userDetailInfo.email;
+        self.nameMailDepartmentTxtField.text = self.userDetailInfo.email;
     } else {
-        self.nameMailPositionTxtField.text = self.userDetailInfo.department;
+        self.nameMailDepartmentTxtField.text = self.userDetailInfo.department;
     }
     
 }
@@ -73,7 +73,7 @@
 
 #pragma mark - response methods
 - (void)freeKeyboard {
-    [self.nameMailPositionTxtField resignFirstResponder];
+    [self.nameMailDepartmentTxtField resignFirstResponder];
 }
 
 - (void)confirmItemOnClicked {
@@ -83,7 +83,7 @@
     userInfo.userId = self.userDetailInfo.userId;
     
     if (self.type == ESUserMsgName) {
-        if ([ColorHandler isNullOrEmptyString:self.nameMailPositionTxtField.text]) {
+        if ([ColorHandler isNullOrEmptyString:self.nameMailDepartmentTxtField.text]) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
                                                             message:@"用户名不能为空"
                                                            delegate:self
@@ -92,11 +92,11 @@
             [alert show];
             return;
         }
-        userInfo.userName = self.nameMailPositionTxtField.text;
+        userInfo.userName = self.nameMailDepartmentTxtField.text;
         userInfo.position = self.userDetailInfo.position;
     } else {
         userInfo.userName = self.userDetailInfo.userName;
-        userInfo.position = self.nameMailPositionTxtField.text;
+        userInfo.position = self.nameMailDepartmentTxtField.text;
     }
     
     userInfo.contactDescription = self.userDetailInfo.contactDescription;

@@ -1,5 +1,5 @@
 //
-//  NameMailPositionViewController.h
+//  NameMailDepartmentViewController.h
 //  MyRill
 //
 //  Created by Siyuan Wang on 15/8/16.
@@ -13,10 +13,10 @@
 typedef enum : NSUInteger {
     ESUserMsgName = 300,
     ESUserMail,
-    ESUserMsgPosition
+    ESUserMsgDepartment
 } ESUserMsg;
 
-@interface NameMailPositionViewController : UIViewController
+@interface NameMailDepartmentViewController : UIViewController
 
 @property (nonatomic, assign) ESUserMsg type;
 @property (nonatomic, strong) ESUserDetailInfo *userDetailInfo;

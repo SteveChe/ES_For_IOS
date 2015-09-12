@@ -22,7 +22,7 @@
 #import "ShowQRCodeViewController.h"
 #import "UIImageView+WebCache.h"
 #import "UserInfoDataSource.h"
-#import "NameMailPositionViewController.h"
+#import "NameMailDepartmentViewController.h"
 #import "ESNavigationController.h"
 #import "UserDescriptionChangeViewController.h"
 #import "GetContactDetailDataParse.h"
@@ -222,7 +222,7 @@
     switch (sender.tag) {
         case 902:
             {
-                NameMailPositionViewController *nameAndPositionVC = [[NameMailPositionViewController alloc] init];
+                NameMailDepartmentViewController *nameAndPositionVC = [[NameMailDepartmentViewController alloc] init];
                 nameAndPositionVC.title = @"用户名修改";
                 nameAndPositionVC.type = ESUserMsgName;
                 nameAndPositionVC.userDetailInfo = self.userDetailInfo;
@@ -234,7 +234,7 @@
             break;
         case 903:
         {
-            NameMailPositionViewController *nameAndPositionVC = [[NameMailPositionViewController alloc] init];
+            NameMailDepartmentViewController *nameAndPositionVC = [[NameMailDepartmentViewController alloc] init];
             nameAndPositionVC.title = @"邮箱修改";
             nameAndPositionVC.type = ESUserMail;
             nameAndPositionVC.userDetailInfo = self.userDetailInfo;
@@ -259,9 +259,9 @@
             break;
         case 905:
             {
-                NameMailPositionViewController *nameAndPositionVC = [[NameMailPositionViewController alloc] init];
+                NameMailDepartmentViewController *nameAndPositionVC = [[NameMailDepartmentViewController alloc] init];
                 nameAndPositionVC.title = @"部门修改";
-                nameAndPositionVC.type = ESUserMsgPosition;
+                nameAndPositionVC.type = ESUserMsgDepartment;
                 nameAndPositionVC.userDetailInfo = self.userDetailInfo;
                 ESNavigationController *nav = [[ESNavigationController alloc] initWithRootViewController:nameAndPositionVC];
                 [self.navigationController presentViewController:nav
