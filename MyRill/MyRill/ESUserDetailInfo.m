@@ -45,12 +45,6 @@
             self.department = dic[@"department"];
         }
         
-//        if ([ColorHandler isNullOrEmptyString:dic[@"department"]]) {
-//            self.department = @"";
-//        } else {
-//            self.department = dic[@"department"];
-//        }
-        
         if ([ColorHandler isNullOrEmptyString:dic[@"gender"]]) {
             self.gender = @"";
         } else {

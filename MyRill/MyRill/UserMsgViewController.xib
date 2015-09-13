@@ -13,8 +13,8 @@
                 <outlet property="UserPositionLbl" destination="aeB-FY-ozp" id="rEd-DU-91C"/>
                 <outlet property="contentView" destination="uRq-6W-p4u" id="nXI-eJ-eGD"/>
                 <outlet property="enterpriseArrow" destination="MjY-wl-fne" id="ZGY-1o-XgO"/>
-                <outlet property="enterpriseQRCodeArrow" destination="uKC-P1-caB" id="dEr-ly-afc"/>
-                <outlet property="enterpriseQRCodeImg" destination="9Xg-pX-8Ba" id="Ol3-VP-yxr"/>
+                <outlet property="enterpriseQRCodeArrow" destination="uKC-P1-caB" id="lIi-Eu-cl3"/>
+                <outlet property="enterpriseQRCodeImg" destination="9Xg-pX-8Ba" id="aKz-Cs-e44"/>
                 <outlet property="mailLbl" destination="wVk-p3-hWD" id="2DP-C5-M2l"/>
                 <outlet property="personQRCodeArrow" destination="sTY-oT-5TR" id="oaD-cA-3pe"/>
                 <outlet property="personQRCodeImg" destination="pv6-MJ-yqc" id="cMk-33-gav"/>
@@ -139,8 +139,8 @@
                                             <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wVk-p3-hWD">
-                                            <rect key="frame" x="520" y="17" width="36" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wVk-p3-hWD">
+                                            <rect key="frame" x="556" y="27.5" width="0.0" height="0.0"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -275,10 +275,10 @@
                                             <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="二维码" translatesAutoresizingMaskIntoConstraints="NO" id="9Xg-pX-8Ba">
+                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="二维码" translatesAutoresizingMaskIntoConstraints="NO" id="9Xg-pX-8Ba">
                                             <rect key="frame" x="532" y="16" width="24" height="24"/>
                                         </imageView>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="右箭头" translatesAutoresizingMaskIntoConstraints="NO" id="uKC-P1-caB">
+                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="右箭头" translatesAutoresizingMaskIntoConstraints="NO" id="uKC-P1-caB">
                                             <rect key="frame" x="572" y="19" width="10" height="17"/>
                                         </imageView>
                                         <button opaque="NO" tag="906" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wIy-AD-713">
@@ -314,10 +314,10 @@
                                             <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="二维码" translatesAutoresizingMaskIntoConstraints="NO" id="pv6-MJ-yqc">
+                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="二维码" translatesAutoresizingMaskIntoConstraints="NO" id="pv6-MJ-yqc">
                                             <rect key="frame" x="532" y="15" width="24" height="24"/>
                                         </imageView>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="右箭头" translatesAutoresizingMaskIntoConstraints="NO" id="sTY-oT-5TR">
+                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="右箭头" translatesAutoresizingMaskIntoConstraints="NO" id="sTY-oT-5TR">
                                             <rect key="frame" x="572" y="19" width="10" height="17"/>
                                         </imageView>
                                         <button opaque="NO" tag="907" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yFj-SP-trP">
@@ -489,6 +489,6 @@
     <resources>
         <image name="二维码" width="24" height="24"/>
         <image name="右箭头" width="10" height="17"/>
-        <image name="头像_100" width="50" height="50"/>
+        <image name="头像_100" width="75" height="75"/>
     </resources>
 </document>
