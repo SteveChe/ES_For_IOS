@@ -53,10 +53,10 @@
             self.enterprise = [[ESEnterpriseInfo alloc] initWithDic:enterpriseDic];
         }
         
-        if ([ColorHandler isNullOrEmptyString:dic[@"position"]]) {
-            self.position = @"";
+        if ([ColorHandler isNullOrEmptyString:dic[@"department"]]) {
+            self.department = @"";
         } else {
-            self.position = dic[@"position"];
+            self.department = dic[@"department"];
         }
     }
     

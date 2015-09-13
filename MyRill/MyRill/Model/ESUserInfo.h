@@ -21,7 +21,9 @@
 /** 公司 */
 @property(nonatomic, strong) ESEnterpriseInfo *enterprise;
 /** 公司 职位*/
-@property(nonatomic, strong) NSString *position;
+//@property(nonatomic, strong) NSString *position;
+/** 公司 部门*/
+@property(nonatomic, strong) NSString *department;
 /** type */
 @property(nonatomic, strong) NSString *type;
 //**  0 非手机通讯录联系人 , 1 手机通讯录联系人 , 2 联系人请求

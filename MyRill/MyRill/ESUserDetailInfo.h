@@ -21,7 +21,7 @@
 /** 公司 */
 @property(nonatomic, strong) ESEnterpriseInfo* enterprise;
 /** 公司 职位*/
-@property(nonatomic, strong) NSString* position;
+//@property(nonatomic, strong) NSString* position;
 /** 公司 部门*/
 @property (nonatomic, strong) NSString *department;
 /** 邮箱 地址*/

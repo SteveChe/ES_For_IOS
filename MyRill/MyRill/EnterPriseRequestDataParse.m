@@ -140,9 +140,9 @@
                      }
                      
                      
-                     NSString* senderPosition = [senderDic objectForKey:@"position"];
-                     if (senderPosition!=nil && ![senderPosition isEqual:[NSNull null]] && [senderPosition length]>0) {
-                         senderUserInfo.position = senderPosition;
+                     NSString* senderDepartment = [senderDic objectForKey:@"department"];
+                     if (senderDepartment!=nil && ![senderDepartment isEqual:[NSNull null]] && [senderDepartment length]>0) {
+                         senderUserInfo.department = senderDepartment;
                      }
                      
                      NSString* senderAvatar = [senderDic objectForKey:@"avatar"];

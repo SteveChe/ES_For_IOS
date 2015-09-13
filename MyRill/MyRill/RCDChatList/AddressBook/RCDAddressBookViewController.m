@@ -229,13 +229,13 @@
         cell.accessoryType = UITableViewCellAccessoryNone;
         ESUserInfo *user = _searchResult[indexPath.row];
         if(user){
-            if (user.position == nil || [user.position isEqual:[NSNull null]]||[user.position length] <= 0)
+            if (user.department == nil || [user.department isEqual:[NSNull null]]||[user.department length] <= 0)
             {
                 cell.addressBookName.text = user.userName;
             }
             else
             {
-                cell.addressBookName.text = [NSString stringWithFormat:@"%@/%@",user.userName,user.position];
+                cell.addressBookName.text = [NSString stringWithFormat:@"%@/%@",user.userName,user.department];
             }
             [cell.ivAva sd_setImageWithURL:[NSURL URLWithString:user.portraitUri] placeholderImage:[UIImage imageNamed:@"头像_100"]];
             cell.ivAva.clipsToBounds = YES;
@@ -350,13 +350,13 @@
             
             ESUserInfo *user = contactList.contactList[indexPath.row];
             if(user){
-                if (user.position == nil || [user.position isEqual:[NSNull null]]||[user.position length] <= 0)
+                if (user.department == nil || [user.department isEqual:[NSNull null]]||[user.department length] <= 0)
                 {
                     cell.addressBookName.text = user.userName;
                 }
                 else
                 {
-                    cell.addressBookName.text = [NSString stringWithFormat:@"%@/%@",user.userName,user.position];
+                    cell.addressBookName.text = [NSString stringWithFormat:@"%@/%@",user.userName,user.department];
                 }
                 [cell.ivAva sd_setImageWithURL:[NSURL URLWithString:user.portraitUri] placeholderImage:[UIImage imageNamed:@"头像_100"]];
                 cell.ivAva.clipsToBounds = YES;

@@ -55,10 +55,10 @@ static NSString * const userTableName = @"USERINFO_TABLE";
 //存储用户信息
 -(void)insertUserToDB:(ESUserInfo*)user
 {
-    NSString *insertSql = @"REPLACE INTO USERINFO_TABLE (user_id, name, portrait_uri,phone_number,enterprise,position,type,status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    NSString *insertSql = @"REPLACE INTO USERINFO_TABLE (user_id, name, portrait_uri,phone_number,enterprise,department,type,status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     FMDatabaseQueue *queue = [DBHelper getDatabaseQueue];
     [queue inDatabase:^(FMDatabase *db) {
-        [db executeUpdate:insertSql,user.userId,user.userName,user.portraitUri,user.phoneNumber,user.enterprise,user.position,user.type,user.status];
+        [db executeUpdate:insertSql,user.userId,user.userName,user.portraitUri,user.phoneNumber,user.enterprise,user.department,user.type,user.status];
     }];
 }
 
@@ -76,7 +76,7 @@ static NSString * const userTableName = @"USERINFO_TABLE";
             userInfo.portraitUri = [rs stringForColumn:@"portrait_uri"];
             userInfo.phoneNumber = [rs stringForColumn:@"phone_number"];
             userInfo.enterprise = [rs stringForColumn:@"enterprise"];
-            userInfo.position = [rs stringForColumn:@"position"];
+            userInfo.department = [rs stringForColumn:@"department"];
             userInfo.type = [rs stringForColumn:@"type"];
             userInfo.status = [NSNumber numberWithInt: [rs intForColumn:@"status"] ];
         }
@@ -100,7 +100,7 @@ static NSString * const userTableName = @"USERINFO_TABLE";
             userInfo.portraitUri = [rs stringForColumn:@"portrait_uri"];
             userInfo.phoneNumber = [rs stringForColumn:@"phone_number"];
             userInfo.enterprise = [rs stringForColumn:@"enterprise"];
-            userInfo.position = [rs stringForColumn:@"position"];
+            userInfo.department = [rs stringForColumn:@"department"];
             userInfo.type = [rs stringForColumn:@"type"];
             userInfo.status = [NSNumber numberWithInt:[rs intForColumn:@"status"]];
             [contactList addObject:userInfo];
@@ -125,7 +125,7 @@ static NSString * const userTableName = @"USERINFO_TABLE";
             userInfo.portraitUri = [rs stringForColumn:@"portrait_uri"];
             userInfo.phoneNumber = [rs stringForColumn:@"phone_number"];
             userInfo.enterprise = [rs stringForColumn:@"enterprise"];
-            userInfo.position = [rs stringForColumn:@"position"];
+            userInfo.department = [rs stringForColumn:@"department"];
             userInfo.type = [rs stringForColumn:@"type"];
             userInfo.status = [NSNumber numberWithInt:[rs intForColumn:@"status"]];
             [contactList addObject:userInfo];
