@@ -69,8 +69,8 @@
                      forKey:DEFAULTS_USERNAME];
     [userDefaults setObject:[ColorHandler isNullOrEmptyString:userDetailInfo.phoneNumber]?@"":userDetailInfo.phoneNumber
                      forKey:DEFAULTS_USERPHONENUMBER];
-    [userDefaults setObject:[ColorHandler isNullOrEmptyString:userDetailInfo.position]?@"":userDetailInfo.position
-                     forKey:DEFAULTS_USERPOSITION];
+    [userDefaults setObject:[ColorHandler isNullOrEmptyString:userDetailInfo.department]?@"":userDetailInfo.department
+                     forKey:DEFAULTS_USERDEPARTMENT];
     [userDefaults setObject:[ColorHandler isNullOrEmptyString:userDetailInfo.portraitUri]?@"":userDetailInfo.portraitUri
                      forKey:DEFAULTS_USERAVATAR];
     [userDefaults setObject:[ColorHandler isNullOrEmptyString:userDetailInfo.contactDescription]?@"":userDetailInfo.contactDescription

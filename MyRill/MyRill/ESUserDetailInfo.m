@@ -39,17 +39,17 @@
             self.phoneNumber = dic[@"phoneNumber"];
         }
         
-        if ([ColorHandler isNullOrEmptyString:dic[@"position"]]) {
-            self.position = @"";
+        if ([ColorHandler isNullOrEmptyString:dic[@"department"]]) {
+            self.department = @"";
         } else {
-            self.position = dic[@"position"];
+            self.department = dic[@"department"];
         }
         
-        if ([ColorHandler isNullOrEmptyString:dic[@"department"]]) {
-            self.position = @"";
-        } else {
-            self.position = dic[@"department"];
-        }
+//        if ([ColorHandler isNullOrEmptyString:dic[@"department"]]) {
+//            self.department = @"";
+//        } else {
+//            self.department = dic[@"department"];
+//        }
         
         if ([ColorHandler isNullOrEmptyString:dic[@"gender"]]) {
             self.gender = @"";

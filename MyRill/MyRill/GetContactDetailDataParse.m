@@ -111,10 +111,10 @@
                          userDetailInfo.portraitUri = userPortraitUri;
                      }
                      
-                     NSString* userPosition = [temDic valueForKey:@"position"];
-                     if (userPosition != nil && ![userPosition isEqual:[NSNull null]])
+                     NSString* userDepartment = [temDic valueForKey:@"department"];
+                     if (userDepartment != nil && ![userDepartment isEqual:[NSNull null]])
                      {
-                         userDetailInfo.position = userPosition;
+                         userDetailInfo.department = userDepartment;
                      }
                      NSString* gender = [temDic valueForKey:@"gender"];
                      if (gender != nil && ![gender isEqual:[NSNull null]])

@@ -93,10 +93,10 @@
             return;
         }
         userInfo.userName = self.nameMailDepartmentTxtField.text;
-        userInfo.position = self.userDetailInfo.position;
+        userInfo.department = self.userDetailInfo.department;
     } else {
         userInfo.userName = self.userDetailInfo.userName;
-        userInfo.position = self.nameMailDepartmentTxtField.text;
+        userInfo.department = self.nameMailDepartmentTxtField.text;
     }
     
     userInfo.contactDescription = self.userDetailInfo.contactDescription;

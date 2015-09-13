@@ -66,7 +66,7 @@
     ESUserDetailInfo *userInfo = [[ESUserDetailInfo alloc] init];
     userInfo.userId = self.userDetailInfo.userId;
     userInfo.userName = self.userDetailInfo.userName;
-    userInfo.position = self.userDetailInfo.position;
+    userInfo.department = self.userDetailInfo.department;
     userInfo.contactDescription = self.textView.text;
     
     [self.changeUserMsgDP changeUserMsgWithUserInfo:userInfo];

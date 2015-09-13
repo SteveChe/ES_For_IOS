@@ -26,7 +26,7 @@
                                       NSDictionary *dataDic = responseDic[NETWORK_OK_DATA];
                                       ESUserDetailInfo *userInfo = [[ESUserDetailInfo alloc] init];
                                       userInfo.contactDescription = dataDic[@"description"];
-                                      userInfo.position = dataDic[@"position"];
+                                      userInfo.department = dataDic[@"department"];
                                       userInfo.userName = dataDic[@"name"];
                                       [self.delegate changeUserMsgSuccess:userInfo];
                                   } failure:^(NSError *err) {

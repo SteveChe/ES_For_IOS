@@ -88,13 +88,13 @@
                          userInfo.portraitUri = userPortraitUri;
                      }
                      
-                     NSString* userPosition = [temDic valueForKey:@"position"];
-                     if (userPosition != nil && ![userPosition isEqual:[NSNull null]])
+                     NSString* userDepartment = [temDic valueForKey:@"department"];
+                     if (userDepartment != nil && ![userDepartment isEqual:[NSNull null]])
                      {
-                         userInfo.position = userPosition;
+                         userInfo.department = userDepartment;
                      }
                      NSString* type = [temDic valueForKey:@"type"];
-                     if (userPosition != nil && ![userPosition isEqual:[NSNull null]])
+                     if (type != nil && ![type isEqual:[NSNull null]])
                      {
                          userInfo.type = type;
                      }

@@ -618,7 +618,7 @@ void(^completionHandler)(RCUserInfo* userInfo);
     }
 }
 
-
+#pragma mark -- RCIMUserInfoDataSource
 // 获取用户信息的方法。
 -(void)getUserInfoWithUserId:(NSString *)userId completion:(void(^)(RCUserInfo* userInfo))completion
 {
@@ -643,6 +643,13 @@ void(^completionHandler)(RCUserInfo* userInfo);
         return completion(user);
     }
     return completion(nil);
+}
+
+#pragma mark -- RCIMGroupInfoDataSource
+- (void)getGroupInfoWithGroupId:(NSString *)groupId
+                     completion:(void (^)(RCGroup *groupInfo))completion
+{
+    
 }
 
 @end
