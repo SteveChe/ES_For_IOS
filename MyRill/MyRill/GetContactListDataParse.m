@@ -79,43 +79,12 @@
                      contactList.contactList = userInfoArray;
                      for (NSDictionary* temDic in temContactArray)
                      {
-                         ESUserInfo* userInfo = [[ESUserInfo alloc] init];
-                         NSNumber* userId = [temDic valueForKey:@"id"];
-                         if (userId != nil && ![userId isEqual:[NSNull null]])
+                         ESUserInfo* userInfo = [[ESUserInfo alloc] initWithDic:temDic];
+                         if (userInfo!= nil)
                          {
-                             userInfo.userId = [NSString stringWithFormat:@"%d",[userId intValue]];
+                             [userInfoArray addObject:userInfo];
                          }
                          
-                         NSString* userName = [temDic valueForKey:@"name"];
-                         if (userName != nil && ![userName isEqual:[NSNull null]])
-                         {
-                             userInfo.userName = userName;
-                         }
-                         NSString* userPhoneNum = [temDic valueForKey:@"phone_number"];
-                         if (userPhoneNum != nil && ![userPhoneNum isEqual:[NSNull null]])
-                         {
-                             userInfo.phoneNumber = userPhoneNum;
-                         }
-                         NSDictionary* userEnterpriseDic = [temDic valueForKey:@"enterprise"];
-                         if (userEnterpriseDic != nil && ![userEnterpriseDic isEqual:[NSNull null]])
-                         {
-                             ESEnterpriseInfo* enterpriseInfo = [[ESEnterpriseInfo alloc] initWithDic:userEnterpriseDic];
-//                             if ([enterpriseInfo.enterpriseName length ]<=0)
-//                             {
-//                                 userEnterprise = @"默认";
-//                             }
-                             userInfo.enterprise = enterpriseInfo;
-                         }
-                         
-                         NSString* userPortraitUri = [temDic valueForKey:@"avatar"];
-                         if (userPortraitUri != nil && ![userPortraitUri isEqual:[NSNull null]])
-                         {
-                             userInfo.portraitUri = userPortraitUri;
-                         }
-
-                         userInfo.type = @"contact";
-                         
-                         [userInfoArray addObject:userInfo];
                      
                      }
                      

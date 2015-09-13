@@ -235,7 +235,7 @@
             }
             else
             {
-                cell.addressBookName.text = [NSString stringWithFormat:@"%@/%@",user.userName,user.department];
+                cell.addressBookName.text = [NSString stringWithFormat:@"%@ / %@",user.userName,user.department];
             }
             [cell.ivAva sd_setImageWithURL:[NSURL URLWithString:user.portraitUri] placeholderImage:[UIImage imageNamed:@"头像_100"]];
             cell.ivAva.clipsToBounds = YES;
@@ -324,7 +324,16 @@
                 
                 ESUserInfo *user = contactList.contactList[indexPath.row];
                 if(user){
-                    cell.addressBookName.text = user.userName;
+//                    cell.addressBookName.text = user.userName;
+                    if (user.department == nil || [user.department isEqual:[NSNull null]]||[user.department length] <= 0)
+                    {
+                        cell.addressBookName.text = user.userName;
+                    }
+                    else
+                    {
+                        cell.addressBookName.text = [NSString stringWithFormat:@"%@ / %@",user.userName,user.department];
+                    }
+
                     [cell.ivAva sd_setImageWithURL:[NSURL URLWithString:user.portraitUri] placeholderImage:[UIImage imageNamed:@"头像_100"]];
                     cell.ivAva.clipsToBounds = YES;
                     cell.ivAva.layer.cornerRadius = 18.f;
@@ -356,7 +365,7 @@
                 }
                 else
                 {
-                    cell.addressBookName.text = [NSString stringWithFormat:@"%@/%@",user.userName,user.department];
+                    cell.addressBookName.text = [NSString stringWithFormat:@"%@ / %@",user.userName,user.department];
                 }
                 [cell.ivAva sd_setImageWithURL:[NSURL URLWithString:user.portraitUri] placeholderImage:[UIImage imageNamed:@"头像_100"]];
                 cell.ivAva.clipsToBounds = YES;
