@@ -116,19 +116,19 @@
         case e_Push_Category_Contact_Accept:
         {
             selectIndex = 2;
-//            targetVC = [[RCDAddressBookViewController alloc] init];
+            targetVC = [[RCDAddressBookViewController alloc] init];
         }
             break;
         case e_Push_Category_Enterprise_Message:
         case e_Push_Category_Riil_Message:
         {
-//            targetVC = [[ChatListViewController alloc] init];
+            targetVC = [[ChatListViewController alloc] init];
             selectIndex = 1;
         }
             break;
         case e_Push_Category_Assignment:
         {
-//            targetVC = [[TaskOverviewViewController alloc]init];
+            targetVC = [[TaskOverviewViewController alloc]init];
             selectIndex = 3;
         }
             break;
@@ -136,7 +136,7 @@
         case e_Push_Category_Profession:
         case e_Push_Category_Profession_Apply:
         {
-//            targetVC = [[ProfessionViewController alloc] init];
+            targetVC = [[ProfessionViewController alloc] init];
             selectIndex = 0;
         }
             break;
@@ -146,12 +146,12 @@
     }
     ESMenuViewController* rootViewCtrl = (ESMenuViewController*)appDelegate.window.rootViewController;
     [rootViewCtrl.navigationController popToRootViewControllerAnimated:NO];
-//    [rootViewCtrl setSelectedIndex:selectIndex];
-    RCDAcceptContactViewController* targetVC1 = [[RCDAcceptContactViewController alloc] init];
+    [rootViewCtrl setSelectedIndex:selectIndex];
+//    RCDAcceptContactViewController* targetVC1 = [[RCDAcceptContactViewController alloc] init];
 
 //    if (targetVC != nil)
 //    {
-        [rootViewCtrl.navigationController pushViewController:targetVC1 animated:NO];
+//        [rootViewCtrl.navigationController pushViewController:targetVC1 animated:NO];
 //    }
 }
 

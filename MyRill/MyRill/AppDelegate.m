@@ -213,6 +213,18 @@ void uncaughtExceptionHandler(NSException *exception) {
 -(void)didReceiveMessageNotification:(NSNotification *)notification
 {
     [UIApplication sharedApplication].applicationIconBadgeNumber = [UIApplication sharedApplication].applicationIconBadgeNumber+1;
+    ESMenuViewController* rootViewCtrl = (ESMenuViewController*)self.window.rootViewController;
+    if ([rootViewCtrl.tabBarController isKindOfClass:[ESMenuViewController class]])
+    {
+        [rootViewCtrl setSelectedIndex:1];
+
+    }
+    else
+    {
+//        [rootViewCtrl.navigationController popToRootViewControllerAnimated:NO];
+        [rootViewCtrl setSelectedIndex:1];
+    }
+    
 }
 
 -(void)didReceiveErrorMessage:(id)notification
