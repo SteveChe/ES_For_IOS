@@ -11,6 +11,7 @@
 #import "ESUserDetailInfo.h"
 #import "MRProgress.h"
 #import "UserDefaultsDefine.h"
+#import "CustomShowMessage.h"
 
 @interface UserDescriptionChangeViewController () <ChangeUserMsgDelegate>
 
@@ -45,11 +46,11 @@
 }
 
 #pragma mark - ChangeUserMsgDelegate methods
-- (void)changeUserMsgSuccess:(ESUserDetailInfo *)userInfo {
+- (void)changeUserMsgSuccess:(NSString *)successInfo {
+    
     [self showTips:@"修改成功!" mode:MRProgressOverlayViewModeCheckmark isDismiss:YES isSucceuss:YES];
-//    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-//    [userDefaults setObject:[ColorHandler isNullOrEmptyString:userInfo.contactDescription]?@"":userInfo.contactDescription forKey:DEFAULTS_USERDESCRIPTION];
-//    [userDefaults synchronize];
+
+
 }
 
 - (void)changeUserMsgFailed:(NSString *)error {
@@ -66,7 +67,8 @@
     ESUserDetailInfo *userInfo = [[ESUserDetailInfo alloc] init];
     userInfo.userId = self.userDetailInfo.userId;
     userInfo.userName = self.userDetailInfo.userName;
-    userInfo.position = self.userDetailInfo.position;
+    userInfo.email = self.userDetailInfo.email;
+    userInfo.department = self.userDetailInfo.department;
     userInfo.contactDescription = self.textView.text;
     
     [self.changeUserMsgDP changeUserMsgWithUserInfo:userInfo];

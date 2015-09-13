@@ -18,19 +18,24 @@
                                   success:^(id response) {
                                       NSDictionary *responseDic = (NSDictionary *)response;
                                       NSNumber* errorCodeNum = [responseDic valueForKey:NETWORK_ERROR_CODE];
-                                      if (errorCodeNum == nil || [errorCodeNum isEqual:[NSNull null]] )
-                                      {
+                                      if (errorCodeNum == nil || [errorCodeNum isEqual:[NSNull null]] ) {
                                           return ;
                                       }
                                       
-                                      NSDictionary *dataDic = responseDic[NETWORK_OK_DATA];
-                                      ESUserDetailInfo *userInfo = [[ESUserDetailInfo alloc] init];
-                                      userInfo.contactDescription = dataDic[@"description"];
-                                      userInfo.position = dataDic[@"position"];
-                                      userInfo.userName = dataDic[@"name"];
-                                      [self.delegate changeUserMsgSuccess:userInfo];
+                                      int errorCode = [errorCodeNum intValue];
+                                      switch (errorCode)
+                                      {
+                                          case 0:
+                                              [self.delegate changeUserMsgSuccess:nil];
+                                              break;
+                                          default:
+                                              [self.delegate changeUserMsgSuccess:responseDic[NETWORK_ERROR_MESSAGE]];
+                                              break;
+                                      }
+                                      
                                   } failure:^(NSError *err) {
                                       NSLog(@"%@", [err debugDescription]);
+                                      [self.delegate changeUserMsgFailed:@"请求失败,或者无效的邮箱地址!"];
                                   }];
 }
 

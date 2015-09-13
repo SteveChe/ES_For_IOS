@@ -11,7 +11,7 @@
 
 @protocol ChangeUserMsgDelegate <NSObject>
 
-- (void)changeUserMsgSuccess:(ESUserDetailInfo *)userInfo;
+- (void)changeUserMsgSuccess:(NSString *)successInfo;
 - (void)changeUserMsgFailed:(NSString *)error;
 
 @end

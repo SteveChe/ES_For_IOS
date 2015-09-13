@@ -11,6 +11,7 @@
 #import "ESUserDetailInfo.h"
 #import "MRProgress.h"
 #import "UserDefaultsDefine.h"
+#import "CustomShowMessage.h"
 
 @interface NameMailDepartmentViewController () <ChangeUserMsgDelegate>
 
@@ -54,21 +55,17 @@
 }
 
 #pragma mark - ChangeUserMsgDelegate methods
-- (void)changeUserMsgSuccess:(ESUserDetailInfo *)userInfo {
-    [self showTips:@"修改成功!" mode:MRProgressOverlayViewModeCheckmark isDismiss:YES isSucceuss:YES];
-//    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-//    if (self.type == ESUserMsgName) {
-//        [userDefaults setObject:[ColorHandler isNullOrEmptyString:userInfo.userName]?@"":userInfo.userName forKey:DEFAULTS_USERNAME];
-//    } else if (self.type == ESUserMsgPosition) {
-//        [userDefaults setObject:[ColorHandler isNullOrEmptyString:userInfo.position]?@"":userInfo.position forKey:DEFAULTS_USERPOSITION];
-//    } else {
-//        //empty
-//    }
-//    [userDefaults synchronize];
+- (void)changeUserMsgSuccess:(NSString *)successInfo {
+    if (![ColorHandler isNullOrEmptyString:successInfo]) {
+        [[CustomShowMessage getInstance] showNotificationMessage:successInfo];
+    } else {
+        [self showTips:@"修改成功!" mode:MRProgressOverlayViewModeCheckmark isDismiss:YES isSucceuss:YES];
+    }
 }
 
 - (void)changeUserMsgFailed:(NSString *)error {
-    [self showTips:@"修改失败!" mode:MRProgressOverlayViewModeCross isDismiss:YES isSucceuss:NO];
+    [[CustomShowMessage getInstance] showNotificationMessage:error];
+    //[self showTips:@"修改失败!" mode:MRProgressOverlayViewModeCross isDismiss:YES isSucceuss:NO];
 }
 
 #pragma mark - response methods
@@ -93,10 +90,18 @@
             return;
         }
         userInfo.userName = self.nameMailDepartmentTxtField.text;
-        userInfo.position = self.userDetailInfo.position;
-    } else {
+        userInfo.email = self.userDetailInfo.email;
+        userInfo.department = self.userDetailInfo.department;
+    } else if (self.type == ESUserMail) {
         userInfo.userName = self.userDetailInfo.userName;
-        userInfo.position = self.nameMailDepartmentTxtField.text;
+        userInfo.email = self.nameMailDepartmentTxtField.text;
+        userInfo.department = self.userDetailInfo.department;
+    } else if (self.type == ESUserMsgDepartment) {
+        userInfo.userName = self.userDetailInfo.userName;
+        userInfo.email = self.userDetailInfo.email;
+        userInfo.department = self.nameMailDepartmentTxtField.text;
+    } else {
+        //empty
     }
     
     userInfo.contactDescription = self.userDetailInfo.contactDescription;
