@@ -25,6 +25,7 @@ typedef NS_ENUM(NSInteger, RequestProtocolType){
 
 typedef enum : NSUInteger {
     ESTaskListWithChatId = 200,
+    ESTaskListWithChatIdSubEnd,
     ESTaskListWithInitiatorId,
     ESTaskListWithPersonInChargeId,
     ESTaskListStatus,

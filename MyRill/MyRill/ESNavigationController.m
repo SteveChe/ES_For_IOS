@@ -25,7 +25,7 @@
     self.navigationBar.tintColor = [UIColor whiteColor];
     //设定title颜色
     [self.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
-    //取消translucent效果
+    //取消translucent效果,会使栈中controller的view起始点在navitionbar下面开始
     self.navigationBar.translucent = NO;
 }
 
