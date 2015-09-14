@@ -457,8 +457,12 @@
     NSString *strURL = @"/api/assignments/.json";
     NSDictionary *param = nil;
     switch (taskListType) {
+        //status:0-进行中,1-关闭
         case ESTaskListWithChatId:
-            param = @{@"chat_id":identify};
+            param = @{@"chat_id":identify,@"status":@"0"};
+            break;
+        case ESTaskListWithChatIdSubEnd:
+            param = @{@"chat_id":identify,@"status":@"1"};
             break;
         case ESTaskListWithInitiatorId:
             param = @{@"initiator_id":identify,@"status":@"0"};
@@ -467,13 +471,7 @@
             param = @{@"person_in_charge_id":identify,@"status":@"0"};
             break;
         case ESTaskListStatus:
-            {
-                if ([identify isEqualToString:@"0"]) {
-                    param = @{@"status":@"0"};
-                } else {
-                    param = @{@"status":identify};
-                }
-            }
+            param = @{@"status":identify};
             break;
         case ESTaskOverdue:
             param = @{@"overdue":@"1",@"person_in_charge_id":identify,@"status":@"0"};
@@ -531,20 +529,23 @@
         [observerArray addObject:user.userId];
     }
 
-//    NSError *error = nil;
-//    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:observerArray
-//                                                       options:NSJSONWritingPrettyPrinted
-//                                                         error:&error];
-//    NSString* strJson = [[NSString alloc]initWithData:jsonData
-//                                             encoding:NSUTF8StringEncoding];
-    
-    NSDictionary *param = @{@"title":task.title,
-                            @"description":task.taskDescription,
-                            @"due_date":task.endDate,
-                            @"status":task.status,
-                            @"chat_id":task.chatID,
-                            @"person_in_charge":task.personInCharge.userId,
-                            @"observers":observerArray};
+    NSDictionary *param = nil;
+    if (task.endDate == nil) {
+        param = @{@"title":task.title,
+                  @"description":task.taskDescription,
+                  @"status":task.status,
+                  @"chat_id":task.chatID,
+                  @"person_in_charge":task.personInCharge.userId,
+                  @"observers":observerArray};
+    } else {
+        param = @{@"title":task.title,
+                  @"description":task.taskDescription,
+                  @"due_date":task.endDate,
+                  @"status":task.status,
+                  @"chat_id":task.chatID,
+                  @"person_in_charge":task.personInCharge.userId,
+                  @"observers":observerArray};
+    }
 
     [AFHttpTool requestWithMethod:RequestMethodTypePost
                      protocolType:RequestProtocolTypeJson

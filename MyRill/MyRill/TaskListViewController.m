@@ -20,11 +20,12 @@
 
 @interface TaskListViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate, TaskListDelegate, SWTableViewCellDelegate>
 
+@property (nonatomic, strong) UISegmentedControl *segment;
 @property (nonatomic, strong) UILabel *msgLbl;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UISearchDisplayController *displayController;
 
-@property (nonatomic, strong) NSArray *dataSource;
+@property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) NSMutableArray *searchResultDataSource;
 @property (nonatomic, strong) GetTaskListDataParse *getTaskListDP;
 
@@ -53,6 +54,15 @@
     
     [self setAutomaticallyAdjustsScrollViewInsets:YES];
     [self setExtendedLayoutIncludesOpaqueBars:YES];
+    
+    if (self.type == ESTaskListWithChatId) {
+        self.segment = [[UISegmentedControl alloc ] initWithItems:@[@"进行中任务",@"关闭任务"]];
+        self.segment.selectedSegmentIndex = 0;
+        [self.segment addTarget:self
+                         action:@selector(segmentOnClicked:)
+               forControlEvents:UIControlEventValueChanged];
+        self.navigationItem.titleView = self.segment;
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -82,12 +92,19 @@
 - (void)getTaskListSuccess:(NSArray *)taskList {
     if (taskList.count) {
         self.tableView.hidden = NO;
-        self.dataSource = nil;
-        self.dataSource = [NSArray arrayWithArray:taskList];
-        [self.tableView reloadData];
+        self.msgLbl.hidden = YES;
     } else {
-        self.msgLbl.hidden = NO;
+        if (self.segment.selectedSegmentIndex != 1) {
+            self.msgLbl.hidden = NO;
+        } else {
+            self.msgLbl.hidden = YES;
+        }
+        self.tableView.hidden = YES;
     }
+    
+    [self.dataSource removeAllObjects];
+    [self.dataSource addObjectsFromArray:taskList];
+    [self.tableView reloadData];
 }
 
 #pragma mark - UITableViewDataSource&UITableViewDelegate
@@ -176,6 +193,19 @@
     [self.getTaskListDP getTaskListWithIdentify:self.identity type:self.type];
 }
 
+- (void)segmentOnClicked:(UISegmentedControl *)segment {
+    switch (segment.selectedSegmentIndex) {
+        case 0:
+            [self.getTaskListDP getTaskListWithIdentify:self.identity type:self.type];
+            break;
+        case 1:
+            [self.getTaskListDP getTaskListWithIdentify:self.identity type:ESTaskListWithChatIdSubEnd];
+            break;
+        default:
+            break;
+    }
+}
+
 - (void)addTask {
     AddTaskViewController *addTaskVC = [[AddTaskViewController alloc] init];
     if (self.type == ESTaskListWithChatId) {
@@ -233,6 +263,14 @@
     }
     
     return _tableView;
+}
+
+- (NSArray *)dataSource {
+    if (!_dataSource) {
+        _dataSource = [[NSMutableArray alloc] init];
+    }
+    
+    return _dataSource;
 }
 
 - (NSMutableArray *)searchResultDataSource {
