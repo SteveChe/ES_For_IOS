@@ -16,6 +16,6 @@
 
 +(void)postNotificationMessage:(NSString*)notificationMessage;
 
-+(void)changeToPageWithType:(E_PUSH_CATEGORY_TYPE)categoryType;
++(void)changeToPageWithType:(E_PUSH_CATEGORY_TYPE)categoryType  Dic:(NSDictionary*) paramsDic;
 
 @end
