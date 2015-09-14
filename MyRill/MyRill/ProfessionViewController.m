@@ -125,14 +125,18 @@
     if (indexPath.row == self.dataSource.count - 1) {
         AddProfessionViewController *addProfessionVC = [[AddProfessionViewController alloc] init];
         [self.navigationController pushViewController:addProfessionVC animated:YES];
-//        BMCLoginViewController *bmcLoginVC = [[BMCLoginViewController alloc] init];
-//        [self.navigationController pushViewController:bmcLoginVC animated:YES];
+
     } else {
-        ProfessionWebViewController *webVC = [[ProfessionWebViewController alloc] init];
-        ESProfession *profession = self.dataSource[indexPath.row];
-        webVC.title = profession.name;
-        webVC.urlString = profession.url;
-        [self.navigationController pushViewController:webVC animated:YES];
+        ESProfession *profession = (ESProfession *)self.dataSource[indexPath.row];
+        if ([profession.professionType isEqualToString:@"BMC"]) {
+            BMCLoginViewController *bmcLoginVC = [[BMCLoginViewController alloc] init];
+            [self.navigationController pushViewController:bmcLoginVC animated:YES];
+        } else {
+            ProfessionWebViewController *webVC = [[ProfessionWebViewController alloc] init];
+            webVC.title = profession.name;
+            webVC.urlString = profession.url;
+            [self.navigationController pushViewController:webVC animated:YES];
+        }
     }
 }
 

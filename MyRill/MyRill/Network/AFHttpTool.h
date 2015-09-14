@@ -93,6 +93,10 @@ typedef enum : NSUInteger {
                       sucess:(void (^)(id response))success
                      failure:(void (^)(NSError* err))failure;
 
++ (void)getEmergencyListWithViewType:(NSString *)viewType
+                              sucess:(void (^)(id response))success
+                             failure:(void (^)(NSError* err))failure;
+
 + (void)getMainResourceListWithTreeNodeId:(NSString *)treeNodeId
                                 pageIndex:(NSString *)pageIndex
                                     state:(NSString *)state

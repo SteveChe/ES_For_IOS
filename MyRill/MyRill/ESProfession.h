@@ -17,6 +17,7 @@
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *url;
 @property (nonatomic, copy) NSString *icon_url;
+@property (nonatomic, copy) NSString *professionType;
 
 - (instancetype)initWithDic:(NSDictionary *)dic;
 

@@ -1107,6 +1107,18 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
                           failure:failure];
 }
 
++ (void)getEmergencyListWithViewType:(NSString *)viewType
+                              sucess:(void (^)(id))success
+                             failure:(void (^)(NSError *))failure {
+    NSDictionary *param = @{@"viewType":viewType};
+
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet
+                              url:@"event/client/getEventList.json"
+                           params:param
+                          success:success
+                          failure:failure];
+}
+
 + (void)getMainResourceListWithTreeNodeId:(NSString *)treeNodeId
                                 pageIndex:(NSString *)pageIndex
                                     state:(NSString *)state
@@ -1120,7 +1132,7 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
                             @"sortColumn":sortColumn,
                             @"sortType":sortType};
     
-    [AFHttpTool requestWithMethod:RequestMethodTypeGet
+    [AFHttpTool requestWithMethod:RequestMethodTypePost
                               url:@"res/list.json"
                            params:param
                           success:success
