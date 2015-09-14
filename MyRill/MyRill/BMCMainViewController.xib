@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BMCMainViewController">
             <connections>
                 <outlet property="favoriteTableView" destination="EkG-9X-Coq" id="TKd-IE-wAB"/>
+                <outlet property="scrollView" destination="guo-cE-MkU" id="UV3-pT-Ob0"/>
                 <outlet property="toolbar" destination="IQC-08-aPU" id="TjN-Iw-mZs"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="warningTableView" destination="Pvl-ib-DmF" id="1Yk-0J-XJL"/>
@@ -20,14 +21,28 @@
             <subviews>
                 <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IQC-08-aPU">
                     <rect key="frame" x="0.0" y="556" width="600" height="44"/>
-                    <items/>
+                    <items>
+                        <barButtonItem systemItem="flexibleSpace" id="emk-Yr-CXa"/>
+                        <barButtonItem title="我的关注" id="MC8-DW-FX0">
+                            <connections>
+                                <action selector="favoriteItemOnClicked:" destination="-1" id="bUU-UL-Fct"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem systemItem="flexibleSpace" id="VPa-pw-QWR"/>
+                        <barButtonItem title="告警" id="eiU-RI-5j0">
+                            <connections>
+                                <action selector="emergenceItemOnClicked:" destination="-1" id="Vwm-49-KOj"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem systemItem="flexibleSpace" id="tqb-Tj-UAC"/>
+                    </items>
                 </toolbar>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="guo-cE-MkU" userLabel="Container Scroll View">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="guo-cE-MkU" userLabel="Container Scroll View">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
                     <subviews>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="EkG-9X-Coq" userLabel="Favorite Table View">
                             <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <outlet property="dataSource" destination="-1" id="yQo-is-0Jd"/>
                                 <outlet property="delegate" destination="-1" id="iY8-CY-aDH"/>
@@ -35,7 +50,7 @@
                         </tableView>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Pvl-ib-DmF" userLabel="Warning Table View">
                             <rect key="frame" x="600" y="0.0" width="600" height="556"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <outlet property="dataSource" destination="-1" id="R2p-9g-zRn"/>
                                 <outlet property="delegate" destination="-1" id="7oR-4B-MOm"/>
@@ -68,6 +83,5 @@
                 <constraint firstAttribute="trailing" secondItem="guo-cE-MkU" secondAttribute="trailing" id="hWD-Nm-flk"/>
             </constraints>
         </view>
-        <barButtonItem title="Item" id="0zt-n6-WIW"/>
     </objects>
 </document>

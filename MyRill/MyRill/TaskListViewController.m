@@ -78,7 +78,7 @@
                                                  name:NOTIFICATION_PUSH_ASSIGNMENT
                                                object:nil];
     
-    [self.getTaskListDP getTaskListWithIdentify:self.identity type:self.type];
+    [self segmentOnClicked:self.segment];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {

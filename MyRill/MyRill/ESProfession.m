@@ -52,6 +52,12 @@
         } else {
             self.icon_url = dic[@"icon_url"];
         }
+        
+        if ([ColorHandler isNullOrEmptyString:dic[@"profession_type"]]) {
+            self.professionType = @"";
+        } else {
+            self.professionType = dic[@"profession_type"];
+        }
     }
     
     return self;

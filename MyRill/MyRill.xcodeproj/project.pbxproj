@@ -154,6 +154,10 @@
 		2BEBBD8C1B67AFA7008BE7C4 /* GetTaskListDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEBBD8B1B67AFA7008BE7C4 /* GetTaskListDataParse.m */; };
 		2BEBBD921B6E4920008BE7C4 /* ESTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEBBD911B6E4920008BE7C4 /* ESTask.m */; };
 		2BEBBD931B6F5E1F008BE7C4 /* TaskListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE55A111B64843A008CDB4B /* TaskListTableViewCell.xib */; };
+		2BEEE6F11BA6B150008D4DF3 /* BMCGetEmergencyListDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEEE6F01BA6B150008D4DF3 /* BMCGetEmergencyListDataParse.m */; };
+		2BEEE6F41BA6BAA4008D4DF3 /* EventVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEEE6F31BA6BAA4008D4DF3 /* EventVO.m */; };
+		2BEEE6F91BA6C9EB008D4DF3 /* BMCEmergencyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEEE6F71BA6C9EB008D4DF3 /* BMCEmergencyTableViewCell.m */; };
+		2BEEE6FA1BA6C9EB008D4DF3 /* BMCEmergencyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BEEE6F81BA6C9EB008D4DF3 /* BMCEmergencyTableViewCell.xib */; };
 		F20C13051B73A2690073BFA9 /* EnterpriseChatListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F20C13041B73A2690073BFA9 /* EnterpriseChatListViewController.m */; };
 		F20C13081B73A2920073BFA9 /* EnterpriseChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F20C13071B73A2920073BFA9 /* EnterpriseChatViewController.m */; };
 		F20C130B1B750A870073BFA9 /* SimpleMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = F20C130A1B750A870073BFA9 /* SimpleMessage.m */; };
@@ -609,6 +613,13 @@
 		2BEBBD8B1B67AFA7008BE7C4 /* GetTaskListDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetTaskListDataParse.m; sourceTree = "<group>"; };
 		2BEBBD901B6E4920008BE7C4 /* ESTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESTask.h; sourceTree = "<group>"; };
 		2BEBBD911B6E4920008BE7C4 /* ESTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESTask.m; sourceTree = "<group>"; };
+		2BEEE6EF1BA6B150008D4DF3 /* BMCGetEmergencyListDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMCGetEmergencyListDataParse.h; sourceTree = "<group>"; };
+		2BEEE6F01BA6B150008D4DF3 /* BMCGetEmergencyListDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMCGetEmergencyListDataParse.m; sourceTree = "<group>"; };
+		2BEEE6F21BA6BAA4008D4DF3 /* EventVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventVO.h; sourceTree = "<group>"; };
+		2BEEE6F31BA6BAA4008D4DF3 /* EventVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventVO.m; sourceTree = "<group>"; };
+		2BEEE6F61BA6C9EB008D4DF3 /* BMCEmergencyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMCEmergencyTableViewCell.h; sourceTree = "<group>"; };
+		2BEEE6F71BA6C9EB008D4DF3 /* BMCEmergencyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMCEmergencyTableViewCell.m; sourceTree = "<group>"; };
+		2BEEE6F81BA6C9EB008D4DF3 /* BMCEmergencyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BMCEmergencyTableViewCell.xib; sourceTree = "<group>"; };
 		F20C13031B73A2690073BFA9 /* EnterpriseChatListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnterpriseChatListViewController.h; sourceTree = "<group>"; };
 		F20C13041B73A2690073BFA9 /* EnterpriseChatListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnterpriseChatListViewController.m; sourceTree = "<group>"; };
 		F20C13061B73A2920073BFA9 /* EnterpriseChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnterpriseChatViewController.h; sourceTree = "<group>"; };
@@ -972,6 +983,8 @@
 			children = (
 				2B2B84AC1BA016E60043EFD4 /* BMCLoginDataParse.h */,
 				2B2B84AD1BA016E60043EFD4 /* BMCLoginDataParse.m */,
+				2BEEE6EF1BA6B150008D4DF3 /* BMCGetEmergencyListDataParse.h */,
+				2BEEE6F01BA6B150008D4DF3 /* BMCGetEmergencyListDataParse.m */,
 				2B2B84AF1BA044370043EFD4 /* BMCGetMainResourceListDataParse.h */,
 				2B2B84B01BA044370043EFD4 /* BMCGetMainResourceListDataParse.m */,
 			);
@@ -1031,6 +1044,8 @@
 			children = (
 				2B2B84BB1BA1692B0043EFD4 /* ResVO.h */,
 				2B2B84BC1BA1692B0043EFD4 /* ResVO.m */,
+				2BEEE6F21BA6BAA4008D4DF3 /* EventVO.h */,
+				2BEEE6F31BA6BAA4008D4DF3 /* EventVO.m */,
 			);
 			name = BMC;
 			sourceTree = "<group>";
@@ -1571,6 +1586,7 @@
 		2BE8C2341B52533E00858CEE /* Profession */ = {
 			isa = PBXGroup;
 			children = (
+				2BEEE6F51BA6C9C1008D4DF3 /* BMC */,
 				2BE8C21A1B4D60B400858CEE /* ProfessionCollectionViewCell.h */,
 				2BE8C21B1B4D60B400858CEE /* ProfessionCollectionViewCell.m */,
 				2BE8C21C1B4D60B400858CEE /* ProfessionCollectionViewCell.xib */,
@@ -1623,6 +1639,16 @@
 				2BEAD0691B76FF2400905E21 /* SWUtilityButtonView.m */,
 			);
 			name = SWTableViewCell;
+			sourceTree = "<group>";
+		};
+		2BEEE6F51BA6C9C1008D4DF3 /* BMC */ = {
+			isa = PBXGroup;
+			children = (
+				2BEEE6F61BA6C9EB008D4DF3 /* BMCEmergencyTableViewCell.h */,
+				2BEEE6F71BA6C9EB008D4DF3 /* BMCEmergencyTableViewCell.m */,
+				2BEEE6F81BA6C9EB008D4DF3 /* BMCEmergencyTableViewCell.xib */,
+			);
+			name = BMC;
 			sourceTree = "<group>";
 		};
 		F20060311B652F0500FBD8AF /* AddressBookDetail */ = {
@@ -2152,6 +2178,7 @@
 				F236308A1B6673B400A12F63 /* RCDAddressBookDetailTableViewCell.xib in Resources */,
 				2BE8C21E1B4D60B400858CEE /* ProfessionCollectionViewCell.xib in Resources */,
 				2BEAD0521B74F37C00905E21 /* AddTaskViewController.xib in Resources */,
+				2BEEE6FA1BA6C9EB008D4DF3 /* BMCEmergencyTableViewCell.xib in Resources */,
 				F22FE30A1B4A9F1A00A1A997 /* RCDAddFriendViewController.xib in Resources */,
 				F2F92EFC1B4EC3310047D7BF /* RCDSelectPersonTableViewCell.xib in Resources */,
 				2BC227771B942A3600E3163A /* Overlay@2x.png in Resources */,
@@ -2188,6 +2215,7 @@
 				2B39C96D1B2D79DB007BAC7A /* ProfessionViewController.m in Sources */,
 				2B2B84AE1BA016E60043EFD4 /* BMCLoginDataParse.m in Sources */,
 				F256CB701B6BC397009478C2 /* RCDUpdateNameViewController.m in Sources */,
+				2BEEE6F91BA6C9EB008D4DF3 /* BMCEmergencyTableViewCell.m in Sources */,
 				2B5A590D1B48DFBB000382D7 /* UIImage+MRImageEffects.m in Sources */,
 				2B39C9441B24128F007BAC7A /* LoginViewController.m in Sources */,
 				F23461761B5AA6E400C88FAC /* AddressBookContactListDataSource.m in Sources */,
@@ -2375,6 +2403,7 @@
 				2B5A590E1B48DFBB000382D7 /* MRActivityIndicatorView.m in Sources */,
 				2BC8213A1B5C9FF70090E2C1 /* ShowQRCodeViewController.m in Sources */,
 				2BEBBD831B665849008BE7C4 /* GetTaskDashboardDataParse.m in Sources */,
+				2BEEE6F11BA6B150008D4DF3 /* BMCGetEmergencyListDataParse.m in Sources */,
 				2B39C9381B241212007BAC7A /* MASConstraint.m in Sources */,
 				2BEAD07C1B77360F00905E21 /* RemindView.m in Sources */,
 				2BE8C2331B52506600858CEE /* EditProfessionViewController.m in Sources */,
@@ -2403,6 +2432,7 @@
 				F22FE2FF1B42DAF600A1A997 /* AddContactDataParse.m in Sources */,
 				2B0443721BA1AD3E00BC7BF4 /* UpdateProfessionDataParse.m in Sources */,
 				2BE55A0E1B6483D2008CDB4B /* TaskListViewController.m in Sources */,
+				2BEEE6F41BA6BAA4008D4DF3 /* EventVO.m in Sources */,
 				2BEAD0911B776C2E00905E21 /* GetTaskCommentListDataParse.m in Sources */,
 				2B31C3D51B11C3FD004C865A /* main.m in Sources */,
 				F22FE2ED1B4000ED00A1A997 /* UIButton+WebCache.m in Sources */,
@@ -2546,8 +2576,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MyRill/RCloud",
@@ -2561,7 +2591,7 @@
 					"$(PROJECT_DIR)/MyRill/JPush",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a5c66360-4019-4ebe-9492-df3d30ba3a21";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
@@ -2572,8 +2602,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MyRill/RCloud",
@@ -2587,7 +2617,7 @@
 					"$(PROJECT_DIR)/MyRill/JPush",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a5c66360-4019-4ebe-9492-df3d30ba3a21";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
