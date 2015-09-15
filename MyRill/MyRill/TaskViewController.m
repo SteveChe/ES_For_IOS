@@ -35,7 +35,7 @@
 #import "UpdateObserverAndChatidDataParse.h"
 #import "ESImage.h"
 
-@interface TaskViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ELCImagePickerControllerDelegate, GetTaskCommentListDelegate, SendTaskCommenDelegate, EditTaskDelegate, GetTaskDetailDelegate, SendTaskImageDelegate, UpdateObserverAndChatidDelegate, UIScrollViewDelegate>
+@interface TaskViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ELCImagePickerControllerDelegate, GetTaskCommentListDelegate, SendTaskCommenDelegate, EditTaskDelegate, GetTaskDetailDelegate, SendTaskImageDelegate, UpdateObserverAndChatidDelegate, UIScrollViewDelegate>
 
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *holdViews;
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *txtHoldViews;
@@ -93,7 +93,7 @@
     // Do any additional setup after loading the view from its nib.
     self.title = @"任务详情";
     
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapBackground)];
     [self.tableView.tableHeaderView addGestureRecognizer:tap];
     //[self.sendTxtView addTarget:self action:@selector(send) forControlEvents:UIControlEventEditingDidEndOnExit];
 
@@ -381,7 +381,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self hideKeyboard];
+    [self tapBackground];
     ESTaskComment *taskComment = (ESTaskComment *)self.dataSource[indexPath.row];
     if (taskComment.images != nil) {
         if (taskComment.images.count > 0) {
@@ -476,10 +476,24 @@
     return YES;
 }
 
+
+
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
+    [self hideDatePicker];
     if ([textView isEqual:self.sendTxtView] && [self.taskModel.status isEqualToString:@"1"]) {
         return NO;
     }
+    //若是任务描述的textView，则重置发送消息栏的位置
+    if ([textView isEqual:self.taskDescriptioinTextView]) {
+        [UIView animateWithDuration:.1f
+                              delay:0
+                            options:UIViewAnimationOptionCurveEaseOut
+                         animations:^{
+                             self.sendViewBottomConstraint.constant = 0.f;
+                             [self.view layoutIfNeeded];
+                         } completion:nil];
+    }
+    
     return YES;
 }
 
@@ -494,6 +508,23 @@
                          }
                          completion:nil];
     }
+}
+
+#pragma mark - UITextFieldDelegate methods
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    [self hideDatePicker];
+    //若是任务标题的textField，则重置发送消息栏的位置
+    if ([textField isEqual:self.taskTitleTxtField]) {
+        [UIView animateWithDuration:.1f
+                              delay:0
+                            options:UIViewAnimationOptionCurveEaseOut
+                         animations:^{
+                             self.sendViewBottomConstraint.constant = 0.f;
+                             [self.view layoutIfNeeded];
+                         } completion:nil];
+    }
+    
+    return YES;
 }
 
 #pragma mark - UIImagePickerControllerDelegate methods
@@ -587,11 +618,18 @@
 }
 
 #pragma mark - response events methods
-- (void)hideKeyboard {
+- (void)tapBackground {
+    [self freeKeyboard];
+    [self hideDatePicker];
+}
+
+- (void)freeKeyboard {
     [self.taskTitleTxtField resignFirstResponder];
     [self.taskDescriptioinTextView resignFirstResponder];
     [self.sendTxtView resignFirstResponder];
-    
+}
+
+- (void)hideDatePicker {
     if (self.dateSelectedPicker) {
         [UIView animateWithDuration:.3f
                               delay:0
@@ -610,6 +648,7 @@
 }
 
 - (void)startConversationEvent {
+    [self tapBackground];
     //发起会话功能
     if ([self.assignerDataSource count] <=0 ) {
         [[CustomShowMessage getInstance] showNotificationMessage:@"没有分配人不能发起会话!"];
@@ -737,6 +776,7 @@
 }
 
 - (IBAction)chooseTagBtnOnClicked:(UIButton *)sender {
+    [self tapBackground];
     //标签选择
     //既不是发起人也不是分配人的时候直接返回 || 任务关闭的时候直接返回
     if ((![self.taskModel.initiator.userId isEqualToString:self.userID] && ![self.userID isEqualToString:self.taskModel.personInCharge.userId]) || [self.taskModel.status isEqualToString:@"1"]) {
@@ -753,6 +793,7 @@
 }
 
 - (IBAction)chooseContactorBtnOnClicked:(UIButton *)sender {
+    [self tapBackground];
 //    负责人btn的tag是1001，关注人是1002
     if (sender.tag == 1001) {
         //既不是发起人也不是分配人的时候直接返回 || 任务关闭的时候直接返回
@@ -860,7 +901,7 @@
 }
 
 - (void)saveBarItemOnClicked {
-    
+    [self tapBackground];
     ESTask *task = [[ESTask alloc] init];
     task.taskID = self.taskModel.taskID;
     task.title = self.taskTitleTxtField.text;
@@ -917,6 +958,8 @@
 }
 
 - (IBAction)dateBtnOnClicked:(UIButton *)sender {
+    [self freeKeyboard];
+    
     //既不是发起人也不是分配人的时候直接返回 || 任务关闭的时候直接返回
     if ((![self.taskModel.initiator.userId isEqualToString:self.userID] && ![self.userID isEqualToString:self.taskModel.personInCharge.userId]) || [self.taskModel.status isEqualToString:@"1"]) {
         return;
@@ -1033,8 +1076,11 @@
 }
 
 //当键盘出现或改变时调用
-- (void)keyboardWillShow:(NSNotification *)aNotification
-{
+- (void)keyboardWillShow:(NSNotification *)aNotification {
+    //仅是发送消息栏为第一响应者时变动发送消息栏的位置，其他如任务标题&任务描述不执行以下操作
+    if (![self.sendTxtView isFirstResponder]) {
+        return;
+    }
     //获取键盘的高度
     NSDictionary *userInfo = [aNotification userInfo];
     NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
@@ -1060,6 +1106,10 @@
 
 //当键退出时调用
 - (void)keyboardWillHide:(NSNotification *)aNotification {
+    
+    if (self.sendViewBottomConstraint.constant == 0) {
+        return;
+    }
     [UIView animateWithDuration:.1f
                           delay:0
                         options:UIViewAnimationOptionCurveEaseOut
