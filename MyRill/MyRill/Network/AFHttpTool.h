@@ -69,6 +69,10 @@ typedef enum : NSUInteger {
 + (void)getProfessionSuccess:(void (^)(id response))success
                      failure:(void (^)(NSError *error))failure;
 
++ (void)getProfessionWithProfessionID:(NSString *)professionID
+                              success:(void (^)(id response))success
+                              failure:(void (^)(NSError* err))failure;
+
 + (void)addProfessionWithName:(NSString *)name
                           url:(NSString *)url
                       success:(void (^)(id response))success

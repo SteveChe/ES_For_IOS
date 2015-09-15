@@ -113,6 +113,7 @@
 		2BC821361B5BE6B60090E2C1 /* ChangeUserImageDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC821351B5BE6B60090E2C1 /* ChangeUserImageDataParse.m */; };
 		2BC8213A1B5C9FF70090E2C1 /* ShowQRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC821381B5C9FF70090E2C1 /* ShowQRCodeViewController.m */; };
 		2BC8213B1B5C9FF70090E2C1 /* ShowQRCodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BC821391B5C9FF70090E2C1 /* ShowQRCodeViewController.xib */; };
+		2BCCADDF1BA85A0B00DB4859 /* GetProfessionDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BCCADDE1BA85A0B00DB4859 /* GetProfessionDataParse.m */; };
 		2BE2FFFD1B837DEE0006EB99 /* GetTaskDetailDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE2FFFC1B837DEE0006EB99 /* GetTaskDetailDataParse.m */; };
 		2BE55A081B647324008CDB4B /* TaskOverviewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE55A061B647324008CDB4B /* TaskOverviewTableViewCell.m */; };
 		2BE55A091B647324008CDB4B /* TaskOverviewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE55A071B647324008CDB4B /* TaskOverviewTableViewCell.xib */; };
@@ -539,6 +540,8 @@
 		2BC821371B5C9FF70090E2C1 /* ShowQRCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowQRCodeViewController.h; sourceTree = "<group>"; };
 		2BC821381B5C9FF70090E2C1 /* ShowQRCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowQRCodeViewController.m; sourceTree = "<group>"; };
 		2BC821391B5C9FF70090E2C1 /* ShowQRCodeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowQRCodeViewController.xib; sourceTree = "<group>"; };
+		2BCCADDD1BA85A0B00DB4859 /* GetProfessionDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetProfessionDataParse.h; sourceTree = "<group>"; };
+		2BCCADDE1BA85A0B00DB4859 /* GetProfessionDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetProfessionDataParse.m; sourceTree = "<group>"; };
 		2BDA1A441B8D948B00AD49B8 /* UserDefaultsDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserDefaultsDefine.h; sourceTree = "<group>"; };
 		2BE2FFFB1B837DEE0006EB99 /* GetTaskDetailDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetTaskDetailDataParse.h; sourceTree = "<group>"; };
 		2BE2FFFC1B837DEE0006EB99 /* GetTaskDetailDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetTaskDetailDataParse.m; sourceTree = "<group>"; };
@@ -1027,6 +1030,8 @@
 				2B0443761BA271E800BC7BF4 /* BMC */,
 				2B04436A1BA1A12500BC7BF4 /* GetProfessionListDataParse.h */,
 				2B04436B1BA1A12500BC7BF4 /* GetProfessionListDataParse.m */,
+				2BCCADDD1BA85A0B00DB4859 /* GetProfessionDataParse.h */,
+				2BCCADDE1BA85A0B00DB4859 /* GetProfessionDataParse.m */,
 				2B2B84B21BA06FC60043EFD4 /* AddProfessionDataParse.h */,
 				2B2B84B31BA06FC60043EFD4 /* AddProfessionDataParse.m */,
 				2B04436D1BA1AC5F00BC7BF4 /* DeleteProfessionDataParse.h */,
@@ -2430,6 +2435,7 @@
 				F24787751B2D775E00EC266B /* SignUpDataParse.m in Sources */,
 				F277AE0D1B2DD066006E42CB /* UIPageNavigator.m in Sources */,
 				F22FE2FF1B42DAF600A1A997 /* AddContactDataParse.m in Sources */,
+				2BCCADDF1BA85A0B00DB4859 /* GetProfessionDataParse.m in Sources */,
 				2B0443721BA1AD3E00BC7BF4 /* UpdateProfessionDataParse.m in Sources */,
 				2BE55A0E1B6483D2008CDB4B /* TaskListViewController.m in Sources */,
 				2BEEE6F41BA6BAA4008D4DF3 /* EventVO.m in Sources */,
@@ -2591,7 +2597,7 @@
 					"$(PROJECT_DIR)/MyRill/JPush",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "46caef10-069d-4e94-8a4d-fbd9bc55ceda";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
@@ -2617,7 +2623,7 @@
 					"$(PROJECT_DIR)/MyRill/JPush",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "46caef10-069d-4e94-8a4d-fbd9bc55ceda";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};

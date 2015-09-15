@@ -30,6 +30,17 @@
 #import "PushDefine.h"
 #import "CustomShowMessage.h"
 
+typedef enum : NSInteger {
+    ESUserNameBtnClicked = 902,
+    ESUserMailBtnClicked,
+    ESUserEnterpriseBtnClicked,
+    ESUserDepartmentBtnClicked,
+    ESUserEnterpriseQRCodeBtnClicked,
+    ESUserPersonQRCodeBtnClicked,
+    ESUserTagBtnClicked,
+    ESUserCommentBtnClicked
+}ESUserBtnType;
+
 @interface UserMsgViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, ContactDetailDataDelegate,ChangeUserImageDataDelegate, LogoutDataDelegate>
 
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *btnCollection;
@@ -220,7 +231,7 @@
 
 - (IBAction)buttonsOnClicked:(UIButton *)sender {
     switch (sender.tag) {
-        case 902:
+        case ESUserNameBtnClicked:
             {
                 NameMailDepartmentViewController *nameAndPositionVC = [[NameMailDepartmentViewController alloc] init];
                 nameAndPositionVC.title = @"用户名修改";
@@ -232,32 +243,32 @@
                                                       completion:nil];
             }
             break;
-        case 903:
-        {
-            NameMailDepartmentViewController *nameAndPositionVC = [[NameMailDepartmentViewController alloc] init];
-            nameAndPositionVC.title = @"邮箱修改";
-            nameAndPositionVC.type = ESUserMail;
-            nameAndPositionVC.userDetailInfo = self.userDetailInfo;
-            ESNavigationController *nav = [[ESNavigationController alloc] initWithRootViewController:nameAndPositionVC];
-            [self.navigationController presentViewController:nav
-                                                    animated:YES
-                                                  completion:nil];
-        }
-            break;
-        case 904:
-        {
-            if ([ColorHandler isNullOrEmptyString:self.UserEnterpriseLbl.text]) {
-                return;
+        case ESUserMailBtnClicked:
+            {
+                NameMailDepartmentViewController *nameAndPositionVC = [[NameMailDepartmentViewController alloc] init];
+                nameAndPositionVC.title = @"邮箱修改";
+                nameAndPositionVC.type = ESUserMail;
+                nameAndPositionVC.userDetailInfo = self.userDetailInfo;
+                ESNavigationController *nav = [[ESNavigationController alloc] initWithRootViewController:nameAndPositionVC];
+                [self.navigationController presentViewController:nav
+                                                        animated:YES
+                                                      completion:nil];
             }
-            //企业详情
-            RCDAddressBookEnterpriseDetailViewController* rcdAddressBookEnterpriseDetailVC = [[RCDAddressBookEnterpriseDetailViewController alloc] init];
-            NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
-            NSString* enterpriseId = [userDefaultes stringForKey:DEFAULTS_USERENTERPRISE_ID];
-            rcdAddressBookEnterpriseDetailVC.enterpriseId = enterpriseId;
-            [self.navigationController pushViewController:rcdAddressBookEnterpriseDetailVC animated:YES];            
-        }
             break;
-        case 905:
+        case ESUserEnterpriseBtnClicked:
+            {
+                if ([ColorHandler isNullOrEmptyString:self.UserEnterpriseLbl.text]) {
+                    return;
+                }
+            //企业详情
+                RCDAddressBookEnterpriseDetailViewController* rcdAddressBookEnterpriseDetailVC = [[RCDAddressBookEnterpriseDetailViewController alloc] init];
+                NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
+                NSString* enterpriseId = [userDefaultes stringForKey:DEFAULTS_USERENTERPRISE_ID];
+                rcdAddressBookEnterpriseDetailVC.enterpriseId = enterpriseId;
+                [self.navigationController pushViewController:rcdAddressBookEnterpriseDetailVC animated:YES];
+            }
+            break;
+        case ESUserDepartmentBtnClicked:
             {
                 NameMailDepartmentViewController *nameAndPositionVC = [[NameMailDepartmentViewController alloc] init];
                 nameAndPositionVC.title = @"部门修改";
@@ -269,7 +280,7 @@
                                                       completion:nil];
             }
             break;
-        case 906:
+        case ESUserEnterpriseQRCodeBtnClicked:
             {
                 if (![ColorHandler isNullOrEmptyString:self.userDetailInfo.enterprise_qrcode]) {
                     ShowQRCodeViewController *showQRCodeVC = [[ShowQRCodeViewController alloc] init];
@@ -279,7 +290,7 @@
                 }
             }
             break;
-        case 907:
+        case ESUserPersonQRCodeBtnClicked:
             {
                 if (![ColorHandler isNullOrEmptyString:self.userDetailInfo.qrcode]) {
                     ShowQRCodeViewController *showQRCodeVC = [[ShowQRCodeViewController alloc] init];
@@ -289,7 +300,12 @@
                 }
             }
             break;
-        case 908:
+        case ESUserTagBtnClicked:
+            {
+                //标签选择事件
+            }
+            break;
+        case ESUserCommentBtnClicked:
             {
                 UserDescriptionChangeViewController *userDescriptionVC = [[UserDescriptionChangeViewController alloc] init];
                 userDescriptionVC.title = @"个人简介修改";
@@ -299,7 +315,7 @@
                                                         animated:YES
                                                       completion:nil];
             }
-            
+            break;
         default:
             break;
     }

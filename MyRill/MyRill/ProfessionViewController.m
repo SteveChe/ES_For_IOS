@@ -125,7 +125,10 @@
     if (indexPath.row == self.dataSource.count - 1) {
         AddProfessionViewController *addProfessionVC = [[AddProfessionViewController alloc] init];
         [self.navigationController pushViewController:addProfessionVC animated:YES];
-
+//        ProfessionWebViewController *webVC = [[ProfessionWebViewController alloc] init];
+//        webVC.type = ESWebProfessionWithID;
+//        webVC.professionID = @"87";
+//        [self.navigationController pushViewController:webVC animated:YES];
     } else {
         ESProfession *profession = (ESProfession *)self.dataSource[indexPath.row];
         if ([profession.professionType isEqualToString:@"BMC"]) {
@@ -134,6 +137,7 @@
         } else {
             ProfessionWebViewController *webVC = [[ProfessionWebViewController alloc] init];
             webVC.title = profession.name;
+            webVC.type = ESWebProfessionWithURL;
             webVC.urlString = profession.url;
             [self.navigationController pushViewController:webVC animated:YES];
         }
