@@ -10,7 +10,7 @@
 #import "AppDelegate.h"
 #import "RCDAddressBookViewController.h"
 #import "ChatListViewController.h"
-#import "TaskOverviewViewController.h"
+#import "TaskViewController.h"
 #import "ProfessionViewController.h"
 #import "ESMenuViewController.h"
 #import "RCDAcceptContactViewController.h"
@@ -25,6 +25,8 @@
     {
         return;
     }
+    NSDictionary* paramsDic = [pushDic objectForKey:PUSH_CATEGORY_PARAMS];
+    
     NSString* notificationMessage = nil;
     E_PUSH_CATEGORY_TYPE categoryType = e_Push_Category_Contact_None ;
     
@@ -83,7 +85,7 @@
     
     if (applicationState == UIApplicationStateInactive)
     {
-        [ESPushManager changeToPageWithType:categoryType];
+        [ESPushManager changeToPageWithType:categoryType Dic:paramsDic];
     }
     
     [ESPushManager postNotificationMessage:notificationMessage];
@@ -93,66 +95,109 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:notificationMessage object:nil];
 }
 
-+(void)changeToPageWithType:(E_PUSH_CATEGORY_TYPE)categoryType
++(void)changeToPageWithType:(E_PUSH_CATEGORY_TYPE)categoryType  Dic:(NSDictionary*) paramsDic
 {
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-    UIViewController* targetVC = nil;
     NSUInteger selectIndex = 0;
+    ESMenuViewController* rootViewCtrl = (ESMenuViewController*)appDelegate.window.rootViewController;
+    [rootViewCtrl.navigationController popToRootViewControllerAnimated:NO];
+
     switch (categoryType)
     {
         case e_Push_Category_Contact_Request:
         {
             selectIndex = 2;
-            targetVC = [[RCDAcceptContactViewController alloc] init];
+            RCDAcceptContactViewController* targetVC = [[RCDAcceptContactViewController alloc] init];
+            [rootViewCtrl setSelectedIndex:selectIndex];
+            UINavigationController* topViewCtrl = rootViewCtrl.viewControllers[selectIndex];
+            
+            if (targetVC != nil && topViewCtrl != nil)
+            {
+                [topViewCtrl pushViewController:targetVC animated:NO];
+            }
+
         }
             break;
         case e_Push_Category_Enterprise_Request:
         {
             selectIndex = 2;
-            targetVC = [[RCDApprovedJoinEnterpriseViewController alloc] init ];
+            RCDApprovedJoinEnterpriseViewController* targetVC = [[RCDApprovedJoinEnterpriseViewController alloc] init ];
+            [rootViewCtrl setSelectedIndex:selectIndex];
+            UINavigationController* topViewCtrl = rootViewCtrl.viewControllers[selectIndex];
+            
+            if (targetVC != nil && topViewCtrl != nil)
+            {
+                [topViewCtrl pushViewController:targetVC animated:NO];
+            }
+
         }
             break;
         case e_Push_Category_Enterprise_Accept:
         case e_Push_Category_Contact_Accept:
         {
             selectIndex = 2;
-            targetVC = [[RCDAddressBookViewController alloc] init];
+            RCDAddressBookViewController* targetVC = [[RCDAddressBookViewController alloc] init];
+            [rootViewCtrl setSelectedIndex:selectIndex];
+            UINavigationController* topViewCtrl = rootViewCtrl.viewControllers[selectIndex];
+            
+            if (targetVC != nil && topViewCtrl != nil)
+            {
+                [topViewCtrl pushViewController:targetVC animated:NO];
+            }
+
         }
             break;
         case e_Push_Category_Enterprise_Message:
         case e_Push_Category_Riil_Message:
         {
-            targetVC = [[ChatListViewController alloc] init];
+            ChatListViewController* targetVC = [[ChatListViewController alloc] init];
             selectIndex = 1;
+            [rootViewCtrl setSelectedIndex:selectIndex];
+            UINavigationController* topViewCtrl = rootViewCtrl.viewControllers[selectIndex];
+            
+            if (targetVC != nil && topViewCtrl != nil)
+            {
+                [topViewCtrl pushViewController:targetVC animated:NO];
+            }
+
         }
             break;
         case e_Push_Category_Assignment:
         {
-            targetVC = [[TaskOverviewViewController alloc]init];
+            NSString* taskId = [paramsDic objectForKey:PUSH_CATEGORY_ASSIGNMENT_ID];
+            TaskViewController* targetVC = [[TaskViewController alloc]init];
+            targetVC.requestTaskID = taskId;
             selectIndex = 3;
+            [rootViewCtrl setSelectedIndex:selectIndex];
+            UINavigationController* topViewCtrl = rootViewCtrl.viewControllers[selectIndex];
+            
+            if (targetVC != nil && topViewCtrl != nil)
+            {
+                [topViewCtrl pushViewController:targetVC animated:NO];
+            }
+
         }
             break;
         
         case e_Push_Category_Profession:
         case e_Push_Category_Profession_Apply:
         {
-            targetVC = [[ProfessionViewController alloc] init];
+//            ProfessionViewController* targetVC = [[ProfessionViewController alloc] init];
             selectIndex = 0;
+            [rootViewCtrl setSelectedIndex:selectIndex];
+//            UINavigationController* topViewCtrl = rootViewCtrl.viewControllers[selectIndex];
+//            
+//            if (targetVC != nil && topViewCtrl != nil)
+//            {
+//                [topViewCtrl pushViewController:targetVC animated:NO];
+//            }
+
         }
             break;
             
         default:
             break;
     }
-    ESMenuViewController* rootViewCtrl = (ESMenuViewController*)appDelegate.window.rootViewController;
-    [rootViewCtrl.navigationController popToRootViewControllerAnimated:NO];
-    [rootViewCtrl setSelectedIndex:selectIndex];
-//    RCDAcceptContactViewController* targetVC1 = [[RCDAcceptContactViewController alloc] init];
-
-//    if (targetVC != nil)
-//    {
-//        [rootViewCtrl.navigationController pushViewController:targetVC1 animated:NO];
-//    }
 }
 
 @end

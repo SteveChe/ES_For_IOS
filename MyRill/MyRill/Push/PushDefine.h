@@ -57,6 +57,9 @@ typedef enum E_PUSH_CATEGORY_TYPE
 #define PUSH_CATEGORY_ASSIGNMENT @"assignment"
 #define PUSH_CATEGOTY_PROFESSION @"profession"
 #define PUSH_CATEGORY_PROFESSION_APPLY @"profession_apply"
+#define PUSH_CATEGORY_PARAMS @"params"
+#define PUSH_CATEGORY_ASSIGNMENT_ID @"assignment_id"
+#define PUSH_CATEGORY_PROFESSION_ID @"profession_id"
 
 
 #define NOTIFICATION_PUSH_CONTACT_REQUEST @"notification_contact_request"
