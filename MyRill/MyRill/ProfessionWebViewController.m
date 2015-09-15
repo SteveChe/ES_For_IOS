@@ -8,11 +8,16 @@
 
 #import "ProfessionWebViewController.h"
 #import "Masonry.h"
+#import "GetProfessionDataParse.h"
+#import "ESProfession.h"
+#import "CustomShowMessage.h"
 
-@interface ProfessionWebViewController () <UIWebViewDelegate>
+@interface ProfessionWebViewController () <UIWebViewDelegate, GetProfessionDelegate>
 
 @property (nonatomic, strong) UIWebView *professionWeb;
 @property (nonatomic, strong) UIToolbar *toolbar;
+
+@property (nonatomic, strong) GetProfessionDataParse *getProfessionDP;
 
 @end
 
@@ -49,9 +54,13 @@
     
     self.tabBarController.tabBar.hidden = YES;
     
-    NSURL *url = [NSURL URLWithString:self.urlString];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    [self.professionWeb loadRequest:request];
+    if (self.type == ESWebProfessionWithURL) {
+        NSURL *url = [NSURL URLWithString:self.urlString];
+        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+        [self.professionWeb loadRequest:request];
+    } else {
+        [self.getProfessionDP getProfessionWithProfessionID:self.professionID];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -71,6 +80,16 @@
     [super viewWillDisappear:animated];
     
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+}
+
+- (void)getProfessionSuccess:(ESProfession *)profession {
+    NSURL *url = [NSURL URLWithString:profession.url];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [self.professionWeb loadRequest:request];
+}
+
+- (void)getProfessionFailure:(NSString *)errorMsg {
+    [[CustomShowMessage getInstance] showNotificationMessage:errorMsg];
 }
 
 #pragma mark - UIWebViewDelegate methods
@@ -156,6 +175,15 @@
     }
     
     return _toolbar;
+}
+
+- (GetProfessionDataParse *)getProfessionDP {
+    if (!_getProfessionDP) {
+        _getProfessionDP = [[GetProfessionDataParse alloc] init];
+        _getProfessionDP.delegate = self;
+    }
+    
+    return _getProfessionDP;
 }
 
 @end

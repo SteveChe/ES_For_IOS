@@ -199,6 +199,17 @@
                           failure:failure];
 }
 
++ (void)getProfessionWithProfessionID:(NSString *)professionID
+                              success:(void (^)(id response))success
+                              failure:(void (^)(NSError* err))failure {
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet
+                     protocolType:RequestProtocolTypeText
+                              url:[NSString stringWithFormat:@"/api/professions/%@/.json",professionID]
+                           params:nil
+                          success:success
+                          failure:failure];
+}
+
 + (void)addProfessionWithName:(NSString *)name
                           url:(NSString *)url
                       success:(void (^)(id))success

@@ -20,7 +20,7 @@
         
         if (errorCodeNum == nil || [errorCodeNum isEqual:[NSNull null]]) {
             NSLog(@"请求有误！");
-            [self.delegate getProfessionListFailure:@"请求有误!获取业务失败！"];
+            [self.delegate getProfessionListFailure:@"请求有误!获取业务列表失败！"];
             return;
         }
         
@@ -39,7 +39,7 @@
         }
     } failure:^(NSError *error) {
         NSLog(@"%@",[error debugDescription]);
-        [self.delegate getProfessionListFailure:@"请求失败!获取业务失败!"];
+        [self.delegate getProfessionListFailure:@"请求失败!获取业务列表失败!"];
     }];
 }
 

@@ -898,7 +898,6 @@
         };
         [self.navigationController pushViewController:selectPersonVC animated:YES];
     }
-    
 }
 
 - (void)saveBarItemOnClicked {
