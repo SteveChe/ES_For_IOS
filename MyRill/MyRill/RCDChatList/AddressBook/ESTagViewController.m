@@ -290,7 +290,6 @@ enum
         if (item!=nil)
         {
             cell.detailTextLabel.text = item.tagItemName;
-
         }
     }
     else
@@ -388,31 +387,42 @@ enum
     {
         return;
     }
+    
     ESTagItem* tagItem = [tag.tagItemList objectAtIndex:nSelectedIndex];
     if (tagItem == nil)
     {
         return;
     }
+    tag.selectedTagItemId = tagItem.tagItemId;
     
+    NSMutableDictionary* tagParamsDic = [NSMutableDictionary dictionary];
+    for (ESTag *tag in _tagListArray)
+    {
+        NSString* strKey = [NSString stringWithFormat:@"attr_%@",tag.tagId];
+        if (tag.selectedTagItemId != nil )
+        {
+            [tagParamsDic setObject:tag.selectedTagItemId forKey:strKey];
+        }
+    }
     
     switch (_tagType) {
         case TAG_TYPE_USER:
         {
-            [_tagDataParse setUserTag:_userId TagId:tag.tagId tagItemId:tagItem.tagItemId];
+            [_tagDataParse setUserTag:_userId TagParams:tagParamsDic];
             [[CustomShowMessage getInstance] showWaitingIndicator:REQ_WAITING_INDICATOR];
         }
             break;
         case TAG_TYPE_ENTERPRISE:
         {
-            [_tagDataParse setEnterpriseTag:_enterpriseId TagId:tag.tagId tagItemId:tagItem.tagItemId];
+            [_tagDataParse setEnterpriseTag:_enterpriseId TagParam:tagParamsDic];
             [[CustomShowMessage getInstance] showWaitingIndicator:REQ_WAITING_INDICATOR];
-
         }
             break;
             
         case TAG_TYPE_ASSIGNMENT:
         {
-            [_tagDataParse setTaskTag:_taskId TagId:tag.tagId tagItemId:tagItem.tagItemId];
+//            [_tagDataParse setTaskTag:_taskId TagId:tag.tagId tagItemId:tagItem.tagItemId];
+            [_tagDataParse setTaskTag:_taskId TagParam:tagParamsDic];
             [[CustomShowMessage getInstance] showWaitingIndicator:REQ_WAITING_INDICATOR];
         }
             break;
