@@ -57,6 +57,7 @@
 @property (nonatomic, strong) MRProgressOverlayView *progress;
 @property (weak, nonatomic) IBOutlet UIImageView *personInChargeArrow;
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *arrowImages;
+@property (nonatomic, strong) UIProgressView *progressBar;
 
 @property (nonatomic, strong) NSMutableArray *assignerDataSource; //负责人列表,ESUserInfo
 @property (nonatomic, strong) NSMutableArray *followsDataSource; //关注人列表,ESUserInfo
@@ -280,8 +281,8 @@
     [self.tableView layoutIfNeeded];
 }
 
-- (void)sendTaskImageSuccess:(NSString *)imageURL {
-    [self.imagesOld addObject:imageURL];
+- (void)sendTaskImageSuccess:(ESImage *)image {
+    [self.imagesOld addObject:image];
     [self.images removeObject:[self.images firstObject]];
     if (self.images.count > 0) {
         [self.sendTaskImageDP sendTaskCommentWithTaskID:[self.taskModel.taskID stringValue]
@@ -448,6 +449,71 @@
     return YES;
 }
 
+#pragma mark - UIImagePickerControllerDelegate methods
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    
+    //    self.tabBarController.tabBarItem.enabled = NO;
+    //    [self.tabBarController.tabBar.items makeObjectsPerformSelector:@selector(setEnabled:) withObject:@NO];
+    
+    NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
+    
+    //当选择的类型是图片
+    if ([type isEqualToString:@"public.image"])
+    {
+        //获取编辑框内部的图片，作为上传对象(上传图片不歪了也就)
+        UIImage *image = [info objectForKey:@"UIImagePickerControllerEditedImage"];
+        //先把图片转成NSData
+        //        UIImage *img = [self scaleToSize:image size:CGSizeMake(300, 300)];
+        NSData *data;
+        if (UIImagePNGRepresentation(image) == nil)
+        {
+            data = UIImageJPEGRepresentation(image, 1.0);
+        }
+        else
+        {
+            data = UIImagePNGRepresentation(image);
+        }
+        
+        [self.images removeAllObjects];
+        [self.images addObject:data];
+        
+        //关闭相册界面
+        [picker dismissViewControllerAnimated:YES completion:nil];
+    }
+    //    MRActivityIndicatorView
+    // [self showTips:@"正在上传..." mode:MRProgressOverlayViewModeIndeterminateSmallDefault isDismiss:NO isSucceuss:NO];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)elcImagePickerController:(ELCImagePickerController *)picker didFinishPickingMediaWithInfo:(NSArray *)info {
+    [self.images removeAllObjects];
+    [info enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSDictionary *dic = (NSDictionary *)obj;
+        UIImage *image = dic[@"UIImagePickerControllerOriginalImage"];
+//        image = [self scaleToSize:image];
+        NSData *data;
+        if (UIImagePNGRepresentation(image) == nil) {
+            data = UIImageJPEGRepresentation(image, 1.0);
+        } else {
+            data = UIImagePNGRepresentation(image);
+        }
+        
+        [self.images addObject:data];
+    }];
+    
+    [self.sendTaskCommentDP sendTaskCommentWithTaskID:[self.taskModel.taskID stringValue] comment:@" "];
+    [self showTips:@"正在上传..." mode:MRProgressOverlayViewModeIndeterminateSmallDefault isDismiss:NO isSucceuss:NO];
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)elcImagePickerControllerDidCancel:(ELCImagePickerController *)picker {
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark - UITextViewDelegate methods
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     if ([text isEqualToString:@""]) {
@@ -528,94 +594,14 @@
     return YES;
 }
 
-#pragma mark - UIImagePickerControllerDelegate methods
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    
-    //    self.tabBarController.tabBarItem.enabled = NO;
-    //    [self.tabBarController.tabBar.items makeObjectsPerformSelector:@selector(setEnabled:) withObject:@NO];
-    
-    NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
-    
-    //当选择的类型是图片
-    if ([type isEqualToString:@"public.image"])
-    {
-        //获取编辑框内部的图片，作为上传对象(上传图片不歪了也就)
-        UIImage *image = [info objectForKey:@"UIImagePickerControllerEditedImage"];
-        //先把图片转成NSData
-//        UIImage *img = [self scaleToSize:image size:CGSizeMake(300, 300)];
-        NSData *data;
-        if (UIImagePNGRepresentation(image) == nil)
-        {
-            data = UIImageJPEGRepresentation(image, 1.0);
-        }
-        else
-        {
-            data = UIImagePNGRepresentation(image);
-        }
-        
-        [self.images removeAllObjects];
-        [self.images addObject:data];
-        
-        //关闭相册界面
-        [picker dismissViewControllerAnimated:YES completion:nil];
-    }
-    //    MRActivityIndicatorView
-   // [self showTips:@"正在上传..." mode:MRProgressOverlayViewModeIndeterminateSmallDefault isDismiss:NO isSucceuss:NO];
+#pragma mark - UIScrollViewDelegate methods
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
+    NSInteger index = scrollView.contentOffset.x / scrollView.bounds.size.width;
+    return [scrollView viewWithTag:101 + index];
 }
 
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-{
-    [picker dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)elcImagePickerController:(ELCImagePickerController *)picker didFinishPickingMediaWithInfo:(NSArray *)info {
-    [self.images removeAllObjects];
-    [info enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        NSDictionary *dic = (NSDictionary *)obj;
-        UIImage *image = dic[@"UIImagePickerControllerOriginalImage"];
-        image = [self scaleToSize:image];
-        NSData *data;
-        if (UIImagePNGRepresentation(image) == nil) {
-            data = UIImageJPEGRepresentation(image, 1.0);
-        } else {
-            data = UIImagePNGRepresentation(image);
-        }
-        
-        [self.images addObject:data];
-    }];
-    
-    [self.sendTaskCommentDP sendTaskCommentWithTaskID:[self.taskModel.taskID stringValue] comment:@" "];
-    [self showTips:@"正在上传..." mode:MRProgressOverlayViewModeIndeterminateSmallDefault isDismiss:NO isSucceuss:NO];
-    [picker dismissViewControllerAnimated:YES completion:nil];
-    //    NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
-    //
-    //    //当选择的类型是图片
-    //    if ([type isEqualToString:@"public.image"])
-    //    {
-    //        //获取编辑框内部的图片，作为上传对象(上传图片不歪了也就)
-    //        UIImage *image = [info objectForKey:@"UIImagePickerControllerEditedImage"];
-    //        //先把图片转成NSData
-    //        //        UIImage *img = [self scaleToSize:image size:CGSizeMake(300, 300)];
-    //        NSData *data;
-    //        if (UIImagePNGRepresentation(image) == nil)
-    //        {
-    //            data = UIImageJPEGRepresentation(image, 1.0);
-    //        }
-    //        else
-    //        {
-    //            data = UIImagePNGRepresentation(image);
-    //        }
-    //
-    //        [self.images removeAllObjects];
-    //        [self.images addObject:data];
-    //
-    //        //关闭相册界面
-    //        [picker dismissViewControllerAnimated:YES completion:nil];
-    //    }
-}
-
-- (void)elcImagePickerControllerDidCancel:(ELCImagePickerController *)picker {
-    [picker dismissViewControllerAnimated:YES completion:nil];
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    self.pageControl.currentPage = scrollView.contentOffset.x /scrollView.bounds.size.width;
 }
 
 #pragma mark - response events methods
@@ -995,12 +981,7 @@
                                                       handler:^(UIAlertAction *action) {
                                                           //处理点击拍照
                                                           UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
-                                                          //    if (![UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]) {
-                                                          //        sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-                                                          //    }
-                                                          //sourceType = UIImagePickerControllerSourceTypeCamera; //照相机
-                                                          //sourceType = UIImagePickerControllerSourceTypePhotoLibrary; //图片库
-                                                          //sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum; //保存的相片
+                                                         
                                                           UIImagePickerController *picker = [[UIImagePickerController alloc] init];//初始化
                                                           picker.delegate = self;
                                                           picker.allowsEditing = YES;//设置可编辑
@@ -1017,36 +998,12 @@
                                                         style:UIAlertActionStyleDefault
                                                       handler:^(UIAlertAction *action){
                                                           //处理点击从相册选取
-//                                                          UIImagePickerController *pickerImage = [[UIImagePickerController alloc] init];
-//                                                          if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
-//                                                              pickerImage.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-//                                                              //pickerImage.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-//                                                              pickerImage.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:pickerImage.sourceType];
-//                                                              
-//                                                          }
-//                                                          pickerImage.delegate = self;
-//                                                          pickerImage.allowsEditing = YES;
-//                                                          if([[[UIDevice
-//                                                                currentDevice] systemVersion] floatValue]>=8.0) {
-//                                                              
-//                                                              self.modalPresentationStyle=UIModalPresentationOverCurrentContext;
-//                                                              
-//                                                          }
-//                                                          
-//                                                          pickerImage.navigationBar.barTintColor = [ColorHandler colorFromHexRGB:@"FF5454"];
-//                                                          //item颜色
-//                                                          pickerImage.navigationBar.tintColor = [UIColor whiteColor];
-//                                                          //设定title颜色
-//                                                          [pickerImage.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
-//                                                          //取消translucent效果
-//                                                          pickerImage.navigationBar.translucent = NO;
-//                                                          [self presentViewController:pickerImage animated:YES completion:nil];//进入照相界面
+
                                                           ELCAlbumPickerController *albumController = [[ELCAlbumPickerController alloc] initWithNibName:@"ELCAlbumPickerController" bundle:[NSBundle mainBundle]];
                                                           ELCImagePickerController *pickImage = [[ELCImagePickerController alloc] initWithRootViewController:albumController];
                                                           [albumController setParent:pickImage];
                                                           [pickImage setDelegate:self];
                                                           
-//                                                          ELCImagePickerController *pickImage= [[ELCImagePickerController alloc] init];
                                                           pickImage.maximumImagesCount = 9; //Set the maximum number of images to select, defaults to 4
                                                           pickImage.returnsOriginalImage = NO; //Only return the fullScreenImage, not the fullResolutionImage
                                                           pickImage.returnsImage = YES; //Return UIimage if YES. If NO, only return asset location information
@@ -1167,16 +1124,39 @@
     while (count < images.count) {
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, (self.scrollView.bounds.size.height - self.oldframe.size.height * self.scrollView.bounds.size.width / self.oldframe.size.width) / 2, self.scrollView.bounds.size.width, self.oldframe.size.height * self.scrollView.bounds.size.width / self.oldframe.size.width)];
         ESImage *image = images[count];
+//        [imageView sd_setImageWithURL:[NSURL URLWithString:image.imgURL]
+//                     placeholderImage:[UIImage imageNamed:@"单张图片"]
+//                            completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+//                                CGSize size = [image size];
+//                                if (size.height * self.scrollView.bounds.size.width / size.width >= (self.scrollView.bounds.size.height - 37 * 2)) {
+//                                    imageView.frame = CGRectMake(self.scrollView.bounds.size.width * count, 0, self.scrollView.bounds.size.width, size.height * self.scrollView.bounds.size.width / size.width - 37);
+//                                } else {
+//                                    imageView.frame = CGRectMake(self.scrollView.bounds.size.width * count, (self.scrollView.bounds.size.height - size.height * self.scrollView.bounds.size.width / size.width) / 2, self.scrollView.bounds.size.width, size.height * self.scrollView.bounds.size.width / size.width);
+//                                }
+//                            }];
+        
+        __weak TaskViewController *ws = self;
+        NSLog(@"%@",image.imgURL);
         [imageView sd_setImageWithURL:[NSURL URLWithString:image.imgURL]
                      placeholderImage:[UIImage imageNamed:@"单张图片"]
-                            completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                CGSize size = [image size];
-                                if (size.height * self.scrollView.bounds.size.width / size.width >= (self.scrollView.bounds.size.height - 37 * 2)) {
-                                    imageView.frame = CGRectMake(self.scrollView.bounds.size.width * count, 0, self.scrollView.bounds.size.width, size.height * self.scrollView.bounds.size.width / size.width - 37);
-                                } else {
-                                    imageView.frame = CGRectMake(self.scrollView.bounds.size.width * count, (self.scrollView.bounds.size.height - size.height * self.scrollView.bounds.size.width / size.width) / 2, self.scrollView.bounds.size.width, size.height * self.scrollView.bounds.size.width / size.width);
-                                }
-                            }];
+                              options:SDWebImageRetryFailed
+                             progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+                                 [containerView addSubview:self.progressBar];
+                                 CGRect frame = CGRectMake(self.progressBar.frame.origin.x, self.progressBar.frame.origin.y, containerView.bounds.size.width, self.progressBar.frame.size.height);
+                                 self.progressBar.frame = frame;
+                                 float received = receivedSize;
+                                 float expected = expectedSize;
+                                 [ws.progressBar setProgress:received / expected animated:YES];
+                             } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                 [self.progressBar removeFromSuperview];
+                                 self.progressBar = nil;
+                                 CGSize size = [image size];
+                                 if (size.height * self.scrollView.bounds.size.width / size.width >= (self.scrollView.bounds.size.height - 37 * 2)) {
+                                     imageView.frame = CGRectMake(self.scrollView.bounds.size.width * count, 0, self.scrollView.bounds.size.width, size.height * self.scrollView.bounds.size.width / size.width - 37);
+                                 } else {
+                                     imageView.frame = CGRectMake(self.scrollView.bounds.size.width * count, (self.scrollView.bounds.size.height - size.height * self.scrollView.bounds.size.width / size.width) / 2, self.scrollView.bounds.size.width, size.height * self.scrollView.bounds.size.width / size.width);
+                                 }
+                             }];
          imageView.tag = 101 + count;
         [self.scrollView addSubview:imageView];
         count ++;
@@ -1192,11 +1172,6 @@
     [self.scrollView scrollRectToVisible:CGRectMake(pageControl.currentPage * self.scrollView.bounds.size.width, self.scrollView.bounds.origin.y, self.scrollView.bounds.size.width, self.scrollView.bounds.size.height) animated:YES];
 }
 
-- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
-    NSInteger index = scrollView.contentOffset.x / scrollView.bounds.size.width;
-    return [scrollView viewWithTag:101 + index];
-}
-
 - (void)hideImage:(UITapGestureRecognizer*)tap {
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     UIView *contanerView = tap.view;
@@ -1207,11 +1182,6 @@
     } completion:^(BOOL finished) {
         [contanerView removeFromSuperview];
     }];
-}
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    self.pageControl.currentPage = scrollView.contentOffset.x /scrollView.bounds.size.width;
-    
 }
 
 #pragma mark - private methods
@@ -1258,12 +1228,6 @@
         view.layer.borderColor = [ColorHandler colorFromHexRGB:@"EEEEEE"].CGColor;
     }
 }
-
-//- (void)setTableView:(UITableView *)tableView {
-//    _tableView = tableView;
-//    
-//    _tableView.rowHeight = UITableViewAutomaticDimension;
-//}
 
 - (void)setTxtHoldViews:(NSArray *)txtHoldViews {
     _txtHoldViews = txtHoldViews;
@@ -1334,6 +1298,15 @@
     }
     
     return _progress;
+}
+
+- (UIProgressView *)progressBar {
+    if (!_progressBar) {
+        _progressBar = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
+        _progressBar.progress = .5f;
+    }
+    
+    return _progressBar;
 }
 
 - (NSMutableArray *)assignerDataSource {

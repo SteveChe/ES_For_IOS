@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 @class ESTaskComment;
+@class ESImage;
 
 @protocol SendTaskImageDelegate <NSObject>
 
-- (void)sendTaskImageSuccess:(NSString *)imageURL;
+- (void)sendTaskImageSuccess:(ESImage *)image;
 
 @end
 
