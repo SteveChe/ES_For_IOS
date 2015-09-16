@@ -94,10 +94,11 @@
             [userInfoArray addObject:userInfo];
         }
     }
-    if ([userInfoArray count]>0)
-    {
-        [[UserInfoDataSource shareInstance] insertContactList:userInfoArray];
-    }
+//数据库
+    //    if ([userInfoArray count]>0)
+//    {
+//        [[UserInfoDataSource shareInstance] insertContactList:userInfoArray];
+//    }
 }
 
 @end
