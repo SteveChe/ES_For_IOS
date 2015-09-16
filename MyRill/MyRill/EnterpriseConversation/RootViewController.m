@@ -248,6 +248,7 @@
     if (enterpriseMessage.enterprise_messageContent.bLink)
     {
         ProfessionWebViewController* professionWebVC = [[ProfessionWebViewController alloc] init];
+        professionWebVC.type = ESWebProfessionWithURL;
         professionWebVC.urlString = enterpriseMessage.enterprise_messageContent.linkUrl;
         [self.navigationController pushViewController:professionWebVC animated:YES];
     }

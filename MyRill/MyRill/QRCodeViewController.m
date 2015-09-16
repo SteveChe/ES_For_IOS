@@ -11,8 +11,12 @@
 #import "ColorHandler.h"
 #import "RCDAddFriendViewController.h"
 #import "RCDJoinEnterpriseViewController.h"
+#import "CustomShowMessage.h"
+#import "FollowEnterpriseDataParse.h"
+#import "ESMenuViewController.h"
+#import "AppDelegate.h"
 
-@interface QRCodeViewController ()<AVCaptureMetadataOutputObjectsDelegate, UIAlertViewDelegate>
+@interface QRCodeViewController ()<AVCaptureMetadataOutputObjectsDelegate, UIAlertViewDelegate,FollowEnterpriseDelegate,UIActionSheetDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *qrView;
 @property ( strong , nonatomic ) AVCaptureDevice *device;
@@ -21,6 +25,8 @@
 @property ( strong , nonatomic ) AVCaptureSession *session;
 @property ( strong , nonatomic ) AVCaptureVideoPreviewLayer *preview;
 @property (nonatomic, strong) NSTimer *scanLineTimer;
+@property (nonatomic, strong) FollowEnterpriseDataParse* followEnterpriseDataParse;
+@property (nonatomic, strong) NSString* followEnterpriseId;
 
 @end
 
@@ -31,6 +37,9 @@
     // Do any additional setup after loading the view.
     
     self.title = @"扫描二维码";
+    _followEnterpriseDataParse = [[FollowEnterpriseDataParse alloc] init];
+    _followEnterpriseDataParse.followEnterPriseDelegate = self;
+    
     self.navigationController.navigationBar.barTintColor = [ColorHandler colorFromHexRGB:@"000000"];
     UIBarButtonItem *cancel = [[UIBarButtonItem alloc] initWithTitle:@"取消"
                                                                style:UIBarButtonItemStyleDone
@@ -242,11 +251,58 @@
             [self.navigationController popToViewController:tabbarVC animated:YES];
             [tabbarVC.navigationController pushViewController:joinEnterpriseViewController animated:YES];
         }
-
+        else
+        {
+            NSString* searchEnterpriseQuery = @"enterprise_id=";
+            NSRange rangeEnterpriseId = [qrCodeString rangeOfString:searchEnterpriseQuery];
+            if (rangeEnterpriseId.length > 0)
+            {
+                NSString *strEnterpriseId = [qrCodeString substringFromIndex:rangeEnterpriseId.location+[searchEnterpriseQuery length]];
+                _followEnterpriseId = strEnterpriseId;
+                UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"关注该企业" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"确定" otherButtonTitles:nil];
+                [actionSheet showInView:self.view];
+            }
+            
+        }
+        
         return;
     }
 
 }
+
+#pragma mark-UIActionSheetDelegate
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (0 == buttonIndex)
+    {
+        if (_followEnterpriseId != nil && ![_followEnterpriseId isEqual:[NSNull null]] && [_followEnterpriseId length] > 0)
+        {
+            [_followEnterpriseDataParse followEnterPriseWithEnterpriseId:_followEnterpriseId];
+            [[CustomShowMessage getInstance] showWaitingIndicator:REQ_WAITING_INDICATOR];
+        }
+    }
+}
+
+
+#pragma mark - FollowEnterpriseDelegate
+-(void)followEnterpriseSucceed
+{
+    [[CustomShowMessage getInstance] showNotificationMessage:@"关注企业成功！"];
+    [[CustomShowMessage getInstance] hideWaitingIndicator];
+//    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+//    ESMenuViewController* rootViewCtrl = (ESMenuViewController*)appDelegate.window.rootViewController;
+//    [rootViewCtrl setSelectedIndex:2];
+
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+-(void)followEnterpriseFailed:(NSString*)errorMessage
+{
+    [[CustomShowMessage getInstance] showNotificationMessage:errorMessage];
+    [[CustomShowMessage getInstance] hideWaitingIndicator];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
 
 #pragma mark AVCaptureMetadataOutputObjectsDelegate
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:( AVCaptureConnection *)connection
