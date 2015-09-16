@@ -78,12 +78,15 @@
 @property (nonatomic, assign) BOOL isDataChanged;
 @property (nonatomic, strong) UITableViewCell *prototypeCell;
 
+@property (nonatomic, strong) UIView *containerView;
 @property (nonatomic, strong) ImageTableViewCell *onClickedCell;
 @property (nonatomic, strong) ESTaskComment *cacheTaskComment;
 @property (nonatomic, assign) CGRect oldframe;
 @property (nonatomic, strong) NSMutableArray *imagesOld;
 @property (nonatomic, strong) UIPageControl *pageControl;
 @property (nonatomic, strong) UIScrollView *scrollView;
+
+@property (nonatomic, strong) NSArray *selectCellImages;
 
 @end
 
@@ -388,7 +391,9 @@
     if (taskComment.images != nil) {
         if (taskComment.images.count > 0) {
             self.onClickedCell = (ImageTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
-            [self showImage:taskComment.images];
+            self.selectCellImages = nil;
+            self.selectCellImages = [[NSArray alloc] initWithArray:taskComment.images];
+            [self showImage];
         }
     }
 }
@@ -602,6 +607,36 @@
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     self.pageControl.currentPage = scrollView.contentOffset.x /scrollView.bounds.size.width;
+    
+    if (self.pageControl.currentPage != 0) {
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, (self.scrollView.bounds.size.height - self.oldframe.size.height * self.scrollView.bounds.size.width / self.oldframe.size.width) / 2, self.scrollView.bounds.size.width, self.oldframe.size.height * self.scrollView.bounds.size.width / self.oldframe.size.width)];
+        ESImage *image = self.selectCellImages[self.pageControl.currentPage];
+        
+        __weak TaskViewController *ws = self;
+        [imageView sd_setImageWithURL:[NSURL URLWithString:image.imgURL]
+                     placeholderImage:[UIImage imageNamed:@"单张图片"]
+                              options:SDWebImageRetryFailed
+                             progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+                                 [self.containerView addSubview:self.progressBar];
+                                 CGRect frame = CGRectMake(self.progressBar.frame.origin.x, self.progressBar.frame.origin.y, self.containerView.bounds.size.width, self.progressBar.frame.size.height);
+                                 self.progressBar.frame = frame;
+                                 float received = receivedSize;
+                                 float expected = expectedSize;
+                                 [ws.progressBar setProgress:received / expected animated:YES];
+                             } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                 [self.progressBar removeFromSuperview];
+                                 self.progressBar = nil;
+                                 CGSize size = [image size];
+                                 if (size.height * self.scrollView.bounds.size.width / size.width >= (self.scrollView.bounds.size.height - 37 * 2)) {
+                                     imageView.frame = CGRectMake(self.scrollView.bounds.size.width * self.pageControl.currentPage, 0, self.scrollView.bounds.size.width, size.height * self.scrollView.bounds.size.width / size.width - 37);
+                                 } else {
+                                     imageView.frame = CGRectMake(self.scrollView.bounds.size.width * self.pageControl.currentPage, (self.scrollView.bounds.size.height - size.height * self.scrollView.bounds.size.width / size.width) / 2, self.scrollView.bounds.size.width, size.height * self.scrollView.bounds.size.width / size.width);
+                                 }
+                             }];
+        imageView.tag = 101 + self.pageControl.currentPage;
+        [self.scrollView addSubview:imageView];
+    }
+
 }
 
 #pragma mark - response events methods
@@ -1092,12 +1127,13 @@
     [self.getTaskCommentListDP getTaskCommentListWithTaskID:self.requestTaskID listSize:nil];
 }
 
-- (void)showImage:(NSArray *)images {
+- (void)showImage {
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
     
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
-    UIView *containerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
-    containerView.backgroundColor = [UIColor blackColor];
+    self.containerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
+    self.containerView.backgroundColor = [UIColor blackColor];
+    [window addSubview:self.containerView];
     
     self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 37)];
     self.scrollView.delegate = self;
@@ -1105,71 +1141,86 @@
 //    self.scrollView.minimumZoomScale = .5f;
     self.scrollView.pagingEnabled = YES;
     self.scrollView.showsHorizontalScrollIndicator = NO;
-    self.scrollView.contentSize = CGSizeMake(self.scrollView.bounds.size.width * images.count, self.scrollView.bounds.size.height);
+    self.scrollView.contentSize = CGSizeMake(self.scrollView.bounds.size.width * self.selectCellImages.count, self.scrollView.bounds.size.height);
     
-    [containerView addSubview:self.scrollView];
+    [self.containerView addSubview:self.scrollView];
     
-    self.pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, containerView.bounds.size.height - 37, containerView.bounds.size.width, 37)];
-    [self.pageControl setCurrentPageIndicatorTintColor:[UIColor whiteColor]];
-    [self.pageControl setPageIndicatorTintColor:[UIColor grayColor]];
-    self.pageControl.currentPage = 0;
-    self.pageControl.numberOfPages = images.count;
-    [self.pageControl addTarget:self action:@selector(changeImageViewPage:) forControlEvents:UIControlEventValueChanged];
-    [containerView addSubview:self.pageControl];
-    [window addSubview:containerView];
+    if (self.selectCellImages.count > 1) {
+        self.pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, self.containerView.bounds.size.height - 37, self.containerView.bounds.size.width, 37)];
+        [self.pageControl setCurrentPageIndicatorTintColor:[UIColor whiteColor]];
+        [self.pageControl setPageIndicatorTintColor:[UIColor grayColor]];
+        self.pageControl.currentPage = 0;
+        self.pageControl.numberOfPages = self.selectCellImages.count;
+        [self.pageControl addTarget:self action:@selector(changeImageViewPage:) forControlEvents:UIControlEventValueChanged];
+        [self.containerView addSubview:self.pageControl];
+    }
     
     self.oldframe = [self.onClickedCell.placeholderImg convertRect:self.onClickedCell.placeholderImg.bounds toView:window];
 
-    NSInteger count = 0;
-    while (count < images.count) {
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, (self.scrollView.bounds.size.height - self.oldframe.size.height * self.scrollView.bounds.size.width / self.oldframe.size.width) / 2, self.scrollView.bounds.size.width, self.oldframe.size.height * self.scrollView.bounds.size.width / self.oldframe.size.width)];
-        ESImage *image = images[count];
-//        [imageView sd_setImageWithURL:[NSURL URLWithString:image.imgURL]
-//                     placeholderImage:[UIImage imageNamed:@"单张图片"]
-//                            completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-//                                CGSize size = [image size];
-//                                if (size.height * self.scrollView.bounds.size.width / size.width >= (self.scrollView.bounds.size.height - 37 * 2)) {
-//                                    imageView.frame = CGRectMake(self.scrollView.bounds.size.width * count, 0, self.scrollView.bounds.size.width, size.height * self.scrollView.bounds.size.width / size.width - 37);
-//                                } else {
-//                                    imageView.frame = CGRectMake(self.scrollView.bounds.size.width * count, (self.scrollView.bounds.size.height - size.height * self.scrollView.bounds.size.width / size.width) / 2, self.scrollView.bounds.size.width, size.height * self.scrollView.bounds.size.width / size.width);
-//                                }
-//                            }];
-        
-        __weak TaskViewController *ws = self;
-        NSLog(@"%@",image.imgURL);
-        [imageView sd_setImageWithURL:[NSURL URLWithString:image.imgURL]
-                     placeholderImage:[UIImage imageNamed:@"单张图片"]
-                              options:SDWebImageRetryFailed
-                             progress:^(NSInteger receivedSize, NSInteger expectedSize) {
-                                 [containerView addSubview:self.progressBar];
-                                 CGRect frame = CGRectMake(self.progressBar.frame.origin.x, self.progressBar.frame.origin.y, containerView.bounds.size.width, self.progressBar.frame.size.height);
-                                 self.progressBar.frame = frame;
-                                 float received = receivedSize;
-                                 float expected = expectedSize;
-                                 [ws.progressBar setProgress:received / expected animated:YES];
-                             } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                 [self.progressBar removeFromSuperview];
-                                 self.progressBar = nil;
-                                 CGSize size = [image size];
-                                 if (size.height * self.scrollView.bounds.size.width / size.width >= (self.scrollView.bounds.size.height - 37 * 2)) {
-                                     imageView.frame = CGRectMake(self.scrollView.bounds.size.width * count, 0, self.scrollView.bounds.size.width, size.height * self.scrollView.bounds.size.width / size.width - 37);
-                                 } else {
-                                     imageView.frame = CGRectMake(self.scrollView.bounds.size.width * count, (self.scrollView.bounds.size.height - size.height * self.scrollView.bounds.size.width / size.width) / 2, self.scrollView.bounds.size.width, size.height * self.scrollView.bounds.size.width / size.width);
-                                 }
-                             }];
-         imageView.tag = 101 + count;
-        [self.scrollView addSubview:imageView];
-        count ++;
-    }
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, (self.scrollView.bounds.size.height - self.oldframe.size.height * self.scrollView.bounds.size.width / self.oldframe.size.width) / 2, self.scrollView.bounds.size.width, self.oldframe.size.height * self.scrollView.bounds.size.width / self.oldframe.size.width)];
+    ESImage *image = self.selectCellImages[0];
+    
+    __weak TaskViewController *ws = self;
+    [imageView sd_setImageWithURL:[NSURL URLWithString:image.imgURL]
+                 placeholderImage:[UIImage imageNamed:@"单张图片"]
+                          options:SDWebImageRetryFailed
+                         progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+                             [self.containerView addSubview:self.progressBar];
+                             CGRect frame = CGRectMake(self.progressBar.frame.origin.x, self.progressBar.frame.origin.y, self.containerView.bounds.size.width, self.progressBar.frame.size.height);
+                             self.progressBar.frame = frame;
+                             float received = receivedSize;
+                             float expected = expectedSize;
+                             [ws.progressBar setProgress:received / expected animated:YES];
+                         } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                             [self.progressBar removeFromSuperview];
+                             self.progressBar = nil;
+                             CGSize size = [image size];
+                             if (size.height * self.scrollView.bounds.size.width / size.width >= (self.scrollView.bounds.size.height - 37 * 2)) {
+                                 imageView.frame = CGRectMake(0, 0, self.scrollView.bounds.size.width, size.height * self.scrollView.bounds.size.width / size.width - 37);
+                             } else {
+                                 imageView.frame = CGRectMake(0, (self.scrollView.bounds.size.height - size.height * self.scrollView.bounds.size.width / size.width) / 2, self.scrollView.bounds.size.width, size.height * self.scrollView.bounds.size.width / size.width);
+                             }
+                         }];
+    imageView.tag = 101;
+    [self.scrollView addSubview:imageView];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hideImage:)];
-    [containerView addGestureRecognizer: tap];
+    [self.containerView addGestureRecognizer: tap];
 }
 
 
 - (void)changeImageViewPage:(UIPageControl *)sender {
     UIPageControl *pageControl = (UIPageControl *)sender;
     [self.scrollView scrollRectToVisible:CGRectMake(pageControl.currentPage * self.scrollView.bounds.size.width, self.scrollView.bounds.origin.y, self.scrollView.bounds.size.width, self.scrollView.bounds.size.height) animated:YES];
+    
+    NSInteger index = [pageControl currentPage];
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, (self.scrollView.bounds.size.height - self.oldframe.size.height * self.scrollView.bounds.size.width / self.oldframe.size.width) / 2, self.scrollView.bounds.size.width, self.oldframe.size.height * self.scrollView.bounds.size.width / self.oldframe.size.width)];
+    ESImage *image = self.selectCellImages[index];
+    
+    __weak TaskViewController *ws = self;
+    [imageView sd_setImageWithURL:[NSURL URLWithString:image.imgURL]
+                 placeholderImage:[UIImage imageNamed:@"单张图片"]
+                          options:SDWebImageRetryFailed
+                         progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+                             [self.containerView addSubview:self.progressBar];
+                             CGRect frame = CGRectMake(self.progressBar.frame.origin.x, self.progressBar.frame.origin.y, self.containerView.bounds.size.width, self.progressBar.frame.size.height);
+                             self.progressBar.frame = frame;
+                             float received = receivedSize;
+                             float expected = expectedSize;
+                             [ws.progressBar setProgress:received / expected animated:YES];
+                         } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                             [self.progressBar removeFromSuperview];
+                             self.progressBar = nil;
+                             CGSize size = [image size];
+                             if (size.height * self.scrollView.bounds.size.width / size.width >= (self.scrollView.bounds.size.height - 37 * 2)) {
+                                 imageView.frame = CGRectMake(self.scrollView.bounds.size.width * index, 0, self.scrollView.bounds.size.width, size.height * self.scrollView.bounds.size.width / size.width - 37);
+                             } else {
+                                 imageView.frame = CGRectMake(self.scrollView.bounds.size.width * index, (self.scrollView.bounds.size.height - size.height * self.scrollView.bounds.size.width / size.width) / 2, self.scrollView.bounds.size.width, size.height * self.scrollView.bounds.size.width / size.width);
+                             }
+                         }];
+    imageView.tag = 101 + index;
+    [self.scrollView addSubview:imageView];
 }
 
 - (void)hideImage:(UITapGestureRecognizer*)tap {
