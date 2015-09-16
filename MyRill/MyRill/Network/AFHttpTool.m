@@ -792,6 +792,19 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
                            params:params
                           success:success failure:failure];
 }
+//设置人的标签
++ (void)setUserTagByUserId:(NSString*)userId TagParam:(NSDictionary*)tagDic success:(void (^)(id response))success failure:(void (^)(NSError *error))failure
+{
+    //attr_1
+    NSString* strURL = [NSString stringWithFormat:@"/api/accounts/users/%@/tags/.json",userId];
+//    NSString* strKey = [NSString stringWithFormat:@"attr_%@",tagId];
+//    NSDictionary *params = @{strKey:tagitemid};
+    [AFHttpTool requestWithMethod:RequestMethodTypePost protocolType:RequestProtocolTypeText
+                              url:strURL
+                           params:tagDic
+                          success:success failure:failure];
+}
+
 
 //获取企业的标签
 + (void)getTagByEnterpriseId:(NSString*)enterpriseId success:(void (^)(id response))success failure:(void (^)(NSError *error))failure
@@ -814,6 +827,17 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
                            params:params
                           success:success failure:failure];
 }
++ (void)setEnterpriseTagByEnterpriseId:(NSString*)enterpriseId TagParam:(NSDictionary*)tagDic  success:(void (^)(id response))success failure:(void (^)(NSError *error))failure
+{
+    NSString* strURL = [NSString stringWithFormat:@"/api/accounts/enterprises/%@/tags/.json",enterpriseId];
+//    NSString* strKey = [NSString stringWithFormat:@"attr_%@",tagId];
+//    NSDictionary *params = @{strKey:tagitemid};
+    
+    [AFHttpTool requestWithMethod:RequestMethodTypePost protocolType:RequestProtocolTypeText
+                              url:strURL
+                           params:tagDic
+                          success:success failure:failure];
+}
 
 
 //获取任务的标签
@@ -828,15 +852,16 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
 }
 
 //设置任务的标签
-+ (void)setTaskTagByTaskId:(NSString*)taskId TagId:(NSString*)tagId TagItemId:(NSString*)tagitemid success:(void (^)(id response))success failure:(void (^)(NSError *error))failure
+//+ (void)setTaskTagByTaskId:(NSString*)taskId TagId:(NSString*)tagId TagItemId:(NSString*)tagitemid success:(void (^)(id response))success failure:(void (^)(NSError *error))failure
++ (void)setTaskTagByTaskId:(NSString*)taskId TagParam:(NSDictionary*)tagDic success:(void (^)(id response))success failure:(void (^)(NSError *error))failure
 {
-    NSString* strURL = [NSString stringWithFormat:@"/api/assignments/%@/tags/.json",tagId];
-    NSString* strKey = [NSString stringWithFormat:@"attr_%@",tagId];
-    NSDictionary *params = @{strKey:tagitemid};
+    NSString* strURL = [NSString stringWithFormat:@"/api/assignments/%@/tags/.json",taskId];
+//    NSString* strKey = [NSString stringWithFormat:@"attr_%@",tagId];
+//    NSDictionary *params = @{strKey:tagitemid};
 
     [AFHttpTool requestWithMethod:RequestMethodTypePost protocolType:RequestProtocolTypeText
                               url:strURL
-                           params:params
+                           params:tagDic
                           success:success failure:failure];
 }
 

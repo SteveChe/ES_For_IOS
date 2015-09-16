@@ -212,7 +212,7 @@
     {
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.qrCodeImage.hidden = YES;
-        cell.titleLabel.text = @"标签选择";
+        cell.titleLabel.text = @"扩展属性";
         
     }
     else if (indexPath.section == 1)

@@ -82,14 +82,20 @@
 #pragma mark - GetProfessionDelegate methods
 - (void)getProfessionSuccess:(ESProfession *)profession {
     if ([profession.professionType isEqualToString:@"BMC"]) {
-        BMCLoginViewController *bmcLoginVC = [[BMCLoginViewController alloc] init];
-        [self.navigationController pushViewController:bmcLoginVC animated:YES];
+        dispatch_async(dispatch_get_main_queue(), ^{
+
+            BMCLoginViewController *bmcLoginVC = [[BMCLoginViewController alloc] init];
+            [self.navigationController pushViewController:bmcLoginVC animated:YES];
+        });
     } else {
-        ProfessionWebViewController *webVC = [[ProfessionWebViewController alloc] init];
-        webVC.title = profession.name;
-        webVC.type = ESWebProfessionWithURL;
-        webVC.urlString = profession.url;
-        [self.navigationController pushViewController:webVC animated:YES];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            ProfessionWebViewController *webVC = [[ProfessionWebViewController alloc] init];
+            webVC.title = profession.name;
+            webVC.type = ESWebProfessionWithURL;
+            webVC.urlString = profession.url;
+            [self.navigationController pushViewController:webVC animated:YES];
+        });
+
     }
 }
 

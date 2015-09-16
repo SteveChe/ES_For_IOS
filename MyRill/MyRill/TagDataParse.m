@@ -289,9 +289,11 @@
 }
 
 //设置人的标签
--(void) setUserTag:(NSString*)userId TagId:(NSString*)tagId tagItemId:(NSString*)tagItemId;
+//-(void) setUserTag:(NSString*)userId TagId:(NSString*)tagId tagItemId:(NSString*)tagItemId;
+//设置人的标签
+-(void) setUserTag:(NSString*)userId TagParams:(NSDictionary*)tagDics
 {
-    [AFHttpTool setUserTagByUserId:userId TagId:tagId TagItemId:tagItemId success:^(id response)
+    [AFHttpTool setUserTagByUserId:userId TagParam:tagDics success:^(id response)
      {
          NSDictionary* reponseDic = (NSDictionary*)response;
          NSNumber* errorCodeNum = [reponseDic valueForKey:NETWORK_ERROR_CODE];
@@ -366,9 +368,10 @@
 }
 
 //设置企业的标签
--(void) setEnterpriseTag:(NSString*)enterpriseId TagId:(NSString*)tagId tagItemId:(NSString*)tagItemId
+//-(void) setEnterpriseTag:(NSString*)enterpriseId TagId:(NSString*)tagId tagItemId:(NSString*)tagItemId
+-(void) setEnterpriseTag:(NSString*)enterpriseId TagParam:(NSDictionary*)tagDics
 {
-    [AFHttpTool setEnterpriseTagByEnterpriseId:enterpriseId TagId:tagId TagItemId:tagItemId success:^(id response)
+    [AFHttpTool setEnterpriseTagByEnterpriseId:enterpriseId TagParam:tagDics success:^(id response)
      {
          NSDictionary* reponseDic = (NSDictionary*)response;
          NSNumber* errorCodeNum = [reponseDic valueForKey:NETWORK_ERROR_CODE];
@@ -441,9 +444,10 @@
 }
 
 //设置任务的标签
--(void) setTaskTag:(NSString*)taskId TagId:(NSString*)tagId tagItemId:(NSString*)tagItemId
+//-(void) setTaskTag:(NSString*)taskId TagId:(NSString*)tagId tagItemId:(NSString*)tagItemId
+-(void) setTaskTag:(NSString*)taskId TagParam:(NSDictionary*)tagDics
 {
-    [AFHttpTool setTaskTagByTaskId:taskId TagId:tagId TagItemId:tagItemId success:^(id response)
+    [AFHttpTool setTaskTagByTaskId:taskId TagParam:tagDics success:^(id response)
      {
          NSDictionary* reponseDic = (NSDictionary*)response;
          NSNumber* errorCodeNum = [reponseDic valueForKey:NETWORK_ERROR_CODE];

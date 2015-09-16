@@ -30,6 +30,8 @@
 #import "PushDefine.h"
 #import "CustomShowMessage.h"
 #import <AVFoundation/AVFoundation.h>
+#import "ESTagViewController.h"
+
 
 typedef enum : NSInteger {
     ESUserNameBtnClicked = 902,
@@ -304,6 +306,10 @@ typedef enum : NSInteger {
         case ESUserTagBtnClicked:
             {
                 //标签选择事件
+                ESTagViewController* tagViewVC = [[ESTagViewController alloc] init];
+                tagViewVC.userId = _userDetailInfo.userId;
+                tagViewVC.tagType = TAG_TYPE_USER;
+                [self.navigationController pushViewController:tagViewVC animated:YES];
             }
             break;
         case ESUserCommentBtnClicked:
