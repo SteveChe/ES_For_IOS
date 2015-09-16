@@ -9,6 +9,7 @@
 #import "SendTaskImageDataParse.h"
 #import "AFHttpTool.h"
 #import "DataParseDefine.h"
+#import "ESImage.h"
 
 @implementation SendTaskImageDataParse
 
@@ -27,7 +28,9 @@
                                     }
                                     
                                     NSDictionary *dataDic = reponseDic[NETWORK_OK_DATA];
-                                    [self.delegate sendTaskImageSuccess:dataDic[@"image"]];
+                                    ESImage *image = [[ESImage alloc] initWithDic:dataDic];
+                                    
+                                    [self.delegate sendTaskImageSuccess:image];
                                     NSString* errorMessage = [reponseDic valueForKey:NETWORK_ERROR_MESSAGE];
                                     if(errorMessage==nil)
                                         return;

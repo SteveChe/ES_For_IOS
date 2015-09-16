@@ -29,6 +29,7 @@
 #import "RCDAddressBookEnterpriseDetailViewController.h"
 #import "PushDefine.h"
 #import "CustomShowMessage.h"
+#import <AVFoundation/AVFoundation.h>
 
 typedef enum : NSInteger {
     ESUserNameBtnClicked = 902,
@@ -329,6 +330,7 @@ typedef enum : NSInteger {
     [alertController addAction:[UIAlertAction actionWithTitle:@"拍照"
                                                         style:UIAlertActionStyleDefault
                                                       handler:^(UIAlertAction *action) {
+                                                          
                                                           //处理点击拍照
                                                           UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
                                                           //    if (![UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]) {
@@ -337,9 +339,9 @@ typedef enum : NSInteger {
                                                           //sourceType = UIImagePickerControllerSourceTypeCamera; //照相机
                                                           //sourceType = UIImagePickerControllerSourceTypePhotoLibrary; //图片库
                                                           //sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum; //保存的相片
-                                                          UIImagePickerController *picker = [[UIImagePickerController alloc] init];//初始化  
-                                                          picker.delegate = self;  
-                                                          picker.allowsEditing = YES;//设置可编辑  
+                                                          UIImagePickerController *picker = [[UIImagePickerController alloc] init];//初始化
+                                                          picker.delegate = self;
+                                                          picker.allowsEditing = YES;//设置可编辑
                                                           picker.sourceType = sourceType;
                                                           if([[[UIDevice
                                                                 currentDevice] systemVersion] floatValue]>=8.0) {
@@ -348,6 +350,57 @@ typedef enum : NSInteger {
                                                               
                                                           }
                                                           [self presentViewController:picker animated:YES completion:nil];//进入照相界面
+                                                          
+                                                          AVAuthorizationStatus authorizationStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+                                                          switch (authorizationStatus) {
+                                                              case AVAuthorizationStatusNotDetermined:
+                                                              {
+                                                                  [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo
+                                                                                           completionHandler:^(BOOL granted) {
+                                                                                               if (granted) {
+                                                                                                   //继续
+                                                                                                   //[self configQRCode];
+                                                                                               } else {
+                                                                                                   //用户拒绝，无法继续
+                                                                                                   UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"您拒绝了使用相机的授权"
+                                                                                                                                                   message:@"请在设备的'设置-隐私-相机'中允许应用访问相机。"
+                                                                                                                                                  delegate:self
+                                                                                                                                         cancelButtonTitle:@"确定"
+                                                                                                                                         otherButtonTitles:nil];
+                                                                                                   [alert show];
+                                                                                               }
+                                                                                           }];
+                                                              }
+                                                                  break;
+                                                              case AVAuthorizationStatusAuthorized:
+                                                                  // 继续
+                                                                  //[self configQRCode];
+                                                                  break;
+                                                              case AVAuthorizationStatusDenied:
+                                                                  //用户明确地拒绝授权
+                                                              {
+                                                                  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"未授权使用相机"
+                                                                                                                  message:@"请在设备的'设置-隐私-相机'中允许应用访问相机。"
+                                                                                                                 delegate:self
+                                                                                                        cancelButtonTitle:@"确定"
+                                                                                                        otherButtonTitles:nil];
+                                                                  [alert show];
+                                                              }
+                                                                  break;
+                                                              case AVAuthorizationStatusRestricted:
+                                                                  //相机设备无法访问
+                                                              {
+                                                                  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"相机设备无法访问"
+                                                                                                                  message:@"请在设备的'设置-隐私-相机'中允许应用访问相机。"
+                                                                                                                 delegate:self
+                                                                                                        cancelButtonTitle:@"确定"
+                                                                                                        otherButtonTitles:nil];
+                                                                  [alert show];
+                                                              }
+                                                                  break;
+                                                              default:
+                                                                  break;
+                                                          }
                                                       }]];
     [alertController addAction:[UIAlertAction actionWithTitle:@"从相册选取"
                                                         style:UIAlertActionStyleDefault

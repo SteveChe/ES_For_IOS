@@ -74,6 +74,7 @@
     self.searchDisplayVC.searchResultsDelegate = self;
     self.searchDisplayVC.delegate = self;
     self.searchDisplayVC.searchResultsTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.searchDisplayVC.searchResultsTableView.backgroundColor = [ColorHandler colorFromHexRGB:@"F5F5F5"];
     [self.searchDisplayVC.searchResultsTableView registerNib:[UINib nibWithNibName:@"TaskListTableViewCell" bundle:nil] forCellReuseIdentifier:@"TaskListTableViewCell"];
 }
 
@@ -154,14 +155,30 @@
     return 1;
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView *sectionHeader = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, 30)];
+    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(20, 4, self.tableView.bounds.size.width - 40, 22)];
+    title.text = @"按发起人归属";
+    title.font = [UIFont fontWithName:@"HelveticaNeue" size:15];
+    [sectionHeader addSubview:title];
+    return sectionHeader;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if ([tableView isEqual:self.searchDisplayVC.searchResultsTableView]) {
+      return 0;
+    }
+    return 30;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 //    UITableViewCell *cell = nil;
     if ([tableView isEqual:self.searchDisplayController.searchResultsTableView]) {
         TaskListTableViewCell *cell = (TaskListTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"TaskListTableViewCell" forIndexPath:indexPath];
         [cell updateTackCell:self.searchResultDataSource[indexPath.row]];
         CALayer *layer = [CALayer layer];
-        layer.frame = CGRectMake(0, cell.bounds.size.height - 1, cell.bounds.size.width, 1);
-        layer.backgroundColor = [ColorHandler colorFromHexRGB:@"DDDDDD"].CGColor;
+        layer.frame = CGRectMake(0, cell.bounds.size.height - 10, cell.bounds.size.width, 10);
+        layer.backgroundColor = [ColorHandler colorFromHexRGB:@"F5F5F5"].CGColor;
         [cell.layer addSublayer:layer];
         return cell;
     } else {
@@ -213,13 +230,6 @@
     } else {
         return self.dataSource.count;
     }
-}
-
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if ([tableView isEqual:self.searchDisplayVC.searchResultsTableView]) {
-        return nil;
-    }
-    return @"按发起人归属";
 }
 
 #pragma mark - response events

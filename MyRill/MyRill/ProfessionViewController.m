@@ -17,13 +17,15 @@
 #import "PushDefine.h"
 #import "GetProfessionListDataParse.h"
 #import "CustomShowMessage.h"
+#import "GetProfessionDataParse.h"
 
-@interface ProfessionViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, GetProfessionListDelegate>
+@interface ProfessionViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, GetProfessionListDelegate, GetProfessionDelegate>
 
 @property (nonatomic, strong) UICollectionView *collectionView;
 
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) GetProfessionListDataParse *getProfessionListDP;
+@property (nonatomic, strong) GetProfessionDataParse *getProfessionDP;
 
 @end
 
@@ -62,7 +64,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFICATION_PUSH_PROFESSION object:nil];
 }
 
-#pragma mark - ProfessionDataDelegate methods
+#pragma mark - GetProfessionListDelegate methods
 - (void)getProfessionListSuccess:(NSArray *)list {
     [self.dataSource removeAllObjects];
     [self.dataSource addObjectsFromArray:list];
@@ -75,6 +77,24 @@
 
 - (void)getProfessionListFailure:(NSString *)errorMsg {
     [[CustomShowMessage getInstance] showNotificationMessage:errorMsg];
+}
+
+#pragma mark - GetProfessionDelegate methods
+- (void)getProfessionSuccess:(ESProfession *)profession {
+    if ([profession.professionType isEqualToString:@"BMC"]) {
+        BMCLoginViewController *bmcLoginVC = [[BMCLoginViewController alloc] init];
+        [self.navigationController pushViewController:bmcLoginVC animated:YES];
+    } else {
+        ProfessionWebViewController *webVC = [[ProfessionWebViewController alloc] init];
+        webVC.title = profession.name;
+        webVC.type = ESWebProfessionWithURL;
+        webVC.urlString = profession.url;
+        [self.navigationController pushViewController:webVC animated:YES];
+    }
+}
+
+- (void)getProfessionFailure:(NSString *)errorMsg {
+    [[CustomShowMessage getInstance] showNotificationMessage:@"进入指定业务失败!请手动进入。"];
 }
 
 #pragma mark - UICollectionViewDataSource&UICollectionViewDelegateFlowLayout
@@ -125,10 +145,6 @@
     if (indexPath.row == self.dataSource.count - 1) {
         AddProfessionViewController *addProfessionVC = [[AddProfessionViewController alloc] init];
         [self.navigationController pushViewController:addProfessionVC animated:YES];
-//        ProfessionWebViewController *webVC = [[ProfessionWebViewController alloc] init];
-//        webVC.type = ESWebProfessionWithID;
-//        webVC.professionID = @"87";
-//        [self.navigationController pushViewController:webVC animated:YES];
     } else {
         ESProfession *profession = (ESProfession *)self.dataSource[indexPath.row];
         if ([profession.professionType isEqualToString:@"BMC"]) {
@@ -153,6 +169,10 @@
 //更新push到客户端的业务
 - (void)updatePushProfession {
     [self.getProfessionListDP getProfessionList];
+}
+
+- (void)updatePushProfessionWithProfessionID:(NSString *)professionID {
+    [self.getProfessionDP getProfessionWithProfessionID:professionID];
 }
 
 #pragma mark - setters&getters
@@ -187,6 +207,15 @@
     }
     
     return _getProfessionListDP;
+}
+
+- (GetProfessionDataParse *)getProfessionDP {
+    if (!_getProfessionDP) {
+        _getProfessionDP = [[GetProfessionDataParse alloc] init];
+        _getProfessionDP.delegate = self;
+    }
+    
+    return _getProfessionDP;
 }
 
 @end
