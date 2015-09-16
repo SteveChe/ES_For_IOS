@@ -183,8 +183,11 @@
         case e_Push_Category_Profession_Apply:
         {
 //            ProfessionViewController* targetVC = [[ProfessionViewController alloc] init];
+            NSString* professionId = [paramsDic objectForKey:PUSH_CATEGORY_PROFESSION_ID];
             selectIndex = 0;
             [rootViewCtrl setSelectedIndex:selectIndex];
+            ProfessionViewController* topViewCtrl = rootViewCtrl.viewControllers[selectIndex];
+            [topViewCtrl updatePushProfessionWithProfessionID:professionId];
 //            UINavigationController* topViewCtrl = rootViewCtrl.viewControllers[selectIndex];
 //            
 //            if (targetVC != nil && topViewCtrl != nil)

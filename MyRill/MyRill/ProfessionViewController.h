@@ -10,5 +10,5 @@
 #import "ESViewController.h"
 
 @interface ProfessionViewController : ESViewController
-
+- (void)updatePushProfessionWithProfessionID:(NSString *)professionID ;
 @end
