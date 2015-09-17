@@ -125,7 +125,9 @@
         if ([ColorHandler isNullOrNilNumber:dic[@"time"]]) {
             self.time = @"——";
         } else {
-            NSDate *date = [NSDate dateWithTimeIntervalSince1970:[dic[@"time"] integerValue]];
+            NSNumber *number = dic[@"time"];
+            NSTimeInterval time = [number doubleValue] / 1000;
+            NSDate *date = [NSDate dateWithTimeIntervalSince1970:time];
             NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
             [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
             NSString *dateStr = [formatter stringFromDate:date];
