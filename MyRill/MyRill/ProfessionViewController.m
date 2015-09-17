@@ -155,33 +155,33 @@
     } else {
         ESProfession *profession = (ESProfession *)self.dataSource[indexPath.row];
         if ([profession.professionType isEqualToString:@"BMC"]) {
-            UIViewController *vc = [[BMCLoginViewController alloc] init];
-//            NSData *cookiesdata = [[NSUserDefaults standardUserDefaults] objectForKey:@"sessionCookies"];
-//            if([cookiesdata length]) {
-//                NSArray *cookies = [NSKeyedUnarchiver unarchiveObjectWithData:cookiesdata];
-//                NSHTTPCookie *cookie;
-//                BOOL jsessionidLogin = false;
-//                BOOL ssoTokenLogin = false;
-//                for (cookie in cookies) {
-//                    if ([cookie.name isEqual:@"JSESSIONID"] )
-//                    {
-//                        if([cookie.value length])
-//                            jsessionidLogin = true;
-//                    }
-//                    if ([cookie.name isEqual:@"SSOToken"] )
-//                    {
-//                        if([cookie.value length])
-//                            ssoTokenLogin = true;
-//                    }
-//                }
-//                if (jsessionidLogin && ssoTokenLogin) {
-//                    vc = [[BMCMainViewController alloc] init];
-//                } else {
-//                    vc = [[BMCLoginViewController alloc] init];
-//                }
-//            } else {
-//                vc = [[BMCLoginViewController alloc] init];
-//            }
+            UIViewController *vc = nil;
+            NSData *cookiesdata = [[NSUserDefaults standardUserDefaults] objectForKey:@"sessionCookies"];
+            if([cookiesdata length]) {
+                NSArray *cookies = [NSKeyedUnarchiver unarchiveObjectWithData:cookiesdata];
+                NSHTTPCookie *cookie;
+                BOOL jsessionidLogin = false;
+                BOOL ssoTokenLogin = false;
+                for (cookie in cookies) {
+                    if ([cookie.name isEqual:@"JSESSIONID"] )
+                    {
+                        if([cookie.value length])
+                            jsessionidLogin = true;
+                    }
+                    if ([cookie.name isEqual:@"SSOToken"] )
+                    {
+                        if([cookie.value length])
+                            ssoTokenLogin = true;
+                    }
+                }
+                if (jsessionidLogin && ssoTokenLogin) {
+                    vc = [[BMCMainViewController alloc] init];
+                } else {
+                    vc = [[BMCLoginViewController alloc] init];
+                }
+            } else {
+                vc = [[BMCLoginViewController alloc] init];
+            }
             [self.navigationController pushViewController:vc animated:YES];
         } else {
             ProfessionWebViewController *webVC = [[ProfessionWebViewController alloc] init];
