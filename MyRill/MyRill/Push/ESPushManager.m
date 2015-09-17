@@ -175,25 +175,42 @@
             {
                 [topViewCtrl pushViewController:targetVC animated:NO];
             }
-
+            
         }
             break;
         
-        case e_Push_Category_Profession:
         case e_Push_Category_Profession_Apply:
         {
 //            ProfessionViewController* targetVC = [[ProfessionViewController alloc] init];
-            NSString* professionId = [paramsDic objectForKey:PUSH_CATEGORY_PROFESSION_ID];
             selectIndex = 0;
             [rootViewCtrl setSelectedIndex:selectIndex];
-            ProfessionViewController* topViewCtrl = rootViewCtrl.viewControllers[selectIndex];
-            [topViewCtrl updatePushProfessionWithProfessionID:professionId];
 //            UINavigationController* topViewCtrl = rootViewCtrl.viewControllers[selectIndex];
 //            
 //            if (targetVC != nil && topViewCtrl != nil)
 //            {
 //                [topViewCtrl pushViewController:targetVC animated:NO];
 //            }
+
+        }
+            break;
+        case e_Push_Category_Profession:
+        {
+            NSNumber* professionIdNum = [paramsDic objectForKey:PUSH_CATEGORY_PROFESSION_ID];
+            
+            NSString* professionId = nil;
+            if (professionIdNum!= nil)
+            {
+                professionId = [professionIdNum stringValue];
+            }
+
+            selectIndex = 0;
+            [rootViewCtrl setSelectedIndex:selectIndex];
+            
+            if (professionId!=nil)
+            {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"NOTIFICATION_PUSH_PROFESSION" object:professionId];
+            }
+
 
         }
             break;

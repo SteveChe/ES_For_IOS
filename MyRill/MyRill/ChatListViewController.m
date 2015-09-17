@@ -645,11 +645,5 @@ void(^completionHandler)(RCUserInfo* userInfo);
     return completion(nil);
 }
 
-#pragma mark -- RCIMGroupInfoDataSource
-- (void)getGroupInfoWithGroupId:(NSString *)groupId
-                     completion:(void (^)(RCGroup *groupInfo))completion
-{
-    
-}
 
 @end

@@ -43,7 +43,7 @@ static NSString * const userTableName = @"USERINFO_TABLE";
     FMDatabaseQueue *queue = [DBHelper getDatabaseQueue];
     [queue inDatabase:^(FMDatabase *db) {
         if (![DBHelper isTableOK: userTableName withDB:db]) {
-            NSString *createTableSQL = @"CREATE TABLE USERINFO_TABLE (user_id text not null PRIMARY KEY,name text, portrait_uri text, phone_number text, enterprise text, position text, type text, status integer)";
+            NSString *createTableSQL = @"CREATE TABLE USERINFO_TABLE (user_id text not null PRIMARY KEY,name text, portrait_uri text, phone_number text, enterprise text, department text, type text, status integer)";
             [db executeUpdate:createTableSQL];
 //            NSString *createIndexSQL = @"CREATE INDEX idx_userid ON USERINFO_TABLE(user_id);";
 //            [db executeUpdate:createIndexSQL];

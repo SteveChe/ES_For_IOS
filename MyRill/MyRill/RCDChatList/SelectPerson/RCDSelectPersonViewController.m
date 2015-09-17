@@ -11,13 +11,15 @@
 #import "ESUserInfo.h"
 #import "UIImageView+WebCache.h"
 #import "ESContactList.h"
+#import "TaskContactorCollectionViewCell.h"
 //#import "RCDRCIMDataSource.h"
 //#import "ChatViewController.h"
 
-@interface RCDSelectPersonViewController()
+@interface RCDSelectPersonViewController()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,UISearchControllerDelegate,UISearchDisplayDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate>
 
-@property(nonatomic,assign)BOOL bSearchDisplay;
+//@property(nonatomic,assign)BOOL bSearchDisplay;
 @property(nonatomic,strong)NSMutableArray* selectUsersInSearch;
+@property (nonatomic, strong) UICollectionView *collectionView;
 
 -(void)initUserInSearchArray;
 @end
@@ -33,7 +35,26 @@
     //控制多选
     self.tableView.allowsMultipleSelection = YES;
     self.searchDisplayController1.searchResultsTableView.allowsMultipleSelection = YES;
-    self.bSearchDisplay = NO;
+    
+    UIView* tableHeaderView = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.bounds.size.width, 94)];
+    // Add searchbar
+    UISearchBar* searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.bounds.size.width, 40)];
+//    [tableHeaderView addSubview:searchBar];
+    [tableHeaderView addSubview:self.collectionView];
+    UIView* view = self.tableView.tableHeaderView;
+    [view removeFromSuperview];
+    self.tableView.tableHeaderView = tableHeaderView;
+
+//    searchBar.placeholder = @"搜索";
+//    searchBar.delegate = self;
+//    searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
+//    searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    self.searchDisplayController1 = [[UISearchDisplayController alloc] initWithSearchBar:searchBar contentsController:self];
+    
+    self.searchDisplayController1.searchResultsDataSource = self;
+    self.searchDisplayController1.searchResultsDelegate = self;
+    self.searchDisplayController1.delegate = self;
+
     
     UINib *rcdCellNib = [UINib nibWithNibName:@"RCDSelectPersonTableViewCell" bundle:nil];
     [self.tableView registerNib:rcdCellNib forCellReuseIdentifier:@"RCDSelectPersonTableViewCell"];
@@ -222,7 +243,7 @@
 
     }
     
-
+    [self.collectionView reloadData];
 
 
 }
@@ -253,14 +274,55 @@
         }
         
     }
+    [self.collectionView reloadData];
+}
 
+
+#pragma mark - UICollectionViewDataSource&UICollectionViewDelegateFlowLayout
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.selectUsersInSearch.count;
+}
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return 1;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    TaskContactorCollectionViewCell *cell = (TaskContactorCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"TaskContactorCollectionViewCell" forIndexPath:indexPath];
+    
+    cell.contentView.backgroundColor = [UIColor whiteColor];
+    
+    ESUserInfo *user = (ESUserInfo *)self.selectUsersInSearch[indexPath.row];
+    [cell updateCell:user];
+    return cell;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return CGSizeMake(54,54);
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+    return 0;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+    return 0;
+}
+
+//设置Cell的边界
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    return UIEdgeInsetsMake(0,0,0,0);
+}
+
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
 }
 
 
 #pragma mark - UISearchBarDelegate
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
 {
-    self.bSearchDisplay = YES;
+//    self.bSearchDisplay = YES;
     return YES;
 }
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
@@ -270,9 +332,30 @@
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
-    self.bSearchDisplay = NO;
+//    self.bSearchDisplay = NO;
 
 //    NSLog(@"searchBarCancelButtonClicked");
 }
+
+#pragma mark - setters&getters
+- (UICollectionView *)collectionView {
+    if (!_collectionView) {
+        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+        layout.minimumInteritemSpacing = 0;
+        [layout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
+        _collectionView.collectionViewLayout = layout;
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 40, self.view.bounds.size.width, 54) collectionViewLayout:layout];
+        _collectionView.backgroundColor= [UIColor clearColor];
+
+        UINib *professionCell = [UINib nibWithNibName:@"TaskContactorCollectionViewCell" bundle:nil];
+        [_collectionView registerNib:professionCell forCellWithReuseIdentifier:@"TaskContactorCollectionViewCell"];
+        _collectionView.bounces = NO;
+        _collectionView.delegate = self;
+        _collectionView.dataSource = self;
+    }
+    
+    return _collectionView;
+}
+
 
 @end
