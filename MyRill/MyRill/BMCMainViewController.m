@@ -58,6 +58,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    self.tabBarController.tabBar.hidden = YES;
     [self.getEmergencyListDP getEmergencyListWithViewType:@"unaccepted_event_view"];
 }
 

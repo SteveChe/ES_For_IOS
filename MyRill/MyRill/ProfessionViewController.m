@@ -18,6 +18,7 @@
 #import "GetProfessionListDataParse.h"
 #import "CustomShowMessage.h"
 #import "GetProfessionDataParse.h"
+#import "BMCMainViewController.h"
 
 @interface ProfessionViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, GetProfessionListDelegate, GetProfessionDelegate>
 
@@ -51,7 +52,7 @@
     self.tabBarController.tabBar.hidden = NO;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(updatePushProfession)
+                                             selector:@selector(updatePushProfession:)
                                                  name:NOTIFICATION_PUSH_PROFESSION
                                                object:nil];
     
@@ -154,8 +155,34 @@
     } else {
         ESProfession *profession = (ESProfession *)self.dataSource[indexPath.row];
         if ([profession.professionType isEqualToString:@"BMC"]) {
-            BMCLoginViewController *bmcLoginVC = [[BMCLoginViewController alloc] init];
-            [self.navigationController pushViewController:bmcLoginVC animated:YES];
+            UIViewController *vc = nil;
+            NSData *cookiesdata = [[NSUserDefaults standardUserDefaults] objectForKey:@"sessionCookies"];
+            if([cookiesdata length]) {
+                NSArray *cookies = [NSKeyedUnarchiver unarchiveObjectWithData:cookiesdata];
+                NSHTTPCookie *cookie;
+                BOOL jsessionidLogin = false;
+                BOOL ssoTokenLogin = false;
+                for (cookie in cookies) {
+                    if ([cookie.name isEqual:@"JSESSIONID"] )
+                    {
+                        if([cookie.value length])
+                            jsessionidLogin = true;
+                    }
+                    if ([cookie.name isEqual:@"SSOToken"] )
+                    {
+                        if([cookie.value length])
+                            ssoTokenLogin = true;
+                    }
+                }
+                if (jsessionidLogin && ssoTokenLogin) {
+                    vc = [[BMCMainViewController alloc] init];
+                } else {
+                    vc = [[BMCLoginViewController alloc] init];
+                }
+            } else {
+                vc = [[BMCLoginViewController alloc] init];
+            }
+            [self.navigationController pushViewController:vc animated:YES];
         } else {
             ProfessionWebViewController *webVC = [[ProfessionWebViewController alloc] init];
             webVC.title = profession.name;
@@ -173,12 +200,13 @@
 }
 
 //更新push到客户端的业务
-- (void)updatePushProfession {
-    [self.getProfessionListDP getProfessionList];
-}
-
-- (void)updatePushProfessionWithProfessionID:(NSString *)professionID {
-    [self.getProfessionDP getProfessionWithProfessionID:professionID];
+- (void)updatePushProfession:(id)notification {
+    NSString *professionID = (NSString *)[notification object];
+    if ([ColorHandler isNullOrEmptyString:professionID]) {
+        [self.getProfessionListDP getProfessionList];
+    } else {
+        [self.getProfessionDP getProfessionWithProfessionID:professionID];
+    }
 }
 
 #pragma mark - setters&getters
