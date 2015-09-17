@@ -22,7 +22,7 @@
 @property (nonatomic, copy) NSString *policyId;     //策略ID
 @property (nonatomic, copy) NSString *resTempId;    //模板ID
 @property (nonatomic, copy) NSString *isApp;        //1:基础应用，0：非基础应用
-@property (nonatomic, strong) NSNumber *time;         //事件产生时间
+@property (nonatomic, copy) NSString *time;         //事件产生时间
 @property (nonatomic, copy) NSString *eventState;   //事件状态
 @property (nonatomic, copy) NSString *eventType;    //事件类型:可用性事件-AVAIL_EVENT,配置事件-CONF_EVENT,性能事件-PERF_EVENT
 @property (nonatomic, copy) NSString *viewType;     //unaccepted_event_view-未受理,accepted_event_view-已受理

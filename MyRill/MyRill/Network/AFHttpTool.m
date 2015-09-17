@@ -1063,7 +1063,7 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
                      success(responseObj);
                      NSData *cookiesData = [NSKeyedArchiver archivedDataWithRootObject:[[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]];
                      NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-                     [defaults setObject: cookiesData forKey: @"sessionCookies"];
+                     [defaults setObject: cookiesData forKey:@"BMCsessionCookies"];
                      [defaults synchronize];
                  }
              }
