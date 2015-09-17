@@ -108,13 +108,28 @@
         if ([ColorHandler isNullOrEmptyString:dic[@"isApp"]]) {
             self.isApp = @"";
         } else {
-            self.isApp = dic[@"isApp"];
+            NSInteger index = [dic[@"isApp"] integerValue];
+            switch (index) {
+                case 0:
+                    self.isApp = @"非基础应用";
+                    break;
+                case 1:
+                    self.isApp = @"基础应用";
+                    break;
+                default:
+                    self.isApp = @"——";
+                    break;
+            }
         }
         
         if ([ColorHandler isNullOrNilNumber:dic[@"time"]]) {
-            self.time = [NSNumber numberWithLong:-1];
+            self.time = @"——";
         } else {
-            self.time = dic[@"time"];
+            NSDate *date = [NSDate dateWithTimeIntervalSince1970:[dic[@"time"] integerValue]];
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+            NSString *dateStr = [formatter stringFromDate:date];
+            self.time = dateStr;
         }
         
         if ([ColorHandler isNullOrEmptyString:dic[@"eventState"]]) {
@@ -126,13 +141,28 @@
         if ([ColorHandler isNullOrEmptyString:dic[@"eventType"]]) {
             self.eventType = @"";
         } else {
-            self.eventType = dic[@"eventType"];
+            if ([dic[@"eventType"] isEqualToString:@"AVAIL_EVENT"]) {
+                self.eventType = @"可用事件";
+            } else if ([dic[@"eventType"] isEqualToString:@"CONF_EVENT"]) {
+                self.eventType = @"配置事件";
+            } else if ([dic[@"eventType"] isEqualToString:@"PERF_EVENT"]) {
+                self.eventType = @"性能事件";
+            } else {
+                self.eventType = @"——";
+            }
         }
         
         if ([ColorHandler isNullOrEmptyString:dic[@"viewType"]]) {
             self.viewType = @"";
         } else {
-            self.viewType = dic[@"viewType"];
+            if ([dic[@"viewType"] isEqualToString:@"unaccepted_event_view"]) {
+                self.viewType = @"未受理";
+            } else if ([dic[@"viewType"] isEqualToString:@"accepted_event_view"]) {
+                self.viewType = @"已受理";
+            } else {
+                self.viewType = @"——";
+            }
+            
         }
     }
     

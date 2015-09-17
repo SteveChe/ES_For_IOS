@@ -11,22 +11,25 @@
 #import "BMCGetMainResourceListDataParse.h"
 #import "BMCEmergencyTableViewCell.h"
 #import "ColorHandler.h"
+#import "BMCEmergencyDetailViewController.h"
+#import "BMCLoginViewController.h"
 
-@interface BMCMainViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate, BMCGetEmergencyListDelegate, BMCGetMainResourceListDelegate>
-
+@interface BMCMainViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate, BMCGetEmergencyListDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (weak, nonatomic) IBOutlet UITableView *favoriteTableView;
 @property (weak, nonatomic) IBOutlet UITableView *warningTableView;
-@property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
+@property (weak, nonatomic) IBOutlet UIView *tabView;
+@property (weak, nonatomic) IBOutlet UILabel *alertLbl;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (nonatomic, strong) BMCEmergencyTableViewCell *prototypeCell;
+
 @property (nonatomic, strong) UISearchDisplayController *displayController;
 @property (nonatomic, strong) NSMutableArray *searchResultDataSource;
-
-@property (nonatomic, strong) NSMutableArray *favoriteDataSource;
 @property (nonatomic, strong) NSMutableArray *warningDataSource;
 
 @property (nonatomic, strong) BMCGetEmergencyListDataParse *getEmergencyListDP;
-@property (nonatomic, strong) BMCGetMainResourceListDataParse *getMainResourceListDP;
+
+//@property (nonatomic, strong) BMCGetMainResourceListDataParse *getMainResourceListDP;
 
 @end
 
@@ -38,15 +41,9 @@
     // Do any additional setup after loading the view from its nib.
     self.title = @"RIIL-BMC";
     
-//    [self setAutomaticallyAdjustsScrollViewInsets:YES];
-//    [self setExtendedLayoutIncludesOpaqueBars:YES];
+    [self setAutomaticallyAdjustsScrollViewInsets:YES];
     
-    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.warningTableView.bounds.size.width, 44)];
-    searchBar.delegate = self;
-    searchBar.placeholder = @"条件搜索";
-    self.warningTableView.tableHeaderView = searchBar;
-    
-    self.displayController = [[UISearchDisplayController alloc] initWithSearchBar:searchBar contentsController:self];
+    self.displayController = [[UISearchDisplayController alloc] initWithSearchBar:self.searchBar contentsController:self];
     self.displayController.delegate = self;
     self.displayController.searchResultsDelegate=self;
     self.displayController.searchResultsDataSource = self;
@@ -61,34 +58,25 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self emergenceItemOnClicked:nil];
+    [self.getEmergencyListDP getEmergencyListWithViewType:@"unaccepted_event_view"];
 }
 
-#pragma mark - BMCGetMainResourceListDelegate methods
+#pragma mark - BMCGetEmergencyListDelegate methods
 - (void)getEmergencyListSucceed:(NSArray *)resultList {
     [self.warningDataSource removeAllObjects];
     [self.warningDataSource addObjectsFromArray:resultList];
     [self.warningTableView reloadData];
+    
+    self.alertLbl.text = [NSString stringWithFormat:@"%lu",(unsigned long)resultList.count];
 }
 
 - (void)getEmergencyeListFailed:(NSString *)errorMessage {
     
 }
 
-- (void)getMainResourceListSucceed:(NSArray *)resultList {
-    [self.warningDataSource removeAllObjects];
-    [self.warningDataSource addObjectsFromArray:resultList];
-}
-
-- (void)getMainResourceListFailed:(NSString *)errorMessage {
-    
-}
-
 #pragma mark - UITableViewDataSource&UITableViewDelegate methods
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if ([tableView isEqual:self.favoriteTableView]) {
-        return self.favoriteDataSource.count;
-    } else if ([tableView isEqual:self.displayController.searchResultsTableView]) {
+    if ([tableView isEqual:self.displayController.searchResultsTableView]) {
         return self.searchResultDataSource.count;
     }else {
         return self.warningDataSource.count;
@@ -96,32 +84,38 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if ([tableView isEqual:self.warningTableView] || [tableView isEqual:self.displayController.searchResultsTableView]) {
-        BMCEmergencyTableViewCell *cell = (BMCEmergencyTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"BMCEmergencyTableViewCell" forIndexPath:indexPath];
-        if ([tableView isEqual:self.displayController.searchResultsTableView]) {
-            [cell updateBMCEmergencyCell:self.searchResultDataSource[indexPath.row]];
-        } else {
-            [cell updateBMCEmergencyCell:self.warningDataSource[indexPath.row]];
-        }
-        
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        CALayer *layer = [CALayer layer];
-        layer.frame = CGRectMake(0, cell.bounds.size.height - 10, cell.bounds.size.width, 10);
-        layer.backgroundColor = [ColorHandler colorFromHexRGB:@"F5F5F5"].CGColor;
-        [cell.layer addSublayer:layer];
-        return cell;
+    self.prototypeCell = nil;
+    BMCEmergencyTableViewCell *cell = (BMCEmergencyTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"BMCEmergencyTableViewCell" forIndexPath:indexPath];
+    if ([tableView isEqual:self.displayController.searchResultsTableView]) {
+        [cell updateBMCEmergencyCell:self.searchResultDataSource[indexPath.row]];
+    } else {
+        [cell updateBMCEmergencyCell:self.warningDataSource[indexPath.row]];
     }
     
-    return nil;
+    self.prototypeCell = cell;
+    CALayer *layer = [CALayer layer];
+    layer.frame = CGRectMake(0, 0, self.prototypeCell.bounds.size.width, 10);
+    layer.backgroundColor = [ColorHandler colorFromHexRGB:@"F5F5F5"].CGColor;
+    [self.prototypeCell.layer addSublayer:layer];
+    [self.prototypeCell layoutIfNeeded];
+    
+    return self.prototypeCell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([tableView isEqual:self.warningTableView] || [tableView isEqual:self.displayController.searchResultsTableView]) {
-        return 144.f;
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    BMCEmergencyTableViewCell *cell = (BMCEmergencyTableViewCell *)self.prototypeCell;
+    
+    if ([cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height > 0) {
+        return [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height + 1;
     } else {
-        return 44;
+        return 144.f;
     }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    BMCEmergencyDetailViewController *bmcEmergencyDetailVC = [[BMCEmergencyDetailViewController alloc] init];
+    bmcEmergencyDetailVC.eventVO = (EventVO *)self.warningDataSource[indexPath.row];
+    [self.navigationController pushViewController:bmcEmergencyDetailVC animated:YES];
 }
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString{
@@ -137,21 +131,21 @@
     return YES;
 }
 
-- (IBAction)favoriteItemOnClicked:(UIBarButtonItem *)sender {
-    [self.getMainResourceListDP getMainResourceListWithTreeNodeId:@"00"
-                                                        pageIndex:@"1"
-                                                            state:@"all"
-                                                       sortColumn:@"venderName"
-                                                         sortType:@"asc"];
-    [self.scrollView scrollRectToVisible:CGRectMake(0, 0, self.scrollView.bounds.size.width, self.scrollView.bounds.size.height) animated:YES];
-}
-
-- (IBAction)emergenceItemOnClicked:(UIBarButtonItem *)sender {
-    [self.getEmergencyListDP getEmergencyListWithViewType:@"unaccepted_event_view"];
-    [self.scrollView scrollRectToVisible:CGRectMake(self.scrollView.bounds.size.width, 0, self.scrollView.bounds.size.width, self.scrollView.bounds.size.height) animated:YES];
+#pragma mark - response events
+- (IBAction)backToLoginView:(UIButton *)sender {
+    BMCLoginViewController *bmcLoginVC = [[BMCLoginViewController alloc] init];
+    UITabBarController *tabbarVC = self.navigationController.viewControllers[0];
+    [self.navigationController popToViewController:tabbarVC animated:YES];
+    [tabbarVC.navigationController  pushViewController:bmcLoginVC animated:YES];
 }
 
 #pragma mark - setters&getters
+- (void)setAlertLbl:(UILabel *)alertLbl {
+    _alertLbl = alertLbl;
+    
+    _alertLbl.layer.cornerRadius = 9.f;
+}
+
 - (BMCGetEmergencyListDataParse *)getEmergencyListDP {
     if (!_getEmergencyListDP) {
         _getEmergencyListDP = [[BMCGetEmergencyListDataParse alloc] init];
@@ -161,21 +155,13 @@
     return _getEmergencyListDP;
 }
 
-- (BMCGetMainResourceListDataParse *)getMainResourceListDP {
-    if (!_getMainResourceListDP) {
-        _getMainResourceListDP = [[BMCGetMainResourceListDataParse alloc] init];
-        _getMainResourceListDP.delegate = self;
-    }
-    return _getMainResourceListDP;
-}
-
-- (NSMutableArray *)favoriteDataSource {
-    if (!_favoriteDataSource) {
-        _favoriteDataSource = [[NSMutableArray alloc] init];
-    }
-    
-    return _favoriteDataSource;
-}
+//- (BMCGetMainResourceListDataParse *)getMainResourceListDP {
+//    if (!_getMainResourceListDP) {
+//        _getMainResourceListDP = [[BMCGetMainResourceListDataParse alloc] init];
+//        _getMainResourceListDP.delegate = self;
+//    }
+//    return _getMainResourceListDP;
+//}
 
 - (NSMutableArray *)warningDataSource {
     if (!_warningDataSource) {

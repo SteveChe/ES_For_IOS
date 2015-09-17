@@ -20,7 +20,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bT4-ge-8Bm">
-                    <rect key="frame" x="20" y="283" width="560" height="44"/>
+                    <rect key="frame" x="20" y="226" width="560" height="44"/>
                     <color key="backgroundColor" red="0.023529411760000001" green="0.65490196079999996" blue="0.88235294119999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="P2h-HI-XL3"/>
@@ -35,7 +35,7 @@
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Th-bF-d1M" userLabel="Hold View">
-                    <rect key="frame" x="20" y="151" width="560" height="82"/>
+                    <rect key="frame" x="20" y="104" width="560" height="82"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="用户名" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ieN-Ee-WJz">
                             <rect key="frame" x="10" y="10" width="51" height="20.5"/>
@@ -93,18 +93,14 @@
                         </mask>
                     </variation>
                 </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6GS-uC-cEH">
-                    <rect key="frame" x="180" y="40" width="240" height="81"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="240" id="20b-3F-h7m"/>
-                        <constraint firstAttribute="height" constant="81" id="3p6-dH-zRj"/>
-                    </constraints>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="登录logo" translatesAutoresizingMaskIntoConstraints="NO" id="6GS-uC-cEH">
+                    <rect key="frame" x="240" y="40" width="120" height="34"/>
                 </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="centerX" secondItem="bT4-ge-8Bm" secondAttribute="centerX" id="1W6-G3-zTU"/>
-                <constraint firstItem="bT4-ge-8Bm" firstAttribute="top" secondItem="2Th-bF-d1M" secondAttribute="bottom" constant="50" id="6ho-4q-3Se"/>
+                <constraint firstItem="bT4-ge-8Bm" firstAttribute="top" secondItem="2Th-bF-d1M" secondAttribute="bottom" constant="40" id="6ho-4q-3Se"/>
                 <constraint firstAttribute="trailing" secondItem="bT4-ge-8Bm" secondAttribute="trailing" constant="20" symbolic="YES" id="N1M-Nf-qlO"/>
                 <constraint firstAttribute="trailing" secondItem="2Th-bF-d1M" secondAttribute="trailing" constant="20" symbolic="YES" id="Niz-9s-aH0"/>
                 <constraint firstAttribute="centerX" secondItem="6GS-uC-cEH" secondAttribute="centerX" id="dne-9Y-pTB"/>
@@ -115,4 +111,7 @@
             </constraints>
         </view>
     </objects>
+    <resources>
+        <image name="登录logo" width="120" height="34"/>
+    </resources>
 </document>

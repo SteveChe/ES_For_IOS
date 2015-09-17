@@ -84,6 +84,9 @@
 		2B6038871B79C6A4005B721F /* TaskContactorCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B6038851B79C6A4005B721F /* TaskContactorCollectionViewCell.xib */; };
 		2B7FB8171B56AA5D00DA456E /* ProfessionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B7FB8151B56AA5D00DA456E /* ProfessionTableViewCell.m */; };
 		2B7FB8181B56AA5D00DA456E /* ProfessionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B7FB8161B56AA5D00DA456E /* ProfessionTableViewCell.xib */; };
+		2B93E9241BAA66A20026EB39 /* BMCEmergencyDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B93E9231BAA66A20026EB39 /* BMCEmergencyDetailViewController.m */; };
+		2B93E9281BAA92DE0026EB39 /* BMCEmergencyDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B93E9261BAA92DE0026EB39 /* BMCEmergencyDetailTableViewCell.m */; };
+		2B93E9291BAA92DE0026EB39 /* BMCEmergencyDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B93E9271BAA92DE0026EB39 /* BMCEmergencyDetailTableViewCell.xib */; };
 		2B9CBB5B1B39AA43007D7A45 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		2B9CBB611B3ADEC4007D7A45 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		2B9CBB621B3ADEC4007D7A45 /* (null) in Resources */ = {isa = PBXBuildFile; };
@@ -497,6 +500,11 @@
 		2B7FB8141B56AA5D00DA456E /* ProfessionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfessionTableViewCell.h; sourceTree = "<group>"; };
 		2B7FB8151B56AA5D00DA456E /* ProfessionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfessionTableViewCell.m; sourceTree = "<group>"; };
 		2B7FB8161B56AA5D00DA456E /* ProfessionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfessionTableViewCell.xib; sourceTree = "<group>"; };
+		2B93E9221BAA66A20026EB39 /* BMCEmergencyDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMCEmergencyDetailViewController.h; sourceTree = "<group>"; };
+		2B93E9231BAA66A20026EB39 /* BMCEmergencyDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMCEmergencyDetailViewController.m; sourceTree = "<group>"; };
+		2B93E9251BAA92DE0026EB39 /* BMCEmergencyDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMCEmergencyDetailTableViewCell.h; sourceTree = "<group>"; };
+		2B93E9261BAA92DE0026EB39 /* BMCEmergencyDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMCEmergencyDetailTableViewCell.m; sourceTree = "<group>"; };
+		2B93E9271BAA92DE0026EB39 /* BMCEmergencyDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BMCEmergencyDetailTableViewCell.xib; sourceTree = "<group>"; };
 		2B9CBB681B42D897007D7A45 /* UserMsgViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserMsgViewController.xib; sourceTree = "<group>"; };
 		2B9CBB6A1B4571D0007D7A45 /* SignOutDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignOutDataParse.h; sourceTree = "<group>"; };
 		2B9CBB6B1B4571D0007D7A45 /* SignOutDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignOutDataParse.m; sourceTree = "<group>"; };
@@ -1020,6 +1028,8 @@
 				2B2B84B51BA1536C0043EFD4 /* BMCMainViewController.h */,
 				2B2B84B61BA1536C0043EFD4 /* BMCMainViewController.m */,
 				2B2B84B71BA1536C0043EFD4 /* BMCMainViewController.xib */,
+				2B93E9221BAA66A20026EB39 /* BMCEmergencyDetailViewController.h */,
+				2B93E9231BAA66A20026EB39 /* BMCEmergencyDetailViewController.m */,
 			);
 			name = BMC;
 			sourceTree = "<group>";
@@ -1652,6 +1662,9 @@
 				2BEEE6F61BA6C9EB008D4DF3 /* BMCEmergencyTableViewCell.h */,
 				2BEEE6F71BA6C9EB008D4DF3 /* BMCEmergencyTableViewCell.m */,
 				2BEEE6F81BA6C9EB008D4DF3 /* BMCEmergencyTableViewCell.xib */,
+				2B93E9251BAA92DE0026EB39 /* BMCEmergencyDetailTableViewCell.h */,
+				2B93E9261BAA92DE0026EB39 /* BMCEmergencyDetailTableViewCell.m */,
+				2B93E9271BAA92DE0026EB39 /* BMCEmergencyDetailTableViewCell.xib */,
 			);
 			name = BMC;
 			sourceTree = "<group>";
@@ -2149,6 +2162,7 @@
 				F2467EFC1B8DCF1F0055B78B /* RootTimeCell.xib in Resources */,
 				F2467EF31B8DCF1F0055B78B /* RootCardTopCell.xib in Resources */,
 				F2D2335E1B31B1F400F8C65D /* PushConfig.plist in Resources */,
+				2B93E9291BAA92DE0026EB39 /* BMCEmergencyDetailTableViewCell.xib in Resources */,
 				2BC227811B94578600E3163A /* ImageTableViewCell.xib in Resources */,
 				F2C26EA31B9DB93D00DAACE7 /* RongCloudKit.strings in Resources */,
 				2BC227751B942A3600E3163A /* ELCAssetTablePicker.xib in Resources */,
@@ -2368,6 +2382,7 @@
 				2BC8212F1B57FFDC0090E2C1 /* ProfessionWebViewController.m in Sources */,
 				2B1B88EA1B803D0C00FAF650 /* UserDescriptionChangeViewController.m in Sources */,
 				F256CB831B6E5921009478C2 /* RCDApprovedJoinEnterpriseViewController.m in Sources */,
+				2B93E9241BAA66A20026EB39 /* BMCEmergencyDetailViewController.m in Sources */,
 				2B39C93C1B241212007BAC7A /* MASViewConstraint.m in Sources */,
 				F2F92EFF1B5020CC0047D7BF /* GetPhoneContactListDataParse.m in Sources */,
 				2B5A590F1B48DFBB000382D7 /* MRCircularProgressView.m in Sources */,
@@ -2388,6 +2403,7 @@
 				2B39C9371B241212007BAC7A /* MASCompositeConstraint.m in Sources */,
 				F22FE27B1B3AD94200A1A997 /* UIColor+RCColor.m in Sources */,
 				F29F862C1B2410070058FC9F /* AFSecurityPolicy.m in Sources */,
+				2B93E9281BAA92DE0026EB39 /* BMCEmergencyDetailTableViewCell.m in Sources */,
 				F23630801B6663A100A12F63 /* MKNumberBadgeView.m in Sources */,
 				F29F86491B2410320058FC9F /* UIRefreshControl+AFNetworking.m in Sources */,
 				2B5A59121B48DFBB000382D7 /* MRProgressOverlayView.m in Sources */,
