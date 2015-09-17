@@ -80,18 +80,6 @@
 //clicked done
 -(void) clickedDone:(id) sender
 {
-//    NSArray *indexPaths = nil;
-//    if (self.bSearchDisplay)
-//    {
-//        indexPaths = [self.searchDisplayController1.searchResultsTableView indexPathsForSelectedRows];
-//    }
-//    else
-//    {
-//        indexPaths = [self.tableView indexPathsForSelectedRows];
-//    }
-
-//    NSArray *indexPaths = [self.tableView indexPathsForSelectedRows];
-//    if (self.selectUsersInSearch.count == 0 && self.seletedUsers.count == 0){
     if (self.selectUsersInSearch.count == 0 ){
 
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"请选择联系人!" message:nil preferredStyle:UIAlertControllerStyleAlert];
@@ -103,44 +91,12 @@
     
     //get seleted users
     NSMutableArray *seletedUsers = [NSMutableArray new];
-//    for (NSIndexPath *indexPath in indexPaths) {
-//        //        NSString *key = [self.allKeys objectAtIndex:indexPath.section];
-//        //        NSArray *arrayForKey = [self.allFriends objectForKey:key];
-//        ESContactList* contactList = self.friends[indexPath.section];
-//        
-//        ESUserInfo *user = contactList.contactList[indexPath.row];
-//        
-//        //转成RCDUserInfo
-//        ESUserInfo *userInfo = [ESUserInfo new];
-//        userInfo.userId = user.userId;
-//        userInfo.userName = user.userName;
-//        userInfo.portraitUri = user.portraitUri;
-//        [seletedUsers addObject:userInfo];
-//    }
     
     for (ESUserInfo* user in self.selectUsersInSearch )
     {
         [seletedUsers addObject:user];
     }
 
-//    for (ESUserInfo* user in self.seletedUsers )
-//    {
-//        BOOL bFind = NO;
-//        for (ESUserInfo* userInSelected in seletedUsers)
-//        {
-//            if (userInSelected.userId == nil || user.userId == nil)
-//            {
-//                continue;
-//            }
-//            if ([userInSelected.userId isEqualToString:user.userId])
-//            {
-//                bFind = YES;
-//            }
-//        }
-//        if (!bFind) {
-//            [seletedUsers addObject:user];
-//        }
-//    }
     
     //excute the clickDoneCompletion
     if (self.clickDoneCompletion) {

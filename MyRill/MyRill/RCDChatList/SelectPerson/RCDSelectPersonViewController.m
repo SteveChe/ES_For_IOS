@@ -5,7 +5,7 @@
 //  Created by Liv on 15/3/27.
 //  Copyright (c) 2015年 胡利武. All rights reserved.
 //
-
+#import <RongIMKit/RongIMKit.h>
 #import "RCDSelectPersonViewController.h"
 #import "RCDSelectPersonTableViewCell.h"
 #import "ESUserInfo.h"
@@ -18,6 +18,8 @@
 
 @property(nonatomic,assign)BOOL bSearchDisplay;
 @property(nonatomic,strong)NSMutableArray* selectUsersInSearch;
+
+-(void)initUserInSearchArray;
 @end
 
 @implementation RCDSelectPersonViewController
@@ -36,7 +38,33 @@
     UINib *rcdCellNib = [UINib nibWithNibName:@"RCDSelectPersonTableViewCell" bundle:nil];
     [self.tableView registerNib:rcdCellNib forCellReuseIdentifier:@"RCDSelectPersonTableViewCell"];
     [self.searchDisplayController1.searchResultsTableView registerNib:rcdCellNib forCellReuseIdentifier:@"RCDSelectPersonTableViewCell"];
+//    _selectUsersInSearch = [NSMutableArray array];
+//    _selectUsersInSearch = [NSMutableArray arrayWithArray:self.seletedUsers];
+    [self initUserInSearchArray];
+}
+-(void)initUserInSearchArray
+{
     _selectUsersInSearch = [NSMutableArray array];
+    for (NSObject* tempObj in self.seletedUsers)
+    {
+        if ([tempObj isKindOfClass:[RCUserInfo class]])
+        {
+            RCUserInfo* tempUser = (RCUserInfo*)tempObj;
+//            tempUser = (RCUserInfo*)tempUser;
+            ESUserInfo* user = [[ESUserInfo alloc] init];
+            user.userId = tempUser.userId;
+            user.userName = tempUser.name;
+            user.portraitUri = tempUser.portraitUri;
+            
+            [_selectUsersInSearch addObject:user];
+        }
+        else if ([tempObj isKindOfClass:[ESUserInfo class]])
+        {
+            [_selectUsersInSearch addObject:tempObj];
+        }
+    }
+//    _selectUsersInSearch = [NSMutableArray arrayWithArray:self.seletedUsers];
+
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -53,18 +81,8 @@
 //clicked done
 -(void) clickedDone:(id) sender
 {
-    NSArray *indexPaths = nil;
-
-    if (self.bSearchDisplay)
-    {
-        indexPaths = [self.searchDisplayController1.searchResultsTableView indexPathsForSelectedRows];
-    }
-    else
-    {
-        indexPaths = [self.tableView indexPathsForSelectedRows];
-    }
-//    NSArray *indexPaths = [self.tableView indexPathsForSelectedRows];
-    if (!indexPaths||indexPaths.count == 0){
+    if (self.selectUsersInSearch.count == 0 ){
+        
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"请选择联系人!" message:nil preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *enterAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil];
         [alertController addAction:enterAction];
@@ -74,20 +92,12 @@
     
     //get seleted users
     NSMutableArray *seletedUsers = [NSMutableArray new];
-    for (NSIndexPath *indexPath in indexPaths) {
-//        NSString *key = [self.allKeys objectAtIndex:indexPath.section];
-//        NSArray *arrayForKey = [self.allFriends objectForKey:key];
-        ESContactList* contactList = self.friends[indexPath.section];
-        
-        ESUserInfo *user = contactList.contactList[indexPath.row];
-
-        //转成RCDUserInfo
-        ESUserInfo *userInfo = [ESUserInfo new];
-        userInfo.userId = user.userId;
-        userInfo.userName = user.userName;
-        userInfo.portraitUri = user.portraitUri;
-        [seletedUsers addObject:userInfo];
+    
+    for (ESUserInfo* user in self.selectUsersInSearch )
+    {
+        [seletedUsers addObject:user];
     }
+    
     
     //excute the clickDoneCompletion
     if (self.clickDoneCompletion) {
@@ -153,15 +163,6 @@
             [cell.ivAva sd_setImageWithURL:[NSURL URLWithString:user.portraitUri] placeholderImage:[UIImage imageNamed:@"头像_100"]];
         }
         
-
-        //设置选中状态
-        for (ESUserInfo *userInfo in self.seletedUsers) {
-            if ([user.userId isEqualToString:userInfo.userId]) {
-                [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionBottom];
-                [cell setUserInteractionEnabled:NO];
-            }
-        }
-
         //设置选中状态
         for (ESUserInfo *userInfo in self.selectUsersInSearch) {
             if ([user.userId isEqualToString:userInfo.userId]) {
@@ -181,13 +182,6 @@
             [cell.ivAva sd_setImageWithURL:[NSURL URLWithString:user.portraitUri] placeholderImage:[UIImage imageNamed:@"头像_100"]];
         }
         
-        //设置选中状态
-        for (ESUserInfo *userInfo in self.seletedUsers) {
-            if ([user.userId isEqualToString:userInfo.userId]) {
-                [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionBottom];
-                [cell setUserInteractionEnabled:NO];
-            }
-        }
         //设置选中状态
         for (ESUserInfo *userInfo in self.selectUsersInSearch) {
             if ([user.userId isEqualToString:userInfo.userId]) {
