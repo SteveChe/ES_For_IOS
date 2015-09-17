@@ -36,24 +36,22 @@
     self.tableView.allowsMultipleSelection = YES;
     self.searchDisplayController1.searchResultsTableView.allowsMultipleSelection = YES;
     
-    UIView* tableHeaderView = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.bounds.size.width, 94)];
+    UIView* tableHeaderView = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.bounds.size.width, 100)];
     // Add searchbar
     UISearchBar* searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.bounds.size.width, 40)];
 //    [tableHeaderView addSubview:searchBar];
     [tableHeaderView addSubview:self.collectionView];
-    UIView* view = self.tableView.tableHeaderView;
-    [view removeFromSuperview];
     self.tableView.tableHeaderView = tableHeaderView;
 
-//    searchBar.placeholder = @"搜索";
-//    searchBar.delegate = self;
-//    searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
-//    searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
-    self.searchDisplayController1 = [[UISearchDisplayController alloc] initWithSearchBar:searchBar contentsController:self];
-    
-    self.searchDisplayController1.searchResultsDataSource = self;
-    self.searchDisplayController1.searchResultsDelegate = self;
-    self.searchDisplayController1.delegate = self;
+    searchBar.placeholder = @"搜索";
+    searchBar.delegate = self;
+    searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
+    searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
+//    self.searchDisplayController1 = [[UISearchDisplayController alloc] initWithSearchBar:searchBar contentsController:self];
+//    
+//    self.searchDisplayController1.searchResultsDataSource = self;
+//    self.searchDisplayController1.searchResultsDelegate = self;
+//    self.searchDisplayController1.delegate = self;
 
     
     UINib *rcdCellNib = [UINib nibWithNibName:@"RCDSelectPersonTableViewCell" bundle:nil];
@@ -345,8 +343,7 @@
         [layout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
         _collectionView.collectionViewLayout = layout;
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 40, self.view.bounds.size.width, 54) collectionViewLayout:layout];
-        _collectionView.backgroundColor= [UIColor clearColor];
-
+        _collectionView.backgroundColor = [UIColor clearColor];
         UINib *professionCell = [UINib nibWithNibName:@"TaskContactorCollectionViewCell" bundle:nil];
         [_collectionView registerNib:professionCell forCellWithReuseIdentifier:@"TaskContactorCollectionViewCell"];
         _collectionView.bounces = NO;

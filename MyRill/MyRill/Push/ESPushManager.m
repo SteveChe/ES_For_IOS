@@ -208,7 +208,7 @@
             
             if (professionId!=nil)
             {
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"NOTIFICATION_PUSH_PROFESSION" object:professionId];
+                [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_PUSH_PROFESSION object:professionId];
             }
 
 
