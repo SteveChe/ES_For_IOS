@@ -16,9 +16,13 @@
 #import "UserMsgViewController.h"
 #import "ColorHandler.h"
 #import "RCDAddressBookViewController.h"
+#import "GetAppversionDataParse.h"
 
-@interface ESMenuViewController () <UITabBarControllerDelegate>
+#define ES_VERSION 0.2
 
+@interface ESMenuViewController () <UITabBarControllerDelegate,GetAppVersionDelegate>
+
+@property (nonatomic,strong) GetAppversionDataParse* getAppVersionDataParse;
 @end
 
 @implementation ESMenuViewController
@@ -70,6 +74,10 @@
     [self setSelectedIndex:0];
     self.delegate = self;
     [self loginRongCloud];
+    
+    _getAppVersionDataParse = [[GetAppversionDataParse alloc] init];
+    _getAppVersionDataParse.delegate = self;
+    [_getAppVersionDataParse getAppVersion];
 
 }
 
@@ -118,6 +126,25 @@
     
 }
 
+
+#pragma mark-- GetAppVersionDelegate
+-(void)getAppVersionSucceed:(NSString*)appVersionString
+{
+    float version = [appVersionString floatValue];
+    if (version > (ES_VERSION + 0.01) )
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"版本更新"
+                                                        message:@"有新版本更新啦!"
+                                                       delegate:self
+                                              cancelButtonTitle:@"知道了!"
+                                              otherButtonTitles:nil, nil];
+        [alert show];
+    }
+}
+-(void)getAppVersionFailed:(NSString*)errorMessage
+{
+    
+}
 
 #pragma mark RCIMUserInfoDataSource
 /**

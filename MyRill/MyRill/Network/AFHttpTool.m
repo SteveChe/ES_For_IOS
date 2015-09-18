@@ -1175,4 +1175,18 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
                           failure:failure];
 }
 
+
+
+//app版本信息
++(void)getAppVersionSucess:(void (^)(id response))success failure:(void (^)(NSError* err))failure
+{
+    NSDictionary *params = @{@"platform":@"iOS"};
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet
+                     protocolType:RequestProtocolTypeText
+                              url:@"/api/apps/version-info/.json"
+                           params:params
+                          success:success
+                          failure:failure];
+}
+
 @end

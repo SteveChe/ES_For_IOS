@@ -316,6 +316,8 @@ failure:(void (^)(NSError *error))failure;
 //向企业发送消息
 +(void)replyToOneEnterpriseMessage:(NSString*)enterpriseId content:(NSString*)content sucess:(void (^)(id response))success failure:(void (^)(NSError* err))failure;
 
+//app版本信息
++(void)getAppVersionSucess:(void (^)(id response))success failure:(void (^)(NSError* err))failure;
 
 
 @end
