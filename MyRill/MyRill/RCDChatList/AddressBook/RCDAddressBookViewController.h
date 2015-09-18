@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 //#import "RCSelectPersonViewController.h"
 #import "GetContactListDataParse.h"
-@interface RCDAddressBookViewController : UITableViewController<GetContactListDelegate>
+@interface RCDAddressBookViewController : UIViewController<GetContactListDelegate,UITableViewDataSource,UITableViewDelegate>
 
 
 @property (nonatomic, strong) NSArray *keys;
@@ -21,6 +21,7 @@
 @property (nonatomic,strong) NSMutableArray *enterprises;
 @property (strong, nonatomic) NSMutableArray *searchResult;
 @property (strong, nonatomic) UISearchDisplayController* searchDisplayController1;
+@property (nonatomic,strong)UITableView* tableView;
 
 
 -(void) getAllData;
