@@ -36,22 +36,24 @@
     self.tableView.allowsMultipleSelection = YES;
     self.searchDisplayController1.searchResultsTableView.allowsMultipleSelection = YES;
     
-    UIView* tableHeaderView = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.bounds.size.width, 100)];
     // Add searchbar
     UISearchBar* searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.bounds.size.width, 40)];
-//    [tableHeaderView addSubview:searchBar];
-    [tableHeaderView addSubview:self.collectionView];
-    self.tableView.tableHeaderView = tableHeaderView;
+    [self.view addSubview:searchBar];
+    self.tableView.tableHeaderView = self.collectionView;
+    CGRect rect = self.tableView.frame;
+    rect.origin.y += 40;
+    rect.size.height -= 40;
+    self.tableView.frame = rect;
 
     searchBar.placeholder = @"搜索";
     searchBar.delegate = self;
     searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
     searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
-//    self.searchDisplayController1 = [[UISearchDisplayController alloc] initWithSearchBar:searchBar contentsController:self];
-//    
-//    self.searchDisplayController1.searchResultsDataSource = self;
-//    self.searchDisplayController1.searchResultsDelegate = self;
-//    self.searchDisplayController1.delegate = self;
+    self.searchDisplayController1 = [[UISearchDisplayController alloc] initWithSearchBar:searchBar contentsController:self];
+    
+    self.searchDisplayController1.searchResultsDataSource = self;
+    self.searchDisplayController1.searchResultsDelegate = self;
+    self.searchDisplayController1.delegate = self;
 
     
     UINib *rcdCellNib = [UINib nibWithNibName:@"RCDSelectPersonTableViewCell" bundle:nil];
@@ -127,6 +129,14 @@
 
 
 #pragma mark -UITableViewDataSource
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    if (section ==0)
+    {
+        return self.collectionView;
+    }
+    return nil;
+}
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
@@ -186,6 +196,14 @@
         for (ESUserInfo *userInfo in self.selectUsersInSearch) {
             if ([user.userId isEqualToString:userInfo.userId]) {
                 [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionBottom];
+                for (ESUserInfo* userInSelected in self.seletedUsers)
+                {
+                    if ([userInSelected.userId isEqualToString:user.userId])
+                    {
+                        [cell setUserInteractionEnabled:NO];
+                    }
+                }
+
             }
         }
 
@@ -205,6 +223,13 @@
         for (ESUserInfo *userInfo in self.selectUsersInSearch) {
             if ([user.userId isEqualToString:userInfo.userId]) {
                 [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionBottom];
+                for (ESUserInfo* userInSelected in self.seletedUsers)
+                {
+                    if ([userInSelected.userId isEqualToString:user.userId])
+                    {
+                        [cell setUserInteractionEnabled:NO];
+                    }
+                }
             }
         }
 
@@ -342,7 +367,7 @@
         layout.minimumInteritemSpacing = 0;
         [layout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
         _collectionView.collectionViewLayout = layout;
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 40, self.view.bounds.size.width, 54) collectionViewLayout:layout];
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(6, 40, self.view.bounds.size.width, 54) collectionViewLayout:layout];
         _collectionView.backgroundColor = [UIColor clearColor];
         UINib *professionCell = [UINib nibWithNibName:@"TaskContactorCollectionViewCell" bundle:nil];
         [_collectionView registerNib:professionCell forCellWithReuseIdentifier:@"TaskContactorCollectionViewCell"];

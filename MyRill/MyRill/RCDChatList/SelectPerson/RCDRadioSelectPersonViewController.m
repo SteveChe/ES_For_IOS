@@ -13,8 +13,9 @@
 #import "ESContactList.h"
 #import "UserDefaultsDefine.h"
 #import "ESEnterpriseInfo.h"
+#import "TaskContactorCollectionViewCell.h"
 
-@interface RCDRadioSelectPersonViewController ()
+@interface RCDRadioSelectPersonViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,UISearchControllerDelegate,UISearchDisplayDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate>
 
 -(void)judgeJoinedEnterprise;
 
@@ -22,6 +23,7 @@
 @property (nonatomic,assign)BOOL bJoinedEnterprise;
 @property(nonatomic,assign)BOOL bSearchDisplay;
 @property(nonatomic,strong)NSMutableArray* selectUsersInSearch;
+@property (nonatomic, strong) UICollectionView *collectionView;
 
 @end
 
@@ -44,10 +46,29 @@
     self.bSearchDisplay = NO;
     
     [self judgeJoinedEnterprise];
+    // Add searchbar
+    UISearchBar* searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.bounds.size.width, 40)];
+    [self.view addSubview:searchBar];
+    self.tableView.tableHeaderView = self.collectionView;
+    CGRect rect = self.tableView.frame;
+    rect.origin.y += 40;
+    rect.size.height -= 40;
+    self.tableView.frame = rect;
+    
+    searchBar.placeholder = @"搜索";
+    searchBar.delegate = self;
+    searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
+    searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    self.searchDisplayController1 = [[UISearchDisplayController alloc] initWithSearchBar:searchBar contentsController:self];
+    
+    self.searchDisplayController1.searchResultsDataSource = self;
+    self.searchDisplayController1.searchResultsDelegate = self;
+    self.searchDisplayController1.delegate = self;
+    
+    
     UINib *rcdCellNib = [UINib nibWithNibName:@"RCDSelectPersonTableViewCell" bundle:nil];
     [self.tableView registerNib:rcdCellNib forCellReuseIdentifier:@"RCDSelectPersonTableViewCell"];
-    [self.searchDisplayController1.searchResultsTableView registerNib:rcdCellNib forCellReuseIdentifier:@"RCDSelectPersonTableViewCell"];
-    _selectUsersInSearch = [NSMutableArray arrayWithArray:self.seletedUsers];
+    [self.searchDisplayController1.searchResultsTableView registerNib:rcdCellNib forCellReuseIdentifier:@"RCDSelectPersonTableViewCell"];    _selectUsersInSearch = [NSMutableArray arrayWithArray:self.seletedUsers];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -110,7 +131,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    if(tableView == self.searchDisplayController.searchResultsTableView)
+    if(tableView == self.searchDisplayController1.searchResultsTableView)
     {
         return @"联系人";
     }
@@ -122,7 +143,7 @@
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if(tableView == self.searchDisplayController.searchResultsTableView)
+    if(tableView == self.searchDisplayController1.searchResultsTableView)
     {
         return 1;
     }
@@ -131,7 +152,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if(tableView == self.searchDisplayController.searchResultsTableView)
+    if(tableView == self.searchDisplayController1.searchResultsTableView)
     {
         return [self.searchResult count];
     }
@@ -152,7 +173,7 @@
     
     [cell setUserInteractionEnabled:YES];
     
-    if(tableView == self.searchDisplayController.searchResultsTableView)
+    if(tableView == self.searchDisplayController1.searchResultsTableView)
     {
         ESUserInfo *user = self.searchResult[indexPath.row];
         
@@ -258,6 +279,7 @@
             [self.selectUsersInSearch addObject:user];
         }
     }
+    [self.collectionView reloadData];
 }
 
 -(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -316,8 +338,47 @@
         }
         
     }
+    [self.collectionView reloadData];
+}
+#pragma mark - UICollectionViewDataSource&UICollectionViewDelegateFlowLayout
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.selectUsersInSearch.count;
 }
 
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return 1;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    TaskContactorCollectionViewCell *cell = (TaskContactorCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"TaskContactorCollectionViewCell" forIndexPath:indexPath];
+    
+    cell.contentView.backgroundColor = [UIColor whiteColor];
+    
+    ESUserInfo *user = (ESUserInfo *)self.selectUsersInSearch[indexPath.row];
+    [cell updateCell:user];
+    return cell;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return CGSizeMake(54,54);
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+    return 0;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+    return 0;
+}
+
+//设置Cell的边界
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    return UIEdgeInsetsMake(0,0,0,0);
+}
+
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
 
 #pragma mark - GetContactListDelegate
 -(void)getContactList:(NSArray*)contactList
@@ -393,4 +454,23 @@
     self.bSearchDisplay = NO;    
 }
 
+
+#pragma mark - setters&getters
+- (UICollectionView *)collectionView {
+    if (!_collectionView) {
+        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+        layout.minimumInteritemSpacing = 0;
+        [layout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
+        _collectionView.collectionViewLayout = layout;
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(6, 40, self.view.bounds.size.width, 54) collectionViewLayout:layout];
+        _collectionView.backgroundColor = [UIColor clearColor];
+        UINib *professionCell = [UINib nibWithNibName:@"TaskContactorCollectionViewCell" bundle:nil];
+        [_collectionView registerNib:professionCell forCellWithReuseIdentifier:@"TaskContactorCollectionViewCell"];
+        _collectionView.bounces = NO;
+        _collectionView.delegate = self;
+        _collectionView.dataSource = self;
+    }
+    
+    return _collectionView;
+}
 @end

@@ -29,7 +29,7 @@
 #import "GetRequestContactListDataParse.h"
 #import "EnterPriseRequestDataParse.h"
 
-@interface RCDAddressBookViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,UISearchControllerDelegate,UISearchDisplayDelegate,GetFollowedEnterpriseListDelegate,GetRequestContactListDelegate,GetEnterPriseRequestListDelegate>
+@interface RCDAddressBookViewController ()<UISearchBarDelegate,UISearchControllerDelegate,UISearchDisplayDelegate,GetFollowedEnterpriseListDelegate,GetRequestContactListDelegate,GetEnterPriseRequestListDelegate>
 
 //#字符索引对应的user object
 @property (nonatomic,strong) NSMutableArray *tempOtherArr;
@@ -50,6 +50,11 @@
     // Do any additional setup after loading the view.
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationItem.title = @"联系人";
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    [self.view addSubview:self.tableView];
+    [self.view sendSubviewToBack:self.tableView];
     
     _getContactListDataParse = [[GetContactListDataParse alloc] init];
     _getContactListDataParse.delegate = self;
