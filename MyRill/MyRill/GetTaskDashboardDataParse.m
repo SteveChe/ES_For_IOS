@@ -17,17 +17,23 @@
     [AFHttpTool getTaskDashboardSuccess:^(id response) {
         NSDictionary *responseDic = (NSDictionary *)response;
         NSNumber* errorCodeNum = [responseDic valueForKey:NETWORK_ERROR_CODE];
-        if (errorCodeNum == nil || [errorCodeNum isEqual:[NSNull null]] )
-        {
+        if (errorCodeNum == nil || [errorCodeNum isEqual:[NSNull null]]) {
+            [self.delegate getTaskDashboardFailure:nil];
             return ;
         }
         
-        NSDictionary *dataDic = responseDic[NETWORK_OK_DATA];
-        ESTaskDashboard *taskDashboard = [[ESTaskDashboard alloc] initWithDic:dataDic];
-        [self.delegate getTaskDashboardSuccess:taskDashboard];
+        NSInteger errorCode = [errorCodeNum integerValue];
+        if (errorCode == 0) {
+            NSDictionary *dataDic = responseDic[NETWORK_OK_DATA];
+            ESTaskDashboard *taskDashboard = [[ESTaskDashboard alloc] initWithDic:dataDic];
+            [self.delegate getTaskDashboardSuccess:taskDashboard];
+        } else {
+            [self.delegate getTaskDashboardFailure:nil];
+        }
+        
     } failure:^(NSError *error) {
         NSLog(@"%@",[error debugDescription]);
-
+        [self.delegate getTaskDashboardFailure:nil];
     }];
 }
 

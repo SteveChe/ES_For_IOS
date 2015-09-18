@@ -35,7 +35,7 @@
 #import "UpdateObserverAndChatidDataParse.h"
 #import "ESImage.h"
 
-@interface TaskViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ELCImagePickerControllerDelegate, GetTaskCommentListDelegate, SendTaskCommenDelegate, EditTaskDelegate, GetTaskDetailDelegate, SendTaskImageDelegate, UpdateObserverAndChatidDelegate, UIScrollViewDelegate>
+@interface TaskViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, UITextFieldDelegate, UIScrollViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ELCImagePickerControllerDelegate, GetTaskDetailDelegate, GetTaskCommentListDelegate, EditTaskDelegate, UpdateObserverAndChatidDelegate, SendTaskCommenDelegate, SendTaskImageDelegate>
 
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *holdViews;
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *txtHoldViews;
@@ -156,6 +156,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFICATION_PUSH_ASSIGNMENT object:nil];
 }
 
+#pragma mark - GetTaskDetailDelegate methods
 - (void)getTaskDetailSuccess:(ESTask *)task {
     self.taskModel = task;
     
@@ -230,11 +231,26 @@
     [self.followsCollectionView reloadData];
 }
 
+- (void)getTaskDetailFailure:(NSString *)errorMsg {
+    [[CustomShowMessage getInstance] showNotificationMessage:@"获取任务详情失败!"];
+}
+
+#pragma mark - GetTaskCommentListDelegate methods
+- (void)getTaskCommentListSuccess:(NSArray *)taskCommentList {
+    self.dataSource = [NSMutableArray arrayWithArray:[[taskCommentList reverseObjectEnumerator] allObjects]];
+    [self.tableView reloadData];
+    [self.tableView layoutIfNeeded];
+}
+
+- (void)getTaskCommentListFailure:(NSString *)errorMsg {
+    [[CustomShowMessage getInstance] showNotificationMessage:@"获取任务评论列表失败!"];
+}
+
 #pragma mark - EditTaskDelegate methods
 - (void)editTaskSuccess {
     [self showTips:@"修改成功!" mode:MRProgressOverlayViewModeCheckmark isDismiss:YES isSucceuss:YES];
-    NSLog(@"%@",self.raiseObserverList);
-    NSLog(@"%@",self.raiseChargeList);
+//    NSLog(@"%@",self.raiseObserverList);
+//    NSLog(@"%@",self.raiseChargeList);
     
     NSMutableArray *userIdList = [NSMutableArray new];
     [userIdList addObjectsFromArray:self.raiseObserverList];
@@ -249,14 +265,13 @@
             NSLog(@"%ld",(long)status);
         }];
     }
-
-
 }
 
 - (void)editTaskFailed:(NSString *)errorMessage {
     [self showTips:@"修改失败!" mode:MRProgressOverlayViewModeCross isDismiss:YES isSucceuss:NO];
 }
 
+#pragma mark - UpdateObserverAndChatidDelegate methods
 - (void)updateObserverAndChatidSuccess {
     [self showTips:@"修改成功!" mode:MRProgressOverlayViewModeCheckmark isDismiss:YES isSucceuss:YES];
     NSLog(@"%@",self.raiseObserverList);
@@ -271,19 +286,37 @@
             NSLog(@"%ld",(long)status);
         }];
     }
-
 }
 
 - (void)updateObserverAndChatidFailed:(NSString *)errorMessage {
     [self showTips:@"修改失败!" mode:MRProgressOverlayViewModeCross isDismiss:YES isSucceuss:NO];
 }
 
-- (void)getTaskCommentListSuccess:(NSArray *)taskCommentList {
-    self.dataSource = [NSMutableArray arrayWithArray:[[taskCommentList reverseObjectEnumerator] allObjects]];
+#pragma mark - SendTaskCommenDelegate methods
+- (void)sendTaskCommentSuccess:(ESTaskComment *)taskComment {
+    self.cacheTaskComment = taskComment;
+    
+    if ([taskComment.content isEqualToString:@""]) {
+        [self.sendTaskImageDP sendTaskCommentWithTaskID:[self.taskModel.taskID stringValue]
+                                                comment:taskComment
+                                              imageData:[self.images firstObject]];
+        return;
+    }
+    
+    [self.sendTxtView resignFirstResponder];
+    [self.dataSource insertObject:taskComment atIndex:0];
     [self.tableView reloadData];
-    [self.tableView layoutIfNeeded];
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0
+                                                              inSection:0]
+                          atScrollPosition:UITableViewScrollPositionBottom
+                                  animated:YES];
 }
 
+- (void)sendTaskCommentFailure:(NSString *)errorMsg {
+    [[CustomShowMessage getInstance] showNotificationMessage:@"发送评论失败!"];
+}
+
+#pragma mark - SendTaskImageDelegate methods
 - (void)sendTaskImageSuccess:(ESImage *)image {
     [self.imagesOld addObject:image];
     [self.images removeObject:[self.images firstObject]];
@@ -306,23 +339,8 @@
     }
 }
 
-- (void)sendTaskCommentSuccess:(ESTaskComment *)taskComment {
-    self.cacheTaskComment = taskComment;
-    
-    if ([taskComment.content isEqualToString:@""]) {
-        [self.sendTaskImageDP sendTaskCommentWithTaskID:[self.taskModel.taskID stringValue]
-                                                comment:taskComment
-                                              imageData:[self.images firstObject]];
-        return;
-    }
-    
-    [self.sendTxtView resignFirstResponder];
-    [self.dataSource insertObject:taskComment atIndex:0];
-    [self.tableView reloadData];
-    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0
-                                                              inSection:0]
-                          atScrollPosition:UITableViewScrollPositionBottom
-                                  animated:YES];
+- (void)sendTaskImageFailure:(NSString *)errorMsg {
+    [[CustomShowMessage getInstance] showNotificationMessage:@"上传图片失败!"];
 }
 
 #pragma mark - UITableViewDataSource&UITableViewDelegate methods
@@ -615,7 +633,7 @@
         __weak TaskViewController *ws = self;
         [imageView sd_setImageWithURL:[NSURL URLWithString:image.imgURL]
                      placeholderImage:[UIImage imageNamed:@"单张图片"]
-                              options:SDWebImageRetryFailed
+                              options:SDWebImageContinueInBackground
                              progress:^(NSInteger receivedSize, NSInteger expectedSize) {
                                  [self.containerView addSubview:self.progressBar];
                                  CGRect frame = CGRectMake(self.progressBar.frame.origin.x, self.progressBar.frame.origin.y, self.containerView.bounds.size.width, self.progressBar.frame.size.height);
@@ -627,11 +645,11 @@
                                  [self.progressBar removeFromSuperview];
                                  self.progressBar = nil;
                                  CGSize size = [image size];
-                                 if (size.height * self.scrollView.bounds.size.width / size.width >= (self.scrollView.bounds.size.height - 37 * 2)) {
-                                     imageView.frame = CGRectMake(self.scrollView.bounds.size.width * self.pageControl.currentPage, 0, self.scrollView.bounds.size.width, size.height * self.scrollView.bounds.size.width / size.width - 37);
-                                 } else {
+//                                 if (size.height * self.scrollView.bounds.size.width / size.width >= (self.scrollView.bounds.size.height - 37 * 2)) {
+//                                     imageView.frame = CGRectMake(self.scrollView.bounds.size.width * self.pageControl.currentPage, 0, self.scrollView.bounds.size.width, size.height * self.scrollView.bounds.size.width / size.width - 37);
+//                                 } else {
                                      imageView.frame = CGRectMake(self.scrollView.bounds.size.width * self.pageControl.currentPage, (self.scrollView.bounds.size.height - size.height * self.scrollView.bounds.size.width / size.width) / 2, self.scrollView.bounds.size.width, size.height * self.scrollView.bounds.size.width / size.width);
-                                 }
+//                                 }
                              }];
         imageView.tag = 101 + self.pageControl.currentPage;
         [self.scrollView addSubview:imageView];
@@ -1135,7 +1153,7 @@
     self.containerView.backgroundColor = [UIColor blackColor];
     [window addSubview:self.containerView];
     
-    self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 37)];
+    self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
     self.scrollView.delegate = self;
 //    self.scrollView.maximumZoomScale = 2.f;
 //    self.scrollView.minimumZoomScale = .5f;
@@ -1147,12 +1165,13 @@
     
     if (self.selectCellImages.count > 1) {
         self.pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, self.containerView.bounds.size.height - 37, self.containerView.bounds.size.width, 37)];
+        self.pageControl.backgroundColor = [UIColor clearColor];
         [self.pageControl setCurrentPageIndicatorTintColor:[UIColor whiteColor]];
         [self.pageControl setPageIndicatorTintColor:[UIColor grayColor]];
         self.pageControl.currentPage = 0;
         self.pageControl.numberOfPages = self.selectCellImages.count;
         [self.pageControl addTarget:self action:@selector(changeImageViewPage:) forControlEvents:UIControlEventValueChanged];
-        [self.containerView addSubview:self.pageControl];
+        [self.containerView insertSubview:self.pageControl aboveSubview:self.scrollView];
     }
     
     self.oldframe = [self.onClickedCell.placeholderImg convertRect:self.onClickedCell.placeholderImg.bounds toView:window];
@@ -1163,7 +1182,7 @@
     __weak TaskViewController *ws = self;
     [imageView sd_setImageWithURL:[NSURL URLWithString:image.imgURL]
                  placeholderImage:[UIImage imageNamed:@"单张图片"]
-                          options:SDWebImageRetryFailed
+                          options:SDWebImageContinueInBackground
                          progress:^(NSInteger receivedSize, NSInteger expectedSize) {
                              [self.containerView addSubview:self.progressBar];
                              CGRect frame = CGRectMake(self.progressBar.frame.origin.x, self.progressBar.frame.origin.y, self.containerView.bounds.size.width, self.progressBar.frame.size.height);
@@ -1175,11 +1194,11 @@
                              [self.progressBar removeFromSuperview];
                              self.progressBar = nil;
                              CGSize size = [image size];
-                             if (size.height * self.scrollView.bounds.size.width / size.width >= (self.scrollView.bounds.size.height - 37 * 2)) {
-                                 imageView.frame = CGRectMake(0, 0, self.scrollView.bounds.size.width, size.height * self.scrollView.bounds.size.width / size.width - 37);
-                             } else {
+//                             if (size.height * self.scrollView.bounds.size.width / size.width >= (self.scrollView.bounds.size.height)) {
+//                                 imageView.frame = CGRectMake(0, 0, self.scrollView.bounds.size.width, size.height * self.scrollView.bounds.size.width / size.width);
+//                             } else {
                                  imageView.frame = CGRectMake(0, (self.scrollView.bounds.size.height - size.height * self.scrollView.bounds.size.width / size.width) / 2, self.scrollView.bounds.size.width, size.height * self.scrollView.bounds.size.width / size.width);
-                             }
+//                             }
                          }];
     imageView.tag = 101;
     [self.scrollView addSubview:imageView];
@@ -1201,7 +1220,7 @@
     __weak TaskViewController *ws = self;
     [imageView sd_setImageWithURL:[NSURL URLWithString:image.imgURL]
                  placeholderImage:[UIImage imageNamed:@"单张图片"]
-                          options:SDWebImageRetryFailed
+                          options:SDWebImageContinueInBackground
                          progress:^(NSInteger receivedSize, NSInteger expectedSize) {
                              [self.containerView addSubview:self.progressBar];
                              CGRect frame = CGRectMake(self.progressBar.frame.origin.x, self.progressBar.frame.origin.y, self.containerView.bounds.size.width, self.progressBar.frame.size.height);
@@ -1213,11 +1232,11 @@
                              [self.progressBar removeFromSuperview];
                              self.progressBar = nil;
                              CGSize size = [image size];
-                             if (size.height * self.scrollView.bounds.size.width / size.width >= (self.scrollView.bounds.size.height - 37 * 2)) {
-                                 imageView.frame = CGRectMake(self.scrollView.bounds.size.width * index, 0, self.scrollView.bounds.size.width, size.height * self.scrollView.bounds.size.width / size.width - 37);
-                             } else {
+//                             if (size.height * self.scrollView.bounds.size.width / size.width >= (self.scrollView.bounds.size.height - 37 * 2)) {
+//                                 imageView.frame = CGRectMake(self.scrollView.bounds.size.width * index, 0, self.scrollView.bounds.size.width, size.height * self.scrollView.bounds.size.width / size.width - 37);
+//                             } else {
                                  imageView.frame = CGRectMake(self.scrollView.bounds.size.width * index, (self.scrollView.bounds.size.height - size.height * self.scrollView.bounds.size.width / size.width) / 2, self.scrollView.bounds.size.width, size.height * self.scrollView.bounds.size.width / size.width);
-                             }
+//                             }
                          }];
     imageView.tag = 101 + index;
     [self.scrollView addSubview:imageView];

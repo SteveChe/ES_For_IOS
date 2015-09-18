@@ -13,6 +13,7 @@
 @protocol SendTaskImageDelegate <NSObject>
 
 - (void)sendTaskImageSuccess:(ESImage *)image;
+- (void)sendTaskImageFailure:(NSString *)errorMsg;
 
 @end
 

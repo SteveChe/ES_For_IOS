@@ -12,6 +12,7 @@
 @protocol TaskDashboardDelegate <NSObject>
 
 - (void)getTaskDashboardSuccess:(ESTaskDashboard *)taskDashboard;
+- (void)getTaskDashboardFailure:(NSString *)errorMsg;
 
 @end
 

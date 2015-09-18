@@ -19,25 +19,29 @@
                                     listSize:size
                                      success:^(id response) {
                                          NSDictionary *responseDic = (NSDictionary *)response;
-//                                         NSLog(@"===== %@",response);
                                          NSNumber* errorCodeNum = [responseDic valueForKey:NETWORK_ERROR_CODE];
-                                         if (errorCodeNum == nil || [errorCodeNum isEqual:[NSNull null]] )
-                                         {
+                                         if (errorCodeNum == nil || [errorCodeNum isEqual:[NSNull null]]) {
                                              return ;
                                          }
                                          
-                                         NSDictionary *dataDic = responseDic[NETWORK_OK_DATA];
-                                         NSArray *list = dataDic[@"list"];
-                                         NSNumber *count = dataDic[@"count"];
-                                         NSMutableArray *resultList = [[NSMutableArray alloc] initWithCapacity:[count integerValue]];
-                                         for (NSDictionary *dic in list) {
-                                             ESTaskComment *task = [[ESTaskComment alloc] initWithDic:dic];
-                                             [resultList addObject:task];
+                                         NSInteger errorCode = [errorCodeNum integerValue];
+                                         if (errorCode == 0) {
+                                             NSDictionary *dataDic = responseDic[NETWORK_OK_DATA];
+                                             NSArray *list = dataDic[@"list"];
+                                             NSNumber *count = dataDic[@"count"];
+                                             NSMutableArray *resultList = [[NSMutableArray alloc] initWithCapacity:[count integerValue]];
+                                             for (NSDictionary *dic in list) {
+                                                 ESTaskComment *task = [[ESTaskComment alloc] initWithDic:dic];
+                                                 [resultList addObject:task];
+                                             }
+                                             
+                                             [self.delegate getTaskCommentListSuccess:resultList];
+                                         } else {
+                                             [self.delegate getTaskCommentListFailure:nil];
                                          }
-                                         
-                                         [self.delegate getTaskCommentListSuccess:resultList];
                                      } failure:^(NSError *error) {
-                                         ;
+                                         [self.delegate getTaskCommentListFailure:nil];
+                                         NSLog(@"%@",[error debugDescription]);
                                      }];
 }
 

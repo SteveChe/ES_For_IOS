@@ -19,24 +19,29 @@
                                    type:taskListType
                                 success:^(id response) {
                                     NSDictionary *responseDic = (NSDictionary *)response;
-//                                    NSLog(@"%@",response);
                                     NSNumber* errorCodeNum = [responseDic valueForKey:NETWORK_ERROR_CODE];
-                                    if (errorCodeNum == nil || [errorCodeNum isEqual:[NSNull null]] )
-                                    {
+                                    if (errorCodeNum == nil || [errorCodeNum isEqual:[NSNull null]]) {
+                                        [self.delegate getTaskListFailure:nil];
                                         return ;
                                     }
                                     
-                                    NSDictionary *dataDic = responseDic[NETWORK_OK_DATA];
-                                    NSArray *list = dataDic[@"list"];
-                                    NSNumber *count = dataDic[@"count"];
-                                    NSMutableArray *resultList = [[NSMutableArray alloc] initWithCapacity:[count integerValue]];
-                                    for (NSDictionary *dic in list) {
-                                        ESTask *task = [[ESTask alloc] initWithDic:dic];
-                                        [resultList addObject:task];
+                                    NSInteger errorCode = [errorCodeNum integerValue];
+                                    if (errorCode == 0) {
+                                        NSDictionary *dataDic = responseDic[NETWORK_OK_DATA];
+                                        NSArray *list = dataDic[@"list"];
+                                        NSNumber *count = dataDic[@"count"];
+                                        NSMutableArray *resultList = [[NSMutableArray alloc] initWithCapacity:[count integerValue]];
+                                        for (NSDictionary *dic in list) {
+                                            ESTask *task = [[ESTask alloc] initWithDic:dic];
+                                            [resultList addObject:task];
+                                        }
+                                        
+                                        [self.delegate getTaskListSuccess:resultList];
+                                    } else {
+                                        [self.delegate getTaskListFailure:nil];
                                     }
-                                    
-                                    [self.delegate getTaskListSuccess:resultList];
                                 } failure:^(NSError *error) {
+                                    [self.delegate getTaskListFailure:nil];
                                     NSLog(@"%@",[error description]);
                                 }];
 }

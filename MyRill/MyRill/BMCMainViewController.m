@@ -13,6 +13,7 @@
 #import "ColorHandler.h"
 #import "BMCEmergencyDetailViewController.h"
 #import "BMCLoginViewController.h"
+#import "EventVO.h"
 
 @interface BMCMainViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate, BMCGetEmergencyListDelegate>
 
@@ -48,11 +49,12 @@
     self.displayController.searchResultsDelegate=self;
     self.displayController.searchResultsDataSource = self;
     self.displayController.searchResultsTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.displayController.searchResultsTableView registerNib:[UINib nibWithNibName:@"BMCEmergencyTableViewCell" bundle:nil] forCellReuseIdentifier:@"BMCEmergencyTableViewCell"];
+    [self.displayController.searchResultsTableView registerNib:[UINib nibWithNibName:@"BMCEmergencyTableViewCell" bundle:nil]
+                                        forCellReuseIdentifier:@"BMCEmergencyTableViewCell"];
     self.displayController.searchResultsTableView.backgroundColor = [ColorHandler colorFromHexRGB:@"F5F5F5"];
     
-    UINib *emergenceTableCell = [UINib nibWithNibName:@"BMCEmergencyTableViewCell" bundle:nil];
-    [self.warningTableView registerNib:emergenceTableCell forCellReuseIdentifier:@"BMCEmergencyTableViewCell"];
+    [self.warningTableView registerNib:[UINib nibWithNibName:@"BMCEmergencyTableViewCell" bundle:nil]
+                forCellReuseIdentifier:@"BMCEmergencyTableViewCell"];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -106,7 +108,16 @@
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
     BMCEmergencyTableViewCell *cell = (BMCEmergencyTableViewCell *)self.prototypeCell;
     
+    if ([tableView isEqual:self.displayController.searchResultsTableView]) {
+        EventVO *eventVO = (EventVO *)self.searchResultDataSource[indexPath.row];
+        cell.warningLbl.text = eventVO.name;
+    } else {
+        EventVO *eventVO = (EventVO *)self.warningDataSource[indexPath.row];
+        cell.warningLbl.text = eventVO.name;
+    }
+    
     if ([cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height > 0) {
+        NSLog(@"%f",cell.contentView.bounds.size.height);
         return [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height + 1;
     } else {
         return 144.f;

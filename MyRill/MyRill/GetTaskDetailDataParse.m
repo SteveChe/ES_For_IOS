@@ -17,16 +17,21 @@
                                 success:^(id response) {
                                     NSDictionary *responseDic = (NSDictionary *)response;
                                     NSNumber* errorCodeNum = [responseDic valueForKey:NETWORK_ERROR_CODE];
-                                    if (errorCodeNum == nil || [errorCodeNum isEqual:[NSNull null]] )
-                                    {
-                                        return ;
+                                    if (errorCodeNum == nil || [errorCodeNum isEqual:[NSNull null]]) {
+                                        [self.delegate getTaskDetailFailure:nil];
+                                        return;
                                     }
                                     
-                                    NSDictionary *dataDic = responseDic[NETWORK_OK_DATA];
-                                    ESTask *task = [[ESTask alloc] initWithDic:dataDic];
-                                    
-                                    [self.delegate getTaskDetailSuccess:task];
+                                    NSInteger errorCode = [errorCodeNum integerValue];
+                                    if (errorCode == 0) {
+                                        NSDictionary *dataDic = responseDic[NETWORK_OK_DATA];
+                                        ESTask *task = [[ESTask alloc] initWithDic:dataDic];
+                                        [self.delegate getTaskDetailSuccess:task];
+                                    } else {
+                                        [self.delegate getTaskDetailFailure:nil];
+                                    }
                                 } failure:^(NSError *error) {
+                                    [self.delegate getTaskDetailFailure:nil];
                                     NSLog(@"%@",[error debugDescription]);
                                 }];
 }

@@ -22,19 +22,22 @@
                                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                     NSDictionary *reponseDic = (NSDictionary *)responseObject;
                                     NSNumber* errorCodeNum = [reponseDic valueForKey:NETWORK_ERROR_CODE];
-                                    if (errorCodeNum == nil || [errorCodeNum isEqual:[NSNull null]] )
-                                    {
+                                    if (errorCodeNum == nil || [errorCodeNum isEqual:[NSNull null]]) {
+                                        [self.delegate sendTaskImageFailure:nil];
                                         return ;
                                     }
                                     
-                                    NSDictionary *dataDic = reponseDic[NETWORK_OK_DATA];
-                                    ESImage *image = [[ESImage alloc] initWithDic:dataDic];
+                                    NSInteger errorCode = [errorCodeNum integerValue];
+                                    if (errorCode == 0) {
+                                        NSDictionary *dataDic = reponseDic[NETWORK_OK_DATA];
+                                        ESImage *image = [[ESImage alloc] initWithDic:dataDic];
+                                        [self.delegate sendTaskImageSuccess:image];
+                                    } else {
+                                        [self.delegate sendTaskImageFailure:nil];
+                                    }
                                     
-                                    [self.delegate sendTaskImageSuccess:image];
-                                    NSString* errorMessage = [reponseDic valueForKey:NETWORK_ERROR_MESSAGE];
-                                    if(errorMessage==nil)
-                                        return;
                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                    [self.delegate sendTaskImageFailure:nil];
                                     NSLog(@"Error: %@", error);
                                 }];
 }

@@ -13,6 +13,7 @@
 @protocol TaskListDelegate <NSObject>
 
 - (void)getTaskListSuccess:(NSArray *)taskList;
+- (void)getTaskListFailure:(NSString *)errorMsg;
 
 @end
 

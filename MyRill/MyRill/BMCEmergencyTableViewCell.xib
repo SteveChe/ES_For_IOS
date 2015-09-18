@@ -45,14 +45,14 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qMK-uE-Dup" userLabel="Split Line">
-                        <rect key="frame" x="20" y="54" width="355" height="1"/>
+                        <rect key="frame" x="20" y="54" width="369" height="1"/>
                         <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="98b-Ga-KO8"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kvb-cn-gdH" userLabel="Split Line">
-                        <rect key="frame" x="14" y="99" width="375" height="1"/>
+                        <rect key="frame" x="20" y="99" width="369" height="1"/>
                         <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="R7E-4c-vdr"/>
@@ -66,7 +66,7 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="qMK-uE-Dup" secondAttribute="trailing" constant="14" id="0T9-TA-3Cz"/>
+                    <constraint firstAttribute="trailing" secondItem="qMK-uE-Dup" secondAttribute="trailing" id="0T9-TA-3Cz"/>
                     <constraint firstItem="qsF-A2-4rS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" symbolic="YES" id="Bbf-cf-djD"/>
                     <constraint firstAttribute="trailing" secondItem="5Te-ja-rmw" secondAttribute="trailing" constant="20" symbolic="YES" id="CG5-Ti-srp"/>
                     <constraint firstItem="5Te-ja-rmw" firstAttribute="centerY" secondItem="S2V-Be-ecJ" secondAttribute="centerY" id="Fm3-J1-yS6"/>
@@ -74,7 +74,7 @@
                     <constraint firstItem="5Te-ja-rmw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="S2V-Be-ecJ" secondAttribute="trailing" constant="20" id="M6l-tc-XJG"/>
                     <constraint firstItem="c6m-Zh-qkm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" symbolic="YES" id="V4P-1t-HoR"/>
                     <constraint firstItem="5Te-ja-rmw" firstAttribute="top" secondItem="Kvb-cn-gdH" secondAttribute="bottom" constant="12" id="e38-DY-bzr"/>
-                    <constraint firstItem="Kvb-cn-gdH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="14" id="fXd-ul-Yns"/>
+                    <constraint firstItem="Kvb-cn-gdH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" symbolic="YES" id="fXd-ul-Yns"/>
                     <constraint firstItem="ce9-na-MdG" firstAttribute="top" secondItem="qMK-uE-Dup" secondAttribute="bottom" constant="12" id="hDk-pp-oXT"/>
                     <constraint firstItem="S2V-Be-ecJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" symbolic="YES" id="hPW-G3-DFL"/>
                     <constraint firstItem="qsF-A2-4rS" firstAttribute="top" secondItem="qMK-uE-Dup" secondAttribute="bottom" constant="12" id="hW7-Jp-pxO"/>

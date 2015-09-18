@@ -11,6 +11,7 @@
 @protocol GetTaskCommentListDelegate <NSObject>
 
 - (void)getTaskCommentListSuccess:(NSArray *)taskCommentList;
+- (void)getTaskCommentListFailure:(NSString *)errorMsg;
 
 @end
 

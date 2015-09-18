@@ -12,6 +12,7 @@
 @protocol GetTaskDetailDelegate <NSObject>
 
 - (void)getTaskDetailSuccess:(ESTask *)task;
+- (void)getTaskDetailFailure:(NSString *)errorMsg;
 
 @end
 

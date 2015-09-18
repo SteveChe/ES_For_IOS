@@ -21,6 +21,7 @@
 #import "TaskViewController.h"
 #import "ESTask.h"
 #import "PushDefine.h"
+#import "CustomShowMessage.h"
 
 @interface TaskOverviewViewController () <UISearchBarDelegate, UISearchDisplayDelegate, UITableViewDataSource, UITableViewDelegate, TaskDashboardDelegate, TaskListDelegate>
 
@@ -78,10 +79,6 @@
     [self.searchDisplayVC.searchResultsTableView registerNib:[UINib nibWithNibName:@"TaskListTableViewCell" bundle:nil] forCellReuseIdentifier:@"TaskListTableViewCell"];
 }
 
-//- (void)searchDisplayControllerDidEndSearch:(UISearchDisplayController *)controller {
-//    controller.searchBar.frame = CGRectMake(0, 0, self.view.bounds.size.width, 44);
-//}
-
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     
@@ -109,6 +106,7 @@
                                                   object:nil];
 }
 
+#pragma mark - TaskDashboardDelegate methods
 - (void)getTaskDashboardSuccess:(ESTaskDashboard *)taskDashboard {
     self.openTaskLbl.text = [taskDashboard.openTask.num stringValue];
     self.closedTaskLbl.text = [taskDashboard.closedTask.num stringValue];
@@ -138,10 +136,19 @@
     [self.tableView reloadData];
 }
 
+- (void)getTaskDashboardFailure:(NSString *)errorMsg {
+    [[CustomShowMessage getInstance] showNotificationMessage:@"获取任务信息失败!"];
+}
+
+#pragma mark - TaskListDelegate methods
 - (void)getTaskListSuccess:(NSArray *)taskList {
     [self.searchResultDataSource removeAllObjects];
     [self.searchResultDataSource addObjectsFromArray:taskList];
     [self.searchDisplayController.searchResultsTableView reloadData];
+}
+
+- (void)getTaskListFailure:(NSString *)errorMsg {
+    [[CustomShowMessage getInstance] showNotificationMessage:@"搜索任务失败!"];
 }
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString{

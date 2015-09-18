@@ -11,6 +11,8 @@
 
 @interface BMCEmergencyTableViewCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *warningLbl;
+
 - (void)updateBMCEmergencyCell:(EventVO *)eventVO;
 
 @end

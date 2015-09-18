@@ -17,6 +17,7 @@
 #import "ESTask.h"
 #import "Masonry.h"
 #import "PushDefine.h"
+#import "CustomShowMessage.h"
 
 @interface TaskListViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate, TaskListDelegate, SWTableViewCellDelegate>
 
@@ -89,6 +90,7 @@
                                                   object:nil];
 }
 
+#pragma mark - TaskListDelegate methods
 - (void)getTaskListSuccess:(NSArray *)taskList {
     if (taskList.count) {
         self.tableView.hidden = NO;
@@ -107,12 +109,12 @@
     [self.tableView reloadData];
 }
 
+- (void)getTaskListFailure:(NSString *)errorMsg {
+    [[CustomShowMessage getInstance] showNotificationMessage:@"请求任务列表信息失败!"];
+}
+
 #pragma mark - UITableViewDataSource&UITableViewDelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-//    if (self.type == ESTaskListWithChatId) {
-//        return 2;
-//    }
-    
     return 1;
 }
 
