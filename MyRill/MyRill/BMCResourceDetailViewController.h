@@ -1,5 +1,5 @@
 //
-//  BMCEmergencyDetailViewController.h
+//  BMCResourceDetailViewController.h
 //  MyRill
 //
 //  Created by Siyuan Wang on 15/9/17.
@@ -10,9 +10,8 @@
 #import "ESViewController.h"
 @class EventVO;
 
-@interface BMCEmergencyDetailViewController : ESViewController
+@interface BMCResourceDetailViewController : ESViewController
 
-@property (nonatomic, copy) NSString *resId;     //
 @property (nonatomic, strong) EventVO *eventVO;
 
 @end

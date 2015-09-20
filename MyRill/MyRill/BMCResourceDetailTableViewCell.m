@@ -1,14 +1,14 @@
 //
-//  BMCEmergencyDetailTableViewCell.m
+//  BMCResourceDetailTableViewCell.m
 //  MyRill
 //
 //  Created by Siyuan Wang on 15/9/17.
 //
 //
 
-#import "BMCEmergencyDetailTableViewCell.h"
+#import "BMCResourceDetailTableViewCell.h"
 
-@implementation BMCEmergencyDetailTableViewCell
+@implementation BMCResourceDetailTableViewCell
 
 - (void)awakeFromNib {
     // Initialization code

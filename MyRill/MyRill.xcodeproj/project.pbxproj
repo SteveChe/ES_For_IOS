@@ -84,9 +84,15 @@
 		2B6038871B79C6A4005B721F /* TaskContactorCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B6038851B79C6A4005B721F /* TaskContactorCollectionViewCell.xib */; };
 		2B7FB8171B56AA5D00DA456E /* ProfessionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B7FB8151B56AA5D00DA456E /* ProfessionTableViewCell.m */; };
 		2B7FB8181B56AA5D00DA456E /* ProfessionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B7FB8161B56AA5D00DA456E /* ProfessionTableViewCell.xib */; };
-		2B93E9241BAA66A20026EB39 /* BMCEmergencyDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B93E9231BAA66A20026EB39 /* BMCEmergencyDetailViewController.m */; };
-		2B93E9281BAA92DE0026EB39 /* BMCEmergencyDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B93E9261BAA92DE0026EB39 /* BMCEmergencyDetailTableViewCell.m */; };
-		2B93E9291BAA92DE0026EB39 /* BMCEmergencyDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B93E9271BAA92DE0026EB39 /* BMCEmergencyDetailTableViewCell.xib */; };
+		2B93E9241BAA66A20026EB39 /* BMCResourceDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B93E9231BAA66A20026EB39 /* BMCResourceDetailViewController.m */; };
+		2B93E9281BAA92DE0026EB39 /* BMCResourceDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B93E9261BAA92DE0026EB39 /* BMCResourceDetailTableViewCell.m */; };
+		2B93E9291BAA92DE0026EB39 /* BMCResourceDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B93E9271BAA92DE0026EB39 /* BMCResourceDetailTableViewCell.xib */; };
+		2B93E92C1BAD3EF30026EB39 /* BMCGetResourceDetailDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B93E92B1BAD3EF30026EB39 /* BMCGetResourceDetailDataParse.m */; };
+		2B93E92F1BAD46150026EB39 /* BMCGetResourceMetricListDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B93E92E1BAD46150026EB39 /* BMCGetResourceMetricListDataParse.m */; };
+		2B93E9321BAD50360026EB39 /* BMCGetSubResourceMetricListDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B93E9311BAD50360026EB39 /* BMCGetSubResourceMetricListDataParse.m */; };
+		2B93E9351BAD65EE0026EB39 /* BMCSubResourceDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B93E9341BAD65EE0026EB39 /* BMCSubResourceDetailViewController.m */; };
+		2B93E9371BAD675B0026EB39 /* BMCResourceDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B93E9361BAD675B0026EB39 /* BMCResourceDetailViewController.xib */; };
+		2B93E93A1BAD6E320026EB39 /* LogSummaryEventAlarmPojo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B93E9391BAD6E320026EB39 /* LogSummaryEventAlarmPojo.m */; };
 		2B9CBB5B1B39AA43007D7A45 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		2B9CBB611B3ADEC4007D7A45 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		2B9CBB621B3ADEC4007D7A45 /* (null) in Resources */ = {isa = PBXBuildFile; };
@@ -498,14 +504,26 @@
 		2B6038831B79C6A4005B721F /* TaskContactorCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskContactorCollectionViewCell.h; sourceTree = "<group>"; };
 		2B6038841B79C6A4005B721F /* TaskContactorCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskContactorCollectionViewCell.m; sourceTree = "<group>"; };
 		2B6038851B79C6A4005B721F /* TaskContactorCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskContactorCollectionViewCell.xib; sourceTree = "<group>"; };
+		2B7490651BAEE6AB001FC395 /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
 		2B7FB8141B56AA5D00DA456E /* ProfessionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfessionTableViewCell.h; sourceTree = "<group>"; };
 		2B7FB8151B56AA5D00DA456E /* ProfessionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfessionTableViewCell.m; sourceTree = "<group>"; };
 		2B7FB8161B56AA5D00DA456E /* ProfessionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfessionTableViewCell.xib; sourceTree = "<group>"; };
-		2B93E9221BAA66A20026EB39 /* BMCEmergencyDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMCEmergencyDetailViewController.h; sourceTree = "<group>"; };
-		2B93E9231BAA66A20026EB39 /* BMCEmergencyDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMCEmergencyDetailViewController.m; sourceTree = "<group>"; };
-		2B93E9251BAA92DE0026EB39 /* BMCEmergencyDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMCEmergencyDetailTableViewCell.h; sourceTree = "<group>"; };
-		2B93E9261BAA92DE0026EB39 /* BMCEmergencyDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMCEmergencyDetailTableViewCell.m; sourceTree = "<group>"; };
-		2B93E9271BAA92DE0026EB39 /* BMCEmergencyDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BMCEmergencyDetailTableViewCell.xib; sourceTree = "<group>"; };
+		2B93E9221BAA66A20026EB39 /* BMCResourceDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMCResourceDetailViewController.h; sourceTree = "<group>"; };
+		2B93E9231BAA66A20026EB39 /* BMCResourceDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMCResourceDetailViewController.m; sourceTree = "<group>"; };
+		2B93E9251BAA92DE0026EB39 /* BMCResourceDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMCResourceDetailTableViewCell.h; sourceTree = "<group>"; };
+		2B93E9261BAA92DE0026EB39 /* BMCResourceDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMCResourceDetailTableViewCell.m; sourceTree = "<group>"; };
+		2B93E9271BAA92DE0026EB39 /* BMCResourceDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BMCResourceDetailTableViewCell.xib; sourceTree = "<group>"; };
+		2B93E92A1BAD3EF30026EB39 /* BMCGetResourceDetailDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMCGetResourceDetailDataParse.h; sourceTree = "<group>"; };
+		2B93E92B1BAD3EF30026EB39 /* BMCGetResourceDetailDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMCGetResourceDetailDataParse.m; sourceTree = "<group>"; };
+		2B93E92D1BAD46150026EB39 /* BMCGetResourceMetricListDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMCGetResourceMetricListDataParse.h; sourceTree = "<group>"; };
+		2B93E92E1BAD46150026EB39 /* BMCGetResourceMetricListDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMCGetResourceMetricListDataParse.m; sourceTree = "<group>"; };
+		2B93E9301BAD50360026EB39 /* BMCGetSubResourceMetricListDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMCGetSubResourceMetricListDataParse.h; sourceTree = "<group>"; };
+		2B93E9311BAD50360026EB39 /* BMCGetSubResourceMetricListDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMCGetSubResourceMetricListDataParse.m; sourceTree = "<group>"; };
+		2B93E9331BAD65EE0026EB39 /* BMCSubResourceDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMCSubResourceDetailViewController.h; sourceTree = "<group>"; };
+		2B93E9341BAD65EE0026EB39 /* BMCSubResourceDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMCSubResourceDetailViewController.m; sourceTree = "<group>"; };
+		2B93E9361BAD675B0026EB39 /* BMCResourceDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BMCResourceDetailViewController.xib; sourceTree = "<group>"; };
+		2B93E9381BAD6E320026EB39 /* LogSummaryEventAlarmPojo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogSummaryEventAlarmPojo.h; sourceTree = "<group>"; };
+		2B93E9391BAD6E320026EB39 /* LogSummaryEventAlarmPojo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogSummaryEventAlarmPojo.m; sourceTree = "<group>"; };
 		2B9CBB681B42D897007D7A45 /* UserMsgViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserMsgViewController.xib; sourceTree = "<group>"; };
 		2B9CBB6A1B4571D0007D7A45 /* SignOutDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignOutDataParse.h; sourceTree = "<group>"; };
 		2B9CBB6B1B4571D0007D7A45 /* SignOutDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignOutDataParse.m; sourceTree = "<group>"; };
@@ -893,7 +911,6 @@
 		F2C26E9F1B9C884D00DAACE7 /* Emoji.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Emoji.plist; sourceTree = "<group>"; };
 		F2C26EA21B9DB93D00DAACE7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/RongCloudKit.strings; sourceTree = "<group>"; };
 		F2D233551B31AA1200F8C65D /* libPushSDK-1.8.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPushSDK-1.8.3.a"; path = "MyRill/JPush/libPushSDK-1.8.3.a"; sourceTree = "<group>"; };
-		F2D233581B31AA3A00F8C65D /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APService.h; path = JPush/APService.h; sourceTree = "<group>"; };
 		F2D233591B31AE2800F8C65D /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		F2D2335B1B31AE4D00F8C65D /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		F2D2335D1B31B1F400F8C65D /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PushConfig.plist; path = Resource/Property/PushConfig.plist; sourceTree = "<group>"; };
@@ -1001,6 +1018,12 @@
 				2BEEE6F01BA6B150008D4DF3 /* BMCGetEmergencyListDataParse.m */,
 				2B2B84AF1BA044370043EFD4 /* BMCGetMainResourceListDataParse.h */,
 				2B2B84B01BA044370043EFD4 /* BMCGetMainResourceListDataParse.m */,
+				2B93E92A1BAD3EF30026EB39 /* BMCGetResourceDetailDataParse.h */,
+				2B93E92B1BAD3EF30026EB39 /* BMCGetResourceDetailDataParse.m */,
+				2B93E92D1BAD46150026EB39 /* BMCGetResourceMetricListDataParse.h */,
+				2B93E92E1BAD46150026EB39 /* BMCGetResourceMetricListDataParse.m */,
+				2B93E9301BAD50360026EB39 /* BMCGetSubResourceMetricListDataParse.h */,
+				2B93E9311BAD50360026EB39 /* BMCGetSubResourceMetricListDataParse.m */,
 			);
 			name = BMC;
 			sourceTree = "<group>";
@@ -1031,8 +1054,11 @@
 				2B2B84B51BA1536C0043EFD4 /* BMCMainViewController.h */,
 				2B2B84B61BA1536C0043EFD4 /* BMCMainViewController.m */,
 				2B2B84B71BA1536C0043EFD4 /* BMCMainViewController.xib */,
-				2B93E9221BAA66A20026EB39 /* BMCEmergencyDetailViewController.h */,
-				2B93E9231BAA66A20026EB39 /* BMCEmergencyDetailViewController.m */,
+				2B93E9221BAA66A20026EB39 /* BMCResourceDetailViewController.h */,
+				2B93E9231BAA66A20026EB39 /* BMCResourceDetailViewController.m */,
+				2B93E9361BAD675B0026EB39 /* BMCResourceDetailViewController.xib */,
+				2B93E9331BAD65EE0026EB39 /* BMCSubResourceDetailViewController.h */,
+				2B93E9341BAD65EE0026EB39 /* BMCSubResourceDetailViewController.m */,
 			);
 			name = BMC;
 			sourceTree = "<group>";
@@ -1064,6 +1090,8 @@
 				2B2B84BC1BA1692B0043EFD4 /* ResVO.m */,
 				2BEEE6F21BA6BAA4008D4DF3 /* EventVO.h */,
 				2BEEE6F31BA6BAA4008D4DF3 /* EventVO.m */,
+				2B93E9381BAD6E320026EB39 /* LogSummaryEventAlarmPojo.h */,
+				2B93E9391BAD6E320026EB39 /* LogSummaryEventAlarmPojo.m */,
 			);
 			name = BMC;
 			sourceTree = "<group>";
@@ -1667,9 +1695,9 @@
 				2BEEE6F61BA6C9EB008D4DF3 /* BMCEmergencyTableViewCell.h */,
 				2BEEE6F71BA6C9EB008D4DF3 /* BMCEmergencyTableViewCell.m */,
 				2BEEE6F81BA6C9EB008D4DF3 /* BMCEmergencyTableViewCell.xib */,
-				2B93E9251BAA92DE0026EB39 /* BMCEmergencyDetailTableViewCell.h */,
-				2B93E9261BAA92DE0026EB39 /* BMCEmergencyDetailTableViewCell.m */,
-				2B93E9271BAA92DE0026EB39 /* BMCEmergencyDetailTableViewCell.xib */,
+				2B93E9251BAA92DE0026EB39 /* BMCResourceDetailTableViewCell.h */,
+				2B93E9261BAA92DE0026EB39 /* BMCResourceDetailTableViewCell.m */,
+				2B93E9271BAA92DE0026EB39 /* BMCResourceDetailTableViewCell.xib */,
 			);
 			name = BMC;
 			sourceTree = "<group>";
@@ -2048,7 +2076,7 @@
 		F2D233571B31AA2600F8C65D /* JPush */ = {
 			isa = PBXGroup;
 			children = (
-				F2D233581B31AA3A00F8C65D /* APService.h */,
+				2B7490651BAEE6AB001FC395 /* APService.h */,
 			);
 			name = JPush;
 			sourceTree = "<group>";
@@ -2167,7 +2195,7 @@
 				F2467EFC1B8DCF1F0055B78B /* RootTimeCell.xib in Resources */,
 				F2467EF31B8DCF1F0055B78B /* RootCardTopCell.xib in Resources */,
 				F2D2335E1B31B1F400F8C65D /* PushConfig.plist in Resources */,
-				2B93E9291BAA92DE0026EB39 /* BMCEmergencyDetailTableViewCell.xib in Resources */,
+				2B93E9291BAA92DE0026EB39 /* BMCResourceDetailTableViewCell.xib in Resources */,
 				2BC227811B94578600E3163A /* ImageTableViewCell.xib in Resources */,
 				F2C26EA31B9DB93D00DAACE7 /* RongCloudKit.strings in Resources */,
 				2BC227751B942A3600E3163A /* ELCAssetTablePicker.xib in Resources */,
@@ -2195,6 +2223,7 @@
 				F2467EFE1B8DCF1F0055B78B /* RootViewController.xib in Resources */,
 				F2467EF81B8DCF1F0055B78B /* RootIncomeChatCell.xib in Resources */,
 				F2467EFA1B8DCF1F0055B78B /* RootOutChatCell.xib in Resources */,
+				2B93E9371BAD675B0026EB39 /* BMCResourceDetailViewController.xib in Resources */,
 				2B31C3E01B11C3FD004C865A /* Images.xcassets in Resources */,
 				2BEAD0891B775C4500905E21 /* MessageListTableViewCell.xib in Resources */,
 				2BEAD0791B77195300905E21 /* RemindDateTableViewCell.xib in Resources */,
@@ -2274,6 +2303,7 @@
 				2B9CBB5B1B39AA43007D7A45 /* (null) in Sources */,
 				2BC227721B942A3600E3163A /* ELCOverlayImageView.m in Sources */,
 				F29F86481B2410320058FC9F /* UIProgressView+AFNetworking.m in Sources */,
+				2B93E9321BAD50360026EB39 /* BMCGetSubResourceMetricListDataParse.m in Sources */,
 				2B5A59181B48DFBB000382D7 /* MRMessageInterceptor.m in Sources */,
 				F22FE2781B3AD87800A1A997 /* KxMenu.m in Sources */,
 				2BEAD0511B74F37C00905E21 /* AddTaskViewController.m in Sources */,
@@ -2314,6 +2344,7 @@
 				F2467EF41B8DCF1F0055B78B /* RootFunctionView.m in Sources */,
 				2B1B88E11B803BA900FAF650 /* ChangeUserMsgDataParse.m in Sources */,
 				F2467EFD1B8DCF1F0055B78B /* RootViewController.m in Sources */,
+				2B93E92C1BAD3EF30026EB39 /* BMCGetResourceDetailDataParse.m in Sources */,
 				F2F397741B77AC50006FAE3B /* ESEnterpriseMessage.m in Sources */,
 				2BEBBD8C1B67AFA7008BE7C4 /* GetTaskListDataParse.m in Sources */,
 				F29F862D1B2410070058FC9F /* AFURLConnectionOperation.m in Sources */,
@@ -2361,6 +2392,7 @@
 				F2735FBA1B710C2C00138080 /* RCDSearchEnterpriseViewController.m in Sources */,
 				F22FE2821B3ADB6000A1A997 /* ChatViewController.m in Sources */,
 				F23059C61B56ADE3004599FA /* ESUserDetailInfo.m in Sources */,
+				2B93E92F1BAD46150026EB39 /* BMCGetResourceMetricListDataParse.m in Sources */,
 				F22FE2A71B3FFAC200A1A997 /* RCDAddressBookViewController.m in Sources */,
 				2BE2FFFD1B837DEE0006EB99 /* GetTaskDetailDataParse.m in Sources */,
 				F22FE2E61B4000ED00A1A997 /* SDImageCache.m in Sources */,
@@ -2388,7 +2420,7 @@
 				2BC8212F1B57FFDC0090E2C1 /* ProfessionWebViewController.m in Sources */,
 				2B1B88EA1B803D0C00FAF650 /* UserDescriptionChangeViewController.m in Sources */,
 				F256CB831B6E5921009478C2 /* RCDApprovedJoinEnterpriseViewController.m in Sources */,
-				2B93E9241BAA66A20026EB39 /* BMCEmergencyDetailViewController.m in Sources */,
+				2B93E9241BAA66A20026EB39 /* BMCResourceDetailViewController.m in Sources */,
 				2B39C93C1B241212007BAC7A /* MASViewConstraint.m in Sources */,
 				F2F92EFF1B5020CC0047D7BF /* GetPhoneContactListDataParse.m in Sources */,
 				2B5A590F1B48DFBB000382D7 /* MRCircularProgressView.m in Sources */,
@@ -2407,9 +2439,10 @@
 				2BE55A081B647324008CDB4B /* TaskOverviewTableViewCell.m in Sources */,
 				F234616E1B5AA0FD00C88FAC /* FMDatabase.m in Sources */,
 				2B39C9371B241212007BAC7A /* MASCompositeConstraint.m in Sources */,
+				2B93E93A1BAD6E320026EB39 /* LogSummaryEventAlarmPojo.m in Sources */,
 				F22FE27B1B3AD94200A1A997 /* UIColor+RCColor.m in Sources */,
 				F29F862C1B2410070058FC9F /* AFSecurityPolicy.m in Sources */,
-				2B93E9281BAA92DE0026EB39 /* BMCEmergencyDetailTableViewCell.m in Sources */,
+				2B93E9281BAA92DE0026EB39 /* BMCResourceDetailTableViewCell.m in Sources */,
 				F23630801B6663A100A12F63 /* MKNumberBadgeView.m in Sources */,
 				F29F86491B2410320058FC9F /* UIRefreshControl+AFNetworking.m in Sources */,
 				2B5A59121B48DFBB000382D7 /* MRProgressOverlayView.m in Sources */,
@@ -2455,6 +2488,7 @@
 				2B31C3D81B11C3FD004C865A /* AppDelegate.m in Sources */,
 				F2F397751B77AC50006FAE3B /* ESEnterpriseMessageContent.m in Sources */,
 				F24787751B2D775E00EC266B /* SignUpDataParse.m in Sources */,
+				2B93E9351BAD65EE0026EB39 /* BMCSubResourceDetailViewController.m in Sources */,
 				F277AE0D1B2DD066006E42CB /* UIPageNavigator.m in Sources */,
 				F22FE2FF1B42DAF600A1A997 /* AddContactDataParse.m in Sources */,
 				2BCCADDF1BA85A0B00DB4859 /* GetProfessionDataParse.m in Sources */,

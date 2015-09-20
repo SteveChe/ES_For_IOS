@@ -1155,6 +1155,42 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
                           failure:failure];
 }
 
++ (void)getResourceDetailWithResType:(NSString *)resType
+                              sucess:(void (^)(id response))success
+                             failure:(void (^)(NSError* err))failure {
+    NSDictionary *param = @{@"resType":resType};
+    
+    [AFHttpTool requestWithMethod:RequestMethodTypePost
+                              url:@"res/getResInstanceList.json"
+                           params:param
+                          success:success
+                          failure:failure];
+}
+
++ (void)getResourceMetricListWithResId:(NSString *)resId
+                                sucess:(void (^)(id))success
+                               failure:(void (^)(NSError *))failure {
+    NSDictionary *param = @{@"resId":resId};
+    
+    [AFHttpTool requestWithMethod:RequestMethodTypePost
+                              url:@"res/getResMetricList.json"
+                           params:param
+                          success:success
+                          failure:failure];
+}
+
++ (void)getSubResourceMetricListWithSubResId:(NSString *)subResId
+                                      sucess:(void (^)(id response))success
+                                     failure:(void (^)(NSError* err))failure {
+    NSDictionary *param = @{@"resId":subResId};
+    
+    [AFHttpTool requestWithMethod:RequestMethodTypePost
+                              url:@"res/getSubResMetricList.json"
+                           params:param
+                          success:success
+                          failure:failure];
+}
+
 + (void)getMainResourceListWithTreeNodeId:(NSString *)treeNodeId
                                 pageIndex:(NSString *)pageIndex
                                     state:(NSString *)state

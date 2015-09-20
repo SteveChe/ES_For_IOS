@@ -11,7 +11,7 @@
 #import "BMCGetMainResourceListDataParse.h"
 #import "BMCEmergencyTableViewCell.h"
 #import "ColorHandler.h"
-#import "BMCEmergencyDetailViewController.h"
+#import "BMCResourceDetailViewController.h"
 #import "BMCLoginViewController.h"
 #import "EventVO.h"
 
@@ -125,7 +125,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    BMCEmergencyDetailViewController *bmcEmergencyDetailVC = [[BMCEmergencyDetailViewController alloc] init];
+    BMCResourceDetailViewController *bmcEmergencyDetailVC = [[BMCResourceDetailViewController alloc] init];
     bmcEmergencyDetailVC.eventVO = (EventVO *)self.warningDataSource[indexPath.row];
     [self.navigationController pushViewController:bmcEmergencyDetailVC animated:YES];
 }
