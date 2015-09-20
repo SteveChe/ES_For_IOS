@@ -57,6 +57,7 @@
     if (self.type == ESWebProfessionWithURL) {
         NSURL *url = [NSURL URLWithString:self.urlString];
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
+        [[NSURLCache sharedURLCache] removeCachedResponseForRequest:request];
         [self.professionWeb loadRequest:request];
     } else {
         [self.getProfessionDP getProfessionWithProfessionID:self.professionID];
@@ -85,6 +86,7 @@
 - (void)getProfessionSuccess:(ESProfession *)profession {
     NSURL *url = [NSURL URLWithString:profession.url];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [[NSURLCache sharedURLCache] removeCachedResponseForRequest:request];
     [self.professionWeb loadRequest:request];
 }
 
