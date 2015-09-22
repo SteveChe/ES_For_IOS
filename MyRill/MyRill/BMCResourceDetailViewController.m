@@ -69,11 +69,10 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([tableView isEqual:self.searchDisplayController.searchResultsTableView]) {
-        return 144.f;
-    }
-    
     BMCResourceDetailTableViewCell *cell = (BMCResourceDetailTableViewCell *)self.prototypeCell;
+    
+    LogSummaryEventAlarmPojo *logSummaryEventAlarmPojo = (LogSummaryEventAlarmPojo *)self.dataSource[indexPath.row];
+    cell.contentLbl.text = [ColorHandler isNullOrEmptyString:logSummaryEventAlarmPojo.metricValue] ? @"——" : logSummaryEventAlarmPojo.metricValue;
     
     if ([cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height > 0) {
         return [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height + 1;

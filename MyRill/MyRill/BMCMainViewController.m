@@ -56,6 +56,7 @@
     
     [self.warningTableView registerNib:[UINib nibWithNibName:@"BMCEmergencyTableViewCell" bundle:nil]
                 forCellReuseIdentifier:@"BMCEmergencyTableViewCell"];
+    self.warningTableView.estimatedRowHeight = 144;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -106,28 +107,25 @@
     return self.prototypeCell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if ([tableView isEqual:self.searchDisplayController.searchResultsTableView]) {
-        return 144.f;
-    }
-    
-    BMCEmergencyTableViewCell *cell = (BMCEmergencyTableViewCell *)self.prototypeCell;
-    
-    if ([tableView isEqual:self.displayController.searchResultsTableView]) {
-        EventVO *eventVO = (EventVO *)self.searchResultDataSource[indexPath.row];
-        cell.warningLbl.text = eventVO.name;
-    } else {
-        EventVO *eventVO = (EventVO *)self.warningDataSource[indexPath.row];
-        cell.warningLbl.text = eventVO.name;
-    }
-    
-    if ([cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height > 0) {
-        NSLog(@"%f",cell.contentView.bounds.size.height);
-        return [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height + 1;
-    } else {
-        return 144.f;
-    }
+//- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    
+//    
+//    
+//    BMCEmergencyTableViewCell *cell = (BMCEmergencyTableViewCell *)self.prototypeCell;
+//    
+//    EventVO *eventVO = (EventVO *)self.warningDataSource[indexPath.row];
+//    cell.warningLbl.text = eventVO.name;
+//    
+//    if ([cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height > 0) {
+//        NSLog(@"%f",cell.contentView.bounds.size.height);
+//        return [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height + 1;
+//    } else {
+//        return 144.f;
+//    }
+//}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 168.f;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -136,11 +134,11 @@
     [self.navigationController pushViewController:bmcEmergencyDetailVC animated:YES];
 }
 
--(void)searchDisplayController:(UISearchDisplayController *)controller willShowSearchResultsTableView:(UITableView *)tableView
-{
-    [tableView setContentInset:UIEdgeInsetsZero];
-    [tableView setScrollIndicatorInsets:UIEdgeInsetsZero];
-}
+//-(void)searchDisplayController:(UISearchDisplayController *)controller willShowSearchResultsTableView:(UITableView *)tableView
+//{
+//    [tableView setContentInset:UIEdgeInsetsZero];
+//    [tableView setScrollIndicatorInsets:UIEdgeInsetsZero];
+//}
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString{
     

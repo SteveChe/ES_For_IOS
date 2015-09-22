@@ -16,6 +16,8 @@
 @interface BMCSubResourceDetailViewController () <UITableViewDataSource, UITableViewDelegate, BMCGetSubResourceMetricListDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) BMCSubResourceDetailTableViewCell *prototypeCell;
+
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) BMCGetSubResourceMetricListDataParse *getSubResourceMetricListDP;
 
@@ -29,6 +31,8 @@
     
     self.title = @"子资源详情";
     [self.view addSubview:self.tableView];
+    
+    self.prototypeCell = [self.tableView dequeueReusableCellWithIdentifier:@"BMCSubResourceDetailTableViewCell"];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -54,8 +58,17 @@
     return 1;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 44.f;
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    BMCSubResourceDetailTableViewCell *cell = (BMCSubResourceDetailTableViewCell *)self.prototypeCell;
+    
+    LogSummaryEventAlarmPojo *logSummaryEventAlarmPojo = (LogSummaryEventAlarmPojo *)self.dataSource[indexPath.row];
+    cell.contentLbl.text = [ColorHandler isNullOrEmptyString:logSummaryEventAlarmPojo.metricValue] ? @"——" : logSummaryEventAlarmPojo.metricValue;
+    
+    if ([cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height > 0) {
+        return [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height + 1;
+    } else {
+        return 44.f;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -63,27 +76,30 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    self.prototypeCell  = nil;
     BMCSubResourceDetailTableViewCell *subResourceDetailCell = (BMCSubResourceDetailTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"BMCSubResourceDetailTableViewCell" forIndexPath:indexPath];
     LogSummaryEventAlarmPojo *logSummaryEventAlarmPojo = (LogSummaryEventAlarmPojo *)self.dataSource[indexPath.row];
     subResourceDetailCell.titleLbl.text = logSummaryEventAlarmPojo.metricName;
     subResourceDetailCell.contentLbl.text = [ColorHandler isNullOrEmptyString:logSummaryEventAlarmPojo.metricValue] ? @"——" : logSummaryEventAlarmPojo.metricValue;
     
+    self.prototypeCell = subResourceDetailCell;
     CALayer *layer = [CALayer layer];
-    layer.frame = CGRectMake(0, 0, subResourceDetailCell.bounds.size.width, 1);
+    layer.frame = CGRectMake(0, 0, self.prototypeCell.bounds.size.width, 1);
     layer.backgroundColor = [ColorHandler colorFromHexRGB:@"F5F5F5"].CGColor;
-    [subResourceDetailCell.layer addSublayer:layer];
-    [subResourceDetailCell layoutIfNeeded];
+    [self.prototypeCell.layer addSublayer:layer];
+    [self.prototypeCell layoutIfNeeded];
     
-    return subResourceDetailCell;
+    return self.prototypeCell;
 }
 
 #pragma mark - setters&getters
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height - 16)];
         _tableView.dataSource = self;
         _tableView.delegate = self;
         _tableView.separatorStyle = UITableViewCellSelectionStyleNone;
+        _tableView.allowsSelection = NO;
         [_tableView registerNib:[UINib nibWithNibName:@"BMCSubResourceDetailTableViewCell" bundle:nil] forCellReuseIdentifier:@"BMCSubResourceDetailTableViewCell"];
     }
     

@@ -19,8 +19,8 @@
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="——" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ia-Aa-be9">
-                        <rect key="frame" x="270" y="12.5" width="30" height="17.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="——" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ia-Aa-be9">
+                        <rect key="frame" x="270" y="12" width="30" height="19.5"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -28,10 +28,18 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="centerY" secondItem="9GR-Xb-AKc" secondAttribute="centerY" id="1kw-GH-NqQ"/>
-                    <constraint firstItem="9GR-Xb-AKc" firstAttribute="centerY" secondItem="7Ia-Aa-be9" secondAttribute="centerY" constant="0.25" id="Iwt-Zw-Rkl"/>
+                    <constraint firstItem="7Ia-Aa-be9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="5F2-dq-Whh"/>
+                    <constraint firstAttribute="bottom" secondItem="7Ia-Aa-be9" secondAttribute="bottom" constant="12" id="Dzw-Gt-kQe"/>
+                    <constraint firstItem="9GR-Xb-AKc" firstAttribute="centerY" secondItem="7Ia-Aa-be9" secondAttribute="centerY" id="Iwt-Zw-Rkl"/>
+                    <constraint firstItem="7Ia-Aa-be9" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="9GR-Xb-AKc" secondAttribute="trailing" constant="8" symbolic="YES" id="N7i-8j-wkd"/>
                     <constraint firstItem="9GR-Xb-AKc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" symbolic="YES" id="ZqF-mk-y9v"/>
                     <constraint firstAttribute="trailing" secondItem="7Ia-Aa-be9" secondAttribute="trailing" constant="20" symbolic="YES" id="gqI-64-cIn"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="Iwt-Zw-Rkl"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="contentLbl" destination="7Ia-Aa-be9" id="ssd-Tv-Fa6"/>
