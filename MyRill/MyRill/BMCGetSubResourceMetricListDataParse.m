@@ -8,6 +8,7 @@
 
 #import "BMCGetSubResourceMetricListDataParse.h"
 #import "AFHttpTool.h"
+#import "LogSummaryEventAlarmPojo.h"
 
 @implementation BMCGetSubResourceMetricListDataParse
 
@@ -20,15 +21,16 @@
                                                       NSLog(@"请求有误!");
                                                   } else {
                                                       NSArray *dataArray = (NSArray *)responseDic[@"resMetricList"];
+                                                      
+                                                      NSMutableArray *resultList = [[NSMutableArray alloc] init];
+                                                      [dataArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                                                          LogSummaryEventAlarmPojo *mainMetric = [[LogSummaryEventAlarmPojo alloc] initWithDic:obj];
+                                                          if (![mainMetric.metricName isEqualToString:@""]) {
+                                                              [resultList addObject:mainMetric];
+                                                          }
+                                                      }];
                                                    
-                                                      NSLog(@"sub:%@",dataArray);
-                                                   //                                              NSMutableArray *resultList = [[NSMutableArray alloc] init];
-                                                   //                                              [dataArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                                                   //                                                  ResVO *resVO = [[ResVO alloc] initWithDic:(NSDictionary *)obj];
-                                                   //                                                  [resultList addObject:resVO];
-                                                   //                                              }];
-                                                   
-                                                   //[self.delegate getResourceDetailSucceed:resultList];
+                                                   [self.delegate getSubResourceMetricListSucceed:resultList];
                                                   }
                                               } failure:^(NSError *err) {
                                                   ;

@@ -13,6 +13,7 @@
 #import "BMCGetResourceMetricListDataParse.h"
 #import "LogSummaryEventAlarmPojo.h"
 #import "BMCSubResourceDetailViewController.h"
+#import "CustomShowMessage.h"
 
 @interface BMCResourceDetailViewController () <UITableViewDataSource, UITableViewDelegate, BMCGetResourceMetricListDelegate>
 
@@ -49,17 +50,17 @@
 
 #pragma mark - BMCGetResourceMetricListDelegate methods
 - (void)getResourceMetricListSucceed:(NSArray *)resultList {
-    self.resourceName.text = self.eventVO.resName;
-    self.resourceIP.text = self.eventVO.ip;
-    self.resourceType.text = self.eventVO.resType;
-    
     [self.dataSource removeAllObjects];
     [self.dataSource addObjectsFromArray:resultList];
     [self.tableView reloadData];
+    
+    self.resourceName.text = self.eventVO.resName;
+    self.resourceIP.text = self.eventVO.ip;
+    self.resourceType.text = self.eventVO.resType;
 }
 
 - (void)getResourceMetricListFailed:(NSString *)errorMessage {
-    
+    [[CustomShowMessage getInstance] showNotificationMessage:@"获取主资源信息失败!"];
 }
 
 #pragma mark - UITableViewDataSource&UITableViewDelegate methods
@@ -87,7 +88,7 @@
     
     LogSummaryEventAlarmPojo *mainMetric = (LogSummaryEventAlarmPojo *)self.dataSource[indexPath.row];
     cell.titleLbl.text = mainMetric.metricName;
-    cell.contentLbl.text = mainMetric.metricValue;
+    cell.contentLbl.text = [ColorHandler isNullOrEmptyString:mainMetric.metricValue] ? @"——" : mainMetric.metricValue;
     
     self.prototypeCell = cell;
     CALayer *layer = [CALayer layer];

@@ -47,6 +47,8 @@
     
     if (taskComment.images.count > 1) {
         self.placeholderImg.image = [UIImage imageNamed:@"多张图片"];
+    } else {
+        self.placeholderImg.image = [UIImage imageNamed:@"单张图片"];
     }
 }
 

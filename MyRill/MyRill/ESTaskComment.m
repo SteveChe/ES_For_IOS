@@ -51,7 +51,7 @@
                 ESImage *image = [[ESImage alloc] initWithDic:dic];
                 [temp addObject:image];
             }
-            self.images = [NSArray arrayWithArray:temp];
+            self.images = [NSMutableArray arrayWithArray:temp];
         } else {
             self.images = nil;
         }

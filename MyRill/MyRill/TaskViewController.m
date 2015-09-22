@@ -34,6 +34,7 @@
 #import "UIImageView+WebCache.h"
 #import "UpdateObserverAndChatidDataParse.h"
 #import "ESImage.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface TaskViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, UITextFieldDelegate, UIScrollViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ELCImagePickerControllerDelegate, GetTaskDetailDelegate, GetTaskCommentListDelegate, EditTaskDelegate, UpdateObserverAndChatidDelegate, SendTaskCommenDelegate, SendTaskImageDelegate>
 
@@ -294,9 +295,8 @@
 
 #pragma mark - SendTaskCommenDelegate methods
 - (void)sendTaskCommentSuccess:(ESTaskComment *)taskComment {
-    self.cacheTaskComment = taskComment;
-    
     if ([taskComment.content isEqualToString:@""]) {
+        self.cacheTaskComment = taskComment;
         [self.sendTaskImageDP sendTaskCommentWithTaskID:[self.taskModel.taskID stringValue]
                                                 comment:taskComment
                                               imageData:[self.images firstObject]];
@@ -324,6 +324,7 @@
         [self.sendTaskImageDP sendTaskCommentWithTaskID:[self.taskModel.taskID stringValue]
                                                 comment:self.cacheTaskComment
                                               imageData:[self.images firstObject]];
+        return;
     }
     
     if (self.images.count == 0) {
@@ -336,6 +337,8 @@
                                                                   inSection:0]
                               atScrollPosition:UITableViewScrollPositionBottom
                                       animated:YES];
+        self.cacheTaskComment = nil;
+        self.imagesOld = nil;
     }
 }
 
@@ -477,7 +480,7 @@
     
     //    self.tabBarController.tabBarItem.enabled = NO;
     //    [self.tabBarController.tabBar.items makeObjectsPerformSelector:@selector(setEnabled:) withObject:@NO];
-    
+    [self.images removeAllObjects];
     NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
     
     //当选择的类型是图片
@@ -505,6 +508,8 @@
     }
     //    MRActivityIndicatorView
     // [self showTips:@"正在上传..." mode:MRProgressOverlayViewModeIndeterminateSmallDefault isDismiss:NO isSucceuss:NO];
+    [self.sendTaskCommentDP sendTaskCommentWithTaskID:[self.taskModel.taskID stringValue] comment:@" "];
+    [self showTips:@"正在上传..." mode:MRProgressOverlayViewModeIndeterminateSmallDefault isDismiss:NO isSucceuss:NO];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
@@ -1046,6 +1051,57 @@
                                                               
                                                           }
                                                           [self presentViewController:picker animated:YES completion:nil];//进入照相界面
+                                                          
+                                                          AVAuthorizationStatus authorizationStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+                                                          switch (authorizationStatus) {
+                                                              case AVAuthorizationStatusNotDetermined:
+                                                              {
+                                                                  [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo
+                                                                                           completionHandler:^(BOOL granted) {
+                                                                                               if (granted) {
+                                                                                                   //继续
+                                                                                                   //[self configQRCode];
+                                                                                               } else {
+                                                                                                   //用户拒绝，无法继续
+                                                                                                   UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"您拒绝了使用相机的授权"
+                                                                                                                                                   message:@"请在设备的'设置-隐私-相机'中允许应用访问相机。"
+                                                                                                                                                  delegate:self
+                                                                                                                                         cancelButtonTitle:@"确定"
+                                                                                                                                         otherButtonTitles:nil];
+                                                                                                   [alert show];
+                                                                                               }
+                                                                                           }];
+                                                              }
+                                                                  break;
+                                                              case AVAuthorizationStatusAuthorized:
+                                                                  // 继续
+                                                                  //[self configQRCode];
+                                                                  break;
+                                                              case AVAuthorizationStatusDenied:
+                                                                  //用户明确地拒绝授权
+                                                              {
+                                                                  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"未授权使用相机"
+                                                                                                                  message:@"请在设备的'设置-隐私-相机'中允许应用访问相机。"
+                                                                                                                 delegate:self
+                                                                                                        cancelButtonTitle:@"确定"
+                                                                                                        otherButtonTitles:nil];
+                                                                  [alert show];
+                                                              }
+                                                                  break;
+                                                              case AVAuthorizationStatusRestricted:
+                                                                  //相机设备无法访问
+                                                              {
+                                                                  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"相机设备无法访问"
+                                                                                                                  message:@"请在设备的'设置-隐私-相机'中允许应用访问相机。"
+                                                                                                                 delegate:self
+                                                                                                        cancelButtonTitle:@"确定"
+                                                                                                        otherButtonTitles:nil];
+                                                                  [alert show];
+                                                              }
+                                                                  break;
+                                                              default:
+                                                                  break;
+                                                          }
                                                       }]];
     [alertController addAction:[UIAlertAction actionWithTitle:@"从相册选取"
                                                         style:UIAlertActionStyleDefault

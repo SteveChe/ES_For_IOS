@@ -14,6 +14,7 @@
 #import "BMCResourceDetailViewController.h"
 #import "BMCLoginViewController.h"
 #import "EventVO.h"
+#import "CustomShowMessage.h"
 
 @interface BMCMainViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate, BMCGetEmergencyListDelegate>
 
@@ -42,7 +43,7 @@
     // Do any additional setup after loading the view from its nib.
     self.title = @"RIIL-BMC";
     
-    [self setAutomaticallyAdjustsScrollViewInsets:YES];
+    //[self setAutomaticallyAdjustsScrollViewInsets:YES];
     
     self.displayController = [[UISearchDisplayController alloc] initWithSearchBar:self.searchBar contentsController:self];
     self.displayController.delegate = self;
@@ -74,7 +75,7 @@
 }
 
 - (void)getEmergencyeListFailed:(NSString *)errorMessage {
-    
+    [[CustomShowMessage getInstance] showNotificationMessage:@"获取告警列表失败!"];
 }
 
 #pragma mark - UITableViewDataSource&UITableViewDelegate methods
@@ -106,6 +107,11 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if ([tableView isEqual:self.searchDisplayController.searchResultsTableView]) {
+        return 144.f;
+    }
+    
     BMCEmergencyTableViewCell *cell = (BMCEmergencyTableViewCell *)self.prototypeCell;
     
     if ([tableView isEqual:self.displayController.searchResultsTableView]) {
@@ -128,6 +134,12 @@
     BMCResourceDetailViewController *bmcEmergencyDetailVC = [[BMCResourceDetailViewController alloc] init];
     bmcEmergencyDetailVC.eventVO = (EventVO *)self.warningDataSource[indexPath.row];
     [self.navigationController pushViewController:bmcEmergencyDetailVC animated:YES];
+}
+
+-(void)searchDisplayController:(UISearchDisplayController *)controller willShowSearchResultsTableView:(UITableView *)tableView
+{
+    [tableView setContentInset:UIEdgeInsetsZero];
+    [tableView setScrollIndicatorInsets:UIEdgeInsetsZero];
 }
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString{

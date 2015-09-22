@@ -62,6 +62,6 @@
     </objects>
     <resources>
         <image name="单张图片" width="50" height="50"/>
-        <image name="头像_100" width="50" height="50"/>
+        <image name="头像_100" width="75" height="75"/>
     </resources>
 </document>

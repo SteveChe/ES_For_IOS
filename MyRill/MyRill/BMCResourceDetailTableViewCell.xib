@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -15,24 +15,28 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" text="——" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QQ1-0s-Lxk">
-                        <rect key="frame" x="270" y="12" width="30" height="19.5"/>
+                        <rect key="frame" x="252" y="12" width="30" height="19.5"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wZw-Dc-VQ7">
                         <rect key="frame" x="20" y="12" width="30" height="19"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="右箭头" translatesAutoresizingMaskIntoConstraints="NO" id="hMC-HX-UGu">
+                        <rect key="frame" x="290" y="13.5" width="10" height="17"/>
+                    </imageView>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="centerY" secondItem="hMC-HX-UGu" secondAttribute="centerY" id="DxO-At-tye"/>
                     <constraint firstAttribute="centerY" secondItem="wZw-Dc-VQ7" secondAttribute="centerY" id="KEB-XP-Mzf"/>
                     <constraint firstAttribute="bottom" secondItem="QQ1-0s-Lxk" secondAttribute="bottom" constant="12" id="KzV-v9-e6W"/>
+                    <constraint firstAttribute="trailing" secondItem="hMC-HX-UGu" secondAttribute="trailing" constant="20" symbolic="YES" id="Ncv-ki-Ikh"/>
                     <constraint firstItem="QQ1-0s-Lxk" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="wZw-Dc-VQ7" secondAttribute="trailing" constant="20" id="UPl-bq-H5I"/>
                     <constraint firstItem="QQ1-0s-Lxk" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="XTN-kV-bhg"/>
-                    <constraint firstAttribute="trailing" secondItem="QQ1-0s-Lxk" secondAttribute="trailing" constant="20" symbolic="YES" id="YDs-f1-R07"/>
+                    <constraint firstItem="hMC-HX-UGu" firstAttribute="leading" secondItem="QQ1-0s-Lxk" secondAttribute="trailing" constant="8" symbolic="YES" id="YbP-yp-EqW"/>
                     <constraint firstItem="wZw-Dc-VQ7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" symbolic="YES" id="j81-Gf-UXr"/>
                 </constraints>
             </tableViewCellContentView>
@@ -43,4 +47,7 @@
             <point key="canvasLocation" x="222" y="298"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="右箭头" width="10" height="17"/>
+    </resources>
 </document>

@@ -27,7 +27,7 @@
     // Override point for customization after application launch.
     
     NSString *_deviceTokenCache = [[NSUserDefaults standardUserDefaults]objectForKey:kDeviceToken];
-    
+     
     //初始化融云SDK，
 //    [[RCIM sharedRCIM ]initWithAppKey:RONGCLOUD_IM_APPKEY deviceToken:_deviceTokenCache];
     [[RCIM sharedRCIM ]initWithAppKey:RONGCLOUD_IM_APPKEY ];
