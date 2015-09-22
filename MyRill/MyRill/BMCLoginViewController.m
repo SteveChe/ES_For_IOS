@@ -63,7 +63,7 @@
 }
 
 - (void)loginFailed:(NSString *)errorMessage {
-    
+    [[CustomShowMessage getInstance] showNotificationMessage:errorMessage];
 }
 
 #pragma mark - response events

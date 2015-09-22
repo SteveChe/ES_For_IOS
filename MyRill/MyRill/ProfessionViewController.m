@@ -155,8 +155,12 @@
     } else {
         ESProfession *profession = (ESProfession *)self.dataSource[indexPath.row];
         if ([profession.professionType isEqualToString:@"BMC"]) {
+            NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+            [userDefault setValue:profession.url forKey:@"BMC_URL"];
+            [userDefault synchronize];
+            
             UIViewController *vc = nil;
-            NSData *cookiesdata = [[NSUserDefaults standardUserDefaults] objectForKey:@"sessionCookies"];
+            NSData *cookiesdata = [userDefault objectForKey:@"sessionCookies"];
             if([cookiesdata length]) {
                 NSArray *cookies = [NSKeyedUnarchiver unarchiveObjectWithData:cookiesdata];
                 NSHTTPCookie *cookie;

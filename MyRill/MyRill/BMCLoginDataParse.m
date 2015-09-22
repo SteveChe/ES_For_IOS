@@ -16,10 +16,15 @@
                             password:password
                               sucess:^(id response) {
                                   NSDictionary *responseDic = (NSDictionary *)response;
+                                  if ([[responseDic allKeys] containsObject:@"error"]) {
+                                      [self.delegate loginFailed:@"BMC登录失败!"];
+                                      NSLog(@"请求有误!");
+                                      return;
+                                  }
                                   [self.delegate loginSucceed:nil];
                               } failure:^(NSError *err) {
                                   NSLog(@"%@",[err debugDescription]);
-                                  [self.delegate loginFailed:nil];
+                                  [self.delegate loginFailed:@"无法连接服务器"];
                               }];
 }
 

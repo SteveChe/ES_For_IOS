@@ -18,6 +18,7 @@
                                             NSDictionary *responseDic = (NSDictionary *)response;
                                             
                                             if ([[responseDic allKeys] containsObject:@"error"]) {
+                                                [self.delegate getResourceMetricListFailed:nil];
                                                 NSLog(@"请求有误!");
                                             } else {
                                                 NSArray *dataArray = (NSArray *)responseDic[@"resMetricList"];
@@ -35,7 +36,8 @@
                                             }
 
                                         } failure:^(NSError *err) {
-                                            ;
+                                            NSLog(@"%@",[err debugDescription]);
+                                            [self.delegate getResourceMetricListFailed:nil];
                                         }];
 }
 

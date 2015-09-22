@@ -1004,7 +1004,9 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
                   success:(void (^)(id response))success
                   failure:(void (^)(NSError* err))failure
 {
-    NSURL* baseURL = [NSURL URLWithString:@"http://111.204.215.174:8090/adapter/"];
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    
+    NSURL* baseURL = [NSURL URLWithString:[userDefault objectForKey:@"BMC_URL"]];
     //获得请求管理者
     AFHTTPRequestOperationManager *mgr = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:baseURL];
 //    mgr.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -1137,7 +1139,7 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
                             @"password":password,
                             @"_openCLIENT":@"RIIL"};
     [AFHttpTool requestWithMethod:RequestMethodTypePost
-                              url:@"login"
+                              url:@"/adapter/login"
                            params:param
                           success:success
                           failure:failure];
@@ -1149,7 +1151,7 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
     NSDictionary *param = @{@"viewType":viewType};
 
     [AFHttpTool requestWithMethod:RequestMethodTypeGet
-                              url:@"event/client/getEventList.json"
+                              url:@"/adapter/event/client/getEventList.json"
                            params:param
                           success:success
                           failure:failure];
@@ -1161,7 +1163,7 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
     NSDictionary *param = @{@"resType":resType};
     
     [AFHttpTool requestWithMethod:RequestMethodTypePost
-                              url:@"res/getResInstanceList.json"
+                              url:@"/adapter/res/getResInstanceList.json"
                            params:param
                           success:success
                           failure:failure];
@@ -1173,7 +1175,7 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
     NSDictionary *param = @{@"resId":resId};
     
     [AFHttpTool requestWithMethod:RequestMethodTypePost
-                              url:@"res/getResMetricList.json"
+                              url:@"/adapter/res/getResMetricList.json"
                            params:param
                           success:success
                           failure:failure];
@@ -1185,7 +1187,7 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
     NSDictionary *param = @{@"resId":subResId};
     
     [AFHttpTool requestWithMethod:RequestMethodTypePost
-                              url:@"res/getSubResMetricList.json"
+                              url:@"/adapter/res/getSubResMetricList.json"
                            params:param
                           success:success
                           failure:failure];
@@ -1205,13 +1207,11 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
                             @"sortType":sortType};
     
     [AFHttpTool requestWithMethod:RequestMethodTypePost
-                              url:@"res/list.json"
+                              url:@"/adapter/res/list.json"
                            params:param
                           success:success
                           failure:failure];
 }
-
-
 
 //app版本信息
 +(void)getAppVersionSucess:(void (^)(id response))success failure:(void (^)(NSError* err))failure

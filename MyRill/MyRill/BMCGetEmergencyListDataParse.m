@@ -18,6 +18,7 @@
                                           NSDictionary *responseDic = (NSDictionary *)response;
                                           
                                           if ([[responseDic allKeys] containsObject:@"error"]) {
+                                              [self.delegate getEmergencyeListFailed:nil];
                                               NSLog(@"请求有误!");
                                           } else {
                                               NSArray *dataArray = (NSArray *)responseDic[@"eventList"];
