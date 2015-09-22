@@ -24,7 +24,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" misplaced="YES" text="-天" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zH5-C0-Ifc">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="-天" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zH5-C0-Ifc">
                                 <rect key="frame" x="356" y="21" width="24" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -58,8 +58,12 @@
                                     <constraint firstAttribute="height" constant="35" id="Qun-6u-7b8"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" misplaced="YES" image="icon" translatesAutoresizingMaskIntoConstraints="NO" id="Diz-NJ-7qc">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="Diz-NJ-7qc">
                                 <rect key="frame" x="388" y="22.5" width="10" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="17" placeholder="YES" id="6Ad-cM-NDO"/>
+                                    <constraint firstAttribute="width" constant="10" placeholder="YES" id="Jny-Uo-uxz"/>
+                                </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VP8-kp-lFJ" userLabel="SplitLine">
                                 <rect key="frame" x="0.0" y="62" width="418" height="1"/>
@@ -136,7 +140,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="icon" width="22" height="22"/>
         <image name="头像_100" width="75" height="75"/>
     </resources>
 </document>
