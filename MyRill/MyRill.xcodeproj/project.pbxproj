@@ -2663,7 +2663,7 @@
 					"$(PROJECT_DIR)/MyRill/JPush",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "46caef10-069d-4e94-8a4d-fbd9bc55ceda";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
@@ -2689,7 +2689,7 @@
 					"$(PROJECT_DIR)/MyRill/JPush",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "46caef10-069d-4e94-8a4d-fbd9bc55ceda";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};

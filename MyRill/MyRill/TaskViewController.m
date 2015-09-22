@@ -815,6 +815,47 @@
                                      completion:nil];
                 }
             }
+            else
+            {
+                [[RCIMClient sharedRCIMClient] createDiscussion:discussionTitle userIdList:tempArr success:^(RCDiscussion *discussion) {
+                    NSLog(@"create discussion ssucceed!");
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        ChatViewController *chat =[[ChatViewController alloc]init];
+                        chat.targetId                      = discussion.discussionId;
+                        chat.userName                    = discussion.discussionName;
+                        chat.conversationType              = ConversationType_DISCUSSION;
+                        chat.title                         = @"讨论组";
+                        chat.userIDList = tempArr;
+                        
+                        //保存chat_id请求
+                        weakSelf.taskModel.chatID = chat.targetId;
+                        [weakSelf saveBarItemOnClicked];
+                        
+                        UITabBarController *tabbarVC = weakSelf.navigationController.viewControllers[0];
+                        [weakSelf.navigationController popToViewController:tabbarVC animated:YES];
+                        [tabbarVC.navigationController  pushViewController:chat animated:YES];
+                    });
+                } error:^(RCErrorCode status) {
+                    if ([[UIDevice currentDevice].systemVersion floatValue] < 8.0) {
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                                        message:@"发起会话失败!"
+                                                                       delegate:self
+                                                              cancelButtonTitle:@"知道了!"
+                                                              otherButtonTitles:nil, nil];
+                        [alert show];
+                    } else {
+                        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示"
+                                                                                                 message:@"发起会话失败!"
+                                                                                          preferredStyle:UIAlertControllerStyleAlert];
+                        [alertController addAction:[UIAlertAction actionWithTitle:@"知道了!" style:UIAlertActionStyleDefault handler:nil]];
+                        [self presentViewController:alertController
+                                           animated:YES
+                                         completion:nil];
+                    }
+                    //没有错误信息提示!
+                    NSLog(@"create discussion Failed > %ld!", (long)status);
+                }];
+            }
             NSLog(@"%ld",(long)status);
         }];
     }
