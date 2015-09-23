@@ -18,7 +18,7 @@
 #import "RCDAddressBookViewController.h"
 #import "GetAppversionDataParse.h"
 
-#define ES_VERSION 0.1
+#define ES_VERSION 0.2
 
 @interface ESMenuViewController () <UITabBarControllerDelegate,GetAppVersionDelegate,UIAlertViewDelegate>
 
@@ -131,7 +131,7 @@
 {
     if ( 0 == buttonIndex)
     {
-        NSURL *url = [[NSURL alloc ]initWithString:@"http://fir.im/jgk1"];
+        NSURL *url = [[NSURL alloc ]initWithString:@"http://fir.im/sn1z"];
         
         [[UIApplication sharedApplication] openURL:url];
     }
