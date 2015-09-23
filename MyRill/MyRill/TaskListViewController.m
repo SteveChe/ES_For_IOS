@@ -127,7 +127,7 @@
         cell = (TaskListTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"TaskListTableViewCell" forIndexPath:indexPath];
         [cell updateTackCell:self.dataSource[indexPath.row]];
     }
-    cell.rightUtilityButtons = [self rightButttons];
+//    cell.rightUtilityButtons = [self rightButttons];
     cell.delegate = self;
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
