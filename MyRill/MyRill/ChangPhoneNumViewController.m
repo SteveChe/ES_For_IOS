@@ -12,8 +12,10 @@
 #import "ChangePhoneNumDataParse.h"
 #import "MRProgress.h"
 #import "UserDefaultsDefine.h"
+#import "GetVerificationCodeDataParse.h"
+#import "CustomShowMessage.h"
 
-@interface ChangPhoneNumViewController () <ChangePhoneNumDelegate>
+@interface ChangPhoneNumViewController () <ChangePhoneNumDelegate, GetVerificationCodeDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UILabel *phoneNumLbl;
@@ -23,6 +25,7 @@
 @property (nonatomic, strong) MRProgressOverlayView *progress;
 @property (nonatomic, strong) SignUpDataParse *signUpDP;
 @property (nonatomic, strong) ChangePhoneNumDataParse *changePhoneNumDP;
+@property (nonatomic, strong) GetVerificationCodeDataParse *getVerificationCodeDP;
 
 @end
 
@@ -48,7 +51,7 @@
     self.phoneNumLbl.text = [@"当前手机号:" stringByAppendingString:[userDefaults stringForKey:DEFAULTS_USERPHONENUMBER]];
 }
 
-#pragma mark - ChangePhoneNumDelegate methods
+#pragma mark - ChangePhoneNumDelegate&GetVerificationCodeDelegate methods
 - (void)changePhoneNumSuccess {
     [self showTips:@"修改成功" mode:MRProgressOverlayViewModeCheckmark isDismiss:YES isSucceuss:YES];
 }
@@ -57,6 +60,14 @@
     if (errorMsg == nil || [errorMsg isEqual:[NSNull null]] || [errorMsg isEqualToString:@""]) {
         [self showTips:@"修改失败" mode:MRProgressOverlayViewModeCross isDismiss:YES isSucceuss:NO];
     }
+}
+
+- (void)getVerificationCodeSucceed {
+    [[CustomShowMessage getInstance] showNotificationMessage:@"验证码已发送!"];
+}
+
+- (void)getVerificationCodeFailed:(NSString *)errorMessage {
+    [[CustomShowMessage getInstance] showNotificationMessage:errorMessage];
 }
 
 #pragma mark - response events
@@ -75,6 +86,20 @@
 
 - (IBAction)verificationBtnOnClicked:(UIButton *)sender {
     
+    if ([ColorHandler isNullOrEmptyString:self.newphoneNumTxtField.text]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                        message:@"手机号码不能为空!"
+                                                       delegate:self
+                                              cancelButtonTitle:@"知道了!"
+                                              otherButtonTitles:nil, nil];
+        [alert show];
+        return;
+    }
+    
+    if (self.verificationBtn.userInteractionEnabled) {
+        [self.getVerificationCodeDP getVerificationCode:self.newphoneNumTxtField.text];
+    }
+    
     __block int timeout = 30; //倒计时时间
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
@@ -86,7 +111,6 @@
                 //设置界面的按钮显示 根据自己需求设置
                 [self.verificationBtn setTitle:@"发送验证码" forState:UIControlStateNormal];
                 self.verificationBtn.userInteractionEnabled = YES;
-                [self.signUpDP getVerificationCode:self.newphoneNumTxtField.text];
             });
         } else {
             int seconds = timeout % 60;
@@ -169,6 +193,15 @@
     }
     
     return _progress;
+}
+
+- (GetVerificationCodeDataParse *)getVerificationCodeDP {
+    if (!_getVerificationCodeDP) {
+        _getVerificationCodeDP = [[GetVerificationCodeDataParse alloc] init];
+        _getVerificationCodeDP.delegate = self;
+    }
+    
+    return _getVerificationCodeDP;
 }
 
 @end

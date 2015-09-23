@@ -64,6 +64,7 @@
 		2B39C9971B37E634007BAC7A /* SignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B39C9961B37E634007BAC7A /* SignUpViewController.xib */; };
 		2B42A8691BB1432400E47193 /* BMCSubResourceDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B42A8671BB1432400E47193 /* BMCSubResourceDetailTableViewCell.m */; };
 		2B42A86A1BB1432400E47193 /* BMCSubResourceDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B42A8681BB1432400E47193 /* BMCSubResourceDetailTableViewCell.xib */; };
+		2B42A86D1BB230A900E47193 /* GetVerificationCodeDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B42A86C1BB230A900E47193 /* GetVerificationCodeDataParse.m */; };
 		2B5A590C1B48DFBB000382D7 /* MRBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5A58E81B48DFBB000382D7 /* MRBlurView.m */; };
 		2B5A590D1B48DFBB000382D7 /* UIImage+MRImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5A58EA1B48DFBB000382D7 /* UIImage+MRImageEffects.m */; };
 		2B5A590E1B48DFBB000382D7 /* MRActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5A58ED1B48DFBB000382D7 /* MRActivityIndicatorView.m */; };
@@ -468,6 +469,8 @@
 		2B42A8661BB1432400E47193 /* BMCSubResourceDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMCSubResourceDetailTableViewCell.h; sourceTree = "<group>"; };
 		2B42A8671BB1432400E47193 /* BMCSubResourceDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMCSubResourceDetailTableViewCell.m; sourceTree = "<group>"; };
 		2B42A8681BB1432400E47193 /* BMCSubResourceDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BMCSubResourceDetailTableViewCell.xib; sourceTree = "<group>"; };
+		2B42A86B1BB230A900E47193 /* GetVerificationCodeDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetVerificationCodeDataParse.h; sourceTree = "<group>"; };
+		2B42A86C1BB230A900E47193 /* GetVerificationCodeDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetVerificationCodeDataParse.m; sourceTree = "<group>"; };
 		2B5A58E71B48DFBB000382D7 /* MRBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRBlurView.h; sourceTree = "<group>"; };
 		2B5A58E81B48DFBB000382D7 /* MRBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRBlurView.m; sourceTree = "<group>"; };
 		2B5A58E91B48DFBB000382D7 /* UIImage+MRImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+MRImageEffects.h"; sourceTree = "<group>"; };
@@ -1278,6 +1281,8 @@
 				2B39C94F1B248063007BAC7A /* LoginDataParse.m */,
 				F24787731B2D775E00EC266B /* SignUpDataParse.h */,
 				F24787741B2D775E00EC266B /* SignUpDataParse.m */,
+				2B42A86B1BB230A900E47193 /* GetVerificationCodeDataParse.h */,
+				2B42A86C1BB230A900E47193 /* GetVerificationCodeDataParse.m */,
 				2B2B84AB1BA016BA0043EFD4 /* Profession */,
 				2BEAD0561B75D70500905E21 /* Task */,
 				2B1B88DE1B803B2200FAF650 /* User */,
@@ -2454,6 +2459,7 @@
 				F29F862C1B2410070058FC9F /* AFSecurityPolicy.m in Sources */,
 				2B93E9281BAA92DE0026EB39 /* BMCResourceDetailTableViewCell.m in Sources */,
 				F23630801B6663A100A12F63 /* MKNumberBadgeView.m in Sources */,
+				2B42A86D1BB230A900E47193 /* GetVerificationCodeDataParse.m in Sources */,
 				F29F86491B2410320058FC9F /* UIRefreshControl+AFNetworking.m in Sources */,
 				2B5A59121B48DFBB000382D7 /* MRProgressOverlayView.m in Sources */,
 				2B5A591A1B48DFBB000382D7 /* MRWeakProxy.m in Sources */,

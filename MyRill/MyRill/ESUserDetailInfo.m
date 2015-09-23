@@ -33,10 +33,10 @@
             self.portraitUri = dic[@"avatar"];
         }
         
-        if ([ColorHandler isNullOrEmptyString:dic[@"phoneNumber"]]) {
+        if ([ColorHandler isNullOrEmptyString:dic[@"phone_number"]]) {
             self.phoneNumber = @"";
         } else {
-            self.phoneNumber = dic[@"phoneNumber"];
+            self.phoneNumber = dic[@"phone_number"];
         }
         
         if ([ColorHandler isNullOrEmptyString:dic[@"department"]]) {
