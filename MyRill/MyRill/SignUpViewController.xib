@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
@@ -36,7 +36,7 @@
                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="next"/>
                         </textField>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="2" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入验证码" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ydR-CX-6x2">
-                            <rect key="frame" x="20" y="46" width="382" height="45"/>
+                            <rect key="frame" x="20" y="46" width="441" height="45"/>
                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="next"/>
@@ -120,7 +120,7 @@
                         <constraint firstItem="eqa-Uc-if9" firstAttribute="top" secondItem="pm8-Vs-BJr" secondAttribute="bottom" id="lVG-dv-i5A"/>
                         <constraint firstItem="eVC-gu-UO4" firstAttribute="top" secondItem="dYy-QL-ovT" secondAttribute="bottom" id="ll5-nD-qLf"/>
                         <constraint firstItem="eVC-gu-UO4" firstAttribute="height" secondItem="pm8-Vs-BJr" secondAttribute="height" id="qOW-Ak-R6r"/>
-                        <constraint firstItem="aNS-ld-DBj" firstAttribute="leading" secondItem="ydR-CX-6x2" secondAttribute="trailing" constant="79" id="qlJ-H0-wgk"/>
+                        <constraint firstItem="aNS-ld-DBj" firstAttribute="leading" secondItem="ydR-CX-6x2" secondAttribute="trailing" constant="20" id="qlJ-H0-wgk"/>
                         <constraint firstAttribute="trailing" secondItem="pm8-Vs-BJr" secondAttribute="trailing" constant="20" id="rYF-3R-Zac"/>
                         <constraint firstItem="XcE-wy-HGr" firstAttribute="top" secondItem="7nq-44-gkU" secondAttribute="bottom" id="sMj-rX-b1d"/>
                         <constraint firstAttribute="trailing" secondItem="7nq-44-gkU" secondAttribute="trailing" constant="20" symbolic="YES" id="sc9-yk-AGr"/>

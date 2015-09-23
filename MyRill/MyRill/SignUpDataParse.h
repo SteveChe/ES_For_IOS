@@ -21,9 +21,4 @@
 //sign up
 -(void) signUpWithPhoneNum:(NSString *)phoneNum name:(NSString*)name password:(NSString *)password verificationCode:(NSString*) verificationCode;
 
-
-//get verificiation Code
--(void) getVerificationCode:(NSString *)phoneNum;
-
-
 @end

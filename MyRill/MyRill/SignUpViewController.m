@@ -15,8 +15,10 @@
 #import "LoginViewController.h"
 #import "ESNavigationController.h"
 #import "UserDefaultsDefine.h"
+#import "GetVerificationCodeDataParse.h"
+#import "CustomShowMessage.h"
 
-@interface SignUpViewController () <UITextFieldDelegate>
+@interface SignUpViewController () <UITextFieldDelegate, SignUpDataDelegate, GetVerificationCodeDelegate>
 
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *holdViews;
 @property (weak, nonatomic) IBOutlet UITextField *phoneNumTxtField;
@@ -27,7 +29,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *verificationBtn;
 @property (weak, nonatomic) IBOutlet UIButton *signUpBtn;
 
+
+@property (nonatomic, assign) BOOL isCanSend;
 @property (strong, nonatomic) SignUpDataParse * signUpDataParse;
+@property (nonatomic, strong) GetVerificationCodeDataParse *getVerificationCodeDP;
 
 @end
 
@@ -45,6 +50,32 @@
     
     _signUpDataParse = [[SignUpDataParse alloc] init];
     _signUpDataParse.delegate = self;
+    
+    self.isCanSend = YES;
+}
+
+#pragma mark - SignUpDataDelegate&GetVerificationCodeDelegate methods
+- (void)signUpSucceed{
+    [[CustomShowMessage getInstance] showNotificationMessage:@"注册成功"];
+    
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    [userDefault setObject:self.usernameTxtField.text forKey:DEFAULTS_USERNAME];
+    
+    [self performSelector:@selector(changeToLoginView)
+               withObject:nil
+               afterDelay:2];
+}
+
+- (void)signUpFailed:(NSString*)errorMessage {
+    [[CustomShowMessage getInstance] showNotificationMessage:errorMessage];
+}
+
+- (void)getVerificationCodeSucceed {
+    [[CustomShowMessage getInstance] showNotificationMessage:@"验证码已发送!"];
+}
+
+- (void)getVerificationCodeFailed:(NSString *)errorMessage {
+    [[CustomShowMessage getInstance] showNotificationMessage:errorMessage];
 }
 
 #pragma mark - response events
@@ -92,6 +123,20 @@
 
 - (IBAction)verificationBtnOnClicked:(UIButton *)sender {
     
+    if ([ColorHandler isNullOrEmptyString:_phoneNumTxtField.text]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                        message:@"手机号码不能为空!"
+                                                       delegate:self
+                                              cancelButtonTitle:@"知道了!"
+                                              otherButtonTitles:nil, nil];
+        [alert show];
+        return;
+    }
+    
+    if (self.verificationBtn.userInteractionEnabled) {
+        [self.getVerificationCodeDP getVerificationCode:_phoneNumTxtField.text];
+    }
+    
     __block int timeout = 30; //倒计时时间
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
@@ -103,7 +148,7 @@
                 //设置界面的按钮显示 根据自己需求设置
                 [self.verificationBtn setTitle:@"发送验证码" forState:UIControlStateNormal];
                 self.verificationBtn.userInteractionEnabled = YES;
-                [_signUpDataParse getVerificationCode:_phoneNumTxtField.text];
+//                [_signUpDataParse getVerificationCode:_phoneNumTxtField.text];
             });
         } else {
             int seconds = timeout % 60;
@@ -122,23 +167,6 @@
 }
 
 #pragma mark SignUpDataDelegate - method
--(void)signUpSucceed{
-    [[CustomShowMessage getInstance] showNotificationMessage:@"注册成功"];
-    
-    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
-    [userDefault setObject:self.usernameTxtField.text forKey:DEFAULTS_USERNAME];
-    
-    [self performSelector:@selector(changeToLoginView)
-               withObject:nil
-               afterDelay:2];
-    
-}
-
--(void)signUpFailed:(NSString*)errorMessage
-{
-    [[CustomShowMessage getInstance] showNotificationMessage:errorMessage];
-}
-
 -(void)changeToLoginView
 {
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
@@ -187,6 +215,15 @@
     _signUpBtn = signUpBtn;
     
     _signUpBtn.layer.cornerRadius = 18.f;
+}
+
+- (GetVerificationCodeDataParse *)getVerificationCodeDP {
+    if (!_getVerificationCodeDP) {
+        _getVerificationCodeDP = [[GetVerificationCodeDataParse alloc] init];
+        _getVerificationCodeDP.delegate = self;
+    }
+    
+    return _getVerificationCodeDP;
 }
 
 @end
