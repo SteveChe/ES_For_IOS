@@ -34,6 +34,7 @@
         }
         
         self.isSystem = [dic[@"is_system"] boolValue];
+//        self.isSystem = YES;
         
         if ([ColorHandler isNullOrEmptyString:dic[@"name"]]) {
             self.name = @"";
