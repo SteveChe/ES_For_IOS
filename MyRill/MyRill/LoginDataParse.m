@@ -122,7 +122,7 @@
      }
       failure:^(NSError* err)
      {
-         
+         NSLog(@"rongCloudToken get failed!");
      }];
 }
 

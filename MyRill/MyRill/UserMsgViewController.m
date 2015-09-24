@@ -494,6 +494,8 @@ typedef enum : NSInteger {
 
 - (IBAction)logoutBtnOnClicked:(UIButton *)sender {
     [self.signOutDP logout];
+    [[RCIM sharedRCIM] clearUserInfoCache];
+    [[RCIM sharedRCIM] clearGroupInfoCache];
     [[RCIM sharedRCIM] logout];
 }
 
