@@ -108,10 +108,11 @@
 - (void)deleteProfessionSuccess {
     [self.dataSource removeObjectAtIndex:self.deleteIndexPath.row];
     [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:self.deleteIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+    self.deleteIndexPath = nil;
 }
 
 - (void)deleteProfessionFailure:(NSString *)errorMsg {
-    
+    [self.tableView reloadData];
     [[CustomShowMessage getInstance] showNotificationMessage:errorMsg];
 }
 
@@ -165,7 +166,7 @@
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ESProfession *profession = (ESProfession *)self.dataSource[self.deleteIndexPath.row];
+    ESProfession *profession = (ESProfession *)self.dataSource[indexPath.row];
     if (profession.isSystem == YES) {
         return UITableViewCellEditingStyleNone;
     }
@@ -186,7 +187,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    ESProfession *profession = (ESProfession *)self.dataSource[self.deleteIndexPath.row];
+    ESProfession *profession = (ESProfession *)self.dataSource[indexPath.row];
     if (profession.isSystem == YES) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
                                                         message:@"后台派发业务，不可修改!"

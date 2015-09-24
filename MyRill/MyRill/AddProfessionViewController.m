@@ -39,7 +39,7 @@
 
 #pragma mark - ProfessionDataDelegate methods
 - (void)addProfessionOperationSuccess:(ESProfession *)profession {
-//    ESProfession *newProfession = (ESProfession *)profession;
+    ESProfession *newProfession = (ESProfession *)profession;
     [[CustomShowMessage getInstance] showNotificationMessage:@"添加业务成功!"];
     [self.navigationController popViewControllerAnimated:YES];
 }
