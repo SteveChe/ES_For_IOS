@@ -20,7 +20,7 @@
 
 #define ES_VERSION 0.2
 
-@interface ESMenuViewController () <UITabBarControllerDelegate,GetAppVersionDelegate>
+@interface ESMenuViewController () <UITabBarControllerDelegate,GetAppVersionDelegate,UIAlertViewDelegate>
 
 @property (nonatomic,strong) GetAppversionDataParse* getAppVersionDataParse;
 @end
@@ -124,6 +124,17 @@
      }
      ];
     
+}
+
+#pragma mark-- UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if ( 0 == buttonIndex)
+    {
+        NSURL *url = [[NSURL alloc ]initWithString:@"http://fir.im/sn1z"];
+        
+        [[UIApplication sharedApplication] openURL:url];
+    }
 }
 
 
