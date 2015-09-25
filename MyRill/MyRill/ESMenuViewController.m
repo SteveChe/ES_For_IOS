@@ -18,7 +18,7 @@
 #import "RCDAddressBookViewController.h"
 #import "GetAppversionDataParse.h"
 
-#define ES_VERSION 0.2
+#define ES_VERSION 0.3
 
 @interface ESMenuViewController () <UITabBarControllerDelegate,GetAppVersionDelegate,UIAlertViewDelegate>
 
