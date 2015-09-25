@@ -13,7 +13,9 @@
 #import "APService.h"
 #import "ESPushManager.h"
 
-#define RONGCLOUD_IM_APPKEY @"x18ywvqf8hzqc" //online key
+//#define RONGCLOUD_IM_APPKEY @"x18ywvqf8hzqc" //online key
+#define RONGCLOUD_IM_APPKEY @"Keyx4vkb1qpvr9qk" //online key
+
 
 #define kDeviceToken @"RongCloud_SDK_DeviceToken"
 
