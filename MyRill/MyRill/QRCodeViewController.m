@@ -19,6 +19,7 @@
 @interface QRCodeViewController ()<AVCaptureMetadataOutputObjectsDelegate, UIAlertViewDelegate,FollowEnterpriseDelegate,UIActionSheetDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *qrView;
+@property (weak, nonatomic) IBOutlet UIImageView *scanLineImageView;
 @property ( strong , nonatomic ) AVCaptureDevice *device;
 @property ( strong , nonatomic ) AVCaptureDeviceInput *input;
 @property ( strong , nonatomic ) AVCaptureMetadataOutput *output;
@@ -149,16 +150,22 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
     self.tabBarController.tabBar.hidden = YES;
+}
 
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    
+    //使动画开始时scanLineImageView位置完成初始化
+    [self.view layoutIfNeeded];
+    
     if (self.scanLineTimer == nil) {
-        [self moveUpAndDownLine];
         [self createTimer];
     }
 }
 
 #define LINE_SCAN_TIME  3.0     // 扫描线从上到下扫描所历时间（s）
-
 - (void)createTimer {
     self.scanLineTimer =
     [NSTimer scheduledTimerWithTimeInterval:LINE_SCAN_TIME
@@ -166,45 +173,44 @@
                                    selector:@selector(moveUpAndDownLine)
                                    userInfo:nil
                                     repeats:YES];
+    [self moveUpAndDownLine];
 }
 
 // 扫描条上下滚动
 - (void)moveUpAndDownLine {
-//    CGRect readerFrame = self.view.frame;
-//    CGSize viewFinderSize = CGSizeMake(self.view.frame.size.width - 80, self.view.frame.size.width - 80);
-//    
-//    CGRect scanLineframe = self.scanLineImageView.frame;
-//    scanLineframe.origin.y =
-//    (readerFrame.size.height - viewFinderSize.height)/2;
-//    self.scanLineImageView.frame = scanLineframe;
-//    self.scanLineImageView.hidden = NO;
-//    
-//    __weak __typeof(self) weakSelf = self;
-//    
-//    [UIView animateWithDuration:LINE_SCAN_TIME - 0.05
-//                     animations:^{
-//                         CGRect scanLineframe = weakSelf.scanLineImageView.frame;
-//                         scanLineframe.origin.y =
-//                         (readerFrame.size.height + viewFinderSize.height)/2 -
-//                         weakSelf.scanLineImageView.frame.size.height;
-//                         
-//                         weakSelf.scanLineImageView.frame = scanLineframe;
-//                     }
-//                     completion:^(BOOL finished) {
-//                         weakSelf.scanLineImageView.hidden = YES;
-//                     }];
+    CGRect scanLineframe = self.scanLineImageView.frame;
+    scanLineframe.origin.y = 0;
+    self.scanLineImageView.frame = scanLineframe;
+    self.scanLineImageView.hidden = NO;
+    
+    __weak __typeof(self) weakSelf = self;
+    
+    [UIView animateWithDuration:LINE_SCAN_TIME - 0.05
+                          delay:0
+                        options:UIViewAnimationOptionCurveLinear
+                     animations:^{
+                         CGRect scanLineframe = weakSelf.scanLineImageView.frame;
+                         scanLineframe.origin.y = self.qrView.frame.size.height - weakSelf.scanLineImageView.frame.size.height;
+                         
+                         weakSelf.scanLineImageView.frame = scanLineframe;
+                     }
+                     completion:^(BOOL finished) {
+                         weakSelf.scanLineImageView.hidden = YES;
+                     }];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 
     //设置二维码的有效扫描区域
-    CGSize size = self.view.bounds.size;
+    CGRect screenRect = [UIScreen mainScreen].bounds;
+    
     CGRect cropRect = self.qrView.frame;
-    _output.rectOfInterest = CGRectMake(cropRect.origin.y/size.height,
-                                        cropRect.origin.x/size.width,
-                                        cropRect.size.height/size.height,
-                                        cropRect.size.width/size.width);
+    _output.rectOfInterest = CGRectMake((cropRect.origin.y + 44) / screenRect.size.height,
+                                        (cropRect.origin.x + 40)/ screenRect.size.width,
+                                        cropRect.size.height / screenRect.size.height,
+                                        cropRect.size.width / screenRect.size.width);
+    //CGRectMake（y的起点/屏幕的高，x的起点/屏幕的宽，扫描的区域的高/屏幕的高，扫描的区域的宽/屏幕的宽
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

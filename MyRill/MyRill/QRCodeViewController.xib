@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
@@ -9,6 +9,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QRCodeViewController">
             <connections>
                 <outlet property="qrView" destination="ISc-Ey-1eG" id="MhS-om-fRv"/>
+                <outlet property="scanLineImageView" destination="DU7-q3-LTH" id="Xmf-Fd-Nai"/>
                 <outlet property="view" destination="iN0-l3-epB" id="Psx-Pt-zd7"/>
             </connections>
         </placeholder>
@@ -17,22 +18,22 @@
             <rect key="frame" x="0.0" y="-37" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ISc-Ey-1eG" userLabel="QRView">
-                    <rect key="frame" x="40" y="0.0" width="520" height="520"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ISc-Ey-1eG" userLabel="QRView">
+                    <rect key="frame" x="40" y="20" width="520" height="520"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" ambiguous="YES" image="左上" translatesAutoresizingMaskIntoConstraints="NO" id="dcj-A2-VZf">
+                        <imageView userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" image="左上" translatesAutoresizingMaskIntoConstraints="NO" id="dcj-A2-VZf">
                             <rect key="frame" x="0.0" y="0.0" width="15" height="15"/>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" ambiguous="YES" image="右上" translatesAutoresizingMaskIntoConstraints="NO" id="lc8-EW-bz0">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" image="右上" translatesAutoresizingMaskIntoConstraints="NO" id="lc8-EW-bz0">
                             <rect key="frame" x="505" y="0.0" width="15" height="15"/>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="右下" translatesAutoresizingMaskIntoConstraints="NO" id="j3A-wE-tSA">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="右下" translatesAutoresizingMaskIntoConstraints="NO" id="j3A-wE-tSA">
                             <rect key="frame" x="505" y="505" width="15" height="15"/>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="左下" translatesAutoresizingMaskIntoConstraints="NO" id="pFk-gc-fdL">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="左下" translatesAutoresizingMaskIntoConstraints="NO" id="pFk-gc-fdL">
                             <rect key="frame" x="0.0" y="505" width="15" height="15"/>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" verticalHuggingPriority="251" ambiguous="YES" image="扫描线" translatesAutoresizingMaskIntoConstraints="NO" id="DU7-q3-LTH">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" verticalHuggingPriority="251" image="扫描线" translatesAutoresizingMaskIntoConstraints="NO" id="DU7-q3-LTH">
                             <rect key="frame" x="15" y="0.0" width="490" height="2"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="2" id="rDd-6R-bO9"/>
@@ -63,14 +64,14 @@
                     <rect key="frame" x="560" y="0.0" width="40" height="600"/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
                 </view>
-                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YTc-IZ-GVf" userLabel="topView">
-                    <rect key="frame" x="40" y="0.0" width="520" height="0.0"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YTc-IZ-GVf" userLabel="topView">
+                    <rect key="frame" x="40" y="0.0" width="520" height="20"/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
                 </view>
-                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hxe-J4-Z2A" userLabel="bottomView">
-                    <rect key="frame" x="40" y="520" width="520" height="80"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hxe-J4-Z2A" userLabel="bottomView">
+                    <rect key="frame" x="40" y="540" width="520" height="60"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="将二维码放入框内，即可自动扫描" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3xb-iw-q9T">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="将二维码放入框内，即可自动扫描" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3xb-iw-q9T">
                             <rect key="frame" x="155" y="16" width="210" height="16.5"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                             <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -102,7 +103,7 @@
                 <constraint firstItem="hxe-J4-Z2A" firstAttribute="leading" secondItem="ld5-SX-6SR" secondAttribute="trailing" id="pqN-2b-Z8U"/>
                 <constraint firstItem="ld5-SX-6SR" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="qSf-lA-5cC"/>
                 <constraint firstItem="YTc-IZ-GVf" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="sat-Zw-T0w"/>
-                <constraint firstAttribute="centerY" secondItem="ISc-Ey-1eG" secondAttribute="centerY" constant="44" id="svc-mk-gCx"/>
+                <constraint firstAttribute="centerY" secondItem="ISc-Ey-1eG" secondAttribute="centerY" constant="20" id="svc-mk-gCx"/>
                 <constraint firstItem="4NE-ZL-vjR" firstAttribute="leading" secondItem="YTc-IZ-GVf" secondAttribute="trailing" id="z9f-yS-UMf"/>
                 <constraint firstItem="4NE-ZL-vjR" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="zzs-L0-ElJ"/>
             </constraints>
