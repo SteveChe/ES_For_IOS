@@ -1,5 +1,5 @@
 //
-//  LogSummaryEventAlarmPojo.h
+//  ResMetricPojo.h
 //  MyRill
 //
 //  Created by Siyuan Wang on 15/9/19.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface LogSummaryEventAlarmPojo : NSObject
+@interface ResMetricPojo : NSObject
 
 @property (nonatomic, copy) NSString *resId;        //主资源ID
 @property (nonatomic, copy) NSString *subResId;     //子资源ID

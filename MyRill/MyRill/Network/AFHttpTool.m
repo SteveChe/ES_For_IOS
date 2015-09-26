@@ -1169,9 +1169,9 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
                           failure:failure];
 }
 
-+ (void)getResourceMetricListWithResId:(NSString *)resId
-                                sucess:(void (^)(id))success
-                               failure:(void (^)(NSError *))failure {
++ (void)getMainResourceMetricListWithResId:(NSString *)resId
+                                    sucess:(void (^)(id))success
+                                   failure:(void (^)(NSError *))failure {
     NSDictionary *param = @{@"resId":resId};
     
     [AFHttpTool requestWithMethod:RequestMethodTypePost

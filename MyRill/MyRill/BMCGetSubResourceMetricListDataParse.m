@@ -8,7 +8,7 @@
 
 #import "BMCGetSubResourceMetricListDataParse.h"
 #import "AFHttpTool.h"
-#import "LogSummaryEventAlarmPojo.h"
+#import "ResMetricPojo.h"
 
 @implementation BMCGetSubResourceMetricListDataParse
 
@@ -25,7 +25,7 @@
                                                       
                                                       NSMutableArray *resultList = [[NSMutableArray alloc] init];
                                                       [dataArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                                                          LogSummaryEventAlarmPojo *mainMetric = [[LogSummaryEventAlarmPojo alloc] initWithDic:obj];
+                                                          ResMetricPojo *mainMetric = [[ResMetricPojo alloc] initWithDic:obj];
                                                           if (![mainMetric.metricName isEqualToString:@""]) {
                                                               [resultList addObject:mainMetric];
                                                           }

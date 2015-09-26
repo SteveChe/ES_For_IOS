@@ -9,7 +9,7 @@
 #import "BMCSubResourceDetailViewController.h"
 #import "BMCGetSubResourceMetricListDataParse.h"
 #import "BMCSubResourceDetailTableViewCell.h"
-#import "LogSummaryEventAlarmPojo.h"
+#import "ResMetricPojo.h"
 #import "ColorHandler.h"
 #import "CustomShowMessage.h"
 
@@ -38,7 +38,6 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-//    NSLog(@"!!!!! %@",self.subResId);
     [self.getSubResourceMetricListDP getSubResourceMetricListWithSubResId:self.subResId];
 }
 
@@ -61,7 +60,7 @@
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
     BMCSubResourceDetailTableViewCell *cell = (BMCSubResourceDetailTableViewCell *)self.prototypeCell;
     
-    LogSummaryEventAlarmPojo *logSummaryEventAlarmPojo = (LogSummaryEventAlarmPojo *)self.dataSource[indexPath.row];
+    ResMetricPojo *logSummaryEventAlarmPojo = (ResMetricPojo *)self.dataSource[indexPath.row];
     cell.contentLbl.text = [ColorHandler isNullOrEmptyString:logSummaryEventAlarmPojo.metricValue] ? @"——" : logSummaryEventAlarmPojo.metricValue;
     
     if ([cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height > 0) {
@@ -78,7 +77,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     self.prototypeCell  = nil;
     BMCSubResourceDetailTableViewCell *subResourceDetailCell = (BMCSubResourceDetailTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"BMCSubResourceDetailTableViewCell" forIndexPath:indexPath];
-    LogSummaryEventAlarmPojo *logSummaryEventAlarmPojo = (LogSummaryEventAlarmPojo *)self.dataSource[indexPath.row];
+    ResMetricPojo *logSummaryEventAlarmPojo = (ResMetricPojo *)self.dataSource[indexPath.row];
     subResourceDetailCell.titleLbl.text = logSummaryEventAlarmPojo.metricName;
     subResourceDetailCell.contentLbl.text = [ColorHandler isNullOrEmptyString:logSummaryEventAlarmPojo.metricValue] ? @"——" : logSummaryEventAlarmPojo.metricValue;
     

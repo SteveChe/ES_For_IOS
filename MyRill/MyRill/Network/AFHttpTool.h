@@ -101,13 +101,13 @@ typedef enum : NSUInteger {
                               sucess:(void (^)(id response))success
                              failure:(void (^)(NSError* err))failure;
 
++ (void)getMainResourceMetricListWithResId:(NSString *)resId
+                                    sucess:(void (^)(id response))success
+                                   failure:(void (^)(NSError* err))failure;
+
 + (void)getResourceDetailWithResType:(NSString *)resType
                               sucess:(void (^)(id response))success
                              failure:(void (^)(NSError* err))failure;
-
-+ (void)getResourceMetricListWithResId:(NSString *)resId
-                                sucess:(void (^)(id response))success
-                               failure:(void (^)(NSError* err))failure;
 
 + (void)getSubResourceMetricListWithSubResId:(NSString *)subResId
                                       sucess:(void (^)(id response))success

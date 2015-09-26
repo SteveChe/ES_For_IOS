@@ -1,15 +1,15 @@
 //
-//  LogSummaryEventAlarmPojo.m
+//  ResMetricPojo.m
 //  MyRill
 //
 //  Created by Siyuan Wang on 15/9/19.
 //
 //
 
-#import "LogSummaryEventAlarmPojo.h"
+#import "ResMetricPojo.h"
 #import "ColorHandler.h"
 
-@implementation LogSummaryEventAlarmPojo
+@implementation ResMetricPojo
 
 - (instancetype)initWithDic:(NSDictionary *)dic {
     self = [super init];

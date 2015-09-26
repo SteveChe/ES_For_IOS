@@ -2,111 +2,117 @@
 //  BMCResourceDetailViewController.m
 //  MyRill
 //
-//  Created by Siyuan Wang on 15/9/17.
+//  Created by Siyuan Wang on 15/9/25.
 //
 //
 
 #import "BMCResourceDetailViewController.h"
-#import "BMCResourceDetailTableViewCell.h"
+#import "Masonry.h"
+#import "BMCGetMainResourceMetricListDataParse.h"
 #import "EventVO.h"
-#import "ColorHandler.h"
-#import "BMCGetResourceMetricListDataParse.h"
-#import "LogSummaryEventAlarmPojo.h"
-#import "BMCSubResourceDetailViewController.h"
 #import "CustomShowMessage.h"
+#import "ColorHandler.h"
+#import "BMCSubResourceListViewController.h"
 
-@interface BMCResourceDetailViewController () <UITableViewDataSource, UITableViewDelegate, BMCGetResourceMetricListDelegate>
+@interface BMCResourceDetailViewController () <UITableViewDataSource, UITableViewDelegate, BMCGetMainResourceMetricListDelegate>
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UILabel *resourceName;
-@property (weak, nonatomic) IBOutlet UILabel *resourceIP;
-@property (weak, nonatomic) IBOutlet UILabel *resourceType;
-@property (nonatomic, strong) BMCResourceDetailTableViewCell *prototypeCell;
+@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) UIView *footerView;
 
 @property (nonatomic, strong) NSMutableArray *dataSource;
-@property (nonatomic, strong) BMCGetResourceMetricListDataParse *getResourdeMetricListDP;
+@property (nonatomic, strong) BMCGetMainResourceMetricListDataParse *getMainResourceMetricListDP;
 
 @end
 
 @implementation BMCResourceDetailViewController
-#pragma mark - lifeCycle methods
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    // Do any additional setup after loading the view from its nib.
     
     self.title = @"资源详情";
-    
-    [self.tableView registerNib:[UINib nibWithNibName:@"BMCResourceDetailTableViewCell" bundle:nil]
-         forCellReuseIdentifier:@"BMCResourceDetailTableViewCell"];
-    
-    self.prototypeCell = [self.tableView dequeueReusableCellWithIdentifier:@"BMCResourceDetailTableViewCell"];
+    [self.view addSubview:self.tableView];
+    self.tableView.tableFooterView = self.footerView;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self.getResourdeMetricListDP getResourceMetricListWithResId:self.eventVO.resId];
+    [self.getMainResourceMetricListDP getMainResourceMetricListWithResId:self.eventVO.resId];
 }
 
-#pragma mark - BMCGetResourceMetricListDelegate methods
-- (void)getResourceMetricListSucceed:(NSArray *)resultList {
+#pragma mark - BMCGetMainResourceMetricListDelegate methods
+- (void)getMainResourceMetricListSucceed:(NSArray *)resultList {
     [self.dataSource removeAllObjects];
     [self.dataSource addObjectsFromArray:resultList];
     [self.tableView reloadData];
-    
-    self.resourceName.text = self.eventVO.resName;
-    self.resourceIP.text = self.eventVO.ip;
-    self.resourceType.text = self.eventVO.resType;
 }
 
-- (void)getResourceMetricListFailed:(NSString *)errorMessage {
-    [[CustomShowMessage getInstance] showNotificationMessage:@"获取主资源信息失败!"];
+- (void)getMainResourceMetricListFailed:(NSString *)errorMessage {
+    [[CustomShowMessage getInstance] showNotificationMessage:@"获取资源详情失败!"];
 }
 
 #pragma mark - UITableViewDataSource&UITableViewDelegate methods
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return nil;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 60;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.dataSource.count;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    BMCResourceDetailTableViewCell *cell = (BMCResourceDetailTableViewCell *)self.prototypeCell;
-    
-    LogSummaryEventAlarmPojo *logSummaryEventAlarmPojo = (LogSummaryEventAlarmPojo *)self.dataSource[indexPath.row];
-    cell.contentLbl.text = [ColorHandler isNullOrEmptyString:logSummaryEventAlarmPojo.metricValue] ? @"——" : logSummaryEventAlarmPojo.metricValue;
-    
-    if ([cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height > 0) {
-        return [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height + 1;
-    } else {
-        return 44.f;
-    }
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    self.prototypeCell  = nil;
-    BMCResourceDetailTableViewCell *cell = (BMCResourceDetailTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"BMCResourceDetailTableViewCell" forIndexPath:indexPath];
-    
-    LogSummaryEventAlarmPojo *mainMetric = (LogSummaryEventAlarmPojo *)self.dataSource[indexPath.row];
-    cell.titleLbl.text = mainMetric.metricName;
-    cell.contentLbl.text = [ColorHandler isNullOrEmptyString:mainMetric.metricValue] ? @"——" : mainMetric.metricValue;
-    
-    self.prototypeCell = cell;
-    CALayer *layer = [CALayer layer];
-    layer.frame = CGRectMake(0, 0, self.prototypeCell.bounds.size.width, 1);
-    layer.backgroundColor = [ColorHandler colorFromHexRGB:@"F5F5F5"].CGColor;
-    [self.prototypeCell.layer addSublayer:layer];
-    [self.prototypeCell layoutIfNeeded];
-    
-    return self.prototypeCell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    LogSummaryEventAlarmPojo *mainMetric = (LogSummaryEventAlarmPojo *)self.dataSource[indexPath.row];
-    BMCSubResourceDetailViewController *subResourceDetailVC = [[BMCSubResourceDetailViewController alloc] init];
-    subResourceDetailVC.subResId = mainMetric.subResId;
-    [self.navigationController pushViewController:subResourceDetailVC animated:YES];
+- (void)onAddBtnClicked:(UIButton *)sender {
+    BMCSubResourceListViewController *subResourceListVC = [[BMCSubResourceListViewController alloc] init];
+    subResourceListVC.eventVO = self.eventVO;
+    [self.navigationController pushViewController:subResourceListVC animated:YES];
 }
 
 #pragma mark - setters&getters
+- (UITableView *)tableView {
+    if (!_tableView) {
+        //此处不明，为什么使用allocinit方式初始的tableview，进入不到编辑模式
+        _tableView = [UITableView new];
+        _tableView.frame = self.view.bounds;
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [_tableView registerNib:[UINib nibWithNibName:@"BMCSubResourceDetailTableViewCell" bundle:nil]
+         forCellReuseIdentifier:@"BMCSubResourceDetailTableViewCell"];
+    }
+    
+    return _tableView;
+}
+
+- (UIView *)footerView {
+    if (!_footerView) {
+        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 60)];
+        
+        CALayer *layer = [CALayer layer];
+        layer.frame = CGRectMake(0, _footerView.bounds.size.height - 1, _footerView.bounds.size.width, 1);
+        layer.backgroundColor = [ColorHandler colorFromHexRGB:@"DDDDDD"].CGColor;
+        [_footerView.layer addSublayer:layer];
+        
+        UIButton *addBtn = [UIButton new];
+        [addBtn setTitle:@"子资源列表" forState:UIControlStateNormal];
+        [addBtn addTarget:self action:@selector(onAddBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [_footerView addSubview:addBtn];
+        
+        [addBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(_footerView);
+        }];
+    }
+    
+    return _footerView;
+}
+
 - (NSMutableArray *)dataSource {
     if (!_dataSource) {
         _dataSource = [[NSMutableArray alloc] init];
@@ -115,13 +121,13 @@
     return _dataSource;
 }
 
-- (BMCGetResourceMetricListDataParse *)getResourdeMetricListDP {
-    if (!_getResourdeMetricListDP) {
-        _getResourdeMetricListDP = [[BMCGetResourceMetricListDataParse alloc] init];
-        _getResourdeMetricListDP.delegate = self;
+- (BMCGetMainResourceMetricListDataParse *)getMainResourceMetricListDP {
+    if (!_getMainResourceMetricListDP) {
+        _getMainResourceMetricListDP = [[BMCGetMainResourceMetricListDataParse alloc] init];
+        _getMainResourceMetricListDP.delegate = self;
     }
     
-    return _getResourdeMetricListDP;
+    return _getMainResourceMetricListDP;
 }
 
 @end

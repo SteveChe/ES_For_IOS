@@ -2,15 +2,14 @@
 //  BMCResourceDetailViewController.h
 //  MyRill
 //
-//  Created by Siyuan Wang on 15/9/17.
+//  Created by Siyuan Wang on 15/9/25.
 //
 //
 
 #import <UIKit/UIKit.h>
-#import "ESViewController.h"
 @class EventVO;
 
-@interface BMCResourceDetailViewController : ESViewController
+@interface BMCResourceDetailViewController : UIViewController
 
 @property (nonatomic, strong) EventVO *eventVO;
 
