@@ -13,11 +13,14 @@
 #import "CustomShowMessage.h"
 #import "ColorHandler.h"
 #import "BMCSubResourceListViewController.h"
+#import "BMCResourceAndSubMetricTableViewCell.h"
+#import "ResMetricPojo.h"
 
 @interface BMCResourceDetailViewController () <UITableViewDataSource, UITableViewDelegate, BMCGetMainResourceMetricListDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UIView *footerView;
+@property (nonatomic, strong) BMCResourceAndSubMetricTableViewCell *prototypeCell;
 
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) BMCGetMainResourceMetricListDataParse *getMainResourceMetricListDP;
@@ -33,6 +36,11 @@
     self.title = @"资源详情";
     [self.view addSubview:self.tableView];
     self.tableView.tableFooterView = self.footerView;
+    
+    [self.tableView registerNib:[UINib nibWithNibName:@"BMCResourceAndSubMetricTableViewCell" bundle:nil]
+         forCellReuseIdentifier:@"BMCResourceAndSubMetricTableViewCell"];
+    
+    self.prototypeCell = [self.tableView dequeueReusableCellWithIdentifier:@"BMCResourceAndSubMetricTableViewCell"];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -58,11 +66,42 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return nil;
+    self.prototypeCell  = nil;
+    BMCResourceAndSubMetricTableViewCell *cell = (BMCResourceAndSubMetricTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"BMCResourceAndSubMetricTableViewCell" forIndexPath:indexPath];
+    
+    ResMetricPojo *resMetricPojo = (ResMetricPojo *)self.dataSource[indexPath.row];
+    cell.titleLbl.text = resMetricPojo.metricName;
+    if ([ColorHandler isNullOrEmptyString:resMetricPojo.metricValue]) {
+        cell.contentLbl.text = @"——";
+    } else {
+        cell.contentLbl.text = [resMetricPojo.metricValue stringByAppendingString:resMetricPojo.metricUnit];
+    }
+    
+    self.prototypeCell = cell;
+    CALayer *layer = [CALayer layer];
+    layer.frame = CGRectMake(0, 0, self.prototypeCell.bounds.size.width, 1);
+    layer.backgroundColor = [ColorHandler colorFromHexRGB:@"F5F5F5"].CGColor;
+    [self.prototypeCell.layer addSublayer:layer];
+    [self.prototypeCell layoutIfNeeded];
+    
+    return self.prototypeCell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 60;
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    BMCResourceAndSubMetricTableViewCell *cell = (BMCResourceAndSubMetricTableViewCell *)self.prototypeCell;
+    
+    ResMetricPojo *resMetricPojo = (ResMetricPojo *)self.dataSource[indexPath.row];
+    if ([ColorHandler isNullOrEmptyString:resMetricPojo.metricValue]) {
+        cell.contentLbl.text = @"——";
+    } else {
+        cell.contentLbl.text = [resMetricPojo.metricValue stringByAppendingString:resMetricPojo.metricUnit];
+    }
+    
+    if ([cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height > 0) {
+        return [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height + 1;
+    } else {
+        return 55.f;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -80,12 +119,10 @@
     if (!_tableView) {
         //此处不明，为什么使用allocinit方式初始的tableview，进入不到编辑模式
         _tableView = [UITableView new];
-        _tableView.frame = self.view.bounds;
+        _tableView.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height - 16);
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        [_tableView registerNib:[UINib nibWithNibName:@"BMCSubResourceDetailTableViewCell" bundle:nil]
-         forCellReuseIdentifier:@"BMCSubResourceDetailTableViewCell"];
     }
     
     return _tableView;
@@ -93,15 +130,21 @@
 
 - (UIView *)footerView {
     if (!_footerView) {
-        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 60)];
-        
+        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 55)];
+
         CALayer *layer = [CALayer layer];
         layer.frame = CGRectMake(0, _footerView.bounds.size.height - 1, _footerView.bounds.size.width, 1);
         layer.backgroundColor = [ColorHandler colorFromHexRGB:@"DDDDDD"].CGColor;
         [_footerView.layer addSublayer:layer];
         
+        CALayer *layer1 = [CALayer layer];
+        layer1.frame = CGRectMake(0, 0, _footerView.bounds.size.width, 1);
+        layer1.backgroundColor = [ColorHandler colorFromHexRGB:@"DDDDDD"].CGColor;
+        [_footerView.layer addSublayer:layer1];
+        
         UIButton *addBtn = [UIButton new];
         [addBtn setTitle:@"子资源列表" forState:UIControlStateNormal];
+        [addBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
         [addBtn addTarget:self action:@selector(onAddBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
         [_footerView addSubview:addBtn];
         

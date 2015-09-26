@@ -22,7 +22,7 @@
                                                       NSLog(@"请求有误!");
                                                   } else {
                                                       NSArray *dataArray = (NSArray *)responseDic[@"resMetricList"];
-                                                      
+                                                      NSLog(@"%@",dataArray);
                                                       NSMutableArray *resultList = [[NSMutableArray alloc] init];
                                                       [dataArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                                                           ResMetricPojo *mainMetric = [[ResMetricPojo alloc] initWithDic:obj];

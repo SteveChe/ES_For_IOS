@@ -11,20 +11,20 @@
 
 @implementation BMCGetResourceDetailDataParse
 
-- (void)getResourceDetailWithResType:(NSString *)resType {
-    [AFHttpTool getResourceDetailWithResType:resType
-                                      sucess:^(id response) {
-                                          NSDictionary *responseDic = (NSDictionary *)response;
-                                          
-                                          if ([[responseDic allKeys] containsObject:@"error"]) {
-                                              NSLog(@"请求有误!");
-                                          } else {
-//                                              NSArray *dataArray = (NSArray *)responseDic[@"resInstList"];
-//                                              [self.delegate getResourceDetailSucceed:resultList];
-                                          }
-                                      } failure:^(NSError *err) {
-                                          ;
-                                      }];
-}
+//- (void)getResourceDetailWithResType:(NSString *)resType {
+//    [AFHttpTool getResourceDetailWithResType:resType
+//                                      sucess:^(id response) {
+//                                          NSDictionary *responseDic = (NSDictionary *)response;
+//                                          
+//                                          if ([[responseDic allKeys] containsObject:@"error"]) {
+//                                              NSLog(@"请求有误!");
+//                                          } else {
+////                                              NSArray *dataArray = (NSArray *)responseDic[@"resInstList"];
+////                                              [self.delegate getResourceDetailSucceed:resultList];
+//                                          }
+//                                      } failure:^(NSError *err) {
+//                                          ;
+//                                      }];
+//}
 
 @end

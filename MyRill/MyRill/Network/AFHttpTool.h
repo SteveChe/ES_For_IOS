@@ -97,29 +97,37 @@ typedef enum : NSUInteger {
                       sucess:(void (^)(id response))success
                      failure:(void (^)(NSError* err))failure;
 
+//获取告警列表
 + (void)getEmergencyListWithViewType:(NSString *)viewType
                               sucess:(void (^)(id response))success
                              failure:(void (^)(NSError* err))failure;
 
+//获取主资源指标列表
 + (void)getMainResourceMetricListWithResId:(NSString *)resId
                                     sucess:(void (^)(id response))success
                                    failure:(void (^)(NSError* err))failure;
 
-+ (void)getResourceDetailWithResType:(NSString *)resType
-                              sucess:(void (^)(id response))success
-                             failure:(void (^)(NSError* err))failure;
+//获取主资源的子资源列表
++ (void)getSubResourceListWithResId:(NSString *)resId
+                             sucess:(void (^)(id response))success
+                            failure:(void (^)(NSError* err))failure;
 
+//获取子资源详情
 + (void)getSubResourceMetricListWithSubResId:(NSString *)subResId
                                       sucess:(void (^)(id response))success
                                      failure:(void (^)(NSError* err))failure;
 
-+ (void)getMainResourceListWithTreeNodeId:(NSString *)treeNodeId
-                                pageIndex:(NSString *)pageIndex
-                                    state:(NSString *)state
-                               sortColumn:(NSString *)sortColumn
-                                 sortType:(NSString *)sortType
-                                   sucess:(void (^)(id response))success
-                                  failure:(void (^)(NSError* err))failure;
+//+ (void)getResourceDetailWithResType:(NSString *)resType
+//                              sucess:(void (^)(id response))success
+//                             failure:(void (^)(NSError* err))failure;
+//
+//+ (void)getMainResourceListWithTreeNodeId:(NSString *)treeNodeId
+//                                pageIndex:(NSString *)pageIndex
+//                                    state:(NSString *)state
+//                               sortColumn:(NSString *)sortColumn
+//                                 sortType:(NSString *)sortType
+//                                   sucess:(void (^)(id response))success
+//                                  failure:(void (^)(NSError* err))failure;
 
 //get RongCloud Token
 +(void)getRongTokenSuccess:(void (^)(id response))success

@@ -14,33 +14,33 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" text="——" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QQ1-0s-Lxk">
-                        <rect key="frame" x="252" y="12" width="30" height="19.5"/>
-                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wZw-Dc-VQ7">
                         <rect key="frame" x="20" y="12" width="30" height="19"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" image="右箭头" translatesAutoresizingMaskIntoConstraints="NO" id="hMC-HX-UGu">
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" image="右箭头" translatesAutoresizingMaskIntoConstraints="NO" id="hMC-HX-UGu">
                         <rect key="frame" x="290" y="13" width="10" height="17"/>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" text="——" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QQ1-0s-Lxk">
+                        <rect key="frame" x="54" y="12" width="30" height="19.5"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="centerY" secondItem="hMC-HX-UGu" secondAttribute="centerY" id="DxO-At-tye"/>
                     <constraint firstAttribute="centerY" secondItem="wZw-Dc-VQ7" secondAttribute="centerY" id="KEB-XP-Mzf"/>
                     <constraint firstAttribute="bottom" secondItem="QQ1-0s-Lxk" secondAttribute="bottom" constant="12" id="KzV-v9-e6W"/>
                     <constraint firstAttribute="trailing" secondItem="hMC-HX-UGu" secondAttribute="trailing" constant="20" symbolic="YES" id="Ncv-ki-Ikh"/>
-                    <constraint firstItem="QQ1-0s-Lxk" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="wZw-Dc-VQ7" secondAttribute="trailing" constant="20" id="UPl-bq-H5I"/>
+                    <constraint firstItem="QQ1-0s-Lxk" firstAttribute="leading" secondItem="wZw-Dc-VQ7" secondAttribute="trailing" constant="4" id="UPl-bq-H5I"/>
                     <constraint firstItem="QQ1-0s-Lxk" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="XTN-kV-bhg"/>
-                    <constraint firstItem="hMC-HX-UGu" firstAttribute="leading" secondItem="QQ1-0s-Lxk" secondAttribute="trailing" constant="8" symbolic="YES" id="YbP-yp-EqW"/>
                     <constraint firstItem="wZw-Dc-VQ7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" symbolic="YES" id="j81-Gf-UXr"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="arrowView" destination="hMC-HX-UGu" id="lWa-X6-9Hm"/>
                 <outlet property="contentLbl" destination="QQ1-0s-Lxk" id="WtP-2Z-Ix6"/>
                 <outlet property="titleLbl" destination="wZw-Dc-VQ7" id="5IE-Nt-x9s"/>
             </connections>

@@ -12,5 +12,6 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLbl;
 @property (weak, nonatomic) IBOutlet UILabel *contentLbl;
+@property (weak, nonatomic) IBOutlet UIImageView *arrowView;
 
 @end

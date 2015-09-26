@@ -8,7 +8,7 @@
 
 #import "BMCSubResourceDetailViewController.h"
 #import "BMCGetSubResourceMetricListDataParse.h"
-#import "BMCSubResourceDetailTableViewCell.h"
+#import "BMCResourceAndSubMetricTableViewCell.h"
 #import "ResMetricPojo.h"
 #import "ColorHandler.h"
 #import "CustomShowMessage.h"
@@ -16,7 +16,7 @@
 @interface BMCSubResourceDetailViewController () <UITableViewDataSource, UITableViewDelegate, BMCGetSubResourceMetricListDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) BMCSubResourceDetailTableViewCell *prototypeCell;
+@property (nonatomic, strong) BMCResourceAndSubMetricTableViewCell *prototypeCell;
 
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) BMCGetSubResourceMetricListDataParse *getSubResourceMetricListDP;
@@ -32,7 +32,7 @@
     self.title = @"子资源详情";
     [self.view addSubview:self.tableView];
     
-    self.prototypeCell = [self.tableView dequeueReusableCellWithIdentifier:@"BMCSubResourceDetailTableViewCell"];
+    self.prototypeCell = [self.tableView dequeueReusableCellWithIdentifier:@"BMCResourceAndSubMetricTableViewCell"];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -49,7 +49,7 @@
 }
 
 - (void)getSubResourceMetricListFailed:(NSString *)errorMessage {
-    [[CustomShowMessage getInstance] showNotificationMessage:@"获取子资源指标信息失败!"];
+    [[CustomShowMessage getInstance] showNotificationMessage:@"获取子资源详情失败!"];
 }
 
 #pragma mark - UITableViewDataSource&UITableViewDelegate methods
@@ -58,10 +58,14 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    BMCSubResourceDetailTableViewCell *cell = (BMCSubResourceDetailTableViewCell *)self.prototypeCell;
+    BMCResourceAndSubMetricTableViewCell *cell = (BMCResourceAndSubMetricTableViewCell *)self.prototypeCell;
     
-    ResMetricPojo *logSummaryEventAlarmPojo = (ResMetricPojo *)self.dataSource[indexPath.row];
-    cell.contentLbl.text = [ColorHandler isNullOrEmptyString:logSummaryEventAlarmPojo.metricValue] ? @"——" : logSummaryEventAlarmPojo.metricValue;
+    ResMetricPojo *resMetricPojo = (ResMetricPojo *)self.dataSource[indexPath.row];
+    if ([ColorHandler isNullOrEmptyString:resMetricPojo.metricValue]) {
+        cell.contentLbl.text = @"——";
+    } else {
+        cell.contentLbl.text = [resMetricPojo.metricValue stringByAppendingString:resMetricPojo.metricUnit];
+    }
     
     if ([cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height > 0) {
         return [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height + 1;
@@ -76,10 +80,14 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     self.prototypeCell  = nil;
-    BMCSubResourceDetailTableViewCell *subResourceDetailCell = (BMCSubResourceDetailTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"BMCSubResourceDetailTableViewCell" forIndexPath:indexPath];
-    ResMetricPojo *logSummaryEventAlarmPojo = (ResMetricPojo *)self.dataSource[indexPath.row];
-    subResourceDetailCell.titleLbl.text = logSummaryEventAlarmPojo.metricName;
-    subResourceDetailCell.contentLbl.text = [ColorHandler isNullOrEmptyString:logSummaryEventAlarmPojo.metricValue] ? @"——" : logSummaryEventAlarmPojo.metricValue;
+    BMCResourceAndSubMetricTableViewCell *subResourceDetailCell = (BMCResourceAndSubMetricTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"BMCResourceAndSubMetricTableViewCell" forIndexPath:indexPath];
+    ResMetricPojo *resMetricPojo = (ResMetricPojo *)self.dataSource[indexPath.row];
+    subResourceDetailCell.titleLbl.text = resMetricPojo.metricName;
+    if ([ColorHandler isNullOrEmptyString:resMetricPojo.metricValue]) {
+        subResourceDetailCell.contentLbl.text = @"——";
+    } else {
+        subResourceDetailCell.contentLbl.text = [resMetricPojo.metricValue stringByAppendingString:resMetricPojo.metricUnit];
+    }
     
     self.prototypeCell = subResourceDetailCell;
     CALayer *layer = [CALayer layer];
@@ -99,7 +107,7 @@
         _tableView.delegate = self;
         _tableView.separatorStyle = UITableViewCellSelectionStyleNone;
         _tableView.allowsSelection = NO;
-        [_tableView registerNib:[UINib nibWithNibName:@"BMCSubResourceDetailTableViewCell" bundle:nil] forCellReuseIdentifier:@"BMCSubResourceDetailTableViewCell"];
+        [_tableView registerNib:[UINib nibWithNibName:@"BMCResourceAndSubMetricTableViewCell" bundle:nil] forCellReuseIdentifier:@"BMCResourceAndSubMetricTableViewCell"];
     }
     
     return _tableView;

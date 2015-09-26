@@ -62,9 +62,11 @@
 		2B39C9941B37E5F2007BAC7A /* ResetPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B39C9921B37E5F2007BAC7A /* ResetPwdViewController.m */; };
 		2B39C9951B37E5F2007BAC7A /* ResetPwdViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B39C9931B37E5F2007BAC7A /* ResetPwdViewController.xib */; };
 		2B39C9971B37E634007BAC7A /* SignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B39C9961B37E634007BAC7A /* SignUpViewController.xib */; };
-		2B42A8691BB1432400E47193 /* BMCSubResourceDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B42A8671BB1432400E47193 /* BMCSubResourceDetailTableViewCell.m */; };
-		2B42A86A1BB1432400E47193 /* BMCSubResourceDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B42A8681BB1432400E47193 /* BMCSubResourceDetailTableViewCell.xib */; };
+		2B42A8691BB1432400E47193 /* BMCResourceAndSubMetricTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B42A8671BB1432400E47193 /* BMCResourceAndSubMetricTableViewCell.m */; };
+		2B42A86A1BB1432400E47193 /* BMCResourceAndSubMetricTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B42A8681BB1432400E47193 /* BMCResourceAndSubMetricTableViewCell.xib */; };
 		2B42A86D1BB230A900E47193 /* GetVerificationCodeDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B42A86C1BB230A900E47193 /* GetVerificationCodeDataParse.m */; };
+		2B4513A81BB6479600F78C40 /* BMCGetSubResourceListDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B4513A71BB6479600F78C40 /* BMCGetSubResourceListDataParse.m */; };
+		2B4513AB1BB64A6E00F78C40 /* SubResPojo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B4513AA1BB64A6E00F78C40 /* SubResPojo.m */; };
 		2B5A590C1B48DFBB000382D7 /* MRBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5A58E81B48DFBB000382D7 /* MRBlurView.m */; };
 		2B5A590D1B48DFBB000382D7 /* UIImage+MRImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5A58EA1B48DFBB000382D7 /* UIImage+MRImageEffects.m */; };
 		2B5A590E1B48DFBB000382D7 /* MRActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5A58ED1B48DFBB000382D7 /* MRActivityIndicatorView.m */; };
@@ -467,11 +469,15 @@
 		2B39C9921B37E5F2007BAC7A /* ResetPwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResetPwdViewController.m; sourceTree = "<group>"; };
 		2B39C9931B37E5F2007BAC7A /* ResetPwdViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResetPwdViewController.xib; sourceTree = "<group>"; };
 		2B39C9961B37E634007BAC7A /* SignUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignUpViewController.xib; sourceTree = "<group>"; };
-		2B42A8661BB1432400E47193 /* BMCSubResourceDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMCSubResourceDetailTableViewCell.h; sourceTree = "<group>"; };
-		2B42A8671BB1432400E47193 /* BMCSubResourceDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMCSubResourceDetailTableViewCell.m; sourceTree = "<group>"; };
-		2B42A8681BB1432400E47193 /* BMCSubResourceDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BMCSubResourceDetailTableViewCell.xib; sourceTree = "<group>"; };
+		2B42A8661BB1432400E47193 /* BMCResourceAndSubMetricTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMCResourceAndSubMetricTableViewCell.h; sourceTree = "<group>"; };
+		2B42A8671BB1432400E47193 /* BMCResourceAndSubMetricTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMCResourceAndSubMetricTableViewCell.m; sourceTree = "<group>"; };
+		2B42A8681BB1432400E47193 /* BMCResourceAndSubMetricTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BMCResourceAndSubMetricTableViewCell.xib; sourceTree = "<group>"; };
 		2B42A86B1BB230A900E47193 /* GetVerificationCodeDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetVerificationCodeDataParse.h; sourceTree = "<group>"; };
 		2B42A86C1BB230A900E47193 /* GetVerificationCodeDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetVerificationCodeDataParse.m; sourceTree = "<group>"; };
+		2B4513A61BB6479600F78C40 /* BMCGetSubResourceListDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMCGetSubResourceListDataParse.h; sourceTree = "<group>"; };
+		2B4513A71BB6479600F78C40 /* BMCGetSubResourceListDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMCGetSubResourceListDataParse.m; sourceTree = "<group>"; };
+		2B4513A91BB64A6E00F78C40 /* SubResPojo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubResPojo.h; sourceTree = "<group>"; };
+		2B4513AA1BB64A6E00F78C40 /* SubResPojo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubResPojo.m; sourceTree = "<group>"; };
 		2B5A58E71B48DFBB000382D7 /* MRBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRBlurView.h; sourceTree = "<group>"; };
 		2B5A58E81B48DFBB000382D7 /* MRBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRBlurView.m; sourceTree = "<group>"; };
 		2B5A58E91B48DFBB000382D7 /* UIImage+MRImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+MRImageEffects.h"; sourceTree = "<group>"; };
@@ -1029,12 +1035,14 @@
 				2BEEE6F01BA6B150008D4DF3 /* BMCGetEmergencyListDataParse.m */,
 				2B93E92D1BAD46150026EB39 /* BMCGetMainResourceMetricListDataParse.h */,
 				2B93E92E1BAD46150026EB39 /* BMCGetMainResourceMetricListDataParse.m */,
+				2B4513A61BB6479600F78C40 /* BMCGetSubResourceListDataParse.h */,
+				2B4513A71BB6479600F78C40 /* BMCGetSubResourceListDataParse.m */,
+				2B93E9301BAD50360026EB39 /* BMCGetSubResourceMetricListDataParse.h */,
+				2B93E9311BAD50360026EB39 /* BMCGetSubResourceMetricListDataParse.m */,
 				2B2B84AF1BA044370043EFD4 /* BMCGetMainResourceListDataParse.h */,
 				2B2B84B01BA044370043EFD4 /* BMCGetMainResourceListDataParse.m */,
 				2B93E92A1BAD3EF30026EB39 /* BMCGetResourceDetailDataParse.h */,
 				2B93E92B1BAD3EF30026EB39 /* BMCGetResourceDetailDataParse.m */,
-				2B93E9301BAD50360026EB39 /* BMCGetSubResourceMetricListDataParse.h */,
-				2B93E9311BAD50360026EB39 /* BMCGetSubResourceMetricListDataParse.m */,
 			);
 			name = BMC;
 			sourceTree = "<group>";
@@ -1105,6 +1113,8 @@
 				2BEEE6F31BA6BAA4008D4DF3 /* EventVO.m */,
 				2B93E9381BAD6E320026EB39 /* ResMetricPojo.h */,
 				2B93E9391BAD6E320026EB39 /* ResMetricPojo.m */,
+				2B4513A91BB64A6E00F78C40 /* SubResPojo.h */,
+				2B4513AA1BB64A6E00F78C40 /* SubResPojo.m */,
 			);
 			name = BMC;
 			sourceTree = "<group>";
@@ -1713,9 +1723,9 @@
 				2B93E9251BAA92DE0026EB39 /* BMCResourceDetailTableViewCell.h */,
 				2B93E9261BAA92DE0026EB39 /* BMCResourceDetailTableViewCell.m */,
 				2B93E9271BAA92DE0026EB39 /* BMCResourceDetailTableViewCell.xib */,
-				2B42A8661BB1432400E47193 /* BMCSubResourceDetailTableViewCell.h */,
-				2B42A8671BB1432400E47193 /* BMCSubResourceDetailTableViewCell.m */,
-				2B42A8681BB1432400E47193 /* BMCSubResourceDetailTableViewCell.xib */,
+				2B42A8661BB1432400E47193 /* BMCResourceAndSubMetricTableViewCell.h */,
+				2B42A8671BB1432400E47193 /* BMCResourceAndSubMetricTableViewCell.m */,
+				2B42A8681BB1432400E47193 /* BMCResourceAndSubMetricTableViewCell.xib */,
 			);
 			name = BMC;
 			sourceTree = "<group>";
@@ -2202,7 +2212,7 @@
 				F2467F001B8DD9E10055B78B /* RootCardBottomCell.xib in Resources */,
 				2B6038871B79C6A4005B721F /* TaskContactorCollectionViewCell.xib in Resources */,
 				2BE8C22D1B4EB3A200858CEE /* AddProfessionViewController.xib in Resources */,
-				2B42A86A1BB1432400E47193 /* BMCSubResourceDetailTableViewCell.xib in Resources */,
+				2B42A86A1BB1432400E47193 /* BMCResourceAndSubMetricTableViewCell.xib in Resources */,
 				2B37E44D1B53967D00F671A1 /* ModifyProfessionViewController.xib in Resources */,
 				2B2B84B91BA1536C0043EFD4 /* BMCMainViewController.xib in Resources */,
 				2BC8213B1B5C9FF70090E2C1 /* ShowQRCodeViewController.xib in Resources */,
@@ -2291,6 +2301,7 @@
 				2BEEE6F91BA6C9EB008D4DF3 /* BMCEmergencyTableViewCell.m in Sources */,
 				2B5A590D1B48DFBB000382D7 /* UIImage+MRImageEffects.m in Sources */,
 				2B39C9441B24128F007BAC7A /* LoginViewController.m in Sources */,
+				2B4513A81BB6479600F78C40 /* BMCGetSubResourceListDataParse.m in Sources */,
 				F23461761B5AA6E400C88FAC /* AddressBookContactListDataSource.m in Sources */,
 				2B04436F1BA1AC5F00BC7BF4 /* DeleteProfessionDataParse.m in Sources */,
 				2BE55A121B64843A008CDB4B /* TaskListTableViewCell.m in Sources */,
@@ -2300,7 +2311,7 @@
 				F22FE2E71B4000ED00A1A997 /* SDWebImageCompat.m in Sources */,
 				2BC227791B942A3600E3163A /* ELCImagePickerDemoViewController.m in Sources */,
 				F23059C31B56AD65004599FA /* GetContactDetailDataParse.m in Sources */,
-				2B42A8691BB1432400E47193 /* BMCSubResourceDetailTableViewCell.m in Sources */,
+				2B42A8691BB1432400E47193 /* BMCResourceAndSubMetricTableViewCell.m in Sources */,
 				2B9CBB6C1B4571D0007D7A45 /* SignOutDataParse.m in Sources */,
 				F22FE2851B3ADC5700A1A997 /* UIImage+RCImage.m in Sources */,
 				2B5A59101B48DFBB000382D7 /* MRIconView.m in Sources */,
@@ -2475,6 +2486,7 @@
 				F29F864A1B2410320058FC9F /* UIWebView+AFNetworking.m in Sources */,
 				F28442B81B80D0BD004F94E2 /* ComplexMessageCell.m in Sources */,
 				2B5A59151B48DFBB000382D7 /* MRActivityIndicatorView+AFNetworking.m in Sources */,
+				2B4513AB1BB64A6E00F78C40 /* SubResPojo.m in Sources */,
 				F22FE2F31B4000ED00A1A997 /* UIView+WebCacheOperation.m in Sources */,
 				2BEAD06E1B76FF2400905E21 /* SWUtilityButtonTapGestureRecognizer.m in Sources */,
 				2B37E44C1B53967D00F671A1 /* ModifyProfessionViewController.m in Sources */,

@@ -10,12 +10,12 @@
 #import "BMCResourceDetailTableViewCell.h"
 #import "EventVO.h"
 #import "ColorHandler.h"
-
-#import "ResMetricPojo.h"
+#import "BMCGetSubResourceListDataParse.h"
+#import "SubResPojo.h"
 #import "BMCSubResourceDetailViewController.h"
 #import "CustomShowMessage.h"
 
-@interface BMCSubResourceListViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface BMCSubResourceListViewController () <UITableViewDataSource, UITableViewDelegate, BMCGetSubResourceListDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UILabel *resourceName;
@@ -24,7 +24,7 @@
 @property (nonatomic, strong) BMCResourceDetailTableViewCell *prototypeCell;
 
 @property (nonatomic, strong) NSMutableArray *dataSource;
-
+@property (nonatomic, strong) BMCGetSubResourceListDataParse *getSubResourceListDP;
 
 @end
 
@@ -40,28 +40,25 @@
          forCellReuseIdentifier:@"BMCResourceDetailTableViewCell"];
     
     self.prototypeCell = [self.tableView dequeueReusableCellWithIdentifier:@"BMCResourceDetailTableViewCell"];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
     
-
+    //数据量大，只在viewDidLoad中获取一次，避免重新出栈时在获取一次
+    [self.getSubResourceListDP getSubResourceListWithResId:self.eventVO.resId];
 }
 
 #pragma mark - BMCGetResourceMetricListDelegate methods
-//- (void)getResourceMetricListSucceed:(NSArray *)resultList {
-//    [self.dataSource removeAllObjects];
-//    [self.dataSource addObjectsFromArray:resultList];
-//    [self.tableView reloadData];
-//    
-//    self.resourceName.text = self.eventVO.resName;
-//    self.resourceIP.text = self.eventVO.ip;
-//    self.resourceType.text = self.eventVO.resType;
-//}
-//
-//- (void)getResourceMetricListFailed:(NSString *)errorMessage {
-//    [[CustomShowMessage getInstance] showNotificationMessage:@"获取主资源信息失败!"];
-//}
+- (void)getSubResourceListSucceed:(NSDictionary *)resultDic {
+    [self.dataSource removeAllObjects];
+    [self.dataSource addObjectsFromArray:resultDic[@"subResList"]];
+    [self.tableView reloadData];
+    
+    self.resourceName.text = resultDic[@"resName"];
+    self.resourceIP.text = resultDic[@"resIp"];
+    self.resourceType.text = resultDic[@"resType"];
+}
+
+- (void)getSubResourceListFailed:(NSString *)errorMessage {
+    [[CustomShowMessage getInstance] showNotificationMessage:@"获取子资源列表失败!"];
+}
 
 #pragma mark - UITableViewDataSource&UITableViewDelegate methods
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -71,8 +68,8 @@
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
     BMCResourceDetailTableViewCell *cell = (BMCResourceDetailTableViewCell *)self.prototypeCell;
     
-    ResMetricPojo *logSummaryEventAlarmPojo = (ResMetricPojo *)self.dataSource[indexPath.row];
-    cell.contentLbl.text = [ColorHandler isNullOrEmptyString:logSummaryEventAlarmPojo.metricValue] ? @"——" : logSummaryEventAlarmPojo.metricValue;
+    SubResPojo *subResPojo = (SubResPojo *)self.dataSource[indexPath.row];
+    cell.contentLbl.text = [ColorHandler isNullOrEmptyString:subResPojo.subName] ? @"——" : subResPojo.subName;
     
     if ([cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height > 0) {
         return [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height + 1;
@@ -85,9 +82,10 @@
     self.prototypeCell  = nil;
     BMCResourceDetailTableViewCell *cell = (BMCResourceDetailTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"BMCResourceDetailTableViewCell" forIndexPath:indexPath];
     
-    ResMetricPojo *mainMetric = (ResMetricPojo *)self.dataSource[indexPath.row];
-    cell.titleLbl.text = mainMetric.metricName;
-    cell.contentLbl.text = [ColorHandler isNullOrEmptyString:mainMetric.metricValue] ? @"——" : mainMetric.metricValue;
+    SubResPojo *subResPojo = (SubResPojo *)self.dataSource[indexPath.row];
+    cell.titleLbl.text = [NSString stringWithFormat:@"(%@)",subResPojo.subResType];
+    cell.contentLbl.text = [ColorHandler isNullOrEmptyString:subResPojo.subName] ? @"——" : subResPojo.subName;
+    cell.arrowView.hidden = [ColorHandler isNullOrEmptyString:subResPojo.subResId] ? YES : NO;
     
     self.prototypeCell = cell;
     CALayer *layer = [CALayer layer];
@@ -100,9 +98,13 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    ResMetricPojo *mainMetric = (ResMetricPojo *)self.dataSource[indexPath.row];
+    SubResPojo *subResPojo = (SubResPojo *)self.dataSource[indexPath.row];
+    NSLog(@"%@",subResPojo.subResId);
+    if ([ColorHandler isNullOrEmptyString:subResPojo.subResId]) {
+        return;
+    }
     BMCSubResourceDetailViewController *subResourceDetailVC = [[BMCSubResourceDetailViewController alloc] init];
-    subResourceDetailVC.subResId = mainMetric.subResId;
+    subResourceDetailVC.subResId = subResPojo.subResId;
     [self.navigationController pushViewController:subResourceDetailVC animated:YES];
 }
 
@@ -113,6 +115,15 @@
     }
     
     return _dataSource;
+}
+
+- (BMCGetSubResourceListDataParse *)getSubResourceListDP {
+    if (!_getSubResourceListDP) {
+        _getSubResourceListDP = [[BMCGetSubResourceListDataParse alloc] init];
+        _getSubResourceListDP.delegate = self;
+    }
+    
+    return _getSubResourceListDP;
 }
 
 @end

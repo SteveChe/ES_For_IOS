@@ -19,10 +19,10 @@
 
 @property (nonatomic, weak) id<BMCGetMainResourceListDelegate> delegate;
 
-- (void)getMainResourceListWithTreeNodeId:(NSString *)treeNodeId
-                                pageIndex:(NSString *)pageIndex
-                                    state:(NSString *)state
-                               sortColumn:(NSString *)sortColumn
-                                 sortType:(NSString *)sortType;
+//- (void)getMainResourceListWithTreeNodeId:(NSString *)treeNodeId
+//                                pageIndex:(NSString *)pageIndex
+//                                    state:(NSString *)state
+//                               sortColumn:(NSString *)sortColumn
+//                                 sortType:(NSString *)sortType;
 
 @end

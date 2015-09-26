@@ -19,6 +19,6 @@
 
 @property (nonatomic, weak) id<BMCGetResourceDetailDelegate> delegate;
 
-- (void)getResourceDetailWithResType:(NSString *)resType;
+//- (void)getResourceDetailWithResType:(NSString *)resType;
 
 @end

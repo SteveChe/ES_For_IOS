@@ -1,14 +1,14 @@
 //
-//  BMCSubResourceDetailTableViewCell.m
+//  BMCResourceAndSubMetricTableViewCell.m
 //  MyRill
 //
 //  Created by Siyuan Wang on 15/9/22.
 //
 //
 
-#import "BMCSubResourceDetailTableViewCell.h"
+#import "BMCResourceAndSubMetricTableViewCell.h"
 
-@implementation BMCSubResourceDetailTableViewCell
+@implementation BMCResourceAndSubMetricTableViewCell
 
 - (void)awakeFromNib {
     // Initialization code

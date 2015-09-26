@@ -1008,7 +1008,7 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
     
     NSURL* baseURL = [NSURL URLWithString:[userDefault objectForKey:@"BMC_URL"]];
     //获得请求管理者
-    AFHTTPRequestOperationManager *mgr = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:baseURL];
+    AFHTTPRequestOperationManager *mgr = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:@"http://114.251.56.237:8090/bmc/main"]];
 //    mgr.requestSerializer = [AFJSONRequestSerializer serializer];
     mgr.requestSerializer.HTTPShouldHandleCookies = YES;
     mgr.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html", nil];
@@ -1157,17 +1157,7 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
                           failure:failure];
 }
 
-+ (void)getResourceDetailWithResType:(NSString *)resType
-                              sucess:(void (^)(id response))success
-                             failure:(void (^)(NSError* err))failure {
-    NSDictionary *param = @{@"resType":resType};
-    
-    [AFHttpTool requestWithMethod:RequestMethodTypePost
-                              url:@"/adapter/res/getResInstanceList.json"
-                           params:param
-                          success:success
-                          failure:failure];
-}
+
 
 + (void)getMainResourceMetricListWithResId:(NSString *)resId
                                     sucess:(void (^)(id))success
@@ -1176,6 +1166,18 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
     
     [AFHttpTool requestWithMethod:RequestMethodTypePost
                               url:@"/adapter/res/getResMetricList.json"
+                           params:param
+                          success:success
+                          failure:failure];
+}
+
++ (void)getSubResourceListWithResId:(NSString *)resId
+                             sucess:(void (^)(id response))success
+                            failure:(void (^)(NSError* err))failure {
+    NSDictionary *param = @{@"resId":resId};
+
+    [AFHttpTool requestWithMethod:RequestMethodTypePost
+                              url:@"/adapter/res/getResInstanceById.json"
                            params:param
                           success:success
                           failure:failure];
@@ -1193,25 +1195,37 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
                           failure:failure];
 }
 
-+ (void)getMainResourceListWithTreeNodeId:(NSString *)treeNodeId
-                                pageIndex:(NSString *)pageIndex
-                                    state:(NSString *)state
-                               sortColumn:(NSString *)sortColumn
-                                 sortType:(NSString *)sortType
-                                   sucess:(void (^)(id response))success
-                                  failure:(void (^)(NSError* err))failure {
-    NSDictionary *param = @{@"treeNodeId":treeNodeId,
-                            @"pageIndex":pageIndex,
-                            @"state":state,
-                            @"sortColumn":sortColumn,
-                            @"sortType":sortType};
-    
-    [AFHttpTool requestWithMethod:RequestMethodTypePost
-                              url:@"/adapter/res/list.json"
-                           params:param
-                          success:success
-                          failure:failure];
-}
+//+ (void)getResourceDetailWithResType:(NSString *)resType
+//                              sucess:(void (^)(id response))success
+//                             failure:(void (^)(NSError* err))failure {
+//    NSDictionary *param = @{@"resType":resType};
+//    
+//    [AFHttpTool requestWithMethod:RequestMethodTypePost
+//                              url:@"/adapter/res/getResInstanceList.json"
+//                           params:param
+//                          success:success
+//                          failure:failure];
+//}
+//
+//+ (void)getMainResourceListWithTreeNodeId:(NSString *)treeNodeId
+//                                pageIndex:(NSString *)pageIndex
+//                                    state:(NSString *)state
+//                               sortColumn:(NSString *)sortColumn
+//                                 sortType:(NSString *)sortType
+//                                   sucess:(void (^)(id response))success
+//                                  failure:(void (^)(NSError* err))failure {
+//    NSDictionary *param = @{@"treeNodeId":treeNodeId,
+//                            @"pageIndex":pageIndex,
+//                            @"state":state,
+//                            @"sortColumn":sortColumn,
+//                            @"sortType":sortType};
+//    
+//    [AFHttpTool requestWithMethod:RequestMethodTypePost
+//                              url:@"/adapter/res/list.json"
+//                           params:param
+//                          success:success
+//                          failure:failure];
+//}
 
 //app版本信息
 +(void)getAppVersionSucess:(void (^)(id response))success failure:(void (^)(NSError* err))failure
