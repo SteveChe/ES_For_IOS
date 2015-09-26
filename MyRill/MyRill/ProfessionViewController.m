@@ -69,6 +69,13 @@
 - (void)getProfessionListSuccess:(NSArray *)list {
     [self.dataSource removeAllObjects];
     [self.dataSource addObjectsFromArray:list];
+    
+    ESProfession *professionBMC = [[ESProfession alloc] init];
+    professionBMC.name = @"BMC临时测试";
+    professionBMC.professionType = @"BMC";
+    professionBMC.isSystem = YES;
+    [self.dataSource addObject:professionBMC];
+    
     ESProfession *profession = [[ESProfession alloc] init];
     profession.icon_url = @"add";
     [self.dataSource addObject:profession];
@@ -149,84 +156,51 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-//    if (indexPath.row == self.dataSource.count - 1) {
-//        AddProfessionViewController *addProfessionVC = [[AddProfessionViewController alloc] init];
-//        [self.navigationController pushViewController:addProfessionVC animated:YES];
-//    } else {
-//        ESProfession *profession = (ESProfession *)self.dataSource[indexPath.row];
-//        if ([profession.professionType isEqualToString:@"BMC"]) {
-//            NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
-//            [userDefault setValue:profession.url forKey:@"BMC_URL"];
-//            [userDefault synchronize];
-//            
-//            UIViewController *vc = nil;
-//            NSData *cookiesdata = [userDefault objectForKey:@"sessionCookies"];
-//            if([cookiesdata length]) {
-//                NSArray *cookies = [NSKeyedUnarchiver unarchiveObjectWithData:cookiesdata];
-//                NSHTTPCookie *cookie;
-//                BOOL jsessionidLogin = false;
-//                BOOL ssoTokenLogin = false;
-//                for (cookie in cookies) {
-//                    if ([cookie.name isEqual:@"JSESSIONID"] )
-//                    {
-//                        if([cookie.value length])
-//                            jsessionidLogin = true;
-//                    }
-//                    if ([cookie.name isEqual:@"SSOToken"] )
-//                    {
-//                        if([cookie.value length])
-//                            ssoTokenLogin = true;
-//                    }
-//                }
-//                if (jsessionidLogin && ssoTokenLogin) {
-//                    vc = [[BMCMainViewController alloc] init];
-//                } else {
-//                    vc = [[BMCLoginViewController alloc] init];
-//                }
-//            } else {
-//                vc = [[BMCLoginViewController alloc] init];
-//            }
-//            [self.navigationController pushViewController:vc animated:YES];
-//        } else {
-//            ProfessionWebViewController *webVC = [[ProfessionWebViewController alloc] init];
-//            webVC.title = profession.name;
-//            webVC.type = ESWebProfessionWithURL;
-//            webVC.urlString = profession.url;
-//            [self.navigationController pushViewController:webVC animated:YES];
-//        }
-//    }
-    
     if (indexPath.row == self.dataSource.count - 1) {
-        NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
-        
-        UIViewController *vc = nil;
-        NSData *cookiesdata = [userDefault objectForKey:@"sessionCookies"];
-        if([cookiesdata length]) {
-            NSArray *cookies = [NSKeyedUnarchiver unarchiveObjectWithData:cookiesdata];
-            NSHTTPCookie *cookie;
-            BOOL jsessionidLogin = false;
-            BOOL ssoTokenLogin = false;
-            for (cookie in cookies) {
-                if ([cookie.name isEqual:@"JSESSIONID"] )
-                {
-                    if([cookie.value length])
-                        jsessionidLogin = true;
+        AddProfessionViewController *addProfessionVC = [[AddProfessionViewController alloc] init];
+        [self.navigationController pushViewController:addProfessionVC animated:YES];
+    } else {
+        ESProfession *profession = (ESProfession *)self.dataSource[indexPath.row];
+        if ([profession.professionType isEqualToString:@"BMC"]) {
+            NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+            [userDefault setValue:profession.url forKey:@"BMC_URL"];
+            [userDefault synchronize];
+            
+            UIViewController *vc = nil;
+            NSData *cookiesdata = [userDefault objectForKey:@"sessionCookies"];
+            if([cookiesdata length]) {
+                NSArray *cookies = [NSKeyedUnarchiver unarchiveObjectWithData:cookiesdata];
+                NSHTTPCookie *cookie;
+                BOOL jsessionidLogin = false;
+                BOOL ssoTokenLogin = false;
+                for (cookie in cookies) {
+                    if ([cookie.name isEqual:@"JSESSIONID"] )
+                    {
+                        if([cookie.value length])
+                            jsessionidLogin = true;
+                    }
+                    if ([cookie.name isEqual:@"SSOToken"] )
+                    {
+                        if([cookie.value length])
+                            ssoTokenLogin = true;
+                    }
                 }
-                if ([cookie.name isEqual:@"SSOToken"] )
-                {
-                    if([cookie.value length])
-                        ssoTokenLogin = true;
+                if (jsessionidLogin && ssoTokenLogin) {
+                    vc = [[BMCMainViewController alloc] init];
+                } else {
+                    vc = [[BMCLoginViewController alloc] init];
                 }
-            }
-            if (jsessionidLogin && ssoTokenLogin) {
-                vc = [[BMCMainViewController alloc] init];
             } else {
                 vc = [[BMCLoginViewController alloc] init];
             }
+            [self.navigationController pushViewController:vc animated:YES];
         } else {
-            vc = [[BMCLoginViewController alloc] init];
+            ProfessionWebViewController *webVC = [[ProfessionWebViewController alloc] init];
+            webVC.title = profession.name;
+            webVC.type = ESWebProfessionWithURL;
+            webVC.urlString = profession.url;
+            [self.navigationController pushViewController:webVC animated:YES];
         }
-        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
