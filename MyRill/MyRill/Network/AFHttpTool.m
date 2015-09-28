@@ -1010,7 +1010,7 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
     
     NSURL* baseURL = [NSURL URLWithString:[userDefault objectForKey:@"BMC_URL"]];
     //获得请求管理者
-    AFHTTPRequestOperationManager *mgr = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:@"http://114.251.56.237:8090/bmc/main"]];
+    AFHTTPRequestOperationManager *mgr = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:baseURL];
 //    mgr.requestSerializer = [AFJSONRequestSerializer serializer];
     mgr.requestSerializer.HTTPShouldHandleCookies = YES;
     mgr.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html", nil];

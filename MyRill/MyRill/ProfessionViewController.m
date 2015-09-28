@@ -70,11 +70,11 @@
     [self.dataSource removeAllObjects];
     [self.dataSource addObjectsFromArray:list];
     
-    ESProfession *professionBMC = [[ESProfession alloc] init];
-    professionBMC.name = @"BMC临时测试";
-    professionBMC.professionType = @"BMC";
-    professionBMC.isSystem = YES;
-    [self.dataSource addObject:professionBMC];
+//    ESProfession *professionBMC = [[ESProfession alloc] init];
+//    professionBMC.name = @"BMC临时测试";
+//    professionBMC.professionType = @"BMC";
+//    professionBMC.isSystem = YES;
+//    [self.dataSource addObject:professionBMC];
     
     ESProfession *profession = [[ESProfession alloc] init];
     profession.icon_url = @"add";
