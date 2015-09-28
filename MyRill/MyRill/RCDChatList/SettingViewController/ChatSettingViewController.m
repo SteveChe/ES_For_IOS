@@ -150,16 +150,18 @@
     //添加当前聊天用户
     if (self.conversationType == ConversationType_PRIVATE)
     {
-        ESUserInfo* userInfo = [[UserInfoDataSource shareInstance] getUserByUserId:self.targetId];
-        RCUserInfo* rcUserInfo = [[RCUserInfo alloc] init];
-        rcUserInfo.userId = userInfo.userId;
-        rcUserInfo.name = userInfo.userName;
-        rcUserInfo.portraitUri = userInfo.portraitUri;
-        if (rcUserInfo != nil && ![rcUserInfo isEqual:[NSNull null]])
-        {
-            [self.userIdList addObject:rcUserInfo];
-            [self addUsers:self.userIdList];
-        }
+        [_getContactDetailDataParse getContactDetail:self.targetId];
+
+//        ESUserInfo* userInfo = [[UserInfoDataSource shareInstance] getUserByUserId:self.targetId];
+//        RCUserInfo* rcUserInfo = [[RCUserInfo alloc] init];
+//        rcUserInfo.userId = userInfo.userId;
+//        rcUserInfo.name = userInfo.userName;
+//        rcUserInfo.portraitUri = userInfo.portraitUri;
+//        if (rcUserInfo != nil && ![rcUserInfo isEqual:[NSNull null]])
+//        {
+//            [self.userIdList addObject:rcUserInfo];
+//            [self addUsers:self.userIdList];
+//        }
     }
     else if(self.conversationType == ConversationType_DISCUSSION)
     {
@@ -177,19 +179,21 @@
                 
                 for (NSString *userId in discussion.memberIdList)
                 {
-                    ESUserInfo* esUser = [[UserInfoDataSource shareInstance] getUserByUserId:userId];
-                    if (esUser == nil)
-                    {
-                        [_getContactDetailDataParse getContactDetail:userId];
-                        continue;
-                    }
-                    RCUserInfo* userInfo = [[RCUserInfo alloc] init];
-                    userInfo.userId = esUser.userId;
-                    userInfo.name = esUser.userName;
-                    userInfo.portraitUri = esUser.portraitUri;
-                    [self.userIdList addObject:userInfo];
+                    [_getContactDetailDataParse getContactDetail:userId];
+
+//                    ESUserInfo* esUser = [[UserInfoDataSource shareInstance] getUserByUserId:userId];
+//                    if (esUser == nil)
+//                    {
+//                        [_getContactDetailDataParse getContactDetail:userId];
+//                        continue;
+//                    }
+//                    RCUserInfo* userInfo = [[RCUserInfo alloc] init];
+//                    userInfo.userId = esUser.userId;
+//                    userInfo.name = esUser.userName;
+//                    userInfo.portraitUri = esUser.portraitUri;
+//                    [self.userIdList addObject:userInfo];
                 }
-                [self addUsers:self.userIdList];
+//                [self addUsers:self.userIdList];
                 
             }
         } error:^(RCErrorCode status){
