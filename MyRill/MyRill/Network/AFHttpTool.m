@@ -16,7 +16,9 @@
 #import "UserDefaultsDefine.h"
 #import "ESTaskComment.h"
 
-#define DEV_SERVER_ADDRESS @"http://120.25.249.144/"
+//#define DEV_SERVER_ADDRESS @"http://120.25.249.144/" //test address
+#define DEV_SERVER_ADDRESS @"http://123.57.239.39/" //online address
+
 #define ContentType @"text/json"
 
 @implementation AFHttpTool
