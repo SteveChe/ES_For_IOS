@@ -94,7 +94,7 @@
                  {
 //                     if (![enterpriseList isEqualToArray:enterpriseContactListFromDB])
 //                     {
-                         [[AddressBookContactListDataSource shareInstance] updateContactList:enterpriseList];
+//                         [[AddressBookContactListDataSource shareInstance] updateContactList:enterpriseList];
                          if (self.delegate!= nil && [self.delegate respondsToSelector:@selector(getContactList:)])
                          {
                              [self.delegate getContactList:enterpriseList];
