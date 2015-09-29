@@ -160,7 +160,7 @@ typedef enum : NSInteger {
 }
 
 - (void)changeUserImageFailed:(NSString *)errorMsg {
-    
+
 }
 
 #pragma mark - LogoutDataParse delegate

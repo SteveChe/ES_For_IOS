@@ -129,6 +129,7 @@
 		2BC8213A1B5C9FF70090E2C1 /* ShowQRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC821381B5C9FF70090E2C1 /* ShowQRCodeViewController.m */; };
 		2BC8213B1B5C9FF70090E2C1 /* ShowQRCodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BC821391B5C9FF70090E2C1 /* ShowQRCodeViewController.xib */; };
 		2BCCADDF1BA85A0B00DB4859 /* GetProfessionDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BCCADDE1BA85A0B00DB4859 /* GetProfessionDataParse.m */; };
+		2BD189141BBAC166002DCC82 /* ResetPwdDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD189131BBAC166002DCC82 /* ResetPwdDataParse.m */; };
 		2BE2FFFD1B837DEE0006EB99 /* GetTaskDetailDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE2FFFC1B837DEE0006EB99 /* GetTaskDetailDataParse.m */; };
 		2BE55A081B647324008CDB4B /* TaskOverviewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE55A061B647324008CDB4B /* TaskOverviewTableViewCell.m */; };
 		2BE55A091B647324008CDB4B /* TaskOverviewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE55A071B647324008CDB4B /* TaskOverviewTableViewCell.xib */; };
@@ -586,6 +587,8 @@
 		2BC821391B5C9FF70090E2C1 /* ShowQRCodeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowQRCodeViewController.xib; sourceTree = "<group>"; };
 		2BCCADDD1BA85A0B00DB4859 /* GetProfessionDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetProfessionDataParse.h; sourceTree = "<group>"; };
 		2BCCADDE1BA85A0B00DB4859 /* GetProfessionDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetProfessionDataParse.m; sourceTree = "<group>"; };
+		2BD189121BBAC166002DCC82 /* ResetPwdDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResetPwdDataParse.h; sourceTree = "<group>"; };
+		2BD189131BBAC166002DCC82 /* ResetPwdDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResetPwdDataParse.m; sourceTree = "<group>"; };
 		2BDA1A441B8D948B00AD49B8 /* UserDefaultsDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserDefaultsDefine.h; sourceTree = "<group>"; };
 		2BE2FFFB1B837DEE0006EB99 /* GetTaskDetailDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetTaskDetailDataParse.h; sourceTree = "<group>"; };
 		2BE2FFFC1B837DEE0006EB99 /* GetTaskDetailDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetTaskDetailDataParse.m; sourceTree = "<group>"; };
@@ -1294,6 +1297,8 @@
 				F247876C1B2BC3CE00EC266B /* DataParseDefine.h */,
 				2B39C94E1B248063007BAC7A /* LoginDataParse.h */,
 				2B39C94F1B248063007BAC7A /* LoginDataParse.m */,
+				2BD189121BBAC166002DCC82 /* ResetPwdDataParse.h */,
+				2BD189131BBAC166002DCC82 /* ResetPwdDataParse.m */,
 				F24787731B2D775E00EC266B /* SignUpDataParse.h */,
 				F24787741B2D775E00EC266B /* SignUpDataParse.m */,
 				2B42A86B1BB230A900E47193 /* GetVerificationCodeDataParse.h */,
@@ -2411,6 +2416,7 @@
 				F22FE2EB1B4000ED00A1A997 /* SDWebImageManager.m in Sources */,
 				F2467EEE1B8DCF1F0055B78B /* RootCardBottomCell.m in Sources */,
 				2B39C93B1B241212007BAC7A /* MASViewAttribute.m in Sources */,
+				2BD189141BBAC166002DCC82 /* ResetPwdDataParse.m in Sources */,
 				F24787721B2D5CE700EC266B /* ChangePwdDataParse.m in Sources */,
 				2B0443751BA1AE4B00BC7BF4 /* UpdateProfessionListOrderDataParse.m in Sources */,
 				2BC2276E1B942A3600E3163A /* ELCAssetCell.m in Sources */,
