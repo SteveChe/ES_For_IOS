@@ -72,6 +72,12 @@
     [self.getEmergencyListDP getEmergencyListWithViewType:@"unaccepted_event_view"];
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    [self.headerView free];
+}
+
 #pragma mark - BMCGetEmergencyListDelegate methods
 - (void)getEmergencyListSucceed:(NSArray *)resultList {
     [self.warningDataSource removeAllObjects];
