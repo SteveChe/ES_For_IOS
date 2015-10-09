@@ -16,7 +16,7 @@
     [AFHttpTool getSubResourceListWithResId:resId
                                      sucess:^(id response) {
                                          NSDictionary *responseDic = (NSDictionary *)response;
-
+                                         NSLog(@"%@",responseDic);
                                          if ([[responseDic allKeys] containsObject:@"error"]) {
                                              [self.delegate getSubResourceListFailed:nil];
                                              NSLog(@"请求有误!");
