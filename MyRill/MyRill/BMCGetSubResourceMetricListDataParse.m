@@ -21,17 +21,20 @@
                                                       [self.delegate getSubResourceMetricListFailed:nil];
                                                       NSLog(@"请求有误!");
                                                   } else {
-                                                      NSArray *dataArray = (NSArray *)responseDic[@"resMetricList"];
-                                                      NSLog(@"%@",dataArray);
                                                       NSMutableArray *resultList = [[NSMutableArray alloc] init];
-                                                      [dataArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                                                          ResMetricPojo *mainMetric = [[ResMetricPojo alloc] initWithDic:obj];
-                                                          if (![mainMetric.metricName isEqualToString:@""]) {
-                                                              [resultList addObject:mainMetric];
-                                                          }
-                                                      }];
-                                                   
-                                                   [self.delegate getSubResourceMetricListSucceed:resultList];
+                                                      
+                                                      if (responseDic[@"resMetricList"] != nil && ![responseDic[@"resMetricList"] isKindOfClass:[NSNull class]] && [responseDic[@"resMetricList"] isKindOfClass:[NSArray class]]) {
+                                                          NSArray *dataArray = (NSArray *)responseDic[@"resMetricList"];
+                                                          
+                                                          [dataArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                                                              ResMetricPojo *mainMetric = [[ResMetricPojo alloc] initWithDic:obj];
+                                                              if (![mainMetric.metricName isEqualToString:@""]) {
+                                                                  [resultList addObject:mainMetric];
+                                                              }
+                                                          }];
+                                                      }
+                                                      
+                                                      [self.delegate getSubResourceMetricListSucceed:resultList];
                                                   }
                                               } failure:^(NSError *err) {
                                                   NSLog(@"%@",[err debugDescription]);

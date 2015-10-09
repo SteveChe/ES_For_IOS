@@ -41,11 +41,7 @@
          forCellReuseIdentifier:@"BMCResourceAndSubMetricTableViewCell"];
     
     self.prototypeCell = [self.tableView dequeueReusableCellWithIdentifier:@"BMCResourceAndSubMetricTableViewCell"];
-}
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
     [self.getMainResourceMetricListDP getMainResourceMetricListWithResId:self.eventVO.resId];
 }
 
@@ -78,6 +74,7 @@
     }
     
     self.prototypeCell = cell;
+    self.prototypeCell.selectionStyle = UITableViewCellSelectionStyleNone;
     CALayer *layer = [CALayer layer];
     layer.frame = CGRectMake(0, 0, self.prototypeCell.bounds.size.width, 1);
     layer.backgroundColor = [ColorHandler colorFromHexRGB:@"F5F5F5"].CGColor;

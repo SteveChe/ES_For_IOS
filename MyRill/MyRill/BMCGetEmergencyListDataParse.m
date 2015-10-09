@@ -21,13 +21,16 @@
                                               [self.delegate getEmergencyeListFailed:nil];
                                               NSLog(@"请求有误!");
                                           } else {
-                                              NSArray *dataArray = (NSArray *)responseDic[@"eventList"];
-//                                              NSLog(@"%@",dataArray);
                                               NSMutableArray *resultList = [[NSMutableArray alloc] init];
-                                              [dataArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                                                  EventVO *evnetVO = [[EventVO alloc] initWithDic:(NSDictionary *)obj];
-                                                  [resultList addObject:evnetVO];
-                                              }];
+                                              
+                                              if (responseDic[@"eventList"] != nil && ![responseDic[@"eventList"] isKindOfClass:[NSNull class]] && [responseDic[@"eventList"] isKindOfClass:[NSArray class]]) {
+                                                  NSArray *dataArray = (NSArray *)responseDic[@"eventList"];
+                                                  
+                                                  [dataArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                                                      EventVO *evnetVO = [[EventVO alloc] initWithDic:(NSDictionary *)obj];
+                                                      [resultList addObject:evnetVO];
+                                                  }];
+                                              }
                                               
                                               [self.delegate getEmergencyListSucceed:resultList];
                                           }

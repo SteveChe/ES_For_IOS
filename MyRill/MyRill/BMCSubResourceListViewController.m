@@ -51,9 +51,9 @@
     [self.dataSource addObjectsFromArray:resultDic[@"subResList"]];
     [self.tableView reloadData];
     
-    self.resourceName.text = resultDic[@"resName"];
-    self.resourceIP.text = resultDic[@"resIp"];
-    self.resourceType.text = resultDic[@"resType"];
+    self.resourceName.text = [ColorHandler isNullOrEmptyString:resultDic[@"resName"]] ? @"——" : resultDic[@"resName"];
+    self.resourceIP.text = [ColorHandler isNullOrEmptyString:resultDic[@"resIp"]] ? @"——" : resultDic[@"resIp"];
+    self.resourceType.text = [ColorHandler isNullOrEmptyString:resultDic[@"resType"]] ? @"——" : resultDic[@"resType"];
 }
 
 - (void)getSubResourceListFailed:(NSString *)errorMessage {
