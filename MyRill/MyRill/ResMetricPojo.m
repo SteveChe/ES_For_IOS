@@ -56,6 +56,24 @@
         } else {
             self.metricType = dic[@"metricType"];
         }
+        
+        if ([ColorHandler isNullOrEmptyString:dic[@"metricStatus"]]) {
+            self.metricStatus = @"";
+        } else {
+            self.metricStatus = dic[@"metricStatus"];
+        }
+        
+        if ([ColorHandler isNullOrEmptyString:dic[@"metricStatus4Display"]]) {
+            self.metricStatus4Display = @"";
+        } else {
+            self.metricStatus4Display = dic[@"metricStatus4Display"];
+        }
+        
+        if ([ColorHandler isNullOrEmptyString:dic[@"metricValue4Display"]]) {
+            self.metricValue4Display = @"";
+        } else {
+            self.metricValue4Display = dic[@"metricValue4Display"];
+        }
     }
     
     return self;

@@ -67,10 +67,14 @@
     
     ResMetricPojo *resMetricPojo = (ResMetricPojo *)self.dataSource[indexPath.row];
     cell.titleLbl.text = resMetricPojo.metricName;
-    if ([ColorHandler isNullOrEmptyString:resMetricPojo.metricValue]) {
-        cell.contentLbl.text = @"——";
+    if ([resMetricPojo.metricType isEqualToString:@"AVAIL"]) {
+        cell.contentLbl.text = resMetricPojo.metricStatus4Display;
     } else {
-        cell.contentLbl.text = [resMetricPojo.metricValue stringByAppendingString:resMetricPojo.metricUnit];
+        if ([ColorHandler isNullOrEmptyString:resMetricPojo.metricValue] ) {
+            cell.contentLbl.text = @"——";
+        } else {
+            cell.contentLbl.text = [resMetricPojo.metricValue stringByAppendingString:resMetricPojo.metricUnit];
+        }
     }
     
     self.prototypeCell = cell;
@@ -88,10 +92,14 @@
     BMCResourceAndSubMetricTableViewCell *cell = (BMCResourceAndSubMetricTableViewCell *)self.prototypeCell;
     
     ResMetricPojo *resMetricPojo = (ResMetricPojo *)self.dataSource[indexPath.row];
-    if ([ColorHandler isNullOrEmptyString:resMetricPojo.metricValue]) {
-        cell.contentLbl.text = @"——";
+    if ([resMetricPojo.metricType isEqualToString:@"AVAIL"]) {
+        cell.contentLbl.text = resMetricPojo.metricStatus4Display;
     } else {
-        cell.contentLbl.text = [resMetricPojo.metricValue stringByAppendingString:resMetricPojo.metricUnit];
+        if ([ColorHandler isNullOrEmptyString:resMetricPojo.metricValue] ) {
+            cell.contentLbl.text = @"——";
+        } else {
+            cell.contentLbl.text = [resMetricPojo.metricValue stringByAppendingString:resMetricPojo.metricUnit];
+        }
     }
     
     if ([cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height > 0) {

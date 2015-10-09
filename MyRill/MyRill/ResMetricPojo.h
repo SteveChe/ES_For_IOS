@@ -17,6 +17,9 @@
 @property (nonatomic, copy) NSString *metricUnit;   //单位
 @property (nonatomic, copy) NSString *metricValue;  //值
 @property (nonatomic, copy) NSString *metricType;   //指标类型
+@property (nonatomic, copy) NSString *metricStatus;
+@property (nonatomic, copy) NSString *metricStatus4Display;
+@property (nonatomic, copy) NSString *metricValue4Display;
 
 //designed initilize
 - (instancetype)initWithDic:(NSDictionary *)dic;
