@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
@@ -47,7 +47,7 @@
                             </constraints>
                         </view>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入手机号" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="4rP-kg-Y2d">
-                            <rect key="frame" x="20" y="0.0" width="454" height="44"/>
+                            <rect key="frame" x="20" y="0.0" width="562" height="44"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="next"/>
                         </textField>
@@ -60,57 +60,59 @@
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="确认密码" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="PEe-TH-jpj">
                             <rect key="frame" x="20" y="135" width="562" height="44"/>
                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" secureTextEntry="YES"/>
                         </textField>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kit-nt-dZn">
-                            <rect key="frame" x="482" y="7" width="100" height="30"/>
-                            <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="100" id="B1k-dH-zhc"/>
-                            </constraints>
-                            <state key="normal" title="获取验证码">
-                                <color key="titleColor" red="0.023529411760000001" green="0.65490196079999996" blue="0.88235294119999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                        </button>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入验证码" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Sjj-7v-pWq">
-                            <rect key="frame" x="20" y="45" width="562" height="44"/>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入验证码" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Sjj-7v-pWq">
+                            <rect key="frame" x="20" y="45" width="452" height="44"/>
                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="next"/>
                         </textField>
+                        <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kit-nt-dZn">
+                            <rect key="frame" x="492" y="50" width="90" height="34"/>
+                            <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                            <state key="normal" title="获取验证码">
+                                <color key="titleColor" red="0.023529411760000001" green="0.65490196079999996" blue="0.88235294119999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="verificationBtnOnClicked:" destination="-1" eventType="touchUpInside" id="7Qo-sT-NY0"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="RDT-fH-iXI" secondAttribute="trailing" constant="20" symbolic="YES" id="4bn-Jh-S6j"/>
+                        <constraint firstAttribute="trailing" secondItem="kit-nt-dZn" secondAttribute="trailing" constant="20" symbolic="YES" id="561-N7-tRi"/>
                         <constraint firstItem="4rP-kg-Y2d" firstAttribute="top" secondItem="Kky-Vr-jUC" secondAttribute="top" id="Chy-sv-1df"/>
                         <constraint firstItem="Sjj-7v-pWq" firstAttribute="top" secondItem="PoQ-TV-sbs" secondAttribute="bottom" id="D8g-hk-7vh"/>
                         <constraint firstItem="PEe-TH-jpj" firstAttribute="leading" secondItem="Kky-Vr-jUC" secondAttribute="leading" constant="20" symbolic="YES" id="HBo-s5-0Ec"/>
                         <constraint firstItem="YJo-Ok-p6d" firstAttribute="top" secondItem="vFb-xH-qfZ" secondAttribute="bottom" constant="44" id="Hrp-fI-eWo"/>
                         <constraint firstItem="Sjj-7v-pWq" firstAttribute="leading" secondItem="Kky-Vr-jUC" secondAttribute="leading" constant="20" symbolic="YES" id="Ie2-Bn-606"/>
-                        <constraint firstItem="kit-nt-dZn" firstAttribute="centerY" secondItem="4rP-kg-Y2d" secondAttribute="centerY" id="KbG-Sp-K9a"/>
                         <constraint firstItem="PoQ-TV-sbs" firstAttribute="top" secondItem="Kky-Vr-jUC" secondAttribute="top" constant="44" id="Npn-b6-Q8e"/>
                         <constraint firstItem="YJo-Ok-p6d" firstAttribute="leading" secondItem="Kky-Vr-jUC" secondAttribute="leading" constant="20" symbolic="YES" id="Nt4-aP-AmE"/>
-                        <constraint firstAttribute="trailing" secondItem="Sjj-7v-pWq" secondAttribute="trailing" constant="20" symbolic="YES" id="P1j-tc-bL8"/>
                         <constraint firstItem="PEe-TH-jpj" firstAttribute="top" secondItem="YJo-Ok-p6d" secondAttribute="bottom" id="SMt-ov-p5a"/>
                         <constraint firstItem="4rP-kg-Y2d" firstAttribute="leading" secondItem="Kky-Vr-jUC" secondAttribute="leading" constant="20" id="T78-5w-FV3"/>
                         <constraint firstAttribute="trailing" secondItem="PEe-TH-jpj" secondAttribute="trailing" constant="20" symbolic="YES" id="V33-Gh-LSY"/>
+                        <constraint firstItem="kit-nt-dZn" firstAttribute="leading" secondItem="Sjj-7v-pWq" secondAttribute="trailing" constant="20" id="VId-RV-tBu"/>
                         <constraint firstItem="RDT-fH-iXI" firstAttribute="leading" secondItem="Kky-Vr-jUC" secondAttribute="leading" constant="20" id="YD9-C1-yOB"/>
                         <constraint firstAttribute="trailing" secondItem="vFb-xH-qfZ" secondAttribute="trailing" constant="20" symbolic="YES" id="bYM-ns-0Ar"/>
                         <constraint firstItem="vFb-xH-qfZ" firstAttribute="top" secondItem="PoQ-TV-sbs" secondAttribute="bottom" constant="44" id="e2K-vR-BzN"/>
                         <constraint firstItem="vFb-xH-qfZ" firstAttribute="leading" secondItem="Kky-Vr-jUC" secondAttribute="leading" constant="20" symbolic="YES" id="eCM-u3-0ua"/>
-                        <constraint firstAttribute="trailing" secondItem="kit-nt-dZn" secondAttribute="trailing" constant="20" symbolic="YES" id="fnG-HJ-Bn0"/>
+                        <constraint firstItem="Sjj-7v-pWq" firstAttribute="height" secondItem="kit-nt-dZn" secondAttribute="height" constant="10" id="g9w-Zh-UWI"/>
                         <constraint firstItem="PoQ-TV-sbs" firstAttribute="top" secondItem="4rP-kg-Y2d" secondAttribute="bottom" id="hVl-w4-13v"/>
+                        <constraint firstItem="kit-nt-dZn" firstAttribute="centerY" secondItem="Sjj-7v-pWq" secondAttribute="centerY" id="jdU-Xa-ai9"/>
                         <constraint firstItem="YJo-Ok-p6d" firstAttribute="top" secondItem="RDT-fH-iXI" secondAttribute="bottom" id="lKT-Ic-hBp"/>
                         <constraint firstAttribute="height" constant="179" id="m8O-lq-Pcp"/>
-                        <constraint firstItem="kit-nt-dZn" firstAttribute="leading" secondItem="4rP-kg-Y2d" secondAttribute="trailing" constant="8" symbolic="YES" id="nHu-dX-u8k"/>
                         <constraint firstAttribute="trailing" secondItem="PoQ-TV-sbs" secondAttribute="trailing" constant="20" symbolic="YES" id="p6J-jd-Dek"/>
                         <constraint firstItem="PoQ-TV-sbs" firstAttribute="leading" secondItem="Kky-Vr-jUC" secondAttribute="leading" constant="20" symbolic="YES" id="qzC-Jl-GuH"/>
                         <constraint firstItem="RDT-fH-iXI" firstAttribute="top" secondItem="vFb-xH-qfZ" secondAttribute="bottom" id="vUE-Dg-oOp"/>
                         <constraint firstAttribute="bottom" secondItem="PEe-TH-jpj" secondAttribute="bottom" id="yuP-nh-NNm"/>
                         <constraint firstItem="vFb-xH-qfZ" firstAttribute="top" secondItem="Sjj-7v-pWq" secondAttribute="bottom" id="zfz-Ed-DX3"/>
                         <constraint firstAttribute="trailing" secondItem="YJo-Ok-p6d" secondAttribute="trailing" constant="20" symbolic="YES" id="zgc-OC-gxI"/>
+                        <constraint firstAttribute="trailing" secondItem="4rP-kg-Y2d" secondAttribute="trailing" constant="20" symbolic="YES" id="znR-U2-LT4"/>
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cNI-0e-EXu">
@@ -123,6 +125,9 @@
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="confirmBtnOnClicked:" destination="-1" eventType="touchUpInside" id="IOx-We-bxX"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

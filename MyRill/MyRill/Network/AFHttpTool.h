@@ -49,7 +49,7 @@ typedef enum : NSUInteger {
                   success:(void (^)(id response))success
                   failure:(void (^)(NSError* err))failure;
 //sign-up
-+(void) signUpWithPhoneNum:(NSString *) phoneNum
++ (void)signUpWithPhoneNum:(NSString *) phoneNum
                   userName:(NSString*) userName
                   password:(NSString *) password
           verificationCode:(NSString*) verificationCode
@@ -59,8 +59,14 @@ typedef enum : NSUInteger {
 + (void)signOutSuccess:(void (^)(id response))success
                failure:(void (^)(NSError *err))failure;
 
++ (void)resetPwdWithPhoneNum:(NSString *)phoneNum
+                    password:(NSString *)password
+            verificationCode:(NSString *)verificationCode
+                     success:(void (^)(id response))success
+                     failure:(void (^)(NSError* err))failure;
+
 //login
-+(void) loginWithUserName:(NSString *) userName
++ (void)loginWithUserName:(NSString *) userName
                  password:(NSString *) password
                   success:(void (^)(id response))success
                   failure:(void (^)(NSError* err))failure;

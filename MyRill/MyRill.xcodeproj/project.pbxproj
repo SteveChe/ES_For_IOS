@@ -129,6 +129,12 @@
 		2BC8213A1B5C9FF70090E2C1 /* ShowQRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC821381B5C9FF70090E2C1 /* ShowQRCodeViewController.m */; };
 		2BC8213B1B5C9FF70090E2C1 /* ShowQRCodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BC821391B5C9FF70090E2C1 /* ShowQRCodeViewController.xib */; };
 		2BCCADDF1BA85A0B00DB4859 /* GetProfessionDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BCCADDE1BA85A0B00DB4859 /* GetProfessionDataParse.m */; };
+		2BD189141BBAC166002DCC82 /* ResetPwdDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD189131BBAC166002DCC82 /* ResetPwdDataParse.m */; };
+		2BD189201BBACC08002DCC82 /* MJRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2BD189161BBACC08002DCC82 /* MJRefresh.bundle */; };
+		2BD189211BBACC08002DCC82 /* MJRefreshBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD189191BBACC08002DCC82 /* MJRefreshBaseView.m */; };
+		2BD189221BBACC08002DCC82 /* MJRefreshConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD1891B1BBACC08002DCC82 /* MJRefreshConst.m */; };
+		2BD189231BBACC08002DCC82 /* MJRefreshFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD1891D1BBACC08002DCC82 /* MJRefreshFooterView.m */; };
+		2BD189241BBACC08002DCC82 /* MJRefreshHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD1891F1BBACC08002DCC82 /* MJRefreshHeaderView.m */; };
 		2BE2FFFD1B837DEE0006EB99 /* GetTaskDetailDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE2FFFC1B837DEE0006EB99 /* GetTaskDetailDataParse.m */; };
 		2BE55A081B647324008CDB4B /* TaskOverviewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE55A061B647324008CDB4B /* TaskOverviewTableViewCell.m */; };
 		2BE55A091B647324008CDB4B /* TaskOverviewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE55A071B647324008CDB4B /* TaskOverviewTableViewCell.xib */; };
@@ -586,6 +592,18 @@
 		2BC821391B5C9FF70090E2C1 /* ShowQRCodeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowQRCodeViewController.xib; sourceTree = "<group>"; };
 		2BCCADDD1BA85A0B00DB4859 /* GetProfessionDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetProfessionDataParse.h; sourceTree = "<group>"; };
 		2BCCADDE1BA85A0B00DB4859 /* GetProfessionDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetProfessionDataParse.m; sourceTree = "<group>"; };
+		2BD189121BBAC166002DCC82 /* ResetPwdDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResetPwdDataParse.h; sourceTree = "<group>"; };
+		2BD189131BBAC166002DCC82 /* ResetPwdDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResetPwdDataParse.m; sourceTree = "<group>"; };
+		2BD189161BBACC08002DCC82 /* MJRefresh.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MJRefresh.bundle; sourceTree = "<group>"; };
+		2BD189171BBACC08002DCC82 /* MJRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefresh.h; sourceTree = "<group>"; };
+		2BD189181BBACC08002DCC82 /* MJRefreshBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBaseView.h; sourceTree = "<group>"; };
+		2BD189191BBACC08002DCC82 /* MJRefreshBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshBaseView.m; sourceTree = "<group>"; };
+		2BD1891A1BBACC08002DCC82 /* MJRefreshConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshConst.h; sourceTree = "<group>"; };
+		2BD1891B1BBACC08002DCC82 /* MJRefreshConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshConst.m; sourceTree = "<group>"; };
+		2BD1891C1BBACC08002DCC82 /* MJRefreshFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshFooterView.h; sourceTree = "<group>"; };
+		2BD1891D1BBACC08002DCC82 /* MJRefreshFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshFooterView.m; sourceTree = "<group>"; };
+		2BD1891E1BBACC08002DCC82 /* MJRefreshHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshHeaderView.h; sourceTree = "<group>"; };
+		2BD1891F1BBACC08002DCC82 /* MJRefreshHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshHeaderView.m; sourceTree = "<group>"; };
 		2BDA1A441B8D948B00AD49B8 /* UserDefaultsDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserDefaultsDefine.h; sourceTree = "<group>"; };
 		2BE2FFFB1B837DEE0006EB99 /* GetTaskDetailDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetTaskDetailDataParse.h; sourceTree = "<group>"; };
 		2BE2FFFC1B837DEE0006EB99 /* GetTaskDetailDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetTaskDetailDataParse.m; sourceTree = "<group>"; };
@@ -1294,6 +1312,8 @@
 				F247876C1B2BC3CE00EC266B /* DataParseDefine.h */,
 				2B39C94E1B248063007BAC7A /* LoginDataParse.h */,
 				2B39C94F1B248063007BAC7A /* LoginDataParse.m */,
+				2BD189121BBAC166002DCC82 /* ResetPwdDataParse.h */,
+				2BD189131BBAC166002DCC82 /* ResetPwdDataParse.m */,
 				F24787731B2D775E00EC266B /* SignUpDataParse.h */,
 				F24787741B2D775E00EC266B /* SignUpDataParse.m */,
 				2B42A86B1BB230A900E47193 /* GetVerificationCodeDataParse.h */,
@@ -1619,6 +1639,23 @@
 				2BC227671B942A3600E3163A /* Overlay@2x.png */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		2BD189151BBACC08002DCC82 /* MJRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				2BD189161BBACC08002DCC82 /* MJRefresh.bundle */,
+				2BD189171BBACC08002DCC82 /* MJRefresh.h */,
+				2BD189181BBACC08002DCC82 /* MJRefreshBaseView.h */,
+				2BD189191BBACC08002DCC82 /* MJRefreshBaseView.m */,
+				2BD1891A1BBACC08002DCC82 /* MJRefreshConst.h */,
+				2BD1891B1BBACC08002DCC82 /* MJRefreshConst.m */,
+				2BD1891C1BBACC08002DCC82 /* MJRefreshFooterView.h */,
+				2BD1891D1BBACC08002DCC82 /* MJRefreshFooterView.m */,
+				2BD1891E1BBACC08002DCC82 /* MJRefreshHeaderView.h */,
+				2BD1891F1BBACC08002DCC82 /* MJRefreshHeaderView.m */,
+			);
+			path = MJRefresh;
 			sourceTree = "<group>";
 		};
 		2BDA1A431B8D944E00AD49B8 /* macro */ = {
@@ -2033,6 +2070,7 @@
 		F29F86131B240FC30058FC9F /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				2BD189151BBACC08002DCC82 /* MJRefresh */,
 				2BC2274F1B942A3600E3163A /* ELCImagePickerViewController */,
 				2BEAD07D1B77369F00905E21 /* ZCActionOnCalendar.h */,
 				2BEAD07E1B77369F00905E21 /* ZCActionOnCalendar.m */,
@@ -2237,6 +2275,7 @@
 				2BC227731B942A3600E3163A /* ELCAlbumPickerController.xib in Resources */,
 				F2F3977A1B78E06B006FAE3B /* RCDAddressBookEnterpriseDetailViewController.xib in Resources */,
 				2B5A591F1B48F921000382D7 /* ChangPhoneNumViewController.xib in Resources */,
+				2BD189201BBACC08002DCC82 /* MJRefresh.bundle in Resources */,
 				2B39C9971B37E634007BAC7A /* SignUpViewController.xib in Resources */,
 				2B31C3E31B11C3FD004C865A /* LaunchScreen.xib in Resources */,
 				2B39C9951B37E5F2007BAC7A /* ResetPwdViewController.xib in Resources */,
@@ -2329,9 +2368,11 @@
 				2BC227781B942A3600E3163A /* ELCImagePickerDemoAppDelegate.m in Sources */,
 				2B5A59131B48DFBB000382D7 /* MRProgressView.m in Sources */,
 				2B39C93A1B241212007BAC7A /* MASLayoutConstraint.m in Sources */,
+				2BD189211BBACC08002DCC82 /* MJRefreshBaseView.m in Sources */,
 				F2F397791B78E06B006FAE3B /* RCDAddressBookEnterpriseDetailViewController.m in Sources */,
 				F22FE2E51B4000ED00A1A997 /* NSData+ImageContentType.m in Sources */,
 				2BEAD0731B770B2A00905E21 /* RemindDateViewController.m in Sources */,
+				2BD189221BBACC08002DCC82 /* MJRefreshConst.m in Sources */,
 				2B9CBB5B1B39AA43007D7A45 /* (null) in Sources */,
 				2BC227721B942A3600E3163A /* ELCOverlayImageView.m in Sources */,
 				F29F86481B2410320058FC9F /* UIProgressView+AFNetworking.m in Sources */,
@@ -2378,6 +2419,7 @@
 				F2467EFD1B8DCF1F0055B78B /* RootViewController.m in Sources */,
 				2B93E92C1BAD3EF30026EB39 /* BMCGetResourceDetailDataParse.m in Sources */,
 				F2F397741B77AC50006FAE3B /* ESEnterpriseMessage.m in Sources */,
+				2BD189241BBACC08002DCC82 /* MJRefreshHeaderView.m in Sources */,
 				2BEBBD8C1B67AFA7008BE7C4 /* GetTaskListDataParse.m in Sources */,
 				F29F862D1B2410070058FC9F /* AFURLConnectionOperation.m in Sources */,
 				2BC821361B5BE6B60090E2C1 /* ChangeUserImageDataParse.m in Sources */,
@@ -2411,6 +2453,7 @@
 				F22FE2EB1B4000ED00A1A997 /* SDWebImageManager.m in Sources */,
 				F2467EEE1B8DCF1F0055B78B /* RootCardBottomCell.m in Sources */,
 				2B39C93B1B241212007BAC7A /* MASViewAttribute.m in Sources */,
+				2BD189141BBAC166002DCC82 /* ResetPwdDataParse.m in Sources */,
 				F24787721B2D5CE700EC266B /* ChangePwdDataParse.m in Sources */,
 				2B0443751BA1AE4B00BC7BF4 /* UpdateProfessionListOrderDataParse.m in Sources */,
 				2BC2276E1B942A3600E3163A /* ELCAssetCell.m in Sources */,
@@ -2422,6 +2465,7 @@
 				2B5A591E1B48F921000382D7 /* ChangPhoneNumViewController.m in Sources */,
 				F277ADFB1B2DBE97006E42CB /* CustomShowMessage.m in Sources */,
 				F2735FBA1B710C2C00138080 /* RCDSearchEnterpriseViewController.m in Sources */,
+				2BD189231BBACC08002DCC82 /* MJRefreshFooterView.m in Sources */,
 				F22FE2821B3ADB6000A1A997 /* ChatViewController.m in Sources */,
 				F23059C61B56ADE3004599FA /* ESUserDetailInfo.m in Sources */,
 				2B93E92F1BAD46150026EB39 /* BMCGetMainResourceMetricListDataParse.m in Sources */,
@@ -2672,8 +2716,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MyRill/RCloud",
@@ -2687,7 +2731,7 @@
 					"$(PROJECT_DIR)/MyRill/JPush",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "73d5008a-a5e6-4ab0-9173-d2dc9b906dc1";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
@@ -2698,8 +2742,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MyRill/RCloud",
@@ -2713,7 +2757,7 @@
 					"$(PROJECT_DIR)/MyRill/JPush",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "73d5008a-a5e6-4ab0-9173-d2dc9b906dc1";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};

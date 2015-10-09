@@ -15,8 +15,9 @@
 #import "BMCLoginViewController.h"
 #import "EventVO.h"
 #import "CustomShowMessage.h"
+#import "MJRefresh.h"
 
-@interface BMCMainViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate, BMCGetEmergencyListDelegate>
+@interface BMCMainViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate, BMCGetEmergencyListDelegate, MJRefreshBaseViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UITableView *warningTableView;
@@ -24,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *alertLbl;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (nonatomic, strong) BMCEmergencyTableViewCell *prototypeCell;
+@property (nonatomic, strong) MJRefreshHeaderView *headerView;
 
 @property (nonatomic, strong) UISearchDisplayController *displayController;
 @property (nonatomic, strong) NSMutableArray *searchResultDataSource;
@@ -57,6 +59,10 @@
     [self.warningTableView registerNib:[UINib nibWithNibName:@"BMCEmergencyTableViewCell" bundle:nil]
                 forCellReuseIdentifier:@"BMCEmergencyTableViewCell"];
     self.warningTableView.estimatedRowHeight = 144;
+    
+    self.headerView = [MJRefreshHeaderView header];
+    self.headerView.scrollView = self.warningTableView; // 或者tableView
+    self.headerView.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -66,11 +72,18 @@
     [self.getEmergencyListDP getEmergencyListWithViewType:@"unaccepted_event_view"];
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    [self.headerView free];
+}
+
 #pragma mark - BMCGetEmergencyListDelegate methods
 - (void)getEmergencyListSucceed:(NSArray *)resultList {
     [self.warningDataSource removeAllObjects];
     [self.warningDataSource addObjectsFromArray:resultList];
-    [self.warningTableView reloadData];
+    
+    [self performSelector:@selector(doneWithView:) withObject:self.headerView afterDelay:0];
     
     self.alertLbl.text = [NSString stringWithFormat:@"%lu",(unsigned long)resultList.count];
 }
@@ -139,6 +152,28 @@
 //    [tableView setContentInset:UIEdgeInsetsZero];
 //    [tableView setScrollIndicatorInsets:UIEdgeInsetsZero];
 //}
+
+#pragma mark MJRefreshBaseViewDelegate Method
+-(void)refreshViewBeginRefreshing:(MJRefreshBaseView *)refreshView
+{
+//    NSLog(@"%@----开始进入刷新状态", refreshView.class);
+    [self.getEmergencyListDP getEmergencyListWithViewType:@"unaccepted_event_view"];
+}
+
+#pragma mark 刷新完毕
+- (void)refreshViewEndRefreshing:(MJRefreshBaseView *)refreshView
+{
+//    NSLog(@"%@----刷新完毕", refreshView.class);
+}
+
+- (void)doneWithView:(MJRefreshBaseView *)refreshView
+{
+    // 刷新表格
+    [self.warningTableView reloadData];
+    
+    // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
+    [refreshView endRefreshing];
+}
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString{
     

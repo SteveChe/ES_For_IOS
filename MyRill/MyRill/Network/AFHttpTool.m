@@ -138,6 +138,23 @@
                           failure:failure];
 }
 
++ (void)resetPwdWithPhoneNum:(NSString *)phoneNum
+                    password:(NSString *)password
+            verificationCode:(NSString *)verificationCode
+                     success:(void (^)(id response))success
+                     failure:(void (^)(NSError* err))failure {
+    NSDictionary *params = @{@"phone_number":phoneNum,
+                             @"password":password,
+                             @"verification_code":verificationCode};
+    
+    [AFHttpTool requestWithMethod:RequestMethodTypePost
+                     protocolType:RequestProtocolTypeText
+                              url:@"/api/accounts/reset-password/.json"
+                           params:params
+                          success:success
+                          failure:failure];
+}
+
 //login
 +(void) loginWithUserName:(NSString *) userName
                  password:(NSString *) password
