@@ -16,7 +16,7 @@
     [AFHttpTool getSubResourceMetricListWithSubResId:subResId
                                               sucess:^(id response) {
                                                   NSDictionary *responseDic = (NSDictionary *)response;
-                                                  NSLog(@"%@",responseDic);
+//                                                  NSLog(@"%@",responseDic);
                                                   if ([[responseDic allKeys] containsObject:@"error"]) {
                                                       [self.delegate getSubResourceMetricListFailed:nil];
                                                       NSLog(@"请求有误!");
