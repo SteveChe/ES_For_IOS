@@ -21,12 +21,6 @@
             self.subResId = dic[@"subResId"];
         }
         
-        if ([ColorHandler isNullOrEmptyString:dic[@"resName"]]) {
-            self.resName = @"";
-        } else {
-            self.resName = dic[@"resName"];
-        }
-        
         if ([ColorHandler isNullOrEmptyString:dic[@"resId"]]) {
             self.resId = @"";
         } else {
@@ -43,6 +37,12 @@
             self.subResType = @"";
         } else {
             self.subResType = dic[@"subResType"];
+        }
+        
+        if (dic[@"manage"] != nil && ![dic[@"manage"] isKindOfClass:[NSNull class]]) {
+            self.isManaged = [dic[@"manage"] boolValue];
+        } else {
+            self.isManaged = NO;
         }
     }
     

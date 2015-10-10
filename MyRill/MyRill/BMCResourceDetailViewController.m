@@ -41,11 +41,7 @@
          forCellReuseIdentifier:@"BMCResourceAndSubMetricTableViewCell"];
     
     self.prototypeCell = [self.tableView dequeueReusableCellWithIdentifier:@"BMCResourceAndSubMetricTableViewCell"];
-}
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
     [self.getMainResourceMetricListDP getMainResourceMetricListWithResId:self.eventVO.resId];
 }
 
@@ -71,13 +67,18 @@
     
     ResMetricPojo *resMetricPojo = (ResMetricPojo *)self.dataSource[indexPath.row];
     cell.titleLbl.text = resMetricPojo.metricName;
-    if ([ColorHandler isNullOrEmptyString:resMetricPojo.metricValue]) {
-        cell.contentLbl.text = @"——";
+    if ([resMetricPojo.metricType isEqualToString:@"AVAIL"]) {
+        cell.contentLbl.text = resMetricPojo.metricStatus4Display;
     } else {
-        cell.contentLbl.text = [resMetricPojo.metricValue stringByAppendingString:resMetricPojo.metricUnit];
+        if ([ColorHandler isNullOrEmptyString:resMetricPojo.metricValue] ) {
+            cell.contentLbl.text = @"——";
+        } else {
+            cell.contentLbl.text = [resMetricPojo.metricValue stringByAppendingString:resMetricPojo.metricUnit];
+        }
     }
     
     self.prototypeCell = cell;
+    self.prototypeCell.selectionStyle = UITableViewCellSelectionStyleNone;
     CALayer *layer = [CALayer layer];
     layer.frame = CGRectMake(0, 0, self.prototypeCell.bounds.size.width, 1);
     layer.backgroundColor = [ColorHandler colorFromHexRGB:@"F5F5F5"].CGColor;
@@ -91,10 +92,14 @@
     BMCResourceAndSubMetricTableViewCell *cell = (BMCResourceAndSubMetricTableViewCell *)self.prototypeCell;
     
     ResMetricPojo *resMetricPojo = (ResMetricPojo *)self.dataSource[indexPath.row];
-    if ([ColorHandler isNullOrEmptyString:resMetricPojo.metricValue]) {
-        cell.contentLbl.text = @"——";
+    if ([resMetricPojo.metricType isEqualToString:@"AVAIL"]) {
+        cell.contentLbl.text = resMetricPojo.metricStatus4Display;
     } else {
-        cell.contentLbl.text = [resMetricPojo.metricValue stringByAppendingString:resMetricPojo.metricUnit];
+        if ([ColorHandler isNullOrEmptyString:resMetricPojo.metricValue] ) {
+            cell.contentLbl.text = @"——";
+        } else {
+            cell.contentLbl.text = [resMetricPojo.metricValue stringByAppendingString:resMetricPojo.metricUnit];
+        }
     }
     
     if ([cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height > 0) {

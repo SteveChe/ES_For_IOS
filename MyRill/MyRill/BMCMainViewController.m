@@ -40,6 +40,10 @@
 @implementation BMCMainViewController
 
 #pragma mark - lifeCycle methods
+- (void)dealloc {
+    [self.headerView free];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -70,12 +74,6 @@
     
     self.tabBarController.tabBar.hidden = YES;
     [self.getEmergencyListDP getEmergencyListWithViewType:@"unaccepted_event_view"];
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-    
-    [self.headerView free];
 }
 
 #pragma mark - BMCGetEmergencyListDelegate methods
@@ -138,7 +136,7 @@
 //}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 168.f;
+    return 178.f;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

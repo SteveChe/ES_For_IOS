@@ -97,7 +97,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title = @"任务详情";
-    
+    //    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    //    [pool drain];
+    //    @autoreleasepool {
+    //        extern void _objc_autoreleasePoolPrint();
+    //        id __autoreleasing obj = [[NSString alloc] init];
+    //        _objc_autoreleasePoolPrint();
+    //    }
+    //    id __strong test = [[NSObject alloc] init];
+    //    id __weak t = test;
+    //    id __unsafe_unretained p = t;
+    //    id __autoreleasing a = p;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapBackground)];
     [self.tableView.tableHeaderView addGestureRecognizer:tap];
     //[self.sendTxtView addTarget:self action:@selector(send) forControlEvents:UIControlEventEditingDidEndOnExit];

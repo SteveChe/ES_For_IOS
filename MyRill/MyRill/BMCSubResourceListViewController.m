@@ -51,9 +51,9 @@
     [self.dataSource addObjectsFromArray:resultDic[@"subResList"]];
     [self.tableView reloadData];
     
-    self.resourceName.text = resultDic[@"resName"];
-    self.resourceIP.text = resultDic[@"resIp"];
-    self.resourceType.text = resultDic[@"resType"];
+    self.resourceName.text = [ColorHandler isNullOrEmptyString:resultDic[@"resName"]] ? @"——" : resultDic[@"resName"];
+    self.resourceIP.text = [ColorHandler isNullOrEmptyString:resultDic[@"resIp"]] ? @"——" : resultDic[@"resIp"];
+    self.resourceType.text = [ColorHandler isNullOrEmptyString:resultDic[@"resType"]] ? @"——" : resultDic[@"resType"];
 }
 
 - (void)getSubResourceListFailed:(NSString *)errorMessage {
@@ -85,7 +85,7 @@
     SubResPojo *subResPojo = (SubResPojo *)self.dataSource[indexPath.row];
     cell.titleLbl.text = [NSString stringWithFormat:@"(%@)",subResPojo.subResType];
     cell.contentLbl.text = [ColorHandler isNullOrEmptyString:subResPojo.subName] ? @"——" : subResPojo.subName;
-    cell.arrowView.hidden = [ColorHandler isNullOrEmptyString:subResPojo.subResId] ? YES : NO;
+    cell.arrowView.hidden = subResPojo.isManaged ? NO : YES;
     
     self.prototypeCell = cell;
     CALayer *layer = [CALayer layer];
@@ -99,13 +99,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     SubResPojo *subResPojo = (SubResPojo *)self.dataSource[indexPath.row];
-    NSLog(@"%@",subResPojo.subResId);
-    if ([ColorHandler isNullOrEmptyString:subResPojo.subResId]) {
-        return;
+//    NSLog(@"%@",subResPojo.subResId);
+    if (subResPojo.isManaged) {
+        BMCSubResourceDetailViewController *subResourceDetailVC = [[BMCSubResourceDetailViewController alloc] init];
+        subResourceDetailVC.subResId = subResPojo.subResId;
+        [self.navigationController pushViewController:subResourceDetailVC animated:YES];
     }
-    BMCSubResourceDetailViewController *subResourceDetailVC = [[BMCSubResourceDetailViewController alloc] init];
-    subResourceDetailVC.subResId = subResPojo.subResId;
-    [self.navigationController pushViewController:subResourceDetailVC animated:YES];
 }
 
 #pragma mark - setters&getters
