@@ -2729,9 +2729,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/MyRill/lib",
 					"$(PROJECT_DIR)/MyRill/JPush",
+					"$(PROJECT_DIR)/MyRill/RCloud",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "73d5008a-a5e6-4ab0-9173-d2dc9b906dc1";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
@@ -2755,9 +2756,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/MyRill/lib",
 					"$(PROJECT_DIR)/MyRill/JPush",
+					"$(PROJECT_DIR)/MyRill/RCloud",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "73d5008a-a5e6-4ab0-9173-d2dc9b906dc1";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
