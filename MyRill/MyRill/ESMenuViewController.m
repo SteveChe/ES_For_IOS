@@ -17,8 +17,9 @@
 #import "ColorHandler.h"
 #import "RCDAddressBookViewController.h"
 #import "GetAppversionDataParse.h"
+#import "CustomShowMessage.h"
 
-#define ES_VERSION 0.3
+#define ES_VERSION 0.4
 
 @interface ESMenuViewController () <UITabBarControllerDelegate,GetAppVersionDelegate,UIAlertViewDelegate>
 
@@ -118,9 +119,9 @@
      {
          NSLog(@"登录失败%d",(int)status);
      }
-                         tokenIncorrect:^(id response)
+                         tokenIncorrect:^()
      {
-         
+         [[CustomShowMessage getInstance] showNotificationMessage:@"登录失效，请重新登录！"];
      }
      ];
     

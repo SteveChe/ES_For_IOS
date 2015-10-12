@@ -198,7 +198,7 @@ void(^completionHandler)(RCUserInfo* userInfo);
         if (indexPath.row == 0)
         {
             RootViewController* enterpriseChatVC = [[RootViewController alloc] init];
-            enterpriseChatVC.title = @"ES系统消息";//ES系统消息
+            enterpriseChatVC.title = @"Joint系统消息与帮助";//ES系统消息
             enterpriseChatVC.chatType = e_Enterprise_Chat_Riil;
             [self.navigationController pushViewController:enterpriseChatVC animated:YES];
         }
@@ -368,7 +368,7 @@ void(^completionHandler)(RCUserInfo* userInfo);
     [cell setModel:model];
     if(indexPath.row == 0)
     {
-        cell.lblName.text = @"ES系统消息";
+        cell.lblName.text = @"Joint系统消息与帮助";
         cell.lblDetail.text = model.conversationTitle;
         if (model.sentTime > 0)
         {
