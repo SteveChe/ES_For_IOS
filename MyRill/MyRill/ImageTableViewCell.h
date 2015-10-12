@@ -10,6 +10,8 @@
 @class ESTaskComment;
 @interface ImageTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *placeholderImg;
+@property (weak, nonatomic) IBOutlet UILabel *contentLbl;
+
 - (void)updateMessage:(ESTaskComment *)taskComment;
 
 @end

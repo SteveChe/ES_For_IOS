@@ -42,8 +42,11 @@
     } else {
         self.nameAndEnterpriseLbl.text = [NSString stringWithFormat:@"%@/%@",taskComment.user.userName,taskComment.user.enterprise.enterpriseName];
     }
+    
     NSString *createDateStr = [taskComment.createDate substringToIndex:16];
     self.createDate.text = [createDateStr stringByReplacingOccurrencesOfString:@"-" withString:@"/"];
+    
+    self.contentLbl.text = taskComment.content;
     
     if (taskComment.images.count > 1) {
         self.placeholderImg.image = [UIImage imageNamed:@"多张图片"];

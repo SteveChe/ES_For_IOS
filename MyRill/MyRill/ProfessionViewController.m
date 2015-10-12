@@ -104,6 +104,15 @@
             [self.navigationController pushViewController:webVC animated:YES];
         });
 
+//        dispatch_queue_t testQueue = dispatch_queue_create("justTest", NULL);
+//        dispatch_queue_t tttQ = dispatch_queue_create("againAgain", DISPATCH_QUEUE_SERIAL);
+//        dispatch_queue_t ttQ = dispatch_queue_create("again", DISPATCH_QUEUE_CONCURRENT);
+//        
+//        dispatch_queue_t mainQueue = dispatch_get_main_queue();
+//        dispatch_queue_t highQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
+//        dispatch_queue_t defaultQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+//        dispatch_queue_t lowQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0);
+//        dispatch_queue_t *backgroundQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0);
     }
 }
 
