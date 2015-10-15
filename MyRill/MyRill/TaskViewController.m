@@ -97,17 +97,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title = @"任务详情";
-    //    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    //    [pool drain];
-    //    @autoreleasepool {
-    //        extern void _objc_autoreleasePoolPrint();
-    //        id __autoreleasing obj = [[NSString alloc] init];
-    //        _objc_autoreleasePoolPrint();
-    //    }
-    //    id __strong test = [[NSObject alloc] init];
-    //    id __weak t = test;
-    //    id __unsafe_unretained p = t;
-    //    id __autoreleasing a = p;
+    
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapBackground)];
     [self.tableView.tableHeaderView addGestureRecognizer:tap];
     //[self.sendTxtView addTarget:self action:@selector(send) forControlEvents:UIControlEventEditingDidEndOnExit];
@@ -249,8 +239,8 @@
 #pragma mark - GetTaskCommentListDelegate methods
 - (void)getTaskCommentListSuccess:(NSArray *)taskCommentList {
     self.dataSource = [NSMutableArray arrayWithArray:[[taskCommentList reverseObjectEnumerator] allObjects]];
-    [self.tableView reloadData];
     [self.tableView layoutIfNeeded];
+    [self.tableView reloadData];
 }
 
 - (void)getTaskCommentListFailure:(NSString *)errorMsg {
@@ -362,8 +352,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([self.prototypeCell  isKindOfClass:[MessageListTableViewCell class]]) {
-
+    if ([self.prototypeCell isKindOfClass:[MessageListTableViewCell class]]) {
         MessageListTableViewCell *cell = (MessageListTableViewCell *)self.prototypeCell;
         ESTaskComment *taskComment = (ESTaskComment *)self.dataSource[indexPath.row];
         cell.contentLbl.text = taskComment.content;
@@ -374,7 +363,14 @@
         }
         
     } else if ([self.prototypeCell isKindOfClass:[ImageTableViewCell class]]){
-        return 108;
+        ImageTableViewCell *cell = (ImageTableViewCell *)self.prototypeCell;
+        ESTaskComment *taskComment = (ESTaskComment *)self.dataSource[indexPath.row];
+        cell.contentLbl.text = taskComment.content;
+        if ([cell.contentLbl systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height > 0) {
+            return [cell.contentLbl systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height + 1;
+        } else {
+            return 108;
+        }
     } else {
         return 108;
     }
