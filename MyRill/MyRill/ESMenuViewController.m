@@ -19,7 +19,7 @@
 #import "GetAppversionDataParse.h"
 #import "CustomShowMessage.h"
 
-#define ES_VERSION 0.4
+#define ES_VERSION 0.5
 
 @interface ESMenuViewController () <UITabBarControllerDelegate,GetAppVersionDelegate,UIAlertViewDelegate>
 
@@ -171,3 +171,4 @@
     
 }
 @end
+

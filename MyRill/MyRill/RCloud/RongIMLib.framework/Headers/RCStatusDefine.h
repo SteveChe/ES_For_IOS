@@ -359,7 +359,7 @@ typedef NS_ENUM(NSUInteger, RCReceivedStatus) {
      */
     ReceivedStatus_READ = 1,
     /**
-     * 未读。
+     * 已收听（语音消息）。
      */
     ReceivedStatus_LISTENED = 2,
 
@@ -390,6 +390,10 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
      *  不在群组中。
      */
     NOT_IN_GROUP = 22406,
+    /**
+     *  在群组中被禁言。
+     */
+    FORBIDDEN_IN_GROUP = 22408,
     /**
      *  不在聊天室中。
      */

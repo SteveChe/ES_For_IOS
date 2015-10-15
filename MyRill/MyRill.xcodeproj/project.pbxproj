@@ -255,6 +255,7 @@
 		F236308D1B67A9AB00A12F63 /* ESTagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F236308C1B67A9AB00A12F63 /* ESTagViewController.m */; };
 		F23630BD1B68F61800A12F63 /* TagDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F23630BC1B68F61800A12F63 /* TagDataParse.m */; };
 		F23A3F361BAC1C86001C416A /* GetAppversionDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F23A3F351BAC1C86001C416A /* GetAppversionDataParse.m */; };
+		F242599F1BCBF37E00BE2698 /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F242599E1BCBF37E00BE2698 /* libopencore-amrnb.a */; };
 		F2467EEE1B8DCF1F0055B78B /* RootCardBottomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2467ED51B8DCF1F0055B78B /* RootCardBottomCell.m */; };
 		F2467EF01B8DCF1F0055B78B /* RootCardMiddleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2467ED81B8DCF1F0055B78B /* RootCardMiddleCell.m */; };
 		F2467EF11B8DCF1F0055B78B /* RootCardMiddleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2467ED91B8DCF1F0055B78B /* RootCardMiddleCell.xib */; };
@@ -829,6 +830,7 @@
 		F23630BC1B68F61800A12F63 /* TagDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagDataParse.m; sourceTree = "<group>"; };
 		F23A3F341BAC1C86001C416A /* GetAppversionDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetAppversionDataParse.h; sourceTree = "<group>"; };
 		F23A3F351BAC1C86001C416A /* GetAppversionDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetAppversionDataParse.m; sourceTree = "<group>"; };
+		F242599E1BCBF37E00BE2698 /* libopencore-amrnb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libopencore-amrnb.a"; path = "MyRill/RCloud/libopencore-amrnb.a"; sourceTree = "<group>"; };
 		F2467ED41B8DCF1F0055B78B /* RootCardBottomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RootCardBottomCell.h; path = EnterpriseConversation/RootCardBottomCell.h; sourceTree = "<group>"; };
 		F2467ED51B8DCF1F0055B78B /* RootCardBottomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RootCardBottomCell.m; path = EnterpriseConversation/RootCardBottomCell.m; sourceTree = "<group>"; };
 		F2467ED71B8DCF1F0055B78B /* RootCardMiddleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RootCardMiddleCell.h; path = EnterpriseConversation/RootCardMiddleCell.h; sourceTree = "<group>"; };
@@ -1018,6 +1020,7 @@
 				F2D233A51B37E2EC00F8C65D /* libc++.dylib in Frameworks */,
 				F2D233A31B37E2DE00F8C65D /* ImageIO.framework in Frameworks */,
 				F2D233A11B37E2D200F8C65D /* CoreGraphics.framework in Frameworks */,
+				F242599F1BCBF37E00BE2698 /* libopencore-amrnb.a in Frameworks */,
 				F2D2339F1B37E2C900F8C65D /* CoreVideo.framework in Frameworks */,
 				F2D2339D1B37E2A500F8C65D /* CoreMedia.framework in Frameworks */,
 				F2D2339B1B37E25A00F8C65D /* CoreLocation.framework in Frameworks */,
@@ -1372,6 +1375,7 @@
 		2B39C9561B271C95007BAC7A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F242599E1BCBF37E00BE2698 /* libopencore-amrnb.a */,
 				F2D233B61B37E37100F8C65D /* UIKit.framework */,
 				F2D233B41B37E35300F8C65D /* SystemConfiguration.framework */,
 				F2D233B21B37E34000F8C65D /* QuartzCore.framework */,

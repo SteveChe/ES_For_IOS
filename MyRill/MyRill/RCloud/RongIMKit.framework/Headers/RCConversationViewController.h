@@ -160,6 +160,12 @@
 *  @param message 消息
 */
 - (void)appendAndDisplayMessage:(RCMessage *)message;
+/**
+ *  滚动到list的最底部
+ *
+ *  @param animated 是否动画
+ */
+- (void)scrollToBottomAnimated:(BOOL)animated;
 #pragma mark override
 /**
  *  返回方法，如果继承，请重写该方法，并且优先调用父类方法;
@@ -304,7 +310,7 @@
 - (void)sendMessage:(RCMessageContent *)messageContent pushContent:(NSString *)pushContent;
 
 /**
- *  发送图片消息，此方法会先上传图片到融云指定的图片服务器，在发送消息。
+ *  发送图片消息，此方法会先上传图片到融云指定的图片服务器，再发送消息。
  *
  *  @param imageMessage 消息
  *
