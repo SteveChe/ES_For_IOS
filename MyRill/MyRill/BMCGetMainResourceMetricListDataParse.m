@@ -16,7 +16,7 @@
     [AFHttpTool getMainResourceMetricListWithResId:resId
                                             sucess:^(id response) {
                                                 NSDictionary *responseDic = (NSDictionary *)response;
-                                                NSLog(@"%@",responseDic);
+//                                                NSLog(@"%@",responseDic);
                                                 if ([[responseDic allKeys] containsObject:@"error"]) {
                                                     [self.delegate getMainResourceMetricListFailed:nil];
                                                     NSLog(@"请求有误!");

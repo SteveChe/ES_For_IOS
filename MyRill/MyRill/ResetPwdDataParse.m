@@ -20,7 +20,7 @@
                     verificationCode:verificationCode
                              success:^(id response) {
                                  NSDictionary *responseDic = (NSDictionary *)response;
-                                 NSLog(@"%@",responseDic);
+//                                 NSLog(@"%@",responseDic);
                                  NSNumber *errorCodeNum = responseDic[NETWORK_ERROR_CODE];
                                  
                                  if (errorCodeNum == nil || [errorCodeNum isEqual:[NSNull null]]) {

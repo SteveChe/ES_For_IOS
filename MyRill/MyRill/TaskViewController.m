@@ -275,7 +275,7 @@
 #pragma mark - UpdateObserverAndChatidDelegate methods
 - (void)updateObserverAndChatidSuccess {
     [self showTips:@"修改成功!" mode:MRProgressOverlayViewModeCheckmark isDismiss:YES isSucceuss:YES];
-    NSLog(@"%@",self.raiseObserverList);
+//    NSLog(@"%@",self.raiseObserverList);
     NSMutableArray *userIdList = [NSMutableArray new];
     [userIdList addObjectsFromArray:self.raiseObserverList];
     if (![self.taskModel.chatID isKindOfClass:[NSNull class]] && self.taskModel.chatID != nil && ![self.taskModel.chatID isEqualToString:@""])
@@ -918,7 +918,7 @@
                 [weakSelf.raiseChargeList removeAllObjects];
                 [weakSelf.raiseChargeList addObjectsFromArray:newArr];
                 
-                NSLog(@"%@",selectedUsers);
+//                NSLog(@"%@",selectedUsers);
                 [weakSelf.assignerDataSource removeAllObjects];
                 [weakSelf.assignerDataSource addObjectsFromArray:selectedUsers];
             }
