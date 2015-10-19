@@ -67,6 +67,7 @@
 		2B42A86D1BB230A900E47193 /* GetVerificationCodeDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B42A86C1BB230A900E47193 /* GetVerificationCodeDataParse.m */; };
 		2B4513A81BB6479600F78C40 /* BMCGetSubResourceListDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B4513A71BB6479600F78C40 /* BMCGetSubResourceListDataParse.m */; };
 		2B4513AB1BB64A6E00F78C40 /* SubResPojo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B4513AA1BB64A6E00F78C40 /* SubResPojo.m */; };
+		2B4AA4FF1BD50024000D13F3 /* RongCloudKit.strings in Resources */ = {isa = PBXBuildFile; fileRef = F2C26EA11B9DB93D00DAACE7 /* RongCloudKit.strings */; };
 		2B5A590C1B48DFBB000382D7 /* MRBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5A58E81B48DFBB000382D7 /* MRBlurView.m */; };
 		2B5A590D1B48DFBB000382D7 /* UIImage+MRImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5A58EA1B48DFBB000382D7 /* UIImage+MRImageEffects.m */; };
 		2B5A590E1B48DFBB000382D7 /* MRActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5A58ED1B48DFBB000382D7 /* MRActivityIndicatorView.m */; };
@@ -317,7 +318,6 @@
 		F29F86491B2410320058FC9F /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = F29F86401B2410320058FC9F /* UIRefreshControl+AFNetworking.m */; };
 		F29F864A1B2410320058FC9F /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = F29F86421B2410320058FC9F /* UIWebView+AFNetworking.m */; };
 		F2C26EA01B9C884D00DAACE7 /* Emoji.plist in Resources */ = {isa = PBXBuildFile; fileRef = F2C26E9F1B9C884D00DAACE7 /* Emoji.plist */; };
-		F2C26EA31B9DB93D00DAACE7 /* RongCloudKit.strings in Resources */ = {isa = PBXBuildFile; fileRef = F2C26EA11B9DB93D00DAACE7 /* RongCloudKit.strings */; };
 		F2D233561B31AA1200F8C65D /* libPushSDK-1.8.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2D233551B31AA1200F8C65D /* libPushSDK-1.8.3.a */; };
 		F2D2335A1B31AE2800F8C65D /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F2D233591B31AE2800F8C65D /* libz.dylib */; };
 		F2D2335C1B31AE4D00F8C65D /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2D2335B1B31AE4D00F8C65D /* CoreTelephony.framework */; };
@@ -2249,6 +2249,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B4AA4FF1BD50024000D13F3 /* RongCloudKit.strings in Resources */,
 				2BEBBD931B6F5E1F008BE7C4 /* TaskListTableViewCell.xib in Resources */,
 				F2467EF61B8DCF1F0055B78B /* RootImageCell.xib in Resources */,
 				F2467F001B8DD9E10055B78B /* RootCardBottomCell.xib in Resources */,
@@ -2268,7 +2269,6 @@
 				F2D2335E1B31B1F400F8C65D /* PushConfig.plist in Resources */,
 				2B93E9291BAA92DE0026EB39 /* BMCResourceDetailTableViewCell.xib in Resources */,
 				2BC227811B94578600E3163A /* ImageTableViewCell.xib in Resources */,
-				F2C26EA31B9DB93D00DAACE7 /* RongCloudKit.strings in Resources */,
 				2BC227751B942A3600E3163A /* ELCAssetTablePicker.xib in Resources */,
 				2B39C98D1B37B2A4007BAC7A /* LoginViewController.xib in Resources */,
 				F256CB721B6BD565009478C2 /* RCDUpdateNameViewController.xib in Resources */,
@@ -2736,7 +2736,7 @@
 					"$(PROJECT_DIR)/MyRill/RCloud",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "73d5008a-a5e6-4ab0-9173-d2dc9b906dc1";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
@@ -2763,7 +2763,7 @@
 					"$(PROJECT_DIR)/MyRill/RCloud",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "73d5008a-a5e6-4ab0-9173-d2dc9b906dc1";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
