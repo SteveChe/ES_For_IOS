@@ -279,7 +279,7 @@
         NSDictionary *orderDic = @{@"id":[profession.sub_id stringValue],@"order":[NSString stringWithFormat:@"%d",(i + 1)]};
         [paramArray addObject:orderDic];
     }
-    NSLog(@"%@",paramArray);
+//    NSLog(@"%@",paramArray);
     
     NSError *error = nil;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:paramArray options:NSJSONWritingPrettyPrinted error:&error];
