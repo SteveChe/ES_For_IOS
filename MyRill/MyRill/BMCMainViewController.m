@@ -16,6 +16,8 @@
 #import "EventVO.h"
 #import "CustomShowMessage.h"
 #import "MJRefresh.h"
+#import "AFHttpTool.h"
+#import "DataParseDefine.h"
 
 @interface BMCMainViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate, BMCGetEmergencyListDelegate, MJRefreshBaseViewDelegate>
 
@@ -32,6 +34,10 @@
 @property (nonatomic, strong) NSMutableArray *warningDataSource;
 
 @property (nonatomic, strong) BMCGetEmergencyListDataParse *getEmergencyListDP;
+
+@property (nonatomic,strong) UIButton* rightBarButton;
+@property (nonatomic,assign) BOOL bNotification;
+
 
 //@property (nonatomic, strong) BMCGetMainResourceListDataParse *getMainResourceListDP;
 
@@ -67,6 +73,9 @@
     self.headerView = [MJRefreshHeaderView header];
     self.headerView.scrollView = self.warningTableView; // 或者tableView
     self.headerView.delegate = self;
+    
+    [self setProfessionUpdateStatus];
+    [self getNoticationBlock];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -74,6 +83,134 @@
     
     self.tabBarController.tabBar.hidden = YES;
     [self.getEmergencyListDP getEmergencyListWithViewType:@"unaccepted_event_view"];
+}
+
+-(void)getNoticationBlock
+{
+    [AFHttpTool getProfessionNotification:self.professionId sucess:^(id response)
+     {
+         NSLog(@"getProfessionNotification");
+         NSDictionary* reponseDic = (NSDictionary*)response;
+         NSNumber* errorCodeNum = [reponseDic valueForKey:NETWORK_ERROR_CODE];
+         if (errorCodeNum == nil || [errorCodeNum isEqual:[NSNull null]] )
+         {
+             return ;
+         }
+         int errorCode = [errorCodeNum intValue];
+         switch (errorCode)
+         {
+             case 0:
+             {
+                 NSDictionary* temDic = [reponseDic valueForKey:NETWORK_OK_DATA];
+                 if (temDic == nil || [temDic isEqual:[NSNull null]])
+                 {
+                     break;
+                 }
+                 NSNumber* blockNum = [temDic objectForKey:@"block_notification"];
+                 if (blockNum == nil)
+                 {
+                     break;
+                 }
+                 
+                 dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                     dispatch_async(dispatch_get_main_queue(), ^{
+                         [self setRightBarButtonWithBlock:[blockNum boolValue]];
+                     });
+                 });
+                 
+             }
+                 break;
+             default:
+                 break;
+         }
+
+     }failure:^(NSError* err)
+     {
+         NSLog(@"%@",err);
+         
+     }];
+
+}
+
+-(void)setRightBarButtonWithBlock:(BOOL)bNotification
+{
+    [[CustomShowMessage getInstance] hideWaitingIndicator];
+
+    UIBarButtonItem *rightButtonItem = nil;
+    
+    _bNotification = bNotification;
+    
+    if (bNotification)
+    {
+        rightButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"启用通知"
+                                                           style:UIBarButtonItemStyleDone
+                                                          target:self
+                                                          action:@selector(rightButtonClicked)];
+    }
+    else
+    {
+        rightButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"关闭通知"
+                                                           style:UIBarButtonItemStyleDone
+                                                          target:self
+                                                          action:@selector(rightButtonClicked)];
+    }
+    self.navigationItem.rightBarButtonItem = rightButtonItem;
+
+}
+
+-(void)rightButtonClicked
+{
+    [[CustomShowMessage getInstance] showWaitingIndicator:REQ_WAITING_INDICATOR];
+
+    [AFHttpTool setProfessionNotification:self.professionId block:!_bNotification sucess:^(id response)
+     {
+         NSLog(@"getProfessionNotification");
+         NSDictionary* reponseDic = (NSDictionary*)response;
+         NSNumber* errorCodeNum = [reponseDic valueForKey:NETWORK_ERROR_CODE];
+         if (errorCodeNum == nil || [errorCodeNum isEqual:[NSNull null]] )
+         {
+             return ;
+         }
+         int errorCode = [errorCodeNum intValue];
+         switch (errorCode)
+         {
+             case 0:
+             {
+                 NSDictionary* temDic = [reponseDic valueForKey:NETWORK_OK_DATA];
+                 if (temDic == nil || [temDic isEqual:[NSNull null]])
+                 {
+                     break;
+                 }
+                 dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                     dispatch_async(dispatch_get_main_queue(), ^{
+                         [self setRightBarButtonWithBlock:!_bNotification];
+                     });
+                 });
+                 
+             }
+                 break;
+             default:
+                 break;
+         }
+         
+     }failure:^(NSError* err)
+     {
+         NSLog(@"%@",err);
+         
+     }];
+
+}
+
+-(void)setProfessionUpdateStatus
+{
+    [AFHttpTool setProfessionStatus:self.professionId sucess:^(id response)
+     {
+         NSLog(@"setProfessionStatus success!");
+      }failure:^(NSError* err)
+     {
+         NSLog(@"%@",err);
+
+     }];
 }
 
 #pragma mark - BMCGetEmergencyListDelegate methods

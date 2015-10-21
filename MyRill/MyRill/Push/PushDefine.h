@@ -70,6 +70,12 @@ typedef enum E_PUSH_CATEGORY_TYPE
 #define NOTIFIACATION_PUSH_RIIL_MESSAGE @"notification_riil_message"
 #define NOTIFICATION_PUSH_ASSIGNMENT @"notification_assignment"
 #define NOTIFICATION_PUSH_PROFESSION @"notification_profession"
+#define NOTIFICATION_PUSH_PROFESSION1 @"notification_profession1"
+
 #define NOTIFICATION_PUSH_PROFESSION_APPLY @"notification_profession_apply"
+
+#define NOTIFICATION_STATUS_UPDATE @"notification_status_update"
+
+#define NOTIFICATION_ENTER_FOREGROUD @"notification_enter_foregroud"
 
 #endif

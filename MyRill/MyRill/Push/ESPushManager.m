@@ -88,7 +88,9 @@
         [ESPushManager changeToPageWithType:categoryType Dic:paramsDic];
     }
     
-    [ESPushManager postNotificationMessage:notificationMessage];
+//    if (![notificationMessage isEqualToString:NOTIFICATION_PUSH_PROFESSION] ) {
+//        [ESPushManager postNotificationMessage:notificationMessage];
+//    }
 }
 +(void)postNotificationMessage:(NSString*)notificationMessage
 {
@@ -200,15 +202,16 @@
             NSString* professionId = nil;
             if (professionIdNum!= nil)
             {
-                professionId = [professionIdNum stringValue];
+                professionId = [NSString stringWithFormat:@"%d",[professionIdNum intValue]];
             }
 
             selectIndex = 0;
             [rootViewCtrl setSelectedIndex:selectIndex];
             
+
             if (professionId!=nil)
             {
-                [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_PUSH_PROFESSION object:professionId];
+                [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_PUSH_PROFESSION1 object:professionId];
             }
 
 

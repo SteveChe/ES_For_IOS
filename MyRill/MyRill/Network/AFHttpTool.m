@@ -1258,4 +1258,77 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
                           failure:failure];
 }
 
+//获取通知状态
++(void)getNotificationStatus:(void (^)(id response))success failure:(void (^)(NSError* err))failure
+{
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet
+                     protocolType:RequestProtocolTypeText
+                              url:@"/api/accounts/notification-status/.json"
+                           params:nil
+                          success:success
+                          failure:failure];
+}
+
+//修改通知状态
++(void)setNotificationStatus:(NSString*)menu notificationType:(BOOL)bType  sucess:(void (^)(id response))success failure:(void (^)(NSError* err))failure
+{
+    NSDictionary* dic = @{menu:[NSNumber numberWithBool:bType]};
+
+    NSError* error;
+    NSString *cartJSON = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:dic
+                                                                                        options:NSJSONWritingPrettyPrinted
+                                                                                          error:&error]
+                                               encoding:NSUTF8StringEncoding];
+    
+    NSDictionary *params = @{@"_method":@"patch",@"_content":cartJSON,@"_content_type":@"application/json"};
+
+    [AFHttpTool requestWithMethod:RequestMethodTypePost
+                     protocolType:RequestProtocolTypeText
+                              url:@"/api/accounts/notification-status/.json"
+                           params:params
+                          success:success
+                          failure:failure];
+}
+
+//设定业务更新状态
++(void)setProfessionStatus:(NSString*)professId sucess:(void (^)(id response))success failure:(void (^)(NSError* err))failure
+{
+    NSString* strURL = [NSString stringWithFormat:@"/api/professions/%@/status/.json",professId];
+    
+    [AFHttpTool requestWithMethod:RequestMethodTypePost
+                     protocolType:RequestProtocolTypeText
+                              url:strURL
+                           params:nil
+                          success:success
+                          failure:failure];
+}
+
++(void)getProfessionNotification:(NSString*)professId sucess:(void (^)(id response))success failure:(void (^)(NSError* err))failure
+{
+    NSString* strURL = [NSString stringWithFormat:@"/api/professions/%@/notification/.json",professId];
+    
+    [AFHttpTool requestWithMethod:RequestMethodTypeGet
+                     protocolType:RequestProtocolTypeText
+                              url:strURL
+                           params:nil
+                          success:success
+                          failure:failure];
+
+}
+
+//设置业务推送的开关状态
++(void)setProfessionNotification:(NSString*)professId block:(BOOL)bNotification sucess:(void (^)(id response))success failure:(void (^)(NSError* err))failure
+{
+    NSString* strURL = [NSString stringWithFormat:@"/api/professions/%@/notification/.json",professId];
+    NSDictionary *params = @{@"block_notification":[NSNumber numberWithBool:bNotification]};
+    
+    [AFHttpTool requestWithMethod:RequestMethodTypePost
+                     protocolType:RequestProtocolTypeJson
+                              url:strURL
+                           params:params
+                          success:success
+                          failure:failure];
+
+}
+
 @end

@@ -346,4 +346,19 @@ failure:(void (^)(NSError *error))failure;
 +(void)getAppVersionSucess:(void (^)(id response))success failure:(void (^)(NSError* err))failure;
 
 
+//获取通知状态
++(void)getNotificationStatus:(void (^)(id response))success failure:(void (^)(NSError* err))failure;
+
+//修改通知状态
++(void)setNotificationStatus:(NSString*)menu  notificationType:(BOOL)bType  sucess:(void (^)(id response))success failure:(void (^)(NSError* err))failure;
+
+//设定业务更新状态
++(void)setProfessionStatus:(NSString*)professId sucess:(void (^)(id response))success failure:(void (^)(NSError* err))failure;
+
+//获取业务推送的开关状态
++(void)getProfessionNotification:(NSString*)professId sucess:(void (^)(id response))success failure:(void (^)(NSError* err))failure;
+
+//设置业务推送的开关状态
++(void)setProfessionNotification:(NSString*)professId block:(BOOL)bNotification sucess:(void (^)(id response))success failure:(void (^)(NSError* err))failure;
+
 @end

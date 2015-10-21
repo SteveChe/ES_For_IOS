@@ -18,12 +18,23 @@
 #import "RCDAddressBookViewController.h"
 #import "GetAppversionDataParse.h"
 #import "CustomShowMessage.h"
+#import "GetNotificationStatusDataParse.h"
+#import "DeviceInfo.h"
+#import "PushDefine.h"
 
-#define ES_VERSION 0.6
+#define ES_VERSION 0.7
 
-@interface ESMenuViewController () <UITabBarControllerDelegate,GetAppVersionDelegate,UIAlertViewDelegate>
+@interface ESMenuViewController () <UITabBarControllerDelegate,GetAppVersionDelegate,UIAlertViewDelegate,GetNotificationStatusDelegate>
 
 @property (nonatomic,strong) GetAppversionDataParse* getAppVersionDataParse;
+@property (nonatomic,strong) GetNotificationStatusDataParse* getNotificationStatusDataParse;
+@property (nonatomic,strong) UILabel* professionRedbadage;
+@property (nonatomic,strong) UILabel* subscriptionRedbadage;
+@property (nonatomic,strong) UILabel* contactRedbadage;
+@property (nonatomic,strong) UILabel* assignmentRedbadage;
+
+-(void)getNotificationStatus1;
+
 @end
 
 @implementation ESMenuViewController
@@ -72,6 +83,11 @@
                                 [[ESNavigationController alloc] initWithRootViewController:contactsVC],
                                 [[ESNavigationController alloc] initWithRootViewController:taskVC],
                                 [[ESNavigationController alloc] initWithRootViewController:userVC],nil];
+    [businessVC.tabBarController.tabBar addSubview:self.professionRedbadage];
+    [contactsVC.tabBarController.tabBar addSubview:self.contactRedbadage];
+
+    [taskVC.tabBarController.tabBar addSubview:self.assignmentRedbadage];
+
     [self setSelectedIndex:0];
     self.delegate = self;
     [self loginRongCloud];
@@ -79,6 +95,22 @@
     _getAppVersionDataParse = [[GetAppversionDataParse alloc] init];
     _getAppVersionDataParse.delegate = self;
     [_getAppVersionDataParse getAppVersion];
+    
+    _getNotificationStatusDataParse = [[GetNotificationStatusDataParse alloc]init];
+    _getNotificationStatusDataParse.delegate = self;
+    [_getNotificationStatusDataParse getNotificationStatus];
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateNotificationStatus:)
+                                                 name:NOTIFICATION_STATUS_UPDATE
+                                               object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(getNotificationStatus1)
+                                                 name:NOTIFICATION_ENTER_FOREGROUD
+                                               object:nil];
+    
 
 }
 
@@ -94,6 +126,19 @@
 {
     [super viewWillAppear:animated];
 }
+
+-(void)getNotificationStatus1
+{
+    [_getNotificationStatusDataParse getNotificationStatus];
+}
+
+-(void)updateNotificationStatus:(id)notification
+{
+//    NSLog(@"updateNotificationStatus");
+    NSDictionary *notificationStatusDic = (NSDictionary *)[notification object];
+    [self getNotificationStatusSucceed:notificationStatusDic];
+}
+
 -(void)loginRongCloud
 {
     //登录融云服务器,开始阶段可以先从融云API调试网站获取，之后token需要通过服务器到融云服务器取。
@@ -157,6 +202,32 @@
 {
     
 }
+#pragma mark-- GetNotificationStatusDelegate
+-(void)getNotificationStatusSucceed:(NSDictionary*)notificationStatus
+{
+//    NSLog(@"notificationStatus = %@",notificationStatus);
+    NSNumber* bProfessionUp = [notificationStatus objectForKey:@"profession"];
+    if (bProfessionUp != nil && ![bProfessionUp isEqual:[NSNull null]])
+    {
+        self.professionRedbadage.hidden = ![bProfessionUp boolValue];
+    }
+    NSNumber* bAssignment = [notificationStatus objectForKey:@"assignment"];
+    if (bAssignment != nil && ![bAssignment isEqual:[NSNull null]])
+    {
+        self.assignmentRedbadage.hidden = ![bAssignment boolValue];
+    }
+    
+    NSNumber* bContact = [notificationStatus objectForKey:@"contact"];
+    if (bContact != nil && ![bContact isEqual:[NSNull null]])
+    {
+        self.contactRedbadage.hidden = ![bContact boolValue];
+    }
+    
+}
+-(void)getNotificationStatusFailed:(NSString*)errorMessage
+{
+    
+}
 
 #pragma mark RCIMUserInfoDataSource
 /**
@@ -170,5 +241,65 @@
 {
     
 }
+
+#pragma mark -- setter&getter
+- (UILabel*)professionRedbadage{
+    if (!_professionRedbadage)
+    {
+        _professionRedbadage = [[UILabel alloc] initWithFrame:CGRectMake(50, 5, 10, 10)];
+        _professionRedbadage.font = [UIFont systemFontOfSize:8];
+//        _professionRedbadage.textColor = [ColorHandler colorFromHexRGB:@"F64F50"];
+        _professionRedbadage.backgroundColor = [ColorHandler colorFromHexRGB:@"F64F50"];
+        _professionRedbadage.clipsToBounds = YES;
+        _professionRedbadage.layer.cornerRadius = 5;
+        _professionRedbadage.hidden = YES;
+    }
+    return _professionRedbadage;
+}
+
+-(UILabel*)subscriptionRedbadage{
+    if (!_subscriptionRedbadage)
+    {
+        _subscriptionRedbadage = [[UILabel alloc] initWithFrame:CGRectMake(IPHONE_SCREEN_WIDTH/5 + 50, 5, 10, 10)];
+        _subscriptionRedbadage.font = [UIFont systemFontOfSize:8];
+        //        _professionRedbadage.textColor = [ColorHandler colorFromHexRGB:@"F64F50"];
+        _subscriptionRedbadage.backgroundColor = [ColorHandler colorFromHexRGB:@"F64F50"];
+        _subscriptionRedbadage.clipsToBounds = YES;
+        _subscriptionRedbadage.layer.cornerRadius = 5;
+        _subscriptionRedbadage.hidden = YES;
+    }
+    return _subscriptionRedbadage;
+}
+
+
+-(UILabel*)contactRedbadage{
+    if (!_contactRedbadage)
+    {
+        _contactRedbadage = [[UILabel alloc] initWithFrame:CGRectMake(IPHONE_SCREEN_WIDTH/5 * 2 + 50, 5, 10, 10)];
+        _contactRedbadage.font = [UIFont systemFontOfSize:8];
+        //        _professionRedbadage.textColor = [ColorHandler colorFromHexRGB:@"F64F50"];
+        _contactRedbadage.backgroundColor = [ColorHandler colorFromHexRGB:@"F64F50"];
+        _contactRedbadage.clipsToBounds = YES;
+        _contactRedbadage.layer.cornerRadius = 5;
+        _contactRedbadage.hidden = YES;
+    }
+    return _contactRedbadage;
+}
+
+-(UILabel*)assignmentRedbadage{
+    if (!_assignmentRedbadage)
+    {
+        _assignmentRedbadage = [[UILabel alloc] initWithFrame:CGRectMake(IPHONE_SCREEN_WIDTH/5 * 3 + 50, 5, 10, 10)];
+        _assignmentRedbadage.font = [UIFont systemFontOfSize:8];
+        //        _professionRedbadage.textColor = [ColorHandler colorFromHexRGB:@"F64F50"];
+        _assignmentRedbadage.backgroundColor = [ColorHandler colorFromHexRGB:@"F64F50"];
+        _assignmentRedbadage.clipsToBounds = YES;
+        _assignmentRedbadage.layer.cornerRadius = 5;
+        _assignmentRedbadage.hidden = YES;
+    }
+    return _assignmentRedbadage;
+}
+
+
 @end
 

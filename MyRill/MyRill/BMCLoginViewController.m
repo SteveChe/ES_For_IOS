@@ -59,6 +59,8 @@
     [userDefault synchronize];
     
     BMCMainViewController *bmcMainVC = [[BMCMainViewController alloc] init];
+    bmcMainVC.professionId = [self.professionId copy];
+    
     [self.navigationController pushViewController:bmcMainVC animated:YES];
 }
 

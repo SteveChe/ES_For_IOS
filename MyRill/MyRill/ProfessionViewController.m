@@ -19,14 +19,16 @@
 #import "CustomShowMessage.h"
 #import "GetProfessionDataParse.h"
 #import "BMCMainViewController.h"
+#import "SetNotificationStatusDataParse.h"
 
-@interface ProfessionViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, GetProfessionListDelegate, GetProfessionDelegate>
+@interface ProfessionViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, GetProfessionListDelegate, GetProfessionDelegate,SetNotificationStatusDelegate>
 
 @property (nonatomic, strong) UICollectionView *collectionView;
 
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) GetProfessionListDataParse *getProfessionListDP;
 @property (nonatomic, strong) GetProfessionDataParse *getProfessionDP;
+@property (nonatomic, strong) SetNotificationStatusDataParse * setNotificationStatusDataParse;
 
 @end
 
@@ -42,7 +44,12 @@
                                                                    target:self
                                                                    action:@selector(onSortBtnItemClicked:)];
     self.navigationItem.rightBarButtonItem = sortBtnItem;
-
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updatePushProfession:)
+                                                 name:NOTIFICATION_PUSH_PROFESSION1
+                                               object:nil];
+    
     [self.view addSubview:self.collectionView];
 }
 
@@ -51,18 +58,15 @@
     
     self.tabBarController.tabBar.hidden = NO;
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(updatePushProfession:)
-                                                 name:NOTIFICATION_PUSH_PROFESSION
-                                               object:nil];
-    
     [self.getProfessionListDP getProfessionList];
+    [self.setNotificationStatusDataParse setNotificationStatus:@"profession" notificationType:NO];
+//    [self.setNotificationStatusDataParse setNotificationStatus:@"profession" b]
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFICATION_PUSH_PROFESSION object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFICATION_PUSH_PROFESSION1 object:nil];
 }
 
 #pragma mark - GetProfessionListDelegate methods
@@ -92,8 +96,12 @@
     if ([profession.professionType isEqualToString:@"BMC"]) {
         dispatch_async(dispatch_get_main_queue(), ^{
 
-            BMCLoginViewController *bmcLoginVC = [[BMCLoginViewController alloc] init];
-            [self.navigationController pushViewController:bmcLoginVC animated:YES];
+//            BMCLoginViewController *bmcLoginVC = [[BMCLoginViewController alloc] init];
+//            [self.navigationController pushViewController:bmcLoginVC animated:YES];
+            BMCMainViewController *bmcMainVC = [[BMCMainViewController alloc] init];
+            bmcMainVC.professionId = [profession.professionId copy];
+            
+            [self.navigationController pushViewController:bmcMainVC animated:YES];
         });
     } else {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -175,7 +183,7 @@
             [userDefault setValue:profession.url forKey:@"BMC_URL"];
             [userDefault synchronize];
             
-            UIViewController *vc = nil;
+//            UIViewController *vc = nil;
             NSData *cookiesdata = [userDefault objectForKey:@"sessionCookies"];
             if([cookiesdata length]) {
                 NSArray *cookies = [NSKeyedUnarchiver unarchiveObjectWithData:cookiesdata];
@@ -195,14 +203,22 @@
                     }
                 }
                 if (jsessionidLogin && ssoTokenLogin) {
-                    vc = [[BMCMainViewController alloc] init];
+                   BMCMainViewController* vc = [[BMCMainViewController alloc] init];
+                    vc.professionId = [profession.professionId copy];
+                    [self.navigationController pushViewController:vc animated:YES];
+
                 } else {
-                    vc = [[BMCLoginViewController alloc] init];
+                    BMCLoginViewController* vc = [[BMCLoginViewController alloc] init];
+                    vc.professionId = [profession.professionId copy];
+                    [self.navigationController pushViewController:vc animated:YES];
+
                 }
             } else {
-                vc = [[BMCLoginViewController alloc] init];
+                BMCLoginViewController* vc = [[BMCLoginViewController alloc] init];
+                vc.professionId = [profession.professionId copy];
+                [self.navigationController pushViewController:vc animated:YES];
             }
-            [self.navigationController pushViewController:vc animated:YES];
+            
         } else {
             ProfessionWebViewController *webVC = [[ProfessionWebViewController alloc] init];
             webVC.title = profession.name;
@@ -231,6 +247,16 @@
 
 - (void)updatePushProfessionWithProfessionID:(NSString *)professionID {
     [self.getProfessionDP getProfessionWithProfessionID:professionID];
+}
+
+#pragma mark -- SetNotificationStatusDelegate
+-(void)setNotificationStatusSucceed:(NSDictionary*)notificationStatus
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_STATUS_UPDATE object:notificationStatus];
+}
+-(void)setNotificationStatusFailed:(NSString*)errorMessage
+{
+    
 }
 
 #pragma mark - setters&getters
@@ -276,4 +302,11 @@
     return _getProfessionDP;
 }
 
+- (SetNotificationStatusDataParse *)setNotificationStatusDataParse {
+    if (!_setNotificationStatusDataParse) {
+        _setNotificationStatusDataParse = [[SetNotificationStatusDataParse alloc] init];
+        _setNotificationStatusDataParse.delegate = self;
+    }
+    return _setNotificationStatusDataParse;
+}
 @end

@@ -28,8 +28,9 @@
 #import "PushDefine.h"
 #import "GetRequestContactListDataParse.h"
 #import "EnterPriseRequestDataParse.h"
+#import "SetNotificationStatusDataParse.h"
 
-@interface RCDAddressBookViewController ()<UISearchBarDelegate,UISearchControllerDelegate,UISearchDisplayDelegate,GetFollowedEnterpriseListDelegate,GetRequestContactListDelegate,GetEnterPriseRequestListDelegate>
+@interface RCDAddressBookViewController ()<UISearchBarDelegate,UISearchControllerDelegate,UISearchDisplayDelegate,GetFollowedEnterpriseListDelegate,GetRequestContactListDelegate,GetEnterPriseRequestListDelegate,SetNotificationStatusDelegate>
 
 //#字符索引对应的user object
 @property (nonatomic,strong) NSMutableArray *tempOtherArr;
@@ -39,7 +40,7 @@
 @property (nonatomic,strong)EnterPriseRequestDataParse* enterpriseRequestDataParse;
 @property (nonatomic,strong) NSMutableArray *requestContactList;
 @property (nonatomic,strong) NSMutableArray *enterpriseRequestContactList;
-
+@property (nonatomic,strong) SetNotificationStatusDataParse* setNotificationStatusDataParse;
 
 @end
 
@@ -96,7 +97,8 @@
     
     UIBarButtonItem *settintBtnItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self                      action:@selector(addButtonOnClicked:)];
     self.navigationItem.rightBarButtonItem = settintBtnItem;
-
+    
+    [self.setNotificationStatusDataParse setNotificationStatus:@"contact" notificationType:NO];
 }
 
 //删除已选中用户
@@ -131,6 +133,16 @@
     [_getEnterpriseListDataParse getFollowedEnterpriseList];
     [_getRequestContactListDataParse getRequestedContactList];
     [_enterpriseRequestDataParse getEnterPriseRequestList];
+}
+
+#pragma mark -- SetNotificationStatusDelegate
+-(void)setNotificationStatusSucceed:(NSDictionary*)notificationStatus
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_STATUS_UPDATE object:notificationStatus];
+}
+-(void)setNotificationStatusFailed:(NSString*)errorMessage
+{
+    
 }
 
 #pragma mark - GetFollowedEnterpriseListDelegate
@@ -642,6 +654,14 @@
     [self.searchDisplayController1.searchResultsTableView reloadData];
 }
 
+
+- (SetNotificationStatusDataParse *)setNotificationStatusDataParse {
+    if (!_setNotificationStatusDataParse) {
+        _setNotificationStatusDataParse = [[SetNotificationStatusDataParse alloc] init];
+        _setNotificationStatusDataParse.delegate = self;
+    }
+    return _setNotificationStatusDataParse;
+}
 
 
 @end

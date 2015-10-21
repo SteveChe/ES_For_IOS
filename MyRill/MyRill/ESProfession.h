@@ -18,6 +18,8 @@
 @property (nonatomic, copy) NSString *url;
 @property (nonatomic, copy) NSString *icon_url;
 @property (nonatomic, copy) NSString *professionType;
+@property (nonatomic, assign) BOOL isUpdate;
+
 
 - (instancetype)initWithDic:(NSDictionary *)dic;
 

@@ -10,4 +10,6 @@
 
 @interface BMCLoginViewController : UIViewController
 
+@property (nonatomic,strong) NSString* professionId;
+
 @end

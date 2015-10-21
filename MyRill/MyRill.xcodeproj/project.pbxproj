@@ -285,6 +285,8 @@
 		F256CB7F1B6E4247009478C2 /* RCDJoinEnterpriseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F256CB7D1B6E4247009478C2 /* RCDJoinEnterpriseViewController.m */; };
 		F256CB801B6E4247009478C2 /* RCDJoinEnterpriseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F256CB7E1B6E4247009478C2 /* RCDJoinEnterpriseViewController.xib */; };
 		F256CB831B6E5921009478C2 /* RCDApprovedJoinEnterpriseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F256CB821B6E5921009478C2 /* RCDApprovedJoinEnterpriseViewController.m */; };
+		F25C8C621BD688A2004B913C /* GetNotificationStatusDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F25C8C611BD688A2004B913C /* GetNotificationStatusDataParse.m */; };
+		F25C8C651BD69604004B913C /* SetNotificationStatusDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = F25C8C641BD69604004B913C /* SetNotificationStatusDataParse.m */; };
 		F2735FBA1B710C2C00138080 /* RCDSearchEnterpriseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2735FB91B710C2C00138080 /* RCDSearchEnterpriseViewController.m */; };
 		F277ADFB1B2DBE97006E42CB /* CustomShowMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = F277ADFA1B2DBE97006E42CB /* CustomShowMessage.m */; };
 		F277ADFE1B2DC046006E42CB /* CustomMessageBox.m in Sources */ = {isa = PBXBuildFile; fileRef = F277ADFD1B2DC046006E42CB /* CustomMessageBox.m */; };
@@ -878,6 +880,10 @@
 		F256CB7E1B6E4247009478C2 /* RCDJoinEnterpriseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RCDJoinEnterpriseViewController.xib; path = RCDChatList/SearchContacts/RCDJoinEnterpriseViewController.xib; sourceTree = "<group>"; };
 		F256CB811B6E5921009478C2 /* RCDApprovedJoinEnterpriseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCDApprovedJoinEnterpriseViewController.h; path = RCDChatList/AddressBook/RCDApprovedJoinEnterpriseViewController.h; sourceTree = "<group>"; };
 		F256CB821B6E5921009478C2 /* RCDApprovedJoinEnterpriseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RCDApprovedJoinEnterpriseViewController.m; path = RCDChatList/AddressBook/RCDApprovedJoinEnterpriseViewController.m; sourceTree = "<group>"; };
+		F25C8C601BD688A2004B913C /* GetNotificationStatusDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetNotificationStatusDataParse.h; sourceTree = "<group>"; };
+		F25C8C611BD688A2004B913C /* GetNotificationStatusDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetNotificationStatusDataParse.m; sourceTree = "<group>"; };
+		F25C8C631BD69604004B913C /* SetNotificationStatusDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetNotificationStatusDataParse.h; sourceTree = "<group>"; };
+		F25C8C641BD69604004B913C /* SetNotificationStatusDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetNotificationStatusDataParse.m; sourceTree = "<group>"; };
 		F2735FB81B710C2C00138080 /* RCDSearchEnterpriseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCDSearchEnterpriseViewController.h; path = RCDChatList/SearchContacts/RCDSearchEnterpriseViewController.h; sourceTree = "<group>"; };
 		F2735FB91B710C2C00138080 /* RCDSearchEnterpriseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RCDSearchEnterpriseViewController.m; path = RCDChatList/SearchContacts/RCDSearchEnterpriseViewController.m; sourceTree = "<group>"; };
 		F277ADF91B2DBE97006E42CB /* CustomShowMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomShowMessage.h; path = Utilities/common/CustomShowMessage.h; sourceTree = "<group>"; };
@@ -1352,6 +1358,10 @@
 				F2D99C651B75F13E00759D33 /* GetEnterpriseMessageDataParse.m */,
 				F23A3F341BAC1C86001C416A /* GetAppversionDataParse.h */,
 				F23A3F351BAC1C86001C416A /* GetAppversionDataParse.m */,
+				F25C8C601BD688A2004B913C /* GetNotificationStatusDataParse.h */,
+				F25C8C611BD688A2004B913C /* GetNotificationStatusDataParse.m */,
+				F25C8C631BD69604004B913C /* SetNotificationStatusDataParse.h */,
+				F25C8C641BD69604004B913C /* SetNotificationStatusDataParse.m */,
 			);
 			name = DataDrive;
 			sourceTree = "<group>";
@@ -2414,6 +2424,7 @@
 				2B39C9481B241972007BAC7A /* LoginService.m in Sources */,
 				F22FE2E91B4000ED00A1A997 /* SDWebImageDownloader.m in Sources */,
 				2B2B84A41B9A99940043EFD4 /* TaskViewController.m in Sources */,
+				F25C8C651BD69604004B913C /* SetNotificationStatusDataParse.m in Sources */,
 				2B04436C1BA1A12500BC7BF4 /* GetProfessionListDataParse.m in Sources */,
 				F29F862F1B2410070058FC9F /* AFURLResponseSerialization.m in Sources */,
 				F23630841B66668900A12F63 /* RCDAddressBookDetailViewController.m in Sources */,
@@ -2496,6 +2507,7 @@
 				2B39C93F1B241212007BAC7A /* View+MASAdditions.m in Sources */,
 				F277AE011B2DC146006E42CB /* DeviceInfo.m in Sources */,
 				F22FE2C11B3FFCAF00A1A997 /* MBProgressHUD.m in Sources */,
+				F25C8C621BD688A2004B913C /* GetNotificationStatusDataParse.m in Sources */,
 				2B5A59161B48DFBB000382D7 /* MRProgressOverlayView+AFNetworking.m in Sources */,
 				2BC8212F1B57FFDC0090E2C1 /* ProfessionWebViewController.m in Sources */,
 				2B1B88EA1B803D0C00FAF650 /* UserDescriptionChangeViewController.m in Sources */,
@@ -2720,8 +2732,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MyRill/RCloud",
@@ -2747,8 +2759,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MyRill/RCloud",

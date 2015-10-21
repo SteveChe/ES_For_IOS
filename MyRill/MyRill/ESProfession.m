@@ -59,6 +59,13 @@
         } else {
             self.professionType = dic[@"profession_type"];
         }
+        
+        //isUpdate
+        if ([ColorHandler isNullOrNilNumber:dic[@"has_update"]]) {
+            self.isUpdate = NO;
+        } else {
+            self.isUpdate = [dic[@"has_update"] boolValue];
+        }
     }
     
     return self;

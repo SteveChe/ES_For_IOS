@@ -22,8 +22,10 @@
 #import "ESTask.h"
 #import "PushDefine.h"
 #import "CustomShowMessage.h"
+#import "SetNotificationStatusDataParse.h"
 
-@interface TaskOverviewViewController () <UISearchBarDelegate, UISearchDisplayDelegate, UITableViewDataSource, UITableViewDelegate, TaskDashboardDelegate, TaskListDelegate>
+
+@interface TaskOverviewViewController () <UISearchBarDelegate, UISearchDisplayDelegate, UITableViewDataSource, UITableViewDelegate, TaskDashboardDelegate, TaskListDelegate,SetNotificationStatusDelegate>
 
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *holdViews;
 @property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *redBadgeLbls;
@@ -43,6 +45,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *totalTaskInSelfLbl;
 @property (weak, nonatomic) IBOutlet UILabel *overdueTaskInSelfLbl;
 @property (nonatomic, strong) UISearchDisplayController *searchDisplayVC;
+@property (nonatomic, strong) SetNotificationStatusDataParse* setNotificationStatusDataParse;
 
 @end
 
@@ -96,6 +99,7 @@
                                                object:nil];
     
     [self.getTaskDashboardDP getTaskDashboard];
+    [self.setNotificationStatusDataParse setNotificationStatus:@"assignment" notificationType:NO];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -155,6 +159,16 @@
     [self.getTaskListDP getTaskListWithIdentify:searchString type:ESTaskListQ];
 
     return YES;
+}
+
+#pragma mark - SetNotificationStatusDelegate
+-(void)setNotificationStatusSucceed:(NSDictionary*)notificationStatus
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_STATUS_UPDATE object:notificationStatus];
+}
+-(void)setNotificationStatusFailed:(NSString*)errorMessage
+{
+    
 }
 
 #pragma mark - UITableViewDataSource&UITableViewDelegate
@@ -348,6 +362,14 @@
     }
     
     return _dataSource;
+}
+
+- (SetNotificationStatusDataParse *)setNotificationStatusDataParse {
+    if (!_setNotificationStatusDataParse) {
+        _setNotificationStatusDataParse = [[SetNotificationStatusDataParse alloc] init];
+        _setNotificationStatusDataParse.delegate = self;
+    }
+    return _setNotificationStatusDataParse;
 }
 
 @end

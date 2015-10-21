@@ -172,7 +172,8 @@ void uncaughtExceptionHandler(NSException *exception) {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     application.applicationIconBadgeNumber = 0;
 //    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
-
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_ENTER_FOREGROUD object:nil];
+    
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -204,7 +205,7 @@ void uncaughtExceptionHandler(NSException *exception) {
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
-    NSLog(@"userInfo= %@",userInfo);
+//    NSLog(@"userInfo= %@",userInfo);
     [ESPushManager parsePushJsonDic:userInfo applicationState:application.applicationState];
 
     [APService handleRemoteNotification:userInfo];

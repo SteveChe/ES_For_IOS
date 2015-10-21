@@ -10,4 +10,5 @@
 
 @interface BMCMainViewController : UIViewController
 
+@property (nonatomic,strong) NSString* professionId;
 @end
