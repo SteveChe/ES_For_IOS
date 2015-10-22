@@ -41,10 +41,10 @@
 - (void)setRedBadgeLbl:(UILabel *)redBadgeLbl {
     _redBadgeLbl = redBadgeLbl;
     
-    _redBadgeLbl.font = [UIFont systemFontOfSize:17];
+//    _redBadgeLbl.font = [UIFont systemFontOfSize:17];
     _redBadgeLbl.textColor = [ColorHandler colorFromHexRGB:@"F64F50"];
     _redBadgeLbl.clipsToBounds = YES;
-    _redBadgeLbl.layer.cornerRadius = 10.f;
+    _redBadgeLbl.layer.cornerRadius = 5.f;
 }
 
 @end

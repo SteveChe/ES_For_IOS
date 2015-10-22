@@ -377,12 +377,12 @@ void(^completionHandler)(RCUserInfo* userInfo);
         if (model.unreadMessageCount > 0)
         {
             cell.lblRedBadage.hidden = NO;
-            self.tabBarItem.badgeValue = @"1";
+//            self.tabBarItem.badgeValue = @"1";
         }
         else
         {
             cell.lblRedBadage.hidden = YES;
-            self.tabBarItem.badgeValue = nil;
+//            self.tabBarItem.badgeValue = nil;
         }
         
         
@@ -399,12 +399,12 @@ void(^completionHandler)(RCUserInfo* userInfo);
         if (model.unreadMessageCount > 0)
         {
             cell.lblRedBadage.hidden = NO;
-            self.tabBarItem.badgeValue = @"1";
+//            self.tabBarItem.badgeValue = @"1";
         }
         else
         {
             cell.lblRedBadage.hidden = YES;
-            self.tabBarItem.badgeValue = nil;
+//            self.tabBarItem.badgeValue = nil;
         }
         [cell.ivAva setImage:[UIImage imageNamed:@"duihua_qiyexiaoxi"]];
         

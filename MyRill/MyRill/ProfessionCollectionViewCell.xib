@@ -37,11 +37,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HQ7-3t-ahX">
-                                <rect key="frame" x="133" y="20" width="20" height="20"/>
+                                <rect key="frame" x="143" y="20" width="10" height="10"/>
                                 <color key="backgroundColor" red="0.96470588235294119" green="0.30980392156862746" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="GrH-ae-oH2"/>
-                                    <constraint firstAttribute="width" constant="20" id="xgJ-fc-L2k"/>
+                                    <constraint firstAttribute="height" constant="10" id="GrH-ae-oH2"/>
+                                    <constraint firstAttribute="width" constant="10" id="xgJ-fc-L2k"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.96470588239999999" green="0.30980392159999998" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

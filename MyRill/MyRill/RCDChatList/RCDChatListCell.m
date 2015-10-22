@@ -50,12 +50,12 @@
 
         _lblRedBadage = [UILabel new];
         _lblRedBadage.text = @"11";
-        [_lblRedBadage setFont:[UIFont systemFontOfSize:12.f]];
-        [_lblRedBadage setTextColor:[UIColor redColor]];
+        [_lblRedBadage setFont:[UIFont systemFontOfSize:8.f]];
+        [_lblRedBadage setTextColor:[UIColor clearColor]];
         _lblRedBadage.hidden = YES;
         _lblRedBadage.backgroundColor = [UIColor redColor];
         self.lblRedBadage.clipsToBounds = YES;
-        self.lblRedBadage.layer.cornerRadius = 7.f;
+        self.lblRedBadage.layer.cornerRadius = 5.f;
 
         
         [self addSubview:_ivAva];

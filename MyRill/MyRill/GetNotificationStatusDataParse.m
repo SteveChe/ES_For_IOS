@@ -15,7 +15,7 @@
 //获取
 -(void)getNotificationStatus
 {
-    [AFHttpTool getAppVersionSucess:^(id response)
+    [AFHttpTool getNotificationStatus:^(id response)
      {
          NSDictionary* reponseDic = (NSDictionary*)response;
          NSNumber* errorCodeNum = [reponseDic valueForKey:NETWORK_ERROR_CODE];
@@ -35,28 +35,28 @@
                  }
                  NSMutableDictionary* notificationDic = [NSMutableDictionary dictionary];
 
-                 if ([ColorHandler isNullOrNilNumber:notificationDic[@"assignment"]]) {
+                 if ([ColorHandler isNullOrNilNumber:temDic[@"assignment"]]) {
                      [notificationDic setObject:[NSNumber numberWithBool:NO] forKey:@"assignment"];
                  } else {
-                     [notificationDic setObject:notificationDic[@"assignment"] forKey:@"assignment"];
+                     [notificationDic setObject:temDic[@"assignment"] forKey:@"assignment"];
                  }
                  
-                 if ([ColorHandler isNullOrNilNumber:notificationDic[@"subscription"]]) {
+                 if ([ColorHandler isNullOrNilNumber:temDic[@"subscription"]]) {
                      [notificationDic setObject:[NSNumber numberWithBool:NO] forKey:@"subscription"];
                  } else {
-                     [notificationDic setObject:notificationDic[@"subscription"] forKey:@"subscription"];
+                     [notificationDic setObject:temDic[@"subscription"] forKey:@"subscription"];
                  }
 
-                 if ([ColorHandler isNullOrNilNumber:notificationDic[@"contact"]]) {
+                 if ([ColorHandler isNullOrNilNumber:temDic[@"contact"]]) {
                      [notificationDic setObject:[NSNumber numberWithBool:NO] forKey:@"contact"];
                  } else {
-                     [notificationDic setObject:notificationDic[@"contact"] forKey:@"contact"];
+                     [notificationDic setObject:temDic[@"contact"] forKey:@"contact"];
                  }
 
-                 if ([ColorHandler isNullOrNilNumber:notificationDic[@"profession"]]) {
+                 if ([ColorHandler isNullOrNilNumber:temDic[@"profession"]]) {
                      [notificationDic setObject:[NSNumber numberWithBool:NO] forKey:@"profession"];
                  } else {
-                     [notificationDic setObject:notificationDic[@"profession"] forKey:@"profession"];
+                     [notificationDic setObject:temDic[@"profession"] forKey:@"profession"];
                  }
                  
                  if (self.delegate!= nil &&[self.delegate respondsToSelector:@selector(getNotificationStatusSucceed:)])
