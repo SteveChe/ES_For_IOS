@@ -116,20 +116,20 @@
     self.closedTaskLbl.text = [taskDashboard.closedTask.num stringValue];
     
     self.totalTaskInSelfLbl.text = [[taskDashboard.totalTaskInSelf.num stringValue] stringByAppendingString:@" 全部"];
-    NSMutableAttributedString *attribute = [[NSMutableAttributedString alloc] initWithString:self.totalTaskInSelfLbl.text];
-    [attribute addAttributes:@{NSForegroundColorAttributeName:[ColorHandler colorFromHexRGB:@"999999"]}
-                       range:NSMakeRange(attribute.length - 2, 2)];
-    [attribute addAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]}
-                       range:NSMakeRange(attribute.length - 2, 2)];
-    self.totalTaskInSelfLbl.attributedText = attribute;
+    NSMutableAttributedString *attributeTotal = [[NSMutableAttributedString alloc] initWithString:self.totalTaskInSelfLbl.text];
+    [attributeTotal addAttributes:@{NSForegroundColorAttributeName:[ColorHandler colorFromHexRGB:@"999999"]}
+                       range:NSMakeRange(attributeTotal.length - 2, 2)];
+    [attributeTotal addAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]}
+                       range:NSMakeRange(attributeTotal.length - 2, 2)];
+    self.totalTaskInSelfLbl.attributedText = attributeTotal;
     
     self.overdueTaskInSelfLbl.text = [[taskDashboard.overdueTaskInSelf.num stringValue] stringByAppendingString:@" 超期"];
-    NSMutableAttributedString *attribute1 = [[NSMutableAttributedString alloc] initWithString:self.overdueTaskInSelfLbl.text];
-    [attribute1 addAttributes:@{NSForegroundColorAttributeName:[ColorHandler colorFromHexRGB:@"999999"]}
-                       range:NSMakeRange(attribute.length - 2, 2)];
-    [attribute1 addAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]}
-                       range:NSMakeRange(attribute.length - 2, 2)];
-    self.overdueTaskInSelfLbl.attributedText = attribute1;
+    NSMutableAttributedString *attributeOverdue = [[NSMutableAttributedString alloc] initWithString:self.overdueTaskInSelfLbl.text];
+    [attributeOverdue addAttributes:@{NSForegroundColorAttributeName:[ColorHandler colorFromHexRGB:@"999999"]}
+                        range:NSMakeRange(attributeOverdue.length - 2, 2)];
+    [attributeOverdue addAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]}
+                        range:NSMakeRange(attributeOverdue.length - 2, 2)];
+    self.overdueTaskInSelfLbl.attributedText = attributeOverdue;
     
     self.redAllLbl.hidden = !taskDashboard.totalTask.isUpdate;
     self.redEndLbl.hidden = !taskDashboard.closedTask.isUpdate;
