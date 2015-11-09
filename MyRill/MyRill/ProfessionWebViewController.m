@@ -46,6 +46,8 @@
         make.bottom.equalTo(ws.mas_bottom);
     }];
     
+    [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"UserAgent":@"Mozilla/5.0 (iPhone; CPU iPhone OS 8_1_3 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Version/8.0 Mobile/12B466 Safari/600.1.4"}];
+    
     [self.view layoutIfNeeded];
 }
 
@@ -95,6 +97,14 @@
 }
 
 #pragma mark - UIWebViewDelegate methods
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+//    NSDictionary* dic = [request allHTTPHeaderFields];
+//    NSLog(@"dic = %@",dic);
+    return YES;
+}
+
 //以下方法会在加载一个URL中多次调用(加载图片,加载js file,加载css,都有可能调用)
 - (void)webViewDidStartLoad:(UIWebView *)webView {
 //    NSLog(@"webViewDidStartLoad");
