@@ -22,7 +22,7 @@
 #import "DeviceInfo.h"
 #import "PushDefine.h"
 
-#define ES_VERSION 0.8
+#define ES_VERSION 0.9
 
 @interface ESMenuViewController () <UITabBarControllerDelegate,GetAppVersionDelegate,UIAlertViewDelegate,GetNotificationStatusDelegate>
 
