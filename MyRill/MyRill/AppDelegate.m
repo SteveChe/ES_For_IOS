@@ -12,6 +12,10 @@
 #import "ESNavigationController.h"
 #import "APService.h"
 #import "ESPushManager.h"
+#import "AFHttpTool.h"
+#import "PushDefine.h"
+#import "ESUserDetailInfo.h"
+#import "ChatViewController.h"
 
 //#define RONGCLOUD_IM_APPKEY @"x18ywvqf8hzqc" //online key
 #define RONGCLOUD_IM_APPKEY @"x4vkb1qpvr9qk" //online key
@@ -86,6 +90,9 @@
     }
     
     NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
+    
+    NSDictionary *userInfo =[launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    NSLog(@"userInfo = %@",userInfo);
     return YES;
 }
 
@@ -163,10 +170,13 @@ void uncaughtExceptionHandler(NSException *exception) {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     application.applicationIconBadgeNumber = 0;
+    [APService setBadge:0];
+
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    NSLog(@"applicationWillEnterForeground");
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -174,6 +184,9 @@ void uncaughtExceptionHandler(NSException *exception) {
     application.applicationIconBadgeNumber = 0;
 //    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_ENTER_FOREGROUD object:nil];
+    
+    NSLog(@"applicationDidBecomeActive");
+
     
 }
 
@@ -199,14 +212,33 @@ void uncaughtExceptionHandler(NSException *exception) {
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    
+    NSLog(@"userInfo= %@",userInfo);
+
     // Required
     [APService handleRemoteNotification:userInfo];
 }
 
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+//    NSLog(@"userInfo= %@",notification);
+    NSDictionary* locDic = notification.userInfo;
+    if (locDic != nil )
+    {
+        NSDictionary* rcDic = [locDic objectForKey:@"rc"];
+        if (rcDic != nil)
+        {
+            ESMenuViewController* rootViewCtrl = (ESMenuViewController*)self.window.rootViewController;
+            [rootViewCtrl.navigationController popToRootViewControllerAnimated:NO];
+            [rootViewCtrl setSelectedIndex:1];
+            
+        }
+    }
+    
+}
+
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
-//    NSLog(@"userInfo= %@",userInfo);
+    NSLog(@"userInfo= %@",userInfo);
     [ESPushManager parsePushJsonDic:userInfo applicationState:application.applicationState];
 
     [APService handleRemoteNotification:userInfo];
@@ -217,6 +249,8 @@ void uncaughtExceptionHandler(NSException *exception) {
 -(void)didReceiveMessageNotification:(NSNotification *)notification
 {
     [UIApplication sharedApplication].applicationIconBadgeNumber = [UIApplication sharedApplication].applicationIconBadgeNumber+1;
+    
+    [APService setBadge:[UIApplication sharedApplication].applicationIconBadgeNumber];
 //    ESMenuViewController* rootViewCtrl = (ESMenuViewController*)self.window.rootViewController;
 //    if ([rootViewCtrl.tabBarController isKindOfClass:[ESMenuViewController class]])
 //    {
@@ -245,5 +279,196 @@ void uncaughtExceptionHandler(NSException *exception) {
         [self changeWindow:nav];
     }
 }
+
+
+
+#pragma mark -- RCIMUserInfoDataSource
+// 获取用户信息的方法。
+-(void)getUserInfoWithUserId:(NSString *)userId completion:(void(^)(RCUserInfo* userInfo))completion
+{
+    if (userId == nil || [userId isEqual:[NSNull null]] || [userId length]<=0)
+    {
+        return;
+    }
+    // 此处最终代码逻辑实现需要您从本地缓存或服务器端获取用户信息。
+    //    ESUserInfo* userInfo = [[UserInfoDataSource shareInstance] getUserByUserId:userId];
+    //    if(userInfo == nil || [userInfo isEqual:[NSNull null]])
+    //    {
+    //        completionHandler = completion;
+    //        [_getContactDetailDataParse getContactDetail:userId];
+    //        _nUserDetailRequestNum ++ ;
+    //    }
+    //    else
+    //    {
+    //        RCUserInfo *user = [[RCUserInfo alloc]init];
+    //        user.userId = userInfo.userId;
+    //        user.name = userInfo.userName;
+    //        user.portraitUri = userInfo.portraitUri;
+    //        return completion(user);
+    //    }
+    
+    [AFHttpTool getContactDetail:userId success:^(id response)
+     {
+         NSDictionary* reponseDic = (NSDictionary*)response;
+         NSNumber* errorCodeNum = [reponseDic valueForKey:@"errorCode"];
+         if (errorCodeNum == nil || [errorCodeNum isEqual:[NSNull null]] )
+         {
+             return ;
+         }
+         int errorCode = [errorCodeNum intValue];
+         switch (errorCode)
+         {
+             case 0:
+             {
+                 NSDictionary* temDic = [reponseDic valueForKey:@"data"];
+                 if (temDic == nil || [temDic isEqual:[NSNull null]])
+                 {
+                     break;
+                 }
+                 
+                 ESUserDetailInfo* userDetailInfo = [[ESUserDetailInfo alloc] init];
+                 NSNumber* userId = [temDic valueForKey:@"id"];
+                 if (userId != nil && ![userId isEqual:[NSNull null]])
+                 {
+                     userDetailInfo.userId = [NSString stringWithFormat:@"%d",[userId intValue]];
+                 }
+                 
+                 NSString* userName = [temDic valueForKey:@"name"];
+                 if (userName != nil && ![userName isEqual:[NSNull null]])
+                 {
+                     userDetailInfo.userName = userName;
+                 }
+                 
+                 NSString* userDescription = [temDic valueForKey:@"description"];
+                 if (userDescription != nil && ![userDescription isEqual:[NSNull null]])
+                 {
+                     userDetailInfo.contactDescription = userDescription;
+                 }
+                 
+                 NSString* userPhoneNum = [temDic valueForKey:@"phone_number"];
+                 if (userPhoneNum != nil && ![userPhoneNum isEqual:[NSNull null]])
+                 {
+                     userDetailInfo.phoneNumber = userPhoneNum;
+                 }
+                 NSDictionary* userEnterpriseDic = [temDic valueForKey:@"enterprise"];
+                 if (userEnterpriseDic != nil && ![userEnterpriseDic isEqual:[NSNull null]] )//&& [userEnterpriseDic isKindOfClass:[NSDictionary class]]
+                 {
+                     ESEnterpriseInfo* userEnterprise = [[ESEnterpriseInfo alloc] init];
+                     NSNumber* enterPriseIdNum = [userEnterpriseDic valueForKey:@"id"];
+                     if (enterPriseIdNum!=nil && ![enterPriseIdNum isEqual:[NSNull null]]) {
+                         userEnterprise.enterpriseId = [NSString stringWithFormat:@"%d",[enterPriseIdNum intValue]];
+                     }
+                     
+                     NSString* enterPriseName = [userEnterpriseDic valueForKey:@"name"];
+                     if (enterPriseName!=nil && ![enterPriseName isEqual:[NSNull null]] && [enterPriseName length] > 0) {
+                         userEnterprise.enterpriseName = enterPriseName;
+                     }
+                     
+                     NSString* enterPriseCategory = [userEnterpriseDic valueForKey:@"category"];
+                     if (enterPriseCategory!=nil && ![enterPriseCategory isEqual:[NSNull null]] && [enterPriseCategory length]>0) {
+                         userEnterprise.enterpriseCategory = enterPriseCategory;
+                     }
+                     
+                     NSString* enterPriseDes = [userEnterpriseDic valueForKey:@"description"];
+                     if(enterPriseDes!=nil && ![enterPriseDes isEqual:[NSNull null] ] && [enterPriseDes length] >0 )
+                     {
+                         userEnterprise.enterpriseDescription = enterPriseDes;
+                     }
+                     
+                     NSString* enterPriseQRCode = [userEnterpriseDic valueForKey:@"qrcode"];
+                     if(enterPriseQRCode!=nil && ![enterPriseQRCode isEqual:[NSNull null]] && [enterPriseQRCode length] >0 ){
+                         userEnterprise.enterpriseQRCode = enterPriseQRCode;
+                     }
+                     
+                     NSNumber* enterPriseVerified = [userEnterpriseDic valueForKey:@"verified"];
+                     if (enterPriseVerified!=nil && ![enterPriseVerified isEqual:[NSNull null]]) {
+                         userEnterprise.bVerified = [enterPriseVerified boolValue];
+                     }
+                     
+                     NSString* enterPriseImg = [userEnterpriseDic valueForKey:@"avatar"];
+                     if(enterPriseDes!=nil && ![enterPriseDes isEqual:[NSNull null] ] && [enterPriseDes length] >0 )
+                     {
+                         userEnterprise.portraitUri = enterPriseImg;
+                     }
+                     
+                     userDetailInfo.enterprise = userEnterprise;
+                 }
+                 
+                 NSString* userPortraitUri = [temDic valueForKey:@"avatar"];
+                 if (userPortraitUri != nil && ![userPortraitUri isEqual:[NSNull null]])
+                 {
+                     userDetailInfo.portraitUri = userPortraitUri;
+                 }
+                 
+                 NSString* userDepartment = [temDic valueForKey:@"department"];
+                 if (userDepartment != nil && ![userDepartment isEqual:[NSNull null]])
+                 {
+                     userDetailInfo.department = userDepartment;
+                 }
+                 NSString* gender = [temDic valueForKey:@"gender"];
+                 if (gender != nil && ![gender isEqual:[NSNull null]])
+                 {
+                     userDetailInfo.gender = gender;
+                 }
+                 
+                 NSString* email = [temDic valueForKey:@"email"];
+                 if (email != nil && ![email isEqual:[NSNull null]])
+                 {
+                     userDetailInfo.email = email;
+                 }
+                 
+                 NSString* department = [temDic valueForKey:@"department"];
+                 if (department != nil && ![department isEqual:[NSNull null]])
+                 {
+                     userDetailInfo.department = department;
+                 }
+                 
+                 NSString* qrcode = [temDic valueForKey:@"qrcode"];
+                 if (qrcode != nil && ![qrcode isEqual:[NSNull null]])
+                 {
+                     userDetailInfo.qrcode = qrcode;
+                 }
+                 
+                 NSString* enterprise_qrcode = [temDic valueForKey:@"enterprise_qrcode"];
+                 if (enterprise_qrcode != nil && ![enterprise_qrcode isEqual:[NSNull null]])
+                 {
+                     userDetailInfo.enterprise_qrcode = enterprise_qrcode;
+                 }
+                 
+                 NSMutableArray* tag_data = [temDic valueForKey:@"tag_data"];
+                 if (tag_data != nil && ![tag_data isEqual:[NSNull null]])
+                 {
+                     userDetailInfo.tagDataArray = tag_data;
+                 }
+                 
+                 NSNumber* is_member = [temDic valueForKey:@"is_member"];
+                 if (is_member != nil && ![is_member isEqual:[NSNull null]])
+                 {
+                     userDetailInfo.bMember = [is_member boolValue];
+                 }
+                 NSNumber* is_contact = [temDic valueForKey:@"is_contact"];
+                 if (is_contact != nil && ![is_contact isEqual:[NSNull null]])
+                 {
+                     userDetailInfo.bContact = [is_contact boolValue];
+                 }
+                 RCUserInfo* user = [[RCUserInfo alloc] init];
+                 user.userId = userDetailInfo.userId;
+                 user.name = userDetailInfo.userName;
+                 user.portraitUri = userDetailInfo.portraitUri;
+                 
+                 completion(user);
+             }
+                 break;
+             default:
+             {
+             }
+                 break;
+         }
+     }failure:^(NSError* err)
+     {
+         NSLog(@"%@",err);
+     }];
+}
+
 
 @end
